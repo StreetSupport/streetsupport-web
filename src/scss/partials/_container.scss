@@ -1,8 +1,9 @@
 .container {
   padding: 0 $site-gutter;
 
-  @include container($grid-mobile);
-  @include mq($from: tablet) {
-    @include container($grid-tablet);
+  @include container($grid-small);
+
+  @include mq($from: m) {
+    @include container($grid-large);
   }
 }

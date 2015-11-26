@@ -11,36 +11,32 @@ $mq-responsive: true;
 // across team members. It will improve communication between
 // stakeholders, designers, developers, and testers.
 $mq-breakpoints: (
-  mobile:  320px,
-  tablet:  740px,
-  desktop: 980px,
-  wide:    1300px,
-
-  // Tweakpoints
-  desktopAd: 810px,
-  mobileLandscape: 480px
+  s:   320px,
+  m:   600px,
+  l:   980px,
+  xl:  1300px,
 );
 
 // Define the breakpoint from the $mq-breakpoints list that should
 // be used as the target width when outputting a static stylesheet
 // (i.e. when $mq-responsive is set to 'false').
-$mq-static-breakpoint: desktop;
+$mq-static-breakpoint: l;
 
 // If you want to display the currently active breakpoint in the top
 // right corner of your site during development, add the breakpoints
 // to this list, ordered by width, e.g. (mobile, tablet, desktop).
-$mq-show-breakpoints: (mobile, mobileLandscape, tablet, desktop, wide);
+$mq-show-breakpoints: (s, m, l, xl);
 
 // Site Variables
 // -----------------------------
 
 $base-font-size: 16px; // Recommended to not change this
-$site-container: 61.25rem; // 980px
+$site-container: 81.25rem; // 1300px
 $site-gutter: 1.25rem; // 20px
 $grid-gutter: .25; // Quarter of column width
-$mobile-column: 4;
-$tablet-column: 12;
-$grid-debug: show;
+$column-small: 4;
+$column-large: 12;
+$grid-debug: show; // Change this to show or hide
 
 // Colours
 $brand-a: rgba(50, 120, 50, 1);
@@ -55,8 +51,9 @@ $font-headline-weight: 700;
 // Default Grid Options
 // -----------------------------
 
-$grid-mobile: (
-  columns: $mobile-column,
+// Grid for small breakpoints
+$grid-small: (
+  columns: $column-small,
   gutters: $grid-gutter,
   global-box-sizing: border-box,
   debug: (
@@ -72,8 +69,10 @@ $grid-mobile: (
     rem: false,
   )
 );
-$grid-tablet: (
-  columns: $tablet-column,
+
+// Grid for larger breakpoints
+$grid-large: (
+  columns: $column-large,
   gutters: $grid-gutter,
   global-box-sizing: border-box,
   container: $site-container,

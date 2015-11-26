@@ -1,1 +1,1 @@
-require('./test');
+require('holderjs');

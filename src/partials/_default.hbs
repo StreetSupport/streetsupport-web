@@ -9,17 +9,23 @@
 
     <link rel="stylesheet" href="assets/css/site.css" />
   </head>
-  <body>
+  <body class="page-{{name}}">
     {{#block "header"}}
       {{> header}}
     {{/block}}
 
-    {{#block "main"}}
-      {{{contents}}}
-    {{/block}}
+    <div class="nav__push">
+      {{#block "main"}}
+        {{{contents}}}
+      {{/block}}
 
-    {{#block "footer"}}
-      {{> footer}}
+      {{#block "footer"}}
+        {{> footer}}
+      {{/block}}
+    </div>
+
+    {{#block "gutter"}}
+      {{{contents}}}
     {{/block}}
 
     <script src="assets/js/bundle.js"></script>
