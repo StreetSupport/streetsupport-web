@@ -50,11 +50,11 @@ gulp.task('rebuildMetalsmith', function(callback) {
 
 // Watch task
 gulp.task('watch', function(callback) {
-  gulp.watch(config.paths.css + '**/*.scss', ['scss']);
+  gulp.watch(config.paths.scss + '**/*.scss', ['scss']);
   gulp.watch(config.paths.js + '**/*.js', ['rebuildJs']);
   gulp.watch(config.paths.img + '{,**/}*.{png,jpg,gif,svg}', ['img']);
   gulp.watch(config.paths.icons + '**/*.svg', ['svgicon']);
-  gulp.watch(config.paths.pages + '**/*.hbs', ['rebuildMetalsmith']);
+  gulp.watch([config.paths.pages + '**/*.hbs', config.paths.partials + '**/*.hbs'], ['rebuildMetalsmith']);
 });
 
 // Build website with development assets and run server with live reloading

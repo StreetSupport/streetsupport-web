@@ -9,7 +9,8 @@
     "img": "src/img/",
     "js": "src/js/",
     "svgicon": "_svgicon",
-    "pages": "src/pages"
+    "pages": "src/pages",
+    "partials": "src/partials"       
   },
   "autoprefixer": {
     "browsers": ["last 2 versions", "IE >= 10"]
