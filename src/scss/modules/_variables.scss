@@ -1,0 +1,92 @@
+// Media Queries
+// -----------------------------
+
+// To enable support for browsers that do not support @media queries,
+// (IE <= 8, Firefox <= 3, Opera <= 9) set $mq-responsive to false
+// Create a separate stylesheet served exclusively to these browsers,
+// meaning @media queries will be rasterized, relying on the cascade itself
+$mq-responsive: true;
+
+// Name your breakpoints in a way that creates a ubiquitous language
+// across team members. It will improve communication between
+// stakeholders, designers, developers, and testers.
+$mq-breakpoints: (
+  mobile:  320px,
+  tablet:  740px,
+  desktop: 980px,
+  wide:    1300px,
+
+  // Tweakpoints
+  desktopAd: 810px,
+  mobileLandscape: 480px
+);
+
+// Define the breakpoint from the $mq-breakpoints list that should
+// be used as the target width when outputting a static stylesheet
+// (i.e. when $mq-responsive is set to 'false').
+$mq-static-breakpoint: desktop;
+
+// If you want to display the currently active breakpoint in the top
+// right corner of your site during development, add the breakpoints
+// to this list, ordered by width, e.g. (mobile, tablet, desktop).
+$mq-show-breakpoints: (mobile, mobileLandscape, tablet, desktop, wide);
+
+// Site Variables
+// -----------------------------
+
+$base-font-size: 16px; // Recommended to not change this
+$site-container: 61.25rem; // 980px
+$site-gutter: 1.25rem; // 20px
+$grid-gutter: .25; // Quarter of column width
+$mobile-column: 4;
+$tablet-column: 12;
+$grid-debug: show;
+
+// Colours
+$brand-a: rgba(50, 120, 50, 1);
+$brand-b: rgba(50, 120, 50, .25);
+
+// Fonts
+$font-primary: 'georgia', serif;
+$font-primary-weight: 400;
+$font-headline: 'verdana', sans-serif;
+$font-headline-weight: 700;
+
+// Default Grid Options
+// -----------------------------
+
+$grid-mobile: (
+  columns: $mobile-column,
+  gutters: $grid-gutter,
+  global-box-sizing: border-box,
+  debug: (
+    image: $grid-debug,
+    color: rgba(#6666ff, .25),
+    output: background,
+  ),
+  use-custom: (
+    background-image: false,
+    background-options: false,
+    box-sizing: false,
+    clearfix: true,
+    rem: false,
+  )
+);
+$grid-tablet: (
+  columns: $tablet-column,
+  gutters: $grid-gutter,
+  global-box-sizing: border-box,
+  container: $site-container,
+  debug: (
+    image: $grid-debug,
+    color: rgba(#6666ff, .25),
+    output: background,
+  ),
+  use-custom: (
+    background-image: false,
+    background-options: false,
+    box-sizing: false,
+    clearfix: true,
+    rem: false,
+  )
+);

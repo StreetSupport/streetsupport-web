@@ -1,0 +1,39 @@
+body {
+  font-family: $font-primary;
+  font-weight: $font-primary-weight;
+}
+
+.h1,
+.h2,
+.h3 {
+  font-family: $font-headline;
+  font-weight: $font-headline-weight;
+}
+
+.h1 {
+  font-size: 32px;
+  line-height: 1.1;
+
+  background-color: $brand-b;
+
+  @include mq($from: tablet) {
+    font-size: 45px;
+  }
+}
+
+.h2 {
+  font-size: 24px;
+  line-height: 1.2;
+
+  @include mq($from: tablet) {
+    font-size: 31px;
+  }
+}
+
+.h3 {
+  font-size: 16px;
+
+  @include mq($from: tablet) {
+    font-size: 22px;
+  }
+}

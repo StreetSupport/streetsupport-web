@@ -1,0 +1,19 @@
+# OS Generated Files #
+######################
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# foley #
+######################
+node_modules
+eyeglass_cache
+_svgicon
+_dist
+npm-debug.log
+
+# Project Specific #
+######################

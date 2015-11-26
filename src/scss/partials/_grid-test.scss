@@ -1,0 +1,13 @@
+.grid-test {
+  &__copy {
+    @include mq($from: tablet) {
+      @include span(9 of $tablet-column last);
+    }
+  }
+
+  &__sidebar {
+    @include mq($from: tablet) {
+      @include span(3 of $tablet-column);
+    }
+  }
+}
