@@ -1,8 +1,13 @@
+// npm require
+var FastClick = require('fastclick');
+require('holderjs');
+
+FastClick.attach(document.body);
+
+// local require
 var nav = require('./nav.js');
 
-console.log('testing if jquery is loaded globally:');
-console.log($);
-
+// app
 $('.js-nav-open').on('click', function() {
   nav.open();
 });

@@ -58,6 +58,7 @@
     "yargs": "^3.30.0"
   },
   "dependencies": {
+    "fastclick": "^1.0.6",
     "holderjs": "^2.9.0",
     "jquery": "^2.1.4"
   }
