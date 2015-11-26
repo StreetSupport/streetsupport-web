@@ -1,0 +1,37 @@
+$nav-width: 180px; // move to variables file
+
+.nav {
+
+  &__container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: $nav-width;
+    z-index: 10;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+
+    transition: transform 250ms cubic-bezier(.16, .68, .43, .99);
+    transform: translate3d($nav-width, 0, 0);
+
+    background-color: #e8e8e8;
+
+    &.is-active {
+      transform: translate3d(0px, 0, 0);
+    }
+  }
+
+  &__push {
+    transition: transform 250ms cubic-bezier(.16, .68, .43, .99);
+
+    &.is-active {
+      transform: translate3d(-$nav-width, 0, 0);
+    }
+  }
+
+  &__btn {
+    float: right;
+    margin: 20px;
+  }
+}

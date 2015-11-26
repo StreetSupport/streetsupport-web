@@ -1,5 +1,8 @@
 .header {
+  @include cf();
+
   h1 {
     margin-top: 0;
+    float: left;
   }
 }
