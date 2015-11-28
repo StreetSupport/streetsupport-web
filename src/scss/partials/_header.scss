@@ -1,8 +1,26 @@
 .header {
   @include cf();
+  height: 50px;
+  background-color: $brand-a;
 
-  h1 {
-    margin-top: 0;
+  &__title {
+    margin: 0;
+    padding: 0 $site-gutter;
     float: left;
+    color: #fff;
+    line-height: 50px;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+
+  &__btn {
+    float: right;
+    height: 50px;
+    color: #fff;
+    background-color: $brand-b;
+    padding: 0 20px;
   }
 }
