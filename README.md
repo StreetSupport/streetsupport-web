@@ -8,7 +8,9 @@
 * run `npm i`,
 * run 'gulp'.
 
-See (https://github.com/PJL101/foley)[https://github.com/PJL101/foley] for more information on the workflow. This project uses version 0.0.3.
+See [https://github.com/PJL101/foley](https://github.com/PJL101/foley) for more information on the workflow.
+
+This project uses version 0.0.3.
 
 ## Usage
 
@@ -21,7 +23,9 @@ See (https://github.com/PJL101/foley)[https://github.com/PJL101/foley] for more 
 * The `--production` flag builds minified assets with no sourcemaps,
 * The `--debug` flag shows the files being created in each task (if the task has a pipe).
 
-## Frontend Conventions (Opinionated!/Happy to discuss)
+## Frontend Conventions
+
+Opinionated! Happy to discuss.
 
 * The SCSS uses BEM, mobile first,
 * Try to modularise & reuse everything (if possible),
