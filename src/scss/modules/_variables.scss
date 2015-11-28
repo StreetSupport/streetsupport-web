@@ -32,9 +32,9 @@ $mq-show-breakpoints: (s, m, l, xl);
 
 $base-font-size: 16px; // Recommended to not change this
 $site-container: 81.25rem; // 1300px
-$site-gutter: 1.25rem; // 20px
+$site-gutter: 1rem; // 16px
 $grid-gutter: .25; // Quarter of column width
-$column-small: 4;
+$column-small: 6;
 $column-large: 12;
 $grid-debug: show; // Change this to show or hide
 
