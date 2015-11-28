@@ -60,6 +60,7 @@ $grid-small: (
   columns: $column-small,
   gutters: $grid-gutter,
   global-box-sizing: border-box,
+  gutter-position: inside,
   debug: (
     image: $grid-debug,
     color: rgba(#6666ff, .25),
@@ -79,6 +80,7 @@ $grid-large: (
   columns: $column-large,
   gutters: $grid-gutter,
   global-box-sizing: border-box,
+  gutter-position: inside,
   container: $site-container,
   debug: (
     image: $grid-debug,

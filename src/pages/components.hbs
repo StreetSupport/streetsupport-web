@@ -6,50 +6,73 @@ name: home
 
 {{#extend "_default"}}
   {{#content "main"}}
+    <h1>Component Tests</h1>
+    <p>All website components should go on this page for easy visual testing.</p>
+
+    <h2>Typography</h2>
+    <h1 class="h1">(.h1) Heading 1</h1>
+    <h2 class="h2">(.h2) Heading 2</h2>
+
+    <ul>
+       <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li>
+       <li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li>
+       <li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li>
+       <li>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</li>
+    </ul>
+
+    <ol>
+       <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+       <li>Aliquam tincidunt mauris eu risus.</li>
+       <li>Vestibulum auctor dapibus neque.</li>
+    </ol>
+
+    <dl>
+       <dt>Definition list</dt>
+       <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</dd>
+       <dt>Lorem ipsum dolor sit amet</dt>
+       <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</dd>
+    </dl>
+
+    <h2>Buttons</h2>
     <div class="container">
-      <h1>Component Tests</h1>
-      <p>All website components should go on this page for easy visual testing.</p>
+      <button class="btn btn--brand-d">
+        <span class="btn__text">Button (Brand-d)</span>
+      </button>
 
-      <h2>Typography</h2>
-      <h1 class="h1">(.h1) Heading 1</h1>
-      <h2 class="h2">(.h2) Heading 2</h2>
-
-      <ul>
-         <li>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li>
-         <li>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li>
-         <li>Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li>
-         <li>Pellentesque fermentum dolor. Aliquam quam lectus, facilisis auctor, ultrices ut, elementum vulputate, nunc.</li>
-      </ul>
-
-      <ol>
-         <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-         <li>Aliquam tincidunt mauris eu risus.</li>
-         <li>Vestibulum auctor dapibus neque.</li>
-      </ol>
-
-      <dl>
-         <dt>Definition list</dt>
-         <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</dd>
-         <dt>Lorem ipsum dolor sit amet</dt>
-         <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</dd>
-      </dl>
-
-      <h2>Buttons</h2>
-      <p>TBA</p>
-
-      <h2>Form</h2>
-      <p>TBA</p>
-
-      <h2>Banner</h2>
-      <p>TBA</p>
-
-      <h2>Grid 2 Column Test</h2>
+      <button class="btn btn--brand-e btn--icon">
+        <span class="btn__icon"><img data-src="holder.js/50x50" /></span>
+        <span class="btn__text">Button With Icon (Brand-e)</span>
+      </button>
     </div>
+
+    <h2>Form</h2>
+    <p>TBA</p>
+
+    <h2>Block</h2>
+    <div class="block block--intro">
+      <div class="container block__inner">
+        Intro Block
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="container block__inner">
+        Standard Block
+      </div>
+    </div>
+
+    <div class="block block--highlight">
+      <div class="container block__inner">
+        Highlight Block
+      </div>
+    </div>
+
+    <h2>Grid 2 Column Test</h2>
 
     <div class="container grid-test">
        <div class="grid-test__copy">
          <h1 class="h1">Main Content</h1>
-         <img data-src="holder.js/300x200">
+         <img data-src="holder.js/300x200" />
          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis mi suscipit, facilisis tortor et, malesuada velit. Aenean odio elit, ornare eu consequat eget, mollis quis arcu. Cras imperdiet diam aliquam quam rhoncus lacinia. Suspendisse potenti. Nunc at tempus tortor. Ut justo sapien, ornare ac massa at, vehicula sodales leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut dictum ipsum. Nam porta rutrum nulla, eu ultricies est. Vestibulum at lacinia tortor, vitae tempus orci. Phasellus a hendrerit ex, vitae ullamcorper purus. Aenean sagittis est sit amet arcu accumsan dictum. Nulla vestibulum, lorem eu ultrices condimentum, erat odio tempor tellus, eu pulvinar justo justo quis diam. Phasellus ultrices ex augue, at facilisis purus interdum at. Sed eu eleifend urna.</p>
          <p>Suspendisse consequat eget odio ut lobortis. Fusce eget sapien ut lacus mollis imperdiet. Morbi ornare eleifend orci, in imperdiet felis ultricies in. Aliquam vestibulum vel tortor quis tristique. In pulvinar, velit non aliquet vestibulum, dui metus mollis metus, at ornare massa odio vitae leo. Quisque dignissim volutpat magna sit amet consequat. Aenean luctus rutrum sollicitudin. Maecenas et dui accumsan, posuere odio at, posuere lectus. Duis eget neque lorem. In commodo neque vitae lacus porttitor imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed risus erat, hendrerit at euismod vulputate, molestie non nibh. Cras nisi odio, posuere eu mi quis, facilisis dignissim velit. In hac habitasse platea dictumst.</p>
        </div>
