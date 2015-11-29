@@ -3,21 +3,18 @@
   padding-top: 30px;
   padding-bottom: 30px;
 
+  /*
   &__inner {
-    
+
   }
+  */
 
   // Components
   &__header {
     text-align: center;
 
     .block--intro & {
-      color: #fff;
       padding: 70px;
-    }
-
-    .block--highlight & {
-      color: #fff;
     }
   }
 
@@ -44,9 +41,11 @@
   // Variants
   &--intro {
     background-color: $brand-f;
+    color: #fff;
   }
 
   &--highlight {
     background-color: $brand-b;
+    color: #fff;
   }
 }
