@@ -22,6 +22,12 @@ body {
   font-size: $base-font-size;
 }
 
+html,
+body {
+  overflow-x: hidden;
+  height: 100%;
+}
+
 // Make sure embeds and iframes fit their responsive containers
 embed,
 iframe,

@@ -1,7 +1,4 @@
-$nav-width: 180px; // move to variables file
-
 .nav {
-
   &__container {
     position: fixed;
     top: 0;
@@ -15,7 +12,7 @@ $nav-width: 180px; // move to variables file
     transition: transform 250ms cubic-bezier(.16, .68, .43, .99);
     transform: translate3d($nav-width, 0, 0);
 
-    background-color: #e8e8e8;
+    background-color: $brand-c;
 
     &.is-active {
       transform: translate3d(0px, 0, 0);
@@ -30,8 +27,59 @@ $nav-width: 180px; // move to variables file
     }
   }
 
+  &__overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 30;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: fade 500ms;
+
+    display: none;
+    opacity: 0;
+
+    &.is-active {
+      opacity: 1;
+      display: block;
+    }
+  }
+
   &__btn {
     float: right;
+    width: auto;
     margin: 20px;
+    color: #fff;
+  }
+
+  &__list {
+    clear: both;
+    margin: 20px 0 20px 20px;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  &__item {
+    color: #fff;
+    border-bottom: 1px solid $brand-b;
+    margin-top: 30px;
+    padding-bottom: 5px;
+    font-weight: $font-headline-weight;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
