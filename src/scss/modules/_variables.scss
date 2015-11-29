@@ -55,43 +55,13 @@ $font-headline-weight: 500;
 // Default Grid Options
 // -----------------------------
 
-// Grid for small breakpoints
-$grid-small: (
+$susy: (
   columns: $column-small,
-  gutters: $grid-gutter,
-  global-box-sizing: border-box,
-  gutter-position: inside,
-  debug: (
-    image: $grid-debug,
-    color: rgba(#6666ff, .25),
-    output: background,
-  ),
-  use-custom: (
-    background-image: false,
-    background-options: false,
-    box-sizing: false,
-    clearfix: true,
-    rem: false,
-  )
-);
-
-// Grid for larger breakpoints
-$grid-large: (
-  columns: $column-large,
-  gutters: $grid-gutter,
-  global-box-sizing: border-box,
-  gutter-position: inside,
   container: $site-container,
+  gutters: $grid-gutter,
+  global-box-sizing: border-box,
+  gutter-position: split,
   debug: (
-    image: $grid-debug,
-    color: rgba(#6666ff, .25),
-    output: background,
-  ),
-  use-custom: (
-    background-image: false,
-    background-options: false,
-    box-sizing: false,
-    clearfix: true,
-    rem: false,
+    image: $grid-debug
   )
 );

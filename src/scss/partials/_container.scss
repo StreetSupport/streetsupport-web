@@ -1,9 +1,10 @@
 .container {
+  @include container();
   padding: 0 $site-gutter;
 
-  @include container($grid-small);
-
   @include mq($from: m) {
-    @include container($grid-large);
+    @include with-layout($column-large) {
+      @include container();
+    }
   }
 }

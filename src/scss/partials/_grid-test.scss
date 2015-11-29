@@ -1,7 +1,7 @@
 .grid-test {
   &__copy {
     @include mq($from: m) {
-      @include span(9 of $column-large last);
+      @include span(9 of $column-large);
     }
   }
 

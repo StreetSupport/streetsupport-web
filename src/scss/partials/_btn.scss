@@ -10,7 +10,7 @@
   border-radius: 5px;
   margin-bottom: 20px;
 
-  @include span(3 of $column-small nest);
+  @include span(3 of $column-small);
 
   // Components
   &__icon {
