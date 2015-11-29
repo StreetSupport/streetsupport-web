@@ -1,5 +1,12 @@
 # Street Support Website
 
+## To Do
+
+* Menu styling,
+* Menu opacity,
+* SVG header logo,
+* Form styling.
+
 ## Install
 
 * Install Node 4 LTS or 5 stable. Other versions may work but this has not been tested,
@@ -8,9 +15,7 @@
 * run `npm i`,
 * run 'gulp'.
 
-See [https://github.com/PJL101/foley](https://github.com/PJL101/foley) for more information on the workflow.
-
-This project uses version 0.0.3.
+See [https://github.com/PJL101/foley](https://github.com/PJL101/foley) for more information on the workflow. This project uses version 0.0.3.
 
 ## Usage
 
@@ -29,6 +34,8 @@ Opinionated! Happy to discuss.
 
 * The SCSS uses BEM, mobile first,
 * Try to modularise & reuse everything (if possible),
+* Add each component to component.html,
+* Each component has been designed to be as interchangeable as possible. For example to change a standard block to image block, you just need to add the .block__image div and the content reflows,
 * Webpack is used, so try and follow the require module structure,
 * jQuery 2 has been included as a global, meaning you can use it as you normally would in any module,
 * Try to install framework/modules as a last resort or only when needed,
@@ -39,7 +46,7 @@ Opinionated! Happy to discuss.
 
 ## Workflow Features
 
-This workflow contains:
+The workflow contains:
 
 * Easy to use with configuration from global files,
 * Gulp,

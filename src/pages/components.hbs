@@ -40,14 +40,30 @@ name: home
          <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</dd>
       </dl>
 
+      <h2>List Highlight</h2>
+
       <dl class="list-highlight">
-         <dt>Highlight</dt>
-         <dd>Title</dd>
-         <dt>1234</dt>
-         <dd>Title</dd>
-         <dt>5678</dt>
-         <dd>Title</dd>
+         <dt class="list-highlight__title">Highlight</dt>
+         <dd class="list-highlight__description">Description</dd>
+         <dt class="list-highlight__title">1234</dt>
+         <dd class="list-highlight__description">Description</dd>
+         <dt class="list-highlight__title">£5678</dt>
+         <dd class="list-highlight__description">Description</dd>
       </dl>
+
+      <h2>List Grid</h2>
+
+      <ul class="list-grid">
+        <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
+        <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
+        <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
+        <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
+        <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
+        <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
+        <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
+        <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
+        <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
+      </ul>
     </div>
 
     <div class="container">
@@ -74,41 +90,53 @@ name: home
     <h2>Block</h2>
     <div class="block block--intro">
       <div class="container block__inner">
-        Intro Block
+        <h2 class="h1 block__header">Intro Block</h2>
       </div>
     </div>
 
     <div class="block">
       <div class="container block__inner">
-        Standard Block
-      </div>
-    </div>
-
-    <div class="block">
-      <div class="container block__inner">
-        Standard Block with image
+        <div class="block__content">
+          <p>Standard Block: Suspendisse consequat eget odio ut lobortis. Fusce eget sapien ut lacus mollis imperdiet. Morbi ornare eleifend orci, in imperdiet felis ultricies in. Aliquam vestibulum vel tortor quis tristique.</p>
+          <p>In pulvinar, velit non aliquet vestibulum, dui metus mollis metus.</p>
+        </div>
       </div>
     </div>
 
     <div class="block block--highlight">
       <div class="container block__inner">
-        Highlight Block
+        <h2 class="h1 block__header">Highlight Block</h2>
+        <div class="block__content">
+          <p>Content</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="container block__inner">
+        <h2 class="h1 block__header">Standard Block with image</h2>
+        <div class="block__image">
+          <img data-src="holder.js/100px200" />
+        </div>
+        <div class="block__content">
+          <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis mi suscipit, facilisis tortor et, malesuada velit. Aenean odio elit, ornare eu consequat eget, mollis quis arcu."</p>
+          <p><strong>Cras imperdiet diam</strong></p>
+        </div>
       </div>
     </div>
 
     <h2>Grid 2 Column Test</h2>
 
     <div class="container grid-test">
-       <div class="grid-test__copy">
+      <div class="grid-test__sidebar">
+        <h1 class="h2">Sidebar</h1>
+        <p>Sidebar content</p>
+      </div>
+       <div class="grid-test__main">
          <h1 class="h1">Main Content</h1>
          <img data-src="holder.js/300x200" />
          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis mi suscipit, facilisis tortor et, malesuada velit. Aenean odio elit, ornare eu consequat eget, mollis quis arcu. Cras imperdiet diam aliquam quam rhoncus lacinia. Suspendisse potenti. Nunc at tempus tortor. Ut justo sapien, ornare ac massa at, vehicula sodales leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut dictum ipsum. Nam porta rutrum nulla, eu ultricies est. Vestibulum at lacinia tortor, vitae tempus orci. Phasellus a hendrerit ex, vitae ullamcorper purus. Aenean sagittis est sit amet arcu accumsan dictum. Nulla vestibulum, lorem eu ultrices condimentum, erat odio tempor tellus, eu pulvinar justo justo quis diam. Phasellus ultrices ex augue, at facilisis purus interdum at. Sed eu eleifend urna.</p>
          <p>Suspendisse consequat eget odio ut lobortis. Fusce eget sapien ut lacus mollis imperdiet. Morbi ornare eleifend orci, in imperdiet felis ultricies in. Aliquam vestibulum vel tortor quis tristique. In pulvinar, velit non aliquet vestibulum, dui metus mollis metus, at ornare massa odio vitae leo. Quisque dignissim volutpat magna sit amet consequat. Aenean luctus rutrum sollicitudin. Maecenas et dui accumsan, posuere odio at, posuere lectus. Duis eget neque lorem. In commodo neque vitae lacus porttitor imperdiet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed risus erat, hendrerit at euismod vulputate, molestie non nibh. Cras nisi odio, posuere eu mi quis, facilisis dignissim velit. In hac habitasse platea dictumst.</p>
-       </div>
-
-       <div class="grid-test__sidebar">
-         <h1 class="h2">Sidebar</h1>
-         <p>Sidebar content</p>
        </div>
      </div>
   {{/content}}

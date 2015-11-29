@@ -3,6 +3,45 @@
   padding-top: 30px;
   padding-bottom: 30px;
 
+  &__inner {
+    
+  }
+
+  // Components
+  &__header {
+    text-align: center;
+
+    .block--intro & {
+      color: #fff;
+      padding: 70px;
+    }
+
+    .block--highlight & {
+      color: #fff;
+    }
+  }
+
+  &__content {
+    p:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  &__image {
+    // Append grid to .block__content div if this image div exists
+    @include span(3 of $column-small);
+
+    & + div {
+      @include span(3 of $column-small);
+    }
+
+    img {
+      border: 5px solid $brand-e;
+      border-radius: 10px;
+    }
+  }
+
+  // Variants
   &--intro {
     background-color: $brand-f;
   }
