@@ -24,8 +24,10 @@ body {
 
 html,
 body {
-  overflow-x: hidden;
-  height: 100%;
+  &.is-active {
+    overflow: hidden;
+    height: 100%;
+  }
 }
 
 // Make sure embeds and iframes fit their responsive containers
