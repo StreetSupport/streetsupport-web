@@ -49,7 +49,8 @@
   &__btn {
     float: right;
     width: auto;
-    margin: 20px;
+    padding: 20px;
+    margin: 0;
     color: #fff;
   }
 
@@ -70,6 +71,7 @@
     a {
       color: inherit;
       text-decoration: none;
+      display: block;
     }
   }
 }
