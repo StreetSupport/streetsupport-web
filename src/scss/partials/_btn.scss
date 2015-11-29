@@ -55,4 +55,8 @@
     box-shadow: none;
     border-radius: 0;
   }
+
+  &--wide {
+    @include span(6 of $column-small);  
+  }
 }
