@@ -5,7 +5,7 @@
     right: 0;
     height: 100%;
     width: $nav-width;
-    z-index: 10;
+    z-index: 30;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
 
@@ -33,7 +33,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 30;
+    z-index: 20;
     background-color: rgba(0, 0, 0, 0.8);
     animation: fade 500ms;
 
