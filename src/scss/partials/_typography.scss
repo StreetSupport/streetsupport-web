@@ -43,14 +43,30 @@ p {
 
 ul {
   line-height: 1.25;
+
+  li {
+    margin-bottom: 5px;
+  }
 }
 
 ol {
   line-height: 1.25;
+
+  li {
+    margin-bottom: 5px;
+  }
 }
 
 dl {
   line-height: 1.25;
+
+  dt {
+    margin-bottom: 5px;
+  }
+
+  dd {
+    margin-bottom: 10px;
+  }
 }
 
 strong {
