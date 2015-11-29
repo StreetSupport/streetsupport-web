@@ -12,7 +12,7 @@ body {
 
 .h1 {
   font-size: 25px;
-  line-height: 1.1;
+  line-height: 1.25;
 
   @include mq($from: m) {
     font-size: 45px;
@@ -21,7 +21,7 @@ body {
 
 .h2 {
   font-size: 16px;
-  line-height: 1.1;
+  line-height: 1.25;
 
   @include mq($from: m) {
     font-size: 30px;
@@ -30,7 +30,7 @@ body {
 
 .h3 {
   font-size: 16px;
-  line-height: 1.1;
+  line-height: 1.25;
 
   @include mq($from: m) {
     font-size: 22px;
@@ -38,5 +38,17 @@ body {
 }
 
 p {
-  line-height: 1.1;
+  line-height: 1.25;
+}
+
+ul {
+  line-height: 1.25;
+}
+
+ol {
+  line-height: 1.25;
+}
+
+dl {
+  line-height: 1.25;
 }
