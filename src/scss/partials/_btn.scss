@@ -29,7 +29,7 @@
 
   &__text {
     display: block;
-    padding: 10px 20px;
+    padding: 20px 10px;
   }
 
   // Variants
@@ -51,12 +51,24 @@
     }
   }
 
+  &--brand-g {
+    background-color: $brand-g;
+    color: #fff;
+    box-shadow: 0px 5px 0px 0px darken( $brand-g, 15% );
+    margin-top: 40px;
+    margin-bottom: 40px;
+
+    &:hover {
+      background-color: darken( $brand-g, 5% );
+    }
+  }
+
   &--plain {
     box-shadow: none;
     border-radius: 0;
   }
 
   &--wide {
-    @include span(6 of $column-small);  
+    @include span(6 of $column-small);
   }
 }
