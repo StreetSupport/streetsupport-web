@@ -12,6 +12,10 @@ $('.js-nav-open').on('click', function() {
   nav.open();
 });
 
+$('.js-nav-overlay').on('click', function() {
+  nav.close();
+});
+
 $('.js-nav-close').on('click', function() {
   nav.close();
 });
