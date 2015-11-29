@@ -14,14 +14,24 @@
     text-align: center;
 
     .block--intro & {
-      padding: 70px;
+      padding-top: 70px;
     }
   }
 
   &__content {
-    p:first-of-type {
-      margin-top: 0;
+    p {
+      &:first-of-type {
+        margin-top: 0;
+      }
+
+      a {
+        color: $brand-c;
+      }
     }
+
+    .block--intro & {
+      padding-bottom: 70px;
+    }    
   }
 
   &__image {
@@ -42,6 +52,7 @@
   &--intro {
     background-color: $brand-f;
     color: #fff;
+    text-align: center;
   }
 
   &--highlight {
