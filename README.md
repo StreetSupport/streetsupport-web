@@ -6,7 +6,8 @@
 * Menu opacity,
 * SVG header logo,
 * Form styling,
-* Button image opacity on hover.
+* Button image opacity on hover,
+* Content Button SVG's.
 
 ## Install
 
