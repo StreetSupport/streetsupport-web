@@ -17,7 +17,7 @@ Please work in the develop branch and release to master when ready. Travis CI wi
 
 ## Install
 
-* Install Node 4 LTS or 5 stable. Other versions may work but this has not been tested,
+* Install Node.js 5 stable. Other versions may work but this has not been tested,
 * run `npm i gulp -g`,
 * Navigate to the cloned folder in command line terminal,
 * run `npm i`,
