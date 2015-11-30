@@ -2,12 +2,12 @@ git:
   depth: 1
 language: node_js
 node_js:
-  - '5'
+- '5'
 before_script:
-  - npm install gulp -g
-  - chmod +x ./deploy-gh-pages.sh
-script: ./deploy-gh-pages.sh
+- npm install gulp -g
+- chmod +x ./deploy-gh-pages.sh
+script: "./deploy-gh-pages.sh"
 env:
   global:
-  - GH_REF: "github.com/StreetSupport/streetsupport.net.git"
-  - secure: "pcgSAC+w7CV7Gyo8xTP5E64kvOMVbzbPIh/LvWwBoMD/u6q4FiT2l0GbNHxAHSK4V0REVqBA93pZobk0SFi8JMBZsj6HfHN9+DmeSpNvKZKRoFXlxZstPsctpJBFlF7AjfAWdotoEjx7huJaOiHxihXW7R7Wb33ZWaM0Eib9Bpe1ir823TF3O9dafsyCgOS0jDuquXc6efVwsRR1itHtsYnlXMGHE7WWVr0Uj0Xu48/CSu+SJCHfjDFAr1L0aOA16JOmD0VvPct2fbIVpjnCY0x5sxJpaNG2+XVWBiovLQY0CgV9NP6BL1XDSk1k2l+NJfibQf/DaPBOd0Dt4h8UhHI4T/So4nU45+qxPPh9RG8+z9fLfzKxQKhjwHdAtJI028Dm44QzsVhuZzkk8OGAt6fDSXMQEINasgHG9p4B48iHnYEqc3TFNfEpCQ8cBmEZDsn1Lv5dE00S7jYzqPY1xCuxHCXkzgRmgRVvVtUX54YYGiZlOxoiUunK3pR5i5t2xV3iZKk4KN713tuqzi5roftlfqAXDoyAclKkBREjxHXguEbvU7OgjLQ9nDZi1ulmFZnJwTBrhawHsygs71Pus4Yt8Ob8Q2hO0JnydC9horkz7A9PKCQb6ThAUamy9wWDyIuyhJcZIpLtiacsgPBvVZqeVEcs0GMNU90QgKt553Y="
+  - GH_REF: github.com/StreetSupport/streetsupport.net.git
+  - secure: pBTmBfBqaks3y0P/KeHTpwfuteMdR9IZJkGJuJM9H6B9Y90qLRfSaQNYRL4SMWyYX0LBT5bjJ4+y8wypjFE7rqbHhExv2NfyJp1q2kTwFQlzMFiy7K2mlu/AsYck0Lk7MmYtsPiEQa6B9ajprDX2+sK8WXgk+GJnn0QB4l/IzWbVGQwYx/tR9PIGNLt2TVOFqnC3aNPgjc4b/QDGpRzOzsfsrI0VM7tvrZIdLc2MBPHpmiw8OaQTBxBKDuo1qa7n0YGgY8yp4EW2wwEW8T6Wa1tTQlApemiZmzYspugXHoOFKgU/Knrt6M2TXui8V4cRetofQG5tH70XpzOUsdE7FtX97sU4mPwuNkFCtZCh/74EZTA4l5LVp8KsiTIRCpN8NUDHUtTO6N+MMjrwieWvJ9wKI4HxRKWPTA5k1NCGnDGmFT6MR4HNecGa7XtKzOaRqht/m2T1zBV+iXmNW0/IhuoNqqKRgqHcq0PdgM4FK1XwM926jX0x7+m080m7eWpkqWo5j1Nsva8qJZq2yQ0Eu9lBBS11omhrQ+9v5Vv7oy1CzjQIxVpWdWnbmb0gfWxGUex6+KGvzhB0VRRhyAgELwPWhiHiwwyLdhN6GQ1Z8YpDhutWFYkah9aAs45MPLvrLA7sVQz0xhEDAqZFyCFCDgXQea/cXmxPuJooGHe5Wzc=
