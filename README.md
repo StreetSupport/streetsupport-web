@@ -8,8 +8,8 @@ Please work in the develop branch and release to master when ready. Travis CI wi
 
 ## To Do
 
-* Menu styling,
-* Menu opacity,
+* Tablet and above styling,
+* Menu close button,
 * SVG header logo,
 * Form styling,
 * Button image opacity on hover,
@@ -48,7 +48,7 @@ Opinionated! Happy to discuss.
 * jQuery 2 has been included as a global, meaning you can use it as you normally would in any module,
 * Try to install framework/modules as a last resort or only when needed,
 * No Angular or similar please (for now!),
-* ES2015 is fully supported but I'm still using ES4 for now,
+* ES2015 is fully supported but I'm still using ES5 for now,
 * Speak to Phil about fonts, I'm using my Typekit account for now,
 * Add any new components to the components webpage.
 
