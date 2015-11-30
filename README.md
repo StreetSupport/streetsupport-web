@@ -1,5 +1,11 @@
 # Street Support Website
 
+[![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=master)](https://travis-ci.org/StreetSupport/streetsupport-web)
+
+## Contributing
+
+Please work in the develop branch and release to master when ready. Travis CI will automatically build the website from the master branch.
+
 ## To Do
 
 * Menu styling,
