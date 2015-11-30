@@ -1,21 +1,11 @@
 // npm require
+var holder = require('holderjs');
 var FastClick = require('fastclick');
-require('holderjs');
 
 FastClick.attach(document.body);
 
 // local require
 var nav = require('./nav.js');
 
-// app
-$('.js-nav-open').on('click', function() {
-  nav.open();
-});
-
-$('.js-nav-overlay').on('click', function() {
-  nav.close();
-});
-
-$('.js-nav-close').on('click', function() {
-  nav.close();
-});
+nav.open();
+nav.close();
