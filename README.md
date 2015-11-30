@@ -6,6 +6,8 @@
 
 Please work in the develop branch and release to master when ready. Travis CI will automatically build the website from the master branch.
 
+The master branch is built to [http://streetsupport.github.io/streetsupport.net/](http://streetsupport.github.io/streetsupport.net/).
+
 ## To Do
 
 * Tablet and above styling,
