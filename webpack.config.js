@@ -5,11 +5,7 @@ var CommonsChunkPlugin  = require('./node_modules/webpack/lib/optimize/CommonsCh
 
 // Create plugins array
 var plugins = [
-  new CommonsChunkPlugin('commons.js'),
-  new webpack.ProvidePlugin({
-     $: "jquery",
-     jQuery: "jquery"
-  })
+  new CommonsChunkPlugin('commons.js')
 ];
 
 // Add Uglify task to plugins array if there is a production flag
