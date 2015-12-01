@@ -1,12 +1,11 @@
-var argv    = require('yargs').argv;
-var webpack = require('webpack');
+var argv                = require('yargs').argv;
+var path                = require('path');
+var webpack             = require('webpack');
+var CommonsChunkPlugin  = require(__dirname + '/../../node_modules/webpack/lib/optimize/CommonsChunkPlugin');
 
 // Create plugins array
 var plugins = [
-  new webpack.ProvidePlugin({
-     $: "jquery",
-     jQuery: "jquery"
-  })
+  new CommonsChunkPlugin('commons.js')
 ];
 
 // Add Uglify task to plugins array if there is a production flag
@@ -15,9 +14,16 @@ if (argv.production) {
 }
 
 module.exports = {
-  entry: ['./src/js/global.js', './src/js/app.js'],
+  entry: {
+    home: __dirname + '/../../src/js/page-home',
+    support: __dirname + '/../../src/js/page-find-support',
+    category: __dirname + '/../../src/js/page-category-result'
+  },
   output: {
-    filename: './_dist/assets/js/bundle.js',
+    path: path.join(__dirname, '/../../_dist/assets/js/'),
+    filename: '[name].bundle.js',
+    chunkFilename: '[id].chunk.js',
+    publicPath: "assets/js/"
   },
   plugins: plugins,
   module: {
