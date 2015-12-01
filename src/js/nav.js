@@ -1,12 +1,34 @@
-// .js-nav-push
-// .js-nav-container
-// .js-nav-overlay
-// .is-active
+var openElement = '.js-nav-open';
+var closeElement = '.js-nav-close';
+var overlayElement = '.js-nav-overlay';
+var activeClass = 'is-active';
+var el = document.querySelectorAll('.js-nav-container, .js-nav-push, .js-nav-overlay, html, body');
 
-exports.open = function() {
-  $('.js-nav-container, .js-nav-push, .js-nav-overlay, html, body').addClass('is-active');
+document.querySelector(openElement).addEventListener('click', function(e) {
+  open();
+});
+
+document.querySelector(closeElement).addEventListener('click', function(e) {
+  close();
+});
+
+document.querySelector(overlayElement).addEventListener('click', function(e) {
+  close();
+});
+
+var open = function () {
+  for (i = 0; i < el.length; ++i) {
+    el[i].classList.add(activeClass);
+  }
 };
 
-exports.close = function() {
-  $('.js-nav-container, .js-nav-push, .js-nav-overlay, html, body').removeClass('is-active');
+var close = function () {
+  for (i = 0; i < el.length; ++i) {
+    el[i].classList.remove(activeClass);
+  }
+};
+
+module.exports = {
+  open: open,
+  close: close
 };

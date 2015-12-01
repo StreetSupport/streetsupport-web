@@ -59,7 +59,8 @@
   },
   "dependencies": {
     "fastclick": "^1.0.6",
+    "hogan.js": "^3.0.2",
     "holderjs": "^2.9.0",
-    "jquery": "^2.1.4"
+    "q": "^1.4.1"
   }
 }
