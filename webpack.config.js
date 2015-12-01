@@ -16,7 +16,8 @@ if (argv.production) {
 module.exports = {
   entry: {
     home: './src/js/page-home',
-    support: './src/js/page-find-support'
+    support: './src/js/page-find-support',
+    category: './src/js/page-category-result'    
   },
   output: {
     path: path.join(__dirname, '_dist/assets/js/'),
