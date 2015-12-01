@@ -20,45 +20,16 @@ name: support
         <div class="block__content">
           <p class="text-right"><a href="#">Change time of day</a></p>
 
-          <a class="btn btn--brand-d" href="#">
-            <span class="btn__icon"><img data-src="holder.js/100px140" /></span>
-            <span class="btn__text">Food &amp; Hot Drinks</span>
-          </a>
+          <script id="js-category-tpl" type="text/template">
+            \{{#categories}}
+              <a class="btn btn--brand-d" href="#">
+                <span class="btn__icon"><img data-src="holder.js/100px140" /></span>
+                <span class="btn__text">\{{.}}</span>
+              </a>
+            \{{/categories}}
+          </script>
 
-          <a class="btn btn--brand-d" href="#">
-            <span class="btn__icon"><img data-src="holder.js/100px140" /></span>
-            <span class="btn__text">Place to Sleep</span>
-          </a>
-
-          <a class="btn btn--brand-d" href="#">
-            <span class="btn__icon"><img data-src="holder.js/100px140" /></span>
-            <span class="btn__text">Sleeping Bags</span>
-          </a>
-
-          <a class="btn btn--brand-d" href="#">
-            <span class="btn__icon"><img data-src="holder.js/100px140" /></span>
-            <span class="btn__text">Warm Clothes</span>
-          </a>
-
-          <a class="btn btn--brand-d" href="#">
-            <span class="btn__icon"><img data-src="holder.js/100px140" /></span>
-            <span class="btn__text">Transport</span>
-          </a>
-
-          <a class="btn btn--brand-d" href="#">
-            <span class="btn__icon"><img data-src="holder.js/100px140" /></span>
-            <span class="btn__text">Laundry</span>
-          </a>
-
-          <a class="btn btn--brand-d" href="#">
-            <span class="btn__icon"><img data-src="holder.js/100px140" /></span>
-            <span class="btn__text">Dependancy Advice</span>
-          </a>
-
-          <a class="btn btn--brand-d" href="#">
-            <span class="btn__icon"><img data-src="holder.js/100px140" /></span>
-            <span class="btn__text">General Advice</span>
-          </a>
+          <div id="js-category-output"></div>
 
           <a class="btn btn--brand-g btn--wide" href="#"><span class="btn__text">Emergency Help</span></a>
 

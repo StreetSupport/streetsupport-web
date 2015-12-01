@@ -8,7 +8,8 @@ var categoryData = function () {
 
   req.onload = function() {
     if (this.status >= 200 && this.status < 400) {
-      deferred.resolve(req.responseText);
+      var json = JSON.parse(req.responseText);
+      deferred.resolve(json);
     }
     else {
       alert('error');

@@ -1,5 +1,5 @@
 // NPM require
-var holder = require('holderjs');
+var Holder = require('holderjs');
 var FastClick = require('fastclick');
 FastClick.attach(document.body);
 
