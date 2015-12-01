@@ -17,13 +17,13 @@ module.exports = {
   entry: {
     home: './src/js/page-home',
     support: './src/js/page-find-support',
-    category: './src/js/page-category-result'    
+    category: './src/js/page-category-result'
   },
   output: {
     path: path.join(__dirname, '_dist/assets/js/'),
     filename: '[name].bundle.js',
     chunkFilename: '[id].chunk.js',
-    publicPath: "/assets/js/"
+    publicPath: "assets/js/"
   },
   plugins: plugins,
   module: {
