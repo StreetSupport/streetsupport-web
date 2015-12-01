@@ -1,6 +1,6 @@
 var Q = require('q');
 
-var categoryData = function () {
+var categoryListData = function () {
   var deferred = Q.defer(),
   req = new XMLHttpRequest();
 
@@ -26,5 +26,5 @@ var categoryData = function () {
 };
 
 module.exports = {
-  data: categoryData
+  data: categoryListData
 };

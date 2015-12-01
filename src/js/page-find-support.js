@@ -5,8 +5,8 @@ require(['./name'], function(pageName) {
 	pageName("This is page-support");
 });
 
-require.ensure(['./get-category', 'hogan.js'], function(require) {
-	var getCategory = require('./get-category');
+require.ensure(['./get-category-list', 'hogan.js'], function(require) {
+	var getCategory = require('./get-category-list');
 	var Hogan = require('hogan.js');
 
 	// Get API data using promise
@@ -16,11 +16,11 @@ require.ensure(['./get-category', 'hogan.js'], function(require) {
 		var theData = { categories : result };
 
 		// Compile and render template
-		var theTemplate = document.getElementById('js-category-tpl').innerHTML;
+		var theTemplate = document.getElementById('js-category-list-tpl').innerHTML;
 		var compile = Hogan.compile(theTemplate);
 		var theOutput = compile.render(theData);
 
-		document.getElementById('js-category-output').innerHTML=theOutput;
+		document.getElementById('js-category-list-output').innerHTML=theOutput;
 
 		// Load placeholder images
 		Holder.run();
