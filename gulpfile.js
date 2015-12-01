@@ -1,17 +1,19 @@
 // Load global config and gulp
-var config    = require('./config.json');
-var argv      = require('yargs').argv;
-var browserSync = require('browser-sync');
-var gulp      = require('gulp');
-var watch     = require('gulp-watch');
-var plumber   = require('gulp-plumber');
-var debug     = require('gulp-debug');
-var gulpif    = require('gulp-if');
+var config  = require(__dirname + '/tasks/config/foley.json');
+var argv    = require('yargs').argv;
+var gulp    = require('gulp');
+var plumber = require('gulp-plumber');
+var debug   = require('gulp-debug');
+var gulpif  = require('gulp-if');
 
 // Load modules to run tasks from files
 var requireDir   = require('require-dir');
-var tasks        = requireDir('./tasks');
+var tasks        = requireDir(__dirname + '/tasks');
 var runSequence  = require('run-sequence');
+
+// Specific task modules
+var browserSync = require('browser-sync');
+var watch       = require('gulp-watch');
 
 // Assets task. Metalsmith needs to run first
 gulp.task('assets', function(callback) {
@@ -73,6 +75,7 @@ gulp.task('deploy', function(callback) {
   runSequence(
     'clean',
     'assets',
+    'crticalcss',    
     callback
   );
 });
