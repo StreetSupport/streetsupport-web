@@ -1,7 +1,7 @@
 {
   "name": "foley",
   "description": "A modern, opinionated frontend workflow for building a static website",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Phil Lennon <enquiry@iampjl.co.uk>",
   "private": true,
   "license": "MIT",
@@ -19,12 +19,13 @@
     "test": "gulp deploy --debug"
   },
   "devDependencies": {
-    "autoprefixer": "^6.1.0",
+    "autoprefixer": "^6.1.2",
     "babel-core": "^6.2.1",
     "babel-eslint": "^4.1.5",
     "babel-loader": "^6.2.0",
     "babel-preset-es2015": "^6.1.18",
     "browser-sync": "^2.10.0",
+    "critical": "^0.6.0",
     "css-mqpacker": "^4.0.0",
     "cssnano": "^3.3.2",
     "del": "^2.1.0",
@@ -49,10 +50,12 @@
     "metalsmith-in-place": "^1.3.2",
     "metalsmith-rename": "^1.0.0",
     "postcss-pxtorem": "^3.1.0",
+    "postcss-reporter": "^1.3.0",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.5",
     "sass-mq": "^3.2.5",
     "standard-loader": "^2.0.0",
+    "stylelint": "^2.3.4",
     "susy": "^2.2.6",
     "webpack": "^1.12.6",
     "yargs": "^3.30.0"

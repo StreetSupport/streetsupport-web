@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "color-no-invalid-hex": 2,
+    "declaration-colon-space-after": [1, "always"]
+  }
+}
