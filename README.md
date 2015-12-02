@@ -10,6 +10,10 @@ The master branch is built to [http://streetsupport.github.io](http://streetsupp
 
 ## To Do
 
+* HTML5 geolocation,
+* Updating category ajax request with lat long,
+* Category equal heights,
+* Social media integration,
 * Tablet and above styling,
 * Menu close button,
 * SVG header logo,
