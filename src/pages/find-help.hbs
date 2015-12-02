@@ -1,14 +1,14 @@
 ---
-title: Find Support - Street Support
+title: Find Help - Street Support
 description: Test Description
-jsName: support
+jsName: findhelp
 ---
 
 {{#extend "_default"}}
   {{#content "main"}}
     <div class="block block--intro">
       <div class="container block__inner">
-        <h2 class="h1 block__header">Find Support</h2>
+        <h2 class="h1 block__header">Find Help</h2>
         <div class="block__content">
           <p>What are you looking for?</p>
         </div>
@@ -21,7 +21,7 @@ jsName: support
 
           <script id="js-category-list-tpl" type="text/template">
             \{{#categories}}
-              <a class="btn btn--brand-d" href="category-result.html?category=\{{.}}">
+              <a class="btn btn--brand-d" href="category.html?category=\{{key}}">
                 <span class="btn__icon"><img data-src="holder.js/100px140" /></span>
                 <span class="btn__text">\{{name}}</span>
               </a>

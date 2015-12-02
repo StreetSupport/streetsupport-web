@@ -16,8 +16,9 @@ if (argv.production) {
 module.exports = {
   entry: {
     generic: __dirname + '/../../src/js/page-generic',
-    support: __dirname + '/../../src/js/page-find-support',
-    category: __dirname + '/../../src/js/page-category-result'
+    findhelp: __dirname + '/../../src/js/page-find-help',
+    category: __dirname + '/../../src/js/page-category',
+    organisation: __dirname + '/../../src/js/page-organisation'        
   },
   output: {
     path: path.join(__dirname, '/../../_dist/assets/js/'),
