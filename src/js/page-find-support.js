@@ -1,10 +1,6 @@
 var shared = require('./shared');
 var Holder = require('holderjs');
 
-require(['./name'], function(pageName) {
-	pageName("This is page-support");
-});
-
 require.ensure(['./get-category-list', 'hogan.js'], function(require) {
 	var getCategory = require('./get-category-list');
 	var Hogan = require('hogan.js');

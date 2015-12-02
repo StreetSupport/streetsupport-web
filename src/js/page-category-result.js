@@ -1,10 +1,6 @@
 var shared = require('./shared');
 var Holder = require('holderjs');
 
-require(['./name'], function(pageName) {
-	pageName("This is page-category");
-});
-
 function getParameterByName(name) {
 	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
   var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
