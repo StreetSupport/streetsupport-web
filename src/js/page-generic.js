@@ -1,0 +1,1 @@
+var shared = require('./shared');
