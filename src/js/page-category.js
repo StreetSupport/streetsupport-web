@@ -17,8 +17,17 @@ require.ensure(['./get-category-result', 'hogan.js'], function(require) {
 	// Get API data using promise
 	var data = getCategory.data(category).then(function (result) {
 
-		var theOutput = JSON.stringify(result);
+		// Append object name for Hogan
+		var theData = { organisations : result };
 
-		document.getElementById('js-category-output').innerHTML=theOutput;
+		// Compile and render template
+		var theTemplate = document.getElementById('js-category-result-tpl').innerHTML;
+		var compile = Hogan.compile(theTemplate);
+		var theOutput = compile.render(theData);
+
+		document.getElementById('js-category-result-output').innerHTML=theOutput;
+
+		console.log(theData);
+
   });
 });
