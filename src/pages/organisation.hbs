@@ -9,16 +9,25 @@ jsName: organisation
     <div class="block block--intro">
       <div class="container block__inner">
         <h2 class="h1 block__header">Organisation</h2>
-        <div class="block__content">
-          <p>TBA</p>
-        </div>
       </div>
     </div>
 
     <div class="block">
       <div class="container block__inner">
         <div class="block__content">
+
+          <script id="js-organisation-tpl" type="text/template">
+            \{{#organisation}}
+              <div class="organisation__item">
+                <h2 class="organisation__header">\{{name}}</h2>
+                <p>\{{description}}</p>
+                <p>Area Serviced: \{{areaServiced}}</p>
+              </div>
+            \{{/organisation}}
+          </script>
+
           <div id="js-organisation-output" class="organisation"></div>
+
         </div>
       </div>
     </div>
