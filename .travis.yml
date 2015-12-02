@@ -2,7 +2,7 @@ git:
   depth: 1
 branches:
   only:
-    - master  
+    - master
 language: node_js
 node_js:
 - '5'
@@ -12,5 +12,5 @@ before_script:
 script: "./deploy-gh-pages.sh"
 env:
   global:
-  - GH_REF: github.com/StreetSupport/streetsupport.net.git
+  - GH_REF: github.com/StreetSupport/StreetSupport.github.io.git
   - secure: QXh6oTdc3xkRTsu/uLhqp9KmyxkjN5Q35MJX6zlXG8yNBJyh/TUnrk01hfek9M+KkK4CczWnFUxwNVK+fQYiFoYC3kbBYWQufpBlwerJerfX30pO3LWwX+E3ugj7/A0I4pgTXEJPTwLjxiuHTxdKzZQ1mqa4sCTkcKvPVJlGkPF3axclOeINBvmHbq0+ZjoSXQ/33b8SKjxqqBS34rDRPgolteLoqHOyImDUscppIAyycsVk3QrTArmaPYOsLoDFwP8q7fkve2dGSHDRx5ZzDPjrFpo+yKbTdAcHHipa6pVQaO/bUfdANKffWQLQlOOaUKgh3uK5GbYCRGUTx4TAPJ2GPa64VKymZYDwioeP/JrkMLzvhPYDqbrt0Y8jXjfo8dPcwWsHiHQ+jPKSRM2EoJnc6/U8jMdAnlhGk577BXfoYaZdPE2HxJOe/6eqViPzrbV2Dx7ygRulT+lAWqdwf7s9zg9oIhSkEGNAZDv7g1ehQpGNhucod6f9siSngmusadzm6jTJyYIqSYSD/1zpHZUspeVL6bjXtg1IblZzc9stmvy3vEokSEpbmKIJfvT3CjSpJA7j5ACnlK091K8kXBNFILELwDRiR1jfWOpb1iCJ3wZf/qckQUrusVBFuhSrs0PgNY3LJeTcUsqeK0kxbj3rowv90QH3sBV171reORo=
