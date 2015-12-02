@@ -19,6 +19,6 @@ require.ensure(['./get-category-result', 'hogan.js'], function(require) {
 
 		var theOutput = JSON.stringify(result);
 
-		document.getElementById('js-category-result-output').innerHTML=theOutput;
+		document.getElementById('js-category-output').innerHTML=theOutput;
   });
 });
