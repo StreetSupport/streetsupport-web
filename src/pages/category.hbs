@@ -10,7 +10,6 @@ jsName: category
       <div class="container block__inner">
         <h2 class="h1 block__header">Category</h2>
         <div class="block__content">
-          <p>Add ?category=[CATEGORY] to web address to test</p>
         </div>
       </div>
     </div>
@@ -18,7 +17,20 @@ jsName: category
     <div class="block">
       <div class="container block__inner">
         <div class="block__content">
-          <div id="js-category-output"></div>
+
+          <script id="js-category-result-tpl" type="text/template">
+            \{{#organisations}}
+              <div class="category-result__item">
+                <h2 class="category-result__header"><a class="" href="organisation.html?organisation=\{{key}}">\{{name}}</a></h2>
+                <p>\{{description}}</p>
+                <a class="btn btn--brand-d" href="organisation.html?organisation=\{{key}}">
+                  <span class="btn__text">More information</span>
+                </a>
+              </div>
+            \{{/organisations}}
+          </script>
+
+          <div id="js-category-result-output" class="category-result"></div>
         </div>
       </div>
     </div>

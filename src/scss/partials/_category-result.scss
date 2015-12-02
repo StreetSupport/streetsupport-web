@@ -1,0 +1,13 @@
+.category-result {
+  @include cf();
+
+  &__item {
+    @include cf();
+  }
+
+  &__header {
+    a {
+      color: inherit;
+    }
+  }
+}
