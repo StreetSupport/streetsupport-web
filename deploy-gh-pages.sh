@@ -20,4 +20,4 @@ cd _dist
 git init
 git add -A
 git commit -m "Travis GitHub Pages auto build for $THE_COMMIT"
-git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages > /dev/null 2>&1
+git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master > /dev/null 2>&1
