@@ -20,14 +20,18 @@ require.ensure(['./get-category-result', 'hogan.js'], function(require) {
 		// Append object name for Hogan
 		var theData = { organisations : result };
 
-		// Compile and render template
-		var theTemplate = document.getElementById('js-category-result-tpl').innerHTML;
-		var compile = Hogan.compile(theTemplate);
-		var theOutput = compile.render(theData);
+		// Compile and render header template
+		var theHeaderTemplate = document.getElementById('js-category-header-tpl').innerHTML;
+		var compileHeader = Hogan.compile(theHeaderTemplate);
+		var theHeaderOutput = compileHeader.render(theData);
 
-		document.getElementById('js-category-result-output').innerHTML=theOutput;
+		document.getElementById('js-category-header-output').innerHTML=theHeaderOutput;
 
-		console.log(theData);
+		// Compile and render category template
+		var theCategoryTemplate = document.getElementById('js-category-result-tpl').innerHTML;
+		var compileCategory = Hogan.compile(theCategoryTemplate);
+		var theCategoryOutput = compileCategory.render(theData);
 
+		document.getElementById('js-category-result-output').innerHTML=theCategoryOutput;
   });
 });
