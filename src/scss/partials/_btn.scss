@@ -13,18 +13,18 @@
 
   // Components
   &__icon {
-    height: 130px;
+    height: 90px;
     width: 100%;
     display: block;
     background-position: center top;
     background-size: 100% auto;
 
     @include mq($from: xs) {
-      height: 180px;
+      height: 140px;
     }
 
     @include mq($from: s) {
-      height: 200px;
+      height: 180px;
     }
 
     @include mq($from: m) {
