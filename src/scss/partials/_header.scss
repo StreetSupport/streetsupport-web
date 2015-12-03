@@ -5,15 +5,22 @@
 
   &__title {
     margin: 0;
-    padding: 0 $site-gutter;
+    padding: 5px $site-gutter 0 $site-gutter;
     float: left;
     color: #fff;
-    line-height: 50px;
 
     a {
       text-decoration: none;
       color: inherit;
+      line-height: 40px;
+      vertical-align: top;
     }
+  }
+
+  &__logo {
+    width: 38px;
+    height: 40px;
+    margin-right: 5px;
   }
 
   &__btn {
