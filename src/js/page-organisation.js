@@ -20,6 +20,13 @@ require.ensure(['./get-organisation', 'hogan.js'], function(require) {
 		// Append object name for Hogan
 		var theData = { organisation : result };
 
+		// Compile and render header template
+		var theHeaderTemplate = document.getElementById('js-organisation-header-tpl').innerHTML;
+		var compileHeader = Hogan.compile(theHeaderTemplate);
+		var theHeaderOutput = compileHeader.render(theData);
+
+		document.getElementById('js-organisation-header-output').innerHTML=theHeaderOutput;
+
 		// Compile and render template
 		var theTemplate = document.getElementById('js-organisation-tpl').innerHTML;
 		var compile = Hogan.compile(theTemplate);
