@@ -7,19 +7,19 @@ module.exports = {
   urlpngcss: "icons.fallback.css",
 
   // preview HTML filename
-  previewhtml: "preview.html",
+  previewhtml: "_icons.html",
 
   // grunticon loader code snippet filename
   loadersnippet: "grunticon.loader.js",
 
   // Include loader code for SVG markup embedding
-  enhanceSVG: true,
+  enhanceSVG: false,
 
   // Make markup embedding work across domains (if CSS hosted externally)
   corsEmbed: false,
 
   // folder name (within dest) for png output
-  pngfolder: "png",
+  pngfolder: "assets/img/icon",
 
   // prefix for CSS classnames
   cssprefix: ".icon-",
