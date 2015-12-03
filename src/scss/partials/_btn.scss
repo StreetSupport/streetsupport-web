@@ -6,24 +6,44 @@
   display: block;
   font-family: $font-headline;
   font-weight: $font-headline-weight;
-  border-radius: 10px;
   margin-bottom: 20px;
   text-decoration: none;
   text-align: center;
-  box-shadow: 0px 5px 0px 0px darken( $brand-d, 15% );
-  transition: background-color 200ms ease, box-shadow 200ms ease;
-
   @include span(3 of $column-small);
-
-  &:hover {
-    box-shadow: none;
-  }
 
   // Components
   &__icon {
+    height: 90px;
+    width: 100%;
     display: block;
+    background-position: center top;
+    background-size: 100% auto;
 
-    img {
+    @include mq($from: xs) {
+      height: 140px;
+    }
+
+    @include mq($from: s) {
+      height: 180px;
+    }
+
+    @include mq($from: m) {
+      height: 240px;
+    }
+
+    @include mq($from: l) {
+      height: 310px;
+    }
+
+    @include mq($from: xl) {
+      height: 360px;
+    }
+
+    & + span {
+      border-radius: 0 0 10px 10px;
+    }
+
+    img { // temp style for holder.js!
       border-radius: 10px 10px 0 0;
     }
   }
@@ -31,42 +51,57 @@
   &__text {
     display: block;
     padding: 15px 10px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 0px 0px darken( $brand-d, 15% );
+    transition: background-color 200ms ease, box-shadow 200ms ease;
+
+    &:hover {
+      box-shadow: none;
+    }
   }
 
   // Variants
   &--brand-d {
-    background-color: $brand-d;
-    color: #fff;
+    .btn__text {
+      background-color: $brand-d;
+      color: #fff;
 
-    &:hover {
-      background-color: darken( $brand-d, 5% );
+      &:hover {
+        background-color: darken( $brand-d, 5% );
+      }
     }
   }
 
   &--brand-e {
-    background-color: $brand-e;
-    color: #111;
+    .btn__text {
+      background-color: $brand-e;
+      color: #111;
 
-    &:hover {
-      background-color: darken( $brand-e, 5% );
+      &:hover {
+        background-color: darken( $brand-e, 5% );
+      }
     }
   }
 
   &--brand-g {
-    background-color: $brand-g;
-    color: #fff;
-    box-shadow: 0px 5px 0px 0px darken( $brand-g, 15% );
-    margin-top: 40px;
-    margin-bottom: 40px;
+    .btn__text {
+      background-color: $brand-g;
+      color: #fff;
+      box-shadow: 0px 5px 0px 0px darken( $brand-g, 15% );
+      margin-top: 40px;
+      margin-bottom: 40px;
 
-    &:hover {
-      background-color: darken( $brand-g, 5% );
+      &:hover {
+        background-color: darken( $brand-g, 5% );
+      }
     }
   }
 
   &--plain {
-    box-shadow: none;
-    border-radius: 0;
+    .btn__text {
+      box-shadow: none;
+      border-radius: 0;
+    }
   }
 
   &--wide {
