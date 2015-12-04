@@ -1,5 +1,6 @@
 var shared = require('./shared');
 var Holder = require('holderjs');
+var _ = require('lodash');
 
 function getParameterByName(name) {
 	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -16,6 +17,12 @@ require.ensure(['./get-category-result', 'hogan.js'], function(require) {
 
 	// Get API data using promise
 	var data = getCategory.data(category).then(function (result) {
+
+		_.forEach(result.serviceProviders, function(org) {
+			org.requestedService = _.find(org.servicesProvided, function(service) {
+				return service.name === category
+			})
+		})
 
 		// Append object name for Hogan
 		var theData = { organisations : result };

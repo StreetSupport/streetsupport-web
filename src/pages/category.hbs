@@ -33,7 +33,10 @@ jsName: category
         \{{#serviceProviders}}
           <div class="category-result__item">
             <h2 class="category-result__header"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h2>
-            <p>\{{description}}</p>
+            \{{#requestedService}}
+            <p>\{{info}}</p>
+            <p>\{{timeAndLocation}}</p>
+            \{{/requestedService}}
             <a class="btn btn--brand-d" href="organisation.html?organisation=\{{key}}">
               <span class="btn__text">More information</span>
             </a>
