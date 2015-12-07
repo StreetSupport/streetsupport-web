@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Variables depending on branch
-if [[ $TRAVIS_BRANCH == 'master' ]]
+If [[ $TRAVIS_BRANCH == 'master' ]]
+then
   REPO=`github.com/StreetSupport/streetsupport.net-beta.git`
   DOMAIN=`beta.streetsupport.net`
 else
