@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Variables depending on branch
-If [[ $TRAVIS_BRANCH == 'master' ]]
+# Define variables depending on the branch
+if [[ $TRAVIS_BRANCH == 'master' ]]
 then
-  REPO=`github.com/StreetSupport/streetsupport.net-beta.git`
-  DOMAIN=`beta.streetsupport.net`
+  REPO="github.com/StreetSupport/streetsupport.net-beta.git"
+  DOMAIN="beta.streetsupport.net"
 else
-  REPO=`github.com/StreetSupport/streetsupport.net-dev.git`
-  DOMAIN=`dev.streetsupport.net`
+  REPO="github.com/StreetSupport/streetsupport.net-dev.git"
+  DOMAIN="dev.streetsupport.net"
 fi
 
 # Get the commit details
@@ -30,7 +30,7 @@ cd _dist
 # Create CNAME depending on branch
 # Variables depending on branch
 cat > CNAME << EOF
-  "${DOMAIN}"
+  $DOMAIN
 EOF
 
 # Push to git by overriding previous commits
