@@ -1,7 +1,7 @@
-# Street Support Website
+# StreetSupport Website
 
-Beta Build Status (master) - [![Build Status - beta](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=master)](https://travis-ci.org/StreetSupport/streetsupport-web)
-Dev Build Status (develop) - [![Build Status - dev](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=develop)](https://travis-ci.org/StreetSupport/streetsupport-web)
+* Beta Build Status (master) - [![Build Status - beta](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=master)](https://travis-ci.org/StreetSupport/streetsupport-web)
+* Dev Build Status (develop) - [![Build Status - dev](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=develop)](https://travis-ci.org/StreetSupport/streetsupport-web)
 
 ## Domains
 
