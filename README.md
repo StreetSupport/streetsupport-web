@@ -1,26 +1,25 @@
 # Street Support Website
 
-[![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=master)](https://travis-ci.org/StreetSupport/streetsupport-web)
+[![Build Status - beta](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=master)](https://travis-ci.org/StreetSupport/streetsupport-web)
+[![Build Status - dev](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=develop)](https://travis-ci.org/StreetSupport/streetsupport-web)
 
-## Contributing
+## Domains
 
-Please work in the develop branch and release to master when ready. Travis CI will automatically build the website from the master branch.
+Please work in the develop branch and only merge to master when ready and tested. Travis CI automatically builds on each commit to develop and master. Pull requests are not built and have to be merged.
 
-The master branch is built to [http://streetsupport.github.io](http://streetsupport.github.io).
+* The master branch automatically builds to: [http://beta.streetsupport.web](http://beta.streetsupport.web).
+* The develop branch automatically builds to: [http://dev.streetsupport.web](http://dev.streetsupport.web)
+
 
 ## To Do
 
-* Specific organisation page
+Please see the Trello board for a general To Do. The below list is for specific Frontend tasks:
+
 * HTML5 geolocation,
-* Updating category ajax request with lat long,
-* Category equal heights,
+* Category button equal heights,
 * Social media integration,
 * Tablet and above styling,
-* Menu close button,
-* SVG header logo,
-* Form styling,
-* Button image opacity on hover,
-* Content Button SVG's.
+* Button image opacity on hover.
 
 ## Install
 
@@ -30,7 +29,7 @@ The master branch is built to [http://streetsupport.github.io](http://streetsupp
 * run `npm i`,
 * run 'gulp'.
 
-See [https://github.com/PJL101/foley](https://github.com/PJL101/foley) for more information on the workflow. This project uses version 0.0.3.
+See [https://github.com/PJL101/foley](https://github.com/PJL101/foley) for more information about the workflow. This project uses version 0.0.3.
 
 ## Usage
 
@@ -47,23 +46,21 @@ See [https://github.com/PJL101/foley](https://github.com/PJL101/foley) for more 
 
 Opinionated! Happy to discuss.
 
-* The SCSS uses BEM, mobile first,
-* Try to modularise & reuse everything (if possible),
-* Add each component to component.html,
+* The SCSS uses BEM and mobile first,
+* Try to modularise & reuse components (if possible),
+* Add each new component to component.html,
 * Each component has been designed to be as interchangeable as possible. For example to change a standard block to image block, you just need to add the .block__image div and the content reflows,
 * Webpack is used, so try and follow the require module structure,
-* jQuery 2 has been included as a global, meaning you can use it as you normally would in any module,
+* Vanilla JavaScript is in use with minimal libraries,
 * Try to install framework/modules as a last resort or only when needed,
 * No Angular or similar please (for now!),
-* ES2015 is fully supported but I'm still using ES5 for now,
-* Speak to Phil about fonts, I'm using my Typekit account for now,
-* Add any new components to the components webpage.
+* ES2015 is fully supported but I'm still using ES5 for now.
 
 ## Workflow Features
 
 The workflow contains:
 
-* Easy to use with configuration from global files,
+* Easy to use with configuration from global files (/tasks/config/),
 * Gulp,
 * Metalsmith (static website and blog generator),
 * Handlebars & Handlebars Layouts integration,
