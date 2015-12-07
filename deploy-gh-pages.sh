@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Variables depending on branch
+if [[ $TRAVIS_BRANCH == 'master' ]]
+  REPO=`github.com/StreetSupport/streetsupport.net-beta.git`
+  DOMAIN=`beta.streetsupport.net`
+else
+  REPO=`github.com/StreetSupport/streetsupport.net-dev.git`
+  DOMAIN=`dev.streetsupport.net`
+fi
+
 # Get the commit details
 THE_COMMIT=`git rev-parse HEAD`
 
@@ -14,10 +23,18 @@ mkdir _dist
 # Run gulp
 gulp deploy --debug --production
 
+# Move to created directory
+cd _dist
+
+# Create CNAME depending on branch
+# Variables depending on branch
+cat > CNAME << EOF
+  "${DOMAIN}"
+EOF
+
 # Push to git by overriding previous commits
 # IMPORTANT: Supress messages so nothing appears in logs
-cd _dist
 git init
 git add -A
-git commit -m "Travis GitHub Pages auto build for $THE_COMMIT"
-git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master > /dev/null 2>&1
+git commit -m "Travis automatic build for $THE_COMMIT"
+git push --force --quiet "https://${GH_TOKEN}@${REPO}" master:gh-pages > /dev/null 2>&1
