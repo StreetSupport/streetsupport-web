@@ -27,15 +27,14 @@ gulp deploy --debug --production
 # Move to created directory
 cd _dist
 
-# Create CNAME depending on branch
-# Variables depending on branch
+# Create CNAME file and populate with domain depending on branch
 cat > CNAME << EOF
-  $DOMAIN
+$DOMAIN
 EOF
 
 # Push to git by overriding previous commits
 # IMPORTANT: Supress messages so nothing appears in logs
 git init
 git add -A
-git commit -m "Travis automatic build for $THE_COMMIT"
+git commit -m "Travis CI automatic build for $THE_COMMIT"
 git push --force --quiet "https://${GH_TOKEN}@${REPO}" master:gh-pages > /dev/null 2>&1
