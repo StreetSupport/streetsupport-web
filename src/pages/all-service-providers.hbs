@@ -1,0 +1,47 @@
+---
+title: All Service Providers - Street Support
+description: Street support makes it easier to help homeless people. Find help relevant to your needs.
+jsName: allserviceproviders
+---
+
+{{#extend "_default"}}
+  {{#content "main"}}
+    <div class="block block--intro">
+      <div class="container block__inner">
+        <h2 class="h1 block__header">Full Listing</h2>
+        <div class="block__content">
+          <p>All charities and voluntary groups in Manchester.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="container block__inner">
+        <div class="block__content">
+
+          <div id="js-category-result-output" class="category-result"></div>
+          
+        </div>
+      </div>
+    </div>
+  {{/content}}
+
+  {{#content "gutter"}}
+     <script id="js-category-result-tpl" type="text/template">
+          \{{#organisations}}
+            \{{#serviceProviders}}
+              <div class="category-result__item">
+                <h2 class="category-result__header"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h2>
+                \{{#requestedService}}
+                <p>\{{info}}</p>
+                <p>\{{timeAndLocation}}</p>
+                \{{/requestedService}}
+                <a class="btn btn--brand-d" href="organisation.html?organisation=\{{key}}">
+                  <span class="btn__text">More information</span>
+                </a>
+              </div>
+            \{{/serviceProviders}}
+          \{{/organisations}}
+        </script>
+  {{/content}}
+{{/extend}}
