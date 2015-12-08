@@ -1,24 +1,31 @@
-var shared = require('./shared');
-var Holder = require('holderjs');
+var shared = require('./shared')
+var Holder = require('holderjs')
+var _ = require('lodash')
 
-require.ensure(['./get-category-list', 'hogan.js'], function(require) {
-	var getCategory = require('./get-category-list');
-	var Hogan = require('hogan.js');
+function getParameterByName(name) {
+	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]")
+  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+  results = regex.exec(location.search)
+  return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "))
+}
+
+require.ensure(['./get-all-providers', 'hogan.js'], function(require) {
+	var getCategory = require('./get-all-providers')
+	var Hogan = require('hogan.js')
 
 	// Get API data using promise
 	var data = getCategory.data().then(function (result) {
 
 		// Append object name for Hogan
-		var theData = { categories : result };
+		var theData = { organisations : result }
 
-		// Compile and render template
-		var theTemplate = document.getElementById('js-category-list-tpl').innerHTML;
-		var compile = Hogan.compile(theTemplate);
-		var theOutput = compile.render(theData);
+		console.log(theData)
 
-		document.getElementById('js-category-list-output').innerHTML=theOutput;
+		// Compile and render category template
+		var theCategoryTemplate = document.getElementById('js-category-result-tpl').innerHTML
+		var compileCategory = Hogan.compile(theCategoryTemplate)
+		var theCategoryOutput = compileCategory.render(theData)
 
-		// Load placeholder images
-		Holder.run();
-  });
-});
+		document.getElementById('js-category-result-output').innerHTML=theCategoryOutput
+  })
+})
