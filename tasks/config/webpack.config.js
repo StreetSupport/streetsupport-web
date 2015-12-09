@@ -19,7 +19,8 @@ module.exports = {
     findhelp: __dirname + '/../../src/js/page-find-help',
     category: __dirname + '/../../src/js/page-category',
     organisation: __dirname + '/../../src/js/page-organisation',
-    allserviceproviders: __dirname + '/../../src/js/page-all-service-providers'       
+    allserviceproviders: __dirname + '/../../src/js/page-all-service-providers',
+    services: __dirname + '/../../src/js/page-services'
   },
   output: {
     path: path.join(__dirname, '/../../_dist/assets/js/'),
