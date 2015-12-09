@@ -1,5 +1,10 @@
-var shared = require('./shared')
-var Holder = require('holderjs')
+// Page modules
+var FastClick = require('fastclick')
+var nav = require('./nav.js') // eslint-disable-line
+
+// FastClick
+FastClick.attach(document.body)
+
 var _ = require('lodash')
 
 function getParameterByName(name) {
