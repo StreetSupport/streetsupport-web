@@ -16,10 +16,12 @@ require.ensure(['./get-all-providers', 'hogan.js'], function(require) {
 	// Get API data using promise
 	var data = getCategory.data().then(function (result) {
 
-		// Append object name for Hogan
-		var theData = { organisations : result }
+		var sorted = _.sortBy(result, function(provider) {
+			return provider.name
+		})
 
-		console.log(theData)
+		// Append object name for Hogan
+		var theData = { organisations : sorted }
 
 		// Compile and render category template
 		var theCategoryTemplate = document.getElementById('js-category-result-tpl').innerHTML
