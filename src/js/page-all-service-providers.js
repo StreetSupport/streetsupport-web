@@ -7,7 +7,7 @@ FastClick.attach(document.body)
 
 var _ = require('lodash')
 
-require.ensure(['./get-all-providers', 'hogan.js'], function(require) {
+require.ensure(['hogan.js'], function(require) {
   var apiRoutes = require('./api')
   var getApiData = require('./get-api-data')
   var Hogan = require('hogan.js')
