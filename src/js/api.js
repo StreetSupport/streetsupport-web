@@ -1,8 +1,14 @@
-var live = 'http://api.streetsupport.net/'
-var dev = 'http://localhost:55881'
+var live = 'http://api.streetsupport.net'
+var dev = 'http://localhost:55881' // eslint-disable-line
 
 var domainRoot = live
 
+var serviceProvidersUrl = '/v1/service-providers/'
+var serviceCategoriesUrl = '/v1/service-categories/'
+var categoryServiceProvidersUrl = '/v1/categorised-service-providers/show/'
+
 module.exports = {
-  allServiceProviders: domainRoot + '/v1/service-providers/'
+  serviceProviders: domainRoot + serviceProvidersUrl,
+  serviceCategories: domainRoot + serviceCategoriesUrl,
+  categoryServiceProviders: domainRoot + categoryServiceProvidersUrl
 }
