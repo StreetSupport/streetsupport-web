@@ -2,12 +2,12 @@
 
 # Define variables depending on the branch
 if [[ $TRAVIS_BRANCH == 'master' ]]
-then
-  REPO="github.com/StreetSupport/streetsupport.net-beta.git"
-  DOMAIN="beta.streetsupport.net"
-else
-  REPO="github.com/StreetSupport/streetsupport.net-dev.git"
-  DOMAIN="dev.streetsupport.net"
+  then
+    REPO="github.com/StreetSupport/streetsupport.net-beta.git"
+    DOMAIN="beta.streetsupport.net"
+  else
+    REPO="github.com/StreetSupport/streetsupport.net-dev.git"
+    DOMAIN="dev.streetsupport.net"
 fi
 
 # Get the commit details
@@ -34,7 +34,13 @@ EOF
 
 # Push to git by overriding previous commits
 # IMPORTANT: Supress messages so nothing appears in logs
-git init
-git add -A
-git commit -m "Travis CI automatic build for $THE_COMMIT"
-git push --force --quiet "https://${GH_TOKEN}@${REPO}" master:gh-pages > /dev/null 2>&1
+
+if [[ $TRAVIS_BRANCH == 'master' ]] || [[ $TRAVIS_BRANCH == 'develop' ]]
+  then
+    git init
+    git add -A
+    git commit -m "Travis CI automatic build for $THE_COMMIT"
+    git push --force --quiet "https://${GH_TOKEN}@${REPO}" master:gh-pages > /dev/null 2>&1
+  else
+    echo "Not on master or develop branch so don't push the changes to GitHub Pages"
+fi
