@@ -13,7 +13,7 @@ require.ensure(['./api', './get-api-data', 'hogan.js'], function (require) {
 
   // Get API data using promise
   getApiData.data(apiRoutes.serviceProviders).then(function (result) {
-    var sorted = sortBy.sortBy(result, function (provider) {
+    var sorted = sortBy(result, function (provider) {
       return provider.name
     })
 
