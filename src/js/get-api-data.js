@@ -1,8 +1,10 @@
+/* global XMLHttpRequest */
+
 var Q = require('q')
 
 var getApiData = function (url) {
   var deferred = Q.defer()
-  var req = new XMLHttpRequest() // eslint-disable-line
+  var req = new XMLHttpRequest()
 
   req.open('GET', url, true)
 
