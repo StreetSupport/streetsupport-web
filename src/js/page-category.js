@@ -3,6 +3,8 @@
 // Page modules
 var FastClick = require('fastclick')
 var nav = require('./nav.js') // eslint-disable-line
+var forEach = require('lodash/collection/forEach')
+var find = require('lodash/collection/find')
 
 // FastClick
 FastClick.attach(document.body)
@@ -16,28 +18,22 @@ function getUrlParameter (name) {
 }
 
 // Load and process data
-require.ensure(['./api', './get-api-data', 'hogan.js', 'lodash/collection/forEach', 'lodash/collection/find'], function (require) {
+require.ensure(['./api', './get-api-data', 'hogan.js'], function (require) {
   var apiRoutes = require('./api')
   var getApiData = require('./get-api-data')
   var Hogan = require('hogan.js')
-  /*
-  var forEach = require('lodash/collection/forEach')
-  var find = require('lodash/collection/find')
-  */
 
   var theCategory = getUrlParameter('category')
   var categoryUrl = apiRoutes.categoryServiceProviders += theCategory
 
   // Get API data using promise
   getApiData.data(categoryUrl).then(function (result) {
-/*
     // Get services provided
-    forEach.forEach(result.serviceProviders, function (org) {
-      org.requestedService = find.find(org.servicesProvided, function (service) {
-        return service.name === category
+    forEach(result.serviceProviders, function (org) {
+      org.requestedService = find(org.servicesProvided, function (service) {
+        return service.name === theCategory
       })
     })
-*/
 
     // Append object name for Hogan
     var theData = { organisations: result }
