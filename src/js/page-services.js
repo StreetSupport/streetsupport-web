@@ -1,19 +1,10 @@
-/* global location */
-
 // Page modules
 var FastClick = require('fastclick')
 var nav = require('./nav.js') // eslint-disable-line
+var urlParameter = require('./get-url-parameter')
 
 // FastClick
 FastClick.attach(document.body)
-
-// TO DO: Make this a module
-function getUrlParameter (name) {
-  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]')
-  var regex = new RegExp('[\\?&]' + name + '=([^&#]*)')
-  var results = regex.exec(location.search)
-  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
-}
 
 // Load and process data
 require.ensure(['./api', './get-api-data', 'hogan.js'], function (require) {
@@ -21,12 +12,11 @@ require.ensure(['./api', './get-api-data', 'hogan.js'], function (require) {
   var getApiData = require('./get-api-data')
   var Hogan = require('hogan.js')
 
-  var theCategory = getUrlParameter('category')
+  var theCategory = urlParameter.parameter('category')
   var categoryUrl = apiRoutes.subCategoryServiceProviders += theCategory
 
   // Get API data using promise
   getApiData.data(categoryUrl).then(function (result) {
-
     // Append object name for Hogan
     var theData = { organisations: result }
 
