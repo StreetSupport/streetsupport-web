@@ -1,15 +1,22 @@
 // Page modules
 var FastClick = require('fastclick')
 var nav = require('./nav.js') // eslint-disable-line
+
+// Lodash
 var sortBy = require('lodash/collection/sortBy')
 
 // FastClick
 FastClick.attach(document.body)
 
-require.ensure(['./api', './get-api-data', 'hogan.js'], function (require) {
+require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (require) {
   var apiRoutes = require('./api')
   var getApiData = require('./get-api-data')
   var Hogan = require('hogan.js')
+  var Spinner = require('spin.js')
+
+  // Spinner
+  var spin = document.getElementById('spin')
+  var loading = new Spinner().spin(spin)
 
   // Get API data using promise
   getApiData.data(apiRoutes.serviceProviders).then(function (result) {
@@ -26,5 +33,7 @@ require.ensure(['./api', './get-api-data', 'hogan.js'], function (require) {
     var theOutput = compileTemplate.render(theData)
 
     document.getElementById('js-category-result-output').innerHTML = theOutput
+
+    loading.stop()
   })
 })

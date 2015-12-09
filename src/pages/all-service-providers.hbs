@@ -19,14 +19,15 @@ jsName: allserviceproviders
       <div class="container block__inner">
         <div class="block__content">
 
-          <div id="js-category-result-output" class="category-result"></div>
-          
+          <div id="js-category-result-output" class="template category-result"></div>
         </div>
       </div>
     </div>
   {{/content}}
 
   {{#content "gutter"}}
+    <div id="spin"></div>
+
      <script id="js-category-result-tpl" type="text/template">
           \{{#organisations}}
               <div class="category-result__item">

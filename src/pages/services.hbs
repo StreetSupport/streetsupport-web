@@ -6,10 +6,12 @@ jsName: services
 
 {{#extend "_default"}}
   {{#content "main"}}
-    <div id="js-category-result-output" class="category-result"></div>
+    <div id="js-category-result-output" class="template category-result"></div>
   {{/content}}
 
   {{#content "gutter"}}
+    <div id="spin"></div>
+
     <script id="js-category-result-tpl" type="text/template">
       <div class="block block--intro">
         <div class="container block__inner">

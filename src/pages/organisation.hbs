@@ -6,10 +6,12 @@ jsName: organisation
 
 {{#extend "_default"}}
   {{#content "main"}}
-    <div id="js-organisation-output" class="organisation"></div>
+    <div id="js-organisation-output" class="template organisation"></div>
   {{/content}}
 
   {{#content "gutter"}}
+    <div id="spin"></div>
+    
     <script id="js-organisation-tpl" type="text/template">
       <div class="block block--intro">
         <div class="container block__inner">
