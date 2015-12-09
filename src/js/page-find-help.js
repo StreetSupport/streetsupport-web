@@ -1,23 +1,26 @@
-var Holder = require('holderjs')
+// Page modules
+var FastClick = require('fastclick')
+var nav = require('./nav.js') // eslint-disable-line
 
-require.ensure(['./get-category-list', 'hogan.js'], function(require) {
-	var getCategory = require('./get-category-list')
-	var Hogan = require('hogan.js')
+// FastClick
+FastClick.attach(document.body)
 
-	// Get API data using promise
-	var data = getCategory.data().then(function (result) {
+// Load and process data
+require.ensure(['./api', './get-api-data', 'hogan.js'], function (require) {
+  var apiRoutes = require('./api')
+  var getApiData = require('./get-api-data')
+  var Hogan = require('hogan.js')
 
-		// Append object name for Hogan
-		var theData = { categories : result }
+  // Get API data using promise
+  getApiData.data(apiRoutes.serviceCategories).then(function (result) {
+    // Append object name for Hogan
+    var theData = { categories: result }
 
-		// Compile and render template
-		var theTemplate = document.getElementById('js-category-list-tpl').innerHTML
-		var compile = Hogan.compile(theTemplate)
-		var theOutput = compile.render(theData)
+    // Compile and render template
+    var theTemplate = document.getElementById('js-category-list-tpl').innerHTML
+    var compile = Hogan.compile(theTemplate)
+    var theOutput = compile.render(theData)
 
-		document.getElementById('js-category-list-output').innerHTML = theOutput
-
-		// Load placeholder images
-		Holder.run()
+    document.getElementById('js-category-list-output').innerHTML = theOutput
   })
 })

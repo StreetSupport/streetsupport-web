@@ -6,43 +6,39 @@ jsName: category
 
 {{#extend "_default"}}
   {{#content "main"}}
-    <div class="block block--intro">
-      <div class="container block__inner">
-        <div id="js-category-header-output"></div>
-      </div>
-    </div>
-
-    <div class="block">
-      <div class="container block__inner">
-        <div class="block__content">
-          <div id="js-category-result-output" class="category-result"></div>
-        </div>
-      </div>
-    </div>
+    <div id="js-category-result-output" class="category-result"></div>  
   {{/content}}
 
   {{#content "gutter"}}
-    <script id="js-category-header-tpl" type="text/template">
-      \{{#organisations}}
-        <h2 class="h1 block__header">\{{name}}</h2>
-      \{{/organisations}}
-    </script>
-
     <script id="js-category-result-tpl" type="text/template">
-      \{{#organisations}}
-        \{{#serviceProviders}}
-          <div class="category-result__item">
-            <h2 class="category-result__header"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h2>
-            \{{#requestedService}}
-            <p>\{{info}}</p>
-            <p>\{{timeAndLocation}}</p>
-            \{{/requestedService}}
-            <a class="btn btn--brand-d" href="organisation.html?organisation=\{{key}}">
-              <span class="btn__text">More information</span>
-            </a>
+      <div class="block block--intro">
+        <div class="container block__inner">
+          \{{#organisations}}
+            <h2 class="h1 block__header">\{{name}}</h2>
+          \{{/organisations}}
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="container block__inner">
+          <div class="block__content">
+            \{{#organisations}}
+              \{{#serviceProviders}}
+                <div class="category-result__item">
+                  <h2 class="category-result__header"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h2>
+                  \{{#requestedService}}
+                  <p>\{{info}}</p>
+                  <p>\{{timeAndLocation}}</p>
+                  \{{/requestedService}}
+                  <a class="btn btn--brand-d" href="organisation.html?organisation=\{{key}}">
+                    <span class="btn__text">More information</span>
+                  </a>
+                </div>
+              \{{/serviceProviders}}
+            \{{/organisations}}
           </div>
-        \{{/serviceProviders}}
-      \{{/organisations}}
+        </div>
+      </div>
     </script>
   {{/content}}
 {{/extend}}

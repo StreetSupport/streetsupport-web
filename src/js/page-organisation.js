@@ -1,40 +1,39 @@
-var shared = require('./shared');
-var Holder = require('holderjs');
+/* global location */
 
-function getParameterByName(name) {
-	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-  results = regex.exec(location.search);
-  return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+// Page modules
+var FastClick = require('fastclick')
+var nav = require('./nav.js') // eslint-disable-line
+
+// FastClick
+FastClick.attach(document.body)
+
+// TO DO: Make this a module
+function getUrlParameter (name) {
+  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]')
+  var regex = new RegExp('[\\?&]' + name + '=([^&#]*)')
+  var results = regex.exec(location.search)
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
 }
 
-require.ensure(['./get-organisation', 'hogan.js'], function(require) {
-	var getCategory = require('./get-organisation');
-	var Hogan = require('hogan.js');
+// Load and process data
+require.ensure(['./api', './get-api-data', 'hogan.js'], function (require) {
+  var apiRoutes = require('./api')
+  var getApiData = require('./get-api-data')
+  var Hogan = require('hogan.js')
 
-	var organisation = getParameterByName('organisation');
+  var theOrganisation = getUrlParameter('organisation')
+  var organisationUrl = apiRoutes.organisation += theOrganisation
 
-	// Get API data using promise
-	var data = getCategory.data(organisation).then(function (result) {
+  // Get API data using promise
+  getApiData.data(organisationUrl).then(function (result) {
+    // Append object name for Hogan
+    var theData = { organisation: result }
 
-		// Append object name for Hogan
-		var theData = { organisation : result };
+    // Compile and render template
+    var theTemplate = document.getElementById('js-organisation-tpl').innerHTML
+    var compileTemplate = Hogan.compile(theTemplate)
+    var theOutput = compileTemplate.render(theData)
 
-		// Compile and render header template
-		var theHeaderTemplate = document.getElementById('js-organisation-header-tpl').innerHTML;
-		var compileHeader = Hogan.compile(theHeaderTemplate);
-		var theHeaderOutput = compileHeader.render(theData);
-
-		document.getElementById('js-organisation-header-output').innerHTML=theHeaderOutput;
-
-		// Compile and render template
-		var theTemplate = document.getElementById('js-organisation-tpl').innerHTML;
-		var compile = Hogan.compile(theTemplate);
-		var theOutput = compile.render(theData);
-
-		document.getElementById('js-organisation-output').innerHTML=theOutput;
-
-		console.log(theData);
-
-  });
-});
+    document.getElementById('js-organisation-output').innerHTML = theOutput
+  })
+})
