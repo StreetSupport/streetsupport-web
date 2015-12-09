@@ -6,9 +6,11 @@ var domainRoot = live
 var serviceProvidersUrl = '/v1/service-providers/'
 var serviceCategoriesUrl = '/v1/service-categories/'
 var categoryServiceProvidersUrl = '/v1/categorised-service-providers/show/'
+var organisationUrl = '/v1/service-providers/show/'
 
 module.exports = {
   serviceProviders: domainRoot + serviceProvidersUrl,
   serviceCategories: domainRoot + serviceCategoriesUrl,
-  categoryServiceProviders: domainRoot + categoryServiceProvidersUrl
+  categoryServiceProviders: domainRoot + categoryServiceProvidersUrl,
+  organisation: domainRoot + organisationUrl
 }
