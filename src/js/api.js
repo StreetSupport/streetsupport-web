@@ -1,7 +1,7 @@
 var live = 'http://api.streetsupport.net'
 var dev = 'http://localhost:55881' // eslint-disable-line
 
-var domainRoot = dev
+var domainRoot = live
 
 var serviceProvidersUrl = '/v1/service-providers/'
 var serviceCategoriesUrl = '/v1/service-categories/'
