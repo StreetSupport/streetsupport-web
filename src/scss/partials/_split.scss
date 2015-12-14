@@ -1,0 +1,7 @@
+.split {
+  @include cf();
+  
+  &__element {
+    @include span(3 of $column-small);
+  }
+}

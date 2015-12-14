@@ -9,7 +9,6 @@
   margin-bottom: 20px;
   text-decoration: none;
   text-align: center;
-  @include span(3 of $column-small);
 
   // Components
   &__icon {
@@ -98,9 +97,5 @@
       box-shadow: none;
       border-radius: 0;
     }
-  }
-
-  &--wide {
-    @include span(6 of $column-small);
   }
 }
