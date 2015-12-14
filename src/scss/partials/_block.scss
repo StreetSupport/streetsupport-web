@@ -3,21 +3,13 @@
   padding-top: 30px;
   padding-bottom: 30px;
 
-  /*
-  &__inner {
-
-  }
-  */
-
   // Components
   &__header {
     text-align: center;
 
-    /*
     .block--intro & {
-      padding-top: 70px;
+      text-align: left;
     }
-    */
   }
 
   &__content {
@@ -30,12 +22,6 @@
         color: $brand-c;
       }
     }
-
-    /*
-    .block--intro & {
-      padding-bottom: 70px;
-    }
-    */
   }
 
   &__image {
@@ -53,10 +39,16 @@
   }
 
   // Variants
-  &--intro {
+  &--cta {
     background-color: $brand-f;
     color: #fff;
     text-align: center;
+  }
+
+  &--intro {
+    color: $brand-h;
+    text-align: left;
+    padding-bottom: 0;
   }
 
   &--highlight {

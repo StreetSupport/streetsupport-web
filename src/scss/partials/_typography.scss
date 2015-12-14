@@ -13,6 +13,7 @@ body {
 .h1 {
   font-size: 36px;
   line-height: 1.25;
+  margin-top: 0;  
 
   /*
   @include mq($from: m) {
