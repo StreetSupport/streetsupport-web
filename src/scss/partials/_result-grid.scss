@@ -1,0 +1,18 @@
+.result-grid {
+  @include cf();
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  &__item {
+    @include span(3 of $column-small);
+
+    @include mq($from: m) {
+      @include span(3 of $column-large);
+    }
+
+    // NOTE: This is a horrible hack and needs to be changed ASAP
+    .btn__icon {
+      height: 180px !important;
+    }
+  }
+}

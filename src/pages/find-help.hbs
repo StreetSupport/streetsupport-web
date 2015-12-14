@@ -15,7 +15,7 @@ jsName: findhelp
     <script id="js-category-list-tpl" type="text/template">
       <div class="block block--intro">
         <div class="container block__inner">
-          <h2 class="h1 block__header">Find Help</h2>
+          <h1 class="h1 block__header">Find Help</h1>
           <div class="block__content">
             <p>Find the support you need.</p>
           </div>
@@ -25,22 +25,26 @@ jsName: findhelp
       <div class="block">
         <div class="container block__inner">
           <div class="block__content">
+            <div class="split">
+              <div class="split__element">
+                <h2 class="h3">Recently homeless?</h2>
+              </div>
+              <div class="split__element">
+                <a class="btn btn--brand-d" href="emergency-help.html">
+                  <span class="btn__text">Get Help</span>
+                </a>
+              </div>
+            </div>
 
-            <div class="category-list">
+            <div class="result-grid">
               \{{#categories}}
-                <a class="btn btn--brand-d" href="category.html?category=\{{key}}">
+                <a class="btn btn--brand-d result-grid__item" href="category.html?category=\{{key}}">
                   <span class="btn__icon icon-\{{key}}"></span>
                   <span class="btn__text">\{{name}}</span>
                 </a>
               \{{/categories}}
-
-              <a class="btn btn--brand-d" href="all-service-providers.html">
-                <span class="btn__icon icon-all"></span>
-                <span class="btn__text">All Service Providers</span>
-              </a>
             </div>
-
-            <a class="btn btn--brand-g btn--wide" href="emergency-help.html"><span class="btn__text">Emergency Help</span></a>
+            
           </div>
         </div>
       </div>
