@@ -31,11 +31,17 @@ require.ensure(['./api', './get-api-data', './get-location', 'hogan.js', 'spin.j
   // Or if geolocation isn't supported just run the build function.
   if (navigator.geolocation) {
     getLocation.location().then(function (position) {
-      console.log(position)
-      var locationUrl = categoryUrl += '/' + position
+      var latitude = position.coords.latitude
+      var longitude = position.coords.longitude
+      var locationUrl = categoryUrl += '/long/' + longitude + '/lat/' + latitude
+
+      console.log(latitude)
+      console.log(longitude)
+      console.log(locationUrl)
+
       buildList(locationUrl)
     }).fail(function (error) {
-      console.error(error)
+      console.error('GEOLOCATION ERROR: ' + error)
       buildList(categoryUrl)
     })
   } else {
