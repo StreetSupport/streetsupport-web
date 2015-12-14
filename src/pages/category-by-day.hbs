@@ -25,18 +25,22 @@ jsName: categorybyday
         <div class="container block__inner">
           <div class="block__content">
             \{{#organisations}}
-              \{{#serviceProviders}}
-                <div class="category-result__item">
-                  <h2 class="category-result__header"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h2>
-                  \{{#requestedService}}
-                  <p>\{{info}}</p>
-                  <p>\{{timeAndLocation}}</p>
-                  \{{/requestedService}}
-                  <a class="btn btn--brand-d" href="organisation.html?organisation=\{{key}}">
-                    <span class="btn__text">More information</span>
-                  </a>
-                </div>
-              \{{/serviceProviders}}
+              \{{#daysServices}}
+                <div class="result__category">
+                  <h2 class="h1 result__header">\{{name}}</h2>
+                  <ul class="result__list">
+                  \{{#serviceProviders}}
+                    <li class="result__item">
+                      <h3 class="h2 result__subheader"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h3>
+                      <p class="result__description">\{{serviceInfo}}</p>
+                      <a class="btn btn--brand-d result__btn" href="organisation.html?organisation=\{{key}}">
+                        <span class="btn__text">More information</span>
+                      </a>
+                    </li>
+                  \{{/serviceProviders}}
+                  </ul>
+                </div> 
+              \{{/daysServices}}
             \{{/organisations}}
           </div>
         </div>
