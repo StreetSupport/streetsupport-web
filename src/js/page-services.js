@@ -18,7 +18,7 @@ require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (req
   var loading = new Spinner().spin(spin)
 
   var theCategory = urlParameter.parameter('category')
-  var categoryUrl = apiRoutes.subCategoryServiceProviders += theCategory
+  var categoryUrl = apiRoutes.categoryServiceProviders += theCategory
 
   // Get API data using promise
   getApiData.data(categoryUrl).then(function (result) {
