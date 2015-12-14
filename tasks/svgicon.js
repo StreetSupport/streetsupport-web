@@ -15,7 +15,7 @@ var svgConfig = require(__dirname + '/icons/config.js');
 svgConfig.dest = config.paths.svgicon;
 
 // Get SVG icons
-var svgFiles = glob.sync(config.paths.icons + '*.svg');
+var svgFiles = glob.sync(config.paths.icons + '**/*.svg');
 
 // Icon task
 gulp.task('svgicon', gulpicon(svgFiles, svgConfig));
