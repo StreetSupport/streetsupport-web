@@ -1,0 +1,46 @@
+---
+title: Category by Day - Street Support
+description: Street support makes it easier to help homeless people. Here are services available near you.
+jsName: categorybyday
+---
+
+{{#extend "_default"}}
+  {{#content "main"}}
+    <div id="js-category-result-output" class="template category-result"></div>
+  {{/content}}
+
+  {{#content "gutter"}}
+    <div id="spin"></div>
+
+    <script id="js-category-result-tpl" type="text/template">
+      <div class="block block--intro">
+        <div class="container block__inner">
+          \{{#organisations}}
+            <h2 class="h1 block__header">\{{categoryName}}</h2>
+          \{{/organisations}}
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="container block__inner">
+          <div class="block__content">
+            \{{#organisations}}
+              \{{#serviceProviders}}
+                <div class="category-result__item">
+                  <h2 class="category-result__header"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h2>
+                  \{{#requestedService}}
+                  <p>\{{info}}</p>
+                  <p>\{{timeAndLocation}}</p>
+                  \{{/requestedService}}
+                  <a class="btn btn--brand-d" href="organisation.html?organisation=\{{key}}">
+                    <span class="btn__text">More information</span>
+                  </a>
+                </div>
+              \{{/serviceProviders}}
+            \{{/organisations}}
+          </div>
+        </div>
+      </div>
+    </script>
+  {{/content}}
+{{/extend}}

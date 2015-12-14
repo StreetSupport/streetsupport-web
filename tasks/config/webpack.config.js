@@ -18,6 +18,7 @@ module.exports = {
     generic: __dirname + '/../../src/js/page-generic',
     findhelp: __dirname + '/../../src/js/page-find-help',
     category: __dirname + '/../../src/js/page-category',
+    categorybyday: __dirname + '/../../src/js/page-category-by-day',
     organisation: __dirname + '/../../src/js/page-organisation',
     allserviceproviders: __dirname + '/../../src/js/page-all-service-providers',
     services: __dirname + '/../../src/js/page-services'
