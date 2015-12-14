@@ -28,15 +28,17 @@ jsName: organisation
               <div class="organisation__item">
                 <h2 class="organisation__header">\{{name}}</h2>
                 <p>\{{description}}</p>
-                <p>Area Serviced: \{{areaServiced}}</p>
+                <dl><dt>Area Serviced</dt><dd>\{{areaServiced}}</dd></dt>
                 <h3>Locations</h3>
                 \{{#addresses}}
-                  \{{#street}}\{{street}}</br>\{{/street}}
-                  \{{#street1}}\{{street1}}</br>\{{/street1}}
-                  \{{#street2}}\{{street2}}</br>\{{/street2}}
-                  \{{#street3}}\{{street3}}</br>\{{/street3}}
-                  \{{#city}}\{{city}}</br>\{{/city}}
-                  \{{postcode}}</p>
+                  <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">
+                    <p>\{{#street}}\{{street}}</br>\{{/street}}
+                    \{{#street1}}\{{street1}}</br>\{{/street1}}
+                    \{{#street2}}\{{street2}}</br>\{{/street2}}
+                    \{{#street3}}\{{street3}}</br>\{{/street3}}
+                    \{{#city}}\{{city}}</br>\{{/city}}
+                    \{{postcode}}</p>
+                  </a>
                 \{{/addresses}}
                 <h3>Services Provided</h3>
                 <ul>
@@ -44,13 +46,16 @@ jsName: organisation
                     <li>
                       <h4>\{{name}}</h4>
                       <p>\{{info}}</p>
-                      <p>
-                        \{{#address.street}}\{{address.street}}</br>\{{/address.street}}
-                        \{{#address.street1}}\{{address.street1}}</br>\{{/address.street1}}
-                        \{{#address.street2}}\{{address.street2}}</br>\{{/address.street2}}
-                        \{{#address.street3}}\{{address.street3}}</br>\{{/address.street3}}
-                      \{{#address.city}}\{{address.city}}\{{/address.city}}</br>
-                      \{{address.postcode}}</p>
+                      <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">
+                        <p>
+                          \{{#address.street}}\{{address.street}}</br>\{{/address.street}}
+                          \{{#address.street1}}\{{address.street1}}</br>\{{/address.street1}}
+                          \{{#address.street2}}\{{address.street2}}</br>\{{/address.street2}}
+                          \{{#address.street3}}\{{address.street3}}</br>\{{/address.street3}}
+                        \{{#address.city}}\{{address.city}}\{{/address.city}}</br>
+                        \{{address.postcode}}
+                        </p>
+                      </a>
                       <h5>Opening Times</h5>
                       <dl>
                         \{{#openingTimes}}
