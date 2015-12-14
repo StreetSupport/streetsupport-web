@@ -28,17 +28,39 @@ jsName: categorybyday
               \{{#daysServices}}
                 <div class="result__category">
                   <h2 class="h1 result__header">\{{name}}</h2>
-                  <ul class="result__list">
+                    <table>
+                      <thead>
+                        <tr>
+                        <th>When</th>  
+                        <th>Who</th>  
+                        <th>Where</th> 
+                        <th>What</th>  
+                        </tr>
+                        </thead>
                   \{{#serviceProviders}}
-                    <li class="result__item">
-                      <h3 class="h2 result__subheader"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h3>
-                      <p class="result__description">\{{serviceInfo}}</p>
-                      <a class="btn btn--brand-d result__btn" href="organisation.html?organisation=\{{key}}">
-                        <span class="btn__text">More information</span>
+                        <tbody>
+                        <tr>
+                        <td>
+                    \{{#openingTimes}}
+                      \{{startTime}} - \{{endTime}}
+                    \{{/openingTimes}}
+                    </td>
+                    <td><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></td>
+                    <td>
+                      <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">
+                        <p>\{{#address.street}}\{{address.street}}</br>\{{/address.street}}
+                        \{{#address.street1}}\{{address.street1}}</br>\{{/address.street1}}
+                        \{{#address.street2}}\{{address.street2}}</br>\{{/address.street2}}
+                        \{{#address.street3}}\{{address.street3}}</br>\{{/address.street3}}
+                        \{{#address.city}}\{{address.city}}</br>\{{/address.city}}
+                        \{{address.postcode}}</p>
                       </a>
-                    </li>
+                    </td>
+                    <td>\{{serviceInfo}}</td>
+                    </tr>
+                    </tbody>
                   \{{/serviceProviders}}
-                  </ul>
+                    </table>
                 </div> 
               \{{/daysServices}}
             \{{/organisations}}
