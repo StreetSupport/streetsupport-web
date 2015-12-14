@@ -35,10 +35,6 @@ require.ensure(['./api', './get-api-data', './get-location', 'hogan.js', 'spin.j
       var longitude = position.coords.longitude
       var locationUrl = categoryUrl += '/long/' + longitude + '/lat/' + latitude
 
-      console.log(latitude)
-      console.log(longitude)
-      console.log(locationUrl)
-
       buildList(locationUrl)
     }).fail(function (error) {
       console.error('GEOLOCATION ERROR: ' + error)
