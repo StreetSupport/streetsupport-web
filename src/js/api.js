@@ -7,7 +7,7 @@ var domainRoot = staging
 var serviceProvidersUrl = '/v1/service-providers/'
 var serviceCategoriesUrl = '/v2/service-categories/'
 var categoryServiceProvidersUrl = '/v2/categorised-service-providers/show/'
-var organisationUrl = '/v1/service-providers/show/'
+var organisationUrl = '/v2/service-providers/show/'
 
 module.exports = {
   serviceProviders: domainRoot + serviceProvidersUrl,

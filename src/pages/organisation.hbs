@@ -28,19 +28,31 @@ jsName: organisation
               <div class="organisation__item">
                 <h2 class="organisation__header">\{{name}}</h2>
                 <p>\{{description}}</p>
-                <p>\{{address.street}}</br>
-                \{{address.city}}</br>
-                \{{address.postcode}}</p>
                 <p>Area Serviced: \{{areaServiced}}</p>
-
+                <h3>Offices</h3>
+                \{{#addresses}}
+                <p>\{{street}}</br>\{{street1}}</br>\{{street2}}</br>\{{street3}}</br>
+                \{{city}}</br>
+                \{{postcode}}</p>
+                \{{/addresses}}
                 <h3>Services Provided</h3>
                 <ul>
-                  \{{#servicesProvided}}
+                  \{{#providedServices}}
                     <li>
+                      <p>\{{name}}</p>
                       <p>\{{info}}</p>
-                      <p>\{{timeAndLocation}}</p>
+                      <p>\{{address.street}}</br>\{{address.street1}}</br>\{{address.street2}}</br>\{{address.street3}}</br>
+                      \{{address.city}}</br>
+                      \{{address.postcode}}</p>
+                      <h4>Opening Times</h4>
+                      <ul>
+                  \{{#openingTimes}}
+                         <li>\{{day}} \{{startTime}} \{{endTime}}
+</li>                        
+                  \{{/openingTimes}}
+                      </ul>
                     </li>
-                  \{{/servicesProvided}}
+                  \{{/providedServices}}
                 </ul>
 
                 <h3>Contact</h3>
