@@ -4,7 +4,7 @@ var dev = 'http://localhost:55881' // eslint-disable-line
 var domainRoot = live
 
 var serviceProvidersUrl = '/v1/service-providers/'
-var serviceCategoriesUrl = '/v1/service-categories/'
+var serviceCategoriesUrl = '/v2/service-categories/'
 var categoryServiceProvidersUrl = '/v1/categorised-service-providers/show/'
 var categoryServiceProvidersWithSubsUrl = '/v2/categorised-service-providers/show/'
 var organisationUrl = '/v1/service-providers/show/'
