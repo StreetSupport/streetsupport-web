@@ -31,42 +31,59 @@ jsName: organisation
                 <p>Area Serviced: \{{areaServiced}}</p>
                 <h3>Offices</h3>
                 \{{#addresses}}
-                <p>\{{street}}</br>\{{street1}}</br>\{{street2}}</br>\{{street3}}</br>
-                \{{city}}</br>
-                \{{postcode}}</p>
+                  \{{#street}}\{{street}}</br>\{{/street}}
+                  \{{#street1}}\{{street1}}</br>\{{/street1}}
+                  \{{#street2}}\{{street2}}</br>\{{/street2}}
+                  \{{#street3}}\{{street3}}</br>\{{/street3}}
+                  \{{#city}}\{{city}}</br>\{{/city}}
+                  \{{postcode}}</p>
                 \{{/addresses}}
                 <h3>Services Provided</h3>
                 <ul>
                   \{{#providedServices}}
                     <li>
-                      <p>\{{name}}</p>
+                      <h4>\{{name}}</h4>
                       <p>\{{info}}</p>
-                      <p>\{{address.street}}</br>\{{address.street1}}</br>\{{address.street2}}</br>\{{address.street3}}</br>
-                      \{{address.city}}</br>
+                      <p>
+                        \{{#address.street}}\{{address.street}}</br>\{{/address.street}}
+                        \{{#address.street1}}\{{address.street1}}</br>\{{/address.street1}}
+                        \{{#address.street2}}\{{address.street2}}</br>\{{/address.street2}}
+                        \{{#address.street3}}\{{address.street3}}</br>\{{/address.street3}}
+                      \{{#address.city}}\{{address.city}}\{{/address.city}}</br>
                       \{{address.postcode}}</p>
-                      <h4>Opening Times</h4>
-                      <ul>
-                  \{{#openingTimes}}
-                         <li>\{{day}} \{{startTime}} \{{endTime}}
-</li>                        
-                  \{{/openingTimes}}
-                      </ul>
+                      <h5>Opening Times</h5>
+                      <dl>
+                        \{{#openingTimes}}
+                         <dt>\{{day}}</dt> 
+                         <dd>\{{startTime}} - \{{endTime}}</dd>                        
+                        \{{/openingTimes}}
+                      </dl>
                     </li>
                   \{{/providedServices}}
                 </ul>
 
                 <h3>Contact</h3>
                 <dl>
+                  \{{#  telephone}}
                   <dt>Telephone:</dt>
                   <dd>\{{telephone}}</dd>
+                  \{{/telephone}}
+                  \{{#email}}
                   <dt>Email:</dt>
-                  <dd>\{{email}}</dd>
+                  <dd><a href="mailto:\{{email}}">\{{email}}</a></dd>
+                  \{{/email}}
+                  \{{#website}}
                   <dt>Website:</dt>
-                  <dd>\{{website}}</dd>
+                  <dd><a href="\{{website}}">\{{website}}</a></dd>
+                  \{{/website}}
+                  \{{#twitter}}
                   <dt>Twitter:</dt>
-                  <dd>\{{twitter}}</dd>
+                  <dd><a href="http://www.twitter.com">\{{twitter}}</a></dd>
+                  \{{/twitter}}
+                  \{{#facebook}}
                   <dt>Facebook:</dt>
-                  <dd>{{facebook}}</dd>
+                  <dd><a href="\{{facebook}}">\{{facebook}}</a></dd>
+                  \{{/  facebook}}
                 </dl>
               </div>
             \{{/organisation}}
