@@ -25,8 +25,6 @@ require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (req
     // Append object name for Hogan
     var theData = { organisation: result }
 
-    console.log(theData)
-
     // Compile and render template
     var theTemplate = document.getElementById('js-organisation-tpl').innerHTML
     var compileTemplate = Hogan.compile(theTemplate)
