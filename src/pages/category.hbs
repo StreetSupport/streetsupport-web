@@ -32,6 +32,14 @@ jsName: category
                   \{{#serviceProviders}}
                     <li class="result__item">
                       <h3 class="h2 result__subheader"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h3>
+                      \{{#address}}
+                        <ul class="result__address-list">
+                          <li class="result__address-item">\{{#street}} \{{street}} \{{/street}}, \{{#street1}} \{{street1}}, \{{/street1}} \{{#street2}} \{{street2}}, \{{/street2}}
+                          \{{#street3}} \{{street3}}, \{{/street3}}</li>
+                          <li class="result__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
+                          <li class="result__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}}</li>
+                        </ul>
+                      \{{/address}}
                       <p class="result__description">\{{serviceInfo}}</p>
                       <a class="btn btn--brand-d result__btn" href="organisation.html?organisation=\{{key}}">
                         <span class="btn__text">More information</span>
