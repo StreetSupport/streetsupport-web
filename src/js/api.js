@@ -4,7 +4,7 @@ var live = 'http://api.streetsupport.net' // eslint-disable-line
 
 var domainRoot = staging
 
-var serviceProvidersUrl = '/v1/service-providers/'
+var serviceProvidersUrl = '/v2/service-providers/'
 var serviceCategoriesUrl = '/v2/service-categories/'
 var categoryServiceProvidersUrl = '/v2/categorised-service-providers/show/'
 var categoryServiceProvidersByDayUrl = '/v2/timetabled-service-providers/show/'
