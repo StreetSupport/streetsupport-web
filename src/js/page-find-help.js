@@ -2,6 +2,8 @@
 var FastClick = require('fastclick')
 var nav = require('./nav.js') // eslint-disable-line
 
+var forEach = require('lodash/collection/forEach')
+
 // FastClick
 FastClick.attach(document.body)
 
@@ -18,6 +20,15 @@ require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (req
 
   // Get API data using promise
   getApiData.data(apiRoutes.serviceCategories).then(function (result) {
+
+    forEach(result, function(category) {
+      if(category.key === "meals") {
+        category.page = "category-by-day"
+      }else {
+        category.page = "category"
+      }
+    })
+
     // Append object name for Hogan
     var theData = { categories: result }
 
