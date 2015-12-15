@@ -6,6 +6,8 @@ var urlParameter = require('./get-url-parameter')
 // Lodash
 var forEach = require('lodash/collection/forEach')
 var sortBy = require('lodash/collection/sortBy')
+var slice = require('lodash/array/slice')
+var concat = require('lodash/chain/concat')
 
 // FastClick
 FastClick.attach(document.body)
@@ -52,6 +54,12 @@ require.ensure(['./api', './get-api-data', './get-location', 'hogan.js', 'spin.j
           return provider.openingTimes.startTime
         })
       })
+
+      // api days: monday == 0!
+      var today =  new Date().getDay() - 1
+      var past = slice(result.daysServices, 0, today)
+      var todayToTail = slice(result.daysServices, today)
+      result.daysServices = todayToTail.concat(past)
 
       // Append object name for Hogan
       var theData = { organisations: result }
