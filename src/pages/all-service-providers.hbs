@@ -28,15 +28,19 @@ jsName: allserviceproviders
     <div id="spin"></div>
 
      <script id="js-category-result-tpl" type="text/template">
-          \{{#organisations}}
-              <div class="category-result__item">
-                <h2 class="category-result__header"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h2>
-                <p>\{{description}}</p>
-                <a class="btn btn--brand-d" href="organisation.html?organisation=\{{key}}">
-                  <span class="btn__text">More information</span>
-                </a>
-              </div>
-          \{{/organisations}}
+          <div class="result-list">
+            \{{#organisations}}
+                <ul class="result-list__list">
+                  <li class="result-list__item">
+                    <h2 class="h2 result-list__header"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h2>
+                    <p>\{{description}}</p>
+                    <a class="btn btn--brand-d" href="organisation.html?organisation=\{{key}}">
+                      <span class="btn__text">More information</span>
+                    </a>
+                  </li>
+                </ul>
+            \{{/organisations}}
+          </div>
         </script>
   {{/content}}
 {{/extend}}

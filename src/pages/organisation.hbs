@@ -24,74 +24,76 @@ jsName: organisation
       <div class="block">
         <div class="container block__inner">
           <div class="block__content">
-            \{{#organisation}}
-              <div class="organisation__item">
-                <h2 class="organisation__header">\{{name}}</h2>
-                <p>\{{description}}</p>
-                <dl><dt>Area Serviced</dt><dd>\{{areaServiced}}</dd></dt>
-                <h3>Locations</h3>
-                \{{#addresses}}
-                  <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">
-                    <p>\{{#street}}\{{street}}</br>\{{/street}}
-                    \{{#street1}}\{{street1}}</br>\{{/street1}}
-                    \{{#street2}}\{{street2}}</br>\{{/street2}}
-                    \{{#street3}}\{{street3}}</br>\{{/street3}}
-                    \{{#city}}\{{city}}</br>\{{/city}}
-                    \{{postcode}}</p>
-                  </a>
-                \{{/addresses}}
-                <h3>Services Provided</h3>
-                <ul>
-                  \{{#providedServices}}
-                    <li>
-                      <h4>\{{name}}</h4>
-                      <p>\{{info}}</p>
-                      <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">
-                        <p>
-                          \{{#address.street}}\{{address.street}}</br>\{{/address.street}}
-                          \{{#address.street1}}\{{address.street1}}</br>\{{/address.street1}}
-                          \{{#address.street2}}\{{address.street2}}</br>\{{/address.street2}}
-                          \{{#address.street3}}\{{address.street3}}</br>\{{/address.street3}}
-                        \{{#address.city}}\{{address.city}}\{{/address.city}}</br>
-                        \{{address.postcode}}
-                        </p>
-                      </a>
-                      <h5>Opening Times</h5>
-                      <dl>
-                        \{{#openingTimes}}
-                         <dt>\{{day}}</dt>
-                         <dd>\{{startTime}} - \{{endTime}}</dd>
-                        \{{/openingTimes}}
-                      </dl>
-                    </li>
-                  \{{/providedServices}}
-                </ul>
+            <div class="result-detail">
+              \{{#organisation}}
+                <div class="organisation__item">
+                  <h2 class="organisation__header">\{{name}}</h2>
+                  <p>\{{description}}</p>
+                  <dl><dt>Area Serviced</dt><dd>\{{areaServiced}}</dd></dt>
+                  <h3>Locations</h3>
+                  \{{#addresses}}
+                    <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">
+                      <p>\{{#street}}\{{street}}</br>\{{/street}}
+                      \{{#street1}}\{{street1}}</br>\{{/street1}}
+                      \{{#street2}}\{{street2}}</br>\{{/street2}}
+                      \{{#street3}}\{{street3}}</br>\{{/street3}}
+                      \{{#city}}\{{city}}</br>\{{/city}}
+                      \{{postcode}}</p>
+                    </a>
+                  \{{/addresses}}
+                  <h3>Services Provided</h3>
+                  <ul>
+                    \{{#providedServices}}
+                      <li>
+                        <h4>\{{name}}</h4>
+                        <p>\{{info}}</p>
+                        <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">
+                          <p>
+                            \{{#address.street}}\{{address.street}}</br>\{{/address.street}}
+                            \{{#address.street1}}\{{address.street1}}</br>\{{/address.street1}}
+                            \{{#address.street2}}\{{address.street2}}</br>\{{/address.street2}}
+                            \{{#address.street3}}\{{address.street3}}</br>\{{/address.street3}}
+                          \{{#address.city}}\{{address.city}}\{{/address.city}}</br>
+                          \{{address.postcode}}
+                          </p>
+                        </a>
+                        <h5>Opening Times</h5>
+                        <dl>
+                          \{{#openingTimes}}
+                           <dt>\{{day}}</dt>
+                           <dd>\{{startTime}} - \{{endTime}}</dd>
+                          \{{/openingTimes}}
+                        </dl>
+                      </li>
+                    \{{/providedServices}}
+                  </ul>
 
-                <h3>Contact</h3>
-                <dl>
-                  \{{#  telephone}}
-                  <dt>Telephone:</dt>
-                  <dd>\{{telephone}}</dd>
-                  \{{/telephone}}
-                  \{{#email}}
-                  <dt>Email:</dt>
-                  <dd><a href="mailto:\{{email}}">\{{email}}</a></dd>
-                  \{{/email}}
-                  \{{#website}}
-                  <dt>Website:</dt>
-                  <dd><a href="\{{website}}">\{{website}}</a></dd>
-                  \{{/website}}
-                  \{{#twitter}}
-                  <dt>Twitter:</dt>
-                  <dd><a href="\{{twitter}}">\{{twitter}}</a></dd>
-                  \{{/twitter}}
-                  \{{#facebook}}
-                  <dt>Facebook:</dt>
-                  <dd><a href="\{{facebook}}">\{{facebook}}</a></dd>
-                  \{{/  facebook}}
-                </dl>
-              </div>
-            \{{/organisation}}
+                  <h3>Contact</h3>
+                  <dl>
+                    \{{#  telephone}}
+                    <dt>Telephone:</dt>
+                    <dd>\{{telephone}}</dd>
+                    \{{/telephone}}
+                    \{{#email}}
+                    <dt>Email:</dt>
+                    <dd><a href="mailto:\{{email}}">\{{email}}</a></dd>
+                    \{{/email}}
+                    \{{#website}}
+                    <dt>Website:</dt>
+                    <dd><a href="\{{website}}">\{{website}}</a></dd>
+                    \{{/website}}
+                    \{{#twitter}}
+                    <dt>Twitter:</dt>
+                    <dd><a href="\{{twitter}}">\{{twitter}}</a></dd>
+                    \{{/twitter}}
+                    \{{#facebook}}
+                    <dt>Facebook:</dt>
+                    <dd><a href="\{{facebook}}">\{{facebook}}</a></dd>
+                    \{{/  facebook}}
+                  </dl>
+                </div>
+              \{{/organisation}}
+            </div>
           </div>
         </div>
       </div>
