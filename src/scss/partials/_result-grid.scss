@@ -7,12 +7,16 @@
     @include span(3 of $column-small);
 
     @include mq($from: m) {
+      @include span(4 of $column-large);
+    }
+
+    @include mq($from: l) {
       @include span(3 of $column-large);
     }
 
     // NOTE: This is a horrible hack and needs to be changed ASAP
     .btn__icon {
-      height: 180px !important;
+      max-height: 180px !important;
     }
   }
 }
