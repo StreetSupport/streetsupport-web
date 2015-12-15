@@ -4,17 +4,19 @@ var overlayElement = '.js-nav-overlay'
 var activeClass = 'is-active'
 var el = document.querySelectorAll('.js-nav-container, .js-nav-push, .js-nav-overlay, html, body')
 
-document.querySelector(openElement).addEventListener('click', function (e) {
-  open()
-})
+var init = function () {
+  document.querySelector(openElement).addEventListener('click', function (e) {
+    open()
+  })
 
-document.querySelector(closeElement).addEventListener('click', function (e) {
-  close()
-})
+  document.querySelector(closeElement).addEventListener('click', function (e) {
+    close()
+  })
 
-document.querySelector(overlayElement).addEventListener('click', function (e) {
-  close()
-})
+  document.querySelector(overlayElement).addEventListener('click', function (e) {
+    close()
+  })
+}
 
 var open = function () {
   var i
@@ -33,6 +35,7 @@ var close = function () {
 }
 
 module.exports = {
+  init: init,  
   open: open,
   close: close
 }

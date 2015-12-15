@@ -1,10 +1,11 @@
 // Page modules
 var FastClick = require('fastclick')
-var nav = require('./nav.js') // eslint-disable-line
+var nav = require('./nav.js')
 
+// Lodash
 var forEach = require('lodash/collection/forEach')
 
-// FastClick
+nav.init()
 FastClick.attach(document.body)
 
 // Load and process data

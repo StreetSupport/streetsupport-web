@@ -1,6 +1,6 @@
 // Page modules
 var FastClick = require('fastclick')
-var nav = require('./nav.js') // eslint-disable-line
+var nav = require('./nav.js')
 var urlParameter = require('./get-url-parameter')
 
 // Lodash
@@ -9,7 +9,7 @@ var sortBy = require('lodash/collection/sortBy')
 var slice = require('lodash/array/slice')
 var concat = require('lodash/chain/concat')
 
-// FastClick
+nav.init()
 FastClick.attach(document.body)
 
 // Load and process data

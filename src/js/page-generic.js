@@ -1,7 +1,7 @@
 // Page modules
 var FastClick = require('fastclick')
-var nav = require('./nav.js') // eslint-disable-line
+var nav = require('./nav.js')
 var Holder = require('holderjs') // eslint-disable-line
 
-// FastClick
+nav.init()
 FastClick.attach(document.body)
