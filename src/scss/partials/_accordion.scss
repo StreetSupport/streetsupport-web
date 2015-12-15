@@ -1,0 +1,16 @@
+.accordion {
+
+  &__header {
+    background-color: $brand-d;
+    color: #fff;
+    margin: 0;
+    padding: 15px;
+    border-bottom: 1px solid #fff;
+  }
+
+  &__item {
+    background-color: $brand-i;
+    margin: 0;
+    padding: 30px 15px;
+  }
+}
