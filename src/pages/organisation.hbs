@@ -35,7 +35,7 @@ jsName: organisation
                   </ul>
                 \{{/addresses}}
                 \{{#providedServices.0}}
-                  <h2 class="h3">Opening Times:</h2>
+                  <h2 class="h3">Opening Times</h2>
                   <dl class="result-detail__times-list">
                     \{{#openingTimes}}
                     <dt class="result-detail__times-title">\{{day}}</dt>
@@ -45,13 +45,13 @@ jsName: organisation
                 \{{/providedServices.0}}
                 <p>\{{description}}</p>
 
-                <h2 class="h2">Services Provided:</h2>
-                <div class="accordion">
+                <h2 class="h2">Services Provided</h2>
+                <div class="accordion js-accordion">
                   \{{#providedServices}}
                     <h3 class="h3 accordion__header">\{{name}}</h3>
                     <div class="accordion__item">
                       <p>\{{info}}</p>
-                      <h2 class="h3">Service Address:</h2>
+                      <h2 class="h3">Service Address</h2>
                       \{{#address}}
                         <ul class="result-detail__address-list">
                           <li class="result-detail__address-item">\{{#street}} \{{street}}, \{{/street}} \{{#street1}} \{{street1}}, \{{/street1}} \{{#street2}} \{{street2}}, \{{/street2}}
@@ -59,8 +59,8 @@ jsName: organisation
                           <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
                           <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}}</li>
                         </ul>
-                      \{{/address}}                       
-                      <h2 class="h3">Opening Times:</h2>
+                      \{{/address}}
+                      <h2 class="h3">Opening Times</h2>
                       <dl class="result-detail__times-list">
                         \{{#openingTimes}}
                         <dt class="result-detail__times-title">\{{day}}</dt>
@@ -71,7 +71,7 @@ jsName: organisation
                   \{{/providedServices}}
                 </div>
 
-                <h2 class="h2">Contact:</h2>
+                <h2 class="h2">Contact</h2>
                 <dl class="result-detail__times-list">
                   \{{#telephone}}
                     <dt class="result-detail__times-title">Telephone:</dt>
