@@ -48,25 +48,27 @@ jsName: organisation
                 <h2 class="h2">Services Provided</h2>
                 <div class="accordion js-accordion">
                   \{{#providedServices}}
-                    <h3 class="h3 accordion__header">\{{name}}</h3>
-                    <div class="accordion__item">
-                      <p>\{{info}}</p>
-                      <h2 class="h3">Service Address</h2>
-                      \{{#address}}
-                        <ul class="result-detail__address-list">
-                          <li class="result-detail__address-item">\{{#street}} \{{street}}, \{{/street}} \{{#street1}} \{{street1}}, \{{/street1}} \{{#street2}} \{{street2}}, \{{/street2}}
-                          \{{#street3}} \{{street3}}, \{{/street3}}</li>
-                          <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
-                          <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}}</li>
-                        </ul>
-                      \{{/address}}
-                      <h2 class="h3">Opening Times</h2>
-                      <dl class="result-detail__times-list">
-                        \{{#openingTimes}}
-                        <dt class="result-detail__times-title">\{{day}}</dt>
-                        <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
-                        \{{/openingTimes}}
-                      </dl>
+                    <h3 class="h3 accordion__header js-header">\{{name}}</h3>
+                    <div class="accordion__item js-item">
+                      <div class="accordion__inner">
+                        <p>\{{info}}</p>
+                        <h2 class="h3">Service Address</h2>
+                        \{{#address}}
+                          <ul class="result-detail__address-list">
+                            <li class="result-detail__address-item">\{{#street}} \{{street}}, \{{/street}} \{{#street1}} \{{street1}}, \{{/street1}} \{{#street2}} \{{street2}}, \{{/street2}}
+                            \{{#street3}} \{{street3}}, \{{/street3}}</li>
+                            <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
+                            <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}}</li>
+                          </ul>
+                        \{{/address}}
+                        <h2 class="h3">Opening Times</h2>
+                        <dl class="result-detail__times-list">
+                          \{{#openingTimes}}
+                          <dt class="result-detail__times-title">\{{day}}</dt>
+                          <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
+                          \{{/openingTimes}}
+                        </dl>
+                      </div>
                     </div>
                   \{{/providedServices}}
                 </div>

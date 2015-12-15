@@ -1,4 +1,7 @@
 .accordion {
+  & > * {
+    overflow: hidden;
+  }
 
   &__header {
     background-color: $brand-d;
@@ -6,11 +9,29 @@
     margin: 0;
     padding: 15px;
     border-bottom: 1px solid #fff;
+
+    &.is-active {
+      border-bottom: 0;
+    }
   }
 
   &__item {
     background-color: $brand-i;
     margin: 0;
+    padding: 0;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height 250ms, visibility 250ms, opacity 250ms;
+
+    &.is-active {
+      max-height: 100rem;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &__inner {
     padding: 30px 15px;
   }
 }
