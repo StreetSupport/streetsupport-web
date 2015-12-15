@@ -5,7 +5,6 @@ var urlParameter = require('./get-url-parameter')
 
 // Lodash
 var forEach = require('lodash/collection/forEach')
-var find = require('lodash/collection/find')
 var sortBy = require('lodash/collection/sortBy')
 
 // FastClick
@@ -48,8 +47,8 @@ require.ensure(['./api', './get-api-data', './get-location', 'hogan.js', 'spin.j
   function buildList (url) {
     // Get API data using promise
     getApiData.data(url).then(function (result) {
-      forEach(result.daysServices, function(day) {
-        day.serviceProviders = sortBy(day.serviceProviders, function(provider) {
+      forEach(result.daysServices, function (day) {
+        day.serviceProviders = sortBy(day.serviceProviders, function (provider) {
           return provider.openingTimes.startTime
         })
       })

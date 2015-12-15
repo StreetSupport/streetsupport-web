@@ -20,12 +20,11 @@ require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (req
 
   // Get API data using promise
   getApiData.data(apiRoutes.serviceCategories).then(function (result) {
-
-    forEach(result, function(category) {
-      if(category.key === "meals") {
-        category.page = "category-by-day"
-      }else {
-        category.page = "category"
+    forEach(result, function (category) {
+      if (category.key === 'meals') {
+        category.page = 'category-by-day'
+      } else {
+        category.page = 'category'
       }
     })
 
