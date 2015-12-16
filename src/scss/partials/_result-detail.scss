@@ -1,13 +1,17 @@
 .result-detail {
-  
+  &__header {
+    margin-top: 0;
+  }
+
+  &__btn {
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+
   &__address-list {
     margin: 0;
     padding: 0 0 20px 0;
     list-style-type: none;
-
-    .accordion & {
-      padding-bottom: 0;
-    }
   }
 
   &__address-item {
@@ -18,10 +22,6 @@
     @include cf();
     margin: 0;
     padding: 0 0 15px 0;
-
-    .accordion & {
-      padding-bottom: 0;
-    }
   }
 
   &__times-title {
@@ -50,7 +50,18 @@
     }
   }
 
-  &__btn {
-    display: inline-block;
+  &__item {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid $brand-f;
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
   }
 }

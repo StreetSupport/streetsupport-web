@@ -32,24 +32,26 @@ jsName: category
                     <div class="accordion__item js-item">
                       <div class="accordion__inner">
                         \{{#serviceProviders}}
-                          <h3 class="h3"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h3>
-                          <ul>
-                          \{{#tags}}
-                            <li>\{{.}}</li>
-                          \{{/tags}}
-                          </ul>
-                          \{{#address}}
-                            <ul class="result-detail__address-list">
-                              <li class="result-detail__address-item">\{{#street}} \{{street}}, \{{/street}} \{{#street1}} \{{street1}}, \{{/street1}} \{{#street2}} \{{street2}}, \{{/street2}}
-                              \{{#street3}} \{{street3}}, \{{/street3}}</li>
-                              <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
-                              <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}}</li>
+                          <div class="result-detail__item">
+                            <h3 class="h3 result-detail__header"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h3>
+                            <ul class="result-detail__tags-list">
+                            \{{#tags}}
+                              <li class="result-detail__tags-item">\{{.}}</li>
+                            \{{/tags}}
                             </ul>
-                          \{{/address}}
-                          <p class="result-detail__description">\{{serviceInfo}}</p>
-                          <a class="btn btn--brand-d result-detail__btn" href="organisation.html?organisation=\{{key}}">
-                            <span class="btn__text">More information</span>
-                          </a>
+                            \{{#address}}
+                              <ul class="result-detail__address-list">
+                                <li class="result-detail__address-item">\{{#street}} \{{street}}, \{{/street}} \{{#street1}} \{{street1}}, \{{/street1}} \{{#street2}} \{{street2}}, \{{/street2}}
+                                \{{#street3}} \{{street3}}, \{{/street3}}</li>
+                                <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
+                                <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a></li>
+                              </ul>
+                            \{{/address}}
+                            <p class="result-detail__description">\{{serviceInfo}}</p>
+                            <a class="btn btn--brand-d result-detail__btn" href="organisation.html?organisation=\{{key}}">
+                              <span class="btn__text">More information</span>
+                            </a>
+                          </div>
                         \{{/serviceProviders}}
                       </div>
                     </div>
