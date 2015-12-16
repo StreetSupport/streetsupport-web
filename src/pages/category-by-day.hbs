@@ -56,7 +56,9 @@ jsName: categorybyday
                         \{{address.postcode}}</p>
                       </a>
                     </td>
-                    <td>\{{serviceInfo}}</td>
+                    <td>\{{#openingTimes}}
+                      \{{description}}
+                    \{{/openingTimes}}</td>
                     </tr>
                     </tbody>
                   \{{/serviceProviders}}
