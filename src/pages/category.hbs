@@ -24,33 +24,34 @@ jsName: category
       <div class="block">
         <div class="container block__inner">
           <div class="block__content">
-            <div class="result-list">
+            <div class="result-detail">
               \{{#organisations}}
-                \{{#subCategories}}
-                  <div class="result-list__category">
-                    <h2 class="h1 result-list__header">\{{name}}</h2>
-                    <ul class="result-list__list">
-                    \{{#serviceProviders}}
-                      <li class="result-list__item">
-                        <h3 class="h2 result-list__subheader"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h3>
-                        \{{#address}}
-                          <ul class="result-list__address-list">
-                            <li class="result-list__address-item">\{{#street}} \{{street}}, \{{/street}} \{{#street1}} \{{street1}}, \{{/street1}} \{{#street2}} \{{street2}}, \{{/street2}}
-                            \{{#street3}} \{{street3}}, \{{/street3}}</li>
-                            <li class="result-list__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
-                            <li class="result-list__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}}</li>
-                          </ul>
-                        \{{/address}}
-                        <p class="result-list__description">\{{serviceInfo}}</p>
-                        <a class="btn btn--brand-d result-list__btn" href="organisation.html?organisation=\{{key}}">
-                          <span class="btn__text">More information</span>
-                        </a>
-                      </li>
-                    \{{/serviceProviders}}
-                    </ul>
+                <div class="accordion js-accordion">
+                  \{{#subCategories}}
+                    <h2 class="h3 accordion__header js-header">\{{name}}</h2>
+                    <div class="accordion__item js-item">
+                      <div class="accordion__inner">
+                        \{{#serviceProviders}}
+                          <h3 class="h3"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h3>
+                          \{{#address}}
+                            <ul class="result-detail__address-list">
+                              <li class="result-detail__address-item">\{{#street}} \{{street}}, \{{/street}} \{{#street1}} \{{street1}}, \{{/street1}} \{{#street2}} \{{street2}}, \{{/street2}}
+                              \{{#street3}} \{{street3}}, \{{/street3}}</li>
+                              <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
+                              <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}}</li>
+                            </ul>
+                          \{{/address}}
+                          <p class="result-detail__description">\{{serviceInfo}}</p>
+                          <a class="btn btn--brand-d result-detail__btn" href="organisation.html?organisation=\{{key}}">
+                            <span class="btn__text">More information</span>
+                          </a>
+                        \{{/serviceProviders}}
+                      </div>
+                    </div>
+                  \{{/subCategories}}
                   </div>
-                \{{/subCategories}}
-              \{{/organisations}}
+                \{{/organisations}}
+              </div>
             </div>
           </div>
         </div>
