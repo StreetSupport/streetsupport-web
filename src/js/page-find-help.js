@@ -4,6 +4,7 @@ var nav = require('./nav.js')
 
 // Lodash
 var forEach = require('lodash/collection/forEach')
+var sortByOrder = require('lodash/collection/sortByOrder')
 
 nav.init()
 FastClick.attach(document.body)
@@ -29,8 +30,10 @@ require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (req
       }
     })
 
+    var sorted = sortByOrder(result, ['sortOrder'], ['desc'])
+
     // Append object name for Hogan
-    var theData = { categories: result }
+    var theData = { categories: sorted }
 
     // Compile and render template
     var theTemplate = document.getElementById('js-category-list-tpl').innerHTML

@@ -7,7 +7,6 @@ var urlParameter = require('./get-url-parameter')
 var forEach = require('lodash/collection/forEach')
 var sortBy = require('lodash/collection/sortBy')
 var slice = require('lodash/array/slice')
-var concat = require('lodash/chain/concat')
 
 nav.init()
 FastClick.attach(document.body)
@@ -56,7 +55,7 @@ require.ensure(['./api', './get-api-data', './get-location', 'hogan.js', 'spin.j
       })
 
       // api days: monday == 0!
-      var today =  new Date().getDay() - 1
+      var today = new Date().getDay() - 1
       var past = slice(result.daysServices, 0, today)
       var todayToTail = slice(result.daysServices, today)
       result.daysServices = todayToTail.concat(past)
