@@ -12,6 +12,10 @@
     margin: 0;
     padding: 0 0 20px 0;
     list-style-type: none;
+
+    .accordion--organisation & {
+      padding-bottom: 0;
+    }
   }
 
   &__address-item {
@@ -22,6 +26,10 @@
     @include cf();
     margin: 0;
     padding: 0 0 15px 0;
+
+    .accordion--organisation & {
+      padding-bottom: 0;
+    }
   }
 
   &__times-title {
