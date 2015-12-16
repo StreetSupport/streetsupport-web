@@ -35,7 +35,7 @@ require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (req
     document.getElementById('js-organisation-output').innerHTML = theOutput
 
     accordion.init()
-    socialShare.init()
     loading.stop()
+    socialShare.init()
   })
 })
