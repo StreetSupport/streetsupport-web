@@ -46,5 +46,7 @@
     padding: 0 0 5px 0;
     display: block;
     float: left;
+
+    a + a { padding-left: 0.5em; }
   }
 }
