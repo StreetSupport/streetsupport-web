@@ -35,7 +35,7 @@ var close = function () {
 }
 
 module.exports = {
-  init: init,  
+  init: init,
   open: open,
   close: close
 }
