@@ -1,4 +1,13 @@
 .result-detail {
+
+  @include mq($from: m) {
+    @include span(10 of $column-large);
+  }
+
+  @include mq($from: l) {
+    @include span(8 of $column-large);
+  }
+
   &__address-list {
     margin: 0;
     padding: 0 0 20px 0;
