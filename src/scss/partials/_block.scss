@@ -9,6 +9,7 @@
 
     .block--intro & {
       text-align: left;
+      margin-bottom: 0;
     }
   }
 
@@ -21,7 +22,7 @@
 
     a {
       color: $brand-c;
-    }    
+    }
   }
 
   &__image {

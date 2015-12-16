@@ -2,6 +2,7 @@
 var FastClick = require('fastclick')
 var nav = require('./nav.js')
 var urlParameter = require('./get-url-parameter')
+var socialShare = require('./social-share')
 var accordion = require('./accordion')
 
 nav.init()
@@ -34,6 +35,7 @@ require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (req
     document.getElementById('js-organisation-output').innerHTML = theOutput
 
     accordion.init()
+    socialShare.init()
     loading.stop()
   })
 })
