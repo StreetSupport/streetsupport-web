@@ -8,5 +8,6 @@
   // Horrible hack to make Twitter iframe align because facebook uses vertical-align: bottom
   & > iframe {
     vertical-align: bottom;
+    margin-right: 5px;
   }
 }
