@@ -2,8 +2,8 @@
 var FastClick = require('fastclick')
 var nav = require('./nav.js')
 var urlParameter = require('./get-url-parameter')
-var socialShare = require('./social-share')
 var accordion = require('./accordion')
+var socialShare = require('./social-share')
 
 nav.init()
 FastClick.attach(document.body)

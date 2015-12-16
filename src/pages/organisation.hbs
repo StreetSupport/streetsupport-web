@@ -24,9 +24,6 @@ jsName: organisation
       <div class="block">
         <div class="container block__inner">
           <div class="block__content">
-
-            {{> social-share}}
-
             <div class="result-detail">
               \{{#organisation}}
                 \{{#addresses}}
@@ -100,16 +97,13 @@ jsName: organisation
                   \{{/facebook}}
                 </dl>
               \{{/organisation}}
+              <p>If you know of any other services that are missing, or can see information that is incorrect or out of date, please <a href="contact.html">let us know</a>.</p>
 
               {{> social-share}}
-
-              <p>If you know of any other services that are missing, or can see information that is incorrect or out of date, please <a href="contact.html">let us know</a>.</p>
             </div>
           </div>
         </div>
       </div>
     </script>
-
-    {{> social-gutter}}
   {{/content}}
 {{/extend}}

@@ -1,6 +1,7 @@
 // Page modules
 var FastClick = require('fastclick')
 var nav = require('./nav.js')
+var socialShare = require('./social-share')
 
 // Lodash
 var sortBy = require('lodash/collection/sortBy')
@@ -35,5 +36,6 @@ require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (req
     document.getElementById('js-category-result-output').innerHTML = theOutput
 
     loading.stop()
+    socialShare.init()
   })
 })

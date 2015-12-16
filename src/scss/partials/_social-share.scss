@@ -1,5 +1,8 @@
 .social-share {
+  @include cf();
+  margin-top: 40px;
   margin-bottom: 20px;
+  display: block;
 
   &__text {
     margin-right: 10px;
