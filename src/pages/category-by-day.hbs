@@ -5,70 +5,62 @@ jsName: categorybyday
 ---
 
 {{#extend "_default"}}
-  {{#content "main"}}
-    <div id="js-category-result-output" class="template"></div>
-  {{/content}}
+{{#content "main"}}
+<div id="js-category-result-output" class="template"></div>
+{{/content}}
 
-  {{#content "gutter"}}
-    <div id="spin"></div>
+{{#content "gutter"}}
+<div id="spin"></div>
 
-    <script id="js-category-result-tpl" type="text/template">
-      <div class="block block--intro">
-        <div class="container block__inner">
-          \{{#organisations}}
-            <h2 class="h1 block__header">\{{categoryName}}</h2>
-          \{{/organisations}}
-        </div>
+<script id="js-category-result-tpl" type="text/template">
+  <div class="block block--intro">
+    <div class="container block__inner">
+      \{{#organisations}}
+      <h2 class="h1 block__header">\{{categoryName}}</h2>
+      \{{/organisations}}
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="container block__inner">
+      <div class="block__content">
+        \{{#organisations}}
+        <div class="accordion js-accordion">
+          \{{#daysServices}}
+          <h2 class="h3 accordion__header result__header  js-header">\{{name}}</h2>
+            <div class="accordion__item js-item">
+              <dl class="accordion__inner">
+                \{{#serviceProviders}}
+                <dt>\{{#openingTimes}}
+                  \{{startTime}} - \{{endTime}}
+                  \{{/openingTimes}}
+                </dt>
+                <dd>
+                  <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">
+                    <p>\{{#address.street}}\{{address.street}}</br>\{{/address.street}}
+                      \{{#address.street1}}\{{address.street1}}</br>\{{/address.street1}}
+                      \{{#address.street2}}\{{address.street2}}</br>\{{/address.street2}}
+                      \{{#address.street3}}\{{address.street3}}</br>\{{/address.street3}}
+                      \{{#address.city}}\{{address.city}}</br>\{{/address.city}}
+                      \{{address.postcode}}
+                    </p>
+                  </a>
+                </dd>
+                <dd>\{{#openingTimes}}
+                  \{{description}}
+                  \{{/openingTimes}}
+                </dd>
+                <dd><a href="organisation.html?organisation=\{{key}}">\{{name}}</a>
+                </dd>
+                \{{/serviceProviders}}
+              </dl>
+            </div> 
+          \{{/daysServices}}
+        </div> 
+        \{{/organisations}}
       </div>
-
-      <div class="block">
-        <div class="container block__inner">
-          <div class="block__content">
-            \{{#organisations}}
-              \{{#daysServices}}
-                <div class="result__category">
-                  <h2 class="h1 result__header">\{{name}}</h2>
-                    <table>
-                      <thead>
-                        <tr>
-                        <th>When</th>  
-                        <th>Who</th>  
-                        <th>Where</th> 
-                        <th>What</th>  
-                        </tr>
-                        </thead>
-                  \{{#serviceProviders}}
-                        <tbody>
-                        <tr>
-                        <td>
-                    \{{#openingTimes}}
-                      \{{startTime}} - \{{endTime}}
-                    \{{/openingTimes}}
-                    </td>
-                    <td><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></td>
-                    <td>
-                      <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">
-                        <p>\{{#address.street}}\{{address.street}}</br>\{{/address.street}}
-                        \{{#address.street1}}\{{address.street1}}</br>\{{/address.street1}}
-                        \{{#address.street2}}\{{address.street2}}</br>\{{/address.street2}}
-                        \{{#address.street3}}\{{address.street3}}</br>\{{/address.street3}}
-                        \{{#address.city}}\{{address.city}}</br>\{{/address.city}}
-                        \{{address.postcode}}</p>
-                      </a>
-                    </td>
-                    <td>\{{#openingTimes}}
-                      \{{description}}
-                    \{{/openingTimes}}</td>
-                    </tr>
-                    </tbody>
-                  \{{/serviceProviders}}
-                    </table>
-                </div> 
-              \{{/daysServices}}
-            \{{/organisations}}
-          </div>
-        </div>
-      </div>
-    </script>
-  {{/content}}
+    </div>
+  </div>
+</script>
+{{/content}}
 {{/extend}}
