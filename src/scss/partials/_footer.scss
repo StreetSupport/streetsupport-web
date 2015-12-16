@@ -1,9 +1,17 @@
 .footer {
   background-color: $brand-c;
   color: #fff;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   text-align: center;
+
+  &__header {
+    margin-top: 0;
+  }
+
+  &__copy {
+    margin-bottom: 0;
+  }
 
   &__social {
     vertical-align: middle;
