@@ -20,8 +20,7 @@ module.exports = {
     category: __dirname + '/../../src/js/page-category',
     categorybyday: __dirname + '/../../src/js/page-category-by-day',
     organisation: __dirname + '/../../src/js/page-organisation',
-    allserviceproviders: __dirname + '/../../src/js/page-all-service-providers',
-    services: __dirname + '/../../src/js/page-services'
+    allserviceproviders: __dirname + '/../../src/js/page-all-service-providers'
   },
   output: {
     path: path.join(__dirname, '/../../_dist/assets/js/'),
