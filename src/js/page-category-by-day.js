@@ -2,6 +2,7 @@
 var FastClick = require('fastclick')
 var nav = require('./nav.js')
 var urlParameter = require('./get-url-parameter')
+var accordion = require('./accordion')
 
 // Lodash
 var forEach = require('lodash/collection/forEach')
@@ -70,6 +71,7 @@ require.ensure(['./api', './get-api-data', './get-location', 'hogan.js', 'spin.j
 
       document.getElementById('js-category-result-output').innerHTML = theOutput
 
+      accordion.init()
       loading.stop()
     })
   }
