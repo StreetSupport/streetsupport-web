@@ -6,9 +6,5 @@
     @include with-layout($column-large) {
       @include container();
     }
-
-    .page-home & {
-      max-width: 980px;
-    }
   }
 }

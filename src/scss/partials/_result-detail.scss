@@ -1,13 +1,5 @@
 .result-detail {
-
-  @include mq($from: m) {
-    @include span(10 of $column-large);
-  }
-
-  @include mq($from: l) {
-    @include span(8 of $column-large);
-  }
-
+  
   &__address-list {
     margin: 0;
     padding: 0 0 20px 0;
@@ -33,11 +25,11 @@
   }
 
   &__times-title {
-    margin: 0;
+    margin: 0 20px 0px 0;
     padding: 0 0 5px 0;
     display: block;
     float: left;
-    width: 100px;
+    min-width: 85px;
     clear: both;
   }
 
@@ -47,7 +39,15 @@
     display: block;
     float: left;
 
-    a + a { padding-left: 0.5em; }
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+
+    li {
+
+    }
   }
 
   &__btn {
