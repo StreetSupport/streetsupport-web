@@ -29,28 +29,24 @@ jsName: categorybyday
           \{{#daysServices}}
           <h2 class="h3 accordion__header result__header  js-header">\{{name}}</h2>
             <div class="accordion__item js-item">
-              <dl class="accordion__inner">
+              <dl class="accordion__inner result-detail__times-list">
                 \{{#serviceProviders}}
-                <dt>\{{#openingTimes}}
+                <dt class="result-detail__times-title">\{{#openingTimes}}
                   \{{startTime}} - \{{endTime}}
                   \{{/openingTimes}}
                 </dt>
-                <dd>
+                <dd class="result-detail__times-item">
                   <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">
-                    <p>\{{#address.street}}\{{address.street}}</br>\{{/address.street}}
-                      \{{#address.street1}}\{{address.street1}}</br>\{{/address.street1}}
-                      \{{#address.street2}}\{{address.street2}}</br>\{{/address.street2}}
-                      \{{#address.street3}}\{{address.street3}}</br>\{{/address.street3}}
-                      \{{#address.city}}\{{address.city}}</br>\{{/address.city}}
+                    \{{#address.street}}\{{address.street}}, \{{/address.street}}
+                      \{{#address.street1}}\{{address.street1}}, \{{/address.street1}}
+                      \{{#address.street2}}\{{address.street2}}, \{{/address.street2}}
+                      \{{#address.street3}}\{{address.street3}}, \{{/address.street3}}
+                      \{{#address.city}}\{{address.city}}. \{{/address.city}}
                       \{{address.postcode}}
-                    </p>
-                  </a>
-                </dd>
-                <dd>\{{#openingTimes}}
+                  </a> <a href="organisation.html?organisation=\{{key}}">\{{name}}</a>
+                  <p>efaf ewfaw ea fefwaf fef\{{#openingTimes}}
                   \{{description}}
-                  \{{/openingTimes}}
-                </dd>
-                <dd><a href="organisation.html?organisation=\{{key}}">\{{name}}</a>
+                  \{{/openingTimes}}</p>
                 </dd>
                 \{{/serviceProviders}}
               </dl>
