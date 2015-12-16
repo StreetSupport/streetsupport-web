@@ -27,7 +27,7 @@
     </script>
     <noscript><link href="icons.fallback.css" rel="stylesheet"></noscript>
   </head>
-  <body class="page-{{name}}">
+  <body {{#if pageName}}class="page-{{pageName}}"{{/if}}>
 
     {{>header-nav}}
 

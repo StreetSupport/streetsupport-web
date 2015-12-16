@@ -55,5 +55,9 @@
   &--highlight {
     background-color: $brand-b;
     color: #fff;
+
+    a {
+      color: inherit;
+    }
   }
 }
