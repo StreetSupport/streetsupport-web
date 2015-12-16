@@ -36,23 +36,24 @@ jsName: categorybyday
                   \{{/openingTimes}}
                 </dt>
                 <dd class="result-detail__times-item">
-                  <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">
-                    \{{#address.street}}\{{address.street}}, \{{/address.street}}
-                      \{{#address.street1}}\{{address.street1}}, \{{/address.street1}}
-                      \{{#address.street2}}\{{address.street2}}, \{{/address.street2}}
-                      \{{#address.street3}}\{{address.street3}}, \{{/address.street3}}
-                      \{{#address.city}}\{{address.city}}. \{{/address.city}}
-                      \{{address.postcode}}
-                  </a> <a href="organisation.html?organisation=\{{key}}">\{{name}}</a>
-                  <p>efaf ewfaw ea fefwaf fef\{{#openingTimes}}
-                  \{{description}}
-                  \{{/openingTimes}}</p>
+                  <ul>
+                    <li>
+                        \{{#address.street}} \{{address.street}}, \{{/address.street}}
+                        \{{#address.street1}} \{{address.street1}}, \{{/address.street1}}
+                        \{{#address.street2}} \{{address.street2}}, \{{/address.street2}}
+                        \{{#address.street3}} \{{address.street3}}, \{{/address.street3}}
+                        \{{#address.city}} \{{address.city}}. \{{/address.city}}
+                        \{{address.postcode}} - <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">Map</a>
+                    </li>
+                    <li>\{{name}} - <a href="organisation.html?organisation=\{{key}}">More information</a></li>
+                    <li>[Description here] \{{#openingTimes}} \{{description}} \{{/openingTimes}}</li>
+                  </ul>
                 </dd>
                 \{{/serviceProviders}}
               </dl>
-            </div> 
+            </div>
           \{{/daysServices}}
-        </div> 
+        </div>
         \{{/organisations}}
       </div>
     </div>
