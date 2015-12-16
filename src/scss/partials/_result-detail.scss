@@ -25,7 +25,7 @@
   &__times-list {
     @include cf();
     margin: 0;
-    padding: 0 0 20px 0;
+    padding: 0 0 15px 0;
 
     .accordion & {
       padding-bottom: 0;
@@ -34,7 +34,7 @@
 
   &__times-title {
     margin: 0;
-    padding: 0;
+    padding: 0 0 5px 0;
     display: block;
     float: left;
     width: 100px;
@@ -43,7 +43,7 @@
 
   &__times-item {
     margin: 0;
-    padding: 0;
+    padding: 0 0 5px 0;
     display: block;
     float: left;
   }
