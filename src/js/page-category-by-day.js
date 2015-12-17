@@ -15,11 +15,11 @@ nav.init()
 FastClick.attach(document.body)
 
 // Load and process data
-require.ensure(['./api', './get-api-data', './get-location', 'hogan.js', 'spin.js'], function (require) {
+require.ensure(['./api', './get-api-data', './category-endpoint', 'hogan.js', 'spin.js'], function (require) {
   var apiRoutes = require('./api')
   var getApiData = require('./get-api-data')
   var Hogan = require('hogan.js')
-  var getLocation = require('./get-location')
+  var categoryEndpoint = require('./category-endpoint')
   var Spinner = require('spin.js')
 
   // Spinner
@@ -31,47 +31,7 @@ require.ensure(['./api', './get-api-data', './get-location', 'hogan.js', 'spin.j
   var theLocation = urlParameter.parameter('location')
   var categoryUrl = apiRoutes.categoryServiceProvidersByDay += theCategory
 
-  var locations = [
-    {
-      'key': 'manchester',
-      'name': 'Manchester',
-      'longitude': -2.24455696347558,
-      'latitude':53.4792777155671
-    },
-    {
-      'key': 'leeds',
-      'name': 'Leeds',
-      'longitude': -1.54511238485298,
-      'latitude':53.7954906003838
-    }
-  ]
-
-  if (theLocation.length) {
-    var requestedLocation = find(locations, function(loc) {
-      return loc.key === theLocation
-    })
-  }
-
-  if(requestedLocation !== false) {
-    var latitude = requestedLocation.latitude
-    var longitude = requestedLocation.longitude
-    var locationUrl = categoryUrl += '/long/' + longitude + '/lat/' + latitude
-
-    buildList(locationUrl)
-  } else if (navigator.geolocation) {
-    getLocation.location().then(function (position) {
-      var latitude = position.coords.latitude
-      var longitude = position.coords.longitude
-      var locationUrl = categoryUrl += '/long/' + longitude + '/lat/' + latitude
-
-      buildList(locationUrl)
-    }).fail(function (error) {
-      console.error('GEOLOCATION ERROR: ' + error)
-      buildList(categoryUrl)
-    })
-  } else {
-    buildList(categoryUrl)
-  }
+  buildList(categoryEndpoint.getEndpointUrl(categoryUrl, theLocation))
 
   function buildList (url) {
     // Get API data using promise
