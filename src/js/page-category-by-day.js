@@ -50,7 +50,7 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
         result.daysServices = sortByOpeningTimes(sortDaysFromToday(result.daysServices))
 
         callback = function () {
-          accordion.init()
+          accordion.init(true)
         }
       } else {
         template = 'js-category-no-results-result-tpl'

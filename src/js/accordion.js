@@ -2,7 +2,7 @@ var accordion = '.js-accordion'
 var header = '.js-header'
 var activeClass = 'is-active'
 
-var init = function () {
+var init = function (showFirst) {
   // If not supported, exit out
   if (!document.querySelector || !document.querySelectorAll || !document.body.classList) {
     return
@@ -12,11 +12,11 @@ var init = function () {
   var el = document.querySelector(accordion)
   var headers = document.querySelectorAll(header)
 
-  // Add active class to first elements on load
-  /*
-  el.children[0].classList.add(activeClass)
-  el.children[1].classList.add(activeClass)
-  */
+  // Add active class to first elements
+  if (showFirst) {
+    el.children[0].classList.add(activeClass)
+    el.children[1].classList.add(activeClass)
+  }
 
   // Add click listener to headers
   for (i = 0; i < headers.length; i++) {
