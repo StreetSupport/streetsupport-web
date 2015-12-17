@@ -13,8 +13,10 @@ var init = function () {
   var headers = document.querySelectorAll(header)
 
   // Add active class to first elements on load
+  /*
   el.children[0].classList.add(activeClass)
   el.children[1].classList.add(activeClass)
+  */
 
   // Add click listener to headers
   for (i = 0; i < headers.length; i++) {
