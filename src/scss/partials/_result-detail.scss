@@ -37,17 +37,18 @@
   }
 
   &__times-title {
-    margin: 0;
+    margin: 0 40px 0 0;
     padding: 0 0 5px 0;
-    display: table-cell;
-    width: 180px;
+    min-width: 85px;
+    float: left;
+    clear: left;
+    font-weight: $font-headline-weight;
   }
 
   &__times-item {
     margin: 0;
-    padding: 3px 0 5px 0;
-    display: table-cell;
-    vertical-align: top;
+    padding: 0px 0 5px 0;
+    float: left;
 
     ul {
       margin: 0;
