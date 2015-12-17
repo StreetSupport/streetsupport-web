@@ -9,11 +9,11 @@ nav.init()
 FastClick.attach(document.body)
 
 // Load and process data
-require.ensure(['./api', './get-api-data', './category-endpoint', 'hogan.js', 'spin.js'], function (require) {
+require.ensure(['./api', './get-api-data', './category-endpoint', './template-render', 'spin.js'], function (require) {
   var apiRoutes = require('./api')
   var getApiData = require('./get-api-data')
-  var Hogan = require('hogan.js')
   var categoryEndpoint = require('./category-endpoint')
+  var templating = require('./template-render')
   var Spinner = require('spin.js')
 
   // Spinner
@@ -44,17 +44,10 @@ require.ensure(['./api', './get-api-data', './category-endpoint', 'hogan.js', 's
         template = 'js-category-no-results-result-tpl'
       }
 
-      renderTemplate(template, theData, 'js-category-result-output', callback)
+      templating.renderTemplate(template, theData, 'js-category-result-output', callback)
 
       loading.stop()
       socialShare.init()
     })
-  }
-
-  function renderTemplate (templateId, data, output, callback) {
-    var theTemplate = document.getElementById(templateId).innerHTML
-    var compileTemplate = Hogan.compile(theTemplate)
-    document.getElementById(output).innerHTML = compileTemplate.render(data)
-    callback()
   }
 })
