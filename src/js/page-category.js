@@ -52,9 +52,9 @@ require.ensure(['./api', './get-api-data', './get-location', 'hogan.js', 'spin.j
 
       if(result.subCategories.length) {
         template = 'js-category-result-tpl'
-      callback = function(){
-        accordion.init()
-      }
+        callback = function(){
+          accordion.init()
+        }
       }else {
         template = 'js-category-no-results-result-tpl'
       }
