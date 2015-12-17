@@ -54,11 +54,12 @@
   }
 
   &__image {
-    // Append grid to .block__content div if this image div exists
-    @include span(3 of $column-small);
+    width: 50%;
+    text-align: center;
+    margin: 0 auto 20px auto;
 
     & + div {
-      @include span(3 of $column-small);
+      text-align: center;
     }
 
     img {
