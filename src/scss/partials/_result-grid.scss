@@ -14,9 +14,17 @@
       @include span(3 of $column-large);
     }
 
-    // NOTE: This is a horrible hack and needs to be changed ASAP
+    // NOTE: Both these classes are horrible hacks and needs to be changed ASAP
     .btn__icon {
       max-height: 180px !important;
+    }
+
+    .btn__text {
+      font-size: 14px;
+
+      @include mq($from: btnhack) {
+        font-size: 16px;
+      }
     }
   }
 }
