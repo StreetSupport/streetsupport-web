@@ -7,7 +7,6 @@ var socialShare = require('./social-share')
 
 // Lodash
 var forEach = require('lodash/collection/forEach')
-var find = require('lodash/collection/find')
 var sortBy = require('lodash/collection/sortBy')
 var slice = require('lodash/array/slice')
 

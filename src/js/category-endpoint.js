@@ -1,4 +1,5 @@
 var getLocation = require('./get-location')
+var find = require('lodash/collection/find')
 
 var getEndpointUrl = function (categoryUrl, theLocation) {
   if (theLocation.length) {
@@ -19,7 +20,6 @@ var getEndpointUrl = function (categoryUrl, theLocation) {
     var requestedLocation = find(locations, function(loc) {
       return loc.key === theLocation
     })
-
     if(requestedLocation !== false) {
 
       var latitude = requestedLocation.latitude
