@@ -17,6 +17,9 @@ jsName: category
         <div class="container block__inner">
           \{{#organisations}}
             <h2 class="h1 block__header">\{{name}}</h2>
+            <div class="block__content">
+              <p>Showing services within 5 miles of your location.</p>
+            </div>
           \{{/organisations}}
         </div>
       </div>
@@ -28,7 +31,7 @@ jsName: category
               <p>We can't find any services listed near your current location.</p>
               <p>We are currently trialing Street Support in Manchester UK, so if you are trying to access it from elsewhere you won't yet be able to find service information for your city.</p>
               <p>We will be rolling out across the UK and beyond in 2016, so if you are interested in Street Support coming to your city, <a href="contact.html">please get in touch</a>.</p>
-          <p>If you would like to see how it works, <a href="category.html?category=\{{#organisations}}\{{key}}\{{/organisations}}&location=manchester">click here to set your location to Manchester</a>.</p>
+              <p>If you would like to see how it works, <a href="category.html?category=\{{#organisations}}\{{key}}\{{/organisations}}&location=manchester">click here to set your location to Manchester</a>.</p>
             </div>
           </div>
         </div>
@@ -57,11 +60,13 @@ jsName: category
                         \{{#serviceProviders}}
                           <div class="result-detail__item">
                             <h3 class="h3 result-detail__header"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h3>
+                            <p>You must be: </p>
                             <ul class="result-detail__tags-list">
                             \{{#tags}}
                               <li class="result-detail__tags-item">\{{.}}</li>
                             \{{/tags}}
                             </ul>
+                            <p class="result-detail__description">\{{serviceInfo}}</p>
                             \{{#address}}
                               <ul class="result-detail__address-list">
                                 <li class="result-detail__address-item">\{{#street}} \{{street}}, \{{/street}} \{{#street1}} \{{street1}}, \{{/street1}} \{{#street2}} \{{street2}}, \{{/street2}}
@@ -70,7 +75,6 @@ jsName: category
                                 <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a></li>
                               </ul>
                             \{{/address}}
-                            <p class="result-detail__description">\{{serviceInfo}}</p>
                             <a class="btn btn--brand-d result-detail__btn" href="organisation.html?organisation=\{{key}}">
                               <span class="btn__text">More information</span>
                             </a>
