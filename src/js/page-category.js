@@ -30,6 +30,10 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
   function buildList (url) {
     // Get API data using promise
     getApiData.data(url).then(function (result) {
+      // Get category name and edit page title
+      var theTitle = result.name + ' - Street Support'
+      document.title = theTitle
+
       // Append object name for Hogan
       var theData = { organisations: result }
       var template = ''

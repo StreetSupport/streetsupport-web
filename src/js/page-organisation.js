@@ -24,6 +24,10 @@ require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (req
 
   // Get API data using promise
   getApiData.data(organisationUrl).then(function (result) {
+    // Get organisation name and edit page title
+    var theTitle = result.name + ' - Street Support'
+    document.title = theTitle
+
     // Append object name for Hogan
     var theData = { organisation: result }
 
