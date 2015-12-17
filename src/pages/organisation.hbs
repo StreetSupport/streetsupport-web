@@ -17,6 +17,12 @@ jsName: organisation
         <div class="container block__inner">
           \{{#organisation}}
             <h1 class="h1 block__header">\{{name}}</h1>
+            <span>{{#isVerified}}
+              verified
+            {{/isVerified}}
+            {{^isVerified}}
+              unverified
+            {{/isVerified}}</span>
           \{{/organisation}}
         </div>
       </div>
