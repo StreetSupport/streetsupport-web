@@ -47,17 +47,24 @@ require.ensure(['./api', './get-api-data', './get-location', 'hogan.js', 'spin.j
     getApiData.data(url).then(function (result) {
       // Append object name for Hogan
       var theData = { organisations: result }
+      var template = ''
+      if(result.subCategories.length) {
+        template = 'js-category-result-tpl'
+      }else {
+        template = 'js-category-no-results-result-tpl'
+      }
 
-      // Compile and render template
-      var theTemplate = document.getElementById('js-category-result-tpl').innerHTML
-      var compileTemplate = Hogan.compile(theTemplate)
-      var theOutput = compileTemplate.render(theData)
-
-      document.getElementById('js-category-result-output').innerHTML = theOutput
+      renderTemplate(template, theData, 'js-category-result-output')
 
       accordion.init()
       loading.stop()
       socialShare.init()
     })
+  }
+
+  function renderTemplate(templateId, data, output) {
+    var theTemplate = document.getElementById(templateId).innerHTML
+    var compileTemplate = Hogan.compile(theTemplate)
+    document.getElementById(output).innerHTML = compileTemplate.render(data)
   }
 })
