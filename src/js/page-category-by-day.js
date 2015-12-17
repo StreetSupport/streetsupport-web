@@ -14,12 +14,13 @@ nav.init()
 FastClick.attach(document.body)
 
 // Load and process data
-require.ensure(['./api', './get-api-data', './category-endpoint', './template-render', 'spin.js'], function (require) {
+require.ensure(['./api', './get-api-data', './category-endpoint', './template-render', 'spin.js', './analytics'], function (require) {
   var apiRoutes = require('./api')
   var getApiData = require('./get-api-data')
   var categoryEndpoint = require('./category-endpoint')
   var templating = require('./template-render')
   var Spinner = require('spin.js')
+  var analytics = require('./analytics')
 
   // Spinner
   var spin = document.getElementById('spin')
@@ -59,6 +60,7 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
       templating.renderTemplate(template, theData, 'js-category-result-output', callback)
 
       loading.stop()
+      analytics.init(theTitle)
       socialShare.init()
     })
   }

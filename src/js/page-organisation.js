@@ -9,11 +9,12 @@ nav.init()
 FastClick.attach(document.body)
 
 // Load and process data
-require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (require) {
+require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js', './analytics'], function (require) {
   var apiRoutes = require('./api')
   var getApiData = require('./get-api-data')
   var Hogan = require('hogan.js')
   var Spinner = require('spin.js')
+  var analytics = require('./analytics')
 
   // Spinner
   var spin = document.getElementById('spin')
@@ -40,6 +41,7 @@ require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (req
 
     accordion.init()
     loading.stop()
+    analytics.init(theTitle)
     socialShare.init()
   })
 })
