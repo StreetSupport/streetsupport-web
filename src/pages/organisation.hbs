@@ -18,10 +18,10 @@ jsName: organisation
           \{{#organisation}}
             <h1 class="h1 block__header">\{{name}}</h1>
             <span>\{{#isVerified}}
-              verified
+              information verified
             \{{/isVerified}}
             \{{^isVerified}}
-              unverified
+              information under review
             \{{/isVerified}}</span>
           \{{/organisation}}
         </div>
@@ -107,7 +107,7 @@ jsName: organisation
               {{> social-share}}
 
               <p>This site is currently under review. If you see something missing, incorrect or incomplete, or you would like to know more, please <a href="contact.html">get in touch</a>.</p>
-              
+
             </div>
           </div>
         </div>
