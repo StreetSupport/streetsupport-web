@@ -8,19 +8,19 @@ var getEndpointUrl = function (categoryUrl, theLocation) {
         'key': 'manchester',
         'name': 'Manchester',
         'longitude': -2.24455696347558,
-        'latitude':53.4792777155671
+        'latitude': 53.4792777155671
       },
       {
         'key': 'leeds',
         'name': 'Leeds',
         'longitude': -1.54511238485298,
-        'latitude':53.7954906003838
+        'latitude': 53.7954906003838
       }
     ]
-    var requestedLocation = find(locations, function(loc) {
+    var requestedLocation = find(locations, function (loc) {
       return loc.key === theLocation
     })
-    if(requestedLocation !== false) {
+    if (requestedLocation !== false) {
 
       var latitude = requestedLocation.latitude
       var longitude = requestedLocation.longitude
