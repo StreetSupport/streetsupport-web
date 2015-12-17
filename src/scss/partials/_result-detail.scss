@@ -61,6 +61,20 @@
     }
   }
 
+  &__tags-list {
+    margin: 0 0 20px 0;
+    padding: 0;
+    list-style-type: none;
+    display: inline-block;
+  }
+
+  &__tags-item {
+    margin: 0;
+    padding: 0;
+    display: inline;
+    font-weight: $font-headline-weight;
+  }
+
   &__item {
     padding-top: 30px;
     padding-bottom: 30px;
