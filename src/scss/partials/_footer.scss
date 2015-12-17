@@ -4,4 +4,26 @@
   padding-top: 30px;
   padding-bottom: 30px;
   text-align: center;
+
+  &__header {
+    margin-top: 0;
+  }
+
+  &__copy {
+    margin-bottom: 0;
+  }
+
+  &__social {
+    vertical-align: middle;
+    display: inline-block;
+    line-height: 10px;
+    margin-right: 10px;
+  }
+
+  &__icon {
+    height: 37px;
+    width: 34px;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
 }

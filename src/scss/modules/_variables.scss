@@ -16,6 +16,8 @@ $mq-breakpoints: (
   m:   740px,
   l:   980px,
   xl:  1300px,
+
+  btnhack:  350px
 );
 
 // Define the breakpoint from the $mq-breakpoints list that should
@@ -47,9 +49,11 @@ $brand-d: #ffa200;
 $brand-e: #ffde00;
 $brand-f: #8d8d8d;
 $brand-g: #a90000;
+$brand-h: #6e6895;
+$brand-i: #f6e9d2;
 
 // Fonts
-$font-primary: 'museo-sans-rounded', serif;
+$font-primary: 'museo-sans-rounded', sans-serif;
 $font-primary-weight: 300;
 $font-headline: 'museo-sans-rounded', sans-serif;
 $font-headline-weight: 500;

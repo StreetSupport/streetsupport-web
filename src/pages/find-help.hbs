@@ -2,39 +2,74 @@
 title: Find Help - Street Support
 description: Street support makes it easier to help homeless people. Find help relevant to your needs.
 jsName: findhelp
+pageName: findhelp
 ---
 
 {{#extend "_default"}}
   {{#content "main"}}
-    <div class="block block--intro">
-      <div class="container block__inner">
-        <h2 class="h1 block__header">Find Help</h2>
-        <div class="block__content">
-          <p>Find the support you need.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="block">
-      <div class="container block__inner">
-        <div class="block__content">
-
-          <script id="js-category-list-tpl" type="text/template">
-            \{{#categories}}
-              <a class="btn btn--brand-d" href="category.html?category=\{{key}}">
-                <span class="btn__icon icon-\{{key}}"></span>
-                <span class="btn__text">\{{name}}</span>
-              </a>
-            \{{/categories}}
-          </script>
-
-          <div id="js-category-list-output" class="category-list"></div>
-
-          <a class="btn btn--brand-g btn--wide" href="emergency-help.html"><span class="btn__text">Emergency Help</span></a>
-        </div>
-      </div>
-    </div>
+    <div id="js-category-list-output" class="template"></div>
   {{/content}}
 
-  {{#content "gutter"}}{{/content}}
+  {{#content "gutter"}}
+    <div id="spin"></div>
+
+    <script id="js-category-list-tpl" type="text/template">
+      <div class="block block--intro">
+        <div class="container block__inner">
+          <h1 class="h1 block__header">Find Help</h1>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="container block__inner">
+          <div class="block__content">
+            <div class="split">
+              <div class="split__element">
+                <h2 class="h3">Recently homeless?</h2>
+              </div>
+              <div class="split__element">
+                <a class="btn btn--brand-d" href="emergency-help.html">
+                  <span class="btn__text">Emergency Advice</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="result-grid">
+              \{{#categories}}
+                <a class="btn btn--brand-d result-grid__item" href="\{{page}}.html?category=\{{key}}">
+                  <span class="btn__icon icon-\{{key}}"></span>
+                  <span class="btn__text">\{{name}}</span>
+                </a>
+              \{{/categories}}
+            </div>
+
+            <div class="split">
+              <div class="split__element">
+                <h2 class="h3">Looking for an organisation?</h2>
+              </div>
+              <a class="btn btn--brand-d split__element" href="all-service-providers.html">
+                <span class="btn__text">See All</span>
+              </a>
+            </div>
+
+            <div class="split">
+              <div class="split__element">
+                <h2 class="h3">Need something else?</h2>
+              </div>
+              <div class="split__element">
+                <a class="btn btn--brand-d" href="contact.html">
+                  <span class="btn__text">Tell Us</span>
+                </a>
+              </div>
+            </div>
+
+            <p>This site is currently under review. If you know of other services, have ideas, or you would like to know more, please <a href="contact.html">get in touch</a>.</p>
+
+            {{> social-share}}   
+
+          </div>
+        </div>
+      </div>
+    </script>
+  {{/content}}
 {{/extend}}

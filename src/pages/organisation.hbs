@@ -6,62 +6,112 @@ jsName: organisation
 
 {{#extend "_default"}}
   {{#content "main"}}
-    <div class="block block--intro">
-      <div class="container block__inner">
-          <div id="js-organisation-header-output" class="organisation"></div>
-      </div>
-    </div>
-
-    <div class="block">
-      <div class="container block__inner">
-        <div class="block__content">
-          <div id="js-organisation-output" class="organisation"></div>
-        </div>
-      </div>
-    </div>
+    <div id="js-organisation-output" class="template"></div>
   {{/content}}
 
   {{#content "gutter"}}
-    <script id="js-organisation-header-tpl" type="text/template">
-      \{{#organisation}}
-        <h2 class="h1 block__header">\{{name}}</h2>
-      \{{/organisation}}
-    </script>
+    <div id="spin"></div>
+
     <script id="js-organisation-tpl" type="text/template">
-      \{{#organisation}}
-        <div class="organisation__item">
-          <h2 class="organisation__header">\{{name}}</h2>
-          <p>\{{description}}</p>
-          <p>\{{address.street}}</br>
-          \{{address.city}}</br>
-          \{{address.postcode}}</p>
-          <p>Area Serviced: \{{areaServiced}}</p>
-
-          <h3>Services Provided</h3>
-          <ul>
-            \{{#servicesProvided}}
-              <li>
-                <p>\{{info}}</p>
-                <p>\{{timeAndLocation}}</p>
-              </li>
-            \{{/servicesProvided}}
-          </ul>
-
-          <h3>Contact</h3>
-          <dl>
-            <dt>Telephone:</dt>
-            <dd>\{{telephone}}</dd>
-            <dt>Email:</dt>
-            <dd>\{{email}}</dd>
-            <dt>Website:</dt>
-            <dd>\{{website}}</dd>
-            <dt>Twitter:</dt>
-            <dd>\{{twitter}}</dd>
-            <dt>Facebook:</dt>
-            <dd>{{facebook}}</dd>
-          </dl>
+      <div class="block block--intro">
+        <div class="container block__inner">
+          \{{#organisation}}
+            <h1 class="h1 block__header">\{{name}}</h1>
+            <span>\{{#isVerified}}
+              verified
+            \{{/isVerified}}
+            \{{^isVerified}}
+              under review
+            \{{/isVerified}}</span>
+          \{{/organisation}}
         </div>
-      \{{/organisation}}
+      </div>
+
+      <div class="block">
+        <div class="container block__inner">
+          <div class="block__content">
+            <div class="result-detail">
+              \{{#organisation}}
+                <p>\{{{description}}}</p>
+                \{{#addresses}}
+                  <ul class="result-detail__address-list">
+                    <li class="result-detail__address-item">\{{#street}} \{{street}}, \{{/street}} \{{#street1}} \{{street1}}, \{{/street1}} \{{#street2}} \{{street2}}, \{{/street2}}
+                    \{{#street3}} \{{street3}}, \{{/street3}}</li>
+                    <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
+                    <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a> \{{/postcode}}</li>
+                  </ul>
+                \{{/addresses}}
+                \{{#providedServices.0}}
+                  <h2 class="h3">Opening Times</h2>
+                  <dl class="result-detail__times-list">
+                    \{{#openingTimes}}
+                    <dt class="result-detail__times-title">\{{day}}</dt>
+                    <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
+                    \{{/openingTimes}}
+                  </dl>
+                \{{/providedServices.0}}
+
+                <h2 class="h2">Services Provided</h2>
+                <div class="accordion accordion--organisation js-accordion">
+                  \{{#providedServices}}
+                    <button class="h3 accordion__header js-header">\{{name}}<span class="icon icon-plus"></span></button>
+                    <div class="accordion__item js-item">
+                      <div class="accordion__inner">
+                        <p>\{{{info}}}</p>
+                        <h2 class="h3">Service Address</h2>
+                        \{{#address}}
+                          <ul class="result-detail__address-list">
+                            <li class="result-detail__address-item">\{{#street}} \{{street}}, \{{/street}} \{{#street1}} \{{street1}}, \{{/street1}} \{{#street2}} \{{street2}}, \{{/street2}}
+                            \{{#street3}} \{{street3}}, \{{/street3}}</li>
+                            <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
+                            <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a></li>
+                          </ul>
+                        \{{/address}}
+                        <h2 class="h3">Opening Times</h2>
+                        <dl class="result-detail__times-list">
+                          \{{#openingTimes}}
+                          <dt class="result-detail__times-title">\{{day}}</dt>
+                          <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
+                          \{{/openingTimes}}
+                        </dl>
+                      </div>
+                    </div>
+                  \{{/providedServices}}
+                </div>
+
+                <h2 class="h2">Contact</h2>
+                <dl class="result-detail__times-list">
+                  \{{#telephone}}
+                    <dt class="result-detail__times-title">Telephone:</dt>
+                    <dd class="result-detail__times-item"><a href="tel:\{{telephone}}">\{{telephone}}</a></dd>
+                  \{{/telephone}}
+                  \{{#email}}
+                    <dt class="result-detail__times-title">Email:</dt>
+                    <dd class="result-detail__times-item"><a href="mailto:\{{email}}">\{{email}}</a></dd>
+                  \{{/email}}
+                  \{{#website}}
+                    <dt class="result-detail__times-title">Website:</dt>
+                    <dd class="result-detail__times-item"><a href="\{{website}}">Website</a></dd>
+                  \{{/website}}
+                  \{{#twitter}}
+                    <dt class="result-detail__times-title">Twitter:</dt>
+                    <dd class="result-detail__times-item"><a href="\{{twitter}}">Twitter page</a></dd>
+                  \{{/twitter}}
+                  \{{#facebook}}
+                    <dt class="result-detail__times-title">Facebook:</dt>
+                    <dd class="result-detail__times-item"><a href="\{{facebook}}">Facebook page</a></dd>
+                  \{{/facebook}}
+                </dl>
+              \{{/organisation}}
+
+              <p>This site is currently under review. If you see something missing, incorrect or incomplete, or you would like to know more, please <a href="contact.html">get in touch</a>.</p>
+
+              {{> social-share}}
+
+            </div>
+          </div>
+        </div>
+      </div>
     </script>
   {{/content}}
 {{/extend}}

@@ -3,21 +3,42 @@
   padding-top: 30px;
   padding-bottom: 30px;
 
-  /*
   &__inner {
+    @include mq($from: m) {
+      @include span(10 of $column-large);
 
+      // Center align on homepage
+      .page-home & {
+        @include push(1 of $column-large);
+      }
+
+      // Full width on find help only
+      .page-findhelp & {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+      }
+    }
+
+    @include mq($from: l) {
+      @include span(8 of $column-large);
+
+      // Center align on homepage
+      .page-home & {
+        @include push(2 of $column-large);
+      }
+    }
   }
-  */
 
   // Components
   &__header {
     text-align: center;
 
-    /*
     .block--intro & {
-      padding-top: 70px;
+      text-align: left;
+      margin-bottom: 0;
     }
-    */
   }
 
   &__content {
@@ -25,25 +46,20 @@
       &:first-of-type {
         margin-top: 0;
       }
-
-      a {
-        color: $brand-c;
-      }
     }
 
-    /*
-    .block--intro & {
-      padding-bottom: 70px;
+    a {
+      color: $brand-c;
     }
-    */
   }
 
   &__image {
-    // Append grid to .block__content div if this image div exists
-    @include span(3 of $column-small);
+    width: 50%;
+    text-align: center;
+    margin: 0 auto 20px auto;
 
     & + div {
-      @include span(3 of $column-small);
+      text-align: center;
     }
 
     img {
@@ -53,14 +69,25 @@
   }
 
   // Variants
-  &--intro {
+  &--cta {
     background-color: $brand-f;
     color: #fff;
     text-align: center;
   }
 
+  &--intro {
+    color: $brand-h;
+    text-align: left;
+    padding-bottom: 0;
+  }
+
   &--highlight {
     background-color: $brand-b;
     color: #fff;
+    text-align: center;
+
+    a {
+      color: inherit;
+    }
   }
 }

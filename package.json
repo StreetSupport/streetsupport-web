@@ -1,22 +1,19 @@
 {
-  "name": "foley",
-  "description": "A modern, opinionated frontend workflow for building a static website",
-  "version": "0.0.3",
-  "author": "Phil Lennon <enquiry@iampjl.co.uk>",
+  "name": "streetsupport",
+  "description": "Street Support Network is a Manchester collective of support groups, charities and kind-hearted folk. We’ve joined forces to make it easier to find help, and give help, to homeless people in Manchester.",
+  "version": "0.1.0",
+  "author": "StreetSupport <streetsupport@objectivesfirst.com>",
   "private": true,
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/PJL101/foley.git"
+    "url": "https://github.com/StreetSupport/streetsupport-web.git"
   },
   "bugs": {
-    "url": "https://github.com/PJL101/foley/issues"
+    "url": "https://github.com/StreetSupport/streetsupport-web/issues"
   },
   "engines": {
-    "node": ">= 4"
-  },
-  "scripts": {
-    "test": "gulp deploy --debug"
+    "node": ">= 5"
   },
   "devDependencies": {
     "autoprefixer": "^6.1.2",
@@ -49,6 +46,7 @@
     "metalsmith": "^2.1.0",
     "metalsmith-in-place": "^1.3.2",
     "metalsmith-rename": "^1.0.0",
+    "path": "^0.12.7",
     "postcss-pxtorem": "^3.1.0",
     "postcss-reporter": "^1.3.0",
     "require-dir": "^0.3.0",
@@ -63,7 +61,8 @@
   "dependencies": {
     "fastclick": "^1.0.6",
     "hogan.js": "^3.0.2",
-    "holderjs": "^2.9.0",
-    "q": "^1.4.1"
+    "lodash": "^3.10.1",
+    "q": "^1.4.1",
+    "spin.js": "^2.3.2"
   }
 }

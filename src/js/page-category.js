@@ -1,44 +1,59 @@
-var shared = require('./shared');
-var Holder = require('holderjs');
-var _ = require('lodash');
+// Page modules
+var FastClick = require('fastclick')
+var nav = require('./nav.js')
+var urlParameter = require('./get-url-parameter')
+var accordion = require('./accordion')
+var socialShare = require('./social-share')
 
-function getParameterByName(name) {
-	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-  results = regex.exec(location.search);
-  return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
+nav.init()
+FastClick.attach(document.body)
 
-require.ensure(['./get-category-result', 'hogan.js'], function(require) {
-	var getCategory = require('./get-category-result');
-	var Hogan = require('hogan.js');
+// Load and process data
+require.ensure(['./api', './get-api-data', './category-endpoint', './template-render', 'spin.js', './analytics'], function (require) {
+  var apiRoutes = require('./api')
+  var getApiData = require('./get-api-data')
+  var categoryEndpoint = require('./category-endpoint')
+  var templating = require('./template-render')
+  var Spinner = require('spin.js')
+  var analytics = require('./analytics')
 
-	var category = getParameterByName('category');
+  // Spinner
+  var spin = document.getElementById('spin')
+  var loading = new Spinner().spin(spin)
 
-	// Get API data using promise
-	var data = getCategory.data(category).then(function (result) {
+  // Get category and create URL
+  var theCategory = urlParameter.parameter('category')
+  var theLocation = urlParameter.parameter('location')
+  var categoryUrl = apiRoutes.categoryServiceProviders += theCategory
 
-		_.forEach(result.serviceProviders, function(org) {
-			org.requestedService = _.find(org.servicesProvided, function(service) {
-				return service.name === category
-			})
-		})
+  buildList(categoryEndpoint.getEndpointUrl(categoryUrl, theLocation))
 
-		// Append object name for Hogan
-		var theData = { organisations : result };
+  function buildList (url) {
+    // Get API data using promise
+    getApiData.data(url).then(function (result) {
+      // Get category name and edit page title
+      var theTitle = result.name + ' - Street Support'
+      document.title = theTitle
 
-		// Compile and render header template
-		var theHeaderTemplate = document.getElementById('js-category-header-tpl').innerHTML;
-		var compileHeader = Hogan.compile(theHeaderTemplate);
-		var theHeaderOutput = compileHeader.render(theData);
+      // Append object name for Hogan
+      var theData = { organisations: result }
+      var template = ''
+      var callback = function () {}
 
-		document.getElementById('js-category-header-output').innerHTML=theHeaderOutput;
+      if (result.subCategories.length) {
+        template = 'js-category-result-tpl'
+        callback = function () {
+          accordion.init()
+        }
+      } else {
+        template = 'js-category-no-results-result-tpl'
+      }
 
-		// Compile and render category template
-		var theCategoryTemplate = document.getElementById('js-category-result-tpl').innerHTML;
-		var compileCategory = Hogan.compile(theCategoryTemplate);
-		var theCategoryOutput = compileCategory.render(theData);
+      templating.renderTemplate(template, theData, 'js-category-result-output', callback)
 
-		document.getElementById('js-category-result-output').innerHTML=theCategoryOutput;
-  });
-});
+      loading.stop()
+      analytics.init(theTitle)
+      socialShare.init()
+    })
+  }
+})

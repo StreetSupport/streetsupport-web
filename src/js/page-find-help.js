@@ -1,24 +1,51 @@
-var shared = require('./shared');
-var Holder = require('holderjs');
+// Page modules
+var FastClick = require('fastclick')
+var nav = require('./nav.js')
+var socialShare = require('./social-share')
+var analytics = require('./analytics')
 
-require.ensure(['./get-category-list', 'hogan.js'], function(require) {
-	var getCategory = require('./get-category-list');
-	var Hogan = require('hogan.js');
+// Lodash
+var forEach = require('lodash/collection/forEach')
+var sortByOrder = require('lodash/collection/sortByOrder')
 
-	// Get API data using promise
-	var data = getCategory.data().then(function (result) {
+nav.init()
+analytics.init()
+FastClick.attach(document.body)
 
-		// Append object name for Hogan
-		var theData = { categories : result };
+// Load and process data
+require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (require) {
+  var apiRoutes = require('./api')
+  var getApiData = require('./get-api-data')
+  var Hogan = require('hogan.js')
+  var Spinner = require('spin.js')
 
-		// Compile and render template
-		var theTemplate = document.getElementById('js-category-list-tpl').innerHTML;
-		var compile = Hogan.compile(theTemplate);
-		var theOutput = compile.render(theData);
+  // Spinner
+  var spin = document.getElementById('spin')
+  var loading = new Spinner().spin(spin)
 
-		document.getElementById('js-category-list-output').innerHTML=theOutput;
+  // Get API data using promise
+  getApiData.data(apiRoutes.serviceCategories).then(function (result) {
+    forEach(result, function (category) {
+      if (category.key === 'meals') {
+        category.page = 'category-by-day'
+      } else {
+        category.page = 'category'
+      }
+    })
 
-		// Load placeholder images
-		Holder.run();
-  });
-});
+    var sorted = sortByOrder(result, ['sortOrder'], ['desc'])
+
+    // Append object name for Hogan
+    var theData = { categories: sorted }
+
+    // Compile and render template
+    var theTemplate = document.getElementById('js-category-list-tpl').innerHTML
+    var compile = Hogan.compile(theTemplate)
+    var theOutput = compile.render(theData)
+
+    document.getElementById('js-category-list-output').innerHTML = theOutput
+
+    loading.stop()
+    socialShare.init()
+  })
+})

@@ -1,0 +1,16 @@
+.social-share {
+  @include cf();
+  margin-top: 40px;
+  margin-bottom: 20px;
+  display: block;
+
+  &__text {
+    margin-right: 10px;
+  }
+
+  // Horrible hack to make Twitter iframe align because facebook uses vertical-align: bottom
+  & > iframe {
+    vertical-align: bottom;
+    margin-right: 5px;
+  }
+}

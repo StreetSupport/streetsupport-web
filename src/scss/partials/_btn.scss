@@ -9,7 +9,7 @@
   margin-bottom: 20px;
   text-decoration: none;
   text-align: center;
-  @include span(3 of $column-small);
+  outline: none;  
 
   // Components
   &__icon {
@@ -28,15 +28,11 @@
     }
 
     @include mq($from: m) {
-      height: 240px;
+      height: 200px;
     }
 
     @include mq($from: l) {
-      height: 310px;
-    }
-
-    @include mq($from: xl) {
-      height: 360px;
+      height: 230px;
     }
 
     & + span {
@@ -98,9 +94,5 @@
       box-shadow: none;
       border-radius: 0;
     }
-  }
-
-  &--wide {
-    @include span(6 of $column-small);
   }
 }

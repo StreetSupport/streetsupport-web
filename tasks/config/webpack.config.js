@@ -18,7 +18,9 @@ module.exports = {
     generic: __dirname + '/../../src/js/page-generic',
     findhelp: __dirname + '/../../src/js/page-find-help',
     category: __dirname + '/../../src/js/page-category',
-    organisation: __dirname + '/../../src/js/page-organisation'        
+    categorybyday: __dirname + '/../../src/js/page-category-by-day',
+    organisation: __dirname + '/../../src/js/page-organisation',
+    allserviceproviders: __dirname + '/../../src/js/page-all-service-providers'
   },
   output: {
     path: path.join(__dirname, '/../../_dist/assets/js/'),

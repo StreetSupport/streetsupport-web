@@ -1,0 +1,25 @@
+.result-list {
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  &__item {
+    @include cf();
+  }
+
+  &__address-list {
+    margin: 0 0 20px 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  &__address-item {
+    display: inline;
+  }
+
+  &__btn {
+    display: inline-block;
+  }
+}

@@ -2,23 +2,27 @@
 title: Homepage - Street Support
 description: Street Support - Making it easier to help homeless people in Manchester
 jsName: generic
+pageName: home
 ---
 
 {{#extend "_default"}}
   {{#content "main"}}
-    <div class="block block--intro">
+    <div class="block block--cta">
       <div class="container block__inner">
-        <a class="btn btn--brand-d" href="find-help.html"><span class="btn__text">Find Help</span></a>
-        <a class="btn btn--brand-e" href="give-help.html"><span class="btn__text">Give Help</span></a>
-
-        <h1 class="h1 block__header">Helping homeless people just got easier!</h1>
+        <div class="split">
+          <a class="btn btn--brand-d split__element" href="find-help.html"><span class="btn__text">Find Help</span></a>
+          <a class="btn btn--brand-e split__element" href="give-help.html"><span class="btn__text">Give Help</span></a>
+        </div>
+        <h1 class="h2 block__header">Helping homeless people just got easier!</h1>
       </div>
     </div>
 
     <div class="block">
       <div class="container block__inner">
         <div class="block__content">
-          <p>The Street Support Network is a Manchester collective of support groups, charities and kind-hearted folk like you. We’ve joined forces to create a search tool that makes our efforts to help homeless people more effective.</p>
+          <p>Street Support Network is a Manchester collective of support groups, charities and kind-hearted folk. We’ve joined forces to make it easier to find help, and give help, to homeless people in Manchester.</p>
+          <p>This site is currently under review. If you see something missing, incorrect or incomplete, or you would like to know more, please <a href="contact.html">get in touch</a>.</p>
+          {{> social-share}}
         </div>
       </div>
     </div>
@@ -26,22 +30,24 @@ jsName: generic
     <div class="block block--highlight">
       <div class="container block__inner">
         <div class="block__content">
-          <a class="btn btn--brand-d" href="find-help.html">
-            <span class="btn__icon icon-find-help"></span>
-            <span class="btn__text">Find Help</span>
-          </a>
+          <div class="split">
+            <a class="btn btn--brand-d split__element" href="find-help.html">
+              <span class="btn__icon icon-find-help"></span>
+              <span class="btn__text">Find Help</span>
+            </a>
 
-          <a class="btn btn--brand-e" href="give-help.html">
-            <span class="btn__icon icon-give-help"></span>
-            <span class="btn__text">Give Help</span>
-          </a>
+            <a class="btn btn--brand-e split__element" href="give-help.html">
+              <span class="btn__icon icon-give-help"></span>
+              <span class="btn__text">Give Help</span>
+            </a>
+          </div>
 
           <dl class="list-highlight">
              <dt class="list-highlight__title">30</dt>
              <dd class="list-highlight__description">Organisations</dd>
-             <dt class="list-highlight__title">4,022</dt>
-             <dd class="list-highlight__description">Volunteers</dd>
-             <dt class="list-highlight__title">161</dt>
+             <!--<dt class="list-highlight__title">4,022</dt>
+             <dd class="list-highlight__description">Volunteers</dd>-->
+             <dt class="list-highlight__title">117</dt>
              <dd class="list-highlight__description">Services</dd>
           </dl>
         </div>
@@ -50,33 +56,29 @@ jsName: generic
 
     <div class="block">
       <div class="container block__inner">
-        <h2 class="h1 block__header">How we've helped.</h2>
+        <h2 class="h1 block__header">How this started</h2>
         <div class="block__image">
-          <img data-src="holder.js/100px200" />
+          <img src="assets/img/started.jpg" />
         </div>
         <div class="block__content">
-          <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis mi suscipit, facilisis tortor et, malesuada velit. Aenean odio elit, ornare eu consequat eget, mollis quis arcu."</p>
-          <p><strong>Cras imperdiet diam</strong></p>
+          <p>"We noticed the number of homeless people in Manchester increasing, and we wanted to do something to help. We hoped that technology could make things a little bit easier somehow. So, one day we decided to find out..."</p>
+          <p><strong><a href="https://streetsupportnet.wordpress.com">Find out more</a></strong></p>
         </div>
       </div>
     </div>
 
     <div class="block block--highlight">
       <div class="container block__inner">
-        <h2 class="h1 block__header">Supported by...</h2>
+        <h2 class="h2 block__header">Supported by...</h2>
 
         <div class="block__content">
           <ul class="list-grid">
-            <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
-            <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
-            <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
-            <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
-            <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
-            <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
-            <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
-            <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
-            <li class="list-grid__item"><img data-src="holder.js/100px80" /></li>
+            <li class="list-grid__item"><img src="assets/img/keyfund.png" /></li>
+            <li class="list-grid__item"><img src="assets/img/new-supporter.png" /></li>
+            <li class="list-grid__item"><img src="assets/img/new-supporter.png" /></li>
           </ul>
+
+          <p>We are looking for Manchester businesses that want to partner with us to help homeless people. If you share our values and want to know more, please <a href="contact.html">get in touch</a>.</p>
         </div>
       </div>
     </div>
