@@ -55,14 +55,17 @@ jsName: categorybyday
           \{{#daysServices}}
           <h2 class="h3 accordion__header result__header  js-header">\{{name}}</h2>
             <div class="accordion__item js-item">
-              <dl class="accordion__inner result-detail__times-list">
+              <div class="accordion__inner result-detail__times-list">
                 \{{#serviceProviders}}
-                <dt class="result-detail__times-title">\{{#openingTimes}}
+                <article class="result-detail__container">
+                <div class="result-detail__times-title h2">\{{#openingTimes}}
                   \{{startTime}} - \{{endTime}}
                   \{{/openingTimes}}
-                </dt>
-                <dd class="result-detail__times-item">
+                </div>
+                <div class="result-detail__times-item">
                   <ul>
+                    <li class="h3">\{{#openingTimes}} \{{description}} \{{/openingTimes}}</li>
+                    <li><a href="organisation.html?organisation=\{{key}}">About \{{name}}</a></li>
                     <li>
                         \{{#address.street}} \{{address.street}}, \{{/address.street}}
                         \{{#address.street1}} \{{address.street1}}, \{{/address.street1}}
@@ -71,12 +74,11 @@ jsName: categorybyday
                         \{{#address.city}} \{{address.city}}. \{{/address.city}}
                         \{{address.postcode}} - <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">Map</a>
                     </li>
-                    <li>\{{name}} - <a href="organisation.html?organisation=\{{key}}">More information</a></li>
-                    <li>\{{#openingTimes}} \{{description}} \{{/openingTimes}}</li>
                   </ul>
-                </dd>
+                </div>
+                </article>
                 \{{/serviceProviders}}
-              </dl>
+              </div>
             </div>
           \{{/daysServices}}
         </div>
