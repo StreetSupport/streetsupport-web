@@ -50,31 +50,52 @@ require.ensure(['./api', './get-api-data', './get-location', 'hogan.js', 'spin.j
   function buildList (url) {
     // Get API data using promise
     getApiData.data(url).then(function (result) {
-      forEach(result.daysServices, function (day) {
-        day.serviceProviders = sortBy(day.serviceProviders, function (provider) {
-          return provider.openingTimes.startTime
-        })
-      })
-
-      // api days: monday == 0!
-      var today = new Date().getDay() - 1
-      var past = slice(result.daysServices, 0, today)
-      var todayToTail = slice(result.daysServices, today)
-      result.daysServices = todayToTail.concat(past)
-
       // Append object name for Hogan
+      var template = ''
+      var callback = function(){}
+
+      if(result.daysServices.length) {
+        template = 'js-category-result-tpl'
+
+        result.daysServices = sortByOpeningTimes(sortDaysFromToday(result.daysServices))
+
+        callback = function(){
+          accordion.init()
+        }
+      }else {
+        template = 'js-category-no-results-result-tpl'
+      }
+
       var theData = { organisations: result }
+      renderTemplate(template, theData, 'js-category-result-output', callback)
 
-      // Compile and render template
-      var theTemplate = document.getElementById('js-category-result-tpl').innerHTML
-      var compileTemplate = Hogan.compile(theTemplate)
-      var theOutput = compileTemplate.render(theData)
-
-      document.getElementById('js-category-result-output').innerHTML = theOutput
-
-      accordion.init()
       loading.stop()
       socialShare.init()
     })
+  }
+
+  function sortByOpeningTimes(days) {
+    forEach(days, function (day) {
+      day.serviceProviders = sortBy(day.serviceProviders, function (provider) {
+        return provider.openingTimes.startTime
+      })
+    })
+
+    return days
+  }
+
+  function sortDaysFromToday(days) {
+    // api days: monday == 0!
+    var today = new Date().getDay() - 1
+    var past = slice(days, 0, today)
+    var todayToTail = slice(days, today)
+    return todayToTail.concat(past)
+  }
+
+  function renderTemplate(templateId, data, output, callback) {
+    var theTemplate = document.getElementById(templateId).innerHTML
+    var compileTemplate = Hogan.compile(theTemplate)
+    document.getElementById(output).innerHTML = compileTemplate.render(data)
+    callback()
   }
 })
