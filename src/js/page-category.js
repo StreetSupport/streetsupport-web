@@ -48,23 +48,28 @@ require.ensure(['./api', './get-api-data', './get-location', 'hogan.js', 'spin.j
       // Append object name for Hogan
       var theData = { organisations: result }
       var template = ''
+      var callback = function(){}
+
       if(result.subCategories.length) {
         template = 'js-category-result-tpl'
+      callback = function(){
+        accordion.init()
+      }
       }else {
         template = 'js-category-no-results-result-tpl'
       }
 
-      renderTemplate(template, theData, 'js-category-result-output')
+      renderTemplate(template, theData, 'js-category-result-output', callback)
 
-      accordion.init()
       loading.stop()
       socialShare.init()
     })
   }
 
-  function renderTemplate(templateId, data, output) {
+  function renderTemplate(templateId, data, output, callback) {
     var theTemplate = document.getElementById(templateId).innerHTML
     var compileTemplate = Hogan.compile(theTemplate)
     document.getElementById(output).innerHTML = compileTemplate.render(data)
+    callback()
   }
 })
