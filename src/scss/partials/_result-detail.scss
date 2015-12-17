@@ -1,8 +1,4 @@
 .result-detail {
-  &__container {
-    display: table;
-  }
-
   &__header {
     margin-top: 0;
   }
@@ -43,12 +39,20 @@
     float: left;
     clear: left;
     font-weight: $font-headline-weight;
+
+    .accordion--day & {
+      float: none;
+    }
   }
 
   &__times-item {
     margin: 0;
     padding: 0px 0 5px 0;
     float: left;
+
+    .accordion--day & {
+      float: none;
+    }
 
     ul {
       margin: 0;

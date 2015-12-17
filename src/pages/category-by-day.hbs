@@ -54,32 +54,32 @@ jsName: categorybyday
     <div class="container block__inner">
       <div class="block__content">
         \{{#organisations}}
-        <div class="accordion js-accordion">
+        <div class="accordion accordion--day js-accordion">
           \{{#daysServices}}
           <h2 class="h3 accordion__header result__header  js-header">\{{name}}</h2>
             <div class="accordion__item js-item">
               <div class="accordion__inner result-detail__times-list">
                 \{{#serviceProviders}}
-                <article class="result-detail__container">
-                <div class="result-detail__times-title h2">\{{#openingTimes}}
-                  \{{startTime}} - \{{endTime}}
-                  \{{/openingTimes}}
+                <div class="result-detail__item">
+                  <div class="result-detail__times-title h2">\{{#openingTimes}}
+                    \{{startTime}} - \{{endTime}}
+                    \{{/openingTimes}}
+                  </div>
+                  <div class="result-detail__times-item">
+                    <ul>
+                      <li class="h3">\{{#openingTimes}} \{{description}} \{{/openingTimes}}</li>
+                      <li><a href="organisation.html?organisation=\{{key}}">About \{{name}}</a></li>
+                      <li>
+                          \{{#address.street}} \{{address.street}}, \{{/address.street}}
+                          \{{#address.street1}} \{{address.street1}}, \{{/address.street1}}
+                          \{{#address.street2}} \{{address.street2}}, \{{/address.street2}}
+                          \{{#address.street3}} \{{address.street3}}, \{{/address.street3}}
+                          \{{#address.city}} \{{address.city}}. \{{/address.city}}
+                          \{{address.postcode}} - <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">Map</a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="result-detail__times-item">
-                  <ul>
-                    <li class="h3">\{{#openingTimes}} \{{description}} \{{/openingTimes}}</li>
-                    <li><a href="organisation.html?organisation=\{{key}}">About \{{name}}</a></li>
-                    <li>
-                        \{{#address.street}} \{{address.street}}, \{{/address.street}}
-                        \{{#address.street1}} \{{address.street1}}, \{{/address.street1}}
-                        \{{#address.street2}} \{{address.street2}}, \{{/address.street2}}
-                        \{{#address.street3}} \{{address.street3}}, \{{/address.street3}}
-                        \{{#address.city}} \{{address.city}}. \{{/address.city}}
-                        \{{address.postcode}} - <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">Map</a>
-                    </li>
-                  </ul>
-                </div>
-                </article>
                 \{{/serviceProviders}}
               </div>
             </div>
