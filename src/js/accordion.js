@@ -11,9 +11,10 @@ var init = function (showFirst) {
   var i
   var el = document.querySelector(accordion)
   var headers = document.querySelectorAll(header)
+  var itemCount = headers.length
 
-  // Add active class to first elements
-  if (showFirst) {
+  // Add active class to first elements or if there is only one panel
+  if (showFirst || itemCount === 1) {
     el.children[0].classList.add(activeClass)
     el.children[1].classList.add(activeClass)
   }
