@@ -22,12 +22,39 @@ require.ensure(['./api', './get-api-data', './get-location', 'hogan.js', 'spin.j
 
   // Get category and create URL
   var theCategory = urlParameter.parameter('category')
+  var theLocation = urlParameter.parameter('location')
   var categoryUrl = apiRoutes.categoryServiceProviders += theCategory
 
-  // If we have geolocation support, run the geolocation promise and modify the url with lat lng,
-  // Or if promise fails just run build function,
-  // Or if geolocation isn't supported just run the build function.
-  if (navigator.geolocation) {
+  var locations = [
+    {
+      'key': 'manchester',
+      'name': 'Manchester',
+      'longitude': -2.24455696347558,
+      'latitude':53.4792777155671
+    },
+    {
+      'key': 'leeds',
+      'name': 'Leeds',
+      'longitude': -1.54511238485298,
+      'latitude':53.7954906003838
+    }
+  ]
+
+  if (theLocation.length) {
+    var requestedLocation = find(locations, function(loc) {
+      return loc.key === theLocation
+    })
+  }
+
+  if(requestedLocation !== false) {
+    var latitude = requestedLocation.latitude
+    var longitude = requestedLocation.longitude
+    var locationUrl = categoryUrl += '/long/' + longitude + '/lat/' + latitude
+
+    console.log(requestedLocation)
+
+    buildList(locationUrl)
+  } else if (navigator.geolocation) {
     getLocation.location().then(function (position) {
       var latitude = position.coords.latitude
       var longitude = position.coords.longitude
