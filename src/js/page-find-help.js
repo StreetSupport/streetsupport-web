@@ -2,12 +2,14 @@
 var FastClick = require('fastclick')
 var nav = require('./nav.js')
 var socialShare = require('./social-share')
+var analytics = require('./analytics')
 
 // Lodash
 var forEach = require('lodash/collection/forEach')
 var sortByOrder = require('lodash/collection/sortByOrder')
 
 nav.init()
+analytics.init()
 FastClick.attach(document.body)
 
 // Load and process data

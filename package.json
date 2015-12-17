@@ -1,22 +1,19 @@
 {
-  "name": "foley",
-  "description": "A modern, opinionated frontend workflow for building a static website",
-  "version": "0.0.3",
-  "author": "Phil Lennon <enquiry@iampjl.co.uk>",
+  "name": "streetsupport",
+  "description": "Street Support Network is a Manchester collective of support groups, charities and kind-hearted folk. We’ve joined forces to make it easier to find help, and give help, to homeless people in Manchester.",
+  "version": "0.1.0",
+  "author": "StreetSupport <streetsupport@objectivesfirst.com>",
   "private": true,
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/PJL101/foley.git"
+    "url": "https://github.com/StreetSupport/streetsupport-web.git"
   },
   "bugs": {
-    "url": "https://github.com/PJL101/foley/issues"
+    "url": "https://github.com/StreetSupport/streetsupport-web/issues"
   },
   "engines": {
-    "node": ">= 4"
-  },
-  "scripts": {
-    "test": "gulp deploy --debug"
+    "node": ">= 5"
   },
   "devDependencies": {
     "autoprefixer": "^6.1.2",

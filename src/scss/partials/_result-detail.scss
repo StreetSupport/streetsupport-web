@@ -1,4 +1,8 @@
 .result-detail {
+  &__container {
+    display: table;
+  }
+
   &__header {
     margin-top: 0;
   }
@@ -35,17 +39,15 @@
   &__times-title {
     margin: 0 20px 0px 0;
     padding: 0 0 5px 0;
-    display: block;
-    float: left;
-    min-width: 85px;
-    clear: both;
+    display: table-cell;
+    width: 160px;
   }
 
   &__times-item {
     margin: 0;
-    padding: 0 0 5px 0;
-    display: block;
-    float: left;
+    padding: 3px 0 5px 0;
+    display: table-cell;
+    vertical-align: top;
 
     ul {
       margin: 0;

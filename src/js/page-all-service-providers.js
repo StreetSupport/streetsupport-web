@@ -2,11 +2,13 @@
 var FastClick = require('fastclick')
 var nav = require('./nav.js')
 var socialShare = require('./social-share')
+var analytics = require('./analytics')
 
 // Lodash
 var sortBy = require('lodash/collection/sortBy')
 
 nav.init()
+analytics.init()
 FastClick.attach(document.body)
 
 require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (require) {
