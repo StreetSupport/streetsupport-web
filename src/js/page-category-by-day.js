@@ -52,17 +52,17 @@ require.ensure(['./api', './get-api-data', './get-location', 'hogan.js', 'spin.j
     getApiData.data(url).then(function (result) {
       // Append object name for Hogan
       var template = ''
-      var callback = function(){}
+      var callback = function () {}
 
-      if(result.daysServices.length) {
+      if (result.daysServices.length) {
         template = 'js-category-result-tpl'
 
         result.daysServices = sortByOpeningTimes(sortDaysFromToday(result.daysServices))
 
-        callback = function(){
+        callback = function () {
           accordion.init()
         }
-      }else {
+      } else {
         template = 'js-category-no-results-result-tpl'
       }
 
@@ -74,7 +74,7 @@ require.ensure(['./api', './get-api-data', './get-location', 'hogan.js', 'spin.j
     })
   }
 
-  function sortByOpeningTimes(days) {
+  function sortByOpeningTimes (days) {
     forEach(days, function (day) {
       day.serviceProviders = sortBy(day.serviceProviders, function (provider) {
         return provider.openingTimes.startTime
@@ -84,7 +84,7 @@ require.ensure(['./api', './get-api-data', './get-location', 'hogan.js', 'spin.j
     return days
   }
 
-  function sortDaysFromToday(days) {
+  function sortDaysFromToday (days) {
     // api days: monday == 0!
     var today = new Date().getDay() - 1
     var past = slice(days, 0, today)
@@ -92,7 +92,7 @@ require.ensure(['./api', './get-api-data', './get-location', 'hogan.js', 'spin.j
     return todayToTail.concat(past)
   }
 
-  function renderTemplate(templateId, data, output, callback) {
+  function renderTemplate (templateId, data, output, callback) {
     var theTemplate = document.getElementById(templateId).innerHTML
     var compileTemplate = Hogan.compile(theTemplate)
     document.getElementById(output).innerHTML = compileTemplate.render(data)
