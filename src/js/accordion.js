@@ -28,6 +28,19 @@ var init = function (showFirst) {
 }
 
 var open = function (el, context) {
+  // Check to see if clicked header is already active
+  if (el.classList.contains(activeClass)) {
+    close(el, context)
+  } else {
+    close(el, context)
+
+    // Add active classes for clicked element and the next div
+    el.classList.add(activeClass)
+    el.nextElementSibling.classList.add(activeClass)
+  }
+}
+
+var close = function (el, context) {
   var i
   var children = context.children
 
@@ -35,10 +48,6 @@ var open = function (el, context) {
   for (i = 0; i < children.length; i++) {
     children[i].classList.remove(activeClass)
   }
-
-  // Add active classes for clicked element and the next div
-  el.classList.add(activeClass)
-  el.nextElementSibling.classList.add(activeClass)
 }
 
 module.exports = {
