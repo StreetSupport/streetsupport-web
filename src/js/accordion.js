@@ -1,5 +1,8 @@
 var accordion = '.js-accordion'
 var header = '.js-header'
+var icon = '.icon'
+var iconOpenClass = 'icon-plus'
+var iconCloseClass = 'icon-minus'
 var activeClass = 'is-active'
 
 var init = function (showFirst) {
@@ -15,8 +18,8 @@ var init = function (showFirst) {
 
   // Add active class to first elements or if there is only one panel
   if (showFirst || itemCount === 1) {
-    el.children[0].classList.add(activeClass)
-    el.children[1].classList.add(activeClass)
+    var firstHeader = headers[0]
+    open(firstHeader, el)
   }
 
   // Add click listener to headers
@@ -34,19 +37,31 @@ var open = function (el, context) {
   } else {
     close(el, context)
 
-    // Add active classes for clicked element and the next div
+    // Add active classes for clicked header and the item div
     el.classList.add(activeClass)
     el.nextElementSibling.classList.add(activeClass)
+
+    // Change icon class in header
+    el.querySelector(icon).classList.remove(iconOpenClass)
+    el.querySelector(icon).classList.add(iconCloseClass)    
   }
 }
 
 var close = function (el, context) {
-  var i
+  var a
+  var b
   var children = context.children
+  var headers = context.querySelectorAll(icon)
+
+  // Change icon class in header
+  for (a = 0; a < headers.length; a++) {
+    headers[a].classList.remove(iconCloseClass)
+    headers[a].classList.add(iconOpenClass)
+  }
 
   // Remove active classes in accordion
-  for (i = 0; i < children.length; i++) {
-    children[i].classList.remove(activeClass)
+  for (b = 0; b < children.length; b++) {
+    children[b].classList.remove(activeClass)
   }
 }
 
