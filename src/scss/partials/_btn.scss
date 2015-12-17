@@ -27,15 +27,11 @@
     }
 
     @include mq($from: m) {
-      height: 240px;
+      height: 200px;
     }
 
     @include mq($from: l) {
-      height: 310px;
-    }
-
-    @include mq($from: xl) {
-      height: 360px;
+      height: 230px;
     }
 
     & + span {
