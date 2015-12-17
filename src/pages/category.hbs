@@ -63,12 +63,16 @@ jsName: category
                         \{{#serviceProviders}}
                           <div class="result-detail__item">
                             <h3 class="h2 result-detail__header"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h3>
-                            <p>You must be: </p>
-                            <ul class="result-detail__tags-list">
-                            \{{#tags}}
-                              <li class="result-detail__tags-item">\{{.}}</li>
-                            \{{/tags}}
-                            </ul>
+                            \{{#tags.length}}
+                              <span>You must be: </span>
+                              <ul class="result-detail__tags-list">
+                            \{{/tags.length}}
+                                \{{#tags}}
+                                  <li class="result-detail__tags-item">\{{.}}, </li>
+                                \{{/tags}}
+                            \{{#tags.length}}
+                              </ul>
+                            \{{/tags.length}}
                             <p class="result-detail__description">\{{serviceInfo}}</p>
                             \{{#address}}
                               <ul class="result-detail__address-list">
