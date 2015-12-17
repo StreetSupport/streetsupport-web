@@ -22,7 +22,7 @@ require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (req
   // Get API data using promise
   getApiData.data(apiRoutes.serviceProviders).then(function (result) {
     var sorted = sortBy(result, function (provider) {
-      return provider.name
+      return provider.name.toLowerCase()
     })
 
     // Append object name for Hogan
