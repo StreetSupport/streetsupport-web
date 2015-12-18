@@ -32,6 +32,9 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
   function buildList (url) {
     // Get API data using promise
     getApiData.data(url).then(function (result) {
+      if (result.status === 'error') {
+        window.location.replace('/find-help.html')
+      }
       var data = result.data
 
       // Get category name and edit page title
