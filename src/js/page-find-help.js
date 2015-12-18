@@ -13,10 +13,10 @@ analytics.init()
 FastClick.attach(document.body)
 
 // Load and process data
-require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (require) {
+require.ensure(['./api', './get-api-data', './template-render', 'spin.js'], function (require) {
   var apiRoutes = require('./api')
   var getApiData = require('./get-api-data')
-  var Hogan = require('hogan.js')
+  var templating = require('./template-render')
   var Spinner = require('spin.js')
 
   // Spinner
@@ -39,14 +39,12 @@ require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (req
     // Append object name for Hogan
     var theData = { categories: sorted }
 
-    // Compile and render template
-    var theTemplate = document.getElementById('js-category-list-tpl').innerHTML
-    var compile = Hogan.compile(theTemplate)
-    var theOutput = compile.render(theData)
+    var callback = function () {
+      loading.stop()
+      socialShare.init()
+    }
 
-    document.getElementById('js-category-list-output').innerHTML = theOutput
+    templating.renderTemplate('js-category-list-tpl', theData, 'js-category-list-output', callback)
 
-    loading.stop()
-    socialShare.init()
   })
 })
