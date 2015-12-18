@@ -25,7 +25,8 @@ require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (req
 
   // Get API data using promise
   getApiData.data(apiRoutes.serviceCategories).then(function (result) {
-    forEach(result, function (category) {
+    var data = result.data
+    forEach(data, function (category) {
       if (category.key === 'meals') {
         category.page = 'category-by-day'
       } else {
@@ -33,7 +34,7 @@ require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js'], function (req
       }
     })
 
-    var sorted = sortByOrder(result, ['sortOrder'], ['desc'])
+    var sorted = sortByOrder(data, ['sortOrder'], ['desc'])
 
     // Append object name for Hogan
     var theData = { categories: sorted }
