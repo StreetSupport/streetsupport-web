@@ -32,20 +32,22 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
   function buildList (url) {
     // Get API data using promise
     getApiData.data(url).then(function (result) {
+      var data = result.data
+
       // Get category name and edit page title
-      var theTitle = result.name + ' - Street Support'
+      var theTitle = data.name + ' - Street Support'
       document.title = theTitle
 
-      result.subCategories = sortBy(result.subCategories, function (item) {
+      data.subCategories = sortBy(data.subCategories, function (item) {
         return item.name
       })
 
       // Append object name for Hogan
-      var theData = { organisations: result }
+      var theData = { organisations: data }
       var template = ''
       var callback = function () {}
 
-      if (result.subCategories.length) {
+      if (data.subCategories.length) {
         template = 'js-category-result-tpl'
         callback = function () {
           accordion.init()

@@ -11,10 +11,16 @@ var getApiData = function (url) {
   req.onload = function () {
     if (this.status === 200) {
       var json = JSON.parse(req.responseText)
-      deferred.resolve(json)
+      deferred.resolve({
+        'status': 'ok',
+        'data': json
+      })
     } else {
-      // tba better error handling
-      alert('error')  // eslint-disable-line
+      deferred.resolve({
+        'status': 'error',
+        'statusCode': this.status,
+        'message': this.responseText
+      })
     }
   }
 

@@ -26,16 +26,17 @@ require.ensure(['./api', './get-api-data', './template-render', 'spin.js', './an
 
   // Get API data using promise
   getApiData.data(organisationUrl).then(function (result) {
+    var data = result.data
     // Get organisation name and edit page title
-    var theTitle = result.name + ' - Street Support'
+    var theTitle = data.name + ' - Street Support'
     document.title = theTitle
 
-    result.providedServices = sortBy(result.providedServices, function (item) {
+    data.providedServices = sortBy(data.providedServices, function (item) {
       return item.name
     })
 
     // Append object name for Hogan
-    var theData = { organisation: result }
+    var theData = { organisation: data }
 
     var callback = function () {
       accordion.init()
