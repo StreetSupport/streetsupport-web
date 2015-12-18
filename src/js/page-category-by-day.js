@@ -50,9 +50,9 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
 
         data.daysServices = sortByOpeningTimes(sortDaysFromToday(data.daysServices))
 
-        forEach(data.daysServices, function(subCat) {
+        forEach(data.daysServices, function (subCat) {
           forEach(subCat.serviceProviders, function (provider) {
-            if(provider.tags !== null) {
+            if (provider.tags !== null) {
               provider.tags = provider.tags.join(', ')
             }
           })

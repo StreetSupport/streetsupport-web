@@ -37,7 +37,7 @@ require.ensure(['./api', './get-api-data', './template-render', 'spin.js', './an
     })
 
     forEach(data.providedServices, function (provider) {
-      if(provider.tags !== null) {
+      if (provider.tags !== null) {
         provider.tags = provider.tags.join(', ')
       }
     })

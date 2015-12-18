@@ -46,9 +46,9 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
         return item.name
       })
 
-      forEach(data.subCategories, function(subCat) {
+      forEach(data.subCategories, function (subCat) {
         forEach(subCat.serviceProviders, function (provider) {
-          if(provider.tags !== null) {
+          if (provider.tags !== null) {
             provider.tags = provider.tags.join(', ')
           }
         })
