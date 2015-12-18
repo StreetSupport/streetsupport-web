@@ -4,6 +4,7 @@ var nav = require('./nav.js')
 var urlParameter = require('./get-url-parameter')
 var accordion = require('./accordion')
 var socialShare = require('./social-share')
+var sortBy = require('lodash/collection/sortBy')
 
 nav.init()
 FastClick.attach(document.body)
@@ -28,6 +29,10 @@ require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js', './analytics']
     // Get organisation name and edit page title
     var theTitle = result.name + ' - Street Support'
     document.title = theTitle
+
+    result.providedServices = sortBy(result.providedServices, function (item) {
+      return item.name
+    })
 
     // Append object name for Hogan
     var theData = { organisation: result }
