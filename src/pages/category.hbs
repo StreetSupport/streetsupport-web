@@ -6,7 +6,7 @@ jsName: category
 
 {{#extend "_default"}}
   {{#content "main"}}
-    {{> no-js}}  
+    {{> no-js}}
     <div id="js-category-result-output" class="template"></div>
   {{/content}}
 
@@ -64,16 +64,9 @@ jsName: category
                         \{{#serviceProviders}}
                           <div class="result-detail__item">
                             <h3 class="h2 result-detail__header"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h3>
-                            \{{#tags.length}}
-                              <span>You must be: </span>
-                              <ul class="result-detail__tags-list">
-                            \{{/tags.length}}
-                                \{{#tags}}
-                                  <li class="result-detail__tags-item">\{{.}}, </li>
-                                \{{/tags}}
-                            \{{#tags.length}}
-                              </ul>
-                            \{{/tags.length}}
+                            \{{#tags}}
+                              <p>You must be: <span class="result-detail__tags-item">\{{tags}}</span></p>
+                            \{{/tags}}
                             <p class="result-detail__description">\{{{serviceInfo}}}</p>
                             \{{#address}}
                               <ul class="result-detail__address-list">

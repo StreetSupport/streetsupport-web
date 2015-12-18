@@ -5,6 +5,7 @@ var urlParameter = require('./get-url-parameter')
 var accordion = require('./accordion')
 var socialShare = require('./social-share')
 var sortBy = require('lodash/collection/sortBy')
+var forEach = require('lodash/collection/forEach')
 
 nav.init()
 FastClick.attach(document.body)
@@ -43,6 +44,14 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
 
       data.subCategories = sortBy(data.subCategories, function (item) {
         return item.name
+      })
+
+      forEach(data.subCategories, function(subCat) {
+        forEach(subCat.serviceProviders, function (provider) {
+          if(provider.tags !== null) {
+            provider.tags = provider.tags.join(', ')
+          }
+        })
       })
 
       // Append object name for Hogan
