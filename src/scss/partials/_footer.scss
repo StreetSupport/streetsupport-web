@@ -7,23 +7,36 @@
 
   &__header {
     margin-top: 0;
+
+    @include mq($from: btnhack) {
+      display: inline-block;
+    }
   }
 
   &__copy {
     margin-bottom: 0;
   }
 
-  &__social {
-    vertical-align: middle;
+  &__social-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+
+    @include mq($from: btnhack) {
+      display: inline-block;
+    }
+  }
+
+  &__social-item {
+    margin: 0 5px;
+    padding: 0;
     display: inline-block;
-    line-height: 10px;
-    margin-right: 10px;
   }
 
   &__icon {
     height: 37px;
     width: 34px;
-    margin-right: 5px;
     vertical-align: middle;
   }
 }
