@@ -9,7 +9,7 @@ The Frontend codebase for streetsupport.net.
 
 ## Domains
 
-Please work in the develop branch and only merge to master when ready and tested. Travis CI automatically builds on each commit to develop and master. Pull requests are not built and have to be merged.
+Please work in the develop branch first and only merge to master when ready and tested. Travis CI automatically builds on each commit to develop and master.
 
 * The master branch automatically builds to: [http://beta.streetsupport.net](http://beta.streetsupport.net).
 * The develop branch automatically builds to: [http://dev.streetsupport.net](http://dev.streetsupport.net).
@@ -37,31 +37,14 @@ See [https://github.com/PJL101/foley](https://github.com/PJL101/foley) for more 
 
 ## Frontend Conventions
 
-Opinionated! Happy to discuss.
+Happy to discuss any of this:
 
 * The SCSS uses BEM and mobile first,
 * Try to modularise & reuse components (if possible),
 * Add each new component to component.html,
-* Each component has been designed to be as interchangeable as possible. For example to change a standard block to image block, you just need to add the .block__image div and the content reflows,
 * Webpack is used, so try and follow the require module structure,
 * Vanilla JavaScript is in use with minimal libraries,
 * Try to install framework/modules as a last resort or only when needed,
 * No Angular or similar please (for now!),
-* ES2015 is fully supported but I'm still using ES5 for now.
-
-## Workflow Features
-
-The workflow contains:
-
-* Easy to use with configuration from global files (/tasks/config/),
-* Gulp,
-* Metalsmith (static website and blog generator),
-* Handlebars & Handlebars Layouts integration,
-* Webpack with jQuery integration,
-* Babel (ES2015 support),
-* Standardjs linting,
-* Sass & PostCSS,
-* Sass-mq & Susy grid system,
-* Image minification,
-* Gulpicon,
-* HTML minification.
+* ES2015 is fully supported in the workflow but I'm still using ES5 for now,
+* Client side templating (Hogan.js/mustache) is in use but do any logic in the API/JavaScript. Use it for output only.

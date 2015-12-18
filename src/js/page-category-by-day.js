@@ -36,18 +36,27 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
   function buildList (url) {
     // Get API data using promise
     getApiData.data(url).then(function (result) {
+      var data = result.data
       // Get category name and edit page title
-      var theTitle = result.categoryName + ' - Street Support'
+      var theTitle = data.categoryName + ' - Street Support'
       document.title = theTitle
 
       // Append object name for Hogan
       var template = ''
       var callback = function () {}
 
-      if (result.daysServices.length) {
+      if (data.daysServices.length) {
         template = 'js-category-result-tpl'
 
-        result.daysServices = sortByOpeningTimes(sortDaysFromToday(result.daysServices))
+        data.daysServices = sortByOpeningTimes(sortDaysFromToday(data.daysServices))
+
+        forEach(data.daysServices, function (subCat) {
+          forEach(subCat.serviceProviders, function (provider) {
+            if (provider.tags !== null) {
+              provider.tags = provider.tags.join(', ')
+            }
+          })
+        })
 
         callback = function () {
           accordion.init(true)
@@ -56,7 +65,7 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
         template = 'js-category-no-results-result-tpl'
       }
 
-      var theData = { organisations: result }
+      var theData = { organisations: data }
       templating.renderTemplate(template, theData, 'js-category-result-output', callback)
 
       loading.stop()

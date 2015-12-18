@@ -21,7 +21,6 @@ var getEndpointUrl = function (categoryUrl, theLocation) {
       return loc.key === theLocation
     })
     if (requestedLocation !== false) {
-
       var latitude = requestedLocation.latitude
       var longitude = requestedLocation.longitude
       var locationUrl = categoryUrl += '/long/' + longitude + '/lat/' + latitude

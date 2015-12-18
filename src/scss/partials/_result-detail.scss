@@ -4,7 +4,6 @@
   }
 
   &__btn {
-    display: inline-block;
     margin-bottom: 5px;
   }
 
@@ -63,13 +62,6 @@
     li {
 
     }
-  }
-
-  &__tags-list {
-    margin: 0 0 20px 0;
-    padding: 0;
-    list-style-type: none;
-    display: inline-block;
   }
 
   &__tags-item {
