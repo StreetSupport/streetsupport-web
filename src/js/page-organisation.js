@@ -10,12 +10,12 @@ nav.init()
 FastClick.attach(document.body)
 
 // Load and process data
-require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js', './analytics'], function (require) {
+require.ensure(['./api', './get-api-data', './template-render', 'spin.js', './analytics'], function (require) {
   var apiRoutes = require('./api')
   var getApiData = require('./get-api-data')
-  var Hogan = require('hogan.js')
   var Spinner = require('spin.js')
   var analytics = require('./analytics')
+  var templating = require('./template-render')
 
   // Spinner
   var spin = document.getElementById('spin')
@@ -37,16 +37,13 @@ require.ensure(['./api', './get-api-data', 'hogan.js', 'spin.js', './analytics']
     // Append object name for Hogan
     var theData = { organisation: result }
 
-    // Compile and render template
-    var theTemplate = document.getElementById('js-organisation-tpl').innerHTML
-    var compileTemplate = Hogan.compile(theTemplate)
-    var theOutput = compileTemplate.render(theData)
+    var callback = function () {
+      accordion.init()
+      loading.stop()
+      analytics.init(theTitle)
+      socialShare.init()
+    }
 
-    document.getElementById('js-organisation-output').innerHTML = theOutput
-
-    accordion.init()
-    loading.stop()
-    analytics.init(theTitle)
-    socialShare.init()
+    templating.renderTemplate('js-organisation-tpl', theData, 'js-organisation-output', callback)
   })
 })
