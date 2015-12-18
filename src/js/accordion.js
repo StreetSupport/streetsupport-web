@@ -43,7 +43,7 @@ var open = function (el, context) {
 
     // Change icon class in header
     el.querySelector(icon).classList.remove(iconOpenClass)
-    el.querySelector(icon).classList.add(iconCloseClass)    
+    el.querySelector(icon).classList.add(iconCloseClass)
   }
 }
 
