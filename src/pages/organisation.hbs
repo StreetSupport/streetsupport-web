@@ -6,7 +6,7 @@ jsName: organisation
 
 {{#extend "_default"}}
   {{#content "main"}}
-    {{> no-js}}  
+    {{> no-js}}
     <div id="js-organisation-output" class="template"></div>
   {{/content}}
 
@@ -59,6 +59,9 @@ jsName: organisation
                     <div class="accordion__item js-item">
                       <div class="accordion__inner">
                         <p>\{{{info}}}</p>
+                        \{{#tags}}
+                          <p>You must be: <span class="result-detail__tags-item">\{{tags}}</span></p>
+                        \{{/tags}}
                         <h2 class="h3">Service Address</h2>
                         \{{#address}}
                           <ul class="result-detail__address-list">
