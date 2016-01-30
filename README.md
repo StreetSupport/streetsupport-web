@@ -62,4 +62,5 @@ Happy to discuss any of this:
 * Vanilla JavaScript is in use with minimal libraries, try to install framework/modules only when needed,
 * No Angular or similar please (for now!),
 * ES2015 is fully supported in the workflow,
-* Client side templating (Hogan.js/mustache) is in use but do any logic in the API/JavaScript. Use templating for rendering output only.
+* Client side templating (Hogan.js/mustache) is in use but do any logic in the API/JavaScript. Use templating for rendering output only,
+* To use client side templating, you must use a \ before each statement.
