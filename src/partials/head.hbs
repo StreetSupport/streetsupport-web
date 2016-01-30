@@ -6,9 +6,8 @@
     <title>{{title}}</title>
     <meta name="description" content="{{description}}" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="apple-touch-icon" href="apple-touch-icon.png" />    
 
-    <link rel="stylesheet" href="assets/css/site.css" />
+    <link rel="stylesheet" href="/assets/css/site.css" />
 
     <script>
       (function(d) {
@@ -36,34 +35,6 @@
 
       ga('create', 'UA-71468202-1', 'auto');
     </script>
+
   </head>
   <body {{#if pageName}}class="page-{{pageName}}"{{/if}}>
-
-    {{>header-nav}}
-
-    <div class="nav__push js-nav-push">
-      {{#block "header"}}
-        {{> header}}
-      {{/block}}
-
-      {{#block "main"}}
-        {{{contents}}}
-      {{/block}}
-
-      {{#block "footer"}}
-        {{> footer}}
-      {{/block}}
-
-      <div class="nav__overlay js-nav-overlay"></div>
-    </div>
-
-    {{#block "gutter"}}
-      {{{contents}}}
-    {{/block}}
-
-    {{> social-gutter}}
-
-    <script src="assets/js/commons.js"></script>
-    <script src="assets/js/{{jsName}}.bundle.js"></script>
-  </body>
-</html>
