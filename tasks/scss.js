@@ -1,64 +1,63 @@
 // Load global config and gulp
-var config  = require(__dirname + '/config/foley.json');
-var argv    = require('yargs').argv;
-var gulp    = require('gulp');
-var plumber = require('gulp-plumber');
-var debug   = require('gulp-debug');
-var gulpif  = require('gulp-if');
+import config from '../foley.json'
+import gulp from 'gulp'
 
 // Specific task modules
-var browserSync = require('browser-sync');
-var sourcemaps  = require('gulp-sourcemaps');
-var sass        = require('gulp-sass');
-var postcss     = require('gulp-postcss');
-var Eyeglass    = require('eyeglass').Eyeglass;
+import { argv as argv } from 'yargs'
+import debug from 'gulp-debug'
+import gulpif from 'gulp-if'
+import browserSync from 'browser-sync'
 
-var sassOptions = {}; // put whatever eyeglass and node-sass options you need here.
-var eyeglass    = new Eyeglass(sassOptions);
+// Sass modules
+import sourcemaps from 'gulp-sourcemaps'
+import sass from 'gulp-sass'
+import postcss from 'gulp-postcss'
+import eyeglass from 'eyeglass'
+const sassOptions = {} // put whatever eyeglass and node-sass options you need here.
+
+// Postcss output modules
+import autoprefixer from 'autoprefixer'
+import pxtorem from 'postcss-pxtorem'
+import mqpacker from 'css-mqpacker'
+import cssnano from 'cssnano'
 
 // Postcss workflow modules
-var autoprefixer  = require('autoprefixer');
-var pxtorem       = require('postcss-pxtorem');
-var mqpacker      = require('css-mqpacker');
-var cssnano       = require('cssnano');
-var stylelint     = require('stylelint');
-var reporter      = require('postcss-reporter');
+import scss from 'postcss-scss'
+import reporter from 'postcss-reporter'
+import stylelint from 'stylelint'
 
-var processors = [
+// Output specific plugins
+const output = [
   autoprefixer({ browsers: config.autoprefixer.browsers }),
-  pxtorem({
-    replace: true
-  }),
-  mqpacker(),
-  stylelint({
-    // add config file path - add to this config file
-    // @see {@Link https://github.com/stylelint/stylelint/blob/master/docs/user-guide/configuration.md}
-    extends: [
-      './tasks/config/.stylelint.json'
-    ]
-  }),
-  reporter({
-    clearMessages: true
-  })
-];
+  pxtorem({ replace: true }),
+  mqpacker()
+]
 
 // Add cssnano if there is a production flag
 if (argv.production) {
-  processors.push(cssnano());
+  output.push(cssnano())
 }
 
-// Disable import once with gulp until we
-// figure out how to make them work together.
-eyeglass.enableImportOnce = false;
+// Workflow specific plugins
+const workflow = [
+  stylelint({}),
+  reporter({ clearMessages: true })
+]
 
-// Postcss task
-gulp.task('scss', function () {
+// Sass & Postcss task
+gulp.task('scss', () => {
   return gulp.src(config.paths.scss + '**/*.scss')
-    .pipe(gulpif(argv.debug === true, debug({title: 'CSS Processed:'})))
-    .pipe(gulpif(!argv.production, sourcemaps.init())) // Sourcemaps if there is no production flag
-    .pipe(sass(eyeglass.sassOptions()).on('error', sass.logError))
-    .pipe(postcss(processors))
-    .pipe(gulpif(!argv.production, sourcemaps.write('.'))) // Sourcemaps if there is no production flag
-    .pipe(gulp.dest(config.paths.buildAssets + 'css'))
-    .pipe(browserSync.stream({match: '**/*.css'}));
-});
+  .pipe(gulpif(argv.debug === true, debug({title: 'CSS Processed:'})))
+  .pipe(gulpif(!argv.production, sourcemaps.init())) // Sourcemaps if there is no production flag
+  .pipe(sass(eyeglass(sassOptions)).on('error', sass.logError))
+  .pipe(postcss(output))
+  .pipe(gulpif(!argv.production, sourcemaps.write('.'))) // Sourcemaps if there is no production flag
+  .pipe(gulp.dest(config.paths.buildAssets + 'css'))
+  .pipe(browserSync.stream({match: '**/*.css'}))
+})
+
+// Stylelint task
+gulp.task('scsslint', () => {
+  return gulp.src([config.paths.scss + '**/*.scss', '!' + config.paths.scss + 'vendor{,/**}'])
+  .pipe(postcss(workflow, {syntax: scss}))
+})
