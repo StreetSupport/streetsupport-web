@@ -22,7 +22,7 @@ Please work in the develop branch first and only merge to master when ready and 
 * Navigate to the workflow folder in command line Terminal,
 * Run: `npm i`.
 
-See [https://github.com/PJL101/foley](https://github.com/PJL101/foley) for more information about the workflow. This project uses version 0.2.1.
+See [https://github.com/PJL101/foley](https://github.com/PJL101/foley) for more information about the workflow. This project uses version 0.2.2.
 
 ## Optional Installs
 
