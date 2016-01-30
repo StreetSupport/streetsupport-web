@@ -10,7 +10,8 @@ Thumbs.db
 # foley #
 ######################
 node_modules
-eyeglass_cache
+.eyeglass_cache
+_svgicon
 _dist
 npm-debug.log
 

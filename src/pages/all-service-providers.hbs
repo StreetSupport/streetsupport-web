@@ -1,49 +1,45 @@
 ---
 title: All Service Providers - Street Support
 description: Street support makes it easier to help homeless people. Find help relevant to your needs.
-jsName: allserviceproviders
+layout: default.hbs
+permalink: false
+jsBundle: allserviceproviders
 ---
 
-{{#extend "_default"}}
-  {{#content "main"}}
-    <div class="block block--intro">
-      <div class="container block__inner">
-        <h2 class="h1 block__header">Full Listing</h2>
-        <div class="block__content">
-          <p>Charities, voluntary groups and government services in Manchester.</p>
-        </div>
-      </div>
+<div class="block block--intro">
+  <div class="container block__inner">
+    <h2 class="h1 block__header">Full Listing</h2>
+    <div class="block__content">
+      <p>Charities, voluntary groups and government services in Manchester.</p>
     </div>
+  </div>
+</div>
 
-    {{> no-js}}    
+{{> no-js}}
 
-    <div class="block">
-      <div class="container block__inner">
-        <div class="block__content">
-          <div id="js-category-result-output" class="template"></div>
-          {{> social-share}}
-        </div>
-      </div>
+<div class="block">
+  <div class="container block__inner">
+    <div class="block__content">
+      <div id="js-category-result-output" class="template"></div>
+      {{> social-share}}
     </div>
-  {{/content}}
+  </div>
+</div>
 
-  {{#content "gutter"}}
-    <div id="spin"></div>
+<div id="spin"></div>
 
-     <script id="js-category-result-tpl" type="text/template">
-          <div class="result-list">
-            \{{#organisations}}
-                <ul class="result-list__list">
-                  <li class="result-list__item">
-                    <h2 class="h2 result-list__header"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h2>
-                    <p>\{{description}}</p>
-                    <a class="btn btn--brand-d result-list__btn" href="organisation.html?organisation=\{{key}}">
-                      <span class="btn__text">More information about \{{name}}</span>
-                    </a>
-                  </li>
-                </ul>
-            \{{/organisations}}
-          </div>
-        </script>
-  {{/content}}
-{{/extend}}
+ <script id="js-category-result-tpl" type="text/template">
+  <div class="result-list">
+    \{{#organisations}}
+        <ul class="result-list__list">
+          <li class="result-list__item">
+            <h2 class="h2 result-list__header"><a href="organisation.html?organisation=\{{key}}">\{{name}}</a></h2>
+            <p>\{{description}}</p>
+            <a class="btn btn--brand-d result-list__btn" href="organisation.html?organisation=\{{key}}">
+              <span class="btn__text">More information about \{{name}}</span>
+            </a>
+          </li>
+        </ul>
+    \{{/organisations}}
+  </div>
+</script>

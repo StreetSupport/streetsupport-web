@@ -17,10 +17,6 @@ THE_COMMIT=`git rev-parse HEAD`
 git config --global user.email "enquiry@streetsupport.net"
 git config --global user.name "Travis CI"
 
-# Delete _dist
-rm -rf _dist
-mkdir _dist
-
 # Run gulp
 gulp deploy --debug --production
 
