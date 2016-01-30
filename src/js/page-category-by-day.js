@@ -45,6 +45,7 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
       var template = ''
       var callback = function () {}
 
+
       if (data.daysServices.length) {
         template = 'js-category-result-tpl'
 
@@ -77,10 +78,9 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
   function sortByOpeningTimes (days) {
     forEach(days, function (day) {
       day.serviceProviders = sortBy(day.serviceProviders, function (provider) {
-        return provider.openingTimes.startTime
+        return provider.openingTime.startTime
       })
     })
-
     return days
   }
 

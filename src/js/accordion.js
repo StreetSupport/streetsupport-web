@@ -1,3 +1,5 @@
+/* global ga */
+
 var accordion = '.js-accordion'
 var header = '.js-header'
 var icon = '.icon'
@@ -19,7 +21,7 @@ var init = function (showFirst) {
   // Add active class to first elements or if there is only one panel
   if (showFirst || itemCount === 1) {
     var firstHeader = headers[0]
-    open(firstHeader, el)
+    open(firstHeader, el, true)
   }
 
   // Add click listener to headers
@@ -30,7 +32,7 @@ var init = function (showFirst) {
   }
 }
 
-var open = function (el, context) {
+var open = function (el, context, noAnalytics) {
   // Check to see if clicked header is already active
   if (el.classList.contains(activeClass)) {
     close(el, context)
@@ -44,6 +46,13 @@ var open = function (el, context) {
     // Change icon class in header
     el.querySelector(icon).classList.remove(iconOpenClass)
     el.querySelector(icon).classList.add(iconCloseClass)
+
+    // Send Google Analytics event
+    if (!noAnalytics) {
+      var headerText = el.textContent
+
+      ga('send', 'event', 'accordion', 'click', headerText + ' open')
+    }
   }
 }
 
