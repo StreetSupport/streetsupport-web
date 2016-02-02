@@ -105,10 +105,10 @@ jsBundle: organisation
                 <dd class="result-detail__times-item"><a href="\{{facebook}}">Facebook page</a></dd>
               \{{/facebook}}
             </dl>
-          \{{/organisation}}
-
+          \{{^isVerified}}
           <p>This site is currently under review. If you see something missing, incorrect or incomplete, or you would like to know more, please <a href="contact.html">get in touch</a>.</p>
-
+          \{{/isVerified}}
+          \{{/organisation}}
           {{> social-share}}
 
         </div>
