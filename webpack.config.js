@@ -15,6 +15,7 @@ if (argv.production) {
 
 module.exports = {
   entry: {
+    home: __dirname + '/src/js/page-generic',
     generic: __dirname + '/src/js/page-generic',
     findhelp: __dirname + '/src/js/page-find-help',
     category: __dirname + '/src/js/page-category',

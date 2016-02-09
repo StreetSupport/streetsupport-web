@@ -1,11 +1,18 @@
 #!/bin/bash
 
 # Define variables depending on the branch
+if [[ $TRAVIS_BRANCH == 'release' ]]
+  then
+    REPO="github.com/StreetSupport/streetsupport.net-live.git"
+    DOMAIN="www.streetsupport.net"
+fi
 if [[ $TRAVIS_BRANCH == 'master' ]]
   then
     REPO="github.com/StreetSupport/streetsupport.net-beta.git"
     DOMAIN="beta.streetsupport.net"
-  else
+fi
+if [[ $TRAVIS_BRANCH == 'develop' ]]
+  then
     REPO="github.com/StreetSupport/streetsupport.net-dev.git"
     DOMAIN="dev.streetsupport.net"
 fi
@@ -31,7 +38,7 @@ EOF
 # Push to git by overriding previous commits
 # IMPORTANT: Supress messages so nothing appears in logs
 
-if [[ $TRAVIS_BRANCH == 'master' ]] || [[ $TRAVIS_BRANCH == 'develop' ]]
+if [[ $TRAVIS_BRANCH == 'release' ]] || [[ $TRAVIS_BRANCH == 'master' ]] || [[ $TRAVIS_BRANCH == 'develop' ]]
   then
     git init
     git add -A
