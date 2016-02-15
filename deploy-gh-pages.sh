@@ -1,13 +1,23 @@
 #!/bin/bash
 
 # Define variables depending on the branch
+if [[ $TRAVIS_BRANCH == 'release' ]]
+  then
+    REPO="github.com/StreetSupport/streetsupport.net-live.git"
+    DOMAIN="www.streetsupport.net"
+    APIENVIRONMENT=2
+fi
 if [[ $TRAVIS_BRANCH == 'master' ]]
   then
     REPO="github.com/StreetSupport/streetsupport.net-beta.git"
     DOMAIN="beta.streetsupport.net"
-  else
+    APIENVIRONMENT=1
+fi
+if [[ $TRAVIS_BRANCH == 'develop' ]]
+  then
     REPO="github.com/StreetSupport/streetsupport.net-dev.git"
     DOMAIN="dev.streetsupport.net"
+    APIENVIRONMENT=1  
 fi
 
 # Get the commit details
@@ -16,6 +26,18 @@ THE_COMMIT=`git rev-parse HEAD`
 # Set git details
 git config --global user.email "enquiry@streetsupport.net"
 git config --global user.name "Travis CI"
+
+# Set environment
+cd src/js
+rm env.js
+cat > env.js << EOF
+module.exports = $APIENVIRONMENT
+EOF
+
+echo "env file rewritten to:"
+cat env.js
+
+cd ../../
 
 # Run gulp
 gulp deploy --debug --production
@@ -31,7 +53,7 @@ EOF
 # Push to git by overriding previous commits
 # IMPORTANT: Supress messages so nothing appears in logs
 
-if [[ $TRAVIS_BRANCH == 'master' ]] || [[ $TRAVIS_BRANCH == 'develop' ]]
+if [[ $TRAVIS_BRANCH == 'release' ]] || [[ $TRAVIS_BRANCH == 'master' ]] || [[ $TRAVIS_BRANCH == 'develop' ]]
   then
     git init
     git add -A
