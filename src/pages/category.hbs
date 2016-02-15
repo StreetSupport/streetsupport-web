@@ -75,6 +75,13 @@ jsBundle: category
                             <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a></li>
                           </ul>
                         \{{/address}}
+			<h2 class="h3">Opening Times</h2>
+                  	<dl class="result-detail__times-list">
+                	\{{#openingTimes}}
+                	<dt class="result-detail__times-title">\{{day}}</dt>
+                	<dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
+                	\{{/openingTimes}}
+              		</dl>
                         <a class="btn btn--brand-d result-detail__btn" href="organisation.html?organisation=\{{key}}">
                           <span class="btn__text">More information about \{{name}}</span>
                         </a>
