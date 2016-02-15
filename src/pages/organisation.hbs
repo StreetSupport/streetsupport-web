@@ -32,8 +32,11 @@ jsBundle: organisation
       <div class="block__content">
         <div class="result-detail">
           \{{#organisation}}
-            <p>\{{{description}}}</p>
-            \{{#addresses}}
+           <p>\{{{description}}}</p>
+           <h2 class="h3">Areas Serviced</h2>
+	   <p>\{{{areaServiced}}}</p>
+           <h2 class="h3">Addresses</h2>
+           \{{#addresses}}
               <ul class="result-detail__address-list">
                 <li class="result-detail__address-item">\{{#street}} \{{street}}, \{{/street}} \{{#street1}} \{{street1}}, \{{/street1}} \{{#street2}} \{{street2}}, \{{/street2}}
                 \{{#street3}} \{{street3}}, \{{/street3}}</li>
