@@ -40,8 +40,6 @@ jsBundle: organisation
                 <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
                 <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a> \{{/postcode}}</li>
               </ul>
-            \{{/addresses}}
-            \{{#providedServices.0}}
               <h2 class="h3">Opening Times</h2>
               <dl class="result-detail__times-list">
                 \{{#openingTimes}}
@@ -49,8 +47,7 @@ jsBundle: organisation
                 <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
                 \{{/openingTimes}}
               </dl>
-            \{{/providedServices.0}}
-
+            \{{/addresses}}
             <h2 class="h2">Services Provided</h2>
             <div class="accordion accordion--organisation js-accordion">
               \{{#providedServices}}
