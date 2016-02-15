@@ -27,7 +27,7 @@ require.ensure(['./api', './get-api-data', './template-render', 'spin.js'], func
   getApiData.data(apiRoutes.serviceCategories).then(function (result) {
     var data = result.data
     forEach(data, function (category) {
-      if (category.key === 'meals') {
+      if (category.key === 'meals' || category.key === 'dropin') {
         category.page = 'category-by-day'
       } else {
         category.page = 'category'
