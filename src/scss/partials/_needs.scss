@@ -9,7 +9,7 @@
 	    }
 
 	    @include mq($from: l) {
-		  margin-top; 0em;
+		  margin-top: 0em;
 	      @include span(9 of $column-large);
 	    }
 	}
