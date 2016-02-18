@@ -1,6 +1,7 @@
 .needs {
 	&__need {
-		margin-top; 1em;
+		margin-top; 1.5em;
+		margin-bottom: 1em;
 	    @include span(6 of $column-small);
 
 	    @include mq($from: m) {
@@ -8,7 +9,7 @@
 	    }
 
 	    @include mq($from: l) {
-			margin-top; 0em;
+		  margin-top; 0em;
 	      @include span(9 of $column-large);
 	    }
 	}
