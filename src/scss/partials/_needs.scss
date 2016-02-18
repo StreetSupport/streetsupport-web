@@ -1,6 +1,6 @@
 .needs {
 	&__need {
-		margin-top; 1.5em;
+		margin-top: 1.5em;
 		margin-bottom: 1em;
 	    @include span(6 of $column-small);
 
