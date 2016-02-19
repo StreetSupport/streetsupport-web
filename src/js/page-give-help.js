@@ -10,24 +10,27 @@ analytics.init()
 FastClick.attach(document.body)
 
 // Load and process data
-require.ensure(['./needs', './template-render', 'spin.js'], function (require) {
+require.ensure(['./api', './get-api-data', './needs', './template-render', 'spin.js'], function (require) {
+  var apiRoutes = require('./api')
+  var getApiData = require('./get-api-data')
   var templating = require('./template-render')
   var Spinner = require('spin.js')
-  var needs = require('./needs')
+  var staticNeeds = require('./needs')
 
   // Spinner
   var spin = document.getElementById('spin')
   var loading = new Spinner().spin(spin)
 
-  // Append object name for Hogan
-  var theData = { needs: needs }
+  // Get API data using promise
+  getApiData.data(apiRoutes.needs).then(function (result) {
+    var needsFromApi = result.data
+    var needsToUse = needsFromApi.length < 1 ? staticNeeds : needsFromApi
 
-  console.log(theData)
+    var callback = function () {
+      loading.stop()
+      //socialShare.init()
+    }
 
-  var callback = function () {
-    loading.stop()
-    //socialShare.init()
-  }
-
-  templating.renderTemplate('js-need-list-tpl', needs, 'js-need-list-output', callback)
-}) 
+    templating.renderTemplate('js-need-list-tpl', needsToUse, 'js-need-list-output', callback)
+  })
+})

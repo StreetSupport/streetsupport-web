@@ -13,11 +13,13 @@ var serviceCategoriesUrl = '/v2/service-categories/'
 var categoryServiceProvidersUrl = '/v2/categorised-service-providers/show/'
 var categoryServiceProvidersByDayUrl = '/v2/timetabled-service-providers/show/'
 var organisationUrl = '/v2/service-providers/show/'
+var needsUrl = '/v1/service-provider-needs/'
 
 module.exports = {
   serviceProviders: domainRoot + serviceProvidersUrl,
   serviceCategories: domainRoot + serviceCategoriesUrl,
   categoryServiceProviders: domainRoot + categoryServiceProvidersUrl,
   categoryServiceProvidersByDay: domainRoot + categoryServiceProvidersByDayUrl,
-  organisation: domainRoot + organisationUrl
+  organisation: domainRoot + organisationUrl,
+  needs: domainRoot + needsUrl
 }
