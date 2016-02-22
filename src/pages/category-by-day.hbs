@@ -67,22 +67,22 @@ jsBundle: categorybyday
                   </div>
                   <div class="result-detail__times-item">
                     <ul>
-                      <li class="h3">\{{#openingTime}} \{{{description}}} \{{/openingTime}}</li>
+                      <li class="h3">\{{#openingTime}} \{{{serviceInfo}}} \{{/openingTime}}</li>
                       \{{#tags}}
                       <li>You must be: <span class="result-detail__tags-item">\{{tags}}</span></li>
                       \{{/tags}}
-                      <li><a href="organisation.html?organisation=\{{key}}">About \{{name}}</a></li>
                       <li>
                         \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
-                        \{{#address.street}} 
+                        \{{#address.street}}
                           \{{#address.street}} \{{address.street}}, \{{/address.street}}
                           \{{#address.street1}} \{{address.street1}}, \{{/address.street1}}
                           \{{#address.street2}} \{{address.street2}}, \{{/address.street2}}
                           \{{#address.street3}} \{{address.street3}}, \{{/address.street3}}
                           \{{#address.city}} \{{address.city}}. \{{/address.city}}
                           \{{address.postcode}} - <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">Map</a>
-                        \{{/address.street}} 
+                        \{{/address.street}}
                       </li>
+                      <li><a href="organisation.html?organisation=\{{key}}">About \{{name}}</a></li>
                     </ul>
                   </div>
                 </div>
