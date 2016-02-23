@@ -12,7 +12,8 @@
         @include push(1 of $column-large);
       }
 
-      // Full width on find help only
+      // Full width on find help/give help only
+      .page-givehelp &,
       .page-findhelp & {
         width: 100%;
         margin-left: auto;
