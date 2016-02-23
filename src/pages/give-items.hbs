@@ -3,18 +3,32 @@ title: Give Items - Street Support
 description: Street support makes it easier to help homeless people. Here's how to get in touch.
 layout: default.hbs
 permalink: false
-jsBundle: generic
+jsBundle: givehelp
 ---
 
 <div class="block block--intro">
   <div class="container block__inner">
     <h1 class="h1 block__header">Give Items</h1>
+  	<p>Organisations require a diverse range of items and voluntary skills to continue providing support. If you are able to help meet any of their needs, press on the 'more info' to get in contact, and tell us how you can help.</p>
   </div>
 </div>
 
 <div class="block">
   <div class="container block__inner">
     <div class="block__content">
+      <div id="js-need-list-output" class="template"></div>
+      {{> social-share}}
     </div>
   </div>
 </div>
+
+
+<script id="js-need-list-tpl" type="text/template">
+  <dl>
+    \{{#needs}}
+    <dt class="needs__need">\{{description}}</dt>
+    <dd class="needs__more-info"><a href="\{{link}}" class="btn btn--brand-e"><span class="btn__text">More info</span></a></dt>
+    \{{/needs}}
+  </dl>
+</script>
+ 
