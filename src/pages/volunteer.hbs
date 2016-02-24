@@ -9,6 +9,7 @@ jsBundle: generic
 <div class="block block--intro">
   <div class="container block__inner">
     <h1 class="h1 block__header">Volunteer</h1>
+    <a href="give-help.html">Other ways to give help</a>
   </div>
 </div>
 
@@ -16,6 +17,59 @@ jsBundle: generic
   <div class="container block__inner">
     <div class="block__content">
     	<p>Organisations and charities are always in need of volunteers to help with a wide variety of tasks and services. This can range from administrative tasks, building renovation, mentoring or just someone to talk to. If you would like to volunteer, please get in touch with what skills you can offer, and your availability to: <a href="mailto:volunteer@streetsupport.net">volunteer@streetsupport.net</a>.
+    	<p>Alternatively, you can fill in the form below:</p>
+    	<p>* denotes a required field.</p>
+    	<form class="form">
+    	<fieldset class="form__fieldset">
+    		<legend class="form__fieldset-title">About You</legend>
+    		<ul class="form__field-list">
+    			<li class="form__field-item">
+    				<label class="form__label" for="name">Name *</label>
+    				<input class="form__input" type="text" name="name" id="name" required></input>
+    			</li>
+    			<li class="form__field-item">
+    				<label class="form__label" for="email">Email *</label>
+    				<input class="form__input" type="email" name="email" id="email" required></input>
+    			</li>
+    			<li class="form__field-item">
+    				<label class="form__label" for="telephone">Telephone</label>
+    				<input class="form__input" type="text" name="telephone" id="telephone"></input>
+    			</li>
+    			<li class="form__field-item">
+    				<label class="form__label" for="postcode">Postcode *</label>
+    				<input class="form__input" type="text" name="postcode" id="postcode" required></input>
+    			</li>
+    		</ul>
+    	</fieldset>
+    	<fieldset class="form__fieldset">
+    		<legend class="form__fieldset-title">Skills and Experience</legend>
+    		<ul class="form__field-list">
+    			<li class="form__field-item">
+    				<label class="form__label form__label--full-width" for="skillsAndExperience">What are you able to offer? Please include any skills, experience or interests that might be useful - from medical, legal or finance, to cooking and music!</label>
+    				<textarea class="form__input--multiline" name="skillsAndExperience" id="skillsAndExperience"></textarea>
+    			</li>
+    		</ul>
+    	</fieldset>
+    	<fieldset class="form__fieldset">
+    		<legend class="form__fieldset-title">Availability</legend>
+    		<ul class="form__field-list">
+    			<li class="form__field-item">
+    				<label class="form__label form__label--full-width" for="availability">When are generally available to help? How often are you able to help?</label>
+    				<textarea class="form__input--multiline" name="availability" id="availability"></textarea>
+    			</li>
+    		</ul>
+    	</fieldset>
+    	<fieldset class="form__fieldset">
+    		<legend class="form__fieldset-title">Resources</legend>
+    		<ul class="form__field-list">
+    			<li class="form__field-item">
+    				<label class="form__label form__label--full-width" for="resources">Is there anything else you could offer? eg meeting rooms, car/van for transport, unwanted items.</label>
+    				<textarea class="form__input--multiline" name="resources" id="resources"></textarea>
+    			</li>
+    		</ul>
+    	</fieldset>
+    	<button class="btn btn--brand-d form__submit"><span class="btn__text">Submit</span></button>
+    	</form>
     </div>
   </div>
 </div>

@@ -1,3 +1,49 @@
 .form {
 
 }
+.form__fieldset {
+	border: none;
+}
+.form__fieldset-title {
+	@extend .h2;
+}
+.form__field-list {
+	list-style: none;
+	padding: 0;
+}
+.form__field-item {
+    @include cf();
+	padding: 5px 0;
+}
+.form__label {
+	@extend .h3;
+	display: block;
+	margin-bottom: 5px;
+
+    @include span(6 of $column-small);
+
+    @include mq($from: m) {
+    	@include span(2 of $column-small);
+
+		&--full-width {
+	    	@include span(6 of $column-small);
+		}
+    }
+}
+.form__input {
+	padding: 5px;
+	@include span(6 of $column-small);
+
+    @include mq($from: m) {
+	    @include span(4 of $column-small);
+	}
+
+	&--multiline {
+    	@include span(6 of $column-small);
+		height: 5em;
+	}
+}
+
+.form__submit { 
+	float: right;
+}
