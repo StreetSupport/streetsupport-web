@@ -14,6 +14,7 @@ var categoryServiceProvidersUrl = '/v2/categorised-service-providers/show/'
 var categoryServiceProvidersByDayUrl = '/v2/timetabled-service-providers/show/'
 var organisationUrl = '/v2/service-providers/show/'
 var needsUrl = '/v1/service-provider-needs/'
+var volunteerEnquiryUrl = '/v1/volunteer-enquiries'
 
 module.exports = {
   serviceProviders: domainRoot + serviceProvidersUrl,
@@ -21,5 +22,6 @@ module.exports = {
   categoryServiceProviders: domainRoot + categoryServiceProvidersUrl,
   categoryServiceProvidersByDay: domainRoot + categoryServiceProvidersByDayUrl,
   organisation: domainRoot + organisationUrl,
-  needs: domainRoot + needsUrl
+  needs: domainRoot + needsUrl,
+  createVolunteerEnquiry: domainRoot + volunteerEnquiryUrl
 }

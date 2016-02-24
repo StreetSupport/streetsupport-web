@@ -22,7 +22,8 @@ module.exports = {
     categorybyday: __dirname + '/src/js/page-category-by-day',
     organisation: __dirname + '/src/js/page-organisation',
     allserviceproviders: __dirname + '/src/js/page-all-service-providers',
-    givehelp: __dirname + '/src/js/page-give-help'
+    givehelp: __dirname + '/src/js/page-give-help',
+    volunteer: __dirname + '/src/js/page-volunteer'
   },
   output: {
     path: path.join(__dirname, '/_dist/assets/js/'),

@@ -3,7 +3,8 @@ title: Volunteer - Street Support
 description: Street support makes it easier to help homeless people. Here's how to get in touch.
 layout: default.hbs
 permalink: false
-jsBundle: generic
+jsBundle: volunteer
+pageName: volunteer
 ---
 
 <div class="block block--intro">
@@ -19,7 +20,7 @@ jsBundle: generic
     	<p>Organisations and charities are always in need of volunteers to help with a wide variety of tasks and services. This can range from administrative tasks, building renovation, mentoring or just someone to talk to. If you would like to volunteer, please get in touch with what skills you can offer, and your availability to: <a href="mailto:volunteer@streetsupport.net">volunteer@streetsupport.net</a>.
     	<p>Alternatively, you can fill in the form below:</p>
     	<p>* denotes a required field.</p>
-    	<form class="form">
+    	<form id="jsForm" class="form">
     	<fieldset class="form__fieldset">
     		<legend class="form__fieldset-title">About You</legend>
     		<ul class="form__field-list">
@@ -72,8 +73,9 @@ jsBundle: generic
     			</li>
     		</ul>
     	</fieldset>
-    	<button class="btn btn--brand-d form__submit"><span class="btn__text">Submit</span></button>
+    	<button id="jsFormButton" class="btn btn--brand-d form__submit"><span class="btn__text">Submit</span></button>
     	</form>
+      	{{> social-share}}
     </div>
   </div>
 </div>

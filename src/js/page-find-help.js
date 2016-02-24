@@ -45,6 +45,5 @@ require.ensure(['./api', './get-api-data', './template-render', 'spin.js'], func
     }
 
     templating.renderTemplate('js-category-list-tpl', theData, 'js-category-list-output', callback)
-
   })
 })
