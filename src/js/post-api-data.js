@@ -11,9 +11,16 @@ var postApiData = function (url, data) {
   req.onload = function () {
     if (this.status === 201) {
       deferred.resolve({
-        'status': 'ok'
+        'status': 'created',
+        'statusCode': this.status
+      })
+    } else if (this.status === 200) {
+      deferred.resolve({
+        'status': 'ok',
+        'statusCode': this.status
       })
     } else {
+      console.log(this)
       deferred.resolve({
         'status': 'error',
         'statusCode': this.status,
@@ -23,6 +30,7 @@ var postApiData = function (url, data) {
   }
 
   req.onerror = function () {
+    console.log(this)
     deferred.reject(new Error('Server responded with a status of ' + req.status))
   }
 
