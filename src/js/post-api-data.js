@@ -9,12 +9,9 @@ var postApiData = function (url, data) {
   req.setRequestHeader('content-type', 'application/json')
 
   req.onload = function () {
-    console.log(this.status)
     if (this.status === 201) {
-      var json = JSON.parse(req.responseText)
       deferred.resolve({
-        'status': 'ok',
-        'data': json
+        'status': 'ok'
       })
     } else {
       deferred.resolve({
