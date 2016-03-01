@@ -16,12 +16,22 @@ require.ensure(['./api', 'spin.js', './post-api-data'], function (require) {
 
   // Spinner
   var spin = document.getElementById('spin')
+  var form = document.getElementById('jsForm')
+  var hideElement = function (element) {
+    console.log('hide')
+    element.className += ' hidden'
+  }
+  var showElement = function (element) {
+    console.log('show')
+    element.className = element.className.replace( /(?:^|\s)hidden(?!\S)/g , '')
+  }
   var loading 
 
   var submitForm = function (e) {
     e.preventDefault()
 
     loading = new Spinner().spin(spin)
+    hideElement(form)
 
     var payload = {
       'FirstName': document.getElementById('firstname').value,
@@ -36,13 +46,11 @@ require.ensure(['./api', 'spin.js', './post-api-data'], function (require) {
 
     postApi.post(apiRoutes.createVolunteerEnquiry, payload)
     .then(function (result) {
-      console.log('loaded')
-      console.log(result)
       loading.stop()
+      showElement(document.getElementById('jsSuccessMessage'))
     })
   }
 
-  var form = document.getElementById('jsForm')
   form.onsubmit = submitForm
 
   //loading.stop()
