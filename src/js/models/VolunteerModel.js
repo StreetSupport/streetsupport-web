@@ -4,17 +4,29 @@ var postApi = require('../post-api-data')
 var Spinner = require('spin.js')
 
 var VolunteerModel = function () {
-  var spin = document.getElementById('spin')
-  var form = document.getElementById('jsForm')
+  var self = this
+
+  var pageElementIds = {
+  	'spinner': 'spin',
+  	'form': 'jsForm'
+  }
+  // browser crap
+  var spin = document.getElementById(pageElementIds.spinner)
+  var form = document.getElementById(pageElementIds.form)
 
   var hideElement = function (element) {
-  	console.log('hide')
     element.className += ' hidden'
   }
   var showElement = function (element) {
-  	console.log('show')
     element.className = element.className.replace( /(?:^|\s)hidden(?!\S)/g , '')
   }
+
+  self.errorMessages = ko.observableArray()
+
+  self.hasErrors = ko.computed(function () {
+  	return self.errorMessages().length > 0
+  })
+
   var loading 
 
   var submitForm = function (e) {
@@ -38,12 +50,11 @@ var VolunteerModel = function () {
     .then(function (result) {
       loading.stop()
       if (result.statusCode.toString().charAt(0) !== '2') {
+      	self.errorMessages(result.messages)
         showElement(form)
       } else {
         showElement(document.getElementById('jsSuccessMessage'))
       }
-    }, function (error) {
-    	console.log('error')
     })
   }
 

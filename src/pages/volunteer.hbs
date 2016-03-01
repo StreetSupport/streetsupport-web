@@ -24,6 +24,12 @@ pageName: volunteer
     	</div>
     	<form id="jsForm" class="form">
     		<p>* denotes a required field.</p>
+    		<!-- ko if: hasErrors -->
+			<h2>There were errors in your submission:</h2>
+			<ul data-bind="foreach: errorMessages">
+			  <li data-bind="text: $data"></li>
+			</ul>
+			<!-- /ko -->
 	    	<fieldset class="form__fieldset">
 	    		<legend class="form__fieldset-title">About You</legend>
 	    		<ul class="form__field-list">

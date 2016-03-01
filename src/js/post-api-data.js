@@ -24,7 +24,7 @@ var postApiData = function (url, data) {
       deferred.resolve({
         'status': 'error',
         'statusCode': this.status,
-        'message': this.responseText
+        'messages': JSON.parse(this.responseText).messages
       })
     }
   }
