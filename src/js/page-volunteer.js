@@ -9,10 +9,7 @@ analytics.init()
 FastClick.attach(document.body)
 
 // Load and process data
-require.ensure(['knockout', './api', 'spin.js', './post-api-data', './models/VolunteerModel'], function (require) {
-  var apiRoutes = require('./api')
-  var postApi = require('./post-api-data')
-  var Spinner = require('spin.js')
+require.ensure(['knockout', './models/VolunteerModel'], function (require) {
   var ko = require('knockout')
   var Model = require('./models/VolunteerModel')
 
