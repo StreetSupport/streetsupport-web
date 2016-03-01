@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# If there are any errors, fail Travis
+set -e
+
 # Define variables depending on the branch
 if [[ $TRAVIS_BRANCH == 'release' ]]
   then
@@ -17,7 +20,7 @@ if [[ $TRAVIS_BRANCH == 'develop' ]]
   then
     REPO="github.com/StreetSupport/streetsupport.net-dev.git"
     DOMAIN="dev.streetsupport.net"
-    APIENVIRONMENT=1  
+    APIENVIRONMENT=1
 fi
 
 # Get the commit details
