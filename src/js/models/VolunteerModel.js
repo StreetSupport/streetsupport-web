@@ -8,11 +8,13 @@ var VolunteerModel = function () {
 
   var pageElementIds = {
   	'spinner': 'spin',
-  	'form': 'jsForm'
+  	'form': 'jsForm',
+    'successMessage': 'jsSuccessMessage'
   }
   // browser crap
   var spin = document.getElementById(pageElementIds.spinner)
   var form = document.getElementById(pageElementIds.form)
+  var successMessage = document.getElementById(pageElementIds.successMessage)
 
   var hideElement = function (element) {
     element.className += ' hidden'
@@ -27,7 +29,7 @@ var VolunteerModel = function () {
   	return self.errorMessages().length > 0
   })
 
-  var loading 
+  var loading
 
   var submitForm = function (e) {
     e.preventDefault()
@@ -53,7 +55,7 @@ var VolunteerModel = function () {
       	self.errorMessages(result.messages)
         showElement(form)
       } else {
-        showElement(document.getElementById('jsSuccessMessage'))
+        showElement(successMessage)
       }
     })
   }
