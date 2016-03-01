@@ -66,6 +66,7 @@
   "dependencies": {
     "fastclick": "1.0.6",
     "hogan.js": "3.0.2",
+    "knockout": "^3.4.0",
     "lodash": "3.10.1",
     "q": "1.4.1",
     "spin.js": "2.3.2"
