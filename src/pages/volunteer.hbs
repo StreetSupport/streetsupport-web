@@ -17,11 +17,11 @@ pageName: volunteer
 <div class="block">
   <div class="container block__inner">
     <div class="block__content">
-    	<form id="jsForm" class="form" data-bind="submit: submitForm">
+    	<form id="jsForm" class="form form--volunteer" data-bind="submit: submitForm">
     		<p>Organisations and charities are always in need of volunteers to help with a wide variety of tasks and services. This can range from administrative tasks, building renovation, mentoring or just someone to talk to. If you would like to volunteer, please fill in the form below.</p>
     		<p>* denotes a required field.</p>
 	    	<fieldset class="form__fieldset">
-	    		<legend class="form__fieldset-title">About You</legend>
+	    		<legend class="h2 form__fieldset-title">About You</legend>
 	    		<ul class="form__field-list">
 	    			<li class="form__field-item">
 	    				<label class="form__label" for="name">First Name *</label>
@@ -46,29 +46,29 @@ pageName: volunteer
 	    		</ul>
 	    	</fieldset>
 	    	<fieldset class="form__fieldset">
-	    		<legend class="form__fieldset-title">Skills and Experience</legend>
+	    		<legend class="h2 form__fieldset-title">Skills and Experience</legend>
 	    		<ul class="form__field-list">
-	    			<li class="form__field-item">
-	    				<label class="form__label form__label--full-width" for="skillsAndExperience">What are you able to offer? Please include any skills, experience or interests that might be useful - from medical, legal or finance, to cooking and music!</label>
-	    				<textarea class="form__input--multiline" id="skillsAndExperience" data-bind="value: skillsAndExperience"></textarea>
+	    			<li class="form__field-item--full">
+	    				<label class="form__label form__label" for="skillsAndExperience">What are you able to offer? Please include any skills, experience or interests that might be useful - from medical, legal or finance, to cooking and music!</label>
+	    				<textarea class="form__input form__input--multiline" id="skillsAndExperience" data-bind="value: skillsAndExperience"></textarea>
 	    			</li>
 	    		</ul>
 	    	</fieldset>
 	    	<fieldset class="form__fieldset">
-	    		<legend class="form__fieldset-title">Availability</legend>
+	    		<legend class="h2 form__fieldset-title">Availability</legend>
 	    		<ul class="form__field-list">
-	    			<li class="form__field-item">
-	    				<label class="form__label form__label--full-width" for="availability">When are generally available to help? How often are you able to help?</label>
-	    				<textarea class="form__input--multiline" id="availability" data-bind="value: availability"></textarea>
+	    			<li class="form__field-item--full">
+	    				<label class="form__label form__label" for="availability">When are generally available to help? How often are you able to help?</label>
+	    				<textarea class="form__input form__input--multiline" id="availability" data-bind="value: availability"></textarea>
 	    			</li>
 	    		</ul>
 	    	</fieldset>
 	    	<fieldset class="form__fieldset">
-	    		<legend class="form__fieldset-title">Resources</legend>
+	    		<legend class="h2 form__fieldset-title">Resources</legend>
 	    		<ul class="form__field-list">
-	    			<li class="form__field-item">
-	    				<label class="form__label form__label--full-width" for="resources">Is there anything else you could offer? eg meeting rooms, car/van for transport, unwanted items.</label>
-	    				<textarea class="form__input--multiline" id="resources" data-bind="value: resources"></textarea>
+	    			<li class="form__field-item--full">
+	    				<label class="form__label form__label" for="resources">Is there anything else you could offer? eg meeting rooms, car/van for transport, unwanted items.</label>
+	    				<textarea class="form__input form__input--multiline" id="resources" data-bind="value: resources"></textarea>
 	    			</li>
 	    		</ul>
 	    	</fieldset>

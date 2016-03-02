@@ -1,52 +1,51 @@
 .form {
-}
-.form__fieldset {
-	border: none;
-}
-.form__fieldset-title {
-	@extend .h2;
-}
-.form__field-list {
-	list-style: none;
-	padding: 0;
-}
-.form__field-item {
+
+  &__fieldset {
+    border: none;
+  }
+
+  &__fieldset-title {
+		@include span(full);
+		margin-bottom: 10px;
+  }
+
+  &__field-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  &__field-item {
+    padding: 5px 0;
     @include cf();
-	padding: 5px 0;
-}
-.form__label {
-	@extend .h3;
-	display: block;
-	margin-bottom: 5px;
 
-    @include span(6 of $column-small);
-
-    @include mq($from: m) {
-    	@include span(2 of $column-small);
-
-		&--full-width {
-	    	@include span(6 of $column-small);
+		@include mq($from: m) {
+      @include span(3 of $column-small);
 		}
+
+		&--full {
+			@include mq($from: m) {
+	      @include span(full);
+			}
+		}
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  &__input {
+    padding: 5px;
+		width: 100%;
+    border: 1px solid $brand-f;
+
+		&--multiline {
+			width: 100%;
+      min-height: 8rem;
     }
-}
-.form__input {
-	padding: 5px;
-	@include span(6 of $column-small);
+  }
 
-    @include mq($from: m) {
-	    @include span(4 of $column-small);
-	}
-
-	&--multiline {
-    	@include span(6 of $column-small);
-		height: 5em;
-	}
-}
-
-.form__submit { 
-	float: right;
-}
-
-.hidden {
-	display: none;
+  &__submit {
+    float: right;
+  }
 }
