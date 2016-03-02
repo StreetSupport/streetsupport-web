@@ -1,16 +1,22 @@
 .form {
+  @include cf();
 
   &__fieldset {
     border: none;
+    padding: 20px 0 0 0;
   }
 
   &__fieldset-title {
-		@include span(full);
-		margin-bottom: 10px;
+		margin-bottom: 5px;
+
+    @include mq($from: m) {
+		  @include span(full);
+		}
   }
 
   &__field-list {
     list-style: none;
+    margin: 0;
     padding: 0;
   }
 
@@ -46,6 +52,7 @@
   }
 
   &__submit {
+    margin-top: 10px;
     float: right;
   }
 }
