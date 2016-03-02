@@ -1,14 +1,68 @@
 var ko = require('knockout')
+require('knockout.validation') // No variable here is deliberate!
+
 var apiRoutes = require('../api')
 var postApi = require('../post-api-data')
 var Spinner = require('spin.js')
 
 var VolunteerModel = function () {
   var self = this
+  var spin = document.getElementById(spin)
 
+  ko.validation.init({
+    insertMessages: true,
+    decorateInputElement: true,
+    parseInputAttributes: true
+  }, true)
+
+  self.firstName = ko.observable('').extend({ required: true })
+  self.lastName = ko.observable('').extend({ required: true })
+  self.email = ko.observable('').extend({ required: true })
+  self.telephone = ko.observable('')
+  self.postcode = ko.observable('').extend({ required: true })
+  self.skillsAndExperience = ko.observable('')
+  self.availability = ko.observable('')
+  self.resources = ko.observable('')
+
+  var loading
+
+  self.submitForm = function () {
+    if (self.errors().length === 0) {
+      loading = new Spinner().spin(spin)
+
+      var payload = {
+        'FirstName': document.getElementById('firstname').value,
+        'LastName': document.getElementById('lastname').value,
+        'Email': document.getElementById('email').value,
+        'Telephone': document.getElementById('telephone').value,
+        'Postcode': document.getElementById('postcode').value,
+        'SkillsAndExperienceDescription': document.getElementById('skillsAndExperience').value,
+        'AvailabilityDescription': document.getElementById('availability').value,
+        'ResourcesDescription': document.getElementById('resources').value
+      }
+
+      postApi.post(apiRoutes.createVolunteerEnquiry, payload)
+      .then(function (result) {
+        loading.stop()
+        if (result.statusCode.toString().charAt(0) !== '2') {
+          showElement(form)
+        } else {
+          showElement(successMessage)
+        }
+      })
+
+    } else {
+      alert('client side validation error')
+      self.errors.showAllMessages()
+    }
+  }
+
+  self.errors = ko.validation.group(self)
+
+  /*
   var pageElementIds = {
-  	'spinner': 'spin',
-  	'form': 'jsForm',
+    'spinner': 'spin',
+    'form': 'jsForm',
     'successMessage': 'jsSuccessMessage'
   }
   // browser crap
@@ -20,13 +74,17 @@ var VolunteerModel = function () {
     element.className += ' hidden'
   }
   var showElement = function (element) {
-    element.className = element.className.replace( /(?:^|\s)hidden(?!\S)/g , '')
+    element.className = element.className.replace(/(?:^|\s)hidden(?!\S)/g, '')
   }
+
+  // enable validation
+  // ko.validation.init()
+  // var dfdf = ko.observable().extend({ required: true })
 
   self.errorMessages = ko.observableArray()
 
   self.hasErrors = ko.computed(function () {
-  	return self.errorMessages().length > 0
+    return self.errorMessages().length > 0
   })
 
   var loading
@@ -52,7 +110,7 @@ var VolunteerModel = function () {
     .then(function (result) {
       loading.stop()
       if (result.statusCode.toString().charAt(0) !== '2') {
-      	self.errorMessages(result.messages)
+        self.errorMessages(result.messages)
         showElement(form)
       } else {
         showElement(successMessage)
@@ -61,6 +119,8 @@ var VolunteerModel = function () {
   }
 
   form.onsubmit = submitForm
+
+  */
 }
 
 module.exports = VolunteerModel

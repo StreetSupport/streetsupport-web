@@ -17,41 +17,31 @@ pageName: volunteer
 <div class="block">
   <div class="container block__inner">
     <div class="block__content">
-    	<div id="jsSuccessMessage" class="hidden">
-    		<h2>Thank you for submitting your details!</h2>
-    		<p>You have been added to our central database. Should an organisation require your help, they will contact you directly with more information.</p>
-    	</div>
-    	<form id="jsForm" class="form">
+    	<form id="jsForm" class="form" data-bind="submit: submitForm">
     		<p>Organisations and charities are always in need of volunteers to help with a wide variety of tasks and services. This can range from administrative tasks, building renovation, mentoring or just someone to talk to. If you would like to volunteer, please fill in the form below.</p>
     		<p>* denotes a required field.</p>
-    		<!-- ko if: hasErrors -->
-			<h2>There were errors in your submission:</h2>
-			<ul data-bind="foreach: errorMessages">
-			  <li data-bind="text: $data"></li>
-			</ul>
-			<!-- /ko -->
 	    	<fieldset class="form__fieldset">
 	    		<legend class="form__fieldset-title">About You</legend>
 	    		<ul class="form__field-list">
 	    			<li class="form__field-item">
 	    				<label class="form__label" for="name">First Name *</label>
-	    				<input class="form__input" type="text" name="firstname" id="firstname"></input>
+	    				<input class="form__input" type="text" id="firstname" data-bind="value: firstName"></input>
 	    			</li>
 	    			<li class="form__field-item">
 	    				<label class="form__label" for="name">Last Name *</label>
-	    				<input class="form__input" type="text" name="lastname" id="lastname" required></input>
+	    				<input class="form__input" type="text" id="lastname" data-bind="value: lastName"></input>
 	    			</li>
 	    			<li class="form__field-item">
 	    				<label class="form__label" for="email">Email *</label>
-	    				<input class="form__input" type="email" name="email" id="email" required></input>
+	    				<input class="form__input" type="email" id="email" data-bind="value: email"></input>
 	    			</li>
 	    			<li class="form__field-item">
 	    				<label class="form__label" for="telephone">Telephone</label>
-	    				<input class="form__input" type="text" name="telephone" id="telephone"></input>
+	    				<input class="form__input" type="text" id="telephone" data-bind="value: telephone"></input>
 	    			</li>
 	    			<li class="form__field-item">
 	    				<label class="form__label" for="postcode">Postcode *</label>
-	    				<input class="form__input" type="text" name="postcode" id="postcode" required></input>
+	    				<input class="form__input" type="text" id="postcode" data-bind="value: postcode"></input>
 	    			</li>
 	    		</ul>
 	    	</fieldset>
@@ -60,7 +50,7 @@ pageName: volunteer
 	    		<ul class="form__field-list">
 	    			<li class="form__field-item">
 	    				<label class="form__label form__label--full-width" for="skillsAndExperience">What are you able to offer? Please include any skills, experience or interests that might be useful - from medical, legal or finance, to cooking and music!</label>
-	    				<textarea class="form__input--multiline" name="skillsAndExperience" id="skillsAndExperience"></textarea>
+	    				<textarea class="form__input--multiline" id="skillsAndExperience" data-bind="value: skillsAndExperience"></textarea>
 	    			</li>
 	    		</ul>
 	    	</fieldset>
@@ -69,7 +59,7 @@ pageName: volunteer
 	    		<ul class="form__field-list">
 	    			<li class="form__field-item">
 	    				<label class="form__label form__label--full-width" for="availability">When are generally available to help? How often are you able to help?</label>
-	    				<textarea class="form__input--multiline" name="availability" id="availability"></textarea>
+	    				<textarea class="form__input--multiline" id="availability" data-bind="value: availability"></textarea>
 	    			</li>
 	    		</ul>
 	    	</fieldset>
@@ -78,11 +68,11 @@ pageName: volunteer
 	    		<ul class="form__field-list">
 	    			<li class="form__field-item">
 	    				<label class="form__label form__label--full-width" for="resources">Is there anything else you could offer? eg meeting rooms, car/van for transport, unwanted items.</label>
-	    				<textarea class="form__input--multiline" name="resources" id="resources"></textarea>
+	    				<textarea class="form__input--multiline" id="resources" data-bind="value: resources"></textarea>
 	    			</li>
 	    		</ul>
 	    	</fieldset>
-	    	<button id="jsFormButton" class="btn btn--brand-d form__submit"><span class="btn__text">Submit</span></button>
+	    	<button type="submit" class="btn btn--brand-d form__submit"><span class="btn__text">Submit</span></button>
     	</form>
       	{{> social-share}}
     </div>
