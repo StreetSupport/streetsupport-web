@@ -11,7 +11,9 @@ var VolunteerModel = function () {
   ko.validation.init({
     insertMessages: true,
     decorateInputElement: true,
-    parseInputAttributes: true
+    parseInputAttributes: true,
+    errorMessageClass: 'form__error',
+    errorElementClass: 'form__input--error'
   }, true)
 
   self.firstName = ko.observable('').extend({ required: true })
@@ -29,7 +31,7 @@ var VolunteerModel = function () {
 
     if (self.errors().length === 0) {
       loading = new Spinner().spin(spin)
-      
+
       // TODO: Use knockout stuff for this
       var payload = {
         'FirstName': document.getElementById('firstname').value,
@@ -42,6 +44,7 @@ var VolunteerModel = function () {
         'ResourcesDescription': document.getElementById('resources').value
       }
 
+      // TODO: Nice notification on success/fail
       postApi.post(apiRoutes.createVolunteerEnquiry, payload).then(function (result) {
         loading.stop()
         if (result.statusCode.toString().charAt(0) !== '2') {
@@ -54,8 +57,12 @@ var VolunteerModel = function () {
       })
 
     } else {
-      alert('client side validation error')
       self.errors.showAllMessages()
+
+      // Jump to top of form
+      var url = location.href
+      location.href = "#jsForm"
+      history.replaceState(null, null, url)
     }
   }
 

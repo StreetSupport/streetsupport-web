@@ -23,6 +23,7 @@
   &__field-item {
     padding: 5px 0;
     @include cf();
+    position: relative;
 
 		@include mq($from: m) {
       @include span(3 of $column-small);
@@ -49,6 +50,21 @@
 			width: 100%;
       min-height: 8rem;
     }
+
+    &--error {
+      border: 1px solid $brand-g;
+    }
+  }
+
+  &__error {
+    font-family: $font-headline;
+    font-weight: $font-headline-weight;
+    margin-top: 7px;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: $brand-g;
   }
 
   &__submit {
