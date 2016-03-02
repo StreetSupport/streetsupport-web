@@ -7,7 +7,6 @@ var Spinner = require('spin.js')
 
 var VolunteerModel = function () {
   var self = this
-  var spin = document.getElementById(spin)
 
   ko.validation.init({
     insertMessages: true,
@@ -24,12 +23,14 @@ var VolunteerModel = function () {
   self.availability = ko.observable('')
   self.resources = ko.observable('')
 
-  var loading
-
   self.submitForm = function () {
+    var loading
+    var spin = document.getElementById('spin')
+
     if (self.errors().length === 0) {
       loading = new Spinner().spin(spin)
-
+      
+      // TODO: Use knockout stuff for this
       var payload = {
         'FirstName': document.getElementById('firstname').value,
         'LastName': document.getElementById('lastname').value,
@@ -41,13 +42,14 @@ var VolunteerModel = function () {
         'ResourcesDescription': document.getElementById('resources').value
       }
 
-      postApi.post(apiRoutes.createVolunteerEnquiry, payload)
-      .then(function (result) {
+      postApi.post(apiRoutes.createVolunteerEnquiry, payload).then(function (result) {
         loading.stop()
         if (result.statusCode.toString().charAt(0) !== '2') {
-          showElement(form)
+          // showElement(form)
+          alert('server submitted')
         } else {
-          showElement(successMessage)
+          alert('server error')
+          //showElement(successMessage)
         }
       })
 
@@ -76,10 +78,6 @@ var VolunteerModel = function () {
   var showElement = function (element) {
     element.className = element.className.replace(/(?:^|\s)hidden(?!\S)/g, '')
   }
-
-  // enable validation
-  // ko.validation.init()
-  // var dfdf = ko.observable().extend({ required: true })
 
   self.errorMessages = ko.observableArray()
 
