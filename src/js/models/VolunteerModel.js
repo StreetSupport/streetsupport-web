@@ -48,10 +48,10 @@ var VolunteerModel = function () {
       postApi.post(apiRoutes.createVolunteerEnquiry, payload).then(function (result) {
         loading.stop()
         if (result.statusCode.toString().charAt(0) !== '2') {
-          // showElement(form)
-          alert('server submitted')
-        } else {
           alert('server error')
+          // showElement(form)
+        } else {
+          alert('server submitted')
           //showElement(successMessage)
         }
       })
