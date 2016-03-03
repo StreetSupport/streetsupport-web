@@ -17,7 +17,7 @@ pageName: volunteer
 <div class="block">
   <div class="container block__inner">
     <div class="block__content">
-    	<form id="jsForm" class="form form--volunteer" data-bind="submit: submitForm">
+    	<form id="js-form" class="form form--volunteer" data-bind="submit: submitForm">
     		<p>Organisations and charities are always in need of volunteers to help with a wide variety of tasks and services. This can range from administrative tasks, building renovation, mentoring or just someone to talk to. If you would like to volunteer, please fill in the form below.</p>
     		<p>* denotes a required field.</p>
 	    	<fieldset class="form__fieldset">
@@ -74,7 +74,18 @@ pageName: volunteer
 	    	</fieldset>
 	    	<button type="submit" class="btn btn--brand-d form__submit"><span class="btn__text">Submit</span></button>
     	</form>
-      	{{> social-share}}
+
+      <div id="js-fail" class="hide">
+        <h2 class="h2">Technical Error</h2>
+        <p>There has been a technical error. Please <a href="/contact.html">contact Street Support</a>.</p>
+      </div>
+
+      <div id="js-success" class="hide">
+        <h2 class="h2">Thank you for submitting your details!</h2>
+        <p>You have been added to our central database. Should an organisation require your help, they will contact you directly with more information.</p>
+      </div>
+
+      {{> social-share}}
     </div>
   </div>
 </div>
