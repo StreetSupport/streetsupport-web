@@ -1,0 +1,21 @@
+// Strip the units from values
+// @param {Number} $number - value to remove unit from
+// @return {Number} - Unitless number
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+// Return a value as `rem` using a base font size
+// @param {Number} $pixels - Value in pixels
+// @param {Number} $context - Value to divide against in pixels, defaults to Base font-size
+// @return {Number} - Value in `rem`s
+@function rem($pixels, $context: $base-font-size) {
+  $pixels: strip-unit($pixels);
+  $context: strip-unit($context);
+
+  @return #{$pixels/$context}rem;
+}
