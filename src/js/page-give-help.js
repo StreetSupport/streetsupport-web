@@ -9,7 +9,7 @@ analytics.init()
 FastClick.attach(document.body)
 
 // Load and process data
-require.ensure(['./api', './get-api-data', './needs', './template-render', 'spin.js', 'lodash'], function (require) {
+require.ensure(['./api', './get-api-data', './template-render', 'spin.js', 'lodash'], function (require) {
   var apiRoutes = require('./api')
   var getApiData = require('./get-api-data')
   var templating = require('./template-render')
