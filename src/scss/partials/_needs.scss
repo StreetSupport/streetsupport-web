@@ -1,30 +1,34 @@
 .needs {
-	&__need {
-		margin-top: 1.5em;
-		margin-bottom: 1em;
-	    @include span(6 of $column-small);
+  &__need {
+    margin: 0 0 10px 0;
+		padding: 0;
 
-	    @include mq($from: m) {
-	      @include span(9 of $column-large);
-	    }
+    @include span(6 of $column-small);
 
-	    @include mq($from: l) {
-		  margin-top: 0em;
-	      @include span(9 of $column-large);
-	    }
-	}
-	&__more-info {
-	    @include span(6 of $column-small);
-		text-align: center;
+    @include mq($from: m) {
+			margin-top: 17px;
+      @include span(9 of $column-large);
+    }
 
-	    @include mq($from: m) {
-	      @include span(3 of $column-large);
-		text-align: right;
-	    }
+    @include mq($from: l) {
+      @include span(9 of $column-large);
+    }
+  }
 
-	    @include mq($from: l) {
-	      @include span(3 of $column-large);
-		text-align: right;
-	    }
-	}
+  &__more-info {
+		margin-bottom: 40px;
+
+    @include span(6 of $column-small);
+    text-align: left;
+
+    @include mq($from: m) {
+      @include span(3 of $column-large);
+      text-align: right;
+    }
+
+    @include mq($from: l) {
+      @include span(3 of $column-large);
+      text-align: right;
+    }
+  }
 }
