@@ -14,7 +14,7 @@ $mq-breakpoints: (
   xs:  360px,
   s:   480px,
   m:   600px,
-  l:   799px
+  l:   800px
 );
 
 // Define the breakpoint from the $mq-breakpoints list that should
@@ -36,7 +36,7 @@ $site-gutter: rem(16px);
 $grid-gutter: .25; // Quarter of column width
 $column-small: 6;
 $column-large: 12;
-$grid-debug: show; // Change this to show or hide
+$grid-debug: hide; // Change this to show or hide
 
 // Colours
 $brand-a: #00C08E;
