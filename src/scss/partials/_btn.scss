@@ -13,26 +13,26 @@
 
   // Components
   &__icon {
-    height: 90px;
+    height: 80px;
     width: 100%;
     display: block;
     background-position: center top;
     background-size: 100% auto;
 
     @include mq($from: xs) {
-      height: 140px;
+      height: 100px;
     }
 
     @include mq($from: s) {
-      height: 180px;
+      height: 120px;
     }
 
     @include mq($from: m) {
-      height: 200px;
+      height: 190px;
     }
 
     @include mq($from: l) {
-      height: 230px;
+      height: 140px;
     }
 
     & + span {
@@ -42,7 +42,7 @@
 
   &__text {
     display: block;
-    padding: 15px 10px;
+    padding: 15px 20px;
     border-radius: 10px;
     box-shadow: 0px 5px 0px 0px darken( $brand-d, 15% );
     transition: background-color 200ms ease, box-shadow 200ms ease;

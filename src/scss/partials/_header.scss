@@ -4,7 +4,7 @@
   background-color: $brand-a;
 
   &__title {
-    margin: 8px $site-gutter 0 $site-gutter;
+    margin: 8px 0 0 0;
     padding: 0;
     display: inline-block;
     color: #fff;
@@ -47,6 +47,7 @@
     padding: 0 15px 0 15px;
     width: auto;
     margin: 0;
+    margin-right: -$site-gutter;
 
     .icon {
       height: 20px;

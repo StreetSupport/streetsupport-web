@@ -11,13 +11,10 @@ $mq-responsive: true;
 // across team members. It will improve communication between
 // stakeholders, designers, developers, and testers.
 $mq-breakpoints: (
-  xs:  480px,
-  s:   600px,
-  m:   740px,
-  l:   980px,
-  xl:  1300px,
-
-  btnhack:  350px
+  xs:  360px,
+  s:   480px,
+  m:   600px,
+  l:   800px
 );
 
 // Define the breakpoint from the $mq-breakpoints list that should
@@ -28,14 +25,14 @@ $mq-static-breakpoint: l;
 // If you want to display the currently active breakpoint in the top
 // right corner of your site during development, add the breakpoints
 // to this list, ordered by width, e.g. (mobile, tablet, desktop).
-//$mq-show-breakpoints: (xs, s, m, l, xl);
+//$mq-show-breakpoints: (xs, s, m, l);
 
 // Site Variables
 // -----------------------------
 
 $base-font-size: 16px; // Recommended to not change this
-$site-container: 81.25rem; // 1300px
-$site-gutter: 1rem; // 16px
+$site-container: rem(800px);
+$site-gutter: rem(16px);
 $grid-gutter: .25; // Quarter of column width
 $column-small: 6;
 $column-large: 12;
@@ -59,7 +56,7 @@ $font-headline: 'museo-sans-rounded', sans-serif;
 $font-headline-weight: 500;
 
 // Misc
-$nav-width: 210px;
+$nav-width: 220px;
 
 // Default Grid Options
 // -----------------------------

@@ -2,7 +2,7 @@
   @include container();
   padding: 0 $site-gutter;
 
-  @include mq($from: m) {
+  @include mq($from: l) {
     @include with-layout($column-large) {
       @include container();
     }

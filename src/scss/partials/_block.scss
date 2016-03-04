@@ -4,32 +4,7 @@
   padding-bottom: 30px;
 
   &__inner {
-    @include mq($from: m) {
-      @include span(10 of $column-large);
 
-      // Center align on homepage
-      .page-home & {
-        @include push(1 of $column-large);
-      }
-
-      // Full width on find help/give help only
-      .page-givehelp &,
-      .page-findhelp & {
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        float: none;
-      }
-    }
-
-    @include mq($from: l) {
-      @include span(8 of $column-large);
-
-      // Center align on homepage
-      .page-home & {
-        @include push(2 of $column-large);
-      }
-    }
   }
 
   // Components

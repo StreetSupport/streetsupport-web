@@ -3,11 +3,10 @@
     margin: 0 0 10px 0;
 		padding: 0;
 
-    @include span(6 of $column-small);
+    @include span(full);
 
     @include mq($from: m) {
-			margin-top: 17px;
-      @include span(9 of $column-large);
+      @include span(4 of $column-small);
     }
 
     @include mq($from: l) {
@@ -17,12 +16,12 @@
 
   &__more-info {
 		margin-bottom: 40px;
-
-    @include span(6 of $column-small);
     text-align: left;
 
+    @include span(full);
+
     @include mq($from: m) {
-      @include span(3 of $column-large);
+      @include span(2 of $column-small);
       text-align: right;
     }
 
