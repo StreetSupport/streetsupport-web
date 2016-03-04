@@ -30,7 +30,7 @@ import stylelint from 'stylelint'
 const output = [
   autoprefixer({ browsers: config.autoprefixer.browsers }),
   pxtorem({ replace: true }),
-  mqpacker()
+  mqpacker({ sort: true })
 ]
 
 // Add cssnano if there is a production flag
