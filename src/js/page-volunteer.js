@@ -13,7 +13,7 @@ require.ensure(['knockout', './models/VolunteerModel'], function (require) {
   var ko = require('knockout')
   var Model = require('./models/VolunteerModel')
 
-  ko.applyBindings(new Model())
+  ko.applyBindings(new Model(), document.getElementById('js-form'))
 
   socialShare.init()
 })

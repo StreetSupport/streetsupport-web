@@ -1,52 +1,75 @@
 .form {
-}
-.form__fieldset {
-	border: none;
-}
-.form__fieldset-title {
-	@extend .h2;
-}
-.form__field-list {
-	list-style: none;
-	padding: 0;
-}
-.form__field-item {
-    @include cf();
-	padding: 5px 0;
-}
-.form__label {
-	@extend .h3;
-	display: block;
-	margin-bottom: 5px;
+  @include cf();
 
-    @include span(6 of $column-small);
+  &__fieldset {
+    border: none;
+    margin: 20px 0 0 0;
+    padding: 0;
+  }
+
+  &__fieldset-title {
+		margin-bottom: 5px;
 
     @include mq($from: m) {
-    	@include span(2 of $column-small);
-
-		&--full-width {
-	    	@include span(6 of $column-small);
+		  @include span(full);
 		}
+  }
+
+  &__field-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__field-item {
+    padding: 5px 0;
+    @include cf();
+    position: relative;
+
+		@include mq($from: m) {
+      @include span(3 of $column-small);
+		}
+
+		&--full {
+			@include mq($from: m) {
+	      @include span(full);
+			}
+		}
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  &__input {
+    padding: 5px;
+		width: 100%;
+    border: 1px solid $brand-f;
+
+		&--multiline {
+			width: 100%;
+      min-height: 8rem;
     }
-}
-.form__input {
-	padding: 5px;
-	@include span(6 of $column-small);
 
-    @include mq($from: m) {
-	    @include span(4 of $column-small);
-	}
+    &--error {
+      border: 1px solid $brand-g;
+    }
+  }
 
-	&--multiline {
-    	@include span(6 of $column-small);
-		height: 5em;
-	}
-}
+  &__error {
+    font-family: $font-headline;
+    font-weight: $font-headline-weight;
+    margin-top: 7px;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: $brand-g;
+  }
 
-.form__submit { 
-	float: right;
-}
-
-.hidden {
-	display: none;
+  &__submit {
+    margin-top: 10px;
+    float: right;
+  }
 }
