@@ -13,29 +13,27 @@
 
   // Components
   &__icon {
-    height: 90px;
+    height: 80px;
     width: 100%;
     display: block;
     background-position: center top;
     background-size: 100% auto;
 
-    /*
     @include mq($from: xs) {
-      height: 140px;
+      height: 100px;
     }
 
     @include mq($from: s) {
-      height: 180px;
+      height: 120px;
     }
 
     @include mq($from: m) {
-      height: 200px;
+      height: 190px;
     }
 
     @include mq($from: l) {
-      height: 230px;
+      height: 140px;
     }
-    */
 
     & + span {
       border-radius: 0 0 10px 10px;
