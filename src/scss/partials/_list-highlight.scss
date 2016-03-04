@@ -6,6 +6,13 @@
   text-align: center;
   padding: 0 80px;
 
+  .page-home & {
+    @include mq($from: l) {
+      max-width: 70%;
+      margin: 0 auto;
+    }
+  }
+
   &__title {
     margin: 0;
     padding: 20px 0 5px 0;
