@@ -3,6 +3,22 @@
 
   &__element {
     @include span(3 of $column-small);
+
+    @include mq($from: l) {
+      @include span(6 of $column-large);
+    }
+  }
+
+  .page-home & {
+    .split__element {
+      @include mq($from: l) {
+        @include span(4 of $column-large);
+
+        &:first-of-type {
+          @include push(2 of $column-large);
+        }
+      }
+    }
   }
 
   .btn {

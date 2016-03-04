@@ -6,23 +6,26 @@
   &__item {
     @include span(3 of $column-small);
 
+    @include mq($from: s) {
+      @include span(2 of $column-small);
+    }
+
     @include mq($from: m) {
-      @include span(4 of $column-large);
+      @include span(3 of $column-small);
     }
 
     @include mq($from: l) {
       @include span(3 of $column-large);
     }
 
-    // NOTE: Both these classes are horrible hacks and needs to be changed ASAP
-    .btn__icon {
-      max-height: 180px !important;
-    }
-
     .btn__text {
-      font-size: 14px;
+      font-size: 12px;
 
-      @include mq($from: btnhack) {
+      @include mq($from: xs) {
+        font-size: 13px;
+      }
+
+      @include mq($from: m) {
         font-size: 16px;
       }
     }

@@ -8,7 +8,7 @@
   &__header {
     margin-top: 0;
 
-    @include mq($from: btnhack) {
+    @include mq($from: xs) {
       display: inline-block;
     }
   }
@@ -23,7 +23,7 @@
     list-style: none;
     text-align: center;
 
-    @include mq($from: btnhack) {
+    @include mq($from: xs) {
       display: inline-block;
     }
   }

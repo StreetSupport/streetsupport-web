@@ -13,10 +13,6 @@
 
     @include span(3 of $column-small);
 
-    @include mq($from: m) {
-      @include span(4 of $column-large);
-    }
-
     @include mq($from: l) {
       @include span(3 of $column-large);
     }
