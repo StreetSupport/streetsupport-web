@@ -30,8 +30,11 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
   var theCategory = urlParameter.parameter('category')
   var theLocation = urlParameter.parameter('location')
   var categoryUrl = apiRoutes.categoryServiceProvidersByDay += theCategory
-
-  buildList(categoryEndpoint.getEndpointUrl(categoryUrl, theLocation))
+  categoryEndpoint.getEndpointUrl(categoryUrl, theLocation).then(function (success) {
+    buildList(success)
+  }, function (error) {
+    console.log(error)
+  })
 
   function buildList (url) {
     // Get API data using promise

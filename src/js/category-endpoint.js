@@ -1,7 +1,11 @@
 var getLocation = require('./get-location')
 var find = require('lodash/collection/find')
+var Q = require('q')
 
 var getEndpointUrl = function (categoryUrl, theLocation) {
+  var self = this
+  self.deferred = Q.defer()
+
   if (theLocation.length) {
     var locations = [
       {
@@ -24,8 +28,8 @@ var getEndpointUrl = function (categoryUrl, theLocation) {
       var latitude = requestedLocation.latitude
       var longitude = requestedLocation.longitude
       var locationUrl = categoryUrl += '/long/' + longitude + '/lat/' + latitude
-
-      return locationUrl
+      console.log('location for '+ theLocation)
+      self.deferred.resolve(locationUrl)
     }
   }
 
@@ -34,15 +38,16 @@ var getEndpointUrl = function (categoryUrl, theLocation) {
       var latitude = position.coords.latitude
       var longitude = position.coords.longitude
       var locationUrl = categoryUrl += '/long/' + longitude + '/lat/' + latitude
-
-      return locationUrl
+      console.log('location for geoLocation '+ locationUrl)
+      self.deferred.resolve(locationUrl)
     }).fail(function (error) {
       console.error('GEOLOCATION ERROR: ' + error)
-      return categoryUrl
+      console.log('location for error '+ categoryUrl)
+      self.deferred.resolve(categoryUrl)
     })
   }
 
-  return categoryUrl
+  return self.deferred.promise
 }
 
 module.exports = {
