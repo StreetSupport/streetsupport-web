@@ -1,0 +1,42 @@
+---
+title: Give (Prototype) - Street Support
+description: xx
+layout: default.hbs
+permalink: false
+jsBundle: give
+---
+
+<div class="block block--intro">
+  <div class="container block__inner">
+    <h1 class="h1 block__header">Give Prototype</h1>
+    <a href="give-help.html">Other ways to give help</a>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container block__inner">
+    <div class="block__content">
+      <form class="give" action="#">
+        <h1 class="h2">What can you give?</h1>
+        <input autofocus placeholder="Search" class="awesomplete give__autocomplete" data-list="container, insurance, coat, jeans" />
+
+        <input type="checkbox" id="all" class="give__select give__select--first" />
+        <label for="all">Everything</label>
+        <input type="checkbox" id="things" class="give__select" />
+        <label for="things">Things</label>
+        <input type="checkbox" id="time" class="give__select" />
+        <label for="time">Time</label>
+        <input type="checkbox" id="money" class="give__select" />
+        <label for="money">Money</label>
+      </form>
+
+      <div id="js-result" class="give__result">
+        <button class="sort" data-sort="organisation" class="give__sort">Sort by organisation name</button>
+
+        <ul class="list"></ul>
+      </div>
+
+      {{> social-share}}
+    </div>
+  </div>
+</div>
