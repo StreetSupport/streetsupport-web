@@ -1,5 +1,5 @@
 describe('test test', function () {
   it('should test', function () {
-    expect(2 + 2).toEqual(5)
+    expect(2 + 2).toEqual(4)
   })
 })
