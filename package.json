@@ -41,6 +41,7 @@
     "gulpicon": "0.1.2",
     "handlebars": "4.0.5",
     "imagemin-pngquant": "4.2.0",
+    "imports-loader": "^0.6.5",
     "metalsmith": "2.1.0",
     "metalsmith-collections": "0.7.0",
     "metalsmith-discover-helpers": "^0.1.0",
@@ -64,10 +65,13 @@
     "yargs": "3.32.0"
   },
   "dependencies": {
+    "awesomplete": "github:leaverou/awesomplete#gh-pages",
     "fastclick": "1.0.6",
     "hogan.js": "3.0.2",
+    "holderjs": "^2.9.3",
     "knockout": "3.4.0",
     "knockout.validation": "2.0.3",
+    "list.js": "1.2.0",
     "lodash": "3.10.1",
     "q": "1.4.1",
     "spin.js": "2.3.2"
