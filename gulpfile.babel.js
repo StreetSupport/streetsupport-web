@@ -12,11 +12,19 @@ const tasks = requireDir(__dirname + '/tasks') // eslint-disable-line
 // Watch task
 gulp.task('watch', () => {
   gulp.watch(config.paths.scss + '**/*.scss', ['scss'])
-  gulp.watch(config.paths.js + '**/*.js', ['webpack'])
+  gulp.watch(config.paths.js + '**/*.js', ['run-jasmine', 'webpack'])
   gulp.watch(config.paths.img + '{,**/}*.{png,jpg,gif,svg}', ['img'])
   gulp.watch(config.paths.icons + '**/*.svg', ['svgicon'])
   gulp.watch(config.paths.fonts + '**/*', ['copy'])
+  gulp.watch(config.paths.specs + '**/*[sS]pec.js', ['run-jasmine'])
   gulp.watch([config.paths.data + '**/*', config.paths.layouts + '**/*', config.paths.pages + '**/*', config.paths.partials + '**/*'], ['metalsmith'])
+})
+
+// JS Dev Watch task
+gulp.task('dev-watch', () => {
+  console.log(config.paths.specs)
+  gulp.watch(config.paths.js + '**/*.js', ['run-jasmine'])
+  gulp.watch(config.paths.specs + '**/*[sS]pec.js', ['run-jasmine'])
 })
 
 // Build website, either with development or minified assets and run server with live reloading
@@ -27,6 +35,15 @@ gulp.task('default', callback => {
     'metalsmith',
     ['html', 'svgicon', 'scss', 'webpack', 'img', 'copy'],
     ['browsersync', 'watch'],
+    callback
+  )
+})
+
+// Run tests and watch js/spec files
+gulp.task('dev', callback => {
+  runSequence(
+    'run-jasmine',
+    'dev-watch',
     callback
   )
 })
