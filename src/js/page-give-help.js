@@ -21,17 +21,18 @@ require.ensure(['./api', './get-api-data', './template-render', 'spin.js', 'loda
   var loading = new Spinner().spin(spin)
 
   // Get API data using promise
-  getApiData.data(apiRoutes.needs).then(function (result) {
-    var needsFromApi = result.data
-    _.each(needsFromApi, function(need) {
-      need.link = "mailto:givehelp@streetsupport.net?subject=" + need.serviceProviderId + " need: " + need.description
-    })
-    var theData = { 'needs': needsFromApi }
-    var callback = function () {
-      loading.stop()
-      socialShare.init()
-    }
+  getApiData.data(apiRoutes.needs)
+    .then(function (result) {
+      var needsFromApi = result.data
+      _.each(needsFromApi, function(need) {
+        need.link = "give-item-submit-details.html?needId=" + need.id
+      })
+      var theData = { 'needs': needsFromApi }
+      var callback = function () {
+        loading.stop()
+        socialShare.init()
+      }
 
-    templating.renderTemplate('js-need-list-tpl', theData, 'js-need-list-output', callback)
-  })
+      templating.renderTemplate('js-need-list-tpl', theData, 'js-need-list-output', callback)
+    })
 })
