@@ -50,6 +50,13 @@ gulp.task('auditcode', callback => {
   )
 })
 
+gulp.task('test', callback => {
+  runSequence(
+    'run-jasmine',
+    callback
+  )
+})
+
 // Run the audit task to check the built website for accessibility
 // NOTE: Not used yet
 /*
