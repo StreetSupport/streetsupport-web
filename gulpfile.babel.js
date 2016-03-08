@@ -34,6 +34,7 @@ gulp.task('default', callback => {
 // Build website, either with development or minified assets depending on flag
 gulp.task('deploy', callback => {
   runSequence(
+    'run-jasmine',
     'clean',
     'metalsmith',
     ['html', 'svgicon', 'scss', 'webpack', 'img', 'copy'],
