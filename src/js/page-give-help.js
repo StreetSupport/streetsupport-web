@@ -24,8 +24,6 @@ require.ensure(['./api', './get-api-data', './template-render', 'spin.js', 'loda
   getApiData.data(apiRoutes.needs).then(function (result) {
     var needsFromApi = result.data
     _.each(needsFromApi, function(need) {
-      console.log('hello!')
-      console.log(need)
       need.link = "mailto:givehelp@streetsupport.net?subject=" + need.serviceProviderId + " need: " + need.description
     })
     var theData = { 'needs': needsFromApi }
