@@ -22,6 +22,7 @@ gulp.task('watch', () => {
 // Build website, either with development or minified assets and run server with live reloading
 gulp.task('default', callback => {
   runSequence(
+    'test',
     'clean',
     'metalsmith',
     ['html', 'svgicon', 'scss', 'webpack', 'img', 'copy'],
