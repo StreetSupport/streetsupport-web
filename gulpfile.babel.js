@@ -22,7 +22,7 @@ gulp.task('watch', () => {
 // Build website, either with development or minified assets and run server with live reloading
 gulp.task('default', callback => {
   runSequence(
-    'test',
+    'run-jasmine',
     'clean',
     'metalsmith',
     ['html', 'svgicon', 'scss', 'webpack', 'img', 'copy'],
@@ -47,13 +47,6 @@ gulp.task('auditcode', callback => {
   runSequence(
     'scsslint',
     'jslint',
-    callback
-  )
-})
-
-gulp.task('test', callback => {
-  runSequence(
-    'run-jasmine',
     callback
   )
 })
