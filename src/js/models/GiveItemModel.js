@@ -1,4 +1,5 @@
 var ko = require('knockout')
+require('knockout.validation') // No variable here is deliberate!
 var getUrlParams = require('../get-url-parameter')
 var getApiData = require('../get-api-data')
 var postApiData = require('../post-api-data')
@@ -8,10 +9,21 @@ var browser = require('../browser')
 var GiveItemModel = function () {
   var self = this
 
-  self.email = ko.observable()
-  self.message = ko.observable()
-  self.needDescription = ko.observable('wangers')
-  self.isOptedIn = ko.observable(false)
+  self.formModel = ko.validatedObservable({
+    email: ko.observable().extend({ required: true }),
+    message: ko.observable().extend({ required: true }),
+    isOptedIn: ko.observable(false)
+  })
+
+  ko.validation.init({
+    insertMessages: true,
+    decorateInputElement: true,
+    parseInputAttributes: true,
+    errorMessageClass: 'form__error',
+    errorElementClass: 'form__input--error'
+  }, true)
+
+  self.needDescription = ko.observable()
 
   var needId = getUrlParams.parameter('needId')
   var providerId = getUrlParams.parameter('providerId')
@@ -26,12 +38,16 @@ var GiveItemModel = function () {
     })
 
   self.submit = function () {
-    postApiData.post(postEndpoint,
-    {
-      'Email': self.email(),
-      'Message': self.message(),
-      'IsOptedIn': self.isOptedIn()
-    })
+    if(self.formModel.isValid()) {
+      postApiData.post(postEndpoint,
+      {
+        'Email': self.formModel().email(),
+        'Message': self.formModel().message(),
+        'IsOptedIn': self.formModel().isOptedIn()
+      })
+    } else {
+
+    }
   }
 }
 

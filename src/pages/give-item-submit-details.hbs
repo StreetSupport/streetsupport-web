@@ -13,12 +13,12 @@ jsBundle: giveitemsubmitdetails
     <form id="js-form" class="form form--volunteer" data-bind="submit: submit">
       <p>Please fill in the form below, detailing how you can fulfil this need.</p>
       <p>* denotes a required field.</p>
-      <fieldset class="form__fieldset">
+      <fieldset class="form__fieldset" data-bind="with: formModel">
         <legend class="h2 form__fieldset-title">I Can Help!</legend>
         <ul class="form__field-list">
           <li class="form__field-item">
             <label class="form__label" for="email">Subject</label>
-            <p data-bind="text: needDescription"></p>
+            <p data-bind="text: $parent.needDescription"></p>
           </li>
           <li class="form__field-item">
             <label class="form__label" for="email">Email *</label>
