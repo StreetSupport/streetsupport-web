@@ -12,7 +12,8 @@
     "data": "src/data/",
     "layouts": "src/layouts",
     "pages": "src/pages",
-    "partials": "src/partials"
+    "partials": "src/partials",
+    "specs": "specs/"
   },
   "autoprefixer": {
     "browsers": ["last 2 versions", "IE >= 10"]

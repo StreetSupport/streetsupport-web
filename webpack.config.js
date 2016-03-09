@@ -23,6 +23,7 @@ module.exports = {
     organisation: __dirname + '/src/js/page-organisation',
     allserviceproviders: __dirname + '/src/js/page-all-service-providers',
     givehelp: __dirname + '/src/js/page-give-help',
+    giveitemsubmitdetails: __dirname + '/src/js/page-give-item-submit-details',
     volunteer: __dirname + '/src/js/page-volunteer'
   },
   output: {

@@ -1,0 +1,38 @@
+---
+title: Give Items - Submit Details - Street Support
+description: Street support makes it easier to help homeless people. Here's how to get in touch.
+layout: default.hbs
+permalink: false
+jsBundle: giveitemsubmitdetails
+---
+
+<div class="block block--intro">
+  <div class="container block__inner">
+    <h1 class="h1 block__header">Give</h1>
+    <a href="give-help.html">Other ways to give help</a>
+    <p>Please fill in the form below, detailing how you can fulfil this need.</p>
+    <form id="js-form" class="form form--volunteer" data-bind="submit: submitForm">
+        <p>Organisations and charities are always in need of volunteers to help with a wide variety of tasks and services. This can range from administration tasks, mentoring, DIY, skill share, or just someone to talk to. If you would like to volunteer, please fill in the form below, and when an organisation needs your skills they can get in touch.</p>
+        <p>* denotes a required field.</p>
+        <fieldset class="form__fieldset">
+          <legend class="h2 form__fieldset-title">About You</legend>
+          <ul class="form__field-list">
+            <li class="form__field-item">
+              <label class="form__label" for="message">Message *</label>
+              <input class="form__input" type="text" id="message" data-bind="textInput: message"></input>
+            </li>
+          </ul>
+        </fieldset>
+        <button type="submit" class="btn btn--brand-d form__submit"><span class="btn__text">Submit</span></button>
+      </form>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container block__inner">
+    <div class="block__content">
+      {{> social-share}}
+    </div>
+  </div>
+</div>
+
