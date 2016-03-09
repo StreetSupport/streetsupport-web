@@ -2,7 +2,7 @@
 var FastClick = require('fastclick')
 var nav = require('./nav.js')
 var analytics = require('./analytics')
-var Model = require('models/GiveItemModel')
+var Model = require('./models/GiveItemModel')
 var ko = require('knockout')
 
 nav.init()
