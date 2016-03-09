@@ -9,16 +9,20 @@ var browser = require('../../src/js/browser')
 describe('Give Item Model', function () {
   var model
   var getFromApiStub
-  var needId = '56d81bad92855625087e9a93'
+  var urlParamStub
+  var needId = needData().needId
+  var providerId = needData().serviceProviderId
 
   describe('Happy Path', function() {
     beforeEach(function () {
-      sinon.stub(getUrlParams, 'parameter')
-        .withArgs('needId')
+      urlParamStub = sinon.stub(getUrlParams, 'parameter')
+      urlParamStub.withArgs('needId')
         .returns(needId)
+      urlParamStub.withArgs('providerId')
+        .returns(providerId)
 
       getFromApiStub = sinon.stub(getFromApi, 'data')
-        .withArgs(endpoints.needs + needId)
+        .withArgs(endpoints.allServiceProviders + '/' + providerId + '/needs/' + needId)
         .returns({
           then: function(success, error) {
               success({
@@ -60,7 +64,7 @@ describe('Give Item Model', function () {
 
     it('should post form to api', function () {
       expect(postToApiStub
-        .withArgs(endpoints.needs + needId + '/offers-to-help',
+        .withArgs(endpoints.allServiceProviders + '/' + providerId + '/needs/' + needId + '/offers-to-help',
         {
           'Email': 'test@test.com',
           'Message': 'message',

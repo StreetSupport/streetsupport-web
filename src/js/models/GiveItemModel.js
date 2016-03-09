@@ -13,10 +13,12 @@ var GiveItemModel = function () {
   self.isOptedIn = ko.observable(false)
 
   var needId = getUrlParams.parameter('needId')
-  var endpoint = endpoints.needs + needId
+  var providerId = getUrlParams.parameter('providerId')
+  var endpoint = endpoints.allServiceProviders + '/' + providerId + '/needs/' + needId
 
   getApiData.data(endpoint)
     .then(function (success) {
+
     }, function (error) {
       browser.redirect('404.html')
     })

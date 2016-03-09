@@ -10,17 +10,21 @@ describe('Give Item Model', function () {
   var model
   var getFromApiStub
   var needId = '56d81bad92855625087e9a93'
+  var providerId = 'albert-kennedy-trust'
 
   describe('Need not found', function() {
     var browserStub
+    var urlParamStub
 
     beforeEach(function() {
-      sinon.stub(getUrlParams, 'parameter')
-        .withArgs('needId')
+      urlParamStub = sinon.stub(getUrlParams, 'parameter')
+      urlParamStub.withArgs('needId')
         .returns(needId)
+      urlParamStub.withArgs('providerId')
+        .returns(providerId)
 
       getFromApiStub = sinon.stub(getFromApi, 'data')
-        .withArgs(endpoints.needs + needId)
+        .withArgs(endpoints.allServiceProviders + '/' + providerId + '/needs/' + needId)
         .returns({
           then: function(success, error) {
               error({

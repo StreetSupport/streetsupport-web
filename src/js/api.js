@@ -15,11 +15,13 @@ var categoryServiceProvidersUrl = '/v2/categorised-service-providers/show/'
 var categoryServiceProvidersByDayUrl = '/v2/timetabled-service-providers/show/'
 var organisationUrl = '/v2/service-providers/show/'
 var needsUrl = '/v1/service-provider-needs/'
+var allServiceProvidersUrl = '/v1/all-service-providers/'
 var volunteerEnquiryUrl = '/v1/volunteer-enquiries/'
 var offerToHelpUrl = '/v1/offers-to-help/'
 
 module.exports = {
   serviceProviders: domainRoot + serviceProvidersUrl,
+  allServiceProviders: domainRoot + allServiceProvidersUrl,
   serviceCategories: domainRoot + serviceCategoriesUrl,
   categoryServiceProviders: domainRoot + categoryServiceProvidersUrl,
   categoryServiceProvidersByDay: domainRoot + categoryServiceProvidersByDayUrl,
