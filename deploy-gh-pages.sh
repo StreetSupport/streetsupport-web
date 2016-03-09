@@ -13,7 +13,7 @@ fi
 if [[ $TRAVIS_BRANCH == 'staging' ]]
   then
     REPO="github.com/StreetSupport/streetsupport.net-beta.git"
-    DOMAIN="beta.streetsupport.net"
+    DOMAIN="staging.streetsupport.net"
     APIENVIRONMENT=2
 fi
 if [[ $TRAVIS_BRANCH == 'develop' ]]
