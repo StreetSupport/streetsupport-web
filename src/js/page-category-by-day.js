@@ -33,7 +33,6 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
   categoryEndpoint.getEndpointUrl(categoryUrl, theLocation).then(function (success) {
     buildList(success)
   }, function (error) {
-    console.log(error)
   })
 
   function buildList (url) {
