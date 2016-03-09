@@ -32,7 +32,6 @@ describe('Give Item Model', function () {
           })
 
       browserStub = sinon.stub(browser, 'redirect')
-        .withArgs('404.html')
 
       model = new Model()
     })
@@ -44,7 +43,7 @@ describe('Give Item Model', function () {
     })
 
     it('should redirect to 404', function() {
-      expect(browserStub.calledOnce).toBeTruthy()
+      expect(browserStub.withArgs('404.html').calledOnce).toBeTruthy()
     })
   })
 })

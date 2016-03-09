@@ -14,7 +14,6 @@ var GiveItemModel = function () {
     .then(function (success) {
 
     }, function (error) {
-      console.log(error)
       browser.redirect('404.html')
     })
 }
