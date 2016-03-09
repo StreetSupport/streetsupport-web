@@ -25,6 +25,8 @@ var GiveItemModel = function () {
 
   self.needDescription = ko.observable()
 
+  self.validationErrors = ko.validation.group(self.formModel)
+
   var needId = getUrlParams.parameter('needId')
   var providerId = getUrlParams.parameter('providerId')
   var endpoint = endpoints.allServiceProviders + providerId + '/needs/' + needId
@@ -46,7 +48,7 @@ var GiveItemModel = function () {
         'IsOptedIn': self.formModel().isOptedIn()
       })
     } else {
-
+      self.validationErrors.showAllMessages()
     }
   }
 }
