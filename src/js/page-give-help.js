@@ -25,7 +25,7 @@ require.ensure(['./api', './get-api-data', './template-render', 'spin.js', 'loda
     .then(function (result) {
       var needsFromApi = result.data
       _.each(needsFromApi, function(need) {
-        need.link = "mailto:givehelp@streetsupport.net?subject=" + need.serviceProviderId + " need: " + need.description
+        need.link = "give-item-submit-details.html?needId=" + need.id
       })
       var theData = { 'needs': needsFromApi }
       var callback = function () {
