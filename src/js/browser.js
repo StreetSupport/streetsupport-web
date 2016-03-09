@@ -3,5 +3,5 @@ var redirect = function (url) {
 }
 
 module.exports = {
-  redirect: redirect,
+  redirect: redirect
 }

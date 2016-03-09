@@ -37,7 +37,35 @@ describe('Give Item Model', function () {
     })
 
     it('should get need data', function () {
-      expect(getFromApiStub.calledOnce).toBeTruthy();
+      expect(getFromApiStub.calledOnce).toBeTruthy()
+    })
+  })
+
+  describe('Submit', function () {
+    var postToApiStub
+
+    beforeEach(function () {
+      postToApiStub = sinon.stub(postToApi, 'post')
+
+      model.email('test@test.com')
+      model.message('message')
+      model.isOptedIn(true)
+
+      model.submit()
+    })
+
+    afterEach(function () {
+      postToApi.post.restore()
+    })
+
+    it('should post form to api', function () {
+      expect(postToApiStub
+        .withArgs(endpoints.needs + needId + '/offers-to-help',
+        {
+          'Email': 'test@test.com',
+          'Message': 'message',
+          'IsOptedIn': true
+        }).calledOnce).toBeTruthy()
     })
   })
 })
