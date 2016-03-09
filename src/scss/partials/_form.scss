@@ -40,6 +40,10 @@
   &__label {
     display: block;
     margin-bottom: 10px;
+
+    &--checkbox {
+      float: left; margin-right: 1em;
+    }
   }
 
   &__input {
@@ -54,6 +58,9 @@
 
     &--error {
       border: 1px solid $brand-g;
+    }
+
+    &--checkbox {
     }
   }
 

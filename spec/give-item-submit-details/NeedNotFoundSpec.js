@@ -24,7 +24,7 @@ describe('Give Item Model', function () {
         .returns(providerId)
 
       getFromApiStub = sinon.stub(getFromApi, 'data')
-        .withArgs(endpoints.allServiceProviders + '/' + providerId + '/needs/' + needId)
+        .withArgs(endpoints.allServiceProviders + providerId + '/needs/' + needId)
         .returns({
           then: function(success, error) {
               error({

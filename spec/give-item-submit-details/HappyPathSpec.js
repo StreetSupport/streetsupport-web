@@ -22,7 +22,7 @@ describe('Give Item Model', function () {
         .returns(providerId)
 
       getFromApiStub = sinon.stub(getFromApi, 'data')
-        .withArgs(endpoints.allServiceProviders + '/' + providerId + '/needs/' + needId)
+        .withArgs(endpoints.allServiceProviders + providerId + '/needs/' + needId)
         .returns({
           then: function(success, error) {
               success({
@@ -42,6 +42,10 @@ describe('Give Item Model', function () {
 
     it('should get need data', function () {
       expect(getFromApiStub.calledOnce).toBeTruthy()
+    })
+
+    it('should set needDescription', function () {
+      expect(model.needDescription()).toEqual('need description')
     })
   })
 
@@ -64,7 +68,7 @@ describe('Give Item Model', function () {
 
     it('should post form to api', function () {
       expect(postToApiStub
-        .withArgs(endpoints.allServiceProviders + '/' + providerId + '/needs/' + needId + '/offers-to-help',
+        .withArgs(endpoints.needs + needId + '/offers-to-help',
         {
           'Email': 'test@test.com',
           'Message': 'message',
@@ -77,7 +81,7 @@ describe('Give Item Model', function () {
 function needData() {
   return {
     'id': '56d81bad92855625087e9a93',
-    'description': 'desc',
+    'description': 'need description',
     'serviceProviderId': 'albert-kennedy-trust',
     'type': 'Things',
     'reason': 'test',
