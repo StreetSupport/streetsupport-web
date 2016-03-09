@@ -18,8 +18,16 @@ jsBundle: giveitemsubmitdetails
           <legend class="h2 form__fieldset-title">About You</legend>
           <ul class="form__field-list">
             <li class="form__field-item">
+              <label class="form__label" for="email">Email *</label>
+              <input type="text" class="form__input form__input" id="email" data-bind="textInput: email" />
+            </li>
+            <li class="form__field-item">
               <label class="form__label" for="message">Message *</label>
-              <input class="form__input" type="text" id="message" data-bind="textInput: message"></input>
+              <textarea class="form__input form__input--multiline" id="message" data-bind="textInput: message"></textarea>
+            </li>
+            <li class="form__field-item form__field-item--checkbox">
+              <input type="checkbox" id="isOptedIn" data-bind="attr: { value: isOptedIn }, checked: isOptedIn" class="form__checkbox" />
+              <label class="form__label" for="isOptedIn">Opt-In to newsletter</label>
             </li>
           </ul>
         </fieldset>
