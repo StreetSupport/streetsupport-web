@@ -10,7 +10,7 @@ var GiveItemModel = function () {
   var self = this
 
   self.formModel = ko.validatedObservable({
-    email: ko.observable().extend({ required: true }),
+    email: ko.observable().extend({ required: true, email: true }),
     message: ko.observable().extend({ required: true }),
     isOptedIn: ko.observable(false)
   })
