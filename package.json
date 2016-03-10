@@ -72,6 +72,7 @@
     "holderjs": "^2.9.3",
     "knockout": "3.4.0",
     "knockout.validation": "2.0.3",
+    "list.fuzzysearch.js": "github:javve/list.fuzzysearch.js#v0.1.0",
     "list.js": "1.2.0",
     "lodash": "3.10.1",
     "q": "1.4.1",

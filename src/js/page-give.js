@@ -5,6 +5,7 @@ var socialShare = require('./social-share')
 var analytics = require('./analytics')
 var awesomplete = require('imports?this=>window!../../node_modules/awesomplete/awesomplete.js')
 import List from 'list.js'
+var ListFuzzySearch = require('imports?this=>window!../../node_modules/list.fuzzysearch.js/dist/list.fuzzysearch.js')
 import Holder from 'holderjs'
 import Bricks from 'bricks.js'
 
@@ -15,9 +16,14 @@ FastClick.attach(document.body)
 // Run Holder
 Holder.run({})
 
+console.log(ListFuzzySearch)
+
 var options = {
   valueNames: [ 'type', 'organisation', 'description' ],
-  item: '<li><h3 class="h3 type"></h3><p class="organisation"></p><p class="description"></p></li>'
+  item: '<li><h3 class="h3 type"></h3><p class="organisation"></p><p class="description"></p></li>',
+  plugins: [
+    ListFuzzySearch()
+  ]
 }
 
 var values = [
@@ -69,6 +75,13 @@ document.addEventListener('DOMContentLoaded', event => {
 theList.on('sortStart', () =>
   instance.pack()
 )
+
+theList.on('searchComplete', () =>
+  //alert('searched')
+  instance.pack()
+)
+
+// console.log(theList.fuzzySearch.search('craig'))
 
 /*
  Example need data
