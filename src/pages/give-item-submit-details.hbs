@@ -11,14 +11,10 @@ jsBundle: giveitemsubmitdetails
     <h1 class="h1 block__header">Give</h1>
     <a href="give-help.html">Other ways to give help</a>
     <!-- ko if: isFormSubmitSuccessful -->
-    <h2>Thank you for submitting your details</h2>
-    <p>Your message has been added to our system. The organisation you are helping will be in touch soon!</p>
+      <!-- ko template: { name: 'form-submit-success-template' } -->
     <!-- /ko -->
     <!-- ko if: isFormSubmitFailure -->
-    <h2>There was a problem with your submission:</h2>
-    <ul data-bind="foreach: apiErrors">
-      <li data-bind="text: $data"></li>
-    </ul>
+      <!-- ko template: { name: 'form-submit-failure-template' } -->
     <!-- /ko -->
     <!-- ko ifnot: isFormSubmitSuccessful -->
     <form class="form" data-bind="submit: submit">
@@ -60,4 +56,17 @@ jsBundle: giveitemsubmitdetails
   </div>
 </div>
 
-{{> loading-spinner}}
+
+  {{> loading-spinner}}
+
+  <script type="text/html" id="form-submit-success-template">
+    <h2>Thank you for submitting your details</h2>
+    <p>Your message has been added to our system. The organisation you are helping will be in touch soon!</p>
+  </script>
+
+  <script type="text/html" id="form-submit-failure-template">
+    <h2>There was a problem with your submission:</h2>
+    <ul data-bind="foreach: apiErrors">
+      <li data-bind="text: $data"></li>
+    </ul>
+  </script>
