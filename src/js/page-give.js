@@ -81,11 +81,22 @@ theList.on('searchComplete', () =>
   instance.pack()
 )
 
-// console.log(theList.fuzzySearch.search('craig'))
+/*
+listObj.filter(function(item) {
+   if (item.values().id > 1) {
+       return true;
+   } else {
+       return false;
+   }
+}); // Only items with id > 1 are shown in list
+
+listObj.filter(); // Remove all filters
+*/
+
+// theList.fuzzySearch.search('craig')
 
 /*
  Example need data
-
  {
 "id": "56d9ba46a3b948fda0b49374",
 "description": "Interview & job seeking skills",
