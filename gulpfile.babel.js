@@ -16,14 +16,14 @@ gulp.task('watch', () => {
   gulp.watch(config.paths.img + '{,**/}*.{png,jpg,gif,svg}', ['img'])
   gulp.watch(config.paths.icons + '**/*.svg', ['svgicon'])
   gulp.watch(config.paths.fonts + '**/*', ['copy'])
-  gulp.watch(config.paths.specs + '**/*', ['run-jasmine'])
+  gulp.watch(config.paths.specs + '**/*[Ss]pec.js', ['run-jasmine'])
   gulp.watch([config.paths.data + '**/*', config.paths.layouts + '**/*', config.paths.pages + '**/*', config.paths.partials + '**/*'], ['metalsmith'])
 })
 
 // JS Dev Watch task
 gulp.task('dev-watch', () => {
+  gulp.watch(config.paths.specs + '**/*[Ss]pec.js', ['run-jasmine'])
   gulp.watch(config.paths.js + '**/*.js', ['run-jasmine'])
-  gulp.watch(config.paths.specs + '**/*', ['run-jasmine'])
 })
 
 // Build website, either with development or minified assets and run server with live reloading
