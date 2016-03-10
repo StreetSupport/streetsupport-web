@@ -22,22 +22,33 @@
     margin-top: 20px;
 
     ul {
-      margin: 20px 0 0 0;
+      margin: 20px auto 0 auto;
       padding: 0;
       list-style-type: none;
+     // border: 1px dashed red;
     }
 
      li {
-       @include span(3 of $column-small);
-       height: 260px;
        margin-bottom: 20px;
        background-color: #e8e8e8;
-
        padding: 20px;
+       width: 290px;
 
-       @include mq($from: l) {
-         @include span(4 of $column-large);
-       }
+        @include mq($from: xs) {
+          width: 330px;
+        }
+
+        @include mq($from: s) {
+          width: 220px;
+        }
+
+        @include mq($from: m) {
+          width: 330px;
+        }
+
+        @include mq($from: l) {
+          width: 250px;
+        }
      }
   }
 
