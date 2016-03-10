@@ -11,6 +11,8 @@ describe('Give Item Model', function () {
   var model
   var getFromApiStub
   var urlParamStub
+  var browserLoadingStub
+  var browserLoadedStub
   var needId = needData.data.needId
   var providerId = needData.data.serviceProviderId
 
@@ -33,12 +35,17 @@ describe('Give Item Model', function () {
             }
           })
 
+      browserLoadingStub = sinon.stub(browser, 'loading')
+      browserLoadedStub = sinon.stub(browser, 'loaded')
+
       model = new Model()
     })
 
     afterEach(function () {
       getFromApi.data.restore()
       getUrlParams.parameter.restore()
+      browser.loading.restore()
+      browser.loaded.restore()
     })
 
     it('should get need data', function () {
@@ -47,6 +54,14 @@ describe('Give Item Model', function () {
 
     it('should set needDescription', function () {
       expect(model.needDescription()).toEqual('need description')
+    })
+
+    it('should show user it is loading', function () {
+      expect(browserLoadingStub.calledOnce).toBeTruthy()
+    })
+
+    it('should show user then that is loaded', function () {
+      expect(browserLoadedStub.calledAfter(browserLoadingStub)).toBeTruthy()
     })
   })
 

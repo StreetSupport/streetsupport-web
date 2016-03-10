@@ -11,6 +11,7 @@ describe('Give Item Model', function () {
   var getFromApiStub
   var needId = '56d81bad92855625087e9a93'
   var providerId = 'albert-kennedy-trust'
+  var browserLoaderStub
 
   describe('Need not found', function() {
     var browserStub
@@ -36,6 +37,7 @@ describe('Give Item Model', function () {
           })
 
       browserStub = sinon.stub(browser, 'redirect')
+      browserLoaderStub = sinon.stub(browser, 'loading')
 
       model = new Model()
     })
@@ -44,6 +46,7 @@ describe('Give Item Model', function () {
       getFromApi.data.restore()
       getUrlParams.parameter.restore()
       browser.redirect.restore()
+      browser.loading.restore()
     })
 
     it('should redirect to 404', function() {

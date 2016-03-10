@@ -32,8 +32,11 @@ var GiveItemModel = function () {
   var endpoint = endpoints.allServiceProviders + providerId + '/needs/' + needId
   var postEndpoint = endpoints.needs + needId + '/offers-to-help'
 
+  browser.loading()
+
   getApiData.data(endpoint)
     .then(function (success) {
+      browser.loaded()
       self.needDescription(success.data.description)
     }, function (error) {
       browser.redirect('404.html')

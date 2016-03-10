@@ -13,6 +13,7 @@ describe('Give Item Model', function () {
   var urlParamStub
   var needId = needData.data.needId
   var providerId = needData.data.serviceProviderId
+  var browserLoaderStub
 
   describe('Invalid Email Address', function() {
     var postToApiStub
@@ -36,6 +37,8 @@ describe('Give Item Model', function () {
 
       postToApiStub = sinon.stub(postToApi, 'post')
 
+      browserLoaderStub = sinon.stub(browser, 'loading')
+
       model = new Model()
       model.formModel().email('invalid email address')
       model.formModel().message('message')
@@ -47,6 +50,7 @@ describe('Give Item Model', function () {
       getUrlParams.parameter.restore()
       getFromApi.data.restore()
       postToApi.post.restore()
+      browser.loading.restore()
     })
 
 
