@@ -28,7 +28,7 @@ describe('Give Item Model', function () {
         .withArgs(endpoints.allServiceProviders + providerId + '/needs/' + needId)
         .returns({
           then: function(success, error) {
-              success({
+              error({
                 'status': 'error',
                 'statusCode': 404,
                 'message': ''
