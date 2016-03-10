@@ -15,6 +15,8 @@ var GiveItemModel = function () {
     isOptedIn: ko.observable(false)
   })
 
+  self.needDescription = ko.observable()
+
   ko.validation.init({
     insertMessages: true,
     decorateInputElement: true,
@@ -22,14 +24,10 @@ var GiveItemModel = function () {
     errorMessageClass: 'form__error',
     errorElementClass: 'form__input--error'
   }, true)
-
-  self.needDescription = ko.observable()
   self.isFormSubmitSuccessful = ko.observable(false)
-  self.isFormSubmitted = ko.computed(function () {
-    return self.isFormSubmitSuccessful()
-  })
-
-  self.validationErrors = ko.validation.group(self.formModel)
+  self.isFormSubmitFailure = ko.observable(false)
+  self.fieldErrors = ko.validation.group(self.formModel)
+  self.apiErrors = ko.observableArray()
 
   var needId = getUrlParams.parameter('needId')
   var providerId = getUrlParams.parameter('providerId')
@@ -56,12 +54,18 @@ var GiveItemModel = function () {
         'IsOptedIn': self.formModel().isOptedIn()
       }).then(function (success) {
         browser.loaded()
-        self.isFormSubmitSuccessful(true)
+        if(success.status === 'error') {
+          self.isFormSubmitFailure(true)
+          self.apiErrors(success.messages)
+        }else {
+          self.isFormSubmitSuccessful(true)
+          self.isFormSubmitFailure(false)
+        }
       }, function (error) {
-
+        browser.redirect('500.html')
       })
     } else {
-      self.validationErrors.showAllMessages()
+      self.fieldErrors.showAllMessages()
     }
   }
 }

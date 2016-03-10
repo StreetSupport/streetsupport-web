@@ -114,8 +114,8 @@ describe('Give Item Model', function () {
         expect(model.isFormSubmitSuccessful()).toBeTruthy()
       })
 
-      it('should set isFormSubmitted to true', function () {
-        expect(model.isFormSubmitted()).toBeTruthy()
+      it('should set isFormSubmitFailure to false', function () {
+        expect(model.isFormSubmitFailure()).toBeFalsy()
       })
     })
   })
