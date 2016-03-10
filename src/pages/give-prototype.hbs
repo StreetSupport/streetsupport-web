@@ -16,23 +16,22 @@ jsBundle: give
 <div class="block">
   <div class="container block__inner">
     <div class="block__content">
-      <form class="give" action="#">
-        <h1 class="h2">What can you give?</h1>
-        <!-- <input autofocus placeholder="Search" class="awesomplete give__autocomplete" data-list="container, insurance, coat, jeans" /> -->
+      <div id="js-result" class="give">
+        <form class="give__input" action="#">
+          <h1 class="h2">What can you give?</h1>
+          <input autofocus placeholder="Search" class="awesomplete fuzzy-search give__autocomplete" data-list="coffee4craig, maddogs, coat, bedding" />
 
-        Filter by:
-        <input type="checkbox" id="all" class="give__select give__select--first" />
-        <label for="all">Everything</label>
-        <input type="checkbox" id="things" class="give__select" />
-        <label for="things">Things (Items?)</label>
-        <input type="checkbox" id="time" class="give__select" />
-        <label for="time">Time</label>
-        <input type="checkbox" id="money" class="give__select" />
-        <label for="money">Money</label>
-      </form>
+          Filter by:
+          <input type="checkbox" id="all" class="give__select give__select--first" />
+          <label for="all">Everything</label>
+          <input type="checkbox" id="things" class="give__select" />
+          <label for="things">Things (Items?)</label>
+          <input type="checkbox" id="time" class="give__select" />
+          <label for="time">Time</label>
+          <input type="checkbox" id="money" class="give__select" />
+          <label for="money">Money</label>
+        </form>
 
-      <div id="js-result" class="give__result" style="overflow: hidden">
-          <input class="fuzzy-search" />
         <button class="sort" data-sort="organisation" class="give__sort">Sort by organisation name</button>
         <button class="sort" data-sort="xx" class="give__sort">Sort by xx</button>
         <button class="sort" data-sort="xx" class="give__sort">Sort by xx</button>

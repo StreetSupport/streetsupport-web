@@ -1,6 +1,11 @@
 .give {
-  background: #e8e8e8;
-  padding: 10px 20px 20px 20px;
+  overflow: hidden;
+
+  &__input {
+    background: #e8e8e8;
+    padding: 10px 20px 20px 20px;
+    margin-bottom: 20px;
+  }
 
   &__autocomplete {
     margin-bottom: 20px;
@@ -20,41 +25,38 @@
   &__result {
     @include cf();
     margin-top: 20px;
-
-    ul {
-      margin: 20px auto 0 auto;
-      padding: 0;
-      list-style-type: none;
-     // border: 1px dashed red;
     }
-
-     li {
-       margin-bottom: 20px;
-       background-color: #e8e8e8;
-       padding: 20px;
-       width: 290px;
-
-        @include mq($from: xs) {
-          width: 330px;
-        }
-
-        @include mq($from: s) {
-          width: 220px;
-        }
-
-        @include mq($from: m) {
-          width: 330px;
-        }
-
-        @include mq($from: l) {
-          width: 240px;
-        }
-     }
   }
 
+ .list {
+  margin: 20px auto 0 auto;
+  padding: 0;
+  list-style-type: none;
+  // border: 1px dashed red;
 
+  li {
+     margin-bottom: 20px;
+     background-color: #e8e8e8;
+     padding: 20px;
+     width: 290px;
+
+      @include mq($from: xs) {
+        width: 330px;
+      }
+
+      @include mq($from: s) {
+        width: 220px;
+      }
+
+      @include mq($from: m) {
+        width: 330px;
+      }
+
+      @include mq($from: l) {
+        width: 240px;
+      }
+   }
 }
-
 
 // Awesomecomplete
 
