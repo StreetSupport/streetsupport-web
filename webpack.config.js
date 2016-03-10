@@ -22,7 +22,7 @@ module.exports = {
     categorybyday: __dirname + '/src/js/page-category-by-day',
     organisation: __dirname + '/src/js/page-organisation',
     allserviceproviders: __dirname + '/src/js/page-all-service-providers',
-    givehelp: __dirname + '/src/js/page-give-help',
+    giveitems: __dirname + '/src/js/page-give-items',
     giveitemsubmitdetails: __dirname + '/src/js/page-give-item-submit-details',
     volunteer: __dirname + '/src/js/page-volunteer'
   },
