@@ -109,6 +109,14 @@ describe('Give Item Model', function () {
       it('should show user then that is loaded', function () {
         expect(browserLoadedStub.calledAfter(browserLoadingStub)).toBeTruthy()
       })
+
+      it('should set isFormSubmitSuccessful to true', function () {
+        expect(model.isFormSubmitSuccessful()).toBeTruthy()
+      })
+
+      it('should set isFormSubmitted to true', function () {
+        expect(model.isFormSubmitted()).toBeTruthy()
+      })
     })
   })
 })

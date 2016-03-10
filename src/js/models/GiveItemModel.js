@@ -24,6 +24,10 @@ var GiveItemModel = function () {
   }, true)
 
   self.needDescription = ko.observable()
+  self.isFormSubmitSuccessful = ko.observable(false)
+  self.isFormSubmitted = ko.computed(function () {
+    return self.isFormSubmitSuccessful()
+  })
 
   self.validationErrors = ko.validation.group(self.formModel)
 
@@ -52,6 +56,7 @@ var GiveItemModel = function () {
         'IsOptedIn': self.formModel().isOptedIn()
       }).then(function (success) {
         browser.loaded()
+        self.isFormSubmitSuccessful(true)
       }, function (error) {
 
       })
