@@ -13,6 +13,7 @@ describe('Give Item Model', function () {
   var urlParamStub
   var browserLoadingStub
   var browserLoadedStub
+  var browserTrackEventStub
   var needId = needData.data.needId
   var providerId = needData.data.serviceProviderId
 
@@ -37,6 +38,7 @@ describe('Give Item Model', function () {
 
       browserLoadingStub = sinon.stub(browser, 'loading')
       browserLoadedStub = sinon.stub(browser, 'loaded')
+      browserTrackEventStub = sinon.stub(browser, 'trackEvent')
 
       model = new Model()
     })
@@ -46,6 +48,7 @@ describe('Give Item Model', function () {
       getUrlParams.parameter.restore()
       browser.loading.restore()
       browser.loaded.restore()
+      browser.trackEvent.restore()
     })
 
     it('should get need data', function () {
@@ -116,6 +119,10 @@ describe('Give Item Model', function () {
 
       it('should set isFormSubmitFailure to false', function () {
         expect(model.isFormSubmitFailure()).toBeFalsy()
+      })
+
+      it('should track event', function () {
+        expect(browserTrackEventStub.withArgs('give-item-submit-details', 'submit-form', 'success').calledOnce).toBeTruthy()
       })
     })
   })

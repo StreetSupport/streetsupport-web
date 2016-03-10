@@ -20,8 +20,13 @@ var loaded = function () {
   getLoader().stop()
 }
 
+var trackEvent = function (src, action, description) {
+  ga('send', 'event', src, action, description)
+}
+
 module.exports = {
   redirect: redirect,
   loading: loading,
-  loaded: loaded
+  loaded: loaded,
+  trackEvent: trackEvent
 }

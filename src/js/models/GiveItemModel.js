@@ -60,6 +60,7 @@ var GiveItemModel = function () {
         }else {
           self.isFormSubmitSuccessful(true)
           self.isFormSubmitFailure(false)
+          browser.trackEvent('give-item-submit-details', 'submit-form', 'success')
         }
       }, function (error) {
         browser.redirect('500.html')

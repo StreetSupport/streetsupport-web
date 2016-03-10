@@ -47,6 +47,7 @@ describe('Give Item Model', function () {
       browserLoadingStub = sinon.stub(browser, 'loading')
       browserLoadedStub = sinon.stub(browser, 'loaded')
       browserRedirectStub = sinon.stub(browser, 'redirect')
+      browserTrackEventStub = sinon.stub(browser, 'trackEvent')
 
       model = new Model()
 
@@ -63,6 +64,7 @@ describe('Give Item Model', function () {
       browser.loading.restore()
       browser.loaded.restore()
       browser.redirect.restore()
+      browser.trackEvent.restore()
       postToApi.post.restore()
     })
 
