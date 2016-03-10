@@ -14,7 +14,8 @@ describe('Give Item Model', function () {
   var needId = needData.data.needId
   var providerId = needData.data.serviceProviderId
 
-  describe('Happy Path', function() {
+  describe('Invalid Email Address', function() {
+    var postToApiStub
     beforeEach(function () {
       urlParamStub = sinon.stub(getUrlParams, 'parameter')
       urlParamStub.withArgs('needId')
@@ -33,48 +34,24 @@ describe('Give Item Model', function () {
             }
           })
 
-      model = new Model()
-    })
-
-    afterEach(function () {
-      getFromApi.data.restore()
-      getUrlParams.parameter.restore()
-    })
-
-    it('should get need data', function () {
-      expect(getFromApiStub.calledOnce).toBeTruthy()
-    })
-
-    it('should set needDescription', function () {
-      expect(model.needDescription()).toEqual('need description')
-    })
-  })
-
-  describe('Submit', function () {
-    var postToApiStub
-
-    beforeEach(function () {
       postToApiStub = sinon.stub(postToApi, 'post')
 
-      model.formModel().email('test@test.com')
+      model = new Model()
+      model.formModel().email('invalid email address')
       model.formModel().message('message')
-      model.formModel().isOptedIn(true)
 
       model.submit()
     })
 
     afterEach(function () {
+      getUrlParams.parameter.restore()
+      getFromApi.data.restore()
       postToApi.post.restore()
     })
 
-    it('should post form to api', function () {
-      expect(postToApiStub
-        .withArgs(endpoints.needs + needId + '/offers-to-help',
-        {
-          'Email': 'test@test.com',
-          'Message': 'message',
-          'IsOptedIn': true
-        }).calledOnce).toBeTruthy()
+
+    it('should not post form to api', function () {
+      expect(postToApiStub.calledOnce).toBeFalsy()
     })
   })
 })
