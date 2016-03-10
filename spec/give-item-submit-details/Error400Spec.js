@@ -13,6 +13,7 @@ describe('Give Item Model', function () {
   var urlParamStub
   var browserLoadingStub
   var browserLoadedStub
+  var browserTrackEventStub
   var needId = needData.data.needId
   var providerId = needData.data.serviceProviderId
   var postToApiStub
