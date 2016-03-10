@@ -63,33 +63,52 @@ describe('Give Item Model', function () {
     it('should show user then that is loaded', function () {
       expect(browserLoadedStub.calledAfter(browserLoadingStub)).toBeTruthy()
     })
-  })
 
-  describe('Submit', function () {
-    var postToApiStub
+    describe('Submit', function () {
+      var postToApiStub
 
-    beforeEach(function () {
-      postToApiStub = sinon.stub(postToApi, 'post')
+      beforeEach(function () {
+        postToApiStub = sinon.stub(postToApi, 'post')
+        postToApiStub.returns({
+          then: function(success, error) {
+            success({
+              'status': 'created',
+              'statusCode': 201
+            })
+          }
+        })
 
-      model.formModel().email('test@test.com')
-      model.formModel().message('message')
-      model.formModel().isOptedIn(true)
+        browser.loading.reset()
+        browser.loaded.reset()
 
-      model.submit()
-    })
+        model.formModel().email('test@test.com')
+        model.formModel().message('message')
+        model.formModel().isOptedIn(true)
 
-    afterEach(function () {
-      postToApi.post.restore()
-    })
+        model.submit()
+      })
 
-    it('should post form to api', function () {
-      expect(postToApiStub
-        .withArgs(endpoints.needs + needId + '/offers-to-help',
-        {
-          'Email': 'test@test.com',
-          'Message': 'message',
-          'IsOptedIn': true
-        }).calledOnce).toBeTruthy()
+      afterEach(function () {
+        postToApi.post.restore()
+      })
+
+      it('should post form to api', function () {
+        expect(postToApiStub
+          .withArgs(endpoints.needs + needId + '/offers-to-help',
+          {
+            'Email': 'test@test.com',
+            'Message': 'message',
+            'IsOptedIn': true
+          }).calledOnce).toBeTruthy()
+      })
+
+      it('should show user it is loading', function () {
+        expect(browserLoadingStub.calledOnce).toBeTruthy()
+      })
+
+      it('should show user then that is loaded', function () {
+        expect(browserLoadedStub.calledAfter(browserLoadingStub)).toBeTruthy()
+      })
     })
   })
 })

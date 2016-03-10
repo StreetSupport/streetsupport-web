@@ -44,11 +44,16 @@ var GiveItemModel = function () {
 
   self.submit = function () {
     if(self.formModel.isValid()) {
+      browser.loading()
       postApiData.post(postEndpoint,
       {
         'Email': self.formModel().email(),
         'Message': self.formModel().message(),
         'IsOptedIn': self.formModel().isOptedIn()
+      }).then(function (success) {
+        browser.loaded()
+      }, function (error) {
+
       })
     } else {
       self.validationErrors.showAllMessages()
