@@ -32,13 +32,10 @@ var trackLink = function (el) {
   }
 
   var theUrl = el.getAttribute('href')
-  var checkUrl = isUrlExternal(theUrl)
 
-  if (checkUrl === false) {
-    console.log('Analytics: Internal URL')
+  if (isUrlExternal(theUrl) === false) {
     document.location = theUrl
   } else {
-    console.log('Analytics: External URL')
     ga('send', 'event', 'outbound', 'click', theUrl, {
       'transport': 'beacon',
       'hitCallback': function () { document.location = theUrl }
