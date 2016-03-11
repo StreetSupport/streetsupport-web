@@ -24,7 +24,8 @@ module.exports = {
     allserviceproviders: __dirname + '/src/js/page-all-service-providers',
     giveitems: __dirname + '/src/js/page-give-items',
     giveitemsubmitdetails: __dirname + '/src/js/page-give-item-submit-details',
-    volunteer: __dirname + '/src/js/page-volunteer'
+    volunteer: __dirname + '/src/js/page-volunteer',
+    joinstreetsupport: __dirname + '/src/js/page-join-street-support'
   },
   output: {
     path: path.join(__dirname, '/_dist/assets/js/'),
