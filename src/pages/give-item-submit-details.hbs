@@ -26,7 +26,7 @@ jsBundle: giveitemsubmitdetails
         <legend class="h2 form__fieldset-title">I Can Help!</legend>
         <ul class="form__field-list">
           <li class="form__field-item">
-            <label class="form__label" for="email">Subject</label>
+            <label class="form__label">Subject</label>
             <p data-bind="text: $parent.needDescription"></p>
           </li>
           <li class="form__field-item">
@@ -38,14 +38,13 @@ jsBundle: giveitemsubmitdetails
             <textarea class="form__input form__input--multiline" id="message" data-bind="value: message"></textarea>
           </li>
           <li class="form__field-item form__field-item">
-            <label class="form__label--checkbox" for="isOptedIn">Opt-In to receive updates (*)</label>
+            <label class="form__label--checkbox" for="isOptedIn">Opt-In if you want to get occasional updates about Street Support to your inbox</label>
             <input type="checkbox" id="isOptedIn" data-bind="attr: { value: isOptedIn }, checked: isOptedIn" class="form__input--checkbox" />
           </li>
         </ul>
       </fieldset>
       <button type="submit" class="btn btn--brand-d form__submit" data-bind="click: submit"><span class="btn__text">Submit</span></button>
     </form>
-    <p><em>(*) Need blurb as to what it is they'll be receiving.</em></p>
     <!-- /ko -->
   </div>
 </div>
