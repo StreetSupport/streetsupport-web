@@ -18,6 +18,7 @@ var needsUrl = '/v1/service-provider-needs/'
 var allServiceProvidersUrl = '/v1/all-service-providers/'
 var volunteerEnquiryUrl = '/v1/volunteer-enquiries/'
 var offerToHelpUrl = '/v1/offers-to-help/'
+var joinStreetSupportApplicationsUrl = '/v1/join-street-support-applications/'
 
 module.exports = {
   serviceProviders: domainRoot + serviceProvidersUrl,
@@ -28,5 +29,6 @@ module.exports = {
   organisation: domainRoot + organisationUrl,
   needs: domainRoot + needsUrl,
   createVolunteerEnquiry: domainRoot + volunteerEnquiryUrl,
-  createOfferToHelp: domainRoot + offerToHelpUrl
+  createOfferToHelp: domainRoot + offerToHelpUrl,
+  joinStreetSupportApplications: domainRoot + joinStreetSupportApplicationsUrl
 }
