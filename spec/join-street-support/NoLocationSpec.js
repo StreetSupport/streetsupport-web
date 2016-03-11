@@ -9,7 +9,7 @@ describe('Join Street Support Model', function () {
   var browserLoaderStub
   var postToApiStub
 
-  describe('No Name', function() {
+  describe('No Location', function() {
     beforeEach(function () {
       postToApiStub = sinon.stub(postToApi, 'post')
       browserLoaderStub = sinon.stub(browser, 'loading')
@@ -18,7 +18,7 @@ describe('Join Street Support Model', function () {
 
       model.formModel().email('test@test.com')
       model.formModel().reason('reason')
-      model.formModel().location('location')
+      model.formModel().name('name')
       model.formModel().isOptedIn(true)
 
       model.submit()

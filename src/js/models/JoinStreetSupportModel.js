@@ -13,6 +13,7 @@ var Model = function () {
     name: ko.observable().extend({ required: true }),
     email: ko.observable().extend({ required: true, email: true }),
     reason: ko.observable(),
+    location: ko.observable().extend({ required: true }),
     isOptedIn: ko.observable(false)
   })
 
@@ -38,6 +39,7 @@ var Model = function () {
         'Name': self.formModel().name(),
         'Email': self.formModel().email(),
         'Reason': self.formModel().reason(),
+        'Location': self.formModel().location(),
         'IsOptedIn': self.formModel().isOptedIn()
       }).then(function (success) {
         browser.loaded()

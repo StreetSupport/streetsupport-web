@@ -19,6 +19,7 @@ describe('Join Street Support Model', function () {
 
       model.formModel().name('name')
       model.formModel().email('invalid email address')
+      model.formModel().location('location')
       model.formModel().reason('reason')
       model.formModel().isOptedIn(true)
 

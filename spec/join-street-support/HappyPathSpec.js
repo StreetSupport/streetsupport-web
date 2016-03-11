@@ -44,6 +44,7 @@ describe('Join Street Support Model', function () {
         model.formModel().name('name')
         model.formModel().email('test@test.com')
         model.formModel().reason('reason')
+        model.formModel().location('location')
         model.formModel().isOptedIn(true)
 
         model.submit()
@@ -60,6 +61,7 @@ describe('Join Street Support Model', function () {
             'Name': 'name',
             'Email': 'test@test.com',
             'Reason': 'reason',
+            'Location': 'location',
             'IsOptedIn': true
           }).calledOnce).toBeTruthy()
       })

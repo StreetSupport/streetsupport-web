@@ -18,6 +18,7 @@ describe('Join Street Support Model', function () {
 
       model.formModel().name('name')
       model.formModel().reason('reason')
+      model.formModel().location('location')
       model.formModel().isOptedIn(true)
 
       model.submit()
