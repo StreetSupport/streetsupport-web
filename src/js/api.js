@@ -18,7 +18,7 @@ var needsUrl = '/v1/service-provider-needs/'
 var allServiceProvidersUrl = '/v1/all-service-providers/'
 var volunteerEnquiryUrl = '/v1/volunteer-enquiries/'
 var joinStreetSupportApplicationsUrl = '/v1/join-street-support-applications/'
-var offerSponsorshipUrl = '/v1/sponsorship-offer/'
+var offerSponsorshipUrl = '/v1/sponsorship-offers/'
 
 var p = function (url) {
   return domainRoot + url
