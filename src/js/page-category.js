@@ -26,6 +26,17 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
   // Get category and create URL
   var theCategory = urlParameter.parameter('category')
   var theLocation = urlParameter.parameter('location')
+
+  var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+  if(savedLocationCookie.length && theLocation.length === 0) {
+    theLocation = savedLocationCookie
+  }
+
+  if(theLocation === 'my-location') {
+    theLocation = '' // clear it so category-endpoint uses geolocation...
+  }
+
   var categoryUrl = apiRoutes.categoryServiceProviders += theCategory
 
   categoryEndpoint.getEndpointUrl(categoryUrl, theLocation).then(function (success) {
@@ -58,9 +69,15 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
       })
 
       // Append object name for Hogan
+
+      var hasSetManchesterAsLocation = theLocation === 'manchester'
+
       var theData = {
         organisations: data,
-        pageAsFromManchester: 'category.html?category=' + theCategory + '&location=manchester'
+        pageAsFromManchester: 'category.html?category=' + theCategory + '&location=manchester',
+        pageFromCurrentLocation: 'category.html?category=' + theCategory + '&location=my-location',
+        useManchesterAsLocation: hasSetManchesterAsLocation,
+        useGeoLocation: !hasSetManchesterAsLocation
       }
       var template = ''
       var callback = function () {}

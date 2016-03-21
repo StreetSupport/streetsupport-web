@@ -29,6 +29,17 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
   // Get category and create URL
   var theCategory = urlParameter.parameter('category')
   var theLocation = urlParameter.parameter('location')
+
+  var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+  if(savedLocationCookie.length && theLocation.length === 0) {
+    theLocation = savedLocationCookie
+  }
+
+  if(theLocation === 'my-location') {
+    theLocation = '' // clear it so category-endpoint uses geolocation...
+  }
+
   var categoryUrl = apiRoutes.categoryServiceProvidersByDay += theCategory
   categoryEndpoint.getEndpointUrl(categoryUrl, theLocation).then(function (success) {
     buildList(success)
@@ -68,9 +79,14 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
         template = 'js-category-no-results-result-tpl'
       }
 
+      var hasSetManchesterAsLocation = theLocation === 'manchester'
+
       var theData = {
         organisations: data,
-        pageAsFromManchester: 'category.html?category=' + theCategory + '&location=manchester'
+        pageAsFromManchester: 'category-by-day.html?category=' + theCategory + '&location=manchester',
+        pageFromCurrentLocation: 'category-by-day.html?category=' + theCategory + '&location=my-location',
+        useManchesterAsLocation: hasSetManchesterAsLocation,
+        useGeoLocation: !hasSetManchesterAsLocation
       }
       templating.renderTemplate(template, theData, 'js-category-result-output', callback)
 
