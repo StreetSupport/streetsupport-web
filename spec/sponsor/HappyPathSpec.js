@@ -65,25 +65,25 @@ describe('Sponsor Model', function () {
           }).calledOnce).toBeTruthy()
       })
 
-      // it('should show user it is loading', function () {
-      //   expect(browserLoadingStub.calledOnce).toBeTruthy()
-      // })
+      it('should show user it is loading', function () {
+        expect(browserLoadingStub.calledOnce).toBeTruthy()
+      })
 
-      // it('should show user then that is loaded', function () {
-      //   expect(browserLoadedStub.calledAfter(browserLoadingStub)).toBeTruthy()
-      // })
+      it('should show user then that is loaded', function () {
+        expect(browserLoadedStub.calledAfter(browserLoadingStub)).toBeTruthy()
+      })
 
-      // it('should set isFormSubmitSuccessful to true', function () {
-      //   expect(model.isFormSubmitSuccessful()).toBeTruthy()
-      // })
+      it('should set isFormSubmitSuccessful to true', function () {
+        expect(model.isFormSubmitSuccessful()).toBeTruthy()
+      })
 
-      // it('should set isFormSubmitFailure to false', function () {
-      //   expect(model.isFormSubmitFailure()).toBeFalsy()
-      // })
+      it('should set isFormSubmitFailure to false', function () {
+        expect(model.isFormSubmitFailure()).toBeFalsy()
+      })
 
-      // it('should track event', function () {
-      //   expect(browserTrackEventStub.withArgs('give-item-submit-details', 'submit-form', 'success').calledOnce).toBeTruthy()
-      // })
+      it('should track event', function () {
+        expect(browserTrackEventStub.withArgs('offer-sponsorship', 'submit-form', 'success').calledOnce).toBeTruthy()
+      })
     })
   })
 })

@@ -43,7 +43,7 @@ var Model = function () {
         }else {
           self.isFormSubmitSuccessful(true)
           self.isFormSubmitFailure(false)
-          browser.trackEvent('give-item-submit-details', 'submit-form', 'success')
+          browser.trackEvent('offer-sponsorship', 'submit-form', 'success')
         }
       }, function (error) {
         browser.redirect('500.html')
