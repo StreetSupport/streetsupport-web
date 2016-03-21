@@ -18,7 +18,6 @@ var postApiData = function (url, data) {
         'statusCode': this.status
       })
     } else {
-      console.log('post api not 200/201')
       deferred.resolve({
         'status': 'error',
         'statusCode': this.status,
