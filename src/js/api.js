@@ -17,18 +17,22 @@ var organisationUrl = '/v2/service-providers/show/'
 var needsUrl = '/v1/service-provider-needs/'
 var allServiceProvidersUrl = '/v1/all-service-providers/'
 var volunteerEnquiryUrl = '/v1/volunteer-enquiries/'
-var offerToHelpUrl = '/v1/offers-to-help/'
 var joinStreetSupportApplicationsUrl = '/v1/join-street-support-applications/'
+var offerSponsorshipUrl = '/v1/sponsorship-offer/'
+
+var p = function (url) {
+  return domainRoot + url
+}
 
 module.exports = {
-  serviceProviders: domainRoot + serviceProvidersUrl,
-  allServiceProviders: domainRoot + allServiceProvidersUrl,
-  serviceCategories: domainRoot + serviceCategoriesUrl,
-  categoryServiceProviders: domainRoot + categoryServiceProvidersUrl,
-  categoryServiceProvidersByDay: domainRoot + categoryServiceProvidersByDayUrl,
-  organisation: domainRoot + organisationUrl,
-  needs: domainRoot + needsUrl,
-  createVolunteerEnquiry: domainRoot + volunteerEnquiryUrl,
-  createOfferToHelp: domainRoot + offerToHelpUrl,
-  joinStreetSupportApplications: domainRoot + joinStreetSupportApplicationsUrl
+  serviceProviders: p(serviceProvidersUrl),
+  allServiceProviders: p(allServiceProvidersUrl),
+  serviceCategories: p(serviceCategoriesUrl),
+  categoryServiceProviders: p(categoryServiceProvidersUrl),
+  categoryServiceProvidersByDay: p(categoryServiceProvidersByDayUrl),
+  organisation: p(organisationUrl),
+  needs: p(needsUrl),
+  createVolunteerEnquiry: p(volunteerEnquiryUrl),
+  joinStreetSupportApplications: p(joinStreetSupportApplicationsUrl),
+  offerSponsorship: p(offerSponsorshipUrl)
 }
