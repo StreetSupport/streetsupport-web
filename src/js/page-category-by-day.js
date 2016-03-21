@@ -68,7 +68,10 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
         template = 'js-category-no-results-result-tpl'
       }
 
-      var theData = { organisations: data }
+      var theData = {
+        organisations: data,
+        pageAsFromManchester: 'category.html?category=' + theCategory + '&location=manchester'
+      }
       templating.renderTemplate(template, theData, 'js-category-result-output', callback)
 
       loading.stop()

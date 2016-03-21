@@ -58,7 +58,10 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
       })
 
       // Append object name for Hogan
-      var theData = { organisations: data }
+      var theData = {
+        organisations: data,
+        pageAsFromManchester: 'category.html?category=' + theCategory + '&location=manchester'
+      }
       var template = ''
       var callback = function () {}
 
