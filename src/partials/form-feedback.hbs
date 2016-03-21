@@ -1,0 +1,20 @@
+<!-- ko if: isFormSubmitSuccessful -->
+  <!-- ko template: { name: 'form-submit-success-template' } -->
+  <!-- /ko -->
+<!-- /ko -->
+<!-- ko if: isFormSubmitFailure -->
+  <!-- ko template: { name: 'form-submit-failure-template' } -->
+  <!-- /ko -->
+<!-- /ko -->
+
+<script type="text/html" id="form-submit-success-template">
+  <h2>Thank you for submitting your details</h2>
+  <p>Your message has been added to our system. The organisation you are helping will be in touch soon!</p>
+</script>
+
+<script type="text/html" id="form-submit-failure-template">
+  <h2>There was a problem with your submission:</h2>
+  <ul data-bind="foreach: apiErrors">
+    <li data-bind="text: $data"></li>
+  </ul>
+</script>

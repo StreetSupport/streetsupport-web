@@ -24,6 +24,7 @@ module.exports = {
     allserviceproviders: __dirname + '/src/js/page-all-service-providers',
     giveitems: __dirname + '/src/js/page-give-items',
     giveitemsubmitdetails: __dirname + '/src/js/page-give-item-submit-details',
+    sponsor: __dirname + '/src/js/page-sponsor',
     volunteer: __dirname + '/src/js/page-volunteer',
     joinstreetsupport: __dirname + '/src/js/page-join-street-support'
   },

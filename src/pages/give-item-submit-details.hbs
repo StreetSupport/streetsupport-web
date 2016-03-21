@@ -10,14 +10,7 @@ jsBundle: giveitemsubmitdetails
   <div class="container block__inner">
     <h1 class="h1 block__header">Give</h1>
     <a href="give-help.html">Other ways to give help</a>
-    <!-- ko if: isFormSubmitSuccessful -->
-      <!-- ko template: { name: 'form-submit-success-template' } -->
-      <!-- /ko -->
-    <!-- /ko -->
-    <!-- ko if: isFormSubmitFailure -->
-      <!-- ko template: { name: 'form-submit-failure-template' } -->
-      <!-- /ko -->
-    <!-- /ko -->
+    {{> form-feedback}}
     <!-- ko ifnot: isFormSubmitSuccessful -->
     <form class="form" data-bind="submit: submit">
       <p>Please fill in the form below, detailing how you can fulfil this need.</p>
@@ -27,7 +20,7 @@ jsBundle: giveitemsubmitdetails
         <ul class="form__field-list">
           <li class="form__field-item">
             <label class="form__label">Subject</label>
-            <p data-bind="text: $parent.needDescription"></p>
+            <p>I can help with: <span data-bind="text: $parent.needDescription"></span></p>
           </li>
           <li class="form__field-item">
             <label class="form__label" for="email">Email *</label>
@@ -46,6 +39,7 @@ jsBundle: giveitemsubmitdetails
       <button type="submit" class="btn btn--brand-d form__submit" data-bind="click: submit"><span class="btn__text">Submit</span></button>
     </form>
     <!-- /ko -->
+
   </div>
 </div>
 
@@ -58,15 +52,3 @@ jsBundle: giveitemsubmitdetails
 </div>
 
 {{> loading-spinner}}
-
-<script type="text/html" id="form-submit-success-template">
-  <h2>Thank you for submitting your details</h2>
-  <p>Your message has been added to our system. The organisation you are helping will be in touch soon!</p>
-</script>
-
-<script type="text/html" id="form-submit-failure-template">
-  <h2>There was a problem with your submission:</h2>
-  <ul data-bind="foreach: apiErrors">
-    <li data-bind="text: $data"></li>
-  </ul>
-</script>
