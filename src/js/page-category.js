@@ -6,6 +6,7 @@ var accordion = require('./accordion')
 var socialShare = require('./social-share')
 var sortBy = require('lodash/collection/sortBy')
 var forEach = require('lodash/collection/forEach')
+var findIndex = require('lodash/array/findIndex')
 
 nav.init()
 FastClick.attach(document.body)
@@ -26,6 +27,7 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
   // Get category and create URL
   var theCategory = urlParameter.parameter('category')
   var theLocation = urlParameter.parameter('location')
+  var subCategoryToOpen = urlParameter.parameter('sub-category')
 
   var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
@@ -72,6 +74,14 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
 
       var hasSetManchesterAsLocation = theLocation === 'manchester'
 
+      console.log(subCategoryToOpen)
+
+      var subCategoryIndexToOpen = findIndex(data.subCategories, function(subCat) {
+        return subCat.key === subCategoryToOpen
+      })
+      console.log(subCategoryIndexToOpen)
+
+
       var theData = {
         organisations: data,
         pageAsFromManchester: 'category.html?category=' + theCategory + '&location=manchester',
@@ -85,7 +95,7 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
       if (data.subCategories.length) {
         template = 'js-category-result-tpl'
         callback = function () {
-          accordion.init()
+          accordion.init(false, subCategoryIndexToOpen)
         }
       } else {
         template = 'js-category-no-results-result-tpl'

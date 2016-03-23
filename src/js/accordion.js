@@ -7,7 +7,7 @@ var iconOpenClass = 'icon-plus'
 var iconCloseClass = 'icon-minus'
 var activeClass = 'is-active'
 
-var init = function (showFirst) {
+var init = function (showFirst, indexToOpen) {
   // If not supported, exit out
   if (!document.querySelector || !document.querySelectorAll || !document.body.classList) {
     return
@@ -22,6 +22,10 @@ var init = function (showFirst) {
   if (showFirst || itemCount === 1) {
     var firstHeader = headers[0]
     open(firstHeader, el, true)
+  }
+
+  if(indexToOpen >= 0) {
+    open(headers[indexToOpen], el, true)
   }
 
   // Add click listener to headers
