@@ -20,6 +20,13 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
   var Spinner = require('spin.js')
   var analytics = require('./analytics')
 
+  var listener = {
+    accordionOpened: function (element, context) {
+      console.log(element)
+      console.log(context)
+    }
+  }
+
   // Spinner
   var spin = document.getElementById('spin')
   var loading = new Spinner().spin(spin)
@@ -70,17 +77,11 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
         })
       })
 
-      // Append object name for Hogan
-
       var hasSetManchesterAsLocation = theLocation === 'manchester'
-
-      console.log(subCategoryToOpen)
 
       var subCategoryIndexToOpen = findIndex(data.subCategories, function(subCat) {
         return subCat.key === subCategoryToOpen
       })
-      console.log(subCategoryIndexToOpen)
-
 
       var theData = {
         organisations: data,
@@ -95,7 +96,7 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
       if (data.subCategories.length) {
         template = 'js-category-result-tpl'
         callback = function () {
-          accordion.init(false, subCategoryIndexToOpen)
+          accordion.init(false, subCategoryIndexToOpen, listener)
         }
       } else {
         template = 'js-category-no-results-result-tpl'
