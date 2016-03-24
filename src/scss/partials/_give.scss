@@ -1,10 +1,20 @@
 .give {
   overflow: hidden;
 
+  &__search {
+    &.is-active {
+      display: block;
+    }
+
+    &.is-hidden {
+      display: none;
+    }
+  }
+
   &__input {
     background: #e8e8e8;
     padding: 10px 20px 20px 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
 
   &__autocomplete {
@@ -22,44 +32,52 @@
     }
   }
 
-  &__result {
-    @include cf();
-    margin-top: 20px;
+  &__detail {
+    border: 1px solid red;
+
+    &.is-active {
+      display: block;
+    }
+
+    &.is-hidden {
+      display: none;
     }
   }
+}
 
- .list {
-  margin: 20px auto 0 auto;
+// List.js styling
+// Items need to be fixed width for bricks.js support
+.list {
+  margin: 20px auto 20px auto;
   padding: 0;
   list-style-type: none;
   // border: 1px dashed red;
 
   li {
-     margin-bottom: 20px;
-     background-color: #e8e8e8;
-     padding: 20px;
-     width: 290px;
+    margin-bottom: 20px;
+    background-color: #e8e8e8;
+    padding: 20px;
+    width: 290px;
 
-      @include mq($from: xs) {
-        width: 330px;
-      }
+    @include mq($from: xs) {
+      width: 330px;
+    }
 
-      @include mq($from: s) {
-        width: 220px;
-      }
+    @include mq($from: s) {
+      width: 220px;
+    }
 
-      @include mq($from: m) {
-        width: 330px;
-      }
+    @include mq($from: m) {
+      width: 330px;
+    }
 
-      @include mq($from: l) {
-        width: 240px;
-      }
-   }
+    @include mq($from: l) {
+      width: 240px;
+    }
+  }
 }
 
 // Awesomecomplete
-
 [hidden] { display: none; }
 
 .visually-hidden {
@@ -85,6 +103,8 @@ div.awesomplete > ul {
 	left: 0;
 	z-index: 1;
 	min-width: 100%;
+  // width: 100%;
+  // max-width: 300px;
 	box-sizing: border-box;
 	list-style: none;
 	padding: 0;

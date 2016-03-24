@@ -16,27 +16,34 @@ jsBundle: give
 <div class="block">
   <div class="container block__inner">
     <div class="block__content">
-      <div id="js-result" class="give">
-        <form class="give__input" action="#">
-          <h1 class="h2">What can you give?</h1>
-          <input autofocus placeholder="Search" class="awesomplete fuzzy-search give__autocomplete" data-list="coffee4craig, mad dogs, coat, bedding" />
+      <div class="give">
+        <div id="js-search" class="give__search is-active">
+          <div class="give__input" action="#">
+            <h1 class="h2">What can you give?</h1>
+            <input autofocus placeholder="Search" class="awesomplete search give__autocomplete" data-list="coffee4craig, mad dogs, coat, bedding" />
+          </div>
 
           Filter by:
           <input type="checkbox" id="all" class="give__select give__select--first" />
-          <label for="all">Everything</label>
+          <label for="all">All</label>
           <input type="checkbox" id="things" class="give__select" />
-          <label for="things">Things (Items?)</label>
+          <label for="things">Items</label>
           <input type="checkbox" id="time" class="give__select" />
           <label for="time">Time</label>
           <input type="checkbox" id="money" class="give__select" />
           <label for="money">Money</label>
-        </form>
 
-        <button class="sort" data-sort="organisation" class="give__sort">Sort by organisation name</button>
-        <button class="sort" data-sort="xx" class="give__sort">Sort by xx</button>
-        <button class="sort" data-sort="xx" class="give__sort">Sort by xx</button>
+          <button class="sort" data-sort="organisation" class="give__sort">Sort by organisation name</button>
+          <button class="sort" data-sort="xx" class="give__sort">Sort by date</button>
 
-        <ul class="list"></ul>
+          <ul class="list">
+
+          </ul>
+        </div>
+
+        <div class="give__detail js-detail is-hidden">
+          TEST
+        </div>
       </div>
 
       {{> social-share}}
