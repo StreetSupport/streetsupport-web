@@ -7,6 +7,10 @@ var getUrlParameter = function (name) {
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
 }
 
+var getKeyValuePairs = function (param) {
+  return param.split('=')
+}
+
 var getUrlParameterFromString = function (url, reqKey) {
   var queryString = url.split('?')[1]
   var params = queryString.split('&')

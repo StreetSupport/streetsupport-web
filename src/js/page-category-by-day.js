@@ -28,10 +28,6 @@ var theCategory = urlParameter.parameter('category')
 var theLocation = urlParameter.parameter('location')
 var dayToOpen = urlParameter.parameter('day')
 
-var getKeyValuePairs = function (param) {
-  return param.split('=')
-}
-
 var listener = {
   accordionOpened: function (element, context) {
     console.log(element, context)
@@ -98,7 +94,7 @@ function buildList (url) {
 
     window.onpopstate = function(event) {
       var subCategory = urlParameter.parameterFromString(document.location.search, 'day')
-
+      console.log(subCategory)
       var el = document.getElementById(subCategory)
       var context = document.querySelector('.js-accordion')
       var useAnalytics = true
