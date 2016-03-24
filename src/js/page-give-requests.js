@@ -70,6 +70,37 @@ getApiData.data(apiRoutes.needs)
       instance.pack()
     )
 
+    // Filtering
+    var f
+    var filters = document.querySelectorAll('.js-filter-checkbox')
+
+    console.log(filters)
+
+    // Add click listener to each item
+    for (f = 0; f < filters.length; f++) {
+      filters[i].change(function(event) {
+          alert('click')
+          var checkbox = event.target;
+          if (checkbox.checked) {
+              //Checkbox has been checked
+          } else {
+              //Checkbox has been unchecked
+          }
+      })
+    }
+
+    /*
+    listObj.filter(function(item) {
+       if (item.values().id > 1) {
+           return true;
+       } else {
+           return false;
+       }
+    }); // Only items with id > 1 are shown in list
+
+    listObj.filter(); // Remove all filters
+    */
+
     // Full detail view
     var i
     var items = document.querySelectorAll('.list li')
