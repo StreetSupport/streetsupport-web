@@ -6,11 +6,17 @@ var icon = '.icon'
 var iconOpenClass = 'icon-plus'
 var iconCloseClass = 'icon-minus'
 var activeClass = 'is-active'
+var myListener = {
+  accordionOpened: function () { }
+}
 
-var init = function (showFirst) {
+var init = function (showFirst, indexToOpen, listener) {
   // If not supported, exit out
   if (!document.querySelector || !document.querySelectorAll || !document.body.classList) {
     return
+  }
+  if(listener !== undefined) {
+    myListener = listener
   }
 
   var i
@@ -24,6 +30,10 @@ var init = function (showFirst) {
     open(firstHeader, el, true)
   }
 
+  if(indexToOpen >= 0) {
+    open(headers[indexToOpen], el, true)
+  }
+
   // Add click listener to headers
   for (i = 0; i < headers.length; i++) {
     headers[i].addEventListener('click', function (e) {
@@ -33,6 +43,35 @@ var init = function (showFirst) {
 }
 
 var open = function (el, context, noAnalytics) {
+  // Check to see if clicked header is already active
+  myListener.accordionOpened(el, context)
+  if (el.classList.contains(activeClass)) {
+    close(el, context)
+  } else {
+    close(el, context)
+
+    // Add active classes for clicked header and the item div
+    el.classList.add(activeClass)
+    el.nextElementSibling.classList.add(activeClass)
+
+    // Change icon class in header
+    el.querySelector(icon).classList.remove(iconOpenClass)
+    el.querySelector(icon).classList.add(iconCloseClass)
+
+    // Send Google Analytics event
+    if (!noAnalytics) {
+      var headerText = el.textContent
+
+      ga('send', 'event', 'accordion', 'click', headerText + ' open')
+    }
+  }
+}
+
+var reOpen = function (el, context, noAnalytics) {
+  baseOpen(el, context, noAnalytics)
+}
+
+var baseOpen = function (el, context, noAnalytics) {
   // Check to see if clicked header is already active
   if (el.classList.contains(activeClass)) {
     close(el, context)
@@ -75,5 +114,6 @@ var close = function (el, context) {
 }
 
 module.exports = {
-  init: init
+  init: init,
+  reOpen: reOpen
 }

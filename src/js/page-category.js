@@ -8,6 +8,7 @@ var accordion = require('./accordion')
 // Lodash
 var sortBy = require('lodash/collection/sortBy')
 var forEach = require('lodash/collection/forEach')
+var findIndex = require('lodash/array/findIndex')
 
 var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
@@ -24,10 +25,31 @@ var loading = new Spinner().spin(spin)
 // Get category and create URL
 var theCategory = urlParameter.parameter('category')
 var theLocation = urlParameter.parameter('location')
+var subCategoryToOpen = urlParameter.parameter('sub-category')
 
 var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 
-if (savedLocationCookie.length && theLocation.length === 0) {
+var getKeyValuePairs = function (param) {
+  return param.split('=')
+}
+
+var getUrlParameter = function (url, reqKey) {
+  var queryString = url.split('?')[1]
+  var params = queryString.split('&')
+  return params
+    .map(param => getKeyValuePairs(param))
+    .find(kv => kv[0] === reqKey)[1]
+}
+
+var listener = {
+  accordionOpened: function (element, context) {
+    console.log(element, context)
+    var subCategoryId = element.getAttribute('id')
+    history.pushState({}, '', 'category.html?category=' + theCategory + '&sub-category=' + subCategoryId)
+  }
+}
+
+if(savedLocationCookie.length && theLocation.length === 0) {
   theLocation = savedLocationCookie
 }
 
@@ -66,6 +88,7 @@ function buildList (url) {
       })
     })
 
+<<<<<<< HEAD
     // Append object name for Hogan
 
     var hasSetManchesterAsLocation = theLocation === 'manchester'
@@ -80,10 +103,36 @@ function buildList (url) {
     var template = ''
     var callback = function () {}
 
+    var hasSetManchesterAsLocation = theLocation === 'manchester'
+
+    var subCategoryIndexToOpen = findIndex(data.subCategories, function(subCat) {
+      return subCat.key === subCategoryToOpen
+    })
+
+    window.onpopstate = function(event) {
+      var subCategory = getUrlParameter(document.location.search, 'sub-category')
+
+      var el = document.getElementById(subCategory)
+      var context = document.querySelector('.js-accordion')
+      var useAnalytics = true
+
+      accordion.reOpen(el, context, useAnalytics)
+    }
+
+    var theData = {
+      organisations: data,
+      pageAsFromManchester: 'category.html?category=' + theCategory + '&location=manchester',
+      pageFromCurrentLocation: 'category.html?category=' + theCategory + '&location=my-location',
+      useManchesterAsLocation: hasSetManchesterAsLocation,
+      useGeoLocation: !hasSetManchesterAsLocation
+    }
+    var template = ''
+    var callback = function () {}
+
     if (data.subCategories.length) {
       template = 'js-category-result-tpl'
       callback = function () {
-        accordion.init()
+        accordion.init(false, subCategoryIndexToOpen, listener)
       }
     } else {
       template = 'js-category-no-results-result-tpl'
