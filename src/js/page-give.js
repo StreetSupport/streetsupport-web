@@ -33,8 +33,8 @@ getApiData.data(apiRoutes.needs)
 
     // List.js
     var options = {
-      valueNames: [ 'id', 'type', 'organisation', 'description' ],
-      item: '<li><a href="#"><span class="id"></span><h3 class="h3 type"></h3><p class="organisation"></p><p class="description"></p></a></li>',
+      valueNames: [ 'id', 'type', 'serviceProviderId', 'description' ],
+      item: '<li><a href="#"><span class="id"></span><h3 class="h3 type"></h3><p class="serviceProviderId"></p><p class="description"></p></a></li>',
       plugins: [
         // ListFuzzySearch()
       ]

@@ -1,20 +1,20 @@
-.give {
-  overflow: hidden;
+.give-search {
+  &.is-active {
+    display: block;
+  }
 
-  &__search {
-    &.is-active {
-      display: block;
-    }
-
-    &.is-hidden {
-      display: none;
-    }
+  &.is-hidden {
+    display: none;
   }
 
   &__input {
     background: #e8e8e8;
     padding: 10px 20px 20px 20px;
     margin-bottom: 40px;
+
+    &__header {
+
+    }
   }
 
   &__autocomplete {
@@ -24,29 +24,60 @@
     height: 50px;
   }
 
-  &__select {
-    margin-left: 20px;
+  &__filter {
+    margin-bottom: 20px;
 
-    &--first {
-      margin-left: 0;
+    @include mq($from: l) {
+      float: left;
+    }
+
+    &__header {
+      display: inline-block;
+    }
+
+    &__select {
+      margin-left: 20px;
+
+      &--first {
+        margin-left: 10px;
+      }
+    }
+
+    label {
+      padding-left: 2px;
     }
   }
 
-  &__detail {
+  &__sort {
+    margin-bottom: 20px;
 
-    &.is-active {
-      display: block;
+    @include mq($from: l) {
+      float: right;
     }
 
-    &.is-hidden {
-      display: none;
+    &__header {
+      display: inline-block;
+      margin-right: 10px;
     }
+  }
+}
+
+.give-detail {
+  overflow: hidden;
+
+  &.is-active {
+    display: block;
+  }
+
+  &.is-hidden {
+    display: none;
   }
 }
 
 // List.js styling
 // Items need to be fixed width for bricks.js support
 .list {
+  clear: both;
   margin: 20px auto 20px auto;
   padding: 0;
   list-style-type: none;

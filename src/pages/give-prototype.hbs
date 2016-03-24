@@ -16,42 +16,60 @@ jsBundle: give
 <div class="block">
   <div class="container block__inner">
     <div class="block__content">
-      <div class="give">
-        <div id="js-card-search" class="js-card-search give__search is-active">
-          <div class="give__input" action="#">
-            <h1 class="h2">What can you give?</h1>
-            <input autofocus placeholder="Search" class="awesomplete search give__autocomplete" data-list="coffee4craig, mad dogs, coat, bedding" />
-          </div>
+      <div id="js-card-search" class="js-card-search give-search is-active">
+        <div class="give-search__input" action="#">
+          <h1 class="h2 give-search__input__header">What can you give?</h1>
+          <input autofocus placeholder="Search" class="awesomplete search give-search__autocomplete" data-list="coffee4craig, mad dogs, coat, bedding" />
+        </div>
 
-          Filter by:
-          <input type="checkbox" id="all" class="give__select give__select--first" />
+        <div class="give-search__filter">
+          <h2 class="h3 give-search__filter__header">Filter by:</h2>
+          <input type="checkbox" id="all" class="give-search__filter__select give-search__filter__select--first" />
           <label for="all">All</label>
-          <input type="checkbox" id="things" class="give__select" />
-          <label for="things">Items</label>
-          <input type="checkbox" id="time" class="give__select" />
+          <input type="checkbox" id="items" class="give-search__filter__select" />
+          <label for="items">Items</label>
+          <input type="checkbox" id="time" class="give-search__filter__select" />
           <label for="time">Time</label>
-          <input type="checkbox" id="money" class="give__select" />
+          <input type="checkbox" id="money" class="give-search__filter__select" />
           <label for="money">Money</label>
-
-          <button class="sort" data-sort="organisation" class="give__sort">Sort by organisation name</button>
-          <button class="sort" data-sort="xx" class="give__sort">Sort by date</button>
-
-          <ul class="list js-card-list"></ul>
         </div>
 
-        <div class="give__detail js-card-detail is-hidden">
-          <div id="js-card-detail-output" class="template"></div>
+        <div class="give-search__sort">
+          <h2 class="h3 give-search__sort__header">Sort by:</h2>
+          <select class="give-search__sort__list">
+            <option value="organisation">Select</option>
+            <option value="organisation-a">Organisation name (A-Z)</option>
+            <option value="organisation-d">Organisation name (Z-A)</option>
+            <option value="date-a">Date posted (Newest)</option>
+            <option value="date-d">Date posted (Oldest)</option>            
+          </select>
         </div>
+
+        <ul class="list js-card-list"></ul>
       </div>
 
-      {{> social-share}}
-
-      <script id="js-card-detail-tpl" type="text/template">
-        \{{#card}}
-          <h2 class="h2 give">\{{organisation}}</h2>
-          <p>\{{description}}</p>
-        \{{/card}}
-      </script>
+      <div class="give-detail js-card-detail is-hidden">
+        <div id="js-card-detail-output" class="template"></div>
+      </div>
     </div>
+
+    {{> social-share}}
   </div>
 </div>
+
+<script id="js-card-detail-tpl" type="text/template">
+  \{{#card}}
+    <h2 class="h2 give-detail__header">\{{organisation}}</h2>
+    <p>\{{description}}</p>
+  \{{/card}}
+</script>
+
+<!--
+- Type (people/money/stuff)
+- [Need] for [Org name (link)]
+- [Org synopsis]
+- [Reason]
+- [Instructions] - if provided
+- Find Out More [More details url (link)] - if provided
+- Offer button - opens email form
+-->
