@@ -15,8 +15,6 @@ var init = function (showFirst, indexToOpen, listener) {
   if (!document.querySelector || !document.querySelectorAll || !document.body.classList) {
     return
   }
-
-  console.log(listener)
   if(listener !== undefined) {
     myListener = listener
   }
@@ -69,6 +67,34 @@ var open = function (el, context, noAnalytics) {
   }
 }
 
+var reOpen = function (el, context, noAnalytics) {
+  baseOpen(el, context, noAnalytics)
+}
+
+var baseOpen = function (el, context, noAnalytics) {
+  // Check to see if clicked header is already active
+  if (el.classList.contains(activeClass)) {
+    close(el, context)
+  } else {
+    close(el, context)
+
+    // Add active classes for clicked header and the item div
+    el.classList.add(activeClass)
+    el.nextElementSibling.classList.add(activeClass)
+
+    // Change icon class in header
+    el.querySelector(icon).classList.remove(iconOpenClass)
+    el.querySelector(icon).classList.add(iconCloseClass)
+
+    // Send Google Analytics event
+    if (!noAnalytics) {
+      var headerText = el.textContent
+
+      ga('send', 'event', 'accordion', 'click', headerText + ' open')
+    }
+  }
+}
+
 var close = function (el, context) {
   var a
   var b
@@ -88,5 +114,6 @@ var close = function (el, context) {
 }
 
 module.exports = {
-  init: init
+  init: init,
+  reOpen: reOpen
 }

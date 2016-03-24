@@ -20,13 +20,6 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
   var Spinner = require('spin.js')
   var analytics = require('./analytics')
 
-  var listener = {
-    accordionOpened: function (element, context) {
-      console.log(element)
-      console.log(context)
-    }
-  }
-
   // Spinner
   var spin = document.getElementById('spin')
   var loading = new Spinner().spin(spin)
@@ -37,6 +30,26 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
   var subCategoryToOpen = urlParameter.parameter('sub-category')
 
   var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+  var getKeyValuePairs = function (param) {
+    return param.split('=')
+  }
+
+  var getUrlParameter = function (url, reqKey) {
+    var queryString = url.split('?')[1]
+    var params = queryString.split('&')
+    return params
+      .map(param => getKeyValuePairs(param))
+      .find(kv => kv[0] === reqKey)[1]
+  }
+
+  var listener = {
+    accordionOpened: function (element, context) {
+      console.log(element, context)
+      var subCategoryId = element.getAttribute('id')
+      history.pushState({}, '', 'category.html?category=' + theCategory + '&sub-category=' + subCategoryId)
+    }
+  }
 
   if(savedLocationCookie.length && theLocation.length === 0) {
     theLocation = savedLocationCookie
@@ -50,8 +63,7 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
 
   categoryEndpoint.getEndpointUrl(categoryUrl, theLocation).then(function (success) {
     buildList(success)
-  }, function (error) {
-  })
+  }, function (error) { })
 
   function buildList (url) {
     // Get API data using promise
@@ -82,6 +94,16 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
       var subCategoryIndexToOpen = findIndex(data.subCategories, function(subCat) {
         return subCat.key === subCategoryToOpen
       })
+
+      window.onpopstate = function(event) {
+        var subCategory = getUrlParameter(document.location.search, 'sub-category')
+
+        var el = document.getElementById(subCategory)
+        var context = document.querySelector('.js-accordion')
+        var useAnalytics = true
+
+        accordion.reOpen(el, context, useAnalytics)
+      }
 
       var theData = {
         organisations: data,
