@@ -74,6 +74,11 @@
     @include mq($from: l) {
       width: 240px;
     }
+
+    a {
+      color: inherit;
+      text-decoration: inherit;
+    }
   }
 }
 
