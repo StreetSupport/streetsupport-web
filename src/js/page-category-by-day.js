@@ -32,14 +32,6 @@ var getKeyValuePairs = function (param) {
   return param.split('=')
 }
 
-var getUrlParameter = function (url, reqKey) {
-  var queryString = url.split('?')[1]
-  var params = queryString.split('&')
-  return params
-    .map(param => getKeyValuePairs(param))
-    .find(kv => kv[0] === reqKey)[1]
-}
-
 var listener = {
   accordionOpened: function (element, context) {
     console.log(element, context)
@@ -105,7 +97,7 @@ function buildList (url) {
     var hasSetManchesterAsLocation = theLocation === 'manchester'
 
     window.onpopstate = function(event) {
-      var subCategory = getUrlParameter(document.location.search, 'day')
+      var subCategory = urlParameter.parameterFromString(document.location.search, 'day')
 
       var el = document.getElementById(subCategory)
       var context = document.querySelector('.js-accordion')
