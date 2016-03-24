@@ -8,102 +8,101 @@ import List from 'list.js'
 import Holder from 'holderjs'
 import Bricks from 'bricks.js'
 
-import templating from './template-render'
+// Page modules
+var apiRoutes = require('./api')
+var getApiData = require('./get-api-data')
+var templating = require('./template-render')
+// var Spinner = require('spin.js')
 
 import Find from 'lodash/collection/find'
+
+// Spinner
+// var spin = document.getElementById('spin')
+// var loading = new Spinner().spin(spin)
 
 // Run Holder
 Holder.run({})
 
-// Example data
-var data = [
-  { id: '0', type: 'people', organisation: 'Mad Dogs', description: 'We support young people to get into employment so they can support themselves and live independent lives. Help with getting a job would be invaluable.' },
-  { id: '1', type: 'time', organisation: 'Coffee4Craig', description: 'Test result.' },
-  { id: '2', type: 'time', organisation: 'Coffee4Craig', description: 'Another Test result.' },
-  { id: '3', type: 'people', organisation: 'Mad Dogs', description: 'We support young people to get into employment so they can support themselves and live independent lives. Help with getting a job would be invaluable.' },
-  { id: '4', type: 'time', organisation: 'Coffee4Craig', description: 'Test result.' },
-  { id: '5', type: 'time', organisation: 'Coffee4Craig', description: 'Another Test result.' },
-  { id: '6', type: 'people', organisation: 'Mad Dogs', description: 'We support young people to get into employment so they can support themselves and live independent lives. Help with getting a job would be invaluable.' },
-  { id: '7', type: 'time', organisation: 'Coffee4Craig', description: 'Test result.' },
-  { id: '8', type: 'time', organisation: 'Coffee4Craig', description: 'Another Test result.' }
-]
+// Get API data using promise
+getApiData.data(apiRoutes.needs)
+  .then(function (result) {
+    var needsFromApi = result.data
+    // var theData = { 'needs': needsFromApi }
 
-// List.js
-var options = {
-  valueNames: [ 'id', 'type', 'organisation', 'description' ],
-  item: '<li><a href="#"><span class="id"></span><h3 class="h3 type"></h3><p class="organisation"></p><p class="description"></p></a></li>',
-  plugins: [
-    // ListFuzzySearch()
-  ]
-}
+    console.log(needsFromApi)
 
-var theList = new List('js-card-search', options, data)
+    // List.js
+    var options = {
+      valueNames: [ 'id', 'type', 'organisation', 'description' ],
+      item: '<li><a href="#"><span class="id"></span><h3 class="h3 type"></h3><p class="organisation"></p><p class="description"></p></a></li>',
+      plugins: [
+        // ListFuzzySearch()
+      ]
+    }
 
-// Bricks.js
-const sizes = [
-  { columns: 1, gutter: 20 }, // assumed to be mobile, because of the missing mq property
-  { mq: '360px', columns: 1, gutter: 20 },
-  { mq: '480px', columns: 2, gutter: 20 },
-  { mq: '600px', columns: 2, gutter: 20 },
-  { mq: '800px', columns: 3, gutter: 20 }
-]
+    var theList = new List('js-card-search', options, needsFromApi)
 
-const instance = Bricks({
-  container: '.list',
-  packed: 'data-packed', // if not prefixed with 'data-', it will be added
-  sizes: sizes
-})
+    // Bricks.js
+    const sizes = [
+      { columns: 1, gutter: 20 }, // assumed to be mobile, because of the missing mq property
+      { mq: '360px', columns: 1, gutter: 20 },
+      { mq: '480px', columns: 2, gutter: 20 },
+      { mq: '600px', columns: 2, gutter: 20 },
+      { mq: '800px', columns: 3, gutter: 20 }
+    ]
 
-// start it up, when the DOM is ready
-// note that if images are in the grid, you may need to wait for document.readyState === 'complete'
-document.addEventListener('DOMContentLoaded', event => {
-  instance
-    .resize(true) // bind resize handler
-    .pack() // pack initial items
-})
+    const instance = Bricks({
+      container: '.list',
+      packed: 'data-packed', // if not prefixed with 'data-', it will be added
+      sizes: sizes
+    })
 
-// Triggers
-theList.on('sortStart', () =>
-  instance.pack()
-)
+    instance
+      .resize(true) // bind resize handler
+      .pack() // pack initial items
 
-theList.on('searchComplete', () =>
-  // alert('searched')
-  instance.pack()
-)
+    // Triggers
+    theList.on('sortStart', () =>
+      instance.pack()
+    )
 
-// Full detail view
-var i
-var items = document.querySelectorAll('.list li')
+    theList.on('searchComplete', () =>
+      instance.pack()
+    )
 
-// Add click listener to each item
-for (i = 0; i < items.length; i++) {
-  items[i].addEventListener('click', function (event) {
-    event.preventDefault()
-    openCard(this)
+    // Full detail view
+    var i
+    var items = document.querySelectorAll('.list li')
+
+    // Add click listener to each item
+    for (i = 0; i < items.length; i++) {
+      items[i].addEventListener('click', function (event) {
+        event.preventDefault()
+        openCard(this)
+      })
+    }
+
+    var openCard = function (el) {
+      var theId = el.getElementsByClassName('id')[0].textContent
+      var cardData = Find(needsFromApi, function (o) { return o.id === theId })
+
+      // hide search
+      document.querySelector('#js-card-search').classList.remove('is-active')
+      document.querySelector('#js-card-search').classList.add('is-hidden')
+
+      // Append object name for Hogan
+      var theTemplateData = { card: cardData }
+
+      var callback = function () {
+        document.querySelector('.js-card-detail').classList.remove('is-hidden')
+        document.querySelector('.js-card-detail').classList.add('is-active')
+
+        window.scrollTo(0, 0)
+      }
+
+      templating.renderTemplate('js-card-detail-tpl', theTemplateData, 'js-card-detail-output', callback)
+    }
   })
-}
-
-var openCard = function (el) {
-  var theId = el.getElementsByClassName('id')[0].textContent
-  var cardData = Find(data, function (o) { return o.id === theId })
-
-  // hide search
-  document.querySelector('#js-card-search').classList.remove('is-active')
-  document.querySelector('#js-card-search').classList.add('is-hidden')
-
-  // Append object name for Hogan
-  var theTemplateData = { card: cardData }
-
-  var callback = function () {
-    document.querySelector('.js-card-detail').classList.remove('is-hidden')
-    document.querySelector('.js-card-detail').classList.add('is-active')
-
-    window.scrollTo(0, 0)
-  }
-
-  templating.renderTemplate('js-card-detail-tpl', theTemplateData, 'js-card-detail-output', callback)
-}
 
 // theList.fuzzySearch.search('craig')
 
