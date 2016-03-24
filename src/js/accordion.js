@@ -11,6 +11,7 @@ var myListener = {
 }
 
 var init = function (showFirst, indexToOpen, listener) {
+  console.log(showFirst, indexToOpen, listener)
   // If not supported, exit out
   if (!document.querySelector || !document.querySelectorAll || !document.body.classList) {
     return

@@ -27,8 +27,6 @@ var theCategory = urlParameter.parameter('category')
 var theLocation = urlParameter.parameter('location')
 var subCategoryToOpen = urlParameter.parameter('sub-category')
 
-var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-
 var getKeyValuePairs = function (param) {
   return param.split('=')
 }
@@ -48,6 +46,8 @@ var listener = {
     history.pushState({}, '', 'category.html?category=' + theCategory + '&sub-category=' + subCategoryId)
   }
 }
+
+var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 
 if(savedLocationCookie.length && theLocation.length === 0) {
   theLocation = savedLocationCookie
@@ -88,7 +88,6 @@ function buildList (url) {
       })
     })
 
-<<<<<<< HEAD
     // Append object name for Hogan
 
     var hasSetManchesterAsLocation = theLocation === 'manchester'

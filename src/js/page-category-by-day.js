@@ -9,6 +9,8 @@ var accordion = require('./accordion')
 var forEach = require('lodash/collection/forEach')
 var sortBy = require('lodash/collection/sortBy')
 var slice = require('lodash/array/slice')
+var findIndex = require('lodash/array/findIndex')
+
 var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
 var categoryEndpoint = require('./category-endpoint')
@@ -24,6 +26,27 @@ var loading = new Spinner().spin(spin)
 // Get category and create URL
 var theCategory = urlParameter.parameter('category')
 var theLocation = urlParameter.parameter('location')
+var dayToOpen = urlParameter.parameter('day')
+
+var getKeyValuePairs = function (param) {
+  return param.split('=')
+}
+
+var getUrlParameter = function (url, reqKey) {
+  var queryString = url.split('?')[1]
+  var params = queryString.split('&')
+  return params
+    .map(param => getKeyValuePairs(param))
+    .find(kv => kv[0] === reqKey)[1]
+}
+
+var listener = {
+  accordionOpened: function (element, context) {
+    console.log(element, context)
+    var subCategoryId = element.getAttribute('id')
+    history.pushState({}, '', 'category-by-day.html?category=' + theCategory + '&day=' + subCategoryId)
+  }
+}
 
 var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
 
@@ -53,6 +76,12 @@ function buildList (url) {
     var template = ''
     var callback = function () {}
 
+    console.log(data.daysServices)
+
+    var dayIndexToOpen = findIndex(data.daysServices, function(day) {
+      return day.name === dayToOpen
+    })
+
     if (data.daysServices.length) {
       template = 'js-category-result-tpl'
 
@@ -67,13 +96,23 @@ function buildList (url) {
       })
 
       callback = function () {
-        accordion.init(true)
+        accordion.init(true, dayIndexToOpen, listener)
       }
     } else {
       template = 'js-category-no-results-result-tpl'
     }
 
     var hasSetManchesterAsLocation = theLocation === 'manchester'
+
+    window.onpopstate = function(event) {
+      var subCategory = getUrlParameter(document.location.search, 'day')
+
+      var el = document.getElementById(subCategory)
+      var context = document.querySelector('.js-accordion')
+      var useAnalytics = true
+
+      accordion.reOpen(el, context, useAnalytics)
+    }
 
     var theData = {
       organisations: data,
