@@ -1,6 +1,6 @@
 # StreetSupport Website
 
-The Frontend codebase for beta.streetsupport.net.
+The Frontend codebase for streetsupport.net.
 
 ## Git Branching
 
@@ -18,24 +18,24 @@ Please work in the develop branch first and only merge to staging when ready and
 
 ## Install
 
-* Optional: Install PhantomJS, using Homebrew or similar package manager,
-* Install Node 4 LTS or 5 stable (preferred),
+* Install Node 4 LTS,
+* (Recommended) Run in Terminal: `npm i npm -g` (Update NPM to latest version),
 * Run in Terminal: `npm i gulp-cli -g` (Gulp does not need to be installed globally),
 * Navigate to the workflow folder in command line Terminal,
 * Run: `npm i`.
 
 See [https://github.com/PJL101/foley](https://github.com/PJL101/foley) for more information about the workflow. This project uses version 0.2.2.
 
-## Optional Installs
+### Optional Installs
 
-The following plugins for Atom are recommended but not required:
+In your editor of choice, the following plugins are recommended but not required. Note the plugin names might be slightly different depending on your editor.
 
 * editorconfig,
+* tabs-to-spaces,
 * linter,
 * linter-handlebars,
 * linter-js-standard,
-* linter-stylelint,
-* tabs-to-spaces.
+* linter-stylelint.
 
 ## Usage
 

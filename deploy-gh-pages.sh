@@ -8,13 +8,13 @@ if [[ $TRAVIS_BRANCH == 'release' ]]
   then
     REPO="github.com/StreetSupport/streetsupport.net-live.git"
     DOMAIN="www.streetsupport.net"
-    APIENVIRONMENT=2
+    APIENVIRONMENT=3
 fi
 if [[ $TRAVIS_BRANCH == 'staging' ]]
   then
     REPO="github.com/StreetSupport/streetsupport.net-beta.git"
-    DOMAIN="beta.streetsupport.net"
-    APIENVIRONMENT=1
+    DOMAIN="staging.streetsupport.net"
+    APIENVIRONMENT=2
 fi
 if [[ $TRAVIS_BRANCH == 'develop' ]]
   then
@@ -63,5 +63,5 @@ if [[ $TRAVIS_BRANCH == 'release' ]] || [[ $TRAVIS_BRANCH == 'staging' ]] || [[ 
     git commit -m "Travis CI automatic build for $THE_COMMIT"
     git push --force --quiet "https://${GH_TOKEN}@${REPO}" master:gh-pages > /dev/null 2>&1
   else
-    echo "Not on master or develop branch so don't push the changes to GitHub Pages"
+    echo "Not on a build branch so don't push the changes to GitHub Pages"
 fi

@@ -2,14 +2,14 @@ git:
   depth: 1
 language: node_js
 node_js:
-  - '5'
+  - '4'
 cache:
   directories:
     - node_modules
 before_script:
-  - npm set progress=false
-  - npm install gulp-cli -g
-  - chmod +x ./deploy-gh-pages.sh  
+  - npm install -g npm
+  - npm install -g gulp-cli
+  - chmod +x ./deploy-gh-pages.sh
 script: "./deploy-gh-pages.sh"
 env:
   global:

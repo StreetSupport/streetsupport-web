@@ -1,10 +1,11 @@
-var dev = 'http://localhost:55881'
-var staging = 'https://streetsupport-api-staging.apphb.com'
-var live = 'https://streetsupport-api.apphb.com'
+var local = 'http://localhost:55881' // eslint-disable-line
+var dev = 'http://streetsupport-api-ci.apphb.com' // eslint-disable-line
+var staging = 'https://streetsupport-api-staging.apphb.com' // eslint-disable-line
+var live = 'https://streetsupport-api.apphb.com' // eslint-disable-line
 
 var env = require('./env')
 
-var envs = [dev, staging, live]
+var envs = [local, dev, staging, live]
 
 var domainRoot = envs[env]
 
@@ -14,14 +15,24 @@ var categoryServiceProvidersUrl = '/v2/categorised-service-providers/show/'
 var categoryServiceProvidersByDayUrl = '/v2/timetabled-service-providers/show/'
 var organisationUrl = '/v2/service-providers/show/'
 var needsUrl = '/v1/service-provider-needs/'
-var volunteerEnquiryUrl = '/v1/volunteer-enquiries'
+var allServiceProvidersUrl = '/v1/all-service-providers/'
+var volunteerEnquiryUrl = '/v1/volunteer-enquiries/'
+var joinStreetSupportApplicationsUrl = '/v1/join-street-support-applications/'
+var offerSponsorshipUrl = '/v1/sponsorship-offers/'
+
+var p = function (url) {
+  return domainRoot + url
+}
 
 module.exports = {
-  serviceProviders: domainRoot + serviceProvidersUrl,
-  serviceCategories: domainRoot + serviceCategoriesUrl,
-  categoryServiceProviders: domainRoot + categoryServiceProvidersUrl,
-  categoryServiceProvidersByDay: domainRoot + categoryServiceProvidersByDayUrl,
-  organisation: domainRoot + organisationUrl,
-  needs: domainRoot + needsUrl,
-  createVolunteerEnquiry: domainRoot + volunteerEnquiryUrl
+  serviceProviders: p(serviceProvidersUrl),
+  allServiceProviders: p(allServiceProvidersUrl),
+  serviceCategories: p(serviceCategoriesUrl),
+  categoryServiceProviders: p(categoryServiceProvidersUrl),
+  categoryServiceProvidersByDay: p(categoryServiceProvidersByDayUrl),
+  organisation: p(organisationUrl),
+  needs: p(needsUrl),
+  createVolunteerEnquiry: p(volunteerEnquiryUrl),
+  joinStreetSupportApplications: p(joinStreetSupportApplicationsUrl),
+  offerSponsorship: p(offerSponsorshipUrl)
 }

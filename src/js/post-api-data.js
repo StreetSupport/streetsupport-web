@@ -20,7 +20,7 @@ var postApiData = function (url, data) {
         'statusCode': this.status
       })
     } else {
-      console.log(this)
+      console.log('post api not 200/201')
       deferred.resolve({
         'status': 'error',
         'statusCode': this.status,
@@ -30,7 +30,6 @@ var postApiData = function (url, data) {
   }
 
   req.onerror = function () {
-    console.log(this)
     deferred.reject(new Error('Server responded with a status of ' + req.status))
   }
 
