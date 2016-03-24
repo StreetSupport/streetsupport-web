@@ -33,7 +33,6 @@
   }
 
   &__detail {
-    border: 1px solid red;
 
     &.is-active {
       display: block;
@@ -78,6 +77,10 @@
     a {
       color: inherit;
       text-decoration: inherit;
+    }
+
+    .id {
+      display: none;
     }
   }
 }

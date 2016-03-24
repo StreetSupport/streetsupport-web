@@ -17,7 +17,7 @@ jsBundle: give
   <div class="container block__inner">
     <div class="block__content">
       <div class="give">
-        <div id="js-search" class="give__search is-active">
+        <div id="js-card-search" class="js-card-search give__search is-active">
           <div class="give__input" action="#">
             <h1 class="h2">What can you give?</h1>
             <input autofocus placeholder="Search" class="awesomplete search give__autocomplete" data-list="coffee4craig, mad dogs, coat, bedding" />
@@ -36,17 +36,22 @@ jsBundle: give
           <button class="sort" data-sort="organisation" class="give__sort">Sort by organisation name</button>
           <button class="sort" data-sort="xx" class="give__sort">Sort by date</button>
 
-          <ul class="list">
-
-          </ul>
+          <ul class="list js-card-list"></ul>
         </div>
 
-        <div class="give__detail js-detail is-hidden">
-          TEST
+        <div class="give__detail js-card-detail is-hidden">
+          <div id="js-card-detail-output" class="template"></div>
         </div>
       </div>
 
       {{> social-share}}
+
+      <script id="js-card-detail-tpl" type="text/template">
+        \{{#card}}
+          <h2 class="h2 give">\{{organisation}}</h2>
+          <p>\{{description}}</p>
+        \{{/card}}
+      </script>
     </div>
   </div>
 </div>

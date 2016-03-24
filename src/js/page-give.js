@@ -8,32 +8,36 @@ import List from 'list.js'
 import Holder from 'holderjs'
 import Bricks from 'bricks.js'
 
+import templating from './template-render'
+
+import Find from 'lodash/collection/find'
+
 // Run Holder
 Holder.run({})
 
 // Example data
 var data = [
-  { type: 'people', organisation: 'Mad Dogs', description: 'We support young people to get into employment so they can support themselves and live independent lives. Help with getting a job would be invaluable.' },
-  { type: 'time', organisation: 'Coffee4Craig', description: 'Test result.' },
-  { type: 'time', organisation: 'Coffee4Craig', description: 'Another Test result.' },
-  { type: 'people', organisation: 'Mad Dogs', description: 'We support young people to get into employment so they can support themselves and live independent lives. Help with getting a job would be invaluable.' },
-  { type: 'time', organisation: 'Coffee4Craig', description: 'Test result.' },
-  { type: 'time', organisation: 'Coffee4Craig', description: 'Another Test result.' },
-  { type: 'people', organisation: 'Mad Dogs', description: 'We support young people to get into employment so they can support themselves and live independent lives. Help with getting a job would be invaluable.' },
-  { type: 'time', organisation: 'Coffee4Craig', description: 'Test result.' },
-  { type: 'time', organisation: 'Coffee4Craig', description: 'Another Test result.' }
+  { id: '0', type: 'people', organisation: 'Mad Dogs', description: 'We support young people to get into employment so they can support themselves and live independent lives. Help with getting a job would be invaluable.' },
+  { id: '1', type: 'time', organisation: 'Coffee4Craig', description: 'Test result.' },
+  { id: '2', type: 'time', organisation: 'Coffee4Craig', description: 'Another Test result.' },
+  { id: '3', type: 'people', organisation: 'Mad Dogs', description: 'We support young people to get into employment so they can support themselves and live independent lives. Help with getting a job would be invaluable.' },
+  { id: '4', type: 'time', organisation: 'Coffee4Craig', description: 'Test result.' },
+  { id: '5', type: 'time', organisation: 'Coffee4Craig', description: 'Another Test result.' },
+  { id: '6', type: 'people', organisation: 'Mad Dogs', description: 'We support young people to get into employment so they can support themselves and live independent lives. Help with getting a job would be invaluable.' },
+  { id: '7', type: 'time', organisation: 'Coffee4Craig', description: 'Test result.' },
+  { id: '8', type: 'time', organisation: 'Coffee4Craig', description: 'Another Test result.' }
 ]
 
 // List.js
 var options = {
-  valueNames: [ 'type', 'organisation', 'description' ],
-  item: '<li><a href="#"><h3 class="h3 type"></h3><p class="organisation"></p><p class="description"></p></a></li>',
+  valueNames: [ 'id', 'type', 'organisation', 'description' ],
+  item: '<li><a href="#"><span class="id"></span><h3 class="h3 type"></h3><p class="organisation"></p><p class="description"></p></a></li>',
   plugins: [
     // ListFuzzySearch()
   ]
 }
 
-var theList = new List('js-search', options, data)
+var theList = new List('js-card-search', options, data)
 
 // Bricks.js
 const sizes = [
@@ -68,6 +72,39 @@ theList.on('searchComplete', () =>
   instance.pack()
 )
 
+// Full detail view
+var i
+var items = document.querySelectorAll('.list li')
+
+// Add click listener to each item
+for (i = 0; i < items.length; i++) {
+  items[i].addEventListener('click', function (event) {
+    event.preventDefault()
+    openCard(this)
+  })
+}
+
+var openCard = function (el) {
+  var theId = el.getElementsByClassName('id')[0].textContent
+  var cardData = Find(data, function (o) { return o.id === theId })
+
+  // hide search
+  document.querySelector('#js-card-search').classList.remove('is-active')
+  document.querySelector('#js-card-search').classList.add('is-hidden')
+
+  // Append object name for Hogan
+  var theTemplateData = { card: cardData }
+
+  var callback = function () {
+    document.querySelector('.js-card-detail').classList.remove('is-hidden')
+    document.querySelector('.js-card-detail').classList.add('is-active')
+
+    window.scrollTo(0, 0)
+  }
+
+  templating.renderTemplate('js-card-detail-tpl', theTemplateData, 'js-card-detail-output', callback)
+}
+
 // theList.fuzzySearch.search('craig')
 
 // Example bricks.js api
@@ -97,7 +134,7 @@ listObj.filter(); // Remove all filters
 "id": "56d9ba46a3b948fda0b49374",
 "description": "Interview & job seeking skills",
 "serviceProviderId": "lifeshare",
-  "type": "People",
+"type": "People",
 "reason": "We support young people to get into employment so they can support themselves and live independent lives. Help with getting a job would be invaluable.",
 "moreInfoUrl": null,
 "postcode": "M1 1EB",
