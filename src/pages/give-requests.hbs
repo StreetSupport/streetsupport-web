@@ -1,14 +1,14 @@
 ---
-title: Give (Prototype) - Street Support
+title: Requests (Prototype) - Street Support
 description: xx
 layout: default.hbs
 permalink: false
-jsBundle: give
+jsBundle: giverequests
 ---
 
 <div class="block block--intro">
   <div class="container block__inner">
-    <h1 class="h1 block__header">Give Prototype</h1>
+    <h1 class="h1 block__header">Requests (Prototype)</h1>
     <a href="give-help.html">Other ways to give help</a>
   </div>
 </div>
@@ -16,39 +16,39 @@ jsBundle: give
 <div class="block">
   <div class="container block__inner">
     <div class="block__content">
-      <div id="js-card-search" class="js-card-search give-search is-active">
-        <div class="give-search__input" action="#">
-          <h1 class="h2 give-search__input__header">What can you give?</h1>
-          <input autofocus placeholder="Search" class="awesomplete search give-search__autocomplete" data-list="coffee4craig, mad dogs, coat, bedding" />
+      <div id="js-card-search" class="js-card-search requests-search is-active">
+        <div class="requests-search__input" action="#">
+          <h1 class="h2 requests-search__input__header">What can you give?</h1>
+          <input autofocus placeholder="Search" class="awesomplete search requests-search__autocomplete" data-list="coffee4craig, mad dogs, coat, bedding" />
         </div>
 
-        <div class="give-search__filter">
-          <h2 class="h3 give-search__filter__header">Filter by:</h2>
-          <input type="checkbox" id="all" class="give-search__filter__select give-search__filter__select--first" />
+        <div class="requests-search__filter">
+          <h2 class="h3 requests-search__filter__header">Filter by:</h2>
+          <input type="checkbox" id="all" class="requests-search__filter__select requests-search__filter__select--first" checked />
           <label for="all">All</label>
-          <input type="checkbox" id="items" class="give-search__filter__select" />
+          <input type="checkbox" id="items" class="requests-search__filter__select" />
           <label for="items">Items</label>
-          <input type="checkbox" id="time" class="give-search__filter__select" />
+          <input type="checkbox" id="time" class="requests-search__filter__select" />
           <label for="time">Time</label>
-          <input type="checkbox" id="money" class="give-search__filter__select" />
+          <input type="checkbox" id="money" class="requests-search__filter__select" />
           <label for="money">Money</label>
         </div>
 
-        <div class="give-search__sort">
-          <h2 class="h3 give-search__sort__header">Sort by:</h2>
-          <select class="give-search__sort__list">
+        <div class="requests-search__sort">
+          <h2 class="h3 requests-search__sort__header">Sort by:</h2>
+          <select class="requests-search__sort__list">
             <option value="organisation">Select</option>
             <option value="organisation-a">Organisation name (A-Z)</option>
             <option value="organisation-d">Organisation name (Z-A)</option>
             <option value="date-a">Date posted (Newest)</option>
-            <option value="date-d">Date posted (Oldest)</option>            
+            <option value="date-d">Date posted (Oldest)</option>
           </select>
         </div>
 
         <ul class="list js-card-list"></ul>
       </div>
 
-      <div class="give-detail js-card-detail is-hidden">
+      <div class="requests-detail js-card-detail is-hidden">
         <div id="js-card-detail-output" class="template"></div>
       </div>
     </div>
