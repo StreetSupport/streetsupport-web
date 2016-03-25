@@ -25,12 +25,10 @@ var loading = new Spinner().spin(spin)
 
 var findHelp = new FindHelp()
 
-var theCategory = urlParameter.parameter('category')
-var theLocation = findHelp.getLocation()
 var dayToOpen = urlParameter.parameter('day')
 
-var categoryUrl = apiRoutes.categoryServiceProvidersByDay += theCategory
-categoryEndpoint.getEndpointUrl(categoryUrl, theLocation).then(function (success) {
+var categoryUrl = apiRoutes.categoryServiceProvidersByDay += findHelp.theCategory
+categoryEndpoint.getEndpointUrl(categoryUrl, findHelp.getLocation()).then(function (success) {
   buildList(success)
 }, function (error) {
 })
@@ -40,7 +38,7 @@ function buildList (url) {
   getApiData.data(url).then(function (result) {
     var data = result.data
 
-    var theTitle = data.name + ' - Street Support'
+    var theTitle = data.categoryName + ' - Street Support'
     document.title = theTitle
 
     // Append object name for Hogan
@@ -65,20 +63,20 @@ function buildList (url) {
       })
 
       callback = function () {
-        accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', theCategory, 'day'))
+        accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', findHelp.theCategory, 'day'))
       }
     } else {
       template = 'js-category-no-results-result-tpl'
     }
 
-    var hasSetManchesterAsLocation = theLocation === 'manchester'
+    var hasSetManchesterAsLocation = findHelp.getLocation() === 'manchester'
 
     findHelp.handleSubCategoryChange('day', accordion)
 
     var theData = {
       organisations: data,
-      pageAsFromManchester: 'category-by-day.html?category=' + theCategory + '&location=manchester',
-      pageFromCurrentLocation: 'category-by-day.html?category=' + theCategory + '&location=my-location',
+      pageAsFromManchester: 'category-by-day.html?category=' + findHelp.theCategory + '&location=manchester',
+      pageFromCurrentLocation: 'category-by-day.html?category=' + findHelp.theCategory + '&location=my-location',
       useManchesterAsLocation: hasSetManchesterAsLocation,
       useGeoLocation: !hasSetManchesterAsLocation
     }
