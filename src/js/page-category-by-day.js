@@ -4,6 +4,7 @@ import './common'
 // Page modules
 var urlParameter = require('./get-url-parameter')
 var accordion = require('./accordion')
+var FindHelp = require('./find-help')
 
 // Lodash
 var forEach = require('lodash/collection/forEach')
@@ -54,8 +55,10 @@ function handleSubCategoryChange(subCategoryKey, accordion) {
 var spin = document.getElementById('spin')
 var loading = new Spinner().spin(spin)
 
+var findHelp = new FindHelp()
+
 var theCategory = urlParameter.parameter('category')
-var theLocation = getLocation()
+var theLocation = findHelp.getLocation()
 var dayToOpen = urlParameter.parameter('day')
 
 var categoryUrl = apiRoutes.categoryServiceProvidersByDay += theCategory
