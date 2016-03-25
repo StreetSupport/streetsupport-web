@@ -66,7 +66,7 @@ function buildList (url) {
       template = 'js-category-no-results-result-tpl'
     }
 
-    templating.renderTemplate(template, findHelp.buildViewModel(data), 'js-category-result-output', callback)
+    templating.renderTemplate(template, findHelp.buildViewModel('category', data), 'js-category-result-output', callback)
 
     loading.stop()
     analytics.init(theTitle)

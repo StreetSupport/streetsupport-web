@@ -28,7 +28,7 @@ var FindHelp = function () {
 
   self.handleSubCategoryChange = function (subCategoryKey, accordion) {
     window.onpopstate = function () {
-      var subCategory = urlParameter.parameter(subCategoryKey, document.location.search)
+      var subCategory = urlParameter.parameter(subCategoryKey)
       if(subCategory.length) {
         var el = document.getElementById(subCategory)
         var context = document.querySelector('.js-accordion')
@@ -61,13 +61,13 @@ var FindHelp = function () {
       })
   }
 
-  self.buildViewModel = function (data) {
+  self.buildViewModel = function (pagename, data) {
     var hasSetManchesterAsLocation = self.getLocation() === 'manchester'
 
     return {
       organisations: data,
-      pageAsFromManchester: 'category.html?category=' + self.theCategory + '&location=manchester',
-      pageFromCurrentLocation: 'category.html?category=' + self.theCategory + '&location=my-location',
+      pageAsFromManchester: pagename + '.html?category=' + self.theCategory + '&location=manchester',
+      pageFromCurrentLocation: pagename + '.html?category=' + self.theCategory + '&location=my-location',
       useManchesterAsLocation: hasSetManchesterAsLocation,
       useGeoLocation: !hasSetManchesterAsLocation
     }

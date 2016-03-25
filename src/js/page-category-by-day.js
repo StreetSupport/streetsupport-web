@@ -59,13 +59,12 @@ function buildList (url) {
 
       callback = function () {
         accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', 'day'))
-        findHelp.setUrl('category-by-day', 'day', data.daysServices[0].name)
       }
     } else {
       template = 'js-category-no-results-result-tpl'
     }
 
-    templating.renderTemplate(template, findHelp.buildViewModel(data), 'js-category-result-output', callback)
+    templating.renderTemplate(template, findHelp.buildViewModel('category-by-day', data), 'js-category-result-output', callback)
 
     loading.stop()
     analytics.init(theTitle)
