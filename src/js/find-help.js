@@ -24,7 +24,7 @@ var FindHelp = function () {
     console.log('handleSubCategoryChange')
     console.log(subCategoryKey, document.location.search)
     window.onpopstate = function () {
-      var subCategory = urlParameter.parameterFromString(subCategoryKey, document.location.search)
+      var subCategory = urlParameter.parameter(subCategoryKey, document.location.search)
       console.log(subCategory)
       var el = document.getElementById(subCategory)
       var context = document.querySelector('.js-accordion')
