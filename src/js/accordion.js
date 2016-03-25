@@ -11,7 +11,6 @@ var myListener = {
 }
 
 var init = function (showFirst, indexToOpen, listener) {
-  console.log(showFirst, indexToOpen, listener)
   // If not supported, exit out
   if (!document.querySelector || !document.querySelectorAll || !document.body.classList) {
     return
@@ -44,28 +43,8 @@ var init = function (showFirst, indexToOpen, listener) {
 }
 
 var open = function (el, context, noAnalytics) {
-  // Check to see if clicked header is already active
   myListener.accordionOpened(el, context)
-  if (el.classList.contains(activeClass)) {
-    close(el, context)
-  } else {
-    close(el, context)
-
-    // Add active classes for clicked header and the item div
-    el.classList.add(activeClass)
-    el.nextElementSibling.classList.add(activeClass)
-
-    // Change icon class in header
-    el.querySelector(icon).classList.remove(iconOpenClass)
-    el.querySelector(icon).classList.add(iconCloseClass)
-
-    // Send Google Analytics event
-    if (!noAnalytics) {
-      var headerText = el.textContent
-
-      ga('send', 'event', 'accordion', 'click', headerText + ' open')
-    }
-  }
+  baseOpen(el, context, noAnalytics)
 }
 
 var reOpen = function (el, context, noAnalytics) {
