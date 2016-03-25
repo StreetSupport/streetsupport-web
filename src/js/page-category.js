@@ -29,7 +29,6 @@ var subCategoryToOpen = urlParameter.parameter('sub-category')
 
 var listener = {
   accordionOpened: function (element, context) {
-    console.log(element, context)
     var subCategoryId = element.getAttribute('id')
     history.pushState({}, '', 'category.html?category=' + theCategory + '&sub-category=' + subCategoryId)
   }
