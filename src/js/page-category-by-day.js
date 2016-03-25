@@ -58,7 +58,8 @@ function buildList (url) {
       })
 
       callback = function () {
-        accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', findHelp.theCategory, 'day'))
+        accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', 'day'))
+        findHelp.setUrl('category-by-day', 'day', data.daysServices[0].name)
       }
     } else {
       template = 'js-category-no-results-result-tpl'

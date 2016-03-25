@@ -60,7 +60,7 @@ function buildList (url) {
       })
 
       callback = function () {
-        accordion.init(false, subCategoryIndexToOpen, findHelp.buildListener('category', findHelp.theCategory, 'sub-category'))
+        accordion.init(false, subCategoryIndexToOpen, findHelp.buildListener('category', 'sub-category'))
       }
     } else {
       template = 'js-category-no-results-result-tpl'

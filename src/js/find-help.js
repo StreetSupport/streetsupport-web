@@ -12,13 +12,16 @@ var FindHelp = function () {
       return location
   }
 
-  self.buildListener = function (pageName, categoryKey, subCategoryKey) {
+  self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
+    history.pushState({}, '', pageName + '.html?category=' + self.theCategory +
+      '&' + subCategoryKey + '=' + subCategoryId +
+      '&location=' + self.getLocation())
+  }
+
+  self.buildListener = function (pageName, subCategoryKey) {
     return {
       accordionOpened: function (element, context) {
-        var subCategoryId = element.getAttribute('id')
-        history.pushState({}, '', pageName + '.html?category=' + self.theCategory +
-          '&' + subCategoryKey + '=' + subCategoryId +
-          '&location=' + self.getLocation())
+        self.setUrl(pageName, subCategoryKey, element.getAttribute('id'))
       }
     }
   }
