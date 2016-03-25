@@ -19,32 +19,31 @@ var Spinner = require('spin.js')
 var analytics = require('./analytics')
 var socialShare = require('./social-share')
 
+function getLocation () {
+  var location = urlParameter.parameter('location')
+  var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+  if (savedLocationCookie.length && location.length === 0) return savedLocationCookie
+  if (location === 'my-location') return ''
+    return location
+}
+
+function buildListener (categoryKey, subCategoryKey) {
+  return {
+    accordionOpened: function (element, context) {
+      var subCategoryId = element.getAttribute('id')
+      history.pushState({}, '', 'category-by-day.html?category=' + categoryKey + '&' + subCategoryKey + '=' + subCategoryId)
+    }
+  }
+}
+
 // Spinner
 var spin = document.getElementById('spin')
 var loading = new Spinner().spin(spin)
 
 // Get category and create URL
 var theCategory = urlParameter.parameter('category')
-var theLocation = urlParameter.parameter('location')
+var theLocation = getLocation()
 var dayToOpen = urlParameter.parameter('day')
-
-var listener = {
-  accordionOpened: function (element, context) {
-    console.log(element, context)
-    var subCategoryId = element.getAttribute('id')
-    history.pushState({}, '', 'category-by-day.html?category=' + theCategory + '&day=' + subCategoryId)
-  }
-}
-
-var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-
-if (savedLocationCookie.length && theLocation.length === 0) {
-  theLocation = savedLocationCookie
-}
-
-if (theLocation === 'my-location') {
-  theLocation = '' // clear it so category-endpoint uses geolocation...
-}
 
 var categoryUrl = apiRoutes.categoryServiceProvidersByDay += theCategory
 categoryEndpoint.getEndpointUrl(categoryUrl, theLocation).then(function (success) {
@@ -64,12 +63,6 @@ function buildList (url) {
     var template = ''
     var callback = function () {}
 
-    console.log(data.daysServices)
-
-    var dayIndexToOpen = findIndex(data.daysServices, function(day) {
-      return day.name === dayToOpen
-    })
-
     if (data.daysServices.length) {
       template = 'js-category-result-tpl'
 
@@ -83,8 +76,12 @@ function buildList (url) {
         })
       })
 
+      var dayIndexToOpen = findIndex(data.daysServices, function(day) {
+        return day.name === dayToOpen
+      })
+
       callback = function () {
-        accordion.init(true, dayIndexToOpen, listener)
+        accordion.init(true, dayIndexToOpen, buildListener(theCategory, 'day'))
       }
     } else {
       template = 'js-category-no-results-result-tpl'
