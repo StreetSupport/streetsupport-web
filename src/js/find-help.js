@@ -1,3 +1,5 @@
+var apiRoutes = require('./api')
+var categoryEndpoint = require('./category-endpoint')
 var urlParameter = require('./get-url-parameter')
 
 var FindHelp = function () {
@@ -15,7 +17,7 @@ var FindHelp = function () {
     return {
       accordionOpened: function (element, context) {
         var subCategoryId = element.getAttribute('id')
-        history.pushState({}, '', pageName + '.html?category=' + categoryKey +
+        history.pushState({}, '', pageName + '.html?category=' + self.theCategory +
           '&' + subCategoryKey + '=' + subCategoryId +
           '&location=' + self.getLocation())
       }
@@ -34,6 +36,31 @@ var FindHelp = function () {
       }
     }
   }
+
+  self.theCategory = urlParameter.parameter('category')
+
+  self.buildCategories = function (buildList) {
+
+    var categoryUrl = apiRoutes.categoryServiceProviders += self.theCategory
+
+    categoryEndpoint.getEndpointUrl(categoryUrl, self.getLocation())
+      .then(function (success) {
+        buildList(success)
+      }, function (error) {
+      })
+  }
+  // self.theLocation = self.getLocation()
+
+  // self.categoryUrl = apiRoutes.categoryServiceProviders += self.theCategory
+
+  // self.buildCategories = function (buildList) {
+  //   categoryEndpoint
+  //     .getEndpointUrl(self.categoryUrl, self.theLocation)
+  //     .then(function (success) {
+  //       buildList(success)
+  //     }, function (error) {
+  //     })
+  // }
 }
 
 module.exports = FindHelp

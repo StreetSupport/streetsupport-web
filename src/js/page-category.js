@@ -25,17 +25,7 @@ var loading = new Spinner().spin(spin)
 
 var findHelp = new FindHelp()
 
-// Get category and create URL
-var theCategory = urlParameter.parameter('category')
-var theLocation = findHelp.getLocation()
-var subCategoryToOpen = urlParameter.parameter('sub-category')
-
-var categoryUrl = apiRoutes.categoryServiceProviders += theCategory
-
-categoryEndpoint.getEndpointUrl(categoryUrl, theLocation).then(function (success) {
-  buildList(success)
-}, function (error) {
-})
+findHelp.buildCategories(buildList)
 
 function buildList (url) {
   // Get API data using promise
@@ -61,14 +51,14 @@ function buildList (url) {
       })
     })
 
-    var hasSetManchesterAsLocation = theLocation === 'manchester'
+    var hasSetManchesterAsLocation = findHelp.getLocation() === 'manchester'
 
     findHelp.handleSubCategoryChange('sub-category', accordion)
 
     var theData = {
       organisations: data,
-      pageAsFromManchester: 'category.html?category=' + theCategory + '&location=manchester',
-      pageFromCurrentLocation: 'category.html?category=' + theCategory + '&location=my-location',
+      pageAsFromManchester: 'category.html?category=' + findHelp.theCategory + '&location=manchester',
+      pageFromCurrentLocation: 'category.html?category=' + findHelp.theCategory + '&location=my-location',
       useManchesterAsLocation: hasSetManchesterAsLocation,
       useGeoLocation: !hasSetManchesterAsLocation
     }
@@ -79,11 +69,11 @@ function buildList (url) {
       template = 'js-category-result-tpl'
 
       var subCategoryIndexToOpen = findIndex(data.subCategories, function(subCat) {
-        return subCat.key === subCategoryToOpen
+        return subCat.key === urlParameter.parameter('sub-category')
       })
 
       callback = function () {
-        accordion.init(false, subCategoryIndexToOpen, findHelp.buildListener('category', theCategory, 'sub-category'))
+        accordion.init(false, subCategoryIndexToOpen, findHelp.buildListener('category', findHelp.theCategory, 'sub-category'))
       }
     } else {
       template = 'js-category-no-results-result-tpl'
