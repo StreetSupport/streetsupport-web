@@ -20,10 +20,6 @@ var Spinner = require('spin.js')
 var analytics = require('./analytics')
 var socialShare = require('./social-share')
 
-function setTitle (categoryName) {
-  document.title = categoryName + ' - Street Support'
-}
-
 var spin = document.getElementById('spin')
 var loading = new Spinner().spin(spin)
 
@@ -44,7 +40,8 @@ function buildList (url) {
   getApiData.data(url).then(function (result) {
     var data = result.data
 
-    setTitle(data.categoryName)
+    var theTitle = data.name + ' - Street Support'
+    document.title = theTitle
 
     // Append object name for Hogan
     var template = ''
