@@ -23,7 +23,7 @@ var spin = document.getElementById('spin')
 var loading = new Spinner().spin(spin)
 
 var findHelp = new FindHelp()
-
+findHelp.handleSubCategoryChange('sub-category', accordion)
 findHelp.buildCategories(apiRoutes.categoryServiceProviders, buildList)
 
 function buildList (url) {
@@ -34,38 +34,26 @@ function buildList (url) {
     }
     var data = result.data
 
-    // Get category name and edit page title
     var theTitle = data.name + ' - Street Support'
     document.title = theTitle
 
-    data.subCategories = sortBy(data.subCategories, function (item) {
-      return item.name
-    })
-
-    forEach(data.subCategories, function (subCat) {
-      forEach(subCat.serviceProviders, function (provider) {
-        if (provider.tags !== null) {
-          provider.tags = provider.tags.join(', ')
-        }
-      })
-    })
-
-    var hasSetManchesterAsLocation = findHelp.getLocation() === 'manchester'
-
-    findHelp.handleSubCategoryChange('sub-category', accordion)
-
-    var theData = {
-      organisations: data,
-      pageAsFromManchester: 'category.html?category=' + findHelp.theCategory + '&location=manchester',
-      pageFromCurrentLocation: 'category.html?category=' + findHelp.theCategory + '&location=my-location',
-      useManchesterAsLocation: hasSetManchesterAsLocation,
-      useGeoLocation: !hasSetManchesterAsLocation
-    }
     var template = ''
     var callback = function () {}
 
     if (data.subCategories.length) {
       template = 'js-category-result-tpl'
+
+      data.subCategories = sortBy(data.subCategories, function (item) {
+        return item.name
+      })
+
+      forEach(data.subCategories, function (subCat) {
+        forEach(subCat.serviceProviders, function (provider) {
+          if (provider.tags !== null) {
+            provider.tags = provider.tags.join(', ')
+          }
+        })
+      })
 
       var subCategoryIndexToOpen = findIndex(data.subCategories, function(subCat) {
         return subCat.key === urlParameter.parameter('sub-category')
@@ -78,7 +66,7 @@ function buildList (url) {
       template = 'js-category-no-results-result-tpl'
     }
 
-    templating.renderTemplate(template, theData, 'js-category-result-output', callback)
+    templating.renderTemplate(template, findHelp.buildViewModel(data), 'js-category-result-output', callback)
 
     loading.stop()
     analytics.init(theTitle)

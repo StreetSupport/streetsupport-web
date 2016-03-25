@@ -36,6 +36,16 @@ var FindHelp = function () {
     }
   }
 
+  self.formatTags = function (subCategories) {
+  forEach(subCategories, function (subCat) {
+    forEach(subCat.serviceProviders, function (provider) {
+      if (provider.tags !== null) {
+        provider.tags = provider.tags.join(', ')
+      }
+    })
+  })
+}
+
   self.theCategory = urlParameter.parameter('category')
 
   self.buildCategories = function (endpoint, buildList) {
@@ -47,18 +57,18 @@ var FindHelp = function () {
       }, function (error) {
       })
   }
-  // self.theLocation = self.getLocation()
 
-  // self.categoryUrl = apiRoutes.categoryServiceProviders += self.theCategory
+  self.buildViewModel = function (data) {
+    var hasSetManchesterAsLocation = self.getLocation() === 'manchester'
 
-  // self.buildCategories = function (buildList) {
-  //   categoryEndpoint
-  //     .getEndpointUrl(self.categoryUrl, self.theLocation)
-  //     .then(function (success) {
-  //       buildList(success)
-  //     }, function (error) {
-  //     })
-  // }
+    return {
+      organisations: data,
+      pageAsFromManchester: 'category.html?category=' + self.theCategory + '&location=manchester',
+      pageFromCurrentLocation: 'category.html?category=' + self.theCategory + '&location=my-location',
+      useManchesterAsLocation: hasSetManchesterAsLocation,
+      useGeoLocation: !hasSetManchesterAsLocation
+    }
+  }
 }
 
 module.exports = FindHelp

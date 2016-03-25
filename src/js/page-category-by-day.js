@@ -24,24 +24,19 @@ var spin = document.getElementById('spin')
 var loading = new Spinner().spin(spin)
 
 var findHelp = new FindHelp()
-
-var dayToOpen = urlParameter.parameter('day')
-
-var categoryUrl = apiRoutes.categoryServiceProvidersByDay += findHelp.theCategory
-categoryEndpoint.getEndpointUrl(categoryUrl, findHelp.getLocation()).then(function (success) {
-  buildList(success)
-}, function (error) {
-})
+findHelp.handleSubCategoryChange('day', accordion)
+findHelp.buildCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
 
 function buildList (url) {
-  // Get API data using promise
   getApiData.data(url).then(function (result) {
+    if (result.status === 'error') {
+      window.location.replace('/find-help.html')
+    }
     var data = result.data
 
     var theTitle = data.categoryName + ' - Street Support'
     document.title = theTitle
 
-    // Append object name for Hogan
     var template = ''
     var callback = function () {}
 
@@ -59,7 +54,7 @@ function buildList (url) {
       })
 
       var dayIndexToOpen = findIndex(data.daysServices, function(day) {
-        return day.name === dayToOpen
+        return day.name === urlParameter.parameter('day')
       })
 
       callback = function () {
@@ -69,18 +64,7 @@ function buildList (url) {
       template = 'js-category-no-results-result-tpl'
     }
 
-    var hasSetManchesterAsLocation = findHelp.getLocation() === 'manchester'
-
-    findHelp.handleSubCategoryChange('day', accordion)
-
-    var theData = {
-      organisations: data,
-      pageAsFromManchester: 'category-by-day.html?category=' + findHelp.theCategory + '&location=manchester',
-      pageFromCurrentLocation: 'category-by-day.html?category=' + findHelp.theCategory + '&location=my-location',
-      useManchesterAsLocation: hasSetManchesterAsLocation,
-      useGeoLocation: !hasSetManchesterAsLocation
-    }
-    templating.renderTemplate(template, theData, 'js-category-result-output', callback)
+    templating.renderTemplate(template, findHelp.buildViewModel(data), 'js-category-result-output', callback)
 
     loading.stop()
     analytics.init(theTitle)
