@@ -15,22 +15,23 @@ var FindHelp = function () {
     return {
       accordionOpened: function (element, context) {
         var subCategoryId = element.getAttribute('id')
-        history.pushState({}, '', pageName + '.html?category=' + categoryKey + '&' + subCategoryKey + '=' + subCategoryId)
+        history.pushState({}, '', pageName + '.html?category=' + categoryKey +
+          '&' + subCategoryKey + '=' + subCategoryId +
+          '&location=' + self.getLocation())
       }
     }
   }
 
   self.handleSubCategoryChange = function (subCategoryKey, accordion) {
-    console.log('handleSubCategoryChange')
-    console.log(subCategoryKey, document.location.search)
     window.onpopstate = function () {
       var subCategory = urlParameter.parameter(subCategoryKey, document.location.search)
-      console.log(subCategory)
-      var el = document.getElementById(subCategory)
-      var context = document.querySelector('.js-accordion')
-      var useAnalytics = true
+      if(subCategory.length) {
+        var el = document.getElementById(subCategory)
+        var context = document.querySelector('.js-accordion')
+        var useAnalytics = true
 
-      accordion.reOpen(el, context, useAnalytics)
+        accordion.reOpen(el, context, useAnalytics)
+      }
     }
   }
 }
