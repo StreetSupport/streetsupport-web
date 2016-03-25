@@ -1,25 +1,14 @@
-/* global location */
-
-var getUrlParameter = function (name) {
-  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]')
-  var regex = new RegExp('[\\?&]' + name + '=([^&#]*)')
-  var results = regex.exec(location.search)
+var getValue = function (needle, haystack) {
+  needle = needle.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]')
+  var regex = new RegExp('[\\?&]' + needle + '=([^&#]*)')
+  var results = regex.exec(haystack)
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
 }
 
-var getKeyValuePairs = function (param) {
-  return param.split('=')
-}
-
-var getUrlParameterFromString = function (url, reqKey) {
-  var queryString = url.split('?')[1]
-  var params = queryString.split('&')
-  return params
-    .map(param => getKeyValuePairs(param))
-    .find(kv => kv[0] === reqKey)[1]
+var getUrlParameter = function (name) {
+  return getValue(name, location.search)
 }
 
 module.exports = {
-  parameter: getUrlParameter,
-  parameterFromString: getUrlParameterFromString
+  parameter: getUrlParameter
 }

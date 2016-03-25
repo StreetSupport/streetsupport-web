@@ -4,6 +4,7 @@ import './common'
 // Page modules
 var urlParameter = require('./get-url-parameter')
 var accordion = require('./accordion')
+var FindHelp = require('./find-help')
 
 // Lodash
 var sortBy = require('lodash/collection/sortBy')
@@ -22,27 +23,12 @@ var socialShare = require('./social-share')
 var spin = document.getElementById('spin')
 var loading = new Spinner().spin(spin)
 
+var findHelp = new FindHelp()
+
 // Get category and create URL
 var theCategory = urlParameter.parameter('category')
-var theLocation = urlParameter.parameter('location')
+var theLocation = findHelp.getLocation()
 var subCategoryToOpen = urlParameter.parameter('sub-category')
-
-var listener = {
-  accordionOpened: function (element, context) {
-    var subCategoryId = element.getAttribute('id')
-    history.pushState({}, '', 'category.html?category=' + theCategory + '&sub-category=' + subCategoryId)
-  }
-}
-
-var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-
-if(savedLocationCookie.length && theLocation.length === 0) {
-  theLocation = savedLocationCookie
-}
-
-if (theLocation === 'my-location') {
-  theLocation = '' // clear it so category-endpoint uses geolocation...
-}
 
 var categoryUrl = apiRoutes.categoryServiceProviders += theCategory
 
@@ -75,36 +61,9 @@ function buildList (url) {
       })
     })
 
-    // Append object name for Hogan
-
     var hasSetManchesterAsLocation = theLocation === 'manchester'
 
-    var theData = {
-      organisations: data,
-      pageAsFromManchester: 'category.html?category=' + theCategory + '&location=manchester',
-      pageFromCurrentLocation: 'category.html?category=' + theCategory + '&location=my-location',
-      useManchesterAsLocation: hasSetManchesterAsLocation,
-      useGeoLocation: !hasSetManchesterAsLocation
-    }
-    var template = ''
-    var callback = function () {}
-
-    var hasSetManchesterAsLocation = theLocation === 'manchester'
-
-    var subCategoryIndexToOpen = findIndex(data.subCategories, function(subCat) {
-      return subCat.key === subCategoryToOpen
-    })
-
-    window.onpopstate = function(event) {
-      var subCategory = urlParameter.parameterFromString(document.location.search, 'sub-category')
-      console.log(subCategory)
-
-      var el = document.getElementById(subCategory)
-      var context = document.querySelector('.js-accordion')
-      var useAnalytics = true
-
-      accordion.reOpen(el, context, useAnalytics)
-    }
+    findHelp.handleSubCategoryChange('sub-category', accordion)
 
     var theData = {
       organisations: data,
@@ -118,8 +77,13 @@ function buildList (url) {
 
     if (data.subCategories.length) {
       template = 'js-category-result-tpl'
+
+      var subCategoryIndexToOpen = findIndex(data.subCategories, function(subCat) {
+        return subCat.key === subCategoryToOpen
+      })
+
       callback = function () {
-        accordion.init(false, subCategoryIndexToOpen, listener)
+        accordion.init(false, subCategoryIndexToOpen, findHelp.buildListener('category', theCategory, 'sub-category'))
       }
     } else {
       template = 'js-category-no-results-result-tpl'
