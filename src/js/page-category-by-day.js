@@ -36,11 +36,24 @@ function buildListener (categoryKey, subCategoryKey) {
   }
 }
 
-// Spinner
+function setTitle (categoryName) {
+  document.title = categoryName + ' - Street Support'
+}
+
+function handleSubCategoryChange(subCategoryKey, accordion) {
+  window.onpopstate = function () {
+    var subCategory = urlParameter.parameterFromString(document.location.search, subCategoryKey)
+    var el = document.getElementById(subCategory)
+    var context = document.querySelector('.js-accordion')
+    var useAnalytics = true
+
+    accordion.reOpen(el, context, useAnalytics)
+  }
+}
+
 var spin = document.getElementById('spin')
 var loading = new Spinner().spin(spin)
 
-// Get category and create URL
 var theCategory = urlParameter.parameter('category')
 var theLocation = getLocation()
 var dayToOpen = urlParameter.parameter('day')
@@ -55,9 +68,8 @@ function buildList (url) {
   // Get API data using promise
   getApiData.data(url).then(function (result) {
     var data = result.data
-    // Get category name and edit page title
-    var theTitle = data.categoryName + ' - Street Support'
-    document.title = theTitle
+
+    setTitle(data.categoryName)
 
     // Append object name for Hogan
     var template = ''
@@ -89,15 +101,7 @@ function buildList (url) {
 
     var hasSetManchesterAsLocation = theLocation === 'manchester'
 
-    window.onpopstate = function(event) {
-      var subCategory = urlParameter.parameterFromString(document.location.search, 'day')
-      console.log(subCategory)
-      var el = document.getElementById(subCategory)
-      var context = document.querySelector('.js-accordion')
-      var useAnalytics = true
-
-      accordion.reOpen(el, context, useAnalytics)
-    }
+    handleSubCategoryChange('day', accordion)
 
     var theData = {
       organisations: data,
