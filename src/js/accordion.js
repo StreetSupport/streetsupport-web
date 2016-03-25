@@ -28,9 +28,7 @@ var init = function (showFirst, indexToOpen, listener) {
   if (showFirst || itemCount === 1) {
     var firstHeader = headers[0]
     open(firstHeader, el, true)
-  }
-
-  if(indexToOpen >= 0) {
+  }else if(indexToOpen >= 0) {
     open(headers[indexToOpen], el, true)
   }
 
