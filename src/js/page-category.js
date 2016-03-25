@@ -5,15 +5,14 @@ import './common'
 var urlParameter = require('./get-url-parameter')
 var accordion = require('./accordion')
 var FindHelp = require('./find-help')
+var apiRoutes = require('./api')
 
 // Lodash
 var sortBy = require('lodash/collection/sortBy')
 var forEach = require('lodash/collection/forEach')
 var findIndex = require('lodash/array/findIndex')
 
-var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
-var categoryEndpoint = require('./category-endpoint')
 var templating = require('./template-render')
 var Spinner = require('spin.js')
 var analytics = require('./analytics')
@@ -25,7 +24,7 @@ var loading = new Spinner().spin(spin)
 
 var findHelp = new FindHelp()
 
-findHelp.buildCategories(buildList)
+findHelp.buildCategories(apiRoutes.categoryServiceProviders, buildList)
 
 function buildList (url) {
   // Get API data using promise
