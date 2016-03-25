@@ -20,36 +20,8 @@ var Spinner = require('spin.js')
 var analytics = require('./analytics')
 var socialShare = require('./social-share')
 
-function getLocation () {
-  var location = urlParameter.parameter('location')
-  var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-  if (savedLocationCookie.length && location.length === 0) return savedLocationCookie
-  if (location === 'my-location') return ''
-    return location
-}
-
-function buildListener (categoryKey, subCategoryKey) {
-  return {
-    accordionOpened: function (element, context) {
-      var subCategoryId = element.getAttribute('id')
-      history.pushState({}, '', 'category-by-day.html?category=' + categoryKey + '&' + subCategoryKey + '=' + subCategoryId)
-    }
-  }
-}
-
 function setTitle (categoryName) {
   document.title = categoryName + ' - Street Support'
-}
-
-function handleSubCategoryChange(subCategoryKey, accordion) {
-  window.onpopstate = function () {
-    var subCategory = urlParameter.parameterFromString(document.location.search, subCategoryKey)
-    var el = document.getElementById(subCategory)
-    var context = document.querySelector('.js-accordion')
-    var useAnalytics = true
-
-    accordion.reOpen(el, context, useAnalytics)
-  }
 }
 
 var spin = document.getElementById('spin')
@@ -96,7 +68,7 @@ function buildList (url) {
       })
 
       callback = function () {
-        accordion.init(true, dayIndexToOpen, buildListener(theCategory, 'day'))
+        accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', theCategory, 'day'))
       }
     } else {
       template = 'js-category-no-results-result-tpl'
@@ -104,7 +76,7 @@ function buildList (url) {
 
     var hasSetManchesterAsLocation = theLocation === 'manchester'
 
-    handleSubCategoryChange('day', accordion)
+    findHelp.handleSubCategoryChange('day', accordion)
 
     var theData = {
       organisations: data,

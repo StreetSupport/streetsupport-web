@@ -11,22 +11,21 @@ var FindHelp = function () {
       return location
   }
 
-  self.buildListener = function (categoryKey, subCategoryKey) {
+  self.buildListener = function (pageName, categoryKey, subCategoryKey) {
     return {
       accordionOpened: function (element, context) {
         var subCategoryId = element.getAttribute('id')
-        history.pushState({}, '', 'category-by-day.html?category=' + categoryKey + '&' + subCategoryKey + '=' + subCategoryId)
+        history.pushState({}, '', pageName + '.html?category=' + categoryKey + '&' + subCategoryKey + '=' + subCategoryId)
       }
     }
   }
 
-  self.setTitle = function (categoryName) {
-    document.title = categoryName + ' - Street Support'
-  }
-
   self.handleSubCategoryChange = function (subCategoryKey, accordion) {
+    console.log('handleSubCategoryChange')
+    console.log(subCategoryKey, document.location.search)
     window.onpopstate = function () {
-      var subCategory = urlParameter.parameterFromString(document.location.search, subCategoryKey)
+      var subCategory = urlParameter.parameterFromString(subCategoryKey, document.location.search)
+      console.log(subCategory)
       var el = document.getElementById(subCategory)
       var context = document.querySelector('.js-accordion')
       var useAnalytics = true
