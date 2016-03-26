@@ -84,16 +84,15 @@ getApiData.data(apiRoutes.needs)
         console.log('filter clicked: ' + getFilter)
 
         if (getFilter === 'all') {
-          activeFilters = []
           resetFiltering()
         } else {
           if (this.classList.contains('is-active')) {
-            console.log('already active')
+            console.log('this filter is already active')
             this.classList.remove('is-active')
             activeFilters.splice(activeFilters.indexOf(getFilter), 1)
             runFiltering()
           } else {
-            console.log('not active')
+            console.log('this filter is not already active')
 
             document.querySelector('.js-filter-item-all').classList.remove('is-active')
             this.classList.add('is-active')
@@ -106,6 +105,14 @@ getApiData.data(apiRoutes.needs)
 
     var runFiltering = function () {
       console.log('active filters: ' + activeFilters)
+
+      if (activeFilters.length === 0) {
+        console.log('no active filters, abort and reset')
+        resetFiltering()
+        return
+      }
+
+      console.log('test')
 
       theList.filter(function (item) {
         if (activeFilters.length > 0) {
@@ -122,7 +129,10 @@ getApiData.data(apiRoutes.needs)
       var c
       var filters = document.querySelectorAll('.js-filter-item')
 
-      console.log('active filters: ' + activeFilters)
+      activeFilters = []
+
+      console.log('reset filter function')
+      console.log('active filters (there should be none): ' + activeFilters)
 
       for (c = 0; c < filters.length; c++) {
         filters[c].classList.remove('is-active')
