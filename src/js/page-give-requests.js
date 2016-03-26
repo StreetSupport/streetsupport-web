@@ -40,7 +40,7 @@ getApiData.data(apiRoutes.needs)
       ]
     }
 
-    var theList = new List('js-card-search', options, needsFromApi)
+    const theList = new List('js-card-search', options, needsFromApi)
 
     // Bricks.js
     const sizes = [
@@ -51,55 +51,65 @@ getApiData.data(apiRoutes.needs)
       { mq: '800px', columns: 3, gutter: 20 }
     ]
 
-    const instance = Bricks({
+    const cardLayout = Bricks({
       container: '.list',
       packed: 'data-packed', // if not prefixed with 'data-', it will be added
       sizes: sizes
     })
 
-    instance
+    cardLayout
       .resize(true) // bind resize handler
       .pack() // pack initial items
 
-    // Triggers
+    // List.js Triggers
     theList.on('sortStart', () =>
-      instance.pack()
+      cardLayout.pack()
     )
 
     theList.on('searchComplete', () =>
-      instance.pack()
+      cardLayout.pack()
     )
 
     // Filtering
     var f
-    var filters = document.querySelectorAll('.js-filter-checkbox')
-
-    console.log(filters)
+    var filters = document.querySelectorAll('.js-filter-item')
 
     // Add click listener to each item
     for (f = 0; f < filters.length; f++) {
-      filters[i].change(function(event) {
-          alert('click')
-          var checkbox = event.target;
-          if (checkbox.checked) {
-              //Checkbox has been checked
-          } else {
-              //Checkbox has been unchecked
-          }
+      filters[f].addEventListener('click', function (event) {
+        var getFilter = this.getAttribute('data-filter')
+        event.preventDefault()
+
+        console.log(getFilter)
+
+        if (getFilter === 'all') {
+          resetFiltering()
+        } else {
+          runFiltering()
+        }
       })
     }
 
-    /*
-    listObj.filter(function(item) {
-       if (item.values().id > 1) {
-           return true;
-       } else {
-           return false;
-       }
-    }); // Only items with id > 1 are shown in list
+    var runFiltering = function () {
+      // EXAMPLE HARD CODE FILTER
+      theList.filter(function (item) {
+        if (item.values().type === 'People') {
+          return true
+        } else {
+          return false
+        }
+      })
 
-    listObj.filter(); // Remove all filters
-    */
+      cardLayout.pack()
+    }
+
+    var resetFiltering = function () {
+      // TBA: Reset active states
+
+      // Reset filter & layout
+      theList.filter()
+      cardLayout.pack()
+    }
 
     // Full detail view
     var i
@@ -139,38 +149,8 @@ getApiData.data(apiRoutes.needs)
 
 // Example bricks.js api
 /*
-instance
+cardSort
   .on('pack', () => console.log('ALL grid items packed.'))
   .on('update', () => console.log('NEW grid items packed.'))
   .on('resize', size => console.log('The grid has be re-packed to accommodate a new BREAKPOINT.'))
-*/
-
-// Example filter code
-/*
-listObj.filter(function(item) {
-   if (item.values().id > 1) {
-       return true;
-   } else {
-       return false;
-   }
-}); // Only items with id > 1 are shown in list
-
-listObj.filter(); // Remove all filters
-*/
-
-// Example need data
-/*
-{
-"id": "56d9ba46a3b948fda0b49374",
-"description": "Interview & job seeking skills",
-"serviceProviderId": "lifeshare",
-"type": "People",
-"reason": "We support young people to get into employment so they can support themselves and live independent lives. Help with getting a job would be invaluable.",
-"moreInfoUrl": null,
-"postcode": "M1 1EB",
-"instructions": "No specific skills or qualifications required. Please contact us for more detail.",
-"email": "viv@streetsupport.net",
-"donationAmountInPounds": 0,
-"donationUrl": null
-},
 */

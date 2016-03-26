@@ -35,16 +35,22 @@
       display: inline-block;
     }
 
-    &__select {
-      margin-left: 20px;
-
-      &--first {
-        margin-left: 10px;
-      }
+    &__list {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      display: inline-block;
     }
 
-    label {
-      padding-left: 2px;
+    &__item {
+      margin: 0 0 0 20px;
+      padding: 0;
+      display: inline-block;
+      cursor: pointer; // TEMP STYLE
+
+      &.is-active {
+        text-decoration: underline;
+      }
     }
   }
 

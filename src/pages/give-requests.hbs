@@ -22,16 +22,14 @@ jsBundle: giverequests
           <input autofocus placeholder="Search" class="awesomplete search requests-search__autocomplete" data-list="coffee4craig, mad dogs, coat, bedding" />
         </div>
 
-        <div class="requests-search__filter js-filter">
+        <div class="requests-search__filter">
           <h2 class="h3 requests-search__filter__header">Filter by:</h2>
-          <input type="checkbox" id="all" class="requests-search__filter__select requests-search__filter__select--first js-filter-checkbox" checked />
-          <label for="all">All</label>
-          <input type="checkbox" id="things" class="requests-search__filter__select js-filter-checkbox" />
-          <label for="items">Items</label>
-          <input type="checkbox" id="people" class="requests-search__filter__select js-filter-checkbox" />
-          <label for="time">Time</label>
-          <input type="checkbox" id="money" class="requests-search__filter__select js-filter-checkbox" />
-          <label for="money">Money</label>
+          <ul class="requests-search__filter__list js-filter-list">
+            <li class="requests-search__filter__item js-filter-item is-active" data-filter="all">All</li>
+            <li class="requests-search__filter__item js-filter-item" data-filter="items">Items</li>
+            <li class="requests-search__filter__item js-filter-item" data-filter="time">Time</li>
+            <li class="requests-search__filter__item js-filter-item" data-filter="money">Money</li>
+          </ul>
         </div>
 
         <div class="requests-search__sort">
