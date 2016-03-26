@@ -71,40 +71,64 @@ getApiData.data(apiRoutes.needs)
     )
 
     // Filtering
-    var f
+    var b
     var filters = document.querySelectorAll('.js-filter-item')
+    var activeFilters = []
 
     // Add click listener to each item
-    for (f = 0; f < filters.length; f++) {
-      filters[f].addEventListener('click', function (event) {
+    for (b = 0; b < filters.length; b++) {
+      filters[b].addEventListener('click', function (event) {
         var getFilter = this.getAttribute('data-filter')
         event.preventDefault()
 
-        console.log(getFilter)
+        console.log('filter clicked: ' + getFilter)
 
         if (getFilter === 'all') {
+          activeFilters = []
           resetFiltering()
         } else {
-          runFiltering()
+          if (this.classList.contains('is-active')) {
+            console.log('already active')
+            this.classList.remove('is-active')
+            activeFilters.splice(activeFilters.indexOf(getFilter), 1)
+            runFiltering()
+          } else {
+            console.log('not active')
+
+            document.querySelector('.js-filter-item-all').classList.remove('is-active')
+            this.classList.add('is-active')
+            activeFilters.push(getFilter)
+            runFiltering()
+          }
         }
       })
     }
 
     var runFiltering = function () {
-      // EXAMPLE HARD CODE FILTER
+      console.log('active filters: ' + activeFilters)
+
       theList.filter(function (item) {
-        if (item.values().type === 'People') {
-          return true
-        } else {
-          return false
+        if (activeFilters.length > 0) {
+          return (activeFilters.indexOf(item.values().type)) > -1
         }
+        return true
       })
 
       cardLayout.pack()
     }
 
     var resetFiltering = function () {
-      // TBA: Reset active states
+      // Reset active states
+      var c
+      var filters = document.querySelectorAll('.js-filter-item')
+
+      console.log('active filters: ' + activeFilters)
+
+      for (c = 0; c < filters.length; c++) {
+        filters[c].classList.remove('is-active')
+      }
+
+      document.querySelector('.js-filter-item-all').classList.add('is-active')
 
       // Reset filter & layout
       theList.filter()
@@ -112,12 +136,12 @@ getApiData.data(apiRoutes.needs)
     }
 
     // Full detail view
-    var i
+    var a
     var items = document.querySelectorAll('.list li')
 
     // Add click listener to each item
-    for (i = 0; i < items.length; i++) {
-      items[i].addEventListener('click', function (event) {
+    for (a = 0; a < items.length; a++) {
+      items[a].addEventListener('click', function (event) {
         event.preventDefault()
         openCard(this)
       })
@@ -144,8 +168,6 @@ getApiData.data(apiRoutes.needs)
       templating.renderTemplate('js-card-detail-tpl', theTemplateData, 'js-card-detail-output', callback)
     }
   })
-
-// theList.fuzzySearch.search('craig')
 
 // Example bricks.js api
 /*
