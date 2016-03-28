@@ -1,49 +1,47 @@
+// Common modules
+import './common'
+
 // Page modules
-var FastClick = require('fastclick')
-var nav = require('./nav.js')
 var urlParameter = require('./get-url-parameter')
 var accordion = require('./accordion')
-var socialShare = require('./social-share')
+var FindHelp = require('./find-help')
+var apiRoutes = require('./api')
+
+// Lodash
 var sortBy = require('lodash/collection/sortBy')
 var forEach = require('lodash/collection/forEach')
+var findIndex = require('lodash/array/findIndex')
 
-nav.init()
-FastClick.attach(document.body)
+var getApiData = require('./get-api-data')
+var templating = require('./template-render')
+var Spinner = require('spin.js')
+var analytics = require('./analytics')
+var socialShare = require('./social-share')
 
-// Load and process data
-require.ensure(['./api', './get-api-data', './category-endpoint', './template-render', 'spin.js', './analytics'], function (require) {
-  var apiRoutes = require('./api')
-  var getApiData = require('./get-api-data')
-  var categoryEndpoint = require('./category-endpoint')
-  var templating = require('./template-render')
-  var Spinner = require('spin.js')
-  var analytics = require('./analytics')
+// Spinner
+var spin = document.getElementById('spin')
+var loading = new Spinner().spin(spin)
 
-  // Spinner
-  var spin = document.getElementById('spin')
-  var loading = new Spinner().spin(spin)
+var findHelp = new FindHelp()
+findHelp.handleSubCategoryChange('sub-category', accordion)
+findHelp.buildCategories(apiRoutes.categoryServiceProviders, buildList)
 
-  // Get category and create URL
-  var theCategory = urlParameter.parameter('category')
-  var theLocation = urlParameter.parameter('location')
-  var categoryUrl = apiRoutes.categoryServiceProviders += theCategory
+function buildList (url) {
+  // Get API data using promise
+  getApiData.data(url).then(function (result) {
+    if (result.status === 'error') {
+      window.location.replace('/find-help.html')
+    }
+    var data = result.data
 
-  categoryEndpoint.getEndpointUrl(categoryUrl, theLocation).then(function (success) {
-    buildList(success)
-  }, function (error) {
-  })
+    var theTitle = data.name + ' - Street Support'
+    document.title = theTitle
 
-  function buildList (url) {
-    // Get API data using promise
-    getApiData.data(url).then(function (result) {
-      if (result.status === 'error') {
-        window.location.replace('/find-help.html')
-      }
-      var data = result.data
+    var template = ''
+    var callback = function () {}
 
-      // Get category name and edit page title
-      var theTitle = data.name + ' - Street Support'
-      document.title = theTitle
+    if (data.subCategories.length) {
+      template = 'js-category-result-tpl'
 
       data.subCategories = sortBy(data.subCategories, function (item) {
         return item.name
@@ -57,25 +55,21 @@ require.ensure(['./api', './get-api-data', './category-endpoint', './template-re
         })
       })
 
-      // Append object name for Hogan
-      var theData = { organisations: data }
-      var template = ''
-      var callback = function () {}
+      var subCategoryIndexToOpen = findIndex(data.subCategories, function(subCat) {
+        return subCat.key === urlParameter.parameter('sub-category')
+      })
 
-      if (data.subCategories.length) {
-        template = 'js-category-result-tpl'
-        callback = function () {
-          accordion.init()
-        }
-      } else {
-        template = 'js-category-no-results-result-tpl'
+      callback = function () {
+        accordion.init(false, subCategoryIndexToOpen, findHelp.buildListener('category', 'sub-category'))
       }
+    } else {
+      template = 'js-category-no-results-result-tpl'
+    }
 
-      templating.renderTemplate(template, theData, 'js-category-result-output', callback)
+    templating.renderTemplate(template, findHelp.buildViewModel('category', data), 'js-category-result-output', callback)
 
-      loading.stop()
-      analytics.init(theTitle)
-      socialShare.init()
-    })
-  }
-})
+    loading.stop()
+    analytics.init(theTitle)
+    socialShare.init()
+  })
+}

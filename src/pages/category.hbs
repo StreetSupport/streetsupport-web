@@ -16,10 +16,10 @@ jsBundle: category
   <div class="block block--intro">
     <div class="container block__inner">
       \{{#organisations}}
-        <h2 class="h1 block__header">\{{name}}</h2>
+      <h2 class="h1 block__header">\{{name}}</h2>
       \{{/organisations}}
       <div class="block__content">
-        <p>Showing services within 10k of your location.</p>
+        {{> location-description}}
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@ jsBundle: category
           <p>We can't find any services listed near your current location.</p>
           <p>We are currently trialing Street Support in Manchester UK, so if you are trying to access it from elsewhere you won't yet be able to find service information for your city.</p>
           <p>We will be rolling out across the UK and beyond in 2016, so if you are interested in Street Support coming to your city, <a href="contact.html">please get in touch</a>.</p>
-          <p>If you would like to see how it works, <a href="category.html?category=\{{#organisations}}\{{key}}\{{/organisations}}&location=manchester">click here to set your location to Manchester</a>.</p>
+          <p>If you would like to see how it works, <a href="\{{pageAsFromManchester}}">click here to set your location to Manchester</a>.</p>
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@ jsBundle: category
         <h2 class="h1 block__header">\{{name}}</h2>
       \{{/organisations}}
       <div class="block__content">
-        <p>Showing services within 10k of your location.</p>
+        {{> location-description}}
       </div>
     </div>
   </div>
@@ -57,8 +57,8 @@ jsBundle: category
           \{{#organisations}}
             <div class="accordion js-accordion">
               \{{#subCategories}}
-                <button class="h3 accordion__header js-header">\{{name}}<span class="icon icon-plus"></span></button>
-                <div class="accordion__item js-item">
+                <button id="\{{key}}" class="h3 accordion__header js-header">\{{name}}<span class="icon icon-plus"></span></button>
+                <div class="accordion__item js-item" id="\{{key}}">
                   <div class="accordion__inner">
                     \{{#serviceProviders}}
                       <div class="result-detail__item">
@@ -70,14 +70,14 @@ jsBundle: category
                         <h2 class="h3">Location</h2>
                         \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
                         \{{#address}}
-                        \{{#street}} 
+                        \{{#street}}
                         <ul class="result-detail__address-list">
                           <li class="result-detail__address-item">\{{#street}} \{{street}}, \{{/street}} \{{#street1}} \{{street1}}, \{{/street1}} \{{#street2}} \{{street2}}, \{{/street2}}
                           \{{#street3}} \{{street3}}, \{{/street3}}</li>
                           <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
                           <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a></li>
                         </ul>
-                        \{{/street}} 
+                        \{{/street}}
                         \{{/address}}
 			<h2 class="h3">Opening Times</h2>
                   	<dl class="result-detail__times-list">

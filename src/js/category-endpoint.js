@@ -7,6 +7,7 @@ var getEndpointUrl = function (categoryUrl, theLocation) {
   self.deferred = Q.defer()
 
   if (theLocation.length) {
+
     var locations = [
       {
         'key': 'manchester',
@@ -25,10 +26,11 @@ var getEndpointUrl = function (categoryUrl, theLocation) {
       return loc.key === theLocation
     })
     if (requestedLocation !== false) {
+      document.cookie = 'desired-location=' + theLocation
+
       var latitude = requestedLocation.latitude
       var longitude = requestedLocation.longitude
       var locationUrl = categoryUrl += '/long/' + longitude + '/lat/' + latitude
-      console.log('location for '+ theLocation)
       self.deferred.resolve(locationUrl)
     }
   }

@@ -22,8 +22,9 @@ module.exports = {
     categorybyday: __dirname + '/src/js/page-category-by-day',
     organisation: __dirname + '/src/js/page-organisation',
     allserviceproviders: __dirname + '/src/js/page-all-service-providers',
-    giveitems: __dirname + '/src/js/page-give-items',
+    givehelp: __dirname + '/src/js/page-give-items',
     giveitemsubmitdetails: __dirname + '/src/js/page-give-item-submit-details',
+    sponsor: __dirname + '/src/js/page-sponsor',
     volunteer: __dirname + '/src/js/page-volunteer',
     joinstreetsupport: __dirname + '/src/js/page-join-street-support'
   },
@@ -38,8 +39,11 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
+        exclude: /(node_modules|bower_components)/,
         loader: 'babel',
-        exclude: /(node_modules|bower_components)/
+        query: {
+          presets: ['es2015']
+        }
       }
     ]
   },
