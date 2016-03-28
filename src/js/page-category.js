@@ -4,14 +4,15 @@ import './common'
 // Page modules
 var urlParameter = require('./get-url-parameter')
 var accordion = require('./accordion')
+var FindHelp = require('./find-help')
+var apiRoutes = require('./api')
 
 // Lodash
 var sortBy = require('lodash/collection/sortBy')
 var forEach = require('lodash/collection/forEach')
+var findIndex = require('lodash/array/findIndex')
 
-var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
-var categoryEndpoint = require('./category-endpoint')
 var templating = require('./template-render')
 var Spinner = require('spin.js')
 var analytics = require('./analytics')
@@ -21,26 +22,9 @@ var socialShare = require('./social-share')
 var spin = document.getElementById('spin')
 var loading = new Spinner().spin(spin)
 
-// Get category and create URL
-var theCategory = urlParameter.parameter('category')
-var theLocation = urlParameter.parameter('location')
-
-var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-
-if (savedLocationCookie.length && theLocation.length === 0) {
-  theLocation = savedLocationCookie
-}
-
-if (theLocation === 'my-location') {
-  theLocation = '' // clear it so category-endpoint uses geolocation...
-}
-
-var categoryUrl = apiRoutes.categoryServiceProviders += theCategory
-
-categoryEndpoint.getEndpointUrl(categoryUrl, theLocation).then(function (success) {
-  buildList(success)
-}, function (error) {
-})
+var findHelp = new FindHelp()
+findHelp.handleSubCategoryChange('sub-category', accordion)
+findHelp.buildCategories(apiRoutes.categoryServiceProviders, buildList)
 
 function buildList (url) {
   // Get API data using promise
@@ -50,46 +34,39 @@ function buildList (url) {
     }
     var data = result.data
 
-    // Get category name and edit page title
     var theTitle = data.name + ' - Street Support'
     document.title = theTitle
 
-    data.subCategories = sortBy(data.subCategories, function (item) {
-      return item.name
-    })
-
-    forEach(data.subCategories, function (subCat) {
-      forEach(subCat.serviceProviders, function (provider) {
-        if (provider.tags !== null) {
-          provider.tags = provider.tags.join(', ')
-        }
-      })
-    })
-
-    // Append object name for Hogan
-
-    var hasSetManchesterAsLocation = theLocation === 'manchester'
-
-    var theData = {
-      organisations: data,
-      pageAsFromManchester: 'category.html?category=' + theCategory + '&location=manchester',
-      pageFromCurrentLocation: 'category.html?category=' + theCategory + '&location=my-location',
-      useManchesterAsLocation: hasSetManchesterAsLocation,
-      useGeoLocation: !hasSetManchesterAsLocation
-    }
     var template = ''
     var callback = function () {}
 
     if (data.subCategories.length) {
       template = 'js-category-result-tpl'
+
+      data.subCategories = sortBy(data.subCategories, function (item) {
+        return item.name
+      })
+
+      forEach(data.subCategories, function (subCat) {
+        forEach(subCat.serviceProviders, function (provider) {
+          if (provider.tags !== null) {
+            provider.tags = provider.tags.join(', ')
+          }
+        })
+      })
+
+      var subCategoryIndexToOpen = findIndex(data.subCategories, function(subCat) {
+        return subCat.key === urlParameter.parameter('sub-category')
+      })
+
       callback = function () {
-        accordion.init()
+        accordion.init(false, subCategoryIndexToOpen, findHelp.buildListener('category', 'sub-category'))
       }
     } else {
       template = 'js-category-no-results-result-tpl'
     }
 
-    templating.renderTemplate(template, theData, 'js-category-result-output', callback)
+    templating.renderTemplate(template, findHelp.buildViewModel('category', data), 'js-category-result-output', callback)
 
     loading.stop()
     analytics.init(theTitle)

@@ -4,11 +4,14 @@ import './common'
 // Page modules
 var urlParameter = require('./get-url-parameter')
 var accordion = require('./accordion')
+var FindHelp = require('./find-help')
 
 // Lodash
 var forEach = require('lodash/collection/forEach')
 var sortBy = require('lodash/collection/sortBy')
 var slice = require('lodash/array/slice')
+var findIndex = require('lodash/array/findIndex')
+
 var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
 var categoryEndpoint = require('./category-endpoint')
@@ -17,39 +20,23 @@ var Spinner = require('spin.js')
 var analytics = require('./analytics')
 var socialShare = require('./social-share')
 
-// Spinner
 var spin = document.getElementById('spin')
 var loading = new Spinner().spin(spin)
 
-// Get category and create URL
-var theCategory = urlParameter.parameter('category')
-var theLocation = urlParameter.parameter('location')
-
-var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-
-if (savedLocationCookie.length && theLocation.length === 0) {
-  theLocation = savedLocationCookie
-}
-
-if (theLocation === 'my-location') {
-  theLocation = '' // clear it so category-endpoint uses geolocation...
-}
-
-var categoryUrl = apiRoutes.categoryServiceProvidersByDay += theCategory
-categoryEndpoint.getEndpointUrl(categoryUrl, theLocation).then(function (success) {
-  buildList(success)
-}, function (error) {
-})
+var findHelp = new FindHelp()
+findHelp.handleSubCategoryChange('day', accordion)
+findHelp.buildCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
 
 function buildList (url) {
-  // Get API data using promise
   getApiData.data(url).then(function (result) {
+    if (result.status === 'error') {
+      window.location.replace('/find-help.html')
+    }
     var data = result.data
-    // Get category name and edit page title
+
     var theTitle = data.categoryName + ' - Street Support'
     document.title = theTitle
 
-    // Append object name for Hogan
     var template = ''
     var callback = function () {}
 
@@ -66,23 +53,18 @@ function buildList (url) {
         })
       })
 
+      var dayIndexToOpen = findIndex(data.daysServices, function(day) {
+        return day.name === urlParameter.parameter('day')
+      })
+
       callback = function () {
-        accordion.init(true)
+        accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', 'day'))
       }
     } else {
       template = 'js-category-no-results-result-tpl'
     }
 
-    var hasSetManchesterAsLocation = theLocation === 'manchester'
-
-    var theData = {
-      organisations: data,
-      pageAsFromManchester: 'category-by-day.html?category=' + theCategory + '&location=manchester',
-      pageFromCurrentLocation: 'category-by-day.html?category=' + theCategory + '&location=my-location',
-      useManchesterAsLocation: hasSetManchesterAsLocation,
-      useGeoLocation: !hasSetManchesterAsLocation
-    }
-    templating.renderTemplate(template, theData, 'js-category-result-output', callback)
+    templating.renderTemplate(template, findHelp.buildViewModel('category-by-day', data), 'js-category-result-output', callback)
 
     loading.stop()
     analytics.init(theTitle)
