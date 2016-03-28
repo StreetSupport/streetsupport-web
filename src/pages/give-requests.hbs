@@ -6,17 +6,17 @@ permalink: false
 jsBundle: giverequests
 ---
 
-<div class="block block--intro">
-  <div class="container block__inner">
-    <h1 class="h1 block__header">Requests (Prototype)</h1>
-    <a href="give-help.html">Other ways to give help</a>
+<div id="js-card-search" class="requests-search is-active">
+  <div class="block block--intro">
+    <div class="container block__inner">
+      <h1 class="h1 block__header">Requests (Prototype)</h1>
+      <a href="give-help.html">Other ways to give help</a>
+    </div>
   </div>
-</div>
 
-<div class="block">
-  <div class="container block__inner">
-    <div class="block__content">
-      <div id="js-card-search" class="js-card-search requests-search is-active">
+  <div class="block">
+    <div class="container block__inner">
+      <div class="block__content">
         <div class="requests-search__input" action="#">
           <h1 class="h2 requests-search__input__header">What can you give?</h1>
           <input autofocus placeholder="Search" class="awesomplete search requests-search__autocomplete" data-list="coffee4craig, mad dogs, coat, bedding" />
@@ -45,14 +45,12 @@ jsBundle: giverequests
 
         <div id="js-card-list-output"></div>
       </div>
-
-      <div class="requests-detail js-card-detail is-hidden">
-        <div id="js-card-detail-output" class="template"></div>
-      </div>
     </div>
-
-    {{> social-share}}
   </div>
+</div>
+
+<div class="requests-detail js-card-detail is-hidden">
+  <div id="js-card-detail-output" class="template"></div>
 </div>
 
 <script id="js-card-list-tpl" type="text/template">
@@ -72,17 +70,22 @@ jsBundle: giverequests
 
 <script id="js-card-detail-tpl" type="text/template">
   \{{#card}}
-    <h2 class="h2 give-detail__header">\{{organisation}}</h2>
-    <p>\{{description}}</p>
+    <div class="block block--intro">
+      <div class="container block__inner">
+        <h1 class="h1 block__header">\{{serviceProviderName}}</h1>
+        <h2 class="h2 block__subheader">\{{description}}</h2>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="container block__inner">
+        <div class="block__content">
+          <p>\{{creationDate}}</p>
+          <p>\{{reason}}</p>
+          <p>\{{instructions}}</p>
+          <p>\{{email}}</p>
+        </div>
+      </div>
+    </div>
   \{{/card}}
 </script>
-
-<!--
-- Type (people/money/stuff)
-- [Need] for [Org name (link)]
-- [Org synopsis]
-- [Reason]
-- [Instructions] - if provided
-- Find Out More [More details url (link)] - if provided
-- Offer button - opens email form
--->

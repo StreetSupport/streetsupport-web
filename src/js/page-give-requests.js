@@ -1,3 +1,5 @@
+/* global history */
+
 // Common modules
 import './common'
 
@@ -182,6 +184,8 @@ var buildCard = function (data) {
     var theId = el.getAttribute('data-id')
     var cardData = Find(theApiData, function (o) { return o.id === theId })
 
+    console.log(cardData)
+
     // hide search
     document.querySelector('#js-card-search').classList.remove('is-active')
     document.querySelector('#js-card-search').classList.add('is-hidden')
@@ -194,6 +198,10 @@ var buildCard = function (data) {
       document.querySelector('.js-card-detail').classList.add('is-active')
 
       window.scrollTo(0, 0)
+
+      // TODO: Proper URL support
+      var state = { test: 'TBA' }
+      history.pushState(state, 'TEST', '?id=' + theId)
     }
 
     templating.renderTemplate('js-card-detail-tpl', theCardTemplateData, 'js-card-detail-output', cardCallback)
