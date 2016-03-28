@@ -115,6 +115,10 @@
       text-decoration: inherit;
     }
   }
+
+  &__type {
+    text-transform: capitalize;
+  }
 }
 
 // Awesomecomplete
