@@ -78,6 +78,7 @@
     "list.fuzzysearch.js": "github:javve/list.fuzzysearch.js#v0.1.0",
     "list.js": "1.2.0",
     "lodash": "3.10.1",
+    "moment": "^2.12.0",
     "q": "1.4.1",
     "spin.js": "2.3.2"
   },

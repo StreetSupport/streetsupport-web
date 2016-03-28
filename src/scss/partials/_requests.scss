@@ -80,16 +80,15 @@
   }
 }
 
-// List.js styling
-// Items need to be fixed width for bricks.js support
-.list {
+// NOTE: Items need to be fixed width for bricks.js support
+.requests-listing {
   clear: both;
   margin: 20px auto 20px auto;
   padding: 0;
   list-style-type: none;
   // border: 1px dashed red;
 
-  li {
+  &__item {
     margin-bottom: 20px;
     background-color: #e8e8e8;
     padding: 20px;
@@ -115,14 +114,11 @@
       color: inherit;
       text-decoration: inherit;
     }
-
-    .id {
-      display: none;
-    }
   }
 }
 
 // Awesomecomplete
+// NOTE: These styles have just been thrown in here from default example
 [hidden] { display: none; }
 
 .visually-hidden {
