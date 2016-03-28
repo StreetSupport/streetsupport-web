@@ -1,5 +1,5 @@
 var local = 'http://localhost:55881' // eslint-disable-line
-var dev = 'http://streetsupport-api-ci.apphb.com' // eslint-disable-line
+var dev = 'https://streetsupport-api-ci.apphb.com' // eslint-disable-line
 var staging = 'https://streetsupport-api-staging.apphb.com' // eslint-disable-line
 var live = 'https://streetsupport-api.apphb.com' // eslint-disable-line
 
