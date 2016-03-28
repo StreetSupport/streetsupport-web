@@ -45,6 +45,7 @@ getApiData.data(apiRoutes.needs)
     // Template callback
     var listCallback = function () {
       buildList()
+      buildCard(needsFromApi)
     }
 
     templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', listCallback)
@@ -161,10 +162,13 @@ var buildList = function () {
     theList.filter()
     cardLayout.pack()
   }
+}
 
-  // Full detail view
+// Full detail view
+var buildCard = function (data) {
   var a
-  var items = document.querySelectorAll('.list li')
+  var items = document.querySelectorAll('.requests-listing__item')
+  var theApiData = data
 
   // Add click listener to each item
   for (a = 0; a < items.length; a++) {
@@ -175,8 +179,8 @@ var buildList = function () {
   }
 
   var openCard = function (el) {
-    var theId = el.getElementsByClassName('id')[0].textContent
-    var cardData = Find(needsFromApi, function (o) { return o.id === theId })
+    var theId = el.getAttribute('data-id')
+    var cardData = Find(theApiData, function (o) { return o.id === theId })
 
     // hide search
     document.querySelector('#js-card-search').classList.remove('is-active')

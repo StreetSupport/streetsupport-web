@@ -58,9 +58,9 @@ jsBundle: giverequests
 <script id="js-card-list-tpl" type="text/template">
   <ul id="js-card-list" class="requests-listing list">
   \{{#card}}
-    <li class="requests-listing__item">
-      <a href="#" data-id="\{{id}}">
-        <h2 class="h2 requests-listing__type type">\{{type}}</h2>
+    <li class="requests-listing__item" data-id="\{{id}}">
+      <a href="#">
+        <h2 class="h3 requests-listing__type type">\{{type}}</h2>
         <h3 class="h3 requests-listing__provider serviceProviderName">\{{serviceProviderName}}</h3>
         <p class="h3 requests-listing__date creationDate">\{{creationDate}}</p>
         <p>\{{description}}</p>
