@@ -201,9 +201,28 @@ var buildCard = function (data) {
       // TODO: Proper URL support
       var state = { test: 'TBA' }
       history.pushState(state, 'TEST', '?id=' + theId)
+
+      var d
+      var cardBack = document.querySelectorAll('.js-card-back')
+
+      // Add click listener to each item
+      for (d = 0; d < cardBack.length; d++) {
+        cardBack[d].addEventListener('click', function (event) {
+          event.preventDefault()
+          closeCard()
+        })
+      }
     }
 
     templating.renderTemplate('js-card-detail-tpl', theCardTemplateData, 'js-card-detail-output', cardCallback)
+  }
+
+  var closeCard = function () {
+    document.querySelector('#js-card-search').classList.remove('is-hidden')
+    document.querySelector('#js-card-search').classList.add('is-active')
+
+    document.querySelector('.js-card-detail').classList.remove('is-active')
+    document.querySelector('.js-card-detail').classList.add('is-hidden')
   }
 }
 
