@@ -72,19 +72,24 @@ jsBundle: giverequests
   \{{#card}}
     <div class="block block--intro">
       <div class="container block__inner">
-        <h1 class="h1 block__header">\{{serviceProviderName}}</h1>
-        <h2 class="h2 block__subheader">\{{description}}</h2>
+        <h1 class="h1 block__header">\{{description}}</h1>
+        <h2 class="h2 block__subheader requests-detail__type">Request: \{{type}}</h2>
       </div>
     </div>
 
     <div class="block">
       <div class="container block__inner">
         <div class="block__content">
-          <h2 class="h2 js">
-          <p>\{{creationDate}}</p>
+          <h2 class="h2">\{{serviceProviderName}}</h2>
+          <h3 class="h3">\{{serviceProviderSynopsis}}</h3>
+          <p>Posted: \{{creationDate}}</p>
           <p>\{{reason}}</p>
           <p>\{{instructions}}</p>
-          <p>\{{email}}</p>
+          <h3 class="h2">Location</h3>
+          <img src="holder.js/100px300?text=Google Map Here \n Postcode: \{{postcode}}">
+
+          <h3 class="h2">Contact details</h3>
+          <p>Email: <a href="mailto:\{{email}}">\{{email}}</a></p>
         </div>
       </div>
     </div>

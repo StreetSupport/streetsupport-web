@@ -7,7 +7,7 @@ import './common'
 var awesomplete = require('imports?this=>window!../../node_modules/awesomplete/awesomplete.js') // eslint-disable-line
 import List from 'list.js'
 // var ListFuzzySearch = require('imports?this=>window!../../node_modules/list.fuzzysearch.js/dist/list.fuzzysearch.js')
-// import Holder from 'holderjs'
+import Holder from 'holderjs'
 import Bricks from 'bricks.js'
 
 // Page modules
@@ -24,9 +24,6 @@ import moment from 'moment'
 // Spinner
 // var spin = document.getElementById('spin')
 // var loading = new Spinner().spin(spin)
-
-// Run Holder
-// Holder.run({})
 
 // Get API data using promise
 getApiData.data(apiRoutes.needs)
@@ -198,6 +195,8 @@ var buildCard = function (data) {
       document.querySelector('.js-card-detail').classList.add('is-active')
 
       window.scrollTo(0, 0)
+
+      Holder.run({})
 
       // TODO: Proper URL support
       var state = { test: 'TBA' }

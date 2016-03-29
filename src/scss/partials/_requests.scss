@@ -78,6 +78,10 @@
   &.is-hidden {
     display: none;
   }
+
+  &__type {
+    text-transform: capitalize;
+  }
 }
 
 // NOTE: Items need to be fixed width for bricks.js support
