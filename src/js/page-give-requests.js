@@ -75,7 +75,7 @@ var buildList = function () {
 
    // List.js
   var options = {
-    valueNames: [ 'type', 'serviceProviderName', 'creationDate' ],
+    valueNames: [ 'type', 'serviceProviderName', 'creationDate', 'description' ],
     plugins: [
       // ListFuzzySearch()
     ]

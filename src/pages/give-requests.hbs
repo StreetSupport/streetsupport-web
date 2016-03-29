@@ -19,7 +19,7 @@ jsBundle: giverequests
       <div class="block__content">
         <div class="requests-search__input" action="#">
           <h1 class="h2 requests-search__input__header">What can you give?</h1>
-          <input autofocus placeholder="Search" class="awesomplete search requests-search__autocomplete" data-list="coffee4craig, mad dogs, coat, bedding" />
+          <input autofocus placeholder="Search" class="awesomplete search requests-search__autocomplete" data-list="coffee4craig, Breakfast in Bed Street Life Project, lifeshare, booth centre, cups,cutlery,crockery,administration,accommodation,translation,languages,waterproofs,outdoor clothing,coats,dbs,pat testing,electrician,financial,mentoring,interview skills,job seeking,maintenance,odd job,repair,cleaning" />
         </div>
 
         <div class="requests-search__filter">
@@ -61,7 +61,7 @@ jsBundle: giverequests
         <h2 class="h3 requests-listing__type type">\{{type}}</h2>
         <h3 class="h3 requests-listing__provider serviceProviderName">\{{serviceProviderName}}</h3>
         <p class="requests-listing__date creationDate">Posted: <strong>\{{creationDate}}</strong></p>
-        <p>\{{description}}</p>
+        <p class="description">\{{description}}</p>
       </a>
     </li>
   \{{/card}}
@@ -80,6 +80,7 @@ jsBundle: giverequests
     <div class="block">
       <div class="container block__inner">
         <div class="block__content">
+          <h2 class="h2 js">
           <p>\{{creationDate}}</p>
           <p>\{{reason}}</p>
           <p>\{{instructions}}</p>
