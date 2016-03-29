@@ -209,12 +209,20 @@ var buildCard = function (data) {
       for (d = 0; d < cardBack.length; d++) {
         cardBack[d].addEventListener('click', function (event) {
           event.preventDefault()
-          closeCard()
+          rewindHistory()
         })
       }
     }
 
     templating.renderTemplate('js-card-detail-tpl', theCardTemplateData, 'js-card-detail-output', cardCallback)
+  }
+
+  var rewindHistory = function () {
+    window.history.back()
+  }
+
+  window.onpopstate = function () {
+    closeCard()
   }
 
   var closeCard = function () {
