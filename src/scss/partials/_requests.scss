@@ -68,22 +68,6 @@
   }
 }
 
-.requests-detail {
-  overflow: hidden;
-
-  &.is-active {
-    display: block;
-  }
-
-  &.is-hidden {
-    display: none;
-  }
-
-  &__type {
-    text-transform: capitalize;
-  }
-}
-
 // NOTE: Items need to be fixed width for bricks.js support
 .requests-listing {
   clear: both;
@@ -118,6 +102,30 @@
       color: inherit;
       text-decoration: inherit;
     }
+  }
+
+  &__type {
+    text-transform: capitalize;
+    display: inline-block;
+    margin-bottom: 0;
+  }
+
+  &__amount {
+    float: right;
+    display: inline-block;
+    margin-top: 16px !important;        
+  }
+}
+
+.requests-detail {
+  overflow: hidden;
+
+  &.is-active {
+    display: block;
+  }
+
+  &.is-hidden {
+    display: none;
   }
 
   &__type {

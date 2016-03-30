@@ -71,7 +71,7 @@
     "awesomplete": "github:leaverou/awesomplete#gh-pages",
     "bricks.js": "1.1.0",
     "fastclick": "1.0.6",
-    "geolib": "^2.0.20",
+    "geolib": "2.0.20",
     "hogan.js": "3.0.2",
     "holderjs": "^2.9.3",
     "knockout": "3.4.0",
@@ -79,7 +79,7 @@
     "list.fuzzysearch.js": "github:javve/list.fuzzysearch.js#v0.1.0",
     "list.js": "1.2.0",
     "lodash": "3.10.1",
-    "moment": "^2.12.0",
+    "moment": "2.12.0",
     "q": "1.4.1",
     "spin.js": "2.3.2"
   },
