@@ -64,7 +64,7 @@ getApiData.data(apiRoutes.needs)
             { latitude: latitude, longitude: longitude },
             { latitude: n.latitude, longitude: n.longitude }
           )
-          n.locationDescription = (distanceInMetres / 1000).toFixed(2) + 'km away'
+          n.locationDescription = (distanceInMetres * 0.00062137).toFixed(2) + ' miles away'
         })
         renderNeeds()
       }, function (error) {
