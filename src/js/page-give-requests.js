@@ -5,6 +5,7 @@ import './common'
 
 // Page modules
 var awesomplete = require('imports?this=>window!../../node_modules/awesomplete/awesomplete.js') // eslint-disable-line
+var geolib = require('geolib')
 import List from 'list.js'
 // var ListFuzzySearch = require('imports?this=>window!../../node_modules/list.fuzzysearch.js/dist/list.fuzzysearch.js')
 import Holder from 'holderjs'
@@ -13,6 +14,7 @@ import Bricks from 'bricks.js'
 // Page modules
 var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
+var getLocation = require('./get-location')
 var templating = require('./template-render')
 var getUrlParams = require('./get-url-parameter')
 // var Spinner = require('spin.js')
@@ -31,24 +33,49 @@ getApiData.data(apiRoutes.needs)
   .then(function (result) {
     var needsFromApi = result.data
 
-    // Change to relative date
-    ForEach(needsFromApi, function (data) {
-      var theDate = moment(data.creationDate).fromNow()
-      data.creationDate = theDate
-    })
+    var renderNeeds = function () {
+      console.log('rendering needs')
+      // Change to relative date
+      ForEach(needsFromApi, function (data) {
+        var theDate = moment(data.creationDate).fromNow()
+        data.creationDate = theDate
+      })
 
-    // Append object name for Hogan
-    var theData = { card: needsFromApi }
+      // Append object name for Hogan
+      var theData = { card: needsFromApi }
 
-    console.log(theData)
+      console.log(theData)
 
-    // Template callback
-    var listCallback = function () {
-      buildList()
-      buildCard(needsFromApi)
+      // Template callback
+      var listCallback = function () {
+        buildList()
+        buildCard(needsFromApi)
+      }
+
+      templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', listCallback)
     }
 
-    templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', listCallback)
+    if (navigator.geolocation) {
+      getLocation.location().then(function (position) {
+        var latitude = position.coords.latitude
+        var longitude = position.coords.longitude
+        needsFromApi.forEach(n => {
+          var distanceInMetres = geolib.getDistance(
+            { latitude: latitude, longitude: longitude },
+            { latitude: n.latitude, longitude: n.longitude }
+          )
+          n.locationDescription = (distanceInMetres / 1000).toFixed(2) + 'km away'
+        })
+        renderNeeds()
+      }, function (error) {
+
+      })
+    } else {
+      needsFromApi.forEach(n => {
+        n.locationDescription = n.postcode
+      })
+      renderNeeds()
+    }
   })
 
 var buildList = function () {
