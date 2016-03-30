@@ -14,6 +14,7 @@ import Bricks from 'bricks.js'
 var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
 var templating = require('./template-render')
+var getUrlParams = require('./get-url-parameter')
 // var Spinner = require('spin.js')
 
 import Find from 'lodash/collection/find'
@@ -165,22 +166,6 @@ var buildList = function () {
 
 // Full detail view
 var buildCard = function (data) {
-  var openIfCardRequested = function () {
-
-  }
-
-  var a
-  var items = document.querySelectorAll('.requests-listing__item')
-  var theApiData = data
-
-  // Add click listener to each item
-  for (a = 0; a < items.length; a++) {
-    items[a].addEventListener('click', function (event) {
-      event.preventDefault()
-      openCard(this, rewindHistory)
-    })
-  }
-
   var openCard = function (el, cardBackOnClick) {
     var theId = el.getAttribute('data-id')
     var cardData = Find(theApiData, function (o) { return o.id === theId })
@@ -220,6 +205,31 @@ var buildCard = function (data) {
 
     templating.renderTemplate('js-card-detail-tpl', theCardTemplateData, 'js-card-detail-output', cardCallback)
   }
+  var openIfCardRequested = function () {
+    var cardId = getUrlParams.parameter('id')
+    if(cardId) {
+      var card = Array.from(document.querySelectorAll('.requests-listing__item'))
+        .filter(c => c.getAttribute('data-id') === cardId)[0]
+      openCard(card, function () {
+        history.pushState({}, 'from openIfCardRequested', '?')
+        closeCard()
+      })
+    }
+  }
+
+  var a
+  var items = document.querySelectorAll('.requests-listing__item')
+  var theApiData = data
+
+  // Add click listener to each item
+  for (a = 0; a < items.length; a++) {
+    items[a].addEventListener('click', function (event) {
+      event.preventDefault()
+      openCard(this, rewindHistory)
+    })
+  }
+
+  openIfCardRequested()
 
   var rewindHistory = function () {
     window.history.back()
@@ -227,6 +237,7 @@ var buildCard = function (data) {
 
   window.onpopstate = function () {
     closeCard()
+    openIfCardRequested()
   }
 
   var closeCard = function () {
