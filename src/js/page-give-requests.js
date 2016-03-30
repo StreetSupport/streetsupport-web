@@ -165,6 +165,10 @@ var buildList = function () {
 
 // Full detail view
 var buildCard = function (data) {
+  var openIfCardRequested = function () {
+
+  }
+
   var a
   var items = document.querySelectorAll('.requests-listing__item')
   var theApiData = data
@@ -173,11 +177,11 @@ var buildCard = function (data) {
   for (a = 0; a < items.length; a++) {
     items[a].addEventListener('click', function (event) {
       event.preventDefault()
-      openCard(this)
+      openCard(this, rewindHistory)
     })
   }
 
-  var openCard = function (el) {
+  var openCard = function (el, cardBackOnClick) {
     var theId = el.getAttribute('data-id')
     var cardData = Find(theApiData, function (o) { return o.id === theId })
 
@@ -209,7 +213,7 @@ var buildCard = function (data) {
       for (d = 0; d < cardBack.length; d++) {
         cardBack[d].addEventListener('click', function (event) {
           event.preventDefault()
-          rewindHistory()
+          cardBackOnClick()
         })
       }
     }
