@@ -6,11 +6,17 @@ var icon = '.icon'
 var iconOpenClass = 'icon-plus'
 var iconCloseClass = 'icon-minus'
 var activeClass = 'is-active'
+var myListener = {
+  accordionOpened: function () { }
+}
 
-var init = function (showFirst) {
+var init = function (showFirst, indexToOpen, listener) {
   // If not supported, exit out
   if (!document.querySelector || !document.querySelectorAll || !document.body.classList) {
     return
+  }
+  if(listener !== undefined) {
+    myListener = listener
   }
 
   var i
@@ -22,6 +28,8 @@ var init = function (showFirst) {
   if (showFirst || itemCount === 1) {
     var firstHeader = headers[0]
     open(firstHeader, el, true)
+  }else if(indexToOpen >= 0) {
+    open(headers[indexToOpen], el, true)
   }
 
   // Add click listener to headers
@@ -33,6 +41,15 @@ var init = function (showFirst) {
 }
 
 var open = function (el, context, noAnalytics) {
+  myListener.accordionOpened(el, context)
+  baseOpen(el, context, noAnalytics)
+}
+
+var reOpen = function (el, context, noAnalytics) {
+  baseOpen(el, context, noAnalytics)
+}
+
+var baseOpen = function (el, context, noAnalytics) {
   // Check to see if clicked header is already active
   if (el.classList.contains(activeClass)) {
     close(el, context)
@@ -75,5 +92,6 @@ var close = function (el, context) {
 }
 
 module.exports = {
-  init: init
+  init: init,
+  reOpen: reOpen
 }

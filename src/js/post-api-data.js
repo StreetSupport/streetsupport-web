@@ -1,5 +1,3 @@
-/* global XMLHttpRequest */
-
 var Q = require('q')
 
 var postApiData = function (url, data) {
@@ -20,7 +18,6 @@ var postApiData = function (url, data) {
         'statusCode': this.status
       })
     } else {
-      console.log(this)
       deferred.resolve({
         'status': 'error',
         'statusCode': this.status,
@@ -30,7 +27,6 @@ var postApiData = function (url, data) {
   }
 
   req.onerror = function () {
-    console.log(this)
     deferred.reject(new Error('Server responded with a status of ' + req.status))
   }
 

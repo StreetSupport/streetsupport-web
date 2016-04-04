@@ -1,19 +1,8 @@
+// Common modules
+import './common'
+
 // Page modules
-var FastClick = require('fastclick')
-var nav = require('./nav.js')
-var socialShare = require('./social-share')
-var analytics = require('./analytics')
+var ko = require('knockout')
+var Model = require('./models/VolunteerModel')
 
-nav.init()
-analytics.init()
-FastClick.attach(document.body)
-
-// Load and process data
-require.ensure(['knockout', './models/VolunteerModel'], function (require) {
-  var ko = require('knockout')
-  var Model = require('./models/VolunteerModel')
-
-  ko.applyBindings(new Model(), document.getElementById('js-form'))
-
-  socialShare.init()
-})
+ko.applyBindings(new Model(), document.getElementById('js-form'))

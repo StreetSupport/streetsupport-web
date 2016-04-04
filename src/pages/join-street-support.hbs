@@ -1,0 +1,83 @@
+---
+title: Join Street Support - Submit Details - Street Support
+description: Street support makes it easier to help homeless people. Here's how to get in touch.
+layout: default.hbs
+permalink: false
+jsBundle: joinstreetsupport
+---
+
+<div class="block block--intro">
+  <div class="container block__inner">
+    <h1 class="h1 block__header">Join Street Support</h1>
+    <!-- ko if: isFormSubmitSuccessful -->
+      <!-- ko template: { name: 'form-submit-success-template' } -->
+      <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko if: isFormSubmitFailure -->
+      <!-- ko template: { name: 'form-submit-failure-template' } -->
+      <!-- /ko -->
+    <!-- /ko -->
+    <!-- ko ifnot: isFormSubmitSuccessful -->
+    <form class="form" data-bind="submit: submit">
+      <p>We are building a wide network of people who care about homelessness in Manchester, and we would love you to be part of it. Working together, we can provide better support for those who need it most, and combine our efforts to end homelessness in the city.</p>
+      <p>If you would like to join forces with us, and stay informed as the network dveelops, please add your name to the list below.</p>
+      <p>* denotes a required field.</p>
+      <fieldset class="form__fieldset" data-bind="with: formModel">
+        <legend class="h2 form__fieldset-title">Keep me updated!</legend>
+        <ul class="form__field-list">
+          <li class="form__field-item">
+            <label class="form__label" for="name">Name *</label>
+            <input type="text" class="form__input form__input" id="name" data-bind="value: name" />
+          </li>
+          <li class="form__field-item">
+            <label class="form__label" for="email">Email *</label>
+            <input type="text" class="form__input form__input" id="email" data-bind="value: email" />
+          </li>
+          <li class="form__field-item form__field-item--full">
+            <label class="form__label" for="location">Your Location (please provide your postcode or nearest city) *.</label>
+            <input type="text" class="form__input form__input" id="location" data-bind="value: location" />
+          </li>
+          <li class="form__field-item form__field-item--full">
+            <label class="form__label" for="reason">Reason for getting involved</label>
+            <textarea class="form__input form__input--multiline" id="reason" data-bind="value: reason"></textarea>
+          </li>
+          <li class="form__field-item form__field-item--full">
+            <label class="form__label--checkbox" for="isOptedIn">Opt-In if you want to get occasional updates about Street Support to your inbox</label>
+            <input type="checkbox" id="isOptedIn" data-bind="attr: { value: isOptedIn }, checked: isOptedIn" class="form__input--checkbox" />
+          </li>
+        </ul>
+      </fieldset>
+      <button type="submit" class="btn btn--brand-d form__submit" data-bind="click: submit"><span class="btn__text">Submit</span></button>
+    </form>
+    <!-- /ko -->
+  </div>
+</div>
+
+<div class="block">
+  <div class="container block__inner">
+    <div class="block__content">
+      {{> social-share}}
+    </div>
+  </div>
+</div>
+
+{{> loading-spinner}}
+
+<script type="text/html" id="form-submit-success-template">
+  <h2>Thank you for submitting your details</h2>
+  <p>Thank you for joining forces with us to support people who are homeless in Manchester. We are working hard alongside local charities and voluntary groups to add the features that are most useful.</p>
+  <p>In the meantime you can:</p>
+  <ul>
+    <li><a href="find-help.html">find help</a> for someone who is homeless</li>
+    <li><a href="give-help.html">give help</a> by giving your time, money or unwanted items</li>
+    <li class="social-share social-share--in-list">share us with your networks: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="streetsupportuk" data-dnt="true">Tweet</a>
+  <div class="fb-share-button" data-layout="button"></div></li>
+    <li>follow us on <a href="https://twitter.com/streetsupportuk">Twitter</a> or <a href="https://www.facebook.com/streetsupport">Facebook</a> and keep up to date with news, information and new features of the site</li>
+</script>
+
+<script type="text/html" id="form-submit-failure-template">
+  <h2>There was a problem with your submission:</h2>
+  <ul data-bind="foreach: apiErrors">
+    <li data-bind="text: $data"></li>
+  </ul>
+</script>

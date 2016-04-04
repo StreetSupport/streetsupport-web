@@ -3,6 +3,9 @@
 # If there are any errors, fail Travis
 set -e
 
+# Set a default API environment for other branches/pull requests
+APIENVIRONMENT=1
+
 # Define variables depending on the branch
 if [[ $TRAVIS_BRANCH == 'release' ]]
   then
