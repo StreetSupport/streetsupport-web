@@ -44,7 +44,7 @@
       },
       "metalsmith-in-place": {
         "engine": "handlebars",
-        "pattern": "*.hbs",
+        "pattern": "**/*.hbs",
         "partials": "./src/partials"
       }
     }
