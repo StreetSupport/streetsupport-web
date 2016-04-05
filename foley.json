@@ -10,9 +10,9 @@
     "img": "src/img/",
     "js": "src/js/",
     "data": "src/data/",
-    "layouts": "src/layouts",
-    "pages": "src/pages",
-    "partials": "src/partials",
+    "layouts": "src/layouts/",
+    "pages": "src/pages/",
+    "partials": "src/partials/",
     "specs": "spec/"
   },
   "autoprefixer": {
