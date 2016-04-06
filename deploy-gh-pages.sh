@@ -59,6 +59,10 @@ cat > CNAME << EOF
 $DOMAIN
 EOF
 
+
+echo $AZURE_USER
+echo $AZURE_WEBSITE
+
 # Push to git by overriding previous commits
 # IMPORTANT: Supress messages so nothing appears in logs
 
