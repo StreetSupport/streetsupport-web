@@ -67,7 +67,7 @@ if [[ $TRAVIS_BRANCH == 'release' ]] || [[ $TRAVIS_BRANCH == 'staging' ]] || [[ 
     git init
     git add -A
     git commit -m "Travis CI automatic build for $THE_COMMIT"
-    git push --quiet --force "https://${LIVE_AZURE_USER}:${LIVE_AZURE_PASSWORD}@${LIVE_AZURE_WEBSITE}.scm.azurewebsites.net:443/${AZURE_WEBSITE}.git" master > /dev/null 2>&1
+    git push --quiet --force "https://${AZURE_USER}:${AZURE_PASSWORD}@${AZURE_WEBSITE}.scm.azurewebsites.net:443/${AZURE_WEBSITE}.git" master > /dev/null 2>&1
   else
     echo "Not on a build branch so don't push the changes to GitHub Pages"
 fi
