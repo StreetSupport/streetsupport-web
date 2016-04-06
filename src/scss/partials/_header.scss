@@ -4,7 +4,8 @@
   background-color: $brand-a;
 
   @include mq($from: l) {
-    margin-bottom: 30px;
+    margin-bottom: 42px;
+    height: $header-height;
   }
 
   &__title {
@@ -13,10 +14,19 @@
     display: inline-block;
     color: #fff;
 
+    @include mq($from: l) {
+      display: block;
+      margin: 15px 0 0 0;
+    }
+
     a {
       text-decoration: none;
       color: inherit;
       display: block;
+
+      @include mq($from: l) {
+        text-align: center;
+      }
     }
 
     .icon {

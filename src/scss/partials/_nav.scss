@@ -17,11 +17,13 @@
     @include mq($from: l) {
       background-color: $brand-j;
       position: absolute;
-      top: 50px;
+      top: $header-height;
       width: 100%;
       height: auto;
       transition: none;
       transform: none;
+      box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.7);
+      border-top: 2px solid $brand-i;      
     }
 
     &.is-active {
@@ -138,9 +140,10 @@
 
       @include mq($from: l) {
         padding: 10px 20px;
+        color: $brand-k;
 
         &:hover {
-          background-color: red;
+          background-color: $brand-i;
         }
       }
     }
