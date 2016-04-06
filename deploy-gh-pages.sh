@@ -75,7 +75,7 @@ if [[ $TRAVIS_BRANCH == 'staging' ]]
     git init
     git add -A
     git commit -m "Travis CI automatic build for $THE_COMMIT"
-    git push --force --quiet "https://${GH_TOKEN}@${REPO}" master:gh-pages > /dev/null 2>&1
+    git push --quiet --force "https://${STAGING_AZURE_USER}:${STAGING_AZURE_PASSWORD}@${STAGING_AZURE_WEBSITE}.scm.azurewebsites.net:443/${STAGING_AZURE_WEBSITE}.git" master > /dev/null 2>&1
   else
     echo "Not on a build branch so don't push the changes to GitHub Pages"
 fi
