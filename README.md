@@ -4,10 +4,8 @@ The Frontend codebase for streetsupport.net.
 
 ## Git Branching
 
-Please work in the develop branch first and only merge to staging when ready and tested, followed by merging from staging to release when signed off. Travis CI automatically builds on each commit to develop, staging and release.
+Please work in the develop branch first, and use feature branches for significant pieces of work. Only merge to staging when ready and tested. Travis CI automatically builds on each commit to develop, staging and release.
 
-* The develop branch automatically builds to: [http://dev.streetsupport.net](http://dev.streetsupport.net),
-* The staging branch automatically builds to: [http://beta.streetsupport.net](http://beta.streetsupport.net),
 * The release branch automatically builds to: [http://streetsupport.net](http://streetsupport.net).
 
 ## Build Status
@@ -57,12 +55,10 @@ Run these tasks in your command line Terminal:
 
 Happy to discuss any of this:
 
-* The SCSS uses BEM and mobile first,
+* SCSS styling uses BEM and mobile first,
 * Try to modularise & reuse style components (if possible),
-* Add each new component to _components.hbs,
 * Webpack is used, so try and follow the ES2015 module structure,
-* Vanilla JavaScript is in use with minimal libraries, try to install framework/modules only when needed,
-* No Angular or similar please (for now!),
-* ES2015 is fully supported in the workflow,
+* Vanilla JavaScript is in use with minimal libraries. Try to install framework/modules only when needed,
+* ES2015 code is fully supported in the workflow as Babel is used to transpile,
 * Client side templating (Hogan.js/mustache) is in use but do any logic in the API/JavaScript. Use templating for rendering output only,
-* To use client side templating, you must use a \ before each statement.
+* To use client side templating in a page, you must use a \ before each statement.
