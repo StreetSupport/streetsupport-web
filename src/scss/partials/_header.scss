@@ -3,6 +3,10 @@
   height: 50px;
   background-color: $brand-a;
 
+  @include mq($from: l) {
+    margin-bottom: 30px;
+  }
+
   &__title {
     margin: 8px 0 0 0;
     padding: 0;
@@ -27,6 +31,7 @@
       line-height: 35px;
     }
 
+    /*
     .beta {
       margin-left: 10px;
       display: inline;
@@ -37,6 +42,7 @@
       font-size: 14px;
       font-weight: $font-headline-weight;
     }
+    */
   }
 
   &__btn {
@@ -48,6 +54,10 @@
     width: auto;
     margin: 0;
     margin-right: -$site-gutter;
+
+    @include mq($from: l) {
+      display: none;
+    }
 
     .icon {
       height: 20px;
