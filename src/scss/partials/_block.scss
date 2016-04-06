@@ -3,9 +3,11 @@
   padding-top: 30px;
   padding-bottom: 30px;
 
+  /*
   &__inner {
 
   }
+  */
 
   // Components
   &__header {
@@ -49,6 +51,7 @@
     background-color: $brand-f;
     color: #fff;
     text-align: center;
+    padding-top: 50px;    
   }
 
   &--intro {
