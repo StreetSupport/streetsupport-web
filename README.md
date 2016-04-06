@@ -1,18 +1,16 @@
 # StreetSupport Website
 
-The Frontend codebase for streetsupport.net.
+The website codebase for streetsupport.net.
 
 ## Git Branching
 
-Please work in the develop branch first, and use feature branches for significant pieces of work. Only merge to staging when ready and tested. Travis CI automatically builds on each commit to develop, staging and release.
-
-* The release branch automatically builds to: [http://streetsupport.net](http://streetsupport.net).
+Please work in the develop branch first, and use feature branches for significant pieces of work. Only merge to staging when ready, tested and signed off. Travis CI automatically builds on each commit to develop, staging and release. The release branch automatically builds to: [http://streetsupport.net](http://streetsupport.net).
 
 ## Build Status
 
-* Dev (develop) - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=develop)](https://travis-ci.org/StreetSupport/streetsupport-web)
-* Beta (staging) - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=staging)](https://travis-ci.org/StreetSupport/streetsupport-web)
-* Live (release) - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=release)](https://travis-ci.org/StreetSupport/streetsupport-web)
+* develop - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=develop)](https://travis-ci.org/StreetSupport/streetsupport-web)
+* staging - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=staging)](https://travis-ci.org/StreetSupport/streetsupport-web)
+* release - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=release)](https://travis-ci.org/StreetSupport/streetsupport-web)
 
 ## Install
 
