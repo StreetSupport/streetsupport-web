@@ -23,9 +23,8 @@ gulp.task('watch', () => {
 // Copy Web.config
 gulp.task('copywebconfig', function() {
    gulp.src('./Web.config')
-   .pipe(gulp.dest('./_dist/'));
-});
-
+   .pipe(gulp.dest('./_dist/'))
+})
 
 // JS Dev Watch task
 gulp.task('dev-watch', () => {
