@@ -61,7 +61,10 @@ EOF
 
 # Push to git by overriding previous commits
 # IMPORTANT: Supress messages so nothing appears in logs
-
+if [[ $TRAVIS_BRANCH == 'staging' ]] || [[ $TRAVIS_BRANCH == 'develop' ]]
+  then
+    rm Web.config
+fi
 if [[ $TRAVIS_BRANCH == 'release' ]] || [[ $TRAVIS_BRANCH == 'staging' ]] || [[ $TRAVIS_BRANCH == 'develop' ]]
   then
     git init
