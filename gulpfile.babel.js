@@ -20,6 +20,13 @@ gulp.task('watch', () => {
   gulp.watch([config.paths.data + '**/*', config.paths.layouts + '**/*', config.paths.pages + '**/*', config.paths.partials + '**/*'], ['metalsmith'])
 })
 
+// Copy Web.config
+gulp.task('copywebconfig', function() {
+   gulp.src('./Web.config')
+   .pipe(gulp.dest('./_dist/'));
+});
+
+
 // JS Dev Watch task
 gulp.task('dev-watch', () => {
   gulp.watch(config.paths.specs + '**/*[Ss]pec.js', ['run-jasmine'])
@@ -55,6 +62,7 @@ gulp.task('deploy', callback => {
     'metalsmith',
     ['html', 'svgicon', 'scss', 'webpack', 'img', 'copy'],
     'crticalcss',
+    'copywebconfig',
     callback
   )
 })
