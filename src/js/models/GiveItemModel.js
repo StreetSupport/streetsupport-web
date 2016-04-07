@@ -31,7 +31,7 @@ var GiveItemModel = function () {
 
   var needId = getUrlParams.parameter('needId')
   var providerId = getUrlParams.parameter('providerId')
-  var endpoint = endpoints.allServiceProviders + providerId + '/needs/' + needId
+  var endpoint = endpoints.needs + needId
   var postEndpoint = endpoints.needs + needId + '/offers-to-help'
 
   browser.loading()
