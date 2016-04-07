@@ -31,7 +31,7 @@ var GiveItemModel = function () {
   self.fieldErrors = ko.validation.group(self.formModel)
   self.apiErrors = ko.observableArray()
 
-  var needId = getUrlParams.parameter('needId')
+  var needId = getUrlParams.parameter('id')
   var endpoint = endpoints.needs + needId
   var postEndpoint = endpoints.needs + needId + '/offers-to-help'
 

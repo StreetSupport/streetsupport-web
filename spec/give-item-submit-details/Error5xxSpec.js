@@ -22,10 +22,8 @@ describe('Give Item Model', function () {
   describe('API returns 5xx error', function() {
     beforeEach(function () {
       urlParamStub = sinon.stub(getUrlParams, 'parameter')
-      urlParamStub.withArgs('needId')
+      urlParamStub.withArgs('id')
         .returns(needId)
-      urlParamStub.withArgs('providerId')
-        .returns(providerId)
 
       getFromApiStub = sinon.stub(getFromApi, 'data')
         .withArgs(endpoints.needs + needId)
