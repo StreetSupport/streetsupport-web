@@ -55,8 +55,16 @@ describe('Give Item Model', function () {
       expect(getFromApiStub.calledOnce).toBeTruthy()
     })
 
+    it('should set providerName', function () {
+      expect(model.providerName()).toEqual('Albert Kennedy Trust')
+    })
+
     it('should set needDescription', function () {
       expect(model.needDescription()).toEqual('need description')
+    })
+
+    it('should set needReason', function () {
+      expect(model.needReason()).toEqual('reason')
     })
 
     it('should show user it is loading', function () {

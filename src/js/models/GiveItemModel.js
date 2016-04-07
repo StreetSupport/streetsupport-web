@@ -16,6 +16,8 @@ var GiveItemModel = function () {
   })
 
   self.needDescription = ko.observable()
+  self.providerName = ko.observable()
+  self.needReason = ko.observable()
 
   ko.validation.init({
     insertMessages: true,
@@ -30,7 +32,6 @@ var GiveItemModel = function () {
   self.apiErrors = ko.observableArray()
 
   var needId = getUrlParams.parameter('needId')
-  var providerId = getUrlParams.parameter('providerId')
   var endpoint = endpoints.needs + needId
   var postEndpoint = endpoints.needs + needId + '/offers-to-help'
 
@@ -39,6 +40,8 @@ var GiveItemModel = function () {
   getApiData.data(endpoint)
     .then(function (success) {
       browser.loaded()
+      self.providerName(success.data.serviceProviderName)
+      self.needReason(success.data.reason)
       self.needDescription(success.data.description)
     }, function (error) {
       browser.redirect('404.html')
