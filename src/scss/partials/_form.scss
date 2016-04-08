@@ -9,10 +9,6 @@
 
   &__fieldset-title {
 		margin-bottom: 5px;
-
-    @include mq($from: m) {
-		  @include span(full);
-		}
   }
 
   &__field-list {

@@ -14,8 +14,24 @@
 
     background-color: $brand-c;
 
+    @include mq($from: l) {
+      background-color: $brand-j;
+      position: absolute;
+      top: $header-height;
+      width: 100%;
+      height: auto;
+      transition: none;
+      transform: none;
+      box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.7);
+      border-top: 2px solid $brand-i;
+    }
+
     &.is-active {
       transform: translate3d(0px, 0, 0);
+
+      @include mq($from: l) {
+        transform: none;
+      }
     }
   }
 
@@ -24,6 +40,10 @@
 
     &.is-active {
       transform: translate3d(-$nav-width, 0, 0);
+
+      @include mq($from: l) {
+        transform: none;
+      }
     }
   }
 
@@ -43,6 +63,11 @@
     &.is-active {
       opacity: 1;
       display: block;
+
+      @include mq($from: l) {
+        display: none;
+        opacity: 0;
+      }
     }
   }
 
@@ -52,6 +77,10 @@
     padding: 20px;
     margin: 0;
     color: #fff;
+
+    @include mq($from: l) {
+      display: none;
+    }
 
     .icon {
       height: 12px;
@@ -65,10 +94,20 @@
     padding: 0;
     list-style-type: none;
 
+    @include mq($from: l) {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
     &--sub-list {
       list-style: none;
       margin: 10px 0 0 10px;
       padding: 0;
+
+      @include mq($from: l) {
+        display: none;
+      }
     }
   }
 
@@ -80,15 +119,33 @@
     margin-top: 25px;
     font-weight: $font-headline-weight;
 
+    @include mq($from: l) {
+      margin: 0;
+      padding: 0;
+      display: inline-block;
+      border: 0;
+    }
+
+    /*
     &--sub-item {
 
     }
+    */
 
     a {
       color: inherit;
       text-decoration: none;
       display: block;
       padding: 5px 0;
+
+      @include mq($from: l) {
+        padding: 10px 20px;
+        color: $brand-k;
+
+        &:hover {
+          background-color: $brand-i;
+        }
+      }
     }
   }
 }
