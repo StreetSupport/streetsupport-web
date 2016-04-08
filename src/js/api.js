@@ -1,7 +1,7 @@
 var local = 'http://localhost:55881' // eslint-disable-line
 var dev = 'https://dev-api-streetsupport.azurewebsites.net' // eslint-disable-line
-var staging = 'https://streetsupport-api-staging.apphb.com' // eslint-disable-line
-var live = 'https://streetsupport-api.apphb.com' // eslint-disable-line
+var staging = 'https://staging-api-streetsupport.azurewebsites.net' // eslint-disable-line
+var live = 'https://live-api-streetsupport.azurewebsites.net' // eslint-disable-line
 
 var env = require('./env')
 
