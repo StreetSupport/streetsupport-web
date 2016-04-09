@@ -1,7 +1,7 @@
 {
   "name": "streetsupport",
   "description": "Street Support Network is a Manchester collective of support groups, charities and kind-hearted folk. We’ve joined forces to make it easier to find help, and give help, to homeless people in Manchester.",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": "StreetSupport <streetsupport@objectivesfirst.com>",
   "private": true,
   "license": "MIT",
@@ -60,8 +60,8 @@
     "run-sequence": "1.1.5",
     "sass-mq": "3.2.8",
     "sinon": "1.17.3",
-    "stylelint": "4.1.0",
-    "stylelint-config-suitcss": "3.0.0",
+    "stylelint": "5.2.1",
+    "stylelint-config-suitcss": "5.0.0",
     "susy": "2.2.12",
     "webpack": "1.12.14",
     "yargs": "3.32.0"
