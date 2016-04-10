@@ -10,9 +10,9 @@
     "img": "src/img/",
     "js": "src/js/",
     "data": "src/data/",
-    "layouts": "src/layouts",
-    "pages": "src/pages",
-    "partials": "src/partials",
+    "layouts": "src/layouts/",
+    "pages": "src/pages/",
+    "partials": "src/partials/",
     "specs": "spec/"
   },
   "autoprefixer": {
@@ -44,7 +44,7 @@
       },
       "metalsmith-in-place": {
         "engine": "handlebars",
-        "pattern": "*.hbs",
+        "pattern": "**/*.hbs",
         "partials": "./src/partials"
       }
     }

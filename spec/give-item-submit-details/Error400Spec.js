@@ -21,13 +21,11 @@ describe('Give Item Model', function () {
   describe('API returns 400 error', function() {
     beforeEach(function () {
       urlParamStub = sinon.stub(getUrlParams, 'parameter')
-      urlParamStub.withArgs('needId')
+      urlParamStub.withArgs('id')
         .returns(needId)
-      urlParamStub.withArgs('providerId')
-        .returns(providerId)
 
       getFromApiStub = sinon.stub(getFromApi, 'data')
-        .withArgs(endpoints.allServiceProviders + providerId + '/needs/' + needId)
+        .withArgs(endpoints.needs + needId)
         .returns({
           then: function(success, error) {
               success({

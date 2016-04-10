@@ -10,13 +10,16 @@ jsBundle: giveitemsubmitdetails
   <div class="container block__inner">
     <h1 class="h1 block__header">Give</h1>
     <a href="give-help.html">Other ways to give help</a>
+    <h2 class="h2" data-bind="text: needDescription"></h2>
+    <p data-bind="text: needReason"></p>
+    <p>Posted by: <span data-bind="text: providerName"></span></p>
     {{> form-feedback}}
     <!-- ko ifnot: isFormSubmitSuccessful -->
     <form class="form" data-bind="submit: submit">
-      <p>Please fill in the form below, detailing how you can fulfil this need.</p>
-      <p>* denotes a required field.</p>
       <fieldset class="form__fieldset" data-bind="with: formModel">
         <legend class="h2 form__fieldset-title">I Can Help!</legend>
+        <p>Please fill in the form below, detailing how you can fulfil this need.</p>
+        <p>* denotes a required field.</p>
         <ul class="form__field-list">
           <li class="form__field-item">
             <label class="form__label">Subject</label>
