@@ -37,7 +37,7 @@
     "gulp-sass": "2.2.0",
     "gulp-sourcemaps": "1.6.0",
     "gulp-standard": "6.0.5",
-    "gulp-svg-sprite": "1.2.19",    
+    "gulp-svg-sprite": "1.2.19",
     "gulp-util": "3.0.7",
     "handlebars": "4.0.5",
     "imagemin-pngquant": "4.2.2",
@@ -72,7 +72,8 @@
     "knockout.validation": "2.0.3",
     "lodash": "3.10.1",
     "q": "1.4.1",
-    "spin.js": "2.3.2"
+    "spin.js": "2.3.2",
+    "svg4everybody": "2.0.3"
   },
   "babel": {
     "presets": [
