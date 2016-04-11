@@ -9,8 +9,8 @@ cache:
 before_script:
 - npm install -g npm
 - npm install -g gulp-cli
-- chmod +x ./deploy-gh-pages.sh
-script: "./deploy-gh-pages.sh"
+- chmod +x ./deploy-website.sh
+script: "./deploy-website.sh"
 env:
   global:
   - secure: Y2IbrnvA2Z+lqa4/iChgPPzedpp5o434b9NTdNp4aNujkl32VR3xBROj9VL2nMYXMVvHTa3KEtO90TY51Cg0Bf5RMm2V9uj7vZICXDtKk69uOdKCT12wPBrNSe6aUxr3iWmCudTrrFZdUBC/1ap5A/IpgS7d8KI/c0Hg+fh04TP1rHDSc2gxrGOi5aI0N6UthKBvGnXs8uRREIsEbZ1ZR6aJgwpCngQCjjMrLRtwexwSjxR4e5mQPBw69i7MnJWvaKaRoSLS63D/6eLcy097F5BfqdvhZP0k/T5iOnE1Bd6z4Mm+YR0/v54LkugsKQ9sXRcw/fULk4hCm9++2VbpKVAHS/Apjw4swcYxghIpVFHZNIuicFQ8qZUvdB3T6S9T02dIXhquB2aq5Hat3yic0jPJFW3p7q6OEBBWkAXLJ5vzRT0Nh0O4pGQ3plTA5ez207SXw2GWU1IAvltdpRSujVXupHeJkKl+XVG08yETWBFiMf9W7NAIP1xMY4DwquxZqXUOCEewjv30kjT/wDK+3dSX+UxGffYd4mlEtSvqZMEXH9Zno/ys4FsNRNYQM/b/T2p+POKAOHUJcASE7rovJ2XG+zTJ2M6ayXjZ4lk+5ocKuR5plvnhccGWEbCQNEU5yQUwGJUtkx2avqrF0qcwZlcRrQQyngd4an3vrhvW+rE=

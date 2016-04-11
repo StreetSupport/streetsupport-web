@@ -40,12 +40,11 @@
       "metalsmith-layouts": {
         "engine": "handlebars",
         "directory": "./src/layouts",
-        "partials": "./src/partials"
+        "partials": "./src/partials",
+        "rename": true
       },
       "metalsmith-in-place": {
-        "engine": "handlebars",
-        "pattern": "**/*.hbs",
-        "partials": "./src/partials"
+        "engine": "handlebars"
       }
     }
   }
