@@ -6,11 +6,9 @@ var init = function (title) {
 
   // Check if we need to alter page title in GA
   if (title) {
-    console.log('Analytics: Alter page title from AJAX')
     ga('set', 'title', title)
     ga('send', 'pageview')
   } else {
-    console.log('Analytics: Do not alter page title')
     ga('send', 'pageview')
   }
 
