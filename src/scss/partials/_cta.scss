@@ -1,5 +1,7 @@
 .cta {
   @include span(full);
+  margin-top: 20px;
+  margin-bottom: 20px;
 
   @include mq($from: xs) {
     @include span(4 of $grid-column);
