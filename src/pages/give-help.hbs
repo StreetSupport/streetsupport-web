@@ -16,38 +16,11 @@ jsBundle: generic
 <div class="block">
   <div class="container block__inner">
     <div class="block__content">
-      <div class="content-grid">
-        <ul class="content-grid__list">
-          <li class="content-grid__item">
-            <a class="btn btn--brand-e" href="give-items.html">
-              <span class="btn__icon icon-give"></span>
-              <span class="btn__text">Give</span>
-            </a>
-            <p>Respond to things organisations need</p>
-          </li>
-          <li class="content-grid__item">
-            <a class="btn btn--brand-e" href="volunteer.html">
-              <span class="btn__icon icon-volunteer"></span>
-              <span class="btn__text">Volunteer</span>
-            </a>
-            <p>Offer your skills, time &amp; resources</p>
-          </li>
-          <li class="content-grid__item">
-            <a class="btn btn--brand-e" href="donate.html">
-              <span class="btn__icon icon-donate"></span>
-              <span class="btn__text">Donate</span>
-            </a>
-            <p>Fund accomodation & practical items</p>
-          </li>
-          <li class="content-grid__item">
-            <a class="btn btn--brand-e" href="sponsor.html">
-              <span class="btn__icon icon-sponsor"></span>
-              <span class="btn__text">Partnership</span>
-            </a>
-            <p>Corporate sponsorship opportunities</p>
-          </li>
-        </ul>
-      </div>
+      {{>cta brand="e" link="give-items.html" icon="give" name="Give" label="Respond to things organisations need"}}
+      {{>cta brand="e" link="volunteer.html" icon="volunteer" name="Volunteer" label="Offer your skills, time &amp; resources"}}
+      {{>cta brand="e" link="donate.html" icon="donate" name="Donate" label="Fund accomodation &amp; practical items"}}
+      {{>cta brand="e" link="sponsor.html" icon="partnerships" name="Partnership" label="Corporate sponsorship opportunities"}}
+
       {{> social-share}}
     </div>
   </div>

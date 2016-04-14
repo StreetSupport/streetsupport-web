@@ -2,26 +2,24 @@
   @include cf();
 
   &__element {
-    @include span(3 of $column-small);
-
-    @include mq($from: l) {
-      @include span(6 of $column-large);
+    @include mq($from: m) {
+      @include span(4 of $grid-column);
     }
-  }
 
-  .page-home & {
-    .split__element {
-      @include mq($from: l) {
-        @include span(4 of $column-large);
+    &--compact {
+      &:first-of-type {
+        .cta {
+          float: right;
+          margin-right: 0;
+        }
+      }
 
-        &:first-of-type {
-          @include push(2 of $column-large);
+      &:last-of-type {
+        .cta {
+          float: left;
+          margin-left: 0;
         }
       }
     }
-  }
-
-  .btn {
-    display: block;
   }
 }

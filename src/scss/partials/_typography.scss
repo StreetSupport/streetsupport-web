@@ -14,34 +14,16 @@ body {
   font-size: 36px;
   line-height: 1.4;
   margin-top: 0;
-
-  /*
-  @include mq($from: m) {
-    font-size: 45px;
-  }
-  */
 }
 
 .h2 {
   font-size: 25px;
   line-height: 1.4;
-
-  /*
-  @include mq($from: m) {
-    font-size: 30px;
-  }
-  */
 }
 
 .h3 {
   font-size: 16px;
   line-height: 1.4;
-
-  /*
-  @include mq($from: m) {
-    font-size: 22px;
-  }
-  */
 }
 
 p {
@@ -92,8 +74,8 @@ strong {
   text-align: right;
 }
 
-.hide-text {
-  text-indent: 100%;
-  white-space: nowrap;
-  overflow: hidden;
+.line-break {
+  display: block;
+  height: 1px;
+  width: 1px;
 }

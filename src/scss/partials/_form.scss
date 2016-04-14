@@ -23,7 +23,7 @@
     position: relative;
 
 		@include mq($from: m) {
-      @include span(3 of $column-small);
+      @include span(4 of $grid-column);
 		}
 
 		&--full {
