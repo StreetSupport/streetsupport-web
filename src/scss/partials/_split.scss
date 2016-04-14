@@ -5,5 +5,21 @@
     @include mq($from: m) {
       @include span(4 of $grid-column);
     }
+
+    &--compact {
+      &:first-of-type {
+        .cta {
+          float: right;
+          margin-right: 0;
+        }
+      }
+
+      &:last-of-type {
+        .cta {
+          float: left;
+          margin-left: 0;
+        }
+      }
+    }
   }
 }
