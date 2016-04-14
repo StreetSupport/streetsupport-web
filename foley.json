@@ -9,11 +9,11 @@
     "icons": "src/icons/",
     "img": "src/img/",
     "js": "src/js/",
+    "spec": "spec/",
     "data": "src/data/",
     "layouts": "src/layouts/",
     "pages": "src/pages/",
-    "partials": "src/partials/",
-    "specs": "spec/"
+    "partials": "src/partials/"
   },
   "autoprefixer": {
     "browsers": ["last 2 versions", "IE >= 10"]
