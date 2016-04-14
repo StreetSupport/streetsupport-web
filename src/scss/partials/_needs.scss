@@ -6,11 +6,11 @@
     @include span(full);
 
     @include mq($from: m) {
-      @include span(4 of $column-small);
+      @include span(4 of $grid-column);
     }
 
     @include mq($from: l) {
-      @include span(9 of $column-large);
+      @include span(6 of $grid-column);
     }
   }
 
@@ -21,12 +21,12 @@
     @include span(full);
 
     @include mq($from: m) {
-      @include span(2 of $column-small);
+      @include span(4 of $grid-column);
       text-align: right;
     }
 
     @include mq($from: l) {
-      @include span(3 of $column-large);
+      @include span(2 of $grid-column);
       text-align: right;
     }
   }

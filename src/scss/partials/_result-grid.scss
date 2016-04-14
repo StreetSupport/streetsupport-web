@@ -1,19 +1,7 @@
 .result-grid {
   @include cf();
-  padding-top: 30px;
-  padding-bottom: 30px;
 
   &__item {
-    @include span(3 of $column-small);
-
-    @include mq($from: m) {
-      @include span(2 of $column-small);
-    }
-
-    @include mq($from: l) {
-      @include span(3 of $column-large);
-    }
-
     .btn__text {
       font-size: 12px;
 

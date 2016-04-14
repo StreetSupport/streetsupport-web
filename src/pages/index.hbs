@@ -10,9 +10,14 @@ pageName: home
 <div class="block block--cta">
   <div class="container block__inner">
     <div class="split">
-      <a class="btn btn--brand-d split__element" href="find-help.html"><span class="btn__text">Find Help</span></a>
-      <a class="btn btn--brand-e split__element" href="give-help.html"><span class="btn__text">Give Help</span></a>
+      <div class="split__element">
+        {{>cta brand="d" link="find-help.html" name="Find Help"}}
+      </div>
+      <div class="split__element">
+        {{>cta brand="e" link="give-help.html" name="Give Help"}}
+      </div>
     </div>
+
     <h1 class="h2 block__header">Working together to support homeless people in Manchester.</h1>
   </div>
 </div>
@@ -30,15 +35,12 @@ pageName: home
   <div class="container block__inner">
     <div class="block__content">
       <div class="split">
-        <a class="btn btn--brand-d split__element" href="find-help.html">
-          <span class="btn__icon icon-find-help"></span>
-          <span class="btn__text">Find Help</span>
-        </a>
-
-        <a class="btn btn--brand-e split__element" href="give-help.html">
-          <span class="btn__icon icon-give-help"></span>
-          <span class="btn__text">Give Help</span>
-        </a>
+        <div class="split__element">
+          {{>cta brand="d" icon="findhelp" link="find-help.html" name="Find Help"}}
+        </div>
+        <div class="split__element">
+          {{>cta brand="e" icon="givehelp" link="give-help.html" name="Give Help"}}
+        </div>
       </div>
 
       <dl class="list-highlight">
@@ -72,10 +74,10 @@ pageName: home
 
     <div class="block__content">
       <ul class="partners">
-        <li class="partners__logo partners__logo--coalition-of-relief">Coalition of Relief</li>
-        <li class="partners__logo partners__logo--booth-centre">Booth Centre</li>
-        <li class="partners__logo partners__logo--mustard-tree">Mustard Tree</li>
-        <li class="partners__logo partners__logo--bruntwood">Bruntwood</li>
+        <li class="partners__logo partners__logo--coalition-of-relief"><span class="hide-screen">Coalition of Relief</span></li>
+        <li class="partners__logo partners__logo--booth-centre"><span class="hide-screen">Booth Centre</span></li>
+        <li class="partners__logo partners__logo--mustard-tree"><span class="hide-screen">Mustard Tree</span></li>
+        <li class="partners__logo partners__logo--bruntwood"><span class="hide-screen">Bruntwood</span></li>
       </ul>
 
       <p>We are looking for Manchester businesses and organisations to partner with us. If you share our values and want to know more, please <a href="mailto:sponsorship@streetsupport.net">get in touch</a>.</p>

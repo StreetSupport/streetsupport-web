@@ -4,7 +4,6 @@
 }
 
 .partners__logo {
-  @extend .hide-text;
   background: no-repeat; height: 38px;
   display: inline-block;
   margin: 0 10px 10px 10px;
@@ -33,4 +32,3 @@
     width: 38px;
   }
 }
-
