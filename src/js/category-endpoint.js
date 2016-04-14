@@ -40,7 +40,6 @@ var getEndpointUrl = function (categoryUrl, theLocation) {
       var latitude = position.coords.latitude
       var longitude = position.coords.longitude
       var locationUrl = categoryUrl += '/long/' + longitude + '/lat/' + latitude
-      console.log('location for geoLocation '+ locationUrl)
       self.deferred.resolve(locationUrl)
     }).fail(function (error) {
       console.error('GEOLOCATION ERROR: ' + error)
