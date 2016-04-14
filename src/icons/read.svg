@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="289px" height="206.8px" viewBox="0 0 289 206.8" enable-background="new 0 0 289 206.8" xml:space="preserve">
+<g display="none">
+	<defs>
+		<path id="SVGID_1_" d="M0,206V11.3C0,5.1,5.1,0,11.3,0h266.3c6.3,0,11.3,5.1,11.3,11.3V206H0z"/>
+	</defs>
+	<clipPath id="SVGID_2_" display="inline">
+		<use xlink:href="#SVGID_1_"  overflow="visible"/>
+	</clipPath>
+	<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="144.5" y1="276" x2="144.5" y2="-5.978109e-09">
+		<stop  offset="0.3164" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#ADE1F9"/>
+	</linearGradient>
+	<path display="inline" clip-path="url(#SVGID_2_)" fill="url(#SVGID_3_)" d="M277.7,276H11.3C5.1,276,0,270.9,0,264.7V11.3
+		C0,5.1,5.1,0,11.3,0h266.3c6.3,0,11.3,5.1,11.3,11.3v253.3C289,270.9,283.9,276,277.7,276z"/>
+</g>
+<g>
+	<path fill="#5A84B1" d="M144.7,149.1l-62,3.6c-3.2,0-5.9-2.6-5.9-5.9V64.5c0-3.2,2.6-5.9,5.9-5.9h62V149.1z"/>
+	<path fill="#FFFFFF" d="M144.7,146.2H90.6c-2.4,0-4.4-2-4.4-4.4V62.3c0-2.4,2-4.4,4.4-4.4h54.1V146.2z"/>
+	<rect x="95.4" y="70.4" fill="#929497" width="41.2" height="2.4"/>
+	<rect x="95.4" y="97.4" fill="#929497" width="29.8" height="2.4"/>
+	<rect x="95.4" y="88.5" fill="#929497" width="9" height="2.4"/>
+	<rect x="108.6" y="88.5" fill="#929497" width="9" height="2.4"/>
+	<rect x="121.2" y="88.5" fill="#929497" width="15.3" height="2.4"/>
+	<rect x="95.4" y="79.9" fill="#929497" width="20.2" height="2.4"/>
+	<rect x="119.7" y="79.9" fill="#929497" width="12.2" height="2.4"/>
+	<rect x="95.4" y="106.6" fill="#929497" width="20.2" height="2.4"/>
+	<rect x="119.7" y="106.6" fill="#929497" width="12.2" height="2.4"/>
+	<path fill="#5A84B1" d="M144.4,149.1l62,3.6c3.2,0,5.9-2.6,5.9-5.9V64.5c0-3.2-2.6-5.9-5.9-5.9h-62V149.1z"/>
+	<path fill="#FFFFFF" d="M144.4,146.2h54.1c2.4,0,4.4-2,4.4-4.4V62.3c0-2.4-2-4.4-4.4-4.4h-54.1V146.2z"/>
+	<rect x="152.4" y="70.4" fill="#929497" width="41.2" height="2.4"/>
+	<rect x="152.4" y="97.4" fill="#929497" width="29.8" height="2.4"/>
+	<rect x="152.4" y="88.5" fill="#929497" width="9" height="2.4"/>
+	<rect x="165.6" y="88.5" fill="#929497" width="9" height="2.4"/>
+	<rect x="178.2" y="88.5" fill="#929497" width="15.3" height="2.4"/>
+	<rect x="152.4" y="79.9" fill="#929497" width="20.2" height="2.4"/>
+	<rect x="176.8" y="79.9" fill="#929497" width="12.2" height="2.4"/>
+	<rect x="152.4" y="106.6" fill="#929497" width="20.2" height="2.4"/>
+	<rect x="176.8" y="106.6" fill="#929497" width="12.2" height="2.4"/>
+	<path fill="#5A84B1" d="M149.2,151.1h-10.4c-1.2,0-2.2-1-2.2-2.2l0,0c0-1.2,1-2.2,2.2-2.2h10.4c1.2,0,2.2,1,2.2,2.2l0,0
+		C151.4,150.1,150.4,151.1,149.2,151.1z"/>
+	<path opacity="0.2" fill="#5A84B1" d="M206.4,58.7H201c-0.7-0.5-1.6-0.8-2.5-0.8h-53.8h-0.3H144v93.2h5.1c1,0,1.8-0.7,2.1-1.6
+		l55.2,3.2c3.2,0,5.9-2.6,5.9-5.9V64.5C212.3,61.3,209.7,58.7,206.4,58.7z"/>
+</g>
+</svg>
