@@ -1,17 +1,14 @@
 .result-grid {
   @include cf();
+  margin: 20px 0;
 
-  &__item {
-    .btn__text {
-      font-size: 12px;
+  .btn__text {
+    @include mq($from: xs) {
+      font-size: 14px;
+    }
 
-      @include mq($from: xs) {
-        font-size: 14px;
-      }
-
-      @include mq($from: s) {
-        font-size: 16px;
-      }
+    @include mq($from: s) {
+      font-size: 16px;
     }
   }
 }

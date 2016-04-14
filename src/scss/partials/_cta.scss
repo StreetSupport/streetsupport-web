@@ -1,13 +1,12 @@
 .cta {
   @include span(full);
+  margin-bottom: 20px;
 
   @include mq($from: xs) {
     @include span(4 of $grid-column);
-    margin-top: 20px;
-    margin-bottom: 20px;
   }
 
-  @include mq($from: m) {
+  @include mq($from: l) {
     @include span(2 of $grid-column);
   }
 
@@ -31,6 +30,7 @@
   // If there is no icon, we need to set the width of the btn to the container
   .btn {
     width: 100%;
+    margin-bottom: 0;
   }
 
   /*
