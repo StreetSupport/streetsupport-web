@@ -20,7 +20,7 @@ Please work in the develop branch first, and use feature branches for significan
 * Navigate to the workflow folder in command line Terminal,
 * Run: `npm i`.
 
-See [https://github.com/PJL101/foley](https://github.com/PJL101/foley) for more information about the workflow. This project uses version 0.3.5.
+See [https://github.com/fephil/foley](https://github.com/fephil/foley) for more information about the workflow. This project uses version 0.3.5.
 
 ### Optional Installs
 
