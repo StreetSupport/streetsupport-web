@@ -48,8 +48,6 @@ gulp deploy --debug --production
 # Move to created directory
 cd _dist
 
-echo $AZURE_USER
-
 # Push to git by overriding previous commits
 # IMPORTANT: Supress messages so nothing appears in logs
 
