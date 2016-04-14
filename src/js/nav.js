@@ -39,3 +39,5 @@ module.exports = {
   open: open,
   close: close
 }
+
+console.log('hello; nothing to see here...')
