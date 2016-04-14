@@ -28,6 +28,11 @@
     }
   }
 
+  // If there is no icon, we need to set the width of the btn to the container
+  .btn {
+    width: 100%;
+  }
+
   /*
   &__description {
 
