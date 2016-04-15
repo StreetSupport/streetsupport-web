@@ -75,7 +75,11 @@ strong {
 }
 
 .line-break {
-  display: block;
-  height: 1px;
-  width: 1px;
+  display: none;
+
+  @include mq($from: xs) {
+    display: block;
+    height: 1px;
+    width: 1px;
+  }
 }
