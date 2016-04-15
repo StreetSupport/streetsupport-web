@@ -40,7 +40,6 @@
     "gulp-svg-sprite": "1.2.19",
     "gulp-util": "3.0.7",
     "handlebars": "4.0.5",
-    "imports-loader": "0.6.5",
     "imagemin-pngquant": "4.2.2",
     "imports-loader": "0.6.5",
     "jasmine": "2.4.1",
