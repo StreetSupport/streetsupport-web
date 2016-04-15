@@ -67,11 +67,12 @@ jsBundle: categorybyday
                   </div>
                   <div class="result-detail__times-item">
                     <ul>
-                      <li class="h3">\{{#openingTime}} \{{{serviceInfo}}} \{{/openingTime}}</li>
+                      <li>\{{#openingTime}} \{{{serviceInfo}}} \{{/openingTime}}</li>
                       \{{#tags}}
                       <li>You must be: <span class="result-detail__tags-item">\{{tags}}</span></li>
                       \{{/tags}}
                       <li>
+                        <a href="organisation.html?organisation=\{{key}}">\{{name}}</a>
                         \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
                         \{{#address.street}}
                           \{{#address.street}} \{{address.street}}, \{{/address.street}}
@@ -82,7 +83,6 @@ jsBundle: categorybyday
                           \{{address.postcode}} - <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">Map</a>
                         \{{/address.street}}
                       </li>
-                      <li><a href="organisation.html?organisation=\{{key}}">About \{{name}}</a></li>
                     </ul>
                   </div>
                 </div>

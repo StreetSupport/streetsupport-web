@@ -34,8 +34,7 @@ $base-font-size: 16px; // Recommended to not change this
 $site-container: rem(800px);
 $site-gutter: rem(16px);
 $grid-gutter: .25; // Quarter of column width
-$column-small: 6;
-$column-large: 12;
+$grid-column: 8;
 $grid-debug: hide; // Change this to show or hide
 
 // Colours
@@ -65,7 +64,7 @@ $header-height: 64px;
 // -----------------------------
 
 $susy: (
-  columns: $column-small,
+  columns: $grid-column,
   container: $site-container,
   gutters: $grid-gutter,
   global-box-sizing: border-box,

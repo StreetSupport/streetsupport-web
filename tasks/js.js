@@ -31,3 +31,12 @@ gulp.task('jslint', () => {
     breakOnError: false
   }))
 })
+
+// Linting task
+gulp.task('specsjslint', () => {
+  return gulp.src(config.paths.spec + '**/*.js')
+  .pipe(standard())
+  .pipe(standard.reporter('default', {
+    breakOnError: false
+  }))
+})
