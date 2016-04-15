@@ -10,7 +10,7 @@ jsBundle: giveitemsubmitdetails
   <div class="container block__inner">
     <h1 class="h1 block__header">Give</h1>
     <a href="give-help.html">Other ways to give help</a>
-    <h2 class="h2" data-bind="text: needDescription"></h2>
+    <h2 class="h2" data-bind="html: needDescription"></h2>
     <p data-bind="text: needReason"></p>
     <p>Posted by: <span data-bind="text: providerName"></span></p>
     {{> form-feedback}}
@@ -23,7 +23,7 @@ jsBundle: giveitemsubmitdetails
         <ul class="form__field-list">
           <li class="form__field-item">
             <label class="form__label">Subject</label>
-            <p>I can help with: <span data-bind="text: $parent.needDescription"></span></p>
+            <p>I can help with: <span data-bind="html: $parent.needDescription"></span></p>
           </li>
           <li class="form__field-item">
             <label class="form__label" for="email">Email *</label>
