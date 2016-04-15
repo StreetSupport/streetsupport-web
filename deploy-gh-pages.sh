@@ -23,6 +23,8 @@ if [[ $TRAVIS_BRANCH == 'develop' ]]
     APIENVIRONMENT=1
 fi
 
+echo $AZURE_WEBSITE
+
 # Get the commit details
 THE_COMMIT=`git rev-parse HEAD`
 
