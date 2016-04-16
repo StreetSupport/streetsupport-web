@@ -7,7 +7,7 @@ jsBundle: giverequests
 ---
 
 <div id="js-card-search" class="requests-search is-active">
-  <div class="block block--intro">
+  <div class="block block--intro requests-search__intro">
     <div class="container block__inner">
       <h1 class="h1 block__header">Requests <small>(Prototype)</small></h1>
       <a href="give-help.html">Other ways to give help</a>
@@ -19,13 +19,14 @@ jsBundle: giverequests
       <div class="block__content">
         <div class="requests-search__input" action="#">
           <h2 class="h2 requests-search__input__header">What can you give?</h2>
-          <input autofocus placeholder="Search" class="awesomplete search requests-search__autocomplete" data-list="coffee4craig, Breakfast in Bed Street Life Project, lifeshare, booth centre, cups,cutlery,crockery,administration,accommodation,translation,languages,waterproofs,outdoor clothing,coats,dbs,pat testing,electrician,financial,mentoring,interview skills,job seeking,maintenance,odd job,repair,cleaning" />
-          <button class="btn btn--brand-e requests-search__input__submit">
-           <span class="btn__text">Search</span>
-         </button>
-       </div>
+          <form action="#">
+            <input autofocus placeholder="Search" class="awesomplete search requests-search__autocomplete" data-list="coffee4craig, Breakfast in Bed Street Life Project, lifeshare, booth centre, cups,cutlery,crockery,administration,accommodation,translation,languages,waterproofs,outdoor clothing,coats,dbs,pat testing,electrician,financial,mentoring,interview skills,job seeking,maintenance,odd job,repair,cleaning" />
+            <button class="btn btn--brand-e requests-search__input__submit">
+              <span class="btn__text">Search</span>
+            </button>
+          </form>
+        </div>
 
-       <div class="requests-search__filter">
         <ul class="requests-search__filter__list js-filter-list">
           <li class="requests-search__filter__item js-filter-item js-filter-item-all is-active" data-filter="all">
             <span class="hide-screen">Show </span>All
@@ -40,20 +41,6 @@ jsBundle: giverequests
             <span class="hide-screen">Filter by </span>Money
           </li>
         </ul>
-      </div>
-
-      {{!--
-        <div class="requests-search__sort">
-          <h2 class="h3 requests-search__sort__header">Sort by:</h2>
-          <select class="requests-search__sort__list">
-            <option value="organisation">Select</option>
-            <option value="organisation-a">Organisation name (A-Z)</option>
-            <option value="organisation-d">Organisation name (Z-A)</option>
-            <option value="date-a">Date posted (Newest)</option>
-            <option value="date-d">Date posted (Oldest)</option>
-          </select>
-        </div>
-        --}}
 
         <div id="js-card-list-output"></div>
       </div>

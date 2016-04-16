@@ -10,10 +10,18 @@
   }
 }
 
+.requests-search__intro {
+  // @todo see if this needs to be globally applied?
+  text-align: center;
+
+  .block__header {
+    text-align: center;
+  }
+}
+
 .requests-search__input {
   background: linear-gradient(#0B9B75, #086149);
   border-radius: 5px 5px 0 0;
-  margin-bottom: 40px;
   padding: 10px 20px 20px 20px;
   text-align: center;
 }
@@ -21,27 +29,31 @@
 .requests-search__input__header {
   color: #FFF;
 }
+
 .requests-search__autocomplete {
+  // @todo see if we can reuse these form styles globally
+  border: 1px solid #939598;
+  border-radius: 5px;
+  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
   margin-bottom: 20px;
-  padding: 4px 10px;
+  padding: 10px;
   width: 100%;
-  height: 50px;
+
+  @include mq($from: l) {
+    width: 75%;
+  }
 }
 
 .requests-search__input__submit {
   width: 100%;
 
   @include mq($from: l) {
-    width: 60%;
+    width: 33.33%;
   }
 }
 
 .requests-search__filter {
-  margin-bottom: 20px;
 
-  @include mq($from: l) {
-    float: left;
-  }
 }
 
 .requests-search__filter__header {
@@ -49,21 +61,25 @@
 }
 
 .requests-search__filter__list {
-  margin: 0;
+  background: #ECECEC;
+  border-bottom: 1px solid $brand-k;
+  margin: 5px 0 50px;
   padding: 0;
-  list-style-type: none;
-  display: inline-block;
+  text-align: center;
 }
 
 .requests-search__filter__item {
-  margin: 0 0 0 20px;
-  padding: 0;
+  color: #898989;
+  cursor: pointer;
   display: inline-block;
-cursor: pointer; // TEMP STYLE
+  font-weight: $font-headline-weight;
+  margin: 0 0 0 20px;
+  padding: 15px 25px;
 
-&.is-active {
-  text-decoration: underline;
-}
+  &.is-active,
+  &:hover {
+    color: $brand-k;
+  }
 }
 
 .requests-search__sort {
@@ -200,11 +216,6 @@ cursor: pointer; // TEMP STYLE
 // @todo refactor from here
 .awesomplete {
   position: relative;
-  width: 100%;
-
-  input {
-    display: block;
-  }
 
   ul {
     top: 60px;
