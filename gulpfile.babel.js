@@ -70,3 +70,10 @@ gulp.task('auditcode', callback => {
     callback
   )
 })
+
+gulp.task('test', (callback) => {
+  runSequence(
+    'visualTest',
+    callback
+  )
+})
