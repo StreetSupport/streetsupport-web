@@ -81,17 +81,18 @@
 // NOTE: Items need to be fixed width for bricks.js support
 .requests-listing {
   clear: both;
-  list-style-type: none;
+  list-style: none;
   margin: 20px auto;
   padding: 0;
   max-width: 100%;
 }
 
 .requests-listing__item {
-  background-color: #e8e8e8;
+  border: 1px solid $brand-k;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);
   margin-bottom: 20px;
   max-width: 100%;
-  padding: 20px;
   width: 290px;
   word-wrap: break-word;
 
@@ -112,26 +113,67 @@
   }
 }
 
+.requests-listing__info {
+  background: linear-gradient(#074233, #0A6C52);
+  margin-left: -1px;
+  margin-right: -1px;
+  padding: 20px;
+}
+
+.requests-listing__date {
+  color: $brand-j;
+  margin-bottom: 0;
+}
+
 .requests-listing__link {
-  color: inherit!important;
+  color: inherit!important; // @todo wean out
   display: block;
   text-decoration: inherit;
 }
 
 .requests-listing__icon {
-  @include size(30px);
+  @include size(25px);
+
+  position: absolute;
+  left: 10px;
 }
 
 .requests-listing__type {
-  text-transform: capitalize;
+  color: $brand-l;
   display: inline-block;
+  line-height: 28px;
   margin-bottom: 0;
+  padding: 10px 20px 10px 45px;
+  position: relative;
+  text-transform: capitalize;
+  width: 100%;
+}
+
+.requests-listing__provider {
+  color: #FFF;
+  font-size: 18px;
+  margin: 0 0 5px;
+}
+
+
+.requests-listing__location-description,
+.requests-listing__description {
+  color: $brand-k;
+  padding: 0 20px;
+}
+
+.requests-listing__location-description {
+  font-weight: $font-headline-weight;
+}
+
+.requests-listing__description {
+  padding-bottom: 10px;
 }
 
 .requests-listing__amount {
-  float: right;
   display: inline-block;
-  margin-top: 16px !important;
+  float: right;
+  margin-top: 16px !important; // @todo wean out
 }
 
 .requests-detail {
