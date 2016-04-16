@@ -13,12 +13,14 @@
 .requests-search__input {
   background: linear-gradient(#0B9B75, #086149);
   border-radius: 5px 5px 0 0;
-  color: #FFF;
   margin-bottom: 40px;
   padding: 10px 20px 20px 20px;
   text-align: center;
 }
 
+.requests-search__input__header {
+  color: #FFF;
+}
 .requests-search__autocomplete {
   margin-bottom: 20px;
   padding: 4px 10px;
@@ -57,11 +59,11 @@
   margin: 0 0 0 20px;
   padding: 0;
   display: inline-block;
-  cursor: pointer; // TEMP STYLE
+cursor: pointer; // TEMP STYLE
 
-  &.is-active {
-    text-decoration: underline;
-  }
+&.is-active {
+  text-decoration: underline;
+}
 }
 
 .requests-search__sort {
@@ -114,7 +116,7 @@
 }
 
 .requests-listing__info {
-  background: linear-gradient(#074233, #0A6C52);
+  background: linear-gradient(#074233, #0A6C52); // @todo need SVG for this background image
   margin-left: -1px;
   margin-right: -1px;
   padding: 20px;
@@ -152,6 +154,7 @@
 .requests-listing__provider {
   color: #FFF;
   font-size: 18px;
+  font-weight: $font-headline-weight;
   margin: 0 0 5px;
 }
 
@@ -193,98 +196,87 @@
 }
 
 // Awesomecomplete
-// NOTE: These styles have just been thrown in here from default example
+// @note: These styles have just been thrown in here from default example
+// @todo refactor from here
 .awesomplete {
-  width: 100%;  // custom
-
-  display: inline-block;
   position: relative;
-}
+  width: 100%;
 
-.awesomplete > input {
-	display: block;
-}
+  input {
+    display: block;
+  }
 
-.awesomplete > ul {
-  top: 60px; // custom
+  ul {
+    top: 60px;
 
-  position: absolute;
-  left: 0;
-  z-index: 1;
-  min-width: 100%;
-  // width: 100%;
-  // max-width: 300px;
-  box-sizing: border-box;
-  list-style: none;
-  padding: 0;
-  border-radius: .3em;
-  margin: .2em 0 0;
-  background: hsla(0,0%,100%,.9);
-  background: linear-gradient(to bottom right, white, hsla(0,0%,100%,.8));
-  border: 1px solid rgba(0,0,0,.3);
-  box-shadow: .05em .2em .6em rgba(0,0,0,.2);
-  text-shadow: none;
-}
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    min-width: 100%;
+    box-sizing: border-box;
+    list-style: none;
+    padding: 0;
+    border-radius: .3em;
+    margin: .2em 0 0;
+    background: hsla(0,0%,100%,.9);
+    background: linear-gradient(to bottom right, white, hsla(0,0%,100%,.8));
+    border: 1px solid rgba(0,0,0,.3);
+    box-shadow: .05em .2em .6em rgba(0,0,0,.2);
+    text-shadow: none;
+    transition: .3s cubic-bezier(.4,.2,.5,1.4);
+    transform-origin: 1.43em -.43em;
 
-.awesomplete > ul[hidden],
-.awesomplete > ul:empty {
-	display: none;
-}
+    &[hidden],
+    &:empty {
+      display: none;
+      opacity: 0;
+      transform: scale(0);
+      display: block;
+      transition-timing-function: ease;
+    }
 
-.awesomplete > ul {
-  transition: .3s cubic-bezier(.4,.2,.5,1.4);
-  transform-origin: 1.43em -.43em;
-}
+    // pointer arrow
+    &:before {
+      content: '';
+      position: absolute;
+      top: -.43em;
+      left: 1em;
+      width: 0; height: 0;
+      padding: .4em;
+      background: white;
+      border: inherit;
+      border-right: 0;
+      border-bottom: 0;
+      transform: rotate(45deg);
+    }
 
-.awesomplete > ul[hidden],
-.awesomplete > ul:empty {
-  opacity: 0;
-  transform: scale(0);
-  display: block;
-  transition-timing-function: ease;
-}
+    li {
+      position: relative;
+      padding: .2em .5em;
+      cursor: pointer;
 
-// pointer arrow
-.awesomplete > ul:before {
-  content: "";
-  position: absolute;
-  top: -.43em;
-  left: 1em;
-  width: 0; height: 0;
-  padding: .4em;
-  background: white;
-  border: inherit;
-  border-right: 0;
-  border-bottom: 0;
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
+      &:hover {
+        background: hsl(200, 40%, 80%);
+        color: black;
 
-.awesomplete > ul > li {
-  position: relative;
-  padding: .2em .5em;
-  cursor: pointer;
-}
+        mark {
+          background: hsl(68, 100%, 41%);
+        }
+      }
 
-.awesomplete > ul > li:hover {
-  background: hsl(200, 40%, 80%);
-  color: black;
-}
+      &[aria-selected="true"] {
+        background: hsl(205, 40%, 40%);
+        color: white;
 
-.awesomplete > ul > li[aria-selected="true"] {
-  background: hsl(205, 40%, 40%);
-  color: white;
-}
+        mark {
+          background: hsl(86, 100%, 21%);
+          color: inherit;
+        }
+      }
+    }
 
-.awesomplete mark {
- background: hsl(65, 100%, 50%);
-}
-
-.awesomplete li:hover mark {
- background: hsl(68, 100%, 41%);
-}
-
-.awesomplete li[aria-selected="true"] mark {
- background: hsl(86, 100%, 21%);
- color: inherit;
+    mark {
+      background: hsl(65, 100%, 50%);
+    }
+  }
 }
