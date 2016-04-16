@@ -27,7 +27,7 @@ gulp.task('jsdevwatch', () => {
 })
 
 // Build website, either with development or minified assets and run server with live reloading
-gulp.task('default', callback => {
+gulp.task('default', (callback) => {
   runSequence(
     'jasmine',
     'jslint',
@@ -40,7 +40,7 @@ gulp.task('default', callback => {
 })
 
 // Build website, either with development or minified assets depending on flag
-gulp.task('deploy', callback => {
+gulp.task('deploy', (callback) => {
   runSequence(
     'jasmine',
     'jslint',
@@ -53,7 +53,7 @@ gulp.task('deploy', callback => {
 })
 
 // Run tests and watch js/spec files
-gulp.task('jsdev', callback => {
+gulp.task('jsdev', (callback) => {
   runSequence(
     'jasmine',
     'specsjslint',
@@ -63,10 +63,19 @@ gulp.task('jsdev', callback => {
 })
 
 // Run the audit task to check code standards
-gulp.task('auditcode', callback => {
+gulp.task('auditcode', (callback) => {
   runSequence(
     'scsslint',
     'jslint',
+    callback
+  )
+})
+
+// Run the test task to visually test the website -
+// @note run when localhost is already serving the website
+gulp.task('test', (callback) => {
+  runSequence(
+   'visualTest',
     callback
   )
 })
