@@ -18,6 +18,7 @@ npm-debug.log
 # Project Specific #
 ######################
 *.orig
+*.sublime*
 
 # Test generated files #
 ########################
