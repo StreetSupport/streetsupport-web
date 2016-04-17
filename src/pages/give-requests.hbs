@@ -54,29 +54,27 @@ jsBundle: giverequests
 
 <script id="js-card-list-tpl" type="text/template">
   <ul id="js-card-list" class="requests-listing list">
-    \{{#card}}
+  \{{#card}}
     <li class="requests-listing__item" data-id="\{{id}}">
       <a class="requests-listing__link" href="#">
         <article>
-          <p class="h3 requests-listing__type type">
+          <p class="h3 requests-listing__type">
             <svg class="svg-logo-dims requests-listing__icon">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#logo"></use>
             </svg>
-            \{{type}}
+            <span class="type">\{{type}}</span>
           </p>
           \{{#donationAmountInPounds}}<p class="requests-listing__amount">£\{{{donationAmountInPounds}}}</p>\{{/donationAmountInPounds}}
-
           <div class="requests-listing__info">
             <h3 class="requests-listing__provider serviceProviderName">\{{{serviceProviderName}}}</h3>
             <p class="requests-listing__date creationDate">Posted: <time datetime={{{creationDate}}}>\{{{creationDate}}}</time></p>
           </div>
-
           <p class="requests-listing__location-description locationDescription">\{{{locationDescription}}}</p>
           <p class="requests-listing__description">\{{{description}}}</p>
         </article>
       </a>
     </li>
-    \{{/card}}
+  \{{/card}}
   </ul>
 </script>
 
