@@ -24,6 +24,10 @@ import ForEach from 'lodash/collection/forEach'
 
 import moment from 'moment'
 
+import listToSelect from './list-to-select'
+
+listToSelect.init()
+
 // Spinner
 // var spin = document.getElementById('spin')
 // var loading = new Spinner().spin(spin)
@@ -59,7 +63,7 @@ getApiData.data(apiRoutes.needs)
       getLocation.location().then(function (position) {
         var latitude = position.coords.latitude
         var longitude = position.coords.longitude
-        needsFromApi.forEach(n => {
+        needsFromApi.forEach((n) => {
           var distanceInMetres = geolib.getDistance(
             { latitude: latitude, longitude: longitude },
             { latitude: n.latitude, longitude: n.longitude }
@@ -68,10 +72,12 @@ getApiData.data(apiRoutes.needs)
         })
         renderNeeds()
       }, function (error) {
-
+        if (error !== null) {
+          console.log(error)
+        }
       })
     } else {
-      needsFromApi.forEach(n => {
+      needsFromApi.forEach((n) => {
         n.locationDescription = n.postcode
       })
       renderNeeds()
