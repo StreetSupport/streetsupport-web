@@ -1,0 +1,52 @@
+{
+  "viewports": [
+    {
+      "name": "small",
+      "width": 320,
+      "height": 480
+    },
+    {
+      "name": "medium",
+      "width": 568,
+      "height": 1024
+    },
+    {
+      "name": "large",
+      "width": 1024,
+      "height": 768
+    },
+    {
+      "name": "xlarge",
+      "width": 1200,
+      "height": 900
+    }
+  ],
+  "scenarios": [
+    {
+      "label": "Give requests - LOCAL",
+      "url": "http://localhost:3000/give-requests.html",
+      "hideSelectors": [],
+      "removeSelectors": [],
+      "selectors": [
+        ".requests-search__intro",
+        ".requests-search__input",
+        ".requests-search__filter__list"
+      ],
+      "readyEvent": null,
+      "delay": 5000,
+      "misMatchThreshold" : 1
+    }
+  ],
+  "paths": {
+    "bitmaps_reference": "../../test/visual/reference",
+    "bitmaps_test": "../../test/visual/results",
+    "compare_data": "../../test/visual/results/compare.json",
+    "casper_scripts": "../../test/visual/scripts"
+  },
+  "engine": "phantomjs",
+  "report": ["CLI"],
+  "cliExitOnFail": false,
+  "casperFlags": [],
+  "debug": false,
+  "port": 3001
+}

@@ -1,42 +1,43 @@
+// Footer - global page footer styles
+
 .footer {
-  background-color: $brand-c;
-  color: #fff;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  background: $brand-c;
+  color: #FFF;
+  padding: 30px 0;
   text-align: center;
+}
 
-  &__header {
-    margin-top: 0;
+.footer__header {
+  margin-top: 0;
 
-    @include mq($from: xs) {
-      display: inline-block;
-    }
-  }
-
-  &__copy {
-    margin-bottom: 0;
-  }
-
-  &__social-list {
-    margin: 0 0 0 10px;
-    padding: 0;
-    list-style: none;
-    text-align: center;
-
-    @include mq($from: xs) {
-      display: inline-block;
-    }
-  }
-
-  &__social-item {
-    margin: 0 4px;
-    padding: 0;
+  @include mq($from: xs) {
     display: inline-block;
   }
+}
 
-  &__icon {
-    height: 37px;
-    width: 34px;
-    vertical-align: middle;
+.footer__copy {
+  margin-bottom: 0;
+}
+
+.footer__social-list {
+  list-style: none;
+  margin: 0 0 0 10px;
+  padding: 0;
+  text-align: center;
+
+  @include mq($from: xs) {
+    display: inline-block;
   }
+}
+
+.footer__social-item {
+  display: inline-block;
+  margin: 0 4px;
+  padding: 0;
+}
+
+.footer__icon {
+  height: 37px;
+  vertical-align: middle;
+  width: 34px;
 }

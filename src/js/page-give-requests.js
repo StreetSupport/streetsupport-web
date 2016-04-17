@@ -24,6 +24,10 @@ import ForEach from 'lodash/collection/forEach'
 
 import moment from 'moment'
 
+import listToSelect from './list-to-dropdown'
+
+listToSelect.init()
+
 // Spinner
 // var spin = document.getElementById('spin')
 // var loading = new Spinner().spin(spin)
@@ -59,7 +63,7 @@ getApiData.data(apiRoutes.needs)
       getLocation.location().then(function (position) {
         var latitude = position.coords.latitude
         var longitude = position.coords.longitude
-        needsFromApi.forEach(n => {
+        needsFromApi.forEach((n) => {
           var distanceInMetres = geolib.getDistance(
             { latitude: latitude, longitude: longitude },
             { latitude: n.latitude, longitude: n.longitude }
@@ -68,10 +72,12 @@ getApiData.data(apiRoutes.needs)
         })
         renderNeeds()
       }, function (error) {
-
+        if (error !== null) {
+          console.log(error)
+        }
       })
     } else {
-      needsFromApi.forEach(n => {
+      needsFromApi.forEach((n) => {
         n.locationDescription = n.postcode
       })
       renderNeeds()
@@ -147,6 +153,15 @@ var buildList = function () {
           runFiltering()
         }
       }
+    })
+  }
+
+  // Add change listener to `<select>` for small screens
+  var c
+  var filterList = document.querySelectorAll('.js-filter-list.list-to-dropdown__select')
+  for (c = 0; c < filterList.length; c++) {
+    filterList[c].addEventListener('change', function () {
+      console.log('filtering')
     })
   }
 
@@ -234,9 +249,9 @@ var buildCard = function (data) {
   }
   var openIfCardRequested = function () {
     var cardId = getUrlParams.parameter('id')
-    if(cardId) {
+    if (cardId) {
       var card = Array.from(document.querySelectorAll('.requests-listing__item'))
-        .filter(c => c.getAttribute('data-id') === cardId)[0]
+        .filter((c) => c.getAttribute('data-id') === cardId)[0]
       openCard(card, function () {
         history.pushState({}, 'from openIfCardRequested', '?')
         closeCard()
