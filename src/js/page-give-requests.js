@@ -130,7 +130,7 @@ var buildList = function () {
 
   // Add click listener to each item
   for (b = 0; b < filters.length; b++) {
-    filters[b].addEventListener('click change', function (event) {
+    filters[b].addEventListener('click', function (event) {
       var getFilter = this.getAttribute('data-filter')
       event.preventDefault()
 
@@ -153,6 +153,15 @@ var buildList = function () {
           runFiltering()
         }
       }
+    })
+  }
+
+  // Add change listener to `<select>` for small screens
+  var c
+  var filterList = document.querySelectorAll('.js-filter-list.list-to-dropdown__select')
+  for (c = 0; c < filterList.length; c++) {
+    filterList[c].addEventListener('change', function () {
+      console.log('filtering')
     })
   }
 
@@ -240,9 +249,9 @@ var buildCard = function (data) {
   }
   var openIfCardRequested = function () {
     var cardId = getUrlParams.parameter('id')
-    if(cardId) {
+    if (cardId) {
       var card = Array.from(document.querySelectorAll('.requests-listing__item'))
-        .filter(c => c.getAttribute('data-id') === cardId)[0]
+        .filter((c) => c.getAttribute('data-id') === cardId)[0]
       openCard(card, function () {
         history.pushState({}, 'from openIfCardRequested', '?')
         closeCard()

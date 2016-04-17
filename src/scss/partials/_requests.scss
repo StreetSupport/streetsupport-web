@@ -89,6 +89,7 @@
   &.is-active,
   &:hover {
     color: $brand-k;
+    text-decoration: underline;
   }
 }
 

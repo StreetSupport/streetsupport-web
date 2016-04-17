@@ -1,24 +1,43 @@
-var resizeTimer
-var $listToSelect
+/**
+* @file list to dropdown - generic convert list to `<select>`
+* @author Daniel Furze <daniel@furzeface.com>
+* @see `./utils.js`
+*/
 
 import utils from './utils'
 
+/**
+* @namespace listToDropdown
+*/
+
+var resizeTimer
+var $listToSelect
+
+/**
+* @function init
+* @memberOf listToDropdown
+*/
 var init = function () {
   // bind events
   document.addEventListener('DOMContentLoaded', function () {
     $listToSelect = document.querySelectorAll('.list-to-dropdown')
 
-    changeToSelect()
+    convertToDropdown()
   })
 
+  // debouncing, sort of
   window.onresize = function () {
     clearTimeout(resizeTimer)
 
-    resizeTimer = setTimeout(changeToSelect, 250)
+    resizeTimer = setTimeout(convertToDropdown, 250)
   }
 }
 
-var changeToSelect = function () {
+/**
+* @function convertToDropdown
+* @memberOf listToDropdown
+*/
+var convertToDropdown = function () {
   for (var i = 0; i < $listToSelect.length; ++i) {
     var $list = $listToSelect[i]
 
@@ -39,6 +58,12 @@ var changeToSelect = function () {
   }
 }
 
+/**
+* @function createDropdown
+* @memberOf listToDropdown
+* @param  {Number} j     - counter to increment
+* @param  {Obj}    $list - DOM obj
+*/
 function createDropdown (j, $list) {
   var id = 'list-to-dropdown__select_' + j
 
@@ -47,12 +72,17 @@ function createDropdown (j, $list) {
     $select.id = id
     $select.classList.add('list-to-dropdown__select')
 
-    var $parent = $list.parentNode
+    var cssClasses = $list.classList
+    cssClasses.forEach(function (cssClass) {
+      if (cssClass !== 'list-to-dropdown') {
+        $select.classList.add(cssClass)
+      }
+    })
 
+    var $parent = $list.parentNode
     $parent.insertBefore($select, $list)
 
     var $listItems = $list.children
-
     for (var k = 0; k < $listItems.length; ++k) {
       var text = $listItems[k].innerText
       var $option = document.createElement('option')
