@@ -63,7 +63,6 @@
     padding: 10px;
     width: 100%;
   }
-
 }
 
 .requests-search__filter__header {
@@ -73,18 +72,26 @@
 .requests-search__filter__list {
   background: #ECECEC;
   border-bottom: 1px solid $brand-k;
-  margin: 5px 0 50px;
+  list-style-type: none;
+  margin: 5px 0 30px;
   padding: 0;
   text-align: center;
+
+  @include mq($from: l) {
+    margin-bottom: 50px;
+  }
 }
 
 .requests-search__filter__item {
   color: #898989;
   cursor: pointer;
-  display: inline-block;
   font-weight: $font-headline-weight;
-  margin: 0 0 0 20px;
   padding: 15px 25px;
+
+  @include mq($from: l) {
+    display: inline-block;
+    margin: 0 0 0 20px;
+  }
 
   &.is-active,
   &:hover {
