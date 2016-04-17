@@ -130,7 +130,7 @@ var buildList = function () {
 
   // Add click listener to each item
   for (b = 0; b < filters.length; b++) {
-    filters[b].addEventListener('click', function (event) {
+    filters[b].addEventListener('click change', function (event) {
       var getFilter = this.getAttribute('data-filter')
       event.preventDefault()
 

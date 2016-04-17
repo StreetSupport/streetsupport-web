@@ -1,6 +1,7 @@
-// global
 var resizeTimer
 var $listToSelect
+
+import utils from './utils'
 
 var init = function () {
   // bind events
@@ -17,13 +18,6 @@ var init = function () {
   }
 }
 
-// utils
-function isSmallscreen () {
-  var width = window.innerWidth
-  return width < 480
-}
-
-// module
 var changeToSelect = function () {
   for (var i = 0; i < $listToSelect.length; ++i) {
     var $list = $listToSelect[i]
@@ -35,7 +29,7 @@ var changeToSelect = function () {
     }
   }
 
-  if (isSmallscreen()) {
+  if (utils.isSmallscreen()) {
     var j
     for (j = 0; j < $listToSelect.length; ++j) {
       var $list = $listToSelect[j]
