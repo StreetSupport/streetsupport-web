@@ -24,7 +24,7 @@ import ForEach from 'lodash/collection/forEach'
 
 import moment from 'moment'
 
-import listToSelect from './list-to-select'
+import listToSelect from './list-to-dropdown'
 
 listToSelect.init()
 
