@@ -200,9 +200,12 @@
 }
 
 .requests-listing__amount {
-  display: inline-block;
-  float: right;
-  margin-top: 16px !important; // @todo wean out
+  color: $brand-k;
+  font-weight: $font-headline-weight;
+  margin: 0;
+  position: absolute;
+  top: 14px;
+  right: 10px;
 }
 
 .requests-detail {
