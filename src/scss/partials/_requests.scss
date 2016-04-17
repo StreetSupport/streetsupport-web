@@ -167,18 +167,14 @@
   width: 100%;
 }
 
-.requests-listing__provider {
-  color: #FFF;
-  font-size: 18px;
-  font-weight: $font-headline-weight;
-  margin: 0 0 5px;
-}
-
-
-.requests-listing__location-description,
-.requests-listing__description {
+.requests-listing__provider,
+.requests-listing__location-description {
   color: $brand-k;
   padding: 0 20px;
+
+  &:empty {
+    display: none;
+  }
 }
 
 .requests-listing__location-description {
@@ -186,7 +182,10 @@
 }
 
 .requests-listing__description {
-  padding-bottom: 10px;
+  color: #FFF;
+  font-size: 18px;
+  font-weight: $font-headline-weight;
+  margin: 0 0 5px;
 }
 
 .requests-listing__amount {

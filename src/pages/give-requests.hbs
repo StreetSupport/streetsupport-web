@@ -1,5 +1,5 @@
 ---
-title: Requests (Prototype) - Street Support
+title: Requests - Street Support
 description: xx
 layout: default.hbs
 permalink: false
@@ -9,7 +9,7 @@ jsBundle: giverequests
 <div id="js-card-search" class="requests-search is-active">
   <div class="block block--intro requests-search__intro">
     <div class="container block__inner">
-      <h1 class="h1 block__header">Requests <small>(Prototype)</small></h1>
+      <h1 class="h1 block__header">Requests</h1>
       <a href="give-help.html">Other ways to give help</a>
     </div>
   </div>
@@ -66,11 +66,11 @@ jsBundle: giverequests
           </p>
           \{{#donationAmountInPounds}}<p class="requests-listing__amount">£\{{{donationAmountInPounds}}}</p>\{{/donationAmountInPounds}}
           <div class="requests-listing__info">
-            <h3 class="requests-listing__provider serviceProviderName">\{{{serviceProviderName}}}</h3>
+            <h3 class="requests-listing__description">\{{{description}}}</h3>
             <p class="requests-listing__date creationDate">Posted: <time datetime={{{creationDate}}}>\{{{creationDate}}}</time></p>
           </div>
+          <p class="requests-listing__provider serviceProviderName">\{{{serviceProviderName}}}</p>
           <p class="requests-listing__location-description locationDescription">\{{{locationDescription}}}</p>
-          <p class="requests-listing__description">\{{{description}}}</p>
         </article>
       </a>
     </li>
