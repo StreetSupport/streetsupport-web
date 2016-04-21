@@ -44,7 +44,7 @@ var GiveItemModel = function () {
       self.needReason(success.data.reason)
       self.needDescription(success.data.description)
     }, function (error) {
-      browser.redirect('404.html')
+      browser.redirect('/404/')
     })
 
   self.submit = function () {
@@ -66,7 +66,7 @@ var GiveItemModel = function () {
           browser.trackEvent('give-item-submit-details', 'submit-form', 'success')
         }
       }, function (error) {
-        browser.redirect('500.html')
+        browser.redirect('/500/')
       })
     } else {
       self.fieldErrors.showAllMessages()

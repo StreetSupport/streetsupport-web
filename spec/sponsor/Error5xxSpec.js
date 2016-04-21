@@ -45,8 +45,8 @@ describe('Give Item Model', function () {
       postToApi.post.restore()
     })
 
-    it('should redirect to 500.html', function () {
-      expect(browserRedirectStub.withArgs('500.html').calledOnce).toBeTruthy()
+    it('should redirect to 500 page', function () {
+      expect(browserRedirectStub.withArgs('/500/').calledOnce).toBeTruthy()
     })
   })
 })

@@ -30,7 +30,7 @@ findHelp.buildCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
 function buildList (url) {
   getApiData.data(url).then(function (result) {
     if (result.status === 'error') {
-      window.location.replace('/find-help.html')
+      window.location.replace('/find-help/')
     }
     var data = result.data
 

@@ -18,7 +18,7 @@ getApiData.data(apiRoutes.needs)
   .then(function (result) {
     var needsFromApi = result.data
     forEach(needsFromApi, function(need) {
-      need.link = 'give-item-submit-details.html?id=' + need.id
+      need.link = '/give-item-submit-details/?id=' + need.id
     })
     var theData = { 'needs': needsFromApi }
     var callback = function () {

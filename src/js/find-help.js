@@ -13,7 +13,7 @@ var FindHelp = function () {
   }
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
-    history.pushState({}, '', pageName + '.html?category=' + self.theCategory +
+    history.pushState({}, '', pageName + '/?category=' + self.theCategory +
       '&' + subCategoryKey + '=' + subCategoryId +
       '&location=' + self.getLocation())
   }
@@ -66,8 +66,8 @@ var FindHelp = function () {
 
     return {
       organisations: data,
-      pageAsFromManchester: pagename + '.html?category=' + self.theCategory + '&location=manchester',
-      pageFromCurrentLocation: pagename + '.html?category=' + self.theCategory + '&location=my-location',
+      pageAsFromManchester: pagename + '/?category=' + self.theCategory + '&location=manchester',
+      pageFromCurrentLocation: pagename + '/?category=' + self.theCategory + '&location=my-location',
       useManchesterAsLocation: hasSetManchesterAsLocation,
       useGeoLocation: !hasSetManchesterAsLocation
     }

@@ -52,7 +52,7 @@ var Model = function () {
           browser.trackEvent('join-street-support', 'submit-form', 'success')
         }
       }, function (error) {
-        browser.redirect('500.html')
+        browser.redirect('/500/')
       })
     } else {
       self.fieldErrors.showAllMessages()

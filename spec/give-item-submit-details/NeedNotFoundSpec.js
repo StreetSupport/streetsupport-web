@@ -48,7 +48,7 @@ describe('Give Item Model', function () {
     })
 
     it('should redirect to 404', function() {
-      expect(browserStub.withArgs('404.html').calledOnce).toBeTruthy()
+      expect(browserStub.withArgs('/404/').calledOnce).toBeTruthy()
     })
   })
 })

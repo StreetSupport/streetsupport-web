@@ -30,7 +30,7 @@ function buildList (url) {
   // Get API data using promise
   getApiData.data(url).then(function (result) {
     if (result.status === 'error') {
-      window.location.replace('/find-help.html')
+      window.location.replace('/find-help/')
     }
     var data = result.data
 
