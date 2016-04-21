@@ -67,8 +67,8 @@ var FindHelp = function () {
 
     return {
       organisations: data,
-      pageAsFromManchester: pagename + '/?category=' + self.theCategory + '&location=manchester',
-      pageFromCurrentLocation: pagename + '/?category=' + self.theCategory + '&location=my-location',
+      pageAsFromManchester: '?category=' + self.theCategory + '&location=manchester',
+      pageFromCurrentLocation: '?category=' + self.theCategory + '&location=my-location',
       useManchesterAsLocation: hasSetManchesterAsLocation,
       useGeoLocation: !hasSetManchesterAsLocation
     }
