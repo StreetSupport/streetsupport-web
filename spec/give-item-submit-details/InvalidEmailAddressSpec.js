@@ -1,3 +1,5 @@
+/* global describe, beforeEach, afterEach, it, expect */
+
 var postToApi = require('../../src/js/post-api-data')
 var getFromApi = require('../../src/js/get-api-data')
 var sinon = require('sinon')
@@ -9,33 +11,30 @@ var needData = require('./needData')
 
 describe('Give Item Model', function () {
   var model
-  var getFromApiStub
   var urlParamStub
   var needId = needData.data.needId
-  var providerId = needData.data.serviceProviderId
-  var browserLoaderStub
 
-  describe('Invalid Email Address', function() {
+  describe('Invalid Email Address', function () {
     var postToApiStub
     beforeEach(function () {
       urlParamStub = sinon.stub(getUrlParams, 'parameter')
       urlParamStub.withArgs('id')
         .returns(needId)
 
-      getFromApiStub = sinon.stub(getFromApi, 'data')
+      sinon.stub(getFromApi, 'data')
         .withArgs(endpoints.needs + needId)
         .returns({
-          then: function(success, error) {
-              success({
-                'status': 'ok',
-                'data': needData.data
-              })
-            }
-          })
+          then: function (success, error) {
+            success({
+              'status': 'ok',
+              'data': needData.data
+            })
+          }
+        })
 
       postToApiStub = sinon.stub(postToApi, 'post')
 
-      browserLoaderStub = sinon.stub(browser, 'loading')
+      sinon.stub(browser, 'loading')
 
       model = new Model()
       model.formModel().email('invalid email address')
@@ -50,7 +49,6 @@ describe('Give Item Model', function () {
       postToApi.post.restore()
       browser.loading.restore()
     })
-
 
     it('should not post form to api', function () {
       expect(postToApiStub.calledOnce).toBeFalsy()

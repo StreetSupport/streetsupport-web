@@ -1,32 +1,28 @@
+/* global describe, beforeEach, afterEach, it, expect */
+
 var postToApi = require('../../src/js/post-api-data')
 var sinon = require('sinon')
 var Model = require('../../src/js/models/SponsorModel')
-var endpoints = require('../../src/js/api')
 var browser = require('../../src/js/browser')
 
 describe('Give Item Model', function () {
   var model
-  var getFromApiStub
-  var urlParamStub
-  var browserLoadingStub
-  var browserLoadedStub
   var browserRedirectStub
-  var browserTrackEventStub
   var postToApiStub
 
-  describe('API returns 5xx error', function() {
+  describe('API returns 5xx error', function () {
     beforeEach(function () {
       postToApiStub = sinon.stub(postToApi, 'post')
       postToApiStub.returns({
-        then: function(success, error) {
+        then: function (success, error) {
           error(new Error('borked'))
         }
       })
 
-      browserLoadingStub = sinon.stub(browser, 'loading')
-      browserLoadedStub = sinon.stub(browser, 'loaded')
-      browserRedirectStub = sinon.stub(browser, 'redirect')
-      browserTrackEventStub = sinon.stub(browser, 'trackEvent')
+      sinon.stub(browser, 'loading')
+      sinon.stub(browser, 'loaded')
+      sinon.stub(browser, 'redirect')
+      sinon.stub(browser, 'trackEvent')
 
       model = new Model()
 

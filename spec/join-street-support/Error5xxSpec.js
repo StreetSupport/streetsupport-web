@@ -1,3 +1,5 @@
+/* global describe, beforeEach, afterEach, it, expect */
+
 var postToApi = require('../../src/js/post-api-data')
 var sinon = require('sinon')
 var Model = require('../../src/js/models/JoinStreetSupportModel')
