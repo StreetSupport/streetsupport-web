@@ -3,13 +3,8 @@ import config from '../foley.json'
 import gulp from 'gulp'
 
 // Specific task modules
-import { argv as argv } from 'yargs'
-import debug from 'gulp-debug'
-import gulpif from 'gulp-if'
 import browserSync from 'browser-sync'
 import Metalsmith from 'metalsmith'
-import rename from 'metalsmith-rename'
-import htmlmin from 'gulp-htmlmin'
 
 // Build Metalsmith
 function buildMetalsmith (callback) {
@@ -28,12 +23,6 @@ function buildMetalsmith (callback) {
     metalsmith.use(plugin(options))
   })
 
-  // Rename file extensions
-  metalsmith.use(rename([
-    [/\.hbs$/, '.html'],
-    [/\.md$/, '.html']
-  ]))
-
   // Build Metalsmith or error out
   metalsmith.build(function (err) {
     if (err) {
@@ -48,16 +37,4 @@ function buildMetalsmith (callback) {
 // Metalsmith task
 gulp.task('metalsmith', function (callback) {
   buildMetalsmith(callback)
-})
-
-// HTML minify task
-gulp.task('html', () => {
-  return gulp.src(config.paths.build + '**/*.html')
-  .pipe(gulpif(argv.debug === true, debug({title: 'HTML Minified:'})))
-  .pipe(gulpif(argv.production === true,
-    htmlmin({
-      collapseWhitespace: true
-    })
-  ))
-  .pipe(gulp.dest(config.paths.build))
 })

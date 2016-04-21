@@ -11,15 +11,20 @@ const criticalcss = critical.stream
 
 // HTML minify task
 gulp.task('crticalcss', () => {
-  return gulp.src(config.paths.build + '/*.html')
+  return gulp.src(config.paths.build + '**/*.html')
   .pipe(gulpif(argv.debug === true, debug({title: 'CSS Inlined:'})))
   .pipe(criticalcss({
-    base: config.paths.build + '/',
-    width: 320,
-    height: 480,
+    base: config.paths.build,
     minify: true,
     extract: false,
-    inline: true
+    inline: true,
+    dimensions: [{
+      width: 320,
+      height: 480
+    }, {
+      width: 1200,
+      height: 900
+    }]
   }))
   .pipe(gulp.dest(config.paths.build))
 })

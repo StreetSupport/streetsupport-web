@@ -20,7 +20,7 @@ Please work in the develop branch first, and use feature branches for significan
 * Navigate to the workflow folder in command line Terminal,
 * Run: `npm i`.
 
-See [https://github.com/PJL101/foley](https://github.com/PJL101/foley) for more information about the workflow. This project uses version 0.2.2.
+See [https://github.com/fephil/foley](https://github.com/fephil/foley) for more information about the workflow. This project uses version 0.3.5.
 
 ### Optional Installs
 
@@ -48,6 +48,7 @@ Run these tasks in your command line Terminal:
 * The `gulp auditcode` task runs various linting on the project source files.
 * The `--production` flag builds minified assets with no sourcemaps,
 * The `--debug` flag shows the files being created in each task (if the task has a pipe).
+* The `gulp test` task builds the website, starts up a sever and runs visual regression tests.
 
 ## Frontend Conventions
 

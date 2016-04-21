@@ -12,62 +12,58 @@ const tasks = requireDir(__dirname + '/tasks') // eslint-disable-line
 // Watch task
 gulp.task('watch', () => {
   gulp.watch(config.paths.scss + '**/*.scss', ['scss'])
-  gulp.watch(config.paths.js + '**/*.js', ['run-jasmine', 'webpack'])
+  gulp.watch(config.paths.spec + '**/*[Ss]pec.js', ['jasmine'])
+  gulp.watch(config.paths.js + '**/*.js', ['jasmine', 'jslint', 'webpack'])
   gulp.watch(config.paths.img + '{,**/}*.{png,jpg,gif,svg}', ['img'])
-  gulp.watch(config.paths.icons + '**/*.svg', ['svgicon'])
-  gulp.watch([config.paths.fonts + '**/*', config.paths.files + '**/*'] ['copy'])
-  gulp.watch(config.paths.specs + '**/*[Ss]pec.js', ['run-jasmine'])
+  gulp.watch(config.paths.icons + '**/*.svg', ['svgsprite'])
+  gulp.watch([config.paths.fonts + '**/*', config.paths.files + '**/*'], ['copy'])
   gulp.watch([config.paths.layouts + '**/*.hbs', config.paths.pages + '**/*.hbs', config.paths.partials + '**/*.hbs'], ['metalsmith'])
 })
 
-// Copy Web.config
-gulp.task('copywebconfig', function() {
-   gulp.src('./Web.config')
-   .pipe(gulp.dest('./_dist/'))
-})
-
-// JS Dev Watch task
-gulp.task('dev-watch', () => {
-  gulp.watch(config.paths.specs + '**/*[Ss]pec.js', ['run-jasmine'])
-  gulp.watch(config.paths.js + '**/*.js', ['run-jasmine'])
+// jsdev Watch task
+gulp.task('jsdevwatch', () => {
+  gulp.watch(config.paths.spec + '**/*[Ss]pec.js', ['jasmine', 'specsjslint'])
+  gulp.watch(config.paths.js + '**/*.js', ['jasmine'])
 })
 
 // Build website, either with development or minified assets and run server with live reloading
-gulp.task('default', callback => {
+gulp.task('default', (callback) => {
   runSequence(
-    'run-jasmine',
+    'jasmine',
+    'jslint',
     'clean',
     'metalsmith',
-    ['html', 'svgicon', 'scss', 'webpack', 'img', 'copy'],
+    ['htmlmin', 'svgsprite', 'scss', 'webpack', 'img', 'copy'],
     ['browsersync', 'watch'],
     callback
   )
 })
 
-// Run tests and watch js/spec files
-gulp.task('dev', callback => {
-  runSequence(
-    'run-jasmine',
-    'dev-watch',
-    callback
-  )
-})
-
 // Build website, either with development or minified assets depending on flag
-gulp.task('deploy', callback => {
+gulp.task('deploy', (callback) => {
   runSequence(
-    'run-jasmine',
+    'jasmine',
+    'jslint',
     'clean',
     'metalsmith',
-    ['html', 'svgicon', 'scss', 'webpack', 'img', 'copy'],
+    ['htmlmin', 'svgsprite', 'scss', 'webpack', 'img', 'copy'],
     'crticalcss',
-    'copywebconfig',
     callback
   )
 })
 
-// Run the audit task to check the code
-gulp.task('auditcode', callback => {
+// Run tests and watch js/spec files
+gulp.task('jsdev', (callback) => {
+  runSequence(
+    'jasmine',
+    'specsjslint',
+    'jsdevwatch',
+    callback
+  )
+})
+
+// Run the audit task to check code standards
+gulp.task('auditcode', (callback) => {
   runSequence(
     'scsslint',
     'jslint',
@@ -75,24 +71,11 @@ gulp.task('auditcode', callback => {
   )
 })
 
-// Run the audit task to check the built website for accessibility
-// NOTE: Not used yet
-/*
-gulp.task('auditsite', callback => {
+// Run the test task to visually test the website -
+// @note run when localhost is already serving the website
+gulp.task('test', (callback) => {
   runSequence(
-    'deploy',
+   'visualTest',
     callback
   )
 })
-*/
-
-// Run the audit task to check performance using ...
-// NOTE: Not used yet
-/*
-gulp.task('auditperf', callback => {
-  runSequence(
-    'deploy',
-    callback
-  )
-})
-*/

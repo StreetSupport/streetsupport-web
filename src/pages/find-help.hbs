@@ -28,7 +28,7 @@ pageName: findhelp
             <h2 class="h3">Recently homeless?</h2>
           </div>
           <div class="split__element">
-            <a class="btn btn--brand-d" href="emergency-help.html">
+            <a class="btn btn--brand-g" href="emergency-help.html">
               <span class="btn__text">Emergency Advice</span>
             </a>
           </div>
@@ -36,10 +36,15 @@ pageName: findhelp
 
         <div class="result-grid">
           \{{#categories}}
-            <a class="btn btn--brand-d result-grid__item" href="\{{page}}.html?category=\{{key}}">
-              <span class="btn__icon icon-\{{key}}"></span>
-              <span class="btn__text">\{{name}}</span>
-            </a>
+            <span class="cta">
+              <a class="btn btn--brand-d" href="\{{page}}.html?category=\{{key}}">
+                <span class="btn__icon">
+                  <svg class="svg-\{{key}}-dims"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#\{{key}}"></use></svg>
+                  <span class="btn__overlay"></span>
+                </span>
+                <span class="btn__text">\{{name}}</span>
+              </a>
+            </span>
           \{{/categories}}
         </div>
 
@@ -47,9 +52,11 @@ pageName: findhelp
           <div class="split__element">
             <h2 class="h3">Looking for an organisation?</h2>
           </div>
-          <a class="btn btn--brand-d split__element" href="all-service-providers.html">
-            <span class="btn__text">See All</span>
-          </a>
+          <div class="split__element">
+            <a class="btn btn--brand-d" href="all-service-providers.html">
+              <span class="btn__text">All organisations</span>
+            </a>
+          </div>
         </div>
 
         <div class="split">
@@ -58,7 +65,7 @@ pageName: findhelp
           </div>
           <div class="split__element">
             <a class="btn btn--brand-d" href="contact.html">
-              <span class="btn__text">Tell Us</span>
+              <span class="btn__text">Tell us</span>
             </a>
           </div>
         </div>

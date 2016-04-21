@@ -9,11 +9,11 @@
     "icons": "src/icons/",
     "img": "src/img/",
     "js": "src/js/",
+    "spec": "spec/",
     "data": "src/data/",
     "layouts": "src/layouts/",
     "pages": "src/pages/",
-    "partials": "src/partials/",
-    "specs": "spec/"
+    "partials": "src/partials/"
   },
   "autoprefixer": {
     "browsers": ["last 2 versions", "IE >= 10"]
@@ -40,12 +40,11 @@
       "metalsmith-layouts": {
         "engine": "handlebars",
         "directory": "./src/layouts",
-        "partials": "./src/partials"
+        "partials": "./src/partials",
+        "rename": true
       },
       "metalsmith-in-place": {
-        "engine": "handlebars",
-        "pattern": "**/*.hbs",
-        "partials": "./src/partials"
+        "engine": "handlebars"
       }
     }
   }
