@@ -5,7 +5,7 @@ var sinon = require('sinon')
 var Model = require('../../src/js/models/SponsorModel')
 var browser = require('../../src/js/browser')
 
-describe('Give Item Model', function () {
+describe('Sponsor Model', function () {
   var model
   var browserRedirectStub
   var postToApiStub
@@ -21,8 +21,8 @@ describe('Give Item Model', function () {
 
       sinon.stub(browser, 'loading')
       sinon.stub(browser, 'loaded')
-      sinon.stub(browser, 'redirect')
       sinon.stub(browser, 'trackEvent')
+      browserRedirectStub = sinon.stub(browser, 'redirect')
 
       model = new Model()
 

@@ -17,9 +17,8 @@ describe('Give Item Model', function () {
   var browserLoadedStub
   var browserTrackEventStub
   var needId = needData.data.needId
-  var providerId = needData.data.serviceProviderId
 
-  describe('Happy Path', function() {
+  describe('Happy Path', function () {
     beforeEach(function () {
       urlParamStub = sinon.stub(getUrlParams, 'parameter')
       urlParamStub.withArgs('id')
@@ -28,13 +27,13 @@ describe('Give Item Model', function () {
       getFromApiStub = sinon.stub(getFromApi, 'data')
         .withArgs(endpoints.needs + needId)
         .returns({
-          then: function(success, error) {
-              success({
-                'status': 'ok',
-                'data': needData.data
-              })
-            }
-          })
+          then: function (success, error) {
+            success({
+              'status': 'ok',
+              'data': needData.data
+            })
+          }
+        })
 
       browserLoadingStub = sinon.stub(browser, 'loading')
       browserLoadedStub = sinon.stub(browser, 'loaded')
@@ -81,7 +80,7 @@ describe('Give Item Model', function () {
       beforeEach(function () {
         postToApiStub = sinon.stub(postToApi, 'post')
         postToApiStub.returns({
-          then: function(success, error) {
+          then: function (success, error) {
             success({
               'status': 'created',
               'statusCode': 201

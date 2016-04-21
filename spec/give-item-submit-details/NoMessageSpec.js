@@ -14,7 +14,7 @@ describe('Give Item Model', function () {
   var urlParamStub
   var needId = needData.data.needId
 
-  describe('No Message', function() {
+  describe('No Message', function () {
     var postToApiStub
     beforeEach(function () {
       urlParamStub = sinon.stub(getUrlParams, 'parameter')
@@ -24,13 +24,13 @@ describe('Give Item Model', function () {
       sinon.stub(getFromApi, 'data')
         .withArgs(endpoints.needs + needId)
         .returns({
-          then: function(success, error) {
-              success({
-                'status': 'ok',
-                'data': needData.data
-              })
-            }
-          })
+          then: function (success, error) {
+            success({
+              'status': 'ok',
+              'data': needData.data
+            })
+          }
+        })
 
       postToApiStub = sinon.stub(postToApi, 'post')
 
@@ -48,7 +48,6 @@ describe('Give Item Model', function () {
       postToApi.post.restore()
       browser.loading.restore()
     })
-
 
     it('should not post form to api', function () {
       expect(postToApiStub.calledOnce).toBeFalsy()

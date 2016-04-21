@@ -1,21 +1,19 @@
+/* global describe, beforeEach, afterEach, it, expect */
+
 var postToApi = require('../../src/js/post-api-data')
 var sinon = require('sinon')
 var Model = require('../../src/js/models/SponsorModel')
-var endpoints = require('../../src/js/api')
 var browser = require('../../src/js/browser')
 
 describe('Sponsor Model', function () {
   var model
-  var browserLoadingStub
-  var browserLoadedStub
-  var browserTrackEventStub
   var postToApiStub
 
-  describe('API returns 400 error', function() {
+  describe('API returns 400 error', function () {
     beforeEach(function () {
       postToApiStub = sinon.stub(postToApi, 'post')
       postToApiStub.returns({
-        then: function(success, error) {
+        then: function (success, error) {
           success({
             'status': 'error',
             'statusCode': 400,
@@ -24,9 +22,9 @@ describe('Sponsor Model', function () {
         }
       })
 
-      browserLoadingStub = sinon.stub(browser, 'loading')
-      browserLoadedStub = sinon.stub(browser, 'loaded')
-      browserTrackEventStub = sinon.stub(browser, 'trackEvent')
+      sinon.stub(browser, 'loading')
+      sinon.stub(browser, 'loaded')
+      sinon.stub(browser, 'trackEvent')
 
       model = new Model()
 
