@@ -13,7 +13,7 @@ var FindHelp = function () {
   }
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
-    history.pushState({}, '', pageName + '/?category=' + self.theCategory +
+    history.pushState({}, '', '?category=' + self.theCategory +
       '&' + subCategoryKey + '=' + subCategoryId +
       '&location=' + self.getLocation())
   }
