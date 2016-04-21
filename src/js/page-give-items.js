@@ -17,7 +17,7 @@ var loading = new Spinner().spin(spin)
 getApiData.data(apiRoutes.needs)
   .then(function (result) {
     var needsFromApi = result.data
-    forEach(needsFromApi, function(need) {
+    forEach(needsFromApi, function (need) {
       need.link = '/give-item-submit-details/?id=' + need.id
     })
     var theData = { 'needs': needsFromApi }

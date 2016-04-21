@@ -55,7 +55,7 @@ function buildList (url) {
         })
       })
 
-      var subCategoryIndexToOpen = findIndex(data.subCategories, function(subCat) {
+      var subCategoryIndexToOpen = findIndex(data.subCategories, function (subCat) {
         return subCat.key === urlParameter.parameter('sub-category')
       })
 

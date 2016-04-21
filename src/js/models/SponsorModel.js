@@ -28,26 +28,26 @@ var Model = function () {
   var postEndpoint = endpoints.offerSponsorship
 
   self.submit = function () {
-    if(self.formModel.isValid()) {
+    if (self.formModel.isValid()) {
       browser.loading()
-      postApiData.post(postEndpoint,
-      {
-        'Email': self.formModel().email(),
-        'Message': self.formModel().message(),
-        'IsOptedIn': self.formModel().isOptedIn()
-      }).then(function (success) {
-        browser.loaded()
-        if(success.status === 'error') {
-          self.isFormSubmitFailure(true)
-          self.apiErrors(success.messages)
-        }else {
-          self.isFormSubmitSuccessful(true)
-          self.isFormSubmitFailure(false)
-          browser.trackEvent('offer-sponsorship', 'submit-form', 'success')
-        }
-      }, function (error) {
-        browser.redirect('/500/')
-      })
+      postApiData
+        .post(postEndpoint, {
+          'Email': self.formModel().email(),
+          'Message': self.formModel().message(),
+          'IsOptedIn': self.formModel().isOptedIn()
+        }).then(function (success) {
+          browser.loaded()
+          if (success.status === 'error') {
+            self.isFormSubmitFailure(true)
+            self.apiErrors(success.messages)
+          } else {
+            self.isFormSubmitSuccessful(true)
+            self.isFormSubmitFailure(false)
+            browser.trackEvent('offer-sponsorship', 'submit-form', 'success')
+          }
+        }, function () {
+          browser.redirect('/500/')
+        })
     } else {
       self.fieldErrors.showAllMessages()
     }
