@@ -1,3 +1,5 @@
+/* global XMLHttpRequest */
+
 var Q = require('q')
 
 var postApiData = function (url, data) {

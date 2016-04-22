@@ -14,7 +14,6 @@ var findIndex = require('lodash/array/findIndex')
 
 var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
-var categoryEndpoint = require('./category-endpoint')
 var templating = require('./template-render')
 var Spinner = require('spin.js')
 var analytics = require('./analytics')
@@ -30,7 +29,7 @@ findHelp.buildCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
 function buildList (url) {
   getApiData.data(url).then(function (result) {
     if (result.status === 'error') {
-      window.location.replace('/find-help.html')
+      window.location.replace('/find-help/')
     }
     var data = result.data
 
@@ -53,7 +52,7 @@ function buildList (url) {
         })
       })
 
-      var dayIndexToOpen = findIndex(data.daysServices, function(day) {
+      var dayIndexToOpen = findIndex(data.daysServices, function (day) {
         return day.name === urlParameter.parameter('day')
       })
 

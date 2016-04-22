@@ -43,31 +43,32 @@ var GiveItemModel = function () {
       self.providerName(success.data.serviceProviderName)
       self.needReason(success.data.reason)
       self.needDescription(success.data.description)
-    }, function (error) {
-      browser.redirect('404.html')
+    }, function () {
+      browser.redirect('/404/')
     })
 
   self.submit = function () {
-    if(self.formModel.isValid()) {
+    if (self.formModel.isValid()) {
       browser.loading()
-      postApiData.post(postEndpoint,
-      {
-        'Email': self.formModel().email(),
-        'Message': self.formModel().message(),
-        'IsOptedIn': self.formModel().isOptedIn()
-      }).then(function (success) {
-        browser.loaded()
-        if(success.status === 'error') {
-          self.isFormSubmitFailure(true)
-          self.apiErrors(success.messages)
-        }else {
-          self.isFormSubmitSuccessful(true)
-          self.isFormSubmitFailure(false)
-          browser.trackEvent('give-item-submit-details', 'submit-form', 'success')
-        }
-      }, function (error) {
-        browser.redirect('500.html')
-      })
+      postApiData
+        .post(postEndpoint, {
+          'Email': self.formModel().email(),
+          'Message': self.formModel().message(),
+          'IsOptedIn': self.formModel().isOptedIn()
+        })
+        .then(function (success) {
+          browser.loaded()
+          if (success.status === 'error') {
+            self.isFormSubmitFailure(true)
+            self.apiErrors(success.messages)
+          } else {
+            self.isFormSubmitSuccessful(true)
+            self.isFormSubmitFailure(false)
+            browser.trackEvent('give-item-submit-details', 'submit-form', 'success')
+          }
+        }, function () {
+          browser.redirect('/500/')
+        })
     } else {
       self.fieldErrors.showAllMessages()
     }

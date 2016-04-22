@@ -15,7 +15,7 @@ var init = function (showFirst, indexToOpen, listener) {
   if (!document.querySelector || !document.querySelectorAll || !document.body.classList) {
     return
   }
-  if(listener !== undefined) {
+  if (listener !== undefined) {
     myListener = listener
   }
 
@@ -28,7 +28,7 @@ var init = function (showFirst, indexToOpen, listener) {
   if (showFirst || itemCount === 1) {
     var firstHeader = headers[0]
     open(firstHeader, el, true)
-  }else if(indexToOpen >= 0) {
+  } else if (indexToOpen >= 0) {
     open(headers[indexToOpen], el, true)
   }
 

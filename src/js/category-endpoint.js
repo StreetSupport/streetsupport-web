@@ -7,7 +7,6 @@ var getEndpointUrl = function (categoryUrl, theLocation) {
   self.deferred = Q.defer()
 
   if (theLocation.length) {
-
     var locations = [
       {
         'key': 'manchester',
@@ -41,9 +40,7 @@ var getEndpointUrl = function (categoryUrl, theLocation) {
       var longitude = position.coords.longitude
       var locationUrl = categoryUrl += '/long/' + longitude + '/lat/' + latitude
       self.deferred.resolve(locationUrl)
-    }).fail(function (error) {
-      console.error('GEOLOCATION ERROR: ' + error)
-      console.log('location for error '+ categoryUrl)
+    }).fail(function () {
       self.deferred.resolve(categoryUrl)
     })
   }

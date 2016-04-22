@@ -1,7 +1,7 @@
 var argv = require('yargs').argv
 var path = require('path')
 var webpack = require('webpack')
-var CommonsChunkPlugin = require(__dirname + '/node_modules/webpack/lib/optimize/CommonsChunkPlugin')
+var CommonsChunkPlugin = require(path.join(__dirname, '/node_modules/webpack/lib/optimize/CommonsChunkPlugin'))
 
 // Create plugins array
 var plugins = [
@@ -15,19 +15,18 @@ if (argv.production) {
 
 module.exports = {
   entry: {
-    home: __dirname + '/src/js/page-generic',
-    generic: __dirname + '/src/js/page-generic',
-    findhelp: __dirname + '/src/js/page-find-help',
-    category: __dirname + '/src/js/page-category',
-    categorybyday: __dirname + '/src/js/page-category-by-day',
-    organisation: __dirname + '/src/js/page-organisation',
-    allserviceproviders: __dirname + '/src/js/page-all-service-providers',
-    giverequests: __dirname + '/src/js/page-give-requests',
-    giveitems: __dirname + '/src/js/page-give-items',
-    giveitemsubmitdetails: __dirname + '/src/js/page-give-item-submit-details',
-    sponsor: __dirname + '/src/js/page-sponsor',
-    volunteer: __dirname + '/src/js/page-volunteer',
-    joinstreetsupport: __dirname + '/src/js/page-join-street-support'
+    home: path.join(__dirname, '/src/js/page-generic'),
+    generic: path.join(__dirname, '/src/js/page-generic'),
+    findhelp: path.join(__dirname, '/src/js/page-find-help'),
+    category: path.join(__dirname, '/src/js/page-category'),
+    categorybyday: path.join(__dirname, '/src/js/page-category-by-day'),
+    organisation: path.join(__dirname, '/src/js/page-organisation'),
+    allserviceproviders: path.join(__dirname, '/src/js/page-all-service-providers'),
+    giveitems: path.join(__dirname, '/src/js/page-give-items'),
+    giveitemsubmitdetails: path.join(__dirname, '/src/js/page-give-item-submit-details'),
+    sponsor: path.join(__dirname, '/src/js/page-sponsor'),
+    volunteer: path.join(__dirname, '/src/js/page-volunteer'),
+    joinstreetsupport: path.join(__dirname, '/src/js/page-join-street-support')
   },
   output: {
     path: path.join(__dirname, '/_dist/assets/js/'),

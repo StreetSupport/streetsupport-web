@@ -1,0 +1,111 @@
+---
+title: Category - Street Support
+description: Street support makes it easier to help homeless people. Here are services available near you.
+layout: default.hbs
+permalink: false
+jsBundle: category
+---
+
+{{> no-js}}
+
+<div id="js-category-result-output" class="template"></div>
+
+<div id="spin"></div>
+
+<script id="js-category-no-results-result-tpl" type="text/template">
+  <div class="block block--intro">
+    <div class="container block__inner">
+      \{{#organisations}}
+      <h2 class="h1 block__header">\{{name}}</h2>
+      \{{/organisations}}
+      <div class="block__content">
+        {{> location-description}}
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="container block__inner">
+      <div class="block__content">
+        <div class="result-detail">
+          <p>We can't find any services listed near your current location.</p>
+          <p>We are currently trialing Street Support in Manchester UK, so if you are trying to access it from elsewhere you won't yet be able to find service information for your city.</p>
+          <p>We will be rolling out across the UK and beyond in 2016, so if you are interested in Street Support coming to your city, <a href="/contact/">please get in touch</a>.</p>
+          <p>If you would like to see how it works, <a href="\{{pageAsFromManchester}}">click here to set your location to Manchester</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script id="js-category-result-tpl" type="text/template">
+  <div class="block block--intro">
+    <div class="container block__inner">
+      \{{#organisations}}
+      <h2 class="h1 block__header">\{{name}}</h2>
+      \{{/organisations}}
+      <div class="block__content">
+        {{> location-description}}
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="container block__inner">
+      <div class="block__content">
+        <div class="result-detail">
+          \{{#organisations}}
+          <div class="accordion js-accordion">
+            <div class="accordion__inner"
+            \{{#subCategories}}
+            <button id="\{{key}}" class="h3 accordion__header js-header">\{{name}}<span class="icon icon-plus"></span></button>
+            <div class="accordion__item js-item" id="\{{key}}">
+              <div class="accordion__inner">
+                \{{#serviceProviders}}
+                <div class="result-detail__item">
+                  <h3 class="h2 result-detail__header"><a href="/organisation/?organisation=\{{key}}">\{{name}}</a></h3>
+                  \{{#tags}}
+                  <p>You must be: <span class="result-detail__tags-item">\{{tags}}</span></p>
+                  \{{/tags}}
+                  <p class="result-detail__description">\{{{serviceInfo}}}</p>
+                  <h2 class="h3">Location</h2>
+                  \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
+                  \{{#address}}
+                  \{{#street}}
+                  <ul class="result-detail__address-list">
+                    <li class="result-detail__address-item">\{{#street}} \{{street}}, \{{/street}} \{{#street1}} \{{street1}}, \{{/street1}} \{{#street2}} \{{street2}}, \{{/street2}}
+                      \{{#street3}} \{{street3}}, \{{/street3}}</li>
+                      <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
+                      <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a></li>
+                    </ul>
+                    \{{/street}}
+                    \{{/address}}
+                    <h2 class="h3">Opening Times</h2>
+                    <dl class="result-detail__times-list">
+                     \{{#openingTimes}}
+                     <dt class="result-detail__times-title">\{{day}}</dt>
+                     <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
+                     \{{/openingTimes}}
+                   </dl>
+                   <a class="btn btn--brand-d result-detail__btn" href="/organisation/?organisation=\{{key}}">
+                    <span class="btn__text">More information about \{{name}}</span>
+                  </a>
+                </div>
+                \{{/serviceProviders}}
+              </div>
+            </div>
+            \{{/subCategories}}
+          </div>
+        </div>
+        \{{/organisations}}
+      </div>
+
+      <p>If you see something missing, incorrect or incomplete, or you would like to know more, please <a href="/contact/">get in touch</a>.</p>
+
+      {{> social-share}}
+
+    </div>
+  </div>
+</div>
+</div>
+</script>
