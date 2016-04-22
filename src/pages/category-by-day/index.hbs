@@ -57,36 +57,38 @@ jsBundle: categorybyday
         <div class="accordion accordion--day js-accordion">
           \{{#daysServices}}
           <button id="\{{{name}}}" class="h3 accordion__header result__header js-header">\{{{name}}}<span class="icon icon-plus"></span></button>
-            <div class="accordion__inner accordion__item js-item">
-              <div class="result-detail__times-list">
-                \{{#serviceProviders}}
-                <div class="result-detail__item">
-                  <div class="result-detail__times-title h2">\{{#openingTime}}
-                    \{{startTime}} - \{{endTime}}
-                    \{{/openingTime}}
+            <div class="accordion__item js-item">
+              <div class="accordion__inner">
+                <div class="result-detail__times-list">
+                  \{{#serviceProviders}}
+                  <div class="result-detail__item">
+                    <div class="result-detail__times-title h2">\{{#openingTime}}
+                      \{{startTime}} - \{{endTime}}
+                      \{{/openingTime}}
+                    </div>
+                    <div class="result-detail__times-item">
+                      <ul>
+                        <li>\{{#openingTime}} \{{{serviceInfo}}} \{{/openingTime}}</li>
+                        \{{#tags}}
+                        <li>You must be: <span class="result-detail__tags-item">\{{tags}}</span></li>
+                        \{{/tags}}
+                        <li>
+                          <a href="/organisation/?organisation=\{{key}}">\{{{name}}}</a>
+                          \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
+                          \{{#address.street}}
+                            \{{#address.street}} \{{address.street}}, \{{/address.street}}
+                            \{{#address.street1}} \{{address.street1}}, \{{/address.street1}}
+                            \{{#address.street2}} \{{address.street2}}, \{{/address.street2}}
+                            \{{#address.street3}} \{{address.street3}}, \{{/address.street3}}
+                            \{{#address.city}} \{{address.city}}. \{{/address.city}}
+                            \{{address.postcode}} - <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">Map</a>
+                          \{{/address.street}}
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                  <div class="result-detail__times-item">
-                    <ul>
-                      <li>\{{#openingTime}} \{{{serviceInfo}}} \{{/openingTime}}</li>
-                      \{{#tags}}
-                      <li>You must be: <span class="result-detail__tags-item">\{{tags}}</span></li>
-                      \{{/tags}}
-                      <li>
-                        <a href="/organisation/?organisation=\{{key}}">\{{{name}}}</a>
-                        \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
-                        \{{#address.street}}
-                          \{{#address.street}} \{{address.street}}, \{{/address.street}}
-                          \{{#address.street1}} \{{address.street1}}, \{{/address.street1}}
-                          \{{#address.street2}} \{{address.street2}}, \{{/address.street2}}
-                          \{{#address.street3}} \{{address.street3}}, \{{/address.street3}}
-                          \{{#address.city}} \{{address.city}}. \{{/address.city}}
-                          \{{address.postcode}} - <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">Map</a>
-                        \{{/address.street}}
-                      </li>
-                    </ul>
-                  </div>
+                  \{{/serviceProviders}}
                 </div>
-                \{{/serviceProviders}}
               </div>
             </div>
           \{{/daysServices}}
