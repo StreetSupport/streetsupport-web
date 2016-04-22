@@ -16,7 +16,7 @@ jsBundle: category
   <div class="block block--intro">
     <div class="container block__inner">
       \{{#organisations}}
-      <h2 class="h1 block__header">\{{name}}</h2>
+      <h2 class="h1 block__header">\{{{name}}}</h2>
       \{{/organisations}}
       <div class="block__content">
         {{> location-description}}
@@ -42,7 +42,7 @@ jsBundle: category
   <div class="block block--intro">
     <div class="container block__inner">
       \{{#organisations}}
-      <h2 class="h1 block__header">\{{name}}</h2>
+      <h2 class="h1 block__header">\{{{name}}}</h2>
       \{{/organisations}}
       <div class="block__content">
         {{> location-description}}
@@ -56,14 +56,14 @@ jsBundle: category
         <div class="result-detail">
           \{{#organisations}}
           <div class="accordion js-accordion">
-            <div class="accordion__inner"
+            <div class="accordion__inner">
             \{{#subCategories}}
-            <button id="\{{key}}" class="h3 accordion__header js-header">\{{name}}<span class="icon icon-plus"></span></button>
+            <button id="\{{key}}" class="h3 accordion__header js-header">\{{{name}}}<span class="icon icon-plus"></span></button>
             <div class="accordion__item js-item" id="\{{key}}">
               <div class="accordion__inner">
                 \{{#serviceProviders}}
                 <div class="result-detail__item">
-                  <h3 class="h2 result-detail__header"><a href="/organisation/?organisation=\{{key}}">\{{name}}</a></h3>
+                  <h3 class="h2 result-detail__header"><a href="/organisation/?organisation=\{{key}}">\{{{name}}}</a></h3>
                   \{{#tags}}
                   <p>You must be: <span class="result-detail__tags-item">\{{tags}}</span></p>
                   \{{/tags}}
@@ -88,7 +88,7 @@ jsBundle: category
                      \{{/openingTimes}}
                    </dl>
                    <a class="btn btn--brand-d result-detail__btn" href="/organisation/?organisation=\{{key}}">
-                    <span class="btn__text">More information about \{{name}}</span>
+                    <span class="btn__text">More information about \{{{name}}}</span>
                   </a>
                 </div>
                 \{{/serviceProviders}}

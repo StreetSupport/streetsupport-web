@@ -56,7 +56,7 @@ jsBundle: categorybyday
         \{{#organisations}}
         <div class="accordion accordion--day js-accordion">
           \{{#daysServices}}
-          <button id="\{{name}}" class="h3 accordion__header result__header js-header">\{{name}}<span class="icon icon-plus"></span></button>
+          <button id="\{{{name}}}" class="h3 accordion__header result__header js-header">\{{{name}}}<span class="icon icon-plus"></span></button>
             <div class="accordion__inner accordion__item js-item">
               <div class="result-detail__times-list">
                 \{{#serviceProviders}}
@@ -72,7 +72,7 @@ jsBundle: categorybyday
                       <li>You must be: <span class="result-detail__tags-item">\{{tags}}</span></li>
                       \{{/tags}}
                       <li>
-                        <a href="/organisation/?organisation=\{{key}}">\{{name}}</a>
+                        <a href="/organisation/?organisation=\{{key}}">\{{{name}}}</a>
                         \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
                         \{{#address.street}}
                           \{{#address.street}} \{{address.street}}, \{{/address.street}}
