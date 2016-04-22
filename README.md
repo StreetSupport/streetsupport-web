@@ -45,7 +45,9 @@ Run these tasks in your command line Terminal:
 
 * The `gulp` task builds the website, watches for changes and starts up a sever,
 * The `gulp deploy` task builds the website without watching for changes or running the server,
-* The `gulp auditcode` task runs various linting on the project source files.
+* The `gulp auditcode` task runs various linting on the project source files,
+* The `gulp visualtest` task builds the website, starts up a sever and runs visual regression tests,
+* The `gulp jsdev` task only checks and builds javascript with associated tests,
 * The `--production` flag builds minified assets with no sourcemaps,
 * The `--debug` flag shows the files being created in each task (if the task has a pipe).
 * The `gulp test` task builds the website, starts up a sever and runs visual regression tests.
