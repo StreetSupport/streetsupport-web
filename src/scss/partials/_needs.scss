@@ -5,10 +5,6 @@
 
     @include span(full);
 
-    @include mq($from: m) {
-      @include span(4 of $grid-column);
-    }
-
     @include mq($from: l) {
       @include span(6 of $grid-column);
     }
@@ -19,11 +15,6 @@
     text-align: left;
 
     @include span(full);
-
-    @include mq($from: m) {
-      @include span(4 of $grid-column);
-      text-align: right;
-    }
 
     @include mq($from: l) {
       @include span(2 of $grid-column);
