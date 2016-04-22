@@ -44,7 +44,7 @@ var trackLink = function (el) {
       'transport': 'beacon',
       'hitCallback': redirect
     })
-    setTimeout(redirect, 2000);
+    setTimeout(redirect, 2000)
   }
 }
 
