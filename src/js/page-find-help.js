@@ -39,5 +39,3 @@ getApiData
 
     templating.renderTemplate('js-category-list-tpl', theData, 'js-category-list-output', callback)
   })
-
-socialShare.init()
