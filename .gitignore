@@ -17,9 +17,7 @@ npm-debug.log
 
 # Project Specific #
 ######################
+backstop_data
 *.orig
 *sublime*
-
-# Test generated files #
-######################
 test/visual/results

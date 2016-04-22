@@ -46,7 +46,7 @@ gulp.task('reference', () => {
 })
 
 // Runs the tests
-gulp.task('visualTest', () => {
+gulp.task('visualTesting', () => {
   exec('cd node_modules/backstopjs && gulp test', function (error, stdout, stderr) {
     console.log('stdout: ' + stdout)
 

@@ -6,8 +6,8 @@ import gulp from 'gulp'
 import browserSync from 'browser-sync'
 import Metalsmith from 'metalsmith'
 
-// Build Metalsmith
-function buildMetalsmith (callback) {
+// Metalsmith task
+gulp.task('metalsmith', function (callback) {
   // Metalsmith instance and options
   var metalsmith = new Metalsmith('.').clean(false)
   var plugins = config.metalsmith.plugins || {}
@@ -32,9 +32,4 @@ function buildMetalsmith (callback) {
     browserSync.reload()
     callback()
   })
-}
-
-// Metalsmith task
-gulp.task('metalsmith', function (callback) {
-  buildMetalsmith(callback)
 })
