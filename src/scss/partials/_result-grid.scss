@@ -1,6 +1,6 @@
 .result-grid {
   @include cf();
-  margin: 20px 0 40px 0;
+  padding: 0 0 20px 0;
 
   .btn__text {
     @include mq($from: xs) {
