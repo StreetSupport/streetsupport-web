@@ -13,15 +13,24 @@ pageName: findhelp
 <div id="spin"></div>
 
 <script id="js-category-list-tpl" type="text/template">
-  <div class="block block--intro">
-    <div class="container block__inner">
+  <div class="block block--breadcrumbs">
+    <div class="container">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item"><a href="/">Home</a></li>
+        <li class="breadcrumbs__item">Find Help</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="block block--header">
+    <div class="container">
       <h1 class="h1 block__header">Find Help</h1>
-      <p>Find nearby services to meet the specific needs of someone who is homeless in Manchester.</p>
+      <h2 class="h2 block__sub-header">Find nearby services to meet the specific needs of someone who is homeless in Manchester</h2>
     </div>
   </div>
 
   <div class="block">
-    <div class="container block__inner">
+    <div class="container">
       <div class="block__content">
         <div class="split">
           <div class="split__element">
@@ -34,12 +43,12 @@ pageName: findhelp
           </div>
         </div>
 
-        <div class="result-grid">
+        <div class="block__cta--grid result-grid">
           \{{#categories}}
             <span class="cta">
               <a class="btn btn--brand-d" href="/\{{page}}/?category=\{{key}}">
                 <span class="btn__icon">
-                  <svg class="svg-\{{key}}-dims"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#\{{key}}"></use></svg>
+                  <svg class="svg-\{{key}}-dims"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#\{{key}}"></use></svg>
                   <span class="btn__overlay"></span>
                 </span>
                 <span class="btn__text">\{{name}}</span>

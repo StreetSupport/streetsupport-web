@@ -6,6 +6,16 @@ permalink: false
 jsBundle: category
 ---
 
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
+      <li class="breadcrumbs__item">Category</li>
+    </ol>
+  </div>
+</div>
+
 {{> no-js}}
 
 <div id="js-category-result-output" class="template"></div>
@@ -25,7 +35,7 @@ jsBundle: category
   </div>
 
   <div class="block">
-    <div class="container block__inner">
+    <div class="container">
       <div class="block__content">
         <div class="result-detail">
           <p>We can't find any services listed near your current location.</p>
@@ -39,19 +49,16 @@ jsBundle: category
 </script>
 
 <script id="js-category-result-tpl" type="text/template">
-  <div class="block block--intro">
-    <div class="container block__inner">
-      \{{#organisations}}
-      <h2 class="h1 block__header">\{{{name}}}</h2>
-      \{{/organisations}}
-      <div class="block__content">
-        {{> location-description}}
-      </div>
+
+  <div class="block block--subpage-header">
+    <div class="container">
+      <h1 class="h1 block__header">\{{{name}}}</h1>
+      <p class="h2 block__sub-header">{{> location-description}}</p>
     </div>
   </div>
-
+  
   <div class="block">
-    <div class="container block__inner">
+    <div class="container">
       <div class="block__content">
         <div class="result-detail">
           \{{#organisations}}

@@ -6,19 +6,27 @@ permalink: false
 jsBundle: allserviceproviders
 ---
 
-<div class="block block--intro">
-  <div class="container block__inner">
-    <h2 class="h1 block__header">Full Listing</h2>
-    <div class="block__content">
-      <p>Charities, voluntary groups and government services in Manchester.</p>
-    </div>
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
+      <li class="breadcrumbs__item">Full Listing</li>
+    </ol>
+  </div>
+</div>
+
+<div class="block block--subpage-header">
+  <div class="container">
+    <h1 class="h1 block__header">Full Listing</h1>
+    <p class="h2 block__sub-header">Charities, voluntary groups and government services in Manchester.</p>
   </div>
 </div>
 
 {{> no-js}}
 
 <div class="block">
-  <div class="container block__inner">
+  <div class="container">
     <div class="block__content">
       <div id="js-category-result-output" class="template"></div>
       {{> social-share}}
