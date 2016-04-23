@@ -65,7 +65,6 @@ function buildList (url) {
     callback = function () {
       accordion.init(false, subCategoryIndexToOpen, findHelp.buildListener('category', 'sub-category'))
       loading.stop()
-      console.log('callback')
       socialShare.init()
     }
 
