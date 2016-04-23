@@ -4,9 +4,8 @@
     padding-bottom: 20px;
     text-align: center;
 
-    // Remove this style when we
     @include mq($from: s) {
-      //padding-top: 40px;
+      padding-top: 40px;
     }
 
     @include mq($from: l) {
@@ -36,7 +35,7 @@
       display: block;
       width: 100%;
       height: auto;
-      max-width: 500px;
+      max-width: 480px; // m breakpoint
       margin: 0 auto;
 
       @include mq($from: l) {
