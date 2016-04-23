@@ -62,7 +62,11 @@ jsBundle: organisation
             <h2 class="h2">Services Provided</h2>
             <div class="accordion accordion--organisation js-accordion">
               \{{#providedServices}}
-                <button class="h3 accordion__header js-header">\{{{name}}}<span class="icon icon-plus"></span></button>
+                <button class="h3 accordion__header js-header">
+                  \{{{name}}}
+                  <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
+                  <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
+                </button>
                 <div class="accordion__item js-item">
                   <div class="accordion__inner">
                     <p>\{{{info}}}</p>

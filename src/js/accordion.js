@@ -2,9 +2,6 @@
 
 var accordion = '.js-accordion'
 var header = '.js-header'
-var icon = '.icon'
-var iconOpenClass = 'icon-plus'
-var iconCloseClass = 'icon-minus'
 var activeClass = 'is-active'
 var myListener = {
   accordionOpened: function () { }
@@ -60,10 +57,6 @@ var baseOpen = function (el, context, noAnalytics) {
     el.classList.add(activeClass)
     el.nextElementSibling.classList.add(activeClass)
 
-    // Change icon class in header
-    el.querySelector(icon).classList.remove(iconOpenClass)
-    el.querySelector(icon).classList.add(iconCloseClass)
-
     // Send Google Analytics event
     if (!noAnalytics) {
       var headerText = el.textContent
@@ -74,16 +67,8 @@ var baseOpen = function (el, context, noAnalytics) {
 }
 
 var close = function (el, context) {
-  var a
   var b
   var children = context.children
-  var headers = context.querySelectorAll(icon)
-
-  // Change icon class in header
-  for (a = 0; a < headers.length; a++) {
-    headers[a].classList.remove(iconCloseClass)
-    headers[a].classList.add(iconOpenClass)
-  }
 
   // Remove active classes in accordion
   for (b = 0; b < children.length; b++) {

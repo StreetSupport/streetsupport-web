@@ -56,7 +56,11 @@ jsBundle: categorybyday
         \{{#organisations}}
         <div class="accordion accordion--day js-accordion">
           \{{#daysServices}}
-          <button id="\{{{name}}}" class="h3 accordion__header result__header js-header">\{{{name}}}<span class="icon icon-plus"></span></button>
+          <button id="\{{{name}}}" class="h3 accordion__header js-header">
+            \{{{name}}}
+            <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
+            <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
+          </button>
             <div class="accordion__item js-item">
               <div class="accordion__inner">
                 <div class="result-detail__times-list">
