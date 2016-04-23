@@ -42,8 +42,8 @@
     border-radius: 10px;
     transition: background-color 250ms linear, box-shadow 250ms linear;
     margin-bottom: 3px; // safari box-shadow fix
-    font-family: $font-primary;
-    font-weight: $font-primary-weight;
+    font-family: $font-headline;
+    font-weight: $font-headline-weight;   
   }
 
   &__overlay {
