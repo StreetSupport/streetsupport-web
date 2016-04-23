@@ -1,0 +1,54 @@
+.block {
+  &--image {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+
+    @include mq($from: l) {
+      padding-top: 0;
+      padding-bottom: 0;
+
+      .block__content {
+        display: table;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  &__image-image {
+    margin-bottom: 20px;
+
+    @include mq($from: l) {
+      width: 50%;
+      height: 100%;
+      display: table-cell;
+      margin-bottom: 0;
+
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  &__image-description {
+    @include mq($from: l) {
+      width: 50%;
+      position: relative;
+      display: table-cell;
+    }
+  }
+
+  &__image-copy {
+    @include mq($from: l) {
+      position: absolute;
+      top: 50%;
+      left: 40px;
+      width: 400px;
+      transform: translateY(-50%);
+    }
+  }
+}

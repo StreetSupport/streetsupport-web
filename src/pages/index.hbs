@@ -9,8 +9,11 @@ pageName: home
 
 <div class="block block--header">
   <div class="container">
-    <h1 class="h1 block__header">Street Support</h1>
-    <h2 class="h2 block__sub-header">Working together to support homeless people in Manchester</h2>
+    <h1 class="h1 block__header">Working together to support homeless people in Manchester</h1>
+    <div class="block__cta block__cta--2">
+      {{>cta brand="d" link="/find-help/" name="Find Help"}}
+      {{>cta brand="e" link="/give-help/" name="Give Help"}}
+    </div>
   </div>
 </div>
 
@@ -43,15 +46,17 @@ pageName: home
   </div>
 </div>
 
-<div class="block">
-  <div class="container block__inner">
-    <h2 class="h1 block__header">How it started</h2>
-    <div class="block__image">
+<div class="block block--image">
+  <div class="block__content">
+    <div class="block__image-image">
       <a href="/how-it-started/"><img src="assets/img/started.jpg" /></a>
     </div>
-    <div class="block__content">
-      <p>"We noticed the number of homeless people in Manchester increasing, and we wanted to do something to help. We found over 30 amazing charities and volunteer groups providing services, so we asked them what support they needed."</p>
-      <p><strong><a href="/how-it-started/">This is what happened next...</a></strong></p>
+    <div class="block__image-description">
+      <div class="block__image-copy">
+        <h2 class="h1">How it started</h2>
+        <p>"We noticed the number of homeless people in Manchester increasing, and we wanted to do something to help. We found over 30 amazing charities and volunteer groups providing services, so we asked them what support they needed."</p>
+        <p><strong><a href="/how-it-started/">This is what happened next...</a></strong></p>
+      </div>
     </div>
   </div>
 </div>
