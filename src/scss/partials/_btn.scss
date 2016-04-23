@@ -74,7 +74,7 @@
   &--brand-e {
     .btn__text {
       background-color: $brand-e;
-      color: #111;
+      color: $brand-m;
       box-shadow: 0px 3px 0px 0px darken( $brand-e, 15% );
 
       &:hover {
