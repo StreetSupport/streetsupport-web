@@ -75,6 +75,10 @@
       opacity: 1;
       visibility: visible;
     }
+
+    a {
+      color: $brand-c;
+    }
   }
 
   &__inner {
