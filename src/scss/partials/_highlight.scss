@@ -6,11 +6,6 @@
   @include push(1 of $grid-column);
 
   @include mq($from: s) {
-    @include span(4 of $grid-column);
-    @include push(2 of $grid-column);
-  }
-
-  @include mq($from: m) {
     @include span(8 of $grid-column);
     @include push(0 of $grid-column);
   }
@@ -27,11 +22,16 @@
     padding: 20px 0;
     border-bottom: 1px solid $brand-m;
 
-    &:last-of-type {
-      border: 0;
+    &:first-of-type {
+      padding-left: 0;
     }
 
-    @include mq($from: m) {
+    &:last-of-type {
+      border: 0;
+      padding-right: 0;
+    }
+
+    @include mq($from: s) {
       display: inline-block;
       margin: 20px 0 0 0;
       padding: 0 40px;
