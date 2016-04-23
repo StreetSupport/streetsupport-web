@@ -6,16 +6,6 @@ permalink: false
 jsBundle: category
 ---
 
-<div class="block block--breadcrumbs">
-  <div class="container">
-    <ol class="breadcrumbs__list">
-      <li class="breadcrumbs__item"><a href="/">Home</a></li>
-      <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
-      <li class="breadcrumbs__item">Category</li>
-    </ol>
-  </div>
-</div>
-
 {{> no-js}}
 
 <div id="js-category-result-output" class="template"></div>
@@ -23,20 +13,31 @@ jsBundle: category
 <div id="spin"></div>
 
 <script id="js-category-no-results-result-tpl" type="text/template">
-  <div class="block block--intro">
-    <div class="container block__inner">
+  <div class="block block--breadcrumbs">
+    <div class="container">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item"><a href="/">Home</a></li>
+        <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
+        \{{#organisations}}
+        <li class="breadcrumbs__item">\{{{name}}}</li>
+        \{{/organisations}}
+      </ol>
+    </div>
+  </div>
+
+  <div class="block subpage-header">
+    <div class="container">
       \{{#organisations}}
       <h2 class="h1 block__header">\{{{name}}}</h2>
       \{{/organisations}}
-      <div class="block__content">
-        {{> location-description}}
-      </div>
     </div>
   </div>
 
   <div class="block">
     <div class="container">
       <div class="block__content">
+        <p>{{> location-description}}</p>
+
         <div class="result-detail">
           <p>We can't find any services listed near your current location.</p>
           <p>We are currently trialing Street Support in Manchester UK, so if you are trying to access it from elsewhere you won't yet be able to find service information for your city.</p>
@@ -50,16 +51,32 @@ jsBundle: category
 
 <script id="js-category-result-tpl" type="text/template">
 
+  <div class="block block--breadcrumbs">
+    <div class="container">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item"><a href="/">Home</a></li>
+        <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
+        \{{#organisations}}
+        <li class="breadcrumbs__item">\{{{name}}}</li>
+        \{{/organisations}}
+      </ol>
+    </div>
+  </div>
+
   <div class="block block--subpage-header">
     <div class="container">
+      \{{#organisations}}
       <h1 class="h1 block__header">\{{{name}}}</h1>
-      <h2 class="h2 block__sub-header">{{> location-description}}</h2>
+      \{{/organisations}}
     </div>
   </div>
 
   <div class="block">
     <div class="container">
       <div class="block__content">
+
+        <p>{{> location-description}}</p>
+
         <div class="result-detail">
           \{{#organisations}}
           <div class="accordion__incopy">
