@@ -60,9 +60,12 @@ $font-primary-weight: 300;
 $font-headline: 'museo-sans-rounded', sans-serif;
 $font-headline-weight: 500;
 
-// Misc
+// Header & Nav
+// NOTE: Subnav on desktop is diasbled for now
+$header-top: 117px;
+$header-height: 47px;
+$header-margin: 47px;
 $nav-width: 220px;
-$header-height: 117px;
 
 // Default Grid Options
 // -----------------------------

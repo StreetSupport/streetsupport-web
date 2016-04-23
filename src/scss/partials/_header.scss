@@ -3,7 +3,7 @@
   background-color: $brand-a;
 
   @include mq($from: l) {
-    margin-bottom: 84px;
+    margin-bottom: $header-margin;
   }
 
   &__title {
