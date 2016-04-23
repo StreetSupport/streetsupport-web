@@ -19,11 +19,12 @@
       position: absolute;
       top: $header-height;
       width: 100%;
-      height: auto;
+      height: 84px;
       transition: none;
       transform: none;
       box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.7);
       border-top: 2px solid $brand-i;
+      overflow: hidden;
     }
 
     &.is-active {
@@ -107,6 +108,13 @@
 
       @include mq($from: l) {
         display: none;
+        position: absolute;
+        top: 42px;
+        left: 0px;
+        width: 100%;
+        margin: 0;
+        background-color: $brand-i;
+        text-align: center;
       }
     }
   }
@@ -124,13 +132,17 @@
       padding: 0;
       display: inline-block;
       border: 0;
+      margin-right: -4px;
     }
 
-    /*
     &--sub-item {
-
+      @include mq($from: l) {
+        display: inline-block;
+        font-size: 14px;
+        margin: 0
+      }
     }
-    */
+
 
     a {
       color: inherit;
@@ -139,13 +151,20 @@
       padding: 5px 0;
 
       @include mq($from: l) {
-        padding: 10px 20px;
+        padding: 10px 30px;
         color: $brand-k;
+        transition: background-color 150ms linear;
 
         &:hover {
           background-color: $brand-i;
         }
       }
+    }
+  }
+
+  @media print {
+    & {
+      display: none;
     }
   }
 }

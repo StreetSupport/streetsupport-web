@@ -1,13 +1,25 @@
 .cta {
-  @include span(full);
-  margin-bottom: 20px;
-
   @include mq($from: xs) {
     @include span(4 of $grid-column);
+    margin-bottom: 20px;
+
+    &:nth-of-type(even) {
+      @include last();
+    }
   }
 
-  @include mq($from: l) {
+  @include mq($from: m) {
     @include span(2 of $grid-column);
+    margin-bottom: 0;
+
+    // Reset above last style
+    &:nth-of-type(even) {
+      @include span(2 of $grid-column);
+    }
+
+    &:last-of-type {
+      @include last();
+    }
   }
 
   // Because a split element is a 4 column item, resize them here

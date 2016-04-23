@@ -1,5 +1,5 @@
 .footer {
-  background-color: $brand-c;
+  background: linear-gradient($brand-l, $brand-m);
   color: #fff;
   padding-top: 30px;
   padding-bottom: 30px;
@@ -7,10 +7,6 @@
 
   &__header {
     margin-top: 0;
-
-    @include mq($from: xs) {
-      display: inline-block;
-    }
   }
 
   &__copy {
@@ -20,12 +16,8 @@
   &__social-list {
     margin: 0 0 0 10px;
     padding: 0;
-    list-style: none;
+    list-style-type: none;
     text-align: center;
-
-    @include mq($from: xs) {
-      display: inline-block;
-    }
   }
 
   &__social-item {
@@ -38,5 +30,9 @@
     height: 37px;
     width: 34px;
     vertical-align: middle;
+  }
+
+  @media print {
+    & { display: none }
   }
 }

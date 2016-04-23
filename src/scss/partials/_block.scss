@@ -1,72 +1,192 @@
 .block {
   @include cf();
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 
-  /*
-  &__inner {
-
+  @include mq($from: m) {
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
-  */
 
   // Components
   &__header {
     text-align: center;
+    margin: 0;
+  }
 
-    .block--intro & {
-      text-align: left;
-      margin-bottom: 0;
-    }
+  &__sub-header {
+    text-align: center;
+    margin: 0;
+    color: $brand-d;
   }
 
   &__content {
+    @include cf();
+
     p {
       &:first-of-type {
         margin-top: 0;
+      }
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      .btn {
+        margin-bottom: 0;
       }
     }
 
     a {
       color: $brand-c;
+      font-family: $font-headline;
+      font-weight: $font-headline-weight;
+      text-decoration: none;
+    }
+
+    .h1,
+    .h2 {
+      color: $brand-h;
     }
   }
 
-  &__image {
-    width: 50%;
+  &__cta {
+    @include cf();
+    padding: 10px 0 0 0;
     text-align: center;
-    margin: 0 auto 20px auto;
 
-    & + div {
-      text-align: center;
+    &--incopy {
+      padding-bottom: 20px;
+
+      @include mq($from: m) {
+        padding-bottom: 40px;
+      }
     }
 
-    img {
-      border: 5px solid $brand-e;
-      border-radius: 10px;
+    &--grid {
+      @include mq($from: m) {
+        .cta {
+          &:last-of-type {
+            @include span(2 of $grid-column);
+          }
+
+          &:nth-of-type(4n) {
+            @include last();
+          }
+        }
+      }
     }
+
+    &--2 {
+      @include mq($from: m) {
+        .cta:first-of-type {
+          @include push(2 of $grid-column);
+        }
+
+        .cta:last-of-type {
+          @include span(2 of $grid-column);  // Reset last style
+          @include push(0 of $grid-column); // Reset push style
+        }
+      }
+    }
+
+    &--3 {
+      @include mq($from: xs) {
+        .cta:last-of-type {
+          @include span(4 of $grid-column);  // Reset last style
+          @include push(2 of $grid-column);
+        }
+      }
+
+      @include mq($from: m) {
+        .cta:first-of-type {
+          @include push(1 of $grid-column);
+        }
+
+        .cta:last-of-type {
+          @include span(2 of $grid-column);  // Reset last style
+          @include push(0 of $grid-column); // Reset push style
+        }
+      }
+    }
+  }
+
+  &__primary {
+    background-color: $brand-h;
+    padding: 30px 0;
+  }
+
+  &__secondary {
+    background-color: $brand-n;
+    padding: 30px 0;
   }
 
   // Variants
-  &--cta {
-    background-color: $brand-f;
-    color: #fff;
-    text-align: center;
-    padding-top: 50px;    
+  &--breadcrumbs {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    background-color: $brand-h;
+
+    @media print {
+      & { display: none }
+    }
   }
 
-  &--intro {
-    color: $brand-h;
-    text-align: left;
-    padding-bottom: 0;
+  &--header {
+    background-image: url('../img/header-background.png');
+    background-repeat: repeat;
+    color: #fff;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    @include mq($from: m) {
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+  }
+
+  &--subpage-header {
+    padding-bottom: 0px;
+
+    @include mq($from: m) {
+      padding-top: 40px;
+      padding-bottom: 0px;
+    }
+
+    .block__header {
+      color: $brand-h;
+    }
+
+    .block__sub-header {
+      color: $brand-m;
+    }
   }
 
   &--highlight {
-    background-color: $brand-b;
+    background: linear-gradient($brand-b, $brand-c);
     color: #fff;
-    text-align: center;
 
-    a {
-      color: inherit;
+    .h1,
+    .h2 {
+      color: #fff;
+    }
+  }
+
+  &--promo {
+    @include mq($from: m) {
+      text-align: center;
+    }
+  }
+
+  &--pullout {
+    color: #fff;
+    padding-bottom: 0 !important;
+
+    .h1,
+    .h2,
+    .h3,
+    p {
+      margin: 0;
     }
   }
 }

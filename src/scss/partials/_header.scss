@@ -1,22 +1,20 @@
 .header {
   @include cf();
-  height: 50px;
   background-color: $brand-a;
 
   @include mq($from: l) {
-    margin-bottom: 42px;
-    height: $header-height;
+    margin-bottom: 84px;
   }
 
   &__title {
-    margin: 8px 0 0 0;
+    margin: 10px 0 2px 0;
     padding: 0;
     display: inline-block;
     color: #fff;
 
     @include mq($from: l) {
       display: block;
-      margin: 15px 0 0 0;
+      margin: 35px 0;
     }
 
     a {
@@ -30,40 +28,33 @@
     }
 
     .icon {
-      width: 33px;
-      height: 35px;
-      margin-right: 5px;
+      width: 38px;
+      height: 40px;
+      margin-right: 10px;
+      display: inline-block;
     }
 
     .text {
       display: inline-block;
       vertical-align: top;
-      line-height: 35px;
-    }
+      line-height: 43px;
 
-    /*
-    .beta {
-      margin-left: 10px;
-      display: inline;
-      vertical-align: top;
-      line-height: 35px;
-      background-color: $brand-h;
-      padding: 4px 8px;
-      font-size: 14px;
-      font-weight: $font-headline-weight;
+      @include mq($from: l) {
+        font-size: 22px;
+      }
     }
-    */
   }
 
   &__btn {
     float: right;
-    height: 50px;
-    color: #fff;
-    background-color: $brand-b;
-    padding: 0;
-    width: 50px;
+    height: 59px;
+    color: $brand-k;
+    background-color: $brand-e;
+    padding: 0 20px;
     margin: 0;
     margin-right: -$site-gutter;
+    font-family: $font-headline;
+    font-weight: $font-headline-weight;
 
     @include mq($from: l) {
       display: none;
@@ -74,5 +65,9 @@
       width: 20px;
       vertical-align: middle;
     }
+  }
+
+  @media print {
+    & { display: none }
   }
 }
