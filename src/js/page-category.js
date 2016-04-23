@@ -58,18 +58,17 @@ function buildList (url) {
       var subCategoryIndexToOpen = findIndex(data.subCategories, function (subCat) {
         return subCat.key === urlParameter.parameter('sub-category')
       })
-
-      callback = function () {
-        accordion.init(false, subCategoryIndexToOpen, findHelp.buildListener('category', 'sub-category'))
-      }
     } else {
       template = 'js-category-no-results-result-tpl'
     }
 
-    templating.renderTemplate(template, findHelp.buildViewModel('category', data), 'js-category-result-output', callback)
+    callback = function () {
+      accordion.init(false, subCategoryIndexToOpen, findHelp.buildListener('category', 'sub-category'))
+      loading.stop()
+      socialShare.init()
+    }
 
-    loading.stop()
     analytics.init(theTitle)
-    socialShare.init()
+    templating.renderTemplate(template, findHelp.buildViewModel('category', data), 'js-category-result-output', callback)
   })
 }

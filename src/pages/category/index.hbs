@@ -63,7 +63,6 @@ jsBundle: category
         <div class="result-detail">
           \{{#organisations}}
           <div class="accordion js-accordion">
-            <div class="accordion__inner">
             \{{#subCategories}}
             <button id="\{{key}}" class="h3 accordion__header js-header">\{{{name}}}<span class="icon icon-plus"></span></button>
             <div class="accordion__item js-item" id="\{{key}}">
@@ -102,7 +101,6 @@ jsBundle: category
               </div>
             </div>
             \{{/subCategories}}
-          </div>
         </div>
         \{{/organisations}}
       </div>
