@@ -1,4 +1,20 @@
 .block {
+  &--pulldown {
+    padding-bottom: 120px;
+
+    @include mq($from: m) {
+      padding-bottom: 140px;
+    }
+  }
+
+  &--pushup {
+    margin-top: -140px;
+
+    @include mq($from: m) {
+      margin-top: -160px;
+    }
+  }
+
   &--image {
     padding-top: 0;
     padding-bottom: 20px;
