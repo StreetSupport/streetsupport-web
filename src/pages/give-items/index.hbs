@@ -6,18 +6,28 @@ permalink: false
 jsBundle: giveitems
 ---
 
-<div class="block block--intro">
-  <div class="container block__inner">
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item"><a href="/give-help/">Give Help</a></li>
+      <li class="breadcrumbs__item">Give</li>
+    </ol>
+  </div>
+</div>
+
+<div class="block block--subpage-header">
+  <div class="container">
     <h1 class="h1 block__header">Give</h1>
-    <a href="/give-help/">Other ways to give help</a>
-  	<p>Organisations require a diverse range of resources to provide ongoing support to homeless people. If you are able to help meet any of their needs, click the 'I can help!' button, and let us know what you are able to offer.</p>
-    <p>Please note, this section of the site is work in progress - check back soon for other ways to give help.</p>
   </div>
 </div>
 
 <div class="block">
-  <div class="container block__inner">
+  <div class="container">
     <div class="block__content">
+      <p>Organisations require a diverse range of resources to provide ongoing support to homeless people. If you are able to help meet any of their needs, click the 'I can help!' button, and let us know what you are able to offer.</p>
+      <p>Please note, this section of the site is work in progress - check back soon for other ways to give help.</p>
+
       <div id="js-need-list-output" class="template"></div>
       {{> social-share}}
     </div>

@@ -6,6 +6,16 @@ permalink: false
 jsBundle: organisation
 ---
 
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
+      <li class="breadcrumbs__item">Organisation</li>
+    </ol>
+  </div>
+</div>
+
 {{> no-js}}
 
 <div id="js-organisation-output" class="template"></div>
@@ -13,22 +23,22 @@ jsBundle: organisation
 <div id="spin"></div>
 
 <script id="js-organisation-tpl" type="text/template">
-  <div class="block block--intro">
-    <div class="container block__inner">
+  <div class="block block--subpage-header">
+    <div class="container">
       \{{#organisation}}
         <h1 class="h1 block__header">\{{{name}}}</h1>
-        <span>\{{#isVerified}}
+        <h2 class="h2 block__sub-header">\{{#isVerified}}
           verified
         \{{/isVerified}}
         \{{^isVerified}}
           under review
-        \{{/isVerified}}</span>
+        \{{/isVerified}}</h2>
       \{{/organisation}}
     </div>
   </div>
 
   <div class="block">
-    <div class="container block__inner">
+    <div class="container">
       <div class="block__content">
         <div class="result-detail">
           \{{#organisation}}
