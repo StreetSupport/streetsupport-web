@@ -1,6 +1,17 @@
 .accordion {
   margin-bottom: 20px;
 
+
+  &__incopy {
+    @include cf();
+
+    @include mq($from: l) {
+      .accordion {
+        @include span(6 of $grid-column);
+      }
+    }
+  }
+
   & > * {
     overflow: hidden;
   }
