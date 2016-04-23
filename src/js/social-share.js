@@ -1,14 +1,8 @@
 /* global twttr, FB */
 
-var el = '.social-share'
-
 var init = function () {
-  // Twitter
-  twttr.widgets.load(
-    document.querySelectorAll(el)
-  )
-
-  // Facebook
+  var el = '.social-share'
+  twttr.widgets.load(document.querySelectorAll(el))
   FB.init()
 }
 
