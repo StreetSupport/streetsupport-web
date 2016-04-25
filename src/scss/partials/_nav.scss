@@ -143,6 +143,15 @@
       }
     }
 
+    @include mq($from: l) {
+      &--active {
+        background-color: $brand-i;
+
+        .nav__list--sub-list {
+          display: block;
+        }
+      }
+    }
 
     a {
       color: inherit;
