@@ -1,0 +1,50 @@
+---
+title: Give Items - Street Support
+description: Street support makes it easier to help homeless people. Here's how to get in touch.
+layout: default.hbs
+permalink: false
+jsBundle: giveitems
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item"><a href="/give-help/">Give Help</a></li>
+      <li class="breadcrumbs__item">Give Items</li>
+    </ol>
+  </div>
+</div>
+
+<div class="block block--subpage-header">
+  <div class="container">
+    <h1 class="h1 block__header">Give Items</h1>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <p>Organisations require a diverse range of resources to provide ongoing support to homeless people. If you are able to help meet any of their needs, click the 'I can help!' button, and let us know what you are able to offer.</p>
+      <p>Please note, this section of the site is work in progress - check back soon for other ways to give help.</p>
+
+      <div id="js-need-list-output" class="template"></div>
+      {{> social-share}}
+    </div>
+  </div>
+</div>
+
+
+<script id="js-need-list-tpl" type="text/template">
+  <dl class="needs">
+    \{{#needs}}
+    <dt class="needs__need">
+      <h3 class="h3">\{{{description}}}</h3>
+      <p>\{{{reason}}}</p>
+    </dt>
+    <dd class="needs__more-info"><a href="\{{link}}" class="btn btn--brand-e"><span class="btn__text">I can help!</span></a></dt>
+    \{{/needs}}
+  </dl>
+</script>
+
+{{> loading-spinner}}

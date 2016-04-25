@@ -30,7 +30,7 @@ function buildList (url) {
   // Get API data using promise
   getApiData.data(url).then(function (result) {
     if (result.status === 'error') {
-      window.location.replace('/find-help.html')
+      window.location.replace('/find-help/')
     }
     var data = result.data
 
@@ -55,21 +55,20 @@ function buildList (url) {
         })
       })
 
-      var subCategoryIndexToOpen = findIndex(data.subCategories, function(subCat) {
+      var subCategoryIndexToOpen = findIndex(data.subCategories, function (subCat) {
         return subCat.key === urlParameter.parameter('sub-category')
       })
-
-      callback = function () {
-        accordion.init(false, subCategoryIndexToOpen, findHelp.buildListener('category', 'sub-category'))
-      }
     } else {
       template = 'js-category-no-results-result-tpl'
     }
 
-    templating.renderTemplate(template, findHelp.buildViewModel('category', data), 'js-category-result-output', callback)
+    callback = function () {
+      accordion.init(false, subCategoryIndexToOpen, findHelp.buildListener('category', 'sub-category'))
+      loading.stop()
+      socialShare.init()
+    }
 
-    loading.stop()
     analytics.init(theTitle)
-    socialShare.init()
+    templating.renderTemplate(template, findHelp.buildViewModel('category', data), 'js-category-result-output', callback)
   })
 }

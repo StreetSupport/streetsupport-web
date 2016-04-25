@@ -1,9 +1,9 @@
 module.exports = {
-    data: {
+  data: {
     'id': '56d81bad92855625087e9a93',
     'description': 'need description',
     'serviceProviderId': 'albert-kennedy-trust',
-    'serviceProviderName': "Albert Kennedy Trust",
+    'serviceProviderName': 'Albert Kennedy Trust',
     'type': 'Things',
     'reason': 'reason',
     'moreInfoUrl': 'http://moreinfo.com',

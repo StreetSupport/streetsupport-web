@@ -1,4 +1,4 @@
-/* global ga, location */
+/* global ga, location, document */
 
 var init = function (title) {
   var i
@@ -34,10 +34,17 @@ var trackLink = function (el) {
   if (isUrlExternal(theUrl) === false) {
     document.location = theUrl
   } else {
+    var hasRedirected = false
+    var redirect = function () {
+      if (hasRedirected) return
+      document.location = theUrl
+      hasRedirected = true
+    }
     ga('send', 'event', 'outbound', 'click', theUrl, {
       'transport': 'beacon',
-      'hitCallback': function () { document.location = theUrl }
+      'hitCallback': redirect
     })
+    setTimeout(redirect, 2000)
   }
 }
 

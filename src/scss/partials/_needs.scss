@@ -1,33 +1,30 @@
 .needs {
+  margin: 40px 0 0 0;
+  padding: 0;
+
   &__need {
     margin: 0 0 10px 0;
-		padding: 0;
-
-    @include span(full);
+    padding: 0;
 
     @include mq($from: m) {
-      @include span(4 of $grid-column);
-    }
-
-    @include mq($from: l) {
       @include span(6 of $grid-column);
+      margin-bottom: 40px; 
     }
   }
 
   &__more-info {
-		margin-bottom: 40px;
     text-align: left;
-
-    @include span(full);
+    margin: 0 0 20px 0;
+    padding: 0;
 
     @include mq($from: m) {
-      @include span(4 of $grid-column);
+      @include span(2 of $grid-column last);
       text-align: right;
-    }
+      margin: 0 0 40px 0;
 
-    @include mq($from: l) {
-      @include span(2 of $grid-column);
-      text-align: right;
+      .btn {
+        margin-top: 0;
+      }
     }
   }
 }

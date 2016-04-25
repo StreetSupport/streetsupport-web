@@ -1,3 +1,5 @@
+/* global location */
+
 var getValue = function (needle, haystack) {
   needle = needle.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]')
   var regex = new RegExp('[\\?&]' + needle + '=([^&#]*)')
