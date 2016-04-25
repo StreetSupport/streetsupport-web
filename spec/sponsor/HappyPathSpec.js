@@ -1,9 +1,9 @@
+/* global describe, beforeEach, afterEach, it, expect */
+
 var postToApi = require('../../src/js/post-api-data')
-var getFromApi = require('../../src/js/get-api-data')
 var sinon = require('sinon')
 var Model = require('../../src/js/models/SponsorModel')
 var endpoints = require('../../src/js/api')
-var getUrlParams = require('../../src/js/get-url-parameter')
 var browser = require('../../src/js/browser')
 
 describe('Sponsor Model', function () {
@@ -12,7 +12,7 @@ describe('Sponsor Model', function () {
   var browserLoadedStub
   var browserTrackEventStub
 
-  describe('Happy Path', function() {
+  describe('Happy Path', function () {
     beforeEach(function () {
       browserLoadingStub = sinon.stub(browser, 'loading')
       browserLoadedStub = sinon.stub(browser, 'loaded')
@@ -33,7 +33,7 @@ describe('Sponsor Model', function () {
       beforeEach(function () {
         postToApiStub = sinon.stub(postToApi, 'post')
         postToApiStub.returns({
-          then: function(success, error) {
+          then: function (success, error) {
             success({
               'status': 'created',
               'statusCode': 201

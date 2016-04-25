@@ -1,0 +1,85 @@
+---
+title: Find Help - Street Support
+description: Street support makes it easier to help homeless people in Manchester. Find help relevant to your needs.
+layout: default.hbs
+permalink: false
+jsBundle: findhelp
+pageName: findhelp
+---
+
+<div id="js-category-list-output" class="template"></div>
+
+<div id="spin"></div>
+
+<script id="js-category-list-tpl" type="text/template">
+  <div class="block block--breadcrumbs">
+    <div class="container">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item"><a href="/">Home</a></li>
+        <li class="breadcrumbs__item">Find Help</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="block block--header">
+    <div class="container">
+      <h1 class="h1 block__header">Find Help</h1>
+      <h2 class="h2 block__sub-header">Find nearby services to meet the specific needs of someone who is homeless in Manchester</h2>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="container">
+      <div class="block__content">
+        <div class="content-grid">
+          <div class="content-grid__element">
+            <h2 class="h3 content-grid__header">Recently homeless?</h2>
+          </div>
+          <div class="content-grid__element">
+            <a class="btn btn--brand-g content-grid__btn" href="emergency-help/">
+              <span class="btn__text">Emergency Advice</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="block__cta--grid result-grid">
+          \{{#categories}}
+            <span class="cta">
+              <a class="btn btn--brand-d" href="\{{page}}/?category=\{{key}}">
+                <span class="btn__icon">
+                  <svg class="svg-\{{key}}-dims"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#\{{key}}"></use></svg>
+                  <span class="btn__overlay"></span>
+                </span>
+                <span class="btn__text">\{{name}}</span>
+              </a>
+            </span>
+          \{{/categories}}
+        </div>
+
+        <div class="content-grid">
+          <div class="content-grid__element">
+            <h2 class="h3 content-grid__header">Looking for an organisation?</h2>
+          </div>
+          <div class="content-grid__element">
+            <a class="btn btn--brand-d content-grid__btn" href="/find-help/all-service-providers/">
+              <span class="btn__text">All organisations</span>
+            </a>
+          </div>
+          <div class="content-grid__element">
+            <h2 class="h3 content-grid__header">Need something else?</h2>
+          </div>
+          <div class="content-grid__element">
+            <a class="btn btn--brand-d content-grid__btn" href="/contact/">
+              <span class="btn__text">Tell us</span>
+            </a>
+          </div>
+        </div>
+
+        <p>If you know of other services, have ideas, or you would like to know more, please <a href="/contact/">get in touch</a>.</p>
+
+        {{> social-share}}
+
+      </div>
+    </div>
+  </div>
+</script>

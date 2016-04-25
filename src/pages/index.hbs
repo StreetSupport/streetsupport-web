@@ -7,78 +7,81 @@ jsBundle: home
 pageName: home
 ---
 
-<div class="block block--cta">
-  <div class="container block__inner">
-    <div class="split">
-      <a class="btn btn--brand-d split__element" href="find-help.html"><span class="btn__text">Find Help</span></a>
-      <a class="btn btn--brand-e split__element" href="give-help.html"><span class="btn__text">Give Help</span></a>
+<div class="block block--header">
+  <div class="container">
+    <h1 class="h1 block__header">Working together to support homeless people in Manchester</h1>
+    <div class="block__cta block__cta--2">
+      {{>cta brand="d" link="/find-help/" name="Find Help"}}
+      {{>cta brand="e" link="/give-help/" name="Give Help"}}
     </div>
-    <h1 class="h2 block__header">Working together to support homeless people in Manchester.</h1>
   </div>
 </div>
 
-<div class="block">
-  <div class="container block__inner">
+<div class="block block--promo block--pulldown">
+  <div class="container">
     <div class="block__content">
-      <p>Street Support is a network of charities, volunteer groups and kind-hearted folk, working together to support people experiencing homelessness in Manchester. We make it easier to find relevant services, and to offer help, based on what homeless people really need. If you would like to be part of the network, <a href="join-street-support.html">let us know</a>.</p>
+      <p>Street Support is a network of charities, volunteer groups and kind-hearted folk, working together to support people experiencing homelessness in Manchester. We make it easier to find relevant services, and to offer help, based on what homeless people really need. If you would like to be part of the network, <a href="join-street-support/">let us know</a>.</p>
       {{> social-share}}
     </div>
   </div>
 </div>
 
 <div class="block block--highlight">
-  <div class="container block__inner">
+  <div class="container">
     <div class="block__content">
-      <div class="split">
-        <a class="btn btn--brand-d split__element" href="find-help.html">
-          <span class="btn__icon icon-find-help"></span>
-          <span class="btn__text">Find Help</span>
-        </a>
-
-        <a class="btn btn--brand-e split__element" href="give-help.html">
-          <span class="btn__icon icon-give-help"></span>
-          <span class="btn__text">Give Help</span>
-        </a>
+      <div class="block__cta block__cta--incopy block__cta--2 block--pushup">
+        {{>cta brand="d" icon="findhelp" link="/find-help/" name="Find Help"}}
+        {{>cta brand="e" icon="givehelp" link="/give-help/" name="Give Help"}}
       </div>
 
-      <dl class="list-highlight">
-         <dt class="list-highlight__title">37</dt>
-         <dd class="list-highlight__description">Organisations</dd>
-         <dt class="list-highlight__title">175</dt>
-         <dd class="list-highlight__description">Services</dd>
-         <dt class="list-highlight__title">40</dt>
-         <dd class="list-highlight__description">Service Types</dd>
-      </dl>
+      <div class="highlight">
+        <ul class="highlight__list">
+          <li class="highlight__item">
+           <span class="highlight__title">37</span>
+           <span class="h3 highlight__description">Organisations</span>
+         </li>
+         <li class="highlight__item">
+           <span class="highlight__title">175</span>
+           <span class="h3 highlight__description">Services</span>
+         </li>
+         <li class="highlight__item">
+           <span class="highlight__title">40</span>
+           <span class="h3 highlight__description">Service Types</span>
+         </li>
+       </ul>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="block">
-  <div class="container block__inner">
-    <h2 class="h1 block__header">How it started</h2>
-    <div class="block__image">
-      <a href="how-it-started.html"><img src="assets/img/started.jpg" /></a>
+<div class="block block--image">
+  <div class="block__content">
+    <div class="block__image-image">
+      <a href="/how-it-started/"><img src="assets/img/started.jpg" /></a>
     </div>
-    <div class="block__content">
-      <p>"We noticed the number of homeless people in Manchester increasing, and we wanted to do something to help. We found over 30 amazing charities and volunteer groups providing services, so we asked them what support they needed."</p>
-      <p><strong><a href="how-it-started.html">This is what happened next...</a></strong></p>
+    <div class="block__image-description">
+      <div class="block__image-copy">
+        <h2 class="h1">How it started</h2>
+        <p>"We noticed the number of homeless people in Manchester increasing, and we wanted to do something to help. We found over 30 amazing charities and volunteer groups providing services, so we asked them what support they needed."</p>
+        <p><strong><a href="/how-it-started/">This is what happened next...</a></strong></p>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="block block--highlight">
-  <div class="container block__inner">
-    <h2 class="h2 block__header">Supported by...</h2>
-
-    <div class="block__content">
-      <ul class="partners">
-        <li class="partners__logo partners__logo--coalition-of-relief">Coalition of Relief</li>
-        <li class="partners__logo partners__logo--booth-centre">Booth Centre</li>
-        <li class="partners__logo partners__logo--mustard-tree">Mustard Tree</li>
-        <li class="partners__logo partners__logo--bruntwood">Bruntwood</li>
+<div class="block block--highlight block--promo">
+  <div class="container">
+    <div class="block__content partners">
+      <h2 class="h2">Supported by...</h2>
+      <ul class="partners__list">
+        <li class="partners__logo partners__logo--coalition-of-relief"><span class="hide-screen">Coalition of Relief</span></li>
+        <li class="partners__logo partners__logo--booth-centre"><span class="hide-screen">Booth Centre</span></li>
+        <li class="partners__logo partners__logo--mustard-tree"><span class="hide-screen">Mustard Tree</span></li>
+        <li class="partners__logo partners__logo--holy-name-manchester"><span class="hide-screen">Holy Name Manchester</span></li>
+        <li class="partners__logo partners__logo--bruntwood"><span class="hide-screen">Bruntwood</span></li>
       </ul>
-
-      <p>We are looking for Manchester businesses and organisations to partner with us. If you share our values and want to know more, please <a href="mailto:sponsorship@streetsupport.net">get in touch</a>.</p>
+      <p>We are looking for Manchester businesses and organisations to partner with us.</p>
+      <p>If you share our values and want to know more, please <a href="mailto:sponsorship@streetsupport.net">get in touch</a>.</p>
     </div>
   </div>
 </div>

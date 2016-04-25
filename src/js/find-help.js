@@ -1,3 +1,4 @@
+/* global history */
 var categoryEndpoint = require('./category-endpoint')
 var urlParameter = require('./get-url-parameter')
 
@@ -9,11 +10,11 @@ var FindHelp = function () {
     var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
     if (savedLocationCookie.length && location.length === 0) return savedLocationCookie
     if (location === 'my-location') return ''
-      return location
+    return location
   }
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
-    history.pushState({}, '', pageName + '.html?category=' + self.theCategory +
+    history.pushState({}, '', '?category=' + self.theCategory +
       '&' + subCategoryKey + '=' + subCategoryId +
       '&location=' + self.getLocation())
   }
@@ -29,7 +30,7 @@ var FindHelp = function () {
   self.handleSubCategoryChange = function (subCategoryKey, accordion) {
     window.onpopstate = function () {
       var subCategory = urlParameter.parameter(subCategoryKey)
-      if(subCategory.length) {
+      if (subCategory.length) {
         var el = document.getElementById(subCategory)
         var context = document.querySelector('.js-accordion')
         var useAnalytics = true
@@ -40,14 +41,14 @@ var FindHelp = function () {
   }
 
   self.formatTags = function (subCategories) {
-  forEach(subCategories, function (subCat) {
-    forEach(subCat.serviceProviders, function (provider) {
-      if (provider.tags !== null) {
-        provider.tags = provider.tags.join(', ')
-      }
+    subCategories.forEach((subCat) => {
+      subCat.serviceProviders.forEach((provider) => {
+        if (provider.tags !== null) {
+          provider.tags = provider.tags.join(', ')
+        }
+      })
     })
-  })
-}
+  }
 
   self.theCategory = urlParameter.parameter('category')
 
@@ -57,7 +58,7 @@ var FindHelp = function () {
     categoryEndpoint.getEndpointUrl(categoryUrl, self.getLocation())
       .then(function (success) {
         buildList(success)
-      }, function (error) {
+      }, function () {
       })
   }
 
@@ -66,8 +67,8 @@ var FindHelp = function () {
 
     return {
       organisations: data,
-      pageAsFromManchester: pagename + '.html?category=' + self.theCategory + '&location=manchester',
-      pageFromCurrentLocation: pagename + '.html?category=' + self.theCategory + '&location=my-location',
+      pageAsFromManchester: '?category=' + self.theCategory + '&location=manchester',
+      pageFromCurrentLocation: '?category=' + self.theCategory + '&location=my-location',
       useManchesterAsLocation: hasSetManchesterAsLocation,
       useGeoLocation: !hasSetManchesterAsLocation
     }

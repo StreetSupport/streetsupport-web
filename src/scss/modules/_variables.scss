@@ -13,8 +13,9 @@ $mq-responsive: true;
 $mq-breakpoints: (
   xs:  360px,
   s:   480px,
-  m:   600px,
-  l:   800px
+  m:   680px,
+  l:   800px,
+  xl:  960px
 );
 
 // Define the breakpoint from the $mq-breakpoints list that should
@@ -25,31 +26,33 @@ $mq-static-breakpoint: l;
 // If you want to display the currently active breakpoint in the top
 // right corner of your site during development, add the breakpoints
 // to this list, ordered by width, e.g. (mobile, tablet, desktop).
-//$mq-show-breakpoints: (xs, s, m, l);
+// $mq-show-breakpoints: (xs, s, m, l, xl);
 
 // Site Variables
 // -----------------------------
 
 $base-font-size: 16px; // Recommended to not change this
-$site-container: rem(800px);
+$site-container: rem(1000px); 
 $site-gutter: rem(16px);
 $grid-gutter: .25; // Quarter of column width
-$column-small: 6;
-$column-large: 12;
+$grid-column: 8;
 $grid-debug: hide; // Change this to show or hide
 
 // Colours
-$brand-a: #00C08E;
-$brand-b: #00E6A8;
-$brand-c: #00805D;
+$brand-a: #38ae8e;
+$brand-b: #0b9b75;
+$brand-c: #086049;
 $brand-d: #ffa200;
 $brand-e: #ffde00;
 $brand-f: #8d8d8d;
 $brand-g: #a90000;
-$brand-h: #6e6895;
+$brand-h: #5a497f;
 $brand-i: #f6e9d2;
 $brand-j: #e1c116;
 $brand-k: #48484a;
+$brand-l: #29272a;
+$brand-m: #101011;
+$brand-n: #9886bf;
 
 // Fonts
 $font-primary: 'museo-sans-rounded', sans-serif;
@@ -57,19 +60,22 @@ $font-primary-weight: 300;
 $font-headline: 'museo-sans-rounded', sans-serif;
 $font-headline-weight: 500;
 
-// Misc
+// Header & Nav
+// NOTE: Subnav on desktop is diasbled for now
+$header-top: 117px;
+$header-height: 47px;
+$header-margin: 47px;
 $nav-width: 220px;
-$header-height: 64px;
 
 // Default Grid Options
 // -----------------------------
 
 $susy: (
-  columns: $column-small,
+  columns: $grid-column,
   container: $site-container,
   gutters: $grid-gutter,
   global-box-sizing: border-box,
-  gutter-position: split,
+  gutter-position: after,
   debug: (
     image: $grid-debug
   )

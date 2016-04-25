@@ -1,4 +1,4 @@
-/* global ga, location */
+/* global ga, location, document */
 
 var init = function (title) {
   var i
@@ -6,11 +6,9 @@ var init = function (title) {
 
   // Check if we need to alter page title in GA
   if (title) {
-    console.log('Analytics: Alter page title from AJAX')
     ga('set', 'title', title)
     ga('send', 'pageview')
   } else {
-    console.log('Analytics: Do not alter page title')
     ga('send', 'pageview')
   }
 
@@ -36,10 +34,17 @@ var trackLink = function (el) {
   if (isUrlExternal(theUrl) === false) {
     document.location = theUrl
   } else {
+    var hasRedirected = false
+    var redirect = function () {
+      if (hasRedirected) return
+      document.location = theUrl
+      hasRedirected = true
+    }
     ga('send', 'event', 'outbound', 'click', theUrl, {
       'transport': 'beacon',
-      'hitCallback': function () { document.location = theUrl }
+      'hitCallback': redirect
     })
+    setTimeout(redirect, 2000)
   }
 }
 

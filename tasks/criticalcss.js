@@ -9,17 +9,19 @@ import gulpif from 'gulp-if'
 import critical from 'critical'
 const criticalcss = critical.stream
 
+// Get breakpoints from foley.json
+var dimensions = config.critical.dimensions || {}
+
 // HTML minify task
 gulp.task('crticalcss', () => {
-  return gulp.src(config.paths.build + '/*.html')
+  return gulp.src(config.paths.build + '**/*.html')
   .pipe(gulpif(argv.debug === true, debug({title: 'CSS Inlined:'})))
   .pipe(criticalcss({
-    base: config.paths.build + '/',
-    width: 320,
-    height: 480,
+    base: config.paths.build,
     minify: true,
     extract: false,
-    inline: true
+    inline: true,
+    dimensions: dimensions
   }))
   .pipe(gulp.dest(config.paths.build))
 })

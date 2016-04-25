@@ -2,24 +2,36 @@
   "paths": {
     "build": "_dist/",
     "buildAssets": "_dist/assets/",
-    "svgicon": "_dist",
+    "svgicon": "_svgicon",
     "scss": "src/scss/",
     "files": "src/files/",
     "fonts": "src/fonts/",
     "icons": "src/icons/",
     "img": "src/img/",
     "js": "src/js/",
-    "data": "src/data/",
+    "spec": "spec/",
     "layouts": "src/layouts/",
     "pages": "src/pages/",
     "partials": "src/partials/",
-    "specs": "spec/"
+    "data": "src/data/"
   },
   "autoprefixer": {
     "browsers": ["last 2 versions", "IE >= 10"]
   },
+  "critical": {
+    "dimensions": [{
+      "width": "320",
+      "height": "480"
+    }, {
+      "width": "1200",
+      "height": "900"
+    }]
+  },
   "metalsmith": {
     "plugins": {
+      "metalsmith-metadata-directory": {
+        "directory": "./src/data/**/*.json"
+      },
       "metalsmith-drafts": true,
       "metalsmith-markdownit": {
          "typographer": true,
@@ -40,12 +52,11 @@
       "metalsmith-layouts": {
         "engine": "handlebars",
         "directory": "./src/layouts",
-        "partials": "./src/partials"
+        "partials": "./src/partials",
+        "rename": true
       },
       "metalsmith-in-place": {
-        "engine": "handlebars",
-        "pattern": "**/*.hbs",
-        "partials": "./src/partials"
+        "engine": "handlebars"
       }
     }
   }

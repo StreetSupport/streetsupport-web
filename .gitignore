@@ -17,4 +17,7 @@ npm-debug.log
 
 # Project Specific #
 ######################
+backstop_data
 *.orig
+*sublime*
+test/visual/results

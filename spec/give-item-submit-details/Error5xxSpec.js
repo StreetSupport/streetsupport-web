@@ -1,3 +1,5 @@
+/* global describe, beforeEach, afterEach, it, expect */
+
 var postToApi = require('../../src/js/post-api-data')
 var getFromApi = require('../../src/js/get-api-data')
 var sinon = require('sinon')
@@ -9,44 +11,38 @@ var needData = require('./needData')
 
 describe('Give Item Model', function () {
   var model
-  var getFromApiStub
   var urlParamStub
-  var browserLoadingStub
-  var browserLoadedStub
   var browserRedirectStub
-  var browserTrackEventStub
   var needId = needData.data.needId
-  var providerId = needData.data.serviceProviderId
   var postToApiStub
 
-  describe('API returns 5xx error', function() {
+  describe('API returns 5xx error', function () {
     beforeEach(function () {
       urlParamStub = sinon.stub(getUrlParams, 'parameter')
       urlParamStub.withArgs('id')
         .returns(needId)
-
-      getFromApiStub = sinon.stub(getFromApi, 'data')
+      sinon.stub(getFromApi, 'data')
         .withArgs(endpoints.needs + needId)
         .returns({
-          then: function(success, error) {
-              success({
-                'status': 'ok',
-                'data': needData.data
-              })
-            }
-          })
+          then: function (success, error) {
+            success({
+              'status': 'ok',
+              'data': needData.data
+            })
+          }
+        })
 
       postToApiStub = sinon.stub(postToApi, 'post')
       postToApiStub.returns({
-        then: function(success, error) {
+        then: function (success, error) {
           error(new Error('borked'))
         }
       })
 
-      browserLoadingStub = sinon.stub(browser, 'loading')
-      browserLoadedStub = sinon.stub(browser, 'loaded')
+      sinon.stub(browser, 'loading')
+      sinon.stub(browser, 'loaded')
+      sinon.stub(browser, 'trackEvent')
       browserRedirectStub = sinon.stub(browser, 'redirect')
-      browserTrackEventStub = sinon.stub(browser, 'trackEvent')
 
       model = new Model()
 
@@ -67,8 +63,8 @@ describe('Give Item Model', function () {
       postToApi.post.restore()
     })
 
-    it('should redirect to 500.html', function () {
-      expect(browserRedirectStub.withArgs('500.html').calledOnce).toBeTruthy()
+    it('should redirect to 500 page', function () {
+      expect(browserRedirectStub.withArgs('/500/').calledOnce).toBeTruthy()
     })
   })
 })

@@ -1,0 +1,53 @@
+.highlight {
+  @include cf();
+  margin: 0 0 20px 0;
+
+  @include span(6 of $grid-column);
+  @include push(1 of $grid-column);
+
+  @include mq($from: s) {
+    @include span(8 of $grid-column);
+    @include push(0 of $grid-column);
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+  }
+
+  &__item {
+    margin: 0;
+    padding: 20px 0;
+    border-bottom: 1px solid $brand-m;
+
+    &:first-of-type {
+      padding-left: 0;
+    }
+
+    &:last-of-type {
+      border: 0;
+      padding-right: 0;
+    }
+
+    @include mq($from: s) {
+      display: inline-block;
+      margin: 20px 0 0 0;
+      padding: 0 40px;
+      border-bottom: 0;
+      border-right: 1px solid $brand-m;
+    }
+  }
+
+  &__title {
+    font-size: 40px;
+    display: block;
+    line-height: 1.2;
+  }
+
+  &__description {
+    display: block;
+    margin: 0;
+  }
+}

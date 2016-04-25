@@ -8,64 +8,54 @@ body {
 .h3 {
   font-family: $font-headline;
   font-weight: $font-headline-weight;
+  margin: 0 0 20px 0;
+  line-height: 1.5;
 }
 
 .h1 {
-  font-size: 36px;
-  line-height: 1.4;
-  margin-top: 0;
-
-  /*
-  @include mq($from: m) {
-    font-size: 45px;
-  }
-  */
+  font-size: 35px;
 }
 
 .h2 {
-  font-size: 25px;
-  line-height: 1.4;
-
-  /*
-  @include mq($from: m) {
-    font-size: 30px;
-  }
-  */
+  font-size: 20px;
 }
 
 .h3 {
   font-size: 16px;
-  line-height: 1.4;
+}
 
-  /*
-  @include mq($from: m) {
-    font-size: 22px;
-  }
-  */
+.small {
+  font-size: 13px;
+}
+
+.standout {
+  font-family: $font-headline;
+  font-weight: $font-headline-weight;
+  text-transform: uppercase;
+  font-size: 52px;
+  margin: 0;
 }
 
 p {
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 ul {
-  line-height: 1.4;
-
   li {
     margin-bottom: 5px;
+    line-height: 1.5;
   }
 }
 
 ol {
-  line-height: 1.4;
-
   li {
     margin-bottom: 5px;
+    line-height: 1.5;
   }
 }
 
 dl {
-  line-height: 1.4;
+  line-height: 1.5;
 
   dt {
     margin-bottom: 5px;
@@ -92,8 +82,12 @@ strong {
   text-align: right;
 }
 
-.hide-text {
-  text-indent: 100%;
-  white-space: nowrap;
-  overflow: hidden;
+.line-break {
+  display: none;
+
+  @include mq($from: xs) {
+    display: block;
+    height: 1px;
+    width: 1px;
+  }
 }

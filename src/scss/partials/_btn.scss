@@ -4,35 +4,31 @@
   padding: 0;
   appearance: none;
   display: inline-block;
-  font-family: $font-headline;
-  font-weight: $font-headline-weight;
   margin-bottom: 20px;
   text-decoration: none;
   text-align: center;
   outline: none;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 20px;
+
+  &:hover {
+    .btn__text {
+      box-shadow: none;
+    }
+  }
 
   // Components
   &__icon {
-    height: 80px;
     width: 100%;
     display: block;
-    background-position: center top;
-    background-size: 100% auto;
+    background: linear-gradient(#ADE1F9, #FFFFFF);
+    border-radius: 10px 10px 0 0;
+    position: relative;
 
-    @include mq($from: xs) {
-      height: 100px;
-    }
-
-    @include mq($from: s) {
-      height: 120px;
-    }
-
-    @include mq($from: m) {
-      height: 190px;
-    }
-
-    @include mq($from: l) {
-      height: 140px;
+    svg {
+      width: 100%;
+      height: 110px;
     }
 
     & + span {
@@ -44,12 +40,22 @@
     display: block;
     padding: 15px 20px;
     border-radius: 10px;
-    box-shadow: 0px 5px 0px 0px darken( $brand-d, 15% );
-    transition: background-color 200ms ease, box-shadow 200ms ease;
+    transition: background-color 250ms linear, box-shadow 250ms linear;
+    margin-bottom: 3px; // safari box-shadow fix
+    font-family: $font-headline;
+    font-weight: $font-headline-weight;   
+  }
 
-    &:hover {
-      box-shadow: none;
-    }
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: opacity 250ms linear;
+    border-radius: 10px 10px 0 0;
   }
 
   // Variants
@@ -57,6 +63,7 @@
     .btn__text {
       background-color: $brand-d;
       color: #fff;
+      box-shadow: 0px 3px 0px 0px darken( $brand-d, 15% );
 
       &:hover {
         background-color: darken( $brand-d, 5% );
@@ -67,7 +74,8 @@
   &--brand-e {
     .btn__text {
       background-color: $brand-e;
-      color: #111;
+      color: $brand-m;
+      box-shadow: 0px 3px 0px 0px darken( $brand-e, 15% );
 
       &:hover {
         background-color: darken( $brand-e, 5% );
@@ -79,9 +87,7 @@
     .btn__text {
       background-color: $brand-g;
       color: #fff;
-      box-shadow: 0px 5px 0px 0px darken( $brand-g, 15% );
-      margin-top: 40px;
-      margin-bottom: 40px;
+      box-shadow: 0px 3px 0px 0px darken( $brand-g, 15% );
 
       &:hover {
         background-color: darken( $brand-g, 5% );

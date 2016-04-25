@@ -1,27 +1,37 @@
 .split {
   @include cf();
 
-  &__element {
-    @include span(3 of $column-small);
-
-    @include mq($from: l) {
-      @include span(6 of $column-large);
-    }
+  .block__content & {
+    margin: 40px 0;
   }
 
-  .page-home & {
-    .split__element {
-      @include mq($from: l) {
-        @include span(4 of $column-large);
+  &__element {
+    @include cf();
+    margin-bottom: 20px;
 
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    @include mq($from: m) {
+      @include span(4 of $grid-column);
+      margin-bottom: 0;
+
+      &:last-of-type {
+        @include last();
+      }
+    }
+
+    .split--reverse & {
+      @include mq($from: m) {
         &:first-of-type {
-          @include push(2 of $column-large);
+          @include last();
+        }
+
+        &:last-of-type {
+          @include first();
         }
       }
     }
-  }
-
-  .btn {
-    display: block;
   }
 }

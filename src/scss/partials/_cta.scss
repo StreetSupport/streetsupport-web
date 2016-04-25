@@ -1,0 +1,51 @@
+.cta {
+  @include mq($from: xs) {
+    @include span(4 of $grid-column);
+    margin-bottom: 20px;
+
+    &:nth-of-type(even) {
+      @include last();
+    }
+  }
+
+  @include mq($from: m) {
+    @include span(2 of $grid-column);
+    margin-bottom: 0;
+
+    // Reset above last style
+    &:nth-of-type(even) {
+      @include span(2 of $grid-column);
+    }
+
+    &:last-of-type {
+      @include last();
+    }
+  }
+
+  // Because a split element is a 4 column item, resize them here
+  .split__element & {
+    @include mq($from: xs) {
+      @include span(2 of 4);
+    }
+
+    @include mq($from: m) {
+      @include span(2 of 4);
+    }
+  }
+
+  &:hover {
+    .btn__overlay {
+      opacity: 1;
+    }
+  }
+
+  // If there is no icon, we need to set the width of the btn to the container
+  .btn {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  &__description {
+    margin-top: 15px !important;
+  }
+}
