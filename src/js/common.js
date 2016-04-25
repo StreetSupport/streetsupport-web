@@ -24,3 +24,16 @@ if ('touchAction' in document.body.style) {
 
 // SVG support
 Svg4everybody()
+
+let pathName = window.location.pathname
+let activePage = pathName.length > 1
+  ? '/' + pathName.split('/')[1] + '/'
+  : '/'
+
+let navLinks = document.querySelectorAll('.nav__item a')
+let activeNav = Array.from(navLinks).filter((l) => {
+  return l.getAttribute('href') === activePage
+})[0]
+
+console.log(activePage)
+activeNav.parentNode.classList.add('nav__item--active')
