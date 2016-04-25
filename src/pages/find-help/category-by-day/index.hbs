@@ -13,8 +13,21 @@ jsBundle: categorybyday
 <div id="spin"></div>
 
 <script id="js-category-no-results-result-tpl" type="text/template">
-  <div class="block block--intro">
-    <div class="container block__inner">
+
+  <div class="block block--breadcrumbs">
+    <div class="container">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item"><a href="/">Home</a></li>
+        <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
+        \{{#organisations}}
+        <li class="breadcrumbs__item">\{{{categoryName}}}</li>
+        \{{/organisations}}
+      </ol>
+    </div>
+  </div>
+
+  <div class="block block--subpage-header">
+    <div class="container">
       \{{#organisations}}
       <h2 class="h1 block__header">\{{categoryName}}</h2>
       \{{/organisations}}
@@ -39,8 +52,21 @@ jsBundle: categorybyday
 </script>
 
 <script id="js-category-result-tpl" type="text/template">
-  <div class="block block--intro">
-    <div class="container block__inner">
+
+  <div class="block block--breadcrumbs">
+    <div class="container">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item"><a href="/">Home</a></li>
+        <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
+        \{{#organisations}}
+        <li class="breadcrumbs__item">\{{{categoryName}}}</li>
+        \{{/organisations}}
+      </ol>
+    </div>
+  </div>
+
+  <div class="block block--subpage-header">
+    <div class="container">
       \{{#organisations}}
       <h2 class="h1 block__header">\{{categoryName}}</h2>
       \{{/organisations}}
@@ -78,7 +104,7 @@ jsBundle: categorybyday
                           <li>You must be: <span class="result-detail__tags-item">\{{tags}}</span></li>
                           \{{/tags}}
                           <li>
-                            <a href="/organisation/?organisation=\{{key}}">\{{{name}}}</a>
+                            <a href="/find-help/organisation/?organisation=\{{key}}">\{{{name}}}</a>
                             \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
                             \{{#address.street}}
                               \{{#address.street}} \{{address.street}}, \{{/address.street}}

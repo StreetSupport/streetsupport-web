@@ -30,14 +30,15 @@ jsBundle: category
       \{{#organisations}}
       <h2 class="h1 block__header">\{{{name}}}</h2>
       \{{/organisations}}
+      <div class="block__content">
+        {{> location-description}}
+      </div>
     </div>
   </div>
 
   <div class="block">
     <div class="container">
       <div class="block__content">
-        <p>{{> location-description}}</p>
-
         <div class="result-detail">
           <p>We can't find any services listed near your current location.</p>
           <p>We are currently trialing Street Support in Manchester UK, so if you are trying to access it from elsewhere you won't yet be able to find service information for your city.</p>
@@ -68,15 +69,15 @@ jsBundle: category
       \{{#organisations}}
       <h1 class="h1 block__header">\{{{name}}}</h1>
       \{{/organisations}}
+      <div class="block__content">
+        {{> location-description}}
+      </div>
     </div>
   </div>
 
   <div class="block">
     <div class="container">
       <div class="block__content">
-
-        <p>{{> location-description}}</p>
-
         <div class="result-detail">
           \{{#organisations}}
           <div class="accordion__incopy">
@@ -91,7 +92,7 @@ jsBundle: category
                 <div class="accordion__inner">
                   \{{#serviceProviders}}
                   <div class="result-detail__item">
-                    <h3 class="h2 result-detail__header"><a href="/organisation/?organisation=\{{key}}">\{{{name}}}</a></h3>
+                    <h3 class="h2 result-detail__header"><a href="/find-help/organisation/?organisation=\{{key}}">\{{{name}}}</a></h3>
                     \{{#tags}}
                     <p>You must be: <span class="result-detail__tags-item">\{{tags}}</span></p>
                     \{{/tags}}
@@ -115,7 +116,7 @@ jsBundle: category
                        <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
                        \{{/openingTimes}}
                      </dl>
-                     <a class="btn btn--brand-d result-detail__btn" href="/organisation/?organisation=\{{key}}">
+                     <a class="btn btn--brand-d result-detail__btn" href="/find-help/organisation/?organisation=\{{key}}">
                       <span class="btn__text">More information about \{{{name}}}</span>
                     </a>
                   </div>
