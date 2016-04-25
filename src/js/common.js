@@ -26,14 +26,13 @@ let setActiveNav = () => {
   let pathName = window.location.pathname
   let activePage = pathName.length > 1
     ? '/' + pathName.split('/')[1] + '/'
-    : '/'
+    : pathName
 
-  let navLinks = document.querySelectorAll('.nav__item a')
-  let activeNav = Array.from(navLinks).filter((l) => {
-    return l.getAttribute('href') === activePage
-  })[0]
+  let activeNav = Array.from(document.querySelectorAll('.nav__item a'))
+    .filter((l) => {
+      return l.getAttribute('href') === activePage
+    })[0]
 
-  console.log(activePage)
   activeNav.parentNode.classList.add('nav__item--active')
 }
 
