@@ -12,7 +12,7 @@ if [[ $TRAVIS_BRANCH == 'release' ]]
     AZURE_WEBSITE=$LIVE_AZURE_WEBSITE
     APIENVIRONMENT=3
 fi
-if [[ $TRAVIS_BRANCH == 'staging' ]]
+if [[ $TRAVIS_BRANCH == 'uat' ]]
   then
     AZURE_WEBSITE=$UAT_AZURE_WEBSITE
     APIENVIRONMENT=2
@@ -50,7 +50,7 @@ cd _dist
 
 # Push to git by overriding previous commits
 # IMPORTANT: Supress messages so nothing appears in logs
-if [[ $TRAVIS_BRANCH == 'release' ]] || [[ $TRAVIS_BRANCH == 'staging' ]] || [[ $TRAVIS_BRANCH == 'develop' ]]
+if [[ $TRAVIS_BRANCH == 'release' ]] || [[ $TRAVIS_BRANCH == 'uat' ]] || [[ $TRAVIS_BRANCH == 'develop' ]]
   then
     git init
     git add -A
