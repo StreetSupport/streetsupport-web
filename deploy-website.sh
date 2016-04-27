@@ -9,12 +9,12 @@ APIENVIRONMENT=1
 # Define variables depending on the branch
 if [[ $TRAVIS_BRANCH == 'release' ]]
   then
-    AZURE_WEBSITE=$LIVE_AZURE_WEBSITE
+    AZURE_WEBSITE=$PROD_AZURE_WEBSITE
     APIENVIRONMENT=3
 fi
 if [[ $TRAVIS_BRANCH == 'staging' ]]
   then
-    AZURE_WEBSITE=$STAGING_AZURE_WEBSITE
+    AZURE_WEBSITE=$UAT_AZURE_WEBSITE
     APIENVIRONMENT=2
 fi
 if [[ $TRAVIS_BRANCH == 'develop' ]]
