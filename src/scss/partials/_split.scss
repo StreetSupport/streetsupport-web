@@ -1,25 +1,35 @@
 .split {
   @include cf();
 
+  .block__content & {
+    margin: 40px 0;
+  }
+
   &__element {
     @include cf();
+    margin-bottom: 20px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
 
     @include mq($from: m) {
       @include span(4 of $grid-column);
+      margin-bottom: 0;
 
-      &--compact {
+      &:last-of-type {
+        @include last();
+      }
+    }
+
+    .split--reverse & {
+      @include mq($from: m) {
         &:first-of-type {
-          .cta {
-            float: right;
-            margin-right: 0;
-          }
+          @include last();
         }
 
         &:last-of-type {
-          .cta {
-            float: left;
-            margin-left: 0;
-          }
+          @include first();
         }
       }
     }

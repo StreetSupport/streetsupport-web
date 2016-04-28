@@ -1,0 +1,54 @@
+.content-grid {
+  @include cf();
+  padding: 20px 0;
+
+  @include mq($from: m) {
+    padding: 40px 0 20px 0; 
+  }
+
+  &__element {
+    @include cf();
+    text-align: center;
+
+    @include mq($from: xs) {
+      @include span(4 of $grid-column);
+      padding-bottom: 20px;
+
+      &:nth-of-type(2n) {
+        @include last();
+      }
+    }
+
+    @include mq($from: m) {
+      @include span(2 of $grid-column);
+
+      // Reset above last style
+      &:nth-of-type(2n) {
+        @include span(2 of $grid-column);
+      }
+
+      &:nth-of-type(4n) {
+        @include last();
+      }
+    }
+  }
+
+  &__header {
+    margin-top: 20px;
+  }
+
+  &__btn {
+    margin: 0;
+    width: 100%;
+
+    .btn__text {
+      @include mq($from: m) {
+        font-size: 14px;
+      }
+
+      @include mq($from: l) {
+        font-size: 16px;
+      }
+    }
+  }
+}

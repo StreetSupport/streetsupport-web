@@ -6,10 +6,25 @@ permalink: false
 jsBundle: giveitemsubmitdetails
 ---
 
-<div class="block block--intro">
-  <div class="container block__inner">
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item"><a href="/give-help/">Give Help</a></li>
+      <li class="breadcrumbs__item">Give</li>
+    </ol>
+  </div>
+</div>
+{{> no-js}}
+
+<div class="block block--subpage-header">
+  <div class="container">
     <h1 class="h1 block__header">Give</h1>
-    <a href="/give-help/">Other ways to give help</a>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container">
     <h2 class="h2" data-bind="html: needDescription"></h2>
     <p data-bind="html: needReason"></p>
     <p>Posted by: <span data-bind="text: providerName"></span></p>

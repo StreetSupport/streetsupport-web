@@ -6,9 +6,25 @@ permalink: false
 jsBundle: joinstreetsupport
 ---
 
-<div class="block block--intro">
-  <div class="container block__inner">
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item">Join Street Support</li>
+    </ol>
+  </div>
+</div>
+
+{{> no-js}}
+
+<div class="block block--subpage-header">
+  <div class="container">
     <h1 class="h1 block__header">Join Street Support</h1>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container">
     <!-- ko if: isFormSubmitSuccessful -->
       <!-- ko template: { name: 'form-submit-success-template' } -->
       <!-- /ko -->
@@ -50,14 +66,8 @@ jsBundle: joinstreetsupport
       <button type="submit" class="btn btn--brand-d form__submit" data-bind="click: submit"><span class="btn__text">Submit</span></button>
     </form>
     <!-- /ko -->
-  </div>
-</div>
 
-<div class="block">
-  <div class="container block__inner">
-    <div class="block__content">
       {{> social-share}}
-    </div>
   </div>
 </div>
 
