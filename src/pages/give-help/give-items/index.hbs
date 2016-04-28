@@ -61,8 +61,9 @@ jsBundle: giverequests
           </p>
           \{{#donationAmountInPounds}}<p class="requests-listing__amount">£\{{{donationAmountInPounds}}}</p>\{{/donationAmountInPounds}}
           <div class="requests-listing__info">
-            <h3 class="requests-listing__description">\{{{description}}}</h3>
+            <h3 class="requests-listing__description description">\{{{description}}}</h3>
             <p class="requests-listing__date creationDate">Posted: <time datetime={{{creationDate}}}>\{{{creationDate}}}</time></p>
+            <p class="hide-screen keywords">\{{keywords}}</p>
           </div>
           <p class="requests-listing__provider serviceProviderName">\{{{serviceProviderName}}}</p>
           <p class="requests-listing__location-description locationDescription">\{{{locationDescription}}}</p>
