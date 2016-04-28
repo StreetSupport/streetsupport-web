@@ -41,8 +41,7 @@ getApiData.data(apiRoutes.needs)
       console.log('rendering needs')
       // Change to relative date
       ForEach(needsFromApi, function (data) {
-        var theDate = moment(data.creationDate).fromNow()
-        data.creationDate = theDate
+        data.formattedCreationDate = moment(data.creationDate).fromNow()
       })
 
       // Append object name for Hogan
@@ -54,7 +53,7 @@ getApiData.data(apiRoutes.needs)
         .join(',')
 
       var input = document.querySelector('.search')
-      var wang = new Awesomplete(input, {list: keywords});
+      var awesomplete = new Awesomplete(input, {list: keywords}) // eslint-disable-line
 
       // Template callback
       var listCallback = function () {
@@ -74,6 +73,7 @@ getApiData.data(apiRoutes.needs)
             { latitude: latitude, longitude: longitude },
             { latitude: n.latitude, longitude: n.longitude }
           )
+          n.distanceAwayInMetres = distanceInMetres
           n.locationDescription = (distanceInMetres * 0.00062137).toFixed(2) + ' miles away'
         })
         renderNeeds()
@@ -112,7 +112,7 @@ var buildList = function () {
 
    // List.js
   var options = {
-    valueNames: [ 'type', 'serviceProviderName', 'creationDate', 'description', 'keywords' ],
+    valueNames: [ 'type', 'serviceProviderName', 'creationDate', 'description', 'keywords', 'distanceAwayInMetres' ],
     plugins: [
       // ListFuzzySearch()
     ]
@@ -210,6 +210,21 @@ var buildList = function () {
     theList.filter()
     cardLayout.pack()
   }
+
+  // Sorting
+  document.querySelector('.js-sort-dropdown')
+    .addEventListener('change', function (event) {
+      let sortFields = []
+      sortFields['organisation'] = 'serviceProviderName'
+      sortFields['date'] = 'creationDate'
+      sortFields['distance'] = 'distanceAwayInMetres'
+
+      let selectedSort = this.options[this.selectedIndex].value
+      let [field, direction] = selectedSort.split('-')
+      console.log(sortFields[field])
+      theList.sort(sortFields[field], { order: direction });
+      cardLayout.pack()
+    })
 }
 
 // Full detail view

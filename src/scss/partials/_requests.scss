@@ -130,6 +130,7 @@
   margin-bottom: 20px;
   max-width: 100%;
   width: 290px;
+  height: 360px;
   word-wrap: break-word;
 
   @include mq($from: xs) {
@@ -154,6 +155,7 @@
   margin-left: -1px;
   margin-right: -1px;
   padding: 20px;
+  height: 180px;
 }
 
 .requests-listing__date {
