@@ -4,7 +4,7 @@
 import './common'
 
 // Page modules
-var awesomplete = require('imports?this=>window!../../node_modules/awesomplete/awesomplete.js') // eslint-disable-line
+var Awesomplete = require('awesomplete') // eslint-disable-line
 var geolib = require('geolib')
 import List from 'list.js'
 // var ListFuzzySearch = require('imports?this=>window!../../node_modules/list.fuzzysearch.js/dist/list.fuzzysearch.js')
@@ -48,7 +48,13 @@ getApiData.data(apiRoutes.needs)
       // Append object name for Hogan
       var theData = { card: needsFromApi }
 
-      console.log(theData)
+      var keywords = needsFromApi
+        .map((n) => n.keywords)
+        .filter((k) => k.length > 0)
+        .join(',')
+
+      var input = document.querySelector('.search')
+      var wang = new Awesomplete(input, {list: keywords});
 
       // Template callback
       var listCallback = function () {
