@@ -26,7 +26,7 @@ $mq-static-breakpoint: l;
 // If you want to display the currently active breakpoint in the top
 // right corner of your site during development, add the breakpoints
 // to this list, ordered by width, e.g. (mobile, tablet, desktop).
-$mq-show-breakpoints: (xs, s, m, l, xl);
+// $mq-show-breakpoints: (xs, s, m, l, xl);
 
 // Site Variables
 // -----------------------------
@@ -36,7 +36,7 @@ $site-container: rem(1000px);
 $site-gutter: rem(16px);
 $grid-gutter: .25; // Quarter of column width
 $grid-column: 8;
-$grid-debug: show; // Change this to show or hide
+$grid-debug: hide; // Change this to show or hide
 
 // Colours
 $brand-a: #38ae8e;

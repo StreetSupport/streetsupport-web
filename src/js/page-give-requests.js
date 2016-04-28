@@ -13,6 +13,7 @@ import Bricks from 'bricks.js'
 
 // Page modules
 var apiRoutes = require('./api')
+var browser = require('./browser')
 var getApiData = require('./get-api-data')
 var getLocation = require('./get-location')
 var templating = require('./template-render')
@@ -28,9 +29,7 @@ import listToSelect from './list-to-dropdown'
 
 listToSelect.init()
 
-// Spinner
-// var spin = document.getElementById('spin')
-// var loading = new Spinner().spin(spin)
+browser.loading()
 
 // Get API data using promise
 getApiData.data(apiRoutes.needs)
@@ -59,6 +58,7 @@ getApiData.data(apiRoutes.needs)
       var listCallback = function () {
         buildList()
         buildCard(needsFromApi)
+        browser.loaded()
       }
 
       templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', listCallback)

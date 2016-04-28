@@ -18,10 +18,10 @@ jsBundle: giverequests
     <div class="container block__inner">
       <div class="block__content">
         <div class="requests-search__input" action="#">
-          <h2 class="h2 requests-search__input__header">How can you help?</h2>
-          <form action="#">
+          <div class="requests-search__container">
+            <h2 class="h2 requests-search__input__header">How can you help?</h2>
             <input autofocus placeholder="Start typing&hellip;" class="search requests-search__autocomplete" />
-          </form>
+          </div>
         </div>
 
         <section class="requests-search__filter">
@@ -45,7 +45,9 @@ jsBundle: giverequests
           </ul>
         </section>
 
-        <div id="js-card-list-output"></div>
+        <div id="js-card-list-output">
+          {{> loading-spinner}}
+        </div>
       </div>
     </div>
   </div>

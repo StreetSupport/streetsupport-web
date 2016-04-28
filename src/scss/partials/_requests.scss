@@ -26,6 +26,15 @@
   text-align: center;
 }
 
+.requests-search__container {
+  width: 100%;
+  margin: 0 auto;
+
+  @include mq($from: l) {
+    width: 75%;
+  }
+}
+
 .requests-search__input__header {
   color: #FFF!important; margin-top: 20px;
 }
@@ -38,10 +47,6 @@
   margin-bottom: 20px;
   padding: 10px;
   width: 100%;
-
-  @include mq($from: l) {
-    width: 75%;
-  }
 }
 
 .requests-search__input__submit {
@@ -100,19 +105,12 @@
   }
 }
 
-.requests-search__sort {
-  margin-bottom: 20px;
-
-  @include mq($from: l) {
-    float: right;
-  }
+.requests-search__sort__list {
+  border: 1px solid #939598;
+  border-radius: 5px;
+  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
+  padding: 10px;
 }
-
-.requests-search__sort__header {
-  display: inline-block;
-  margin-right: 10px;
-}
-
 
 // NOTE: Items need to be fixed width for bricks.js support
 .requests-listing {
