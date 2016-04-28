@@ -38,8 +38,9 @@ var init = function () {
 * @memberOf listToDropdown
 */
 var convertToDropdown = function () {
+  var $list
   for (var i = 0; i < $listToSelect.length; ++i) {
-    var $list = $listToSelect[i]
+    $list = $listToSelect[i]
 
     var id = 'list-to-dropdown_' + i
 
@@ -51,7 +52,7 @@ var convertToDropdown = function () {
   if (utils.isSmallscreen()) {
     var j
     for (j = 0; j < $listToSelect.length; ++j) {
-      var $list = $listToSelect[j]
+      $list = $listToSelect[j]
 
       createDropdown(j, $list)
     }

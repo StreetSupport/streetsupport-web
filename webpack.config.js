@@ -23,6 +23,7 @@ module.exports = {
     organisation: path.join(__dirname, '/src/js/page-organisation'),
     allserviceproviders: path.join(__dirname, '/src/js/page-all-service-providers'),
     giveitems: path.join(__dirname, '/src/js/page-give-items'),
+    giverequests: path.join(__dirname, '/src/js/page-give-requests'),
     giveitemsubmitdetails: path.join(__dirname, '/src/js/page-give-item-submit-details'),
     sponsor: path.join(__dirname, '/src/js/page-sponsor'),
     volunteer: path.join(__dirname, '/src/js/page-volunteer'),
