@@ -32,7 +32,7 @@ $mq-static-breakpoint: l;
 // -----------------------------
 
 $base-font-size: 16px; // Recommended to not change this
-$site-container: rem(1000px); 
+$site-container: rem(1000px);
 $site-gutter: rem(16px);
 $grid-gutter: .25; // Quarter of column width
 $grid-column: 8;
@@ -61,11 +61,19 @@ $font-headline: 'museo-sans-rounded', sans-serif;
 $font-headline-weight: 500;
 
 // Header & Nav
-// NOTE: Subnav on desktop is diasbled for now
 $header-top: 117px;
-$header-height: 47px;
-$header-margin: 47px;
+
+$header-height: 44px;
+$header-margin: 44px;
+
+$header-subnav-height: 85px;
+$header-subnav-margin: 85px;
+
 $nav-width: 220px;
+
+// Used to automatically generate active CSS classes
+$nav-sections: home findhelp givehelp charter about contact;
+$nav-pages: home findhelp emergencyhelp allorganisations givehelp giveitems volunteer donate partnership charter readthecharter pledgeyoursupport joinactiongroup abouthecharter about contact;
 
 // Default Grid Options
 // -----------------------------
