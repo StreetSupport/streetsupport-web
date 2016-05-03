@@ -110,7 +110,10 @@ jsBundle: giverequests
 
   <section class="requests-detail__location">
     <h3 class="h2 requests-detail__location__heading">Location</h3>
-    <img src="holder.js/100px300?text=Google Map Here \n Postcode: \{{{postcode}}}">
+    {{!-- <img src="https://maps.googleapis.com/maps/api/staticmap?center=\{{{postcode}}}&zoom=13&size=1250x440&markers=color:red%7C\{{{postcode}}}" class="requests-detail__map"> --}}
+
+    <iframe frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDKuLdsfUAztpx0EZC1qTsqq5LgDp9RKuU&q=\{{{postcode}}}" allowfullscreen class="requests-detail__map">
+    </iframe>
   </section>
 
   <section class="block">
@@ -118,21 +121,19 @@ jsBundle: giverequests
       <div class="block__content requests-detail__metadata">
         <h3 class="h2 requests-detail__metadata__heading">Contact details</h3>
 
-        {{!-- <div class="accordion__incopy">
-          <div class="accordion js-accordion">
-            <button id="requests-detail__contact" class="h3 accordion__header js-header">
-                Lorem ipsom dolor amet
-                <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
-                <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
-            </button>
-            <div class="accordion__item js-item" id="requests-detail__contact">
-              <div class="accordion__inner">
-                <p>Email: <a href="mailto:\{{{email}}}">\{{{email}}}</a></p>
-                <p><strong>Developer Note: </strong>This should be a call to action which opens a form</p>
-              </div>
+        <div class="accordion js-accordion requests-detail__accordion">
+          <button id="requests-detail__contact" class="h3 accordion__header js-header">
+              Lorem ipsom dolor amet
+              <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/  assets/svgsprite.svg#plus"></use></svg>
+              <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
+          </button>
+          <div class="accordion__item js-item" id="requests-detail__contact">
+            <div class="accordion__inner">
+              <p>Email: <a href="mailto:\{{{email}}}">\{{{email}}}</a></p>
+              <p><strong>Developer Note: </strong>This should be a call to action which opens a form</p>
             </div>
           </div>
-        </div> --}}
+        </div>
       </div>
     </div>
   </section>
