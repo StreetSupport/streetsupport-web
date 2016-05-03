@@ -23,6 +23,20 @@ if [[ $TRAVIS_BRANCH == 'develop' ]]
     APIENVIRONMENT=1
 fi
 
+# block robots if not live
+if [[ $TRAVIS_BRANCH == 'develop' ]] || [[ $TRAVIS_BRANCH == 'uat' ]]
+  then
+    cd src/files
+
+    echo "User-agent: *" > robots.txt
+    echo "Disallow /" >> robots.txt
+
+    echo "robots.txt rewritten to:"
+    cat robots.txt
+
+    cd ../../
+fi
+
 # Get the commit details
 THE_COMMIT=`git rev-parse HEAD`
 
