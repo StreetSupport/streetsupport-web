@@ -27,11 +27,9 @@ fi
 if [[ $TRAVIS_BRANCH == 'develop' ]] || [[ $TRAVIS_BRANCH == 'uat' ]]
   then
     cd src/files
-    rm robots.txt
-    cat > robots.txt << EOF
-    User-agent: *
-    Disallow: /
-    EOF
+
+    echo "User-agent: *" > robots.txt
+    echo "Disallow /" >> robots.txt
 
     echo "robots.txt rewritten to:"
     cat robots.txt
