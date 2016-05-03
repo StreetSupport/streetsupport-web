@@ -4,6 +4,8 @@ description: Street support makes it easier to help homeless people in Mancheste
 layout: default.hbs
 permalink: false
 jsBundle: generic
+section: givehelp
+page: givehelp
 ---
 
 <div class="block block--breadcrumbs">
@@ -18,7 +20,7 @@ jsBundle: generic
 <div class="block block--header">
   <div class="container">
     <h1 class="h1 block__header">Give Help</h1>
-    <h2 class="h2 block__sub-header">Help homeless people in Manchester by supporting local charities and voluntary groups</h2>
+    <h2 class="h2 block__sub-header">Meet the needs of local charities and voluntary groups</h2>
   </div>
 </div>
 
@@ -26,10 +28,10 @@ jsBundle: generic
   <div class="container">
     <div class="block__content">
       <div class="block__cta block__cta--incopy">
-        {{>cta brand="e" link="give-items/" icon="give" name="Give" label="Respond to things organisations need"}}
-        {{>cta brand="e" link="volunteer/" icon="volunteer" name="Volunteer" label="Offer your skills, time &amp; resources"}}
-        {{>cta brand="e" link="donate/" icon="donate" name="Donate" label="Fund accomodation &amp; practical items"}}
-        {{>cta brand="e" link="sponsor/" icon="partnerships" name="Partnership" label="Corporate sponsorship opportunities"}}
+        {{>cta brand="e" link="/give-items/" icon="give" name="Give" label="Respond to things organisations need"}}
+        {{>cta brand="e" link="/volunteer/" icon="volunteer" name="Volunteer" label="Offer your skills, time &amp; resources"}}
+        {{>cta brand="e" link="/donate/" icon="donate" name="Donate" label="Fund accomodation &amp; practical items"}}
+        {{>cta brand="e" link="/partnership/" icon="partnerships" name="Partnership" label="Corporate sponsorship opportunities"}}
       </div>
 
       {{> social-share}}
