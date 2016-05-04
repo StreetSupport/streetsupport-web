@@ -2,8 +2,12 @@
   @include cf();
   background-color: $brand-a;
 
-  @include mq($from: l) {
-    margin-bottom: $header-margin;
+  @include mq($from: m) {
+    margin-bottom: $header-subnav-margin;
+
+    .section--nosubnav & {
+      margin-bottom: $header-margin;
+    }
   }
 
   &__title {
@@ -12,7 +16,7 @@
     display: inline-block;
     color: #fff;
 
-    @include mq($from: l) {
+    @include mq($from: m) {
       display: block;
       margin: 35px 0;
     }
@@ -22,7 +26,7 @@
       color: inherit;
       display: block;
 
-      @include mq($from: l) {
+      @include mq($from: m) {
         text-align: center;
       }
     }
@@ -39,7 +43,7 @@
       vertical-align: top;
       line-height: 43px;
 
-      @include mq($from: l) {
+      @include mq($from: m) {
         font-size: 22px;
       }
     }
@@ -56,7 +60,7 @@
     font-family: $font-headline;
     font-weight: $font-headline-weight;
 
-    @include mq($from: l) {
+    @include mq($from: m) {
       display: none;
     }
 
@@ -68,6 +72,8 @@
   }
 
   @media print {
-    & { display: none }
+    & {
+      display: none
+    }
   }
 }
