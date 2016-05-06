@@ -88,39 +88,78 @@ jsBundle: giverequests
 
 <script id="js-card-detail-tpl" type="text/template">
   \{{#card}}
-  <div class="block block--intro">
-    <div class="container block__inner">
-      <h1 class="h1 block__header">\{{{description}}}</h1>
-      <h2 class="h2 block__subheader requests-detail__type">Request: \{{{type}}} \{{#donationAmountInPounds}}- £\{{donationAmountInPounds}}\{{/donationAmountInPounds}}</h2>
-      <p><a href="#" class="js-card-back">Back to Requests</a></p>
-    </div>
-  </div>
-
-  <div class="block">
+  <section class="block">
     <div class="container block__inner">
       <div class="block__content">
-        <h2 class="h2">\{{{serviceProviderName}}}</h2>
-        <h3 class="h3">\{{{serviceProviderSynopsis}}}</h3>
-        <p>Posted: \{{{creationDate}}}</p>
+        <h1 class="h1 block__subheader requests-detail__type with-icon">
+         <svg class="svg-logo-dims requests-detail__icon">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#logo"></use>
+        </svg>
+        Request: \{{{type}}} \{{#donationAmountInPounds}}- £\{{donationAmountInPounds}}\{{/donationAmountInPounds}}</h1>
+
+        {{!-- <h2 class="h1 block__header request-detail__description">\{{{description}}}</h2> --}}
+        <h2 class="h2 requests-detail__name">\{{{serviceProviderName}}}</h2>
+        <h3 class="h3 requests-detail__synopsis">\{{{serviceProviderSynopsis}}}</h3>
+        <p class="requests-detail__date">Posted: \{{{creationDate}}}</p>
         <p>\{{{reason}}}</p>
         <p>\{{{instructions}}}</p>
-        <h3 class="h2">Location</h3>
-        <img src="holder.js/100px300?text=Google Map Here \n Postcode: \{{{postcode}}}">
 
-        <h3 class="h2">Contact details</h3>
-        <p>Email: <a href="mailto:\{{{email}}}">\{{{email}}}</a></p>
-        <p><strong>Developer Note: </strong>This should be a call to action which opens a form</p>
+      </div>
+    </div>
+  </section>
 
-        <h3 class="h2">Share this request</h3>
-        <p>If you cannot fulfill this need but know someone who can, please send this request on:</p>
-        <ul>
-          <li>Facebook</li>
-          <li>Twitter</li>
-          <li>Send an Email</li>
+  <section class="requests-detail__location">
+    <h3 class="h2 requests-detail__location__heading">Location</h3>
+    {{!-- <img src="https://maps.googleapis.com/maps/api/staticmap?center=\{{{postcode}}}&zoom=13&size=1250x440&markers=color:red%7C\{{{postcode}}}" class="requests-detail__map"> --}}
+
+    <iframe frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDKuLdsfUAztpx0EZC1qTsqq5LgDp9RKuU&q=\{{{postcode}}}" allowfullscreen class="requests-detail__map">
+    </iframe>
+  </section>
+
+  <section class="block">
+    <div class="container block__inner">
+      <div class="block__content requests-detail__metadata">
+        <h3 class="h2 requests-detail__metadata__heading">Contact details</h3>
+
+        <div class="accordion js-accordion requests-detail__accordion">
+          <button id="requests-detail__contact" class="h3 accordion__header js-header">
+              Lorem ipsom dolor amet
+              <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/  assets/svgsprite.svg#plus"></use></svg>
+              <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
+          </button>
+          <div class="accordion__item js-item" id="requests-detail__contact">
+            <div class="accordion__inner">
+              <p>Email: <a href="mailto:\{{{email}}}">\{{{email}}}</a></p>
+              <p><strong>Developer Note: </strong>This should be a call to action which opens a form</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="container block__inner">
+      <div class="block__content requests-detail__metadata">
+
+        <h3 class="h2 requests-detail__metadata__heading">Share this request</h3>
+        <p>If you cannot share this need but know someone who can please share this request on:</p>
+        <ul class="list-unstyled list-inline requests-detail__share-list">
+          <li class="list-inline__item requests-detail__share-list__item">
+            {{>icon name="facebook" class="requests-detail__share-list__icon"}}
+            <a href="#" class="">Facebook</a>
+          </li>
+          <li class="list-inline__item requests-detail__share-list__item">
+            {{>icon name="twitter" class="requests-detail__share-list__icon"}}
+            <a href="#" class="">Twitter</a>
+          </li>
+          <li class="list-inline__item requests-detail__share-list__item">
+            {{>icon name="email" class="requests-detail__share-list__icon"}}
+            <a href="#" class="">Send an Email</a>
+          </li>
         </ul>
       </div>
-      <p><a href="#" class="js-card-back">Back to Requests</a></p>
     </div>
-  </div>
+  </section>
   \{{/card}}
 </script>

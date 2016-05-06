@@ -20,7 +20,7 @@
 }
 
 .requests-search__input {
-  background: linear-gradient(#0B9B75, #086149);
+  background: linear-gradient($brand-b, $brand-p);
   border-radius: 5px 5px 0 0;
   padding: 10px 20px 20px 20px;
   text-align: center;
@@ -149,7 +149,8 @@
 }
 
 .requests-listing__info {
-  background: linear-gradient(#074233, #0A6C52); // @todo need SVG for this background image
+  background-image: url('../img/header-background.png');
+  background-repeat: repeat;
   margin-left: -1px;
   margin-right: -1px;
   padding: 20px;
@@ -225,10 +226,6 @@
   &.is-hidden {
     display: none;
   }
-}
-
-.requests-detail__type {
-  text-transform: capitalize;
 }
 
 // Awesomecomplete
