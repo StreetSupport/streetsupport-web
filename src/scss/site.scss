@@ -14,7 +14,7 @@
 // Street Support Base Partials
 
 @import 'partials/base';
-@import "partials/svgsprite";
+@import 'partials/svgsprite';
 @import 'partials/container';
 @import 'partials/typography';
 @import 'partials/btn';
@@ -32,7 +32,7 @@
 
 @import "partials/block-ssn"; // Specific SSN block variants
 @import 'partials/form';
-@import 'partials/list-grid';
+@import 'partials/lists';
 @import 'partials/highlight';
 @import 'partials/template';
 @import 'partials/needs';
@@ -42,3 +42,7 @@
 @import 'partials/social-share';
 @import 'partials/partners';
 @import 'partials/content-grid';
+
+
+@import 'partials/requests';
+@import 'partials/requests-detail';

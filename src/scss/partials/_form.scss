@@ -1,78 +1,79 @@
+// Forms - generic global form styles
+
 .form {
   @include cf();
+}
 
-  &__fieldset {
-    border: none;
-    margin: 20px 0 0 0;
-    padding: 0;
+.form__fieldset {
+  border: none;
+  margin: 20px 0 0 0;
+  padding: 0;
+}
+
+.form__fieldset-title {
+  margin-bottom: 5px;
+}
+
+.form__field-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.form__field-item {
+  @include cf();
+
+  padding: 5px 0;
+  position: relative;
+
+  @include mq($from: m) {
+    @include span(4 of $grid-column);
   }
+}
 
-  &__fieldset-title {
-		margin-bottom: 5px;
+.form__field-item--full {
+  @include mq($from: m) {
+    @include span(full);
   }
+}
 
-  &__field-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
+.form__label {
+  display: block;
+  margin-bottom: 10px;
+}
 
-  &__field-item {
-    padding: 5px 0;
-    @include cf();
-    position: relative;
+.form__label--checkbox {
+  float: left;
+  margin-right: 1em;
+}
 
-		@include mq($from: m) {
-      @include span(4 of $grid-column);
-		}
+.form__input {
+  border: 1px solid $brand-f;
+  padding: 5px;
+  width: 100%;
+}
 
-		&--full {
-			@include mq($from: m) {
-	      @include span(full);
-			}
-		}
-  }
+.form__input--multiline {
+  min-height: 8rem;
+  width: 100%;
+}
 
-  &__label {
-    display: block;
-    margin-bottom: 10px;
+.form__input--error {
+  border: 1px solid $brand-g;
+}
 
-    &--checkbox {
-      float: left; margin-right: 1em;
-    }
-  }
+.form__error {
+  color: $brand-g;
+  display: block;
+  font-family: $font-headline;
+  font-weight: $font-headline-weight;
+  margin-top: 7px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
-  &__input {
-    padding: 5px;
-		width: 100%;
-    border: 1px solid $brand-f;
-
-		&--multiline {
-			width: 100%;
-      min-height: 8rem;
-    }
-
-    &--error {
-      border: 1px solid $brand-g;
-    }
-
-    &--checkbox {
-    }
-  }
-
-  &__error {
-    font-family: $font-headline;
-    font-weight: $font-headline-weight;
-    margin-top: 7px;
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: $brand-g;
-  }
-
-  &__submit {
-    margin-top: 10px;
-    float: right;
-  }
+.form__submit {
+  float: right;
+  margin-top: 10px;
 }
