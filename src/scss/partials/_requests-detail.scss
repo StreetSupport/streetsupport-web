@@ -28,6 +28,7 @@
 
 .requests-detail__synopsis {
   color: $brand-k;
+  margin-bottom: 10px;
 }
 
 .requests-detail__date {
@@ -81,6 +82,10 @@
 
 .requests-detail__metadata {
   text-align: center;
+}
+
+.requests-detail__form {
+  text-align: left;
 }
 
 .requests-detail__metadata__heading {
