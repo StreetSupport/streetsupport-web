@@ -22,11 +22,14 @@ body {
   font-size: $base-font-size;
 }
 
-html,
-body {
-  &.is-active {
-    overflow: hidden;
-    height: 100%;
+@include mq($until: m) {
+  html,
+  body {
+    &.is-active {
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
   }
 }
 

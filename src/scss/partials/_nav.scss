@@ -34,7 +34,7 @@
     height: 100%;
     width: $nav-width;
     z-index: 30;
-    overflow: auto;
+    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 
     transition: transform 250ms cubic-bezier(.16, .68, .43, .99);
@@ -52,7 +52,7 @@
       transform: none;
       box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.7);
       border-top: 2px solid $brand-i;
-      overflow: hidden;
+      overflow-y: hidden;
 
       .section--nosubnav & {
         height: $header-height;
@@ -168,7 +168,7 @@
       &--sub-item {
         display: inline-block;
         font-size: 14px;
-        margin: 0 -4px 0 0; // inline-block whitespace fix        
+        margin: 0 -4px 0 0; // inline-block whitespace fix
 
         a {
           &:hover {
