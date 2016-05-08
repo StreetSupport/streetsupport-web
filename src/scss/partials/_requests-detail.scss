@@ -71,7 +71,12 @@
 .requests-detail__map {
   border: 0;
   display: block;
+  min-height: 200px;
   width: 100%;
+
+  @include mq($from: l) {
+    min-height: 440px;
+  }
 }
 
 .requests-detail__metadata {
@@ -104,10 +109,4 @@
 
   display: block;
   margin: 0 auto 10px;
-
-  outline: 1px solid black; // for dev
-
-
-  // @todo
-  // fill: $brand-h;
 }
