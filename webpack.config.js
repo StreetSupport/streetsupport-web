@@ -22,6 +22,7 @@ module.exports = {
     categorybyday: path.join(__dirname, '/src/js/page-category-by-day'),
     organisation: path.join(__dirname, '/src/js/page-organisation'),
     allserviceproviders: path.join(__dirname, '/src/js/page-all-service-providers'),
+    giverequests: path.join(__dirname, '/src/js/page-give-requests'),
     giveitems: path.join(__dirname, '/src/js/page-give-items'),
     giveitemsubmitdetails: path.join(__dirname, '/src/js/page-give-item-submit-details'),
     sponsor: path.join(__dirname, '/src/js/page-sponsor'),
