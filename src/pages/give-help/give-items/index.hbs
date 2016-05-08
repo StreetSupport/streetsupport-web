@@ -64,10 +64,9 @@ jsBundle: giverequests
       <a class="requests-listing__link" href="#">
         <article>
           <p class="h3 requests-listing__type">
-            {{!-- @todo: awaiting icons --}}
-            {{!--  <svg class="svg-logo-dims requests-listing__icon">
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#logo"></use>
-            </svg> --}}
+             <svg class="svg-logo-dims requests-listing__icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#\{{{type}}}-alt"></use>
+            </svg>
             <span class="type">\{{type}}</span>
           </p>
           \{{#donationAmountInPounds}}<p class="requests-listing__amount">£\{{{donationAmountInPounds}}}</p>\{{/donationAmountInPounds}}
@@ -92,20 +91,16 @@ jsBundle: giverequests
   <section class="block">
     <div class="container block__inner">
       <div class="block__content">
-        <h1 class="h1 block__subheader requests-detail__type">
-        {{!-- @todo: awaiting icons --}}
-        {{!-- <svg class="svg-logo-dims requests-detail__icon">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#logo"></use>
-        </svg> --}}
+        <h1 class="h1 block__subheader requests-detail__type with-icon">
+        <svg class="svg-logo-dims requests-detail__icon">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#\{{{type}}}-alt"></use>
+        </svg>
         Request: \{{{type}}} \{{#donationAmountInPounds}}- £\{{donationAmountInPounds}}\{{/donationAmountInPounds}}</h1>
-
-        {{!-- <h2 class="h1 block__header request-detail__description">\{{{description}}}</h2> --}}
         <h2 class="h2 requests-detail__name">\{{{serviceProviderName}}}</h2>
         <h3 class="h3 requests-detail__synopsis">\{{{serviceProviderSynopsis}}}</h3>
         <p class="requests-detail__date">Posted: \{{{creationDate}}}</p>
         <p>\{{{reason}}}</p>
         <p>\{{{instructions}}}</p>
-
       </div>
     </div>
   </section>
