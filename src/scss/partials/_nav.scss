@@ -1,3 +1,31 @@
+// Active Subnav
+@include mq($from: m) {
+  @each $section in $nav-sections {
+    .section--#{$section} .nav__item--#{$section} {
+      background-color: $brand-i;
+
+      .nav__list--sub-list {
+        display: block;
+      }
+    }
+  }
+}
+
+// Active page
+@each $page in $nav-pages {
+  .page--#{$page} {
+    .nav__item--#{$page} > a {
+      text-decoration: underline;
+
+      @include mq($from: m) {
+        background-color: #fff;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+// Nav code
 .nav {
   &__container {
     position: fixed;
@@ -14,23 +42,27 @@
 
     background-color: $brand-c;
 
-    @include mq($from: l) {
+    @include mq($from: m) {
       background-color: $brand-j;
       position: absolute;
       top: $header-top;
       width: 100%;
-      height: $header-height;
+      height: $header-subnav-height;
       transition: none;
       transform: none;
       box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.7);
       border-top: 2px solid $brand-i;
       overflow: hidden;
+
+      .section--nosubnav & {
+        height: $header-height;
+      }
     }
 
     &.is-active {
       transform: translate3d(0px, 0, 0);
 
-      @include mq($from: l) {
+      @include mq($from: m) {
         transform: none;
       }
     }
@@ -42,7 +74,7 @@
     &.is-active {
       transform: translate3d(-$nav-width, 0, 0);
 
-      @include mq($from: l) {
+      @include mq($from: m) {
         transform: none;
       }
     }
@@ -65,7 +97,7 @@
       opacity: 1;
       display: block;
 
-      @include mq($from: l) {
+      @include mq($from: m) {
         display: none;
         opacity: 0;
       }
@@ -79,7 +111,7 @@
     margin: 0;
     color: #fff;
 
-    @include mq($from: l) {
+    @include mq($from: m) {
       display: none;
     }
 
@@ -95,7 +127,7 @@
     padding: 0;
     list-style-type: none;
 
-    @include mq($from: l) {
+    @include mq($from: m) {
       margin: 0;
       padding: 0;
       text-align: center;
@@ -106,7 +138,7 @@
       margin: 10px 0 0 10px;
       padding: 0;
 
-      @include mq($from: l) {
+      @include mq($from: m) {
         display: none;
         position: absolute;
         top: 42px;
@@ -127,23 +159,24 @@
     margin-top: 25px;
     font-weight: $font-headline-weight;
 
-    @include mq($from: l) {
-      margin: 0;
+    @include mq($from: m) {
+      margin: 0 -4px 0 0; // inline-block whitespace fix
       padding: 0;
       display: inline-block;
       border: 0;
-      margin-right: -4px;
-    }
 
-    &--sub-item {
-      @include mq($from: l) {
+      &--sub-item {
         display: inline-block;
         font-size: 14px;
-        margin: 0
-      }
-    }
+        margin: 0 -4px 0 0; // inline-block whitespace fix        
 
-    @include mq($from: l) {
+        a {
+          &:hover {
+            background-color: #fff !important; // cancel out background colour animation
+          }
+        }
+      }
+
       &--active {
         background-color: $brand-i;
 
@@ -159,7 +192,7 @@
       display: block;
       padding: 5px 0;
 
-      @include mq($from: l) {
+      @include mq($from: m) {
         padding: 10px 30px;
         color: $brand-k;
         transition: background-color 150ms linear;
