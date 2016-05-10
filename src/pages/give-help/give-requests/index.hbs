@@ -1,13 +1,12 @@
 ---
-title: Give Items - Street Support
-description: Street support makes it easier to help homeless people. Here's how to get in touch.
+title: Requests for Help - Street Support
+description: Organisations need a variety of help in terms of financial support, donations of items and volunteering help - can you fulfil their needs?
 layout: default.hbs
 permalink: false
 jsBundle: giverequests
 section: givehelp
-page: giverequests
+page: giveitems
 ---
-
 <div class="block block--breadcrumbs">
   <div class="container">
     <ol class="breadcrumbs__list">
@@ -19,25 +18,56 @@ page: giverequests
 </div>
 {{> no-js}}
 
-<div class="block block--subpage-header">
-  <div class="container">
-    <h1 class="h1 block__header">Give</h1>
-    <h2 class="h2 block__sub-header">Give time, money and items that are needed</h2>
+<div id="js-card-search" class="requests-search is-active">
+  <div class="block block--intro requests-search__intro">
+    <div class="container block__inner">
+      <h1 class="h1 block__header">Requests</h1>
+      <a href="give-help.html">Other ways to give help</a>
+    </div>
   </div>
-</div>
 
-<div class="block">
-  <div class="container">
-    <div class="block__content">
-      <p>Organisations need a diverse range of resources to provide support to homeless people. If you are able to meet any of their current needs, click the 'I can help!' button, and let us know what you can give.</p>
-      <p>This section of the site is currently being improved, so please check back soon for more ways to give. In the meantime, let us know what skills, time and resources you have to offer by filling in our <a href="/give-help/volunteer/">volunteer form</a>.</p>
+  <div class="block">
+    <div class="container block__inner">
+      <div class="block__content">
+        <div class="requests-search__input" action="#">
+          <div class="requests-search__container">
+            <h2 class="h2 requests-search__input__header">How can you help?</h2>
+            <input autofocus placeholder="Start typing&hellip;" class="search requests-search__autocomplete" />
+          </div>
+        </div>
 
-      <div id="js-need-list-output" class="template"></div>
-      {{> social-share}}
+        <section class="requests-search__filter">
+          <ul class="requests-search__filter__list js-filter-list">
+            <li class="hide-screen"><h3>Filter</h3></li>
+            <li class="requests-search__filter__item js-filter-item js-filter-item-all is-active" data-filter="all">All</li>
+            <li class="requests-search__filter__item js-filter-item" data-filter="items">Items</li>
+            <li class="requests-search__filter__item js-filter-item" data-filter="time">Time</li>
+            <li class="requests-search__filter__item js-filter-item" data-filter="money">Money</li>
+            <li class="requests-search__filter__item" data-filter="money">
+              <select class="requests-search__sort__list js-sort-dropdown">
+                <option value="organisation">Sort by:</option>
+                  <option value="organisation-asc">Organisation name (A-Z)</option>
+                <option value="organisation-desc">Organisation name (Z-A)</option>
+                <option value="date-desc">Date posted (Newest)</option>
+                <option value="date-asc">Date posted (Oldest)</option>
+                <option value="distance-asc">Distance (Nearest)</option>
+                <option value="distance-desc">Distance (Furthest)</option>
+              </select>
+            </li>
+          </ul>
+        </section>
+
+        <div id="js-card-list-output">
+          {{> loading-spinner}}
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
+<div class="requests-detail js-card-detail is-hidden">
+  <div id="js-card-detail-output" class="template"></div>
+</div>
 
 <script id="js-card-list-tpl" type="text/template">
   <ul id="js-card-list" class="requests-listing list">

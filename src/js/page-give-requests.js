@@ -7,7 +7,6 @@ import './common'
 var Awesomplete = require('awesomplete') // eslint-disable-line
 var geolib = require('geolib')
 import List from 'list.js'
-// var ListFuzzySearch = require('imports?this=>window!../../node_modules/list.fuzzysearch.js/dist/list.fuzzysearch.js')
 import Holder from 'holderjs'
 import Bricks from 'bricks.js'
 
@@ -18,7 +17,6 @@ var getApiData = require('./get-api-data')
 var getLocation = require('./get-location')
 var templating = require('./template-render')
 var getUrlParams = require('./get-url-parameter')
-// var Spinner = require('spin.js')
 var accordion = require('./accordion')
 var socialShare = require('./social-share')
 
@@ -39,7 +37,6 @@ getApiData.data(apiRoutes.needs)
     var needsFromApi = result.data
 
     var renderNeeds = function () {
-      console.log('rendering needs')
       // Change to relative date
       ForEach(needsFromApi, function (data) {
         data.formattedCreationDate = moment(data.creationDate).fromNow()
@@ -53,8 +50,14 @@ getApiData.data(apiRoutes.needs)
         .filter((k) => k.length > 0)
         .join(',')
 
+        console.log(keywords)
+
       var input = document.querySelector('.search')
+        console.log(input)
       var awesomplete = new Awesomplete(input, {list: keywords}) // eslint-disable-line
+
+        console.log(awesomplete)
+
 
       // Template callback
       var listCallback = function () {
@@ -62,6 +65,8 @@ getApiData.data(apiRoutes.needs)
         buildCard(needsFromApi)
         browser.loaded()
       }
+
+      console.log(theData)
 
       templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', listCallback)
     }
