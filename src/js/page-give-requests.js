@@ -1,6 +1,5 @@
 /* global history */
 
-// Common modules
 import './common'
 
 // Page modules
@@ -19,16 +18,14 @@ var templating = require('./template-render')
 var getUrlParams = require('./get-url-parameter')
 var accordion = require('./accordion')
 var socialShare = require('./social-share')
+import listToSelect from './list-to-dropdown'
 
 import Find from 'lodash/collection/find'
 import ForEach from 'lodash/collection/forEach'
-
 import moment from 'moment'
 
-import listToSelect from './list-to-dropdown'
 
 listToSelect.init()
-
 browser.loading()
 
 // Get API data using promise
@@ -50,14 +47,9 @@ getApiData.data(apiRoutes.needs)
         .filter((k) => k.length > 0)
         .join(',')
 
-        console.log(keywords)
 
       var input = document.querySelector('.search')
-        console.log(input)
       var awesomplete = new Awesomplete(input, {list: keywords}) // eslint-disable-line
-
-        console.log(awesomplete)
-
 
       // Template callback
       var listCallback = function () {
@@ -65,8 +57,6 @@ getApiData.data(apiRoutes.needs)
         buildCard(needsFromApi)
         browser.loaded()
       }
-
-      console.log(theData)
 
       templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', listCallback)
     }
@@ -120,9 +110,7 @@ var buildList = function () {
    // List.js
   var options = {
     valueNames: [ 'type', 'serviceProviderName', 'creationDate', 'description', 'keywords', 'distanceAwayInMetres' ],
-    plugins: [
-      // ListFuzzySearch()
-    ]
+    plugins: []
   }
 
   const theList = new List('js-card-search', options)
@@ -147,19 +135,14 @@ var buildList = function () {
       var getFilter = this.getAttribute('data-filter')
       event.preventDefault()
 
-      console.log('filter clicked: ' + getFilter)
-
       if (getFilter === 'all') {
         resetFiltering()
       } else {
         if (this.classList.contains('is-active')) {
-          console.log('this filter is already active')
           this.classList.remove('is-active')
           activeFilters.splice(activeFilters.indexOf(getFilter), 1)
           runFiltering()
         } else {
-          console.log('this filter is not already active')
-
           document.querySelector('.js-filter-item-all').classList.remove('is-active')
           this.classList.add('is-active')
           activeFilters.push(getFilter)
@@ -174,15 +157,11 @@ var buildList = function () {
   var filterList = document.querySelectorAll('.js-filter-list.list-to-dropdown__select')
   for (c = 0; c < filterList.length; c++) {
     filterList[c].addEventListener('change', function () {
-      console.log('filtering')
     })
   }
 
   var runFiltering = function () {
-    console.log('active filters: ' + activeFilters)
-
     if (activeFilters.length === 0) {
-      console.log('no active filters, abort and reset')
       resetFiltering()
       return
     }
@@ -203,9 +182,6 @@ var buildList = function () {
     var filters = document.querySelectorAll('.js-filter-item')
 
     activeFilters = []
-
-    console.log('reset filter function')
-    console.log('active filters (there should be none): ' + activeFilters)
 
     for (c = 0; c < filters.length; c++) {
       filters[c].classList.remove('is-active')
@@ -228,7 +204,6 @@ var buildList = function () {
 
       let selectedSort = this.options[this.selectedIndex].value
       let [field, direction] = selectedSort.split('-')
-      console.log(sortFields[field])
       theList.sort(sortFields[field], { order: direction })
       cardLayout.pack()
     })
@@ -239,8 +214,6 @@ var buildCard = function (data) {
   var openCard = function (el, cardBackOnClick) {
     var theId = el.getAttribute('data-id')
     var cardData = Find(theApiData, function (o) { return o.id === theId })
-
-    console.log(cardData)
 
     // hide search
     document.querySelector('#js-card-search').classList.remove('is-active')
@@ -321,11 +294,3 @@ var buildCard = function (data) {
     document.querySelector('.js-card-detail').classList.add('is-hidden')
   }
 }
-
-// Example bricks.js api
-/*
-cardSort
-  .on('pack', () => console.log('ALL grid items packed.'))
-  .on('update', () => console.log('NEW grid items packed.'))
-  .on('resize', size => console.log('The grid has be re-packed to accommodate a new BREAKPOINT.'))
-*/
