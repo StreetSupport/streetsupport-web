@@ -114,7 +114,7 @@ page: giveitems
         Request: \{{{type}}} \{{#donationAmountInPounds}}- £\{{donationAmountInPounds}}\{{/donationAmountInPounds}}</h1>
         <h2 class="h2 requests-detail__name">\{{{serviceProviderName}}}</h2>
         <h3 class="h3 requests-detail__synopsis">\{{{serviceProviderSynopsis}}}</h3>
-        <p class="requests-detail__date">Posted: \{{{creationDate}}}</p>
+        <p class="requests-detail__date">Posted: \{{{formattedCreationDate}}}</p>
         <p>\{{{reason}}}</p>
         <p>\{{{instructions}}}</p>
       </div>
@@ -124,7 +124,7 @@ page: giveitems
   <section class="requests-detail__location">
     <h3 class="h2 requests-detail__location__heading">Location</h3>
     {{!-- @todo: need real API key before going live --}}
-    <iframe frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCwsg151CBWQ7kyeApw5TTfY6CMl9YDXHQ&q=\{{{postcode}}}" allowfullscreen class="requests-detail__map">
+    <iframe frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDDRleVy8KJBzTPu-KZ1aMCoU7gC-u2mfk&q=\{{{postcode}}}" allowfullscreen class="requests-detail__map">
     </iframe>
   </section>
 
