@@ -24,7 +24,6 @@ import Find from 'lodash/collection/find'
 import ForEach from 'lodash/collection/forEach'
 import moment from 'moment'
 
-
 listToSelect.init()
 browser.loading()
 
@@ -46,7 +45,6 @@ getApiData.data(apiRoutes.needs)
         .map((n) => n.keywords)
         .filter((k) => k.length > 0)
         .join(',')
-
 
       var input = document.querySelector('.search')
       var awesomplete = new Awesomplete(input, {list: keywords}) // eslint-disable-line
@@ -114,6 +112,8 @@ var buildList = function () {
   }
 
   const theList = new List('js-card-search', options)
+  theList.sort('creationDate', { order: 'desc' })
+  cardLayout.pack()
 
   // List.js Triggers
   theList.on('sortStart', () =>
