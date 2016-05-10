@@ -19,6 +19,8 @@ var getLocation = require('./get-location')
 var templating = require('./template-render')
 var getUrlParams = require('./get-url-parameter')
 // var Spinner = require('spin.js')
+var accordion = require('./accordion')
+var socialShare = require('./social-share')
 
 import Find from 'lodash/collection/find'
 import ForEach from 'lodash/collection/forEach'
@@ -222,7 +224,7 @@ var buildList = function () {
       let selectedSort = this.options[this.selectedIndex].value
       let [field, direction] = selectedSort.split('-')
       console.log(sortFields[field])
-      theList.sort(sortFields[field], { order: direction });
+      theList.sort(sortFields[field], { order: direction })
       cardLayout.pack()
     })
 }
@@ -264,6 +266,9 @@ var buildCard = function (data) {
           cardBackOnClick()
         })
       }
+
+      accordion.init(false)
+      socialShare.updateSharePageHrefs()
     }
 
     templating.renderTemplate('js-card-detail-tpl', theCardTemplateData, 'js-card-detail-output', cardCallback)

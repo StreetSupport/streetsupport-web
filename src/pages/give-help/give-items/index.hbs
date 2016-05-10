@@ -64,8 +64,8 @@ jsBundle: giverequests
       <a class="requests-listing__link" href="#">
         <article>
           <p class="h3 requests-listing__type">
-            <svg class="svg-logo-dims requests-listing__icon">
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#logo"></use>
+             <svg class="svg-logo-dims requests-listing__icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#\{{{type}}}-alt"></use>
             </svg>
             <span class="type">\{{type}}</span>
           </p>
@@ -92,27 +92,23 @@ jsBundle: giverequests
     <div class="container block__inner">
       <div class="block__content">
         <h1 class="h1 block__subheader requests-detail__type with-icon">
-         <svg class="svg-logo-dims requests-detail__icon">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#logo"></use>
+        <svg class="svg-logo-dims requests-detail__icon">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#\{{{type}}}-alt"></use>
         </svg>
         Request: \{{{type}}} \{{#donationAmountInPounds}}- £\{{donationAmountInPounds}}\{{/donationAmountInPounds}}</h1>
-
-        {{!-- <h2 class="h1 block__header request-detail__description">\{{{description}}}</h2> --}}
         <h2 class="h2 requests-detail__name">\{{{serviceProviderName}}}</h2>
         <h3 class="h3 requests-detail__synopsis">\{{{serviceProviderSynopsis}}}</h3>
         <p class="requests-detail__date">Posted: \{{{creationDate}}}</p>
         <p>\{{{reason}}}</p>
         <p>\{{{instructions}}}</p>
-
       </div>
     </div>
   </section>
 
   <section class="requests-detail__location">
     <h3 class="h2 requests-detail__location__heading">Location</h3>
-    {{!-- <img src="https://maps.googleapis.com/maps/api/staticmap?center=\{{{postcode}}}&zoom=13&size=1250x440&markers=color:red%7C\{{{postcode}}}" class="requests-detail__map"> --}}
-
-    <iframe frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDKuLdsfUAztpx0EZC1qTsqq5LgDp9RKuU&q=\{{{postcode}}}" allowfullscreen class="requests-detail__map">
+    {{!-- @todo: need real API key before going live --}}
+    <iframe frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCwsg151CBWQ7kyeApw5TTfY6CMl9YDXHQ&q=\{{{postcode}}}" allowfullscreen class="requests-detail__map">
     </iframe>
   </section>
 
@@ -124,13 +120,35 @@ jsBundle: giverequests
         <div class="accordion js-accordion requests-detail__accordion">
           <button id="requests-detail__contact" class="h3 accordion__header js-header">
               Lorem ipsom dolor amet
-              <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/  assets/svgsprite.svg#plus"></use></svg>
+              <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
               <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
           </button>
           <div class="accordion__item js-item" id="requests-detail__contact">
             <div class="accordion__inner">
               <p>Email: <a href="mailto:\{{{email}}}">\{{{email}}}</a></p>
-              <p><strong>Developer Note: </strong>This should be a call to action which opens a form</p>
+
+              <form class="form requests-detail__form">
+                <fieldset class="form__fieldset">
+                  <p>* denotes a required field.</p>
+                  <ul class="form__field-list">
+                    <li class="form__field-item form__field-item--full">
+                      <label class="form__label">Subject</label>
+                      <p>Re: \{{{serviceProviderSynopsis}}}</p>
+                    </li>
+                    <li class="form__field-item">
+                      <label class="form__label" for="email">Email *</label>
+                      <input type="text" class="form__input form__input" id="email"/>
+                    </li>
+                    <li class="form__field-item form__field-item--full">
+                      <label class="form__label" for="message">Message *</label>
+                      <textarea class="form__input form__input--multiline" id="message"></textarea>
+                    </li>
+                  </ul>
+                </fieldset>
+                <button type="submit" class="btn btn--brand-d form__submit">
+                  <span class="btn__text">Submit</span>
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -142,22 +160,30 @@ jsBundle: giverequests
     <div class="container block__inner">
       <div class="block__content requests-detail__metadata">
 
-        <h3 class="h2 requests-detail__metadata__heading">Share this request</h3>
+        <h3 class="h2 requests-detail__metadata__heading">Share this need</h3>
         <p>If you cannot share this need but know someone who can please share this request on:</p>
-        <ul class="list-unstyled list-inline requests-detail__share-list">
-          <li class="list-inline__item requests-detail__share-list__item">
-            {{>icon name="facebook" class="requests-detail__share-list__icon"}}
-            <a href="#" class="">Facebook</a>
-          </li>
-          <li class="list-inline__item requests-detail__share-list__item">
-            {{>icon name="twitter" class="requests-detail__share-list__icon"}}
-            <a href="#" class="">Twitter</a>
-          </li>
-          <li class="list-inline__item requests-detail__share-list__item">
-            {{>icon name="email" class="requests-detail__share-list__icon"}}
-            <a href="#" class="">Send an Email</a>
-          </li>
-        </ul>
+        <div class="social-share">
+          <ul class="list-unstyled list-inline requests-detail__share-list">
+            <li class="list-inline__item requests-detail__share-list__item">
+              <a href="https://twitter.com/intent/tweet?text=\{{{serviceProviderSynopsis}}}&via=streetsupportuk" target="_blank" rel="external" class="js-tweet-page" target="_blank">
+                {{>icon name="twitter-alt" class="requests-detail__share-list__icon"}}
+                Twitter
+              </a>
+            </li>
+            <li class="list-inline__item requests-detail__share-list__item">
+              <a href="https://www.facebook.com/sharer/sharer.php" class="js-fb-share-page" target="_blank">
+                {{>icon name="facebook-alt" class="requests-detail__share-list__icon"}}
+                Facebook
+              </a>
+            </li>
+            <li class="list-inline__item requests-detail__share-list__item">
+              <a href="mailto:?&subject=Request: \{{{serviceProviderSynopsis}}}" class="js-email-page" target="_blank">
+                {{>icon name="email-alt" class="requests-detail__share-list__icon"}}
+                Email
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
