@@ -28,7 +28,9 @@
       "hideSelectors": [],
       "removeSelectors": [],
       "selectors": [
-        "body"
+        ".requests-search__intro",
+        ".requests-search__input",
+        ".requests-search__filter__list"
       ],
       "readyEvent": null,
       "delay": 5000,
