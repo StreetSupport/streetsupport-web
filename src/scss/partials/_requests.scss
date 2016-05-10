@@ -112,6 +112,10 @@
   padding: 10px;
 }
 
+.requests-container {
+  position: relative;
+}
+
 // NOTE: Items need to be fixed width for bricks.js support
 .requests-listing {
   clear: both;
