@@ -268,6 +268,10 @@ let buildCard = function (data) {
       let theId = el.getAttribute('data-id')
       let cardData = Find(data, function (o) { return o.id === theId })
 
+      console.log(cardData)
+
+      cardData.showLocation = cardData.postcode.length > 0 && cardData.type !== 'money'
+
       // hide search
       document.querySelector(searchSelector).classList.remove(activeClass)
       document.querySelector(searchSelector).classList.add(hiddenClass)
