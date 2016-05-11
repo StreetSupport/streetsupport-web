@@ -301,7 +301,7 @@ let buildCard = (data) => {
   }
 
   let openIfCardRequested = () => {
-    let cardId = getUrlParams.parameter('id')
+    let cardId = getUrlParams.parameter('id').replace('/', '')
     if (cardId) {
       let card = Find(document.querySelectorAll('.requests-listing__item'), (c) => {
         return c.getAttribute('data-id') === cardId
