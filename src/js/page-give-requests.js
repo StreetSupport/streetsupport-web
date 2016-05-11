@@ -2,8 +2,8 @@
 
 import './common'
 
-var Awesomplete = require('awesomplete') // eslint-disable-line
-var geolib = require('geolib')
+let Awesomplete = require('awesomplete') // eslint-disable-line
+let geolib = require('geolib')
 import List from 'list.js'
 import Holder from 'holderjs'
 import Bricks from 'bricks.js'
@@ -11,14 +11,14 @@ import Find from 'lodash/collection/find'
 import ForEach from 'lodash/collection/forEach'
 import moment from 'moment'
 
-var apiRoutes = require('./api')
-var browser = require('./browser')
-var getApiData = require('./get-api-data')
-var getLocation = require('./get-location')
-var templating = require('./template-render')
-var getUrlParams = require('./get-url-parameter')
-var accordion = require('./accordion')
-var socialShare = require('./social-share')
+let apiRoutes = require('./api')
+let browser = require('./browser')
+let getApiData = require('./get-api-data')
+let getLocation = require('./get-location')
+let templating = require('./template-render')
+let getUrlParams = require('./get-url-parameter')
+let accordion = require('./accordion')
+let socialShare = require('./social-share')
 import listToSelect from './list-to-dropdown'
 
 let formatDate = (needs) => {
@@ -31,9 +31,9 @@ let formatDate = (needs) => {
 }
 
 let renderNeeds = (needs) => {
-  var theData = { card: needs }
+  let theData = { card: needs }
 
-  var listCallback = function () {
+  let listCallback = () => {
     buildList()
     buildCard(needs)
     browser.loaded()
@@ -43,20 +43,20 @@ let renderNeeds = (needs) => {
 }
 
 let initAutoComplete = (needs) => {
-  var keywords = needs
+  let keywords = needs
     .map((n) => n.keywords)
     .filter((k) => k.length > 0)
     .join(',')
 
-  var input = document.querySelector('.search')
-  var awesomplete = new Awesomplete(input, {list: keywords}) // eslint-disable-line
+  let input = document.querySelector('.search')
+  let awesomplete = new Awesomplete(input, {list: keywords}) // eslint-disable-line
 }
 
 let useDistanceForLocation = (position, needs) => {
-  var latitude = position.coords.latitude
-  var longitude = position.coords.longitude
+  let latitude = position.coords.latitude
+  let longitude = position.coords.longitude
   needs.forEach((n) => {
-    var distanceInMetres = geolib.getDistance(
+    let distanceInMetres = geolib.getDistance(
       { latitude: latitude, longitude: longitude },
       { latitude: n.latitude, longitude: n.longitude }
     )
@@ -79,7 +79,7 @@ let init = () => {
   listToSelect.init()
   getApiData.data(apiRoutes.needs)
     .then(function (result) {
-      var needsFromApi = formatDate(result.data)
+      let needsFromApi = formatDate(result.data)
 
       initAutoComplete(needsFromApi)
 
@@ -113,16 +113,14 @@ let initBricks = () => {
   return cardLayout
 }
 
-var buildList = function () {
-  let cardLayout = initBricks()
-
+let initList = (cardLayout) => {
    // List.js
-  var options = {
+  let options = {
     valueNames: [ 'type', 'serviceProviderName', 'creationDate', 'description', 'keywords', 'distanceAwayInMetres' ],
     plugins: []
   }
 
-  const theList = new List('js-card-search', options)
+  let theList = new List('js-card-search', options)
   theList.sort('creationDate', { order: 'desc' })
   cardLayout.resize(true).pack()
 
@@ -135,14 +133,51 @@ var buildList = function () {
    cardLayout.pack()
   )
 
-  // Filtering
-  var filters = document.querySelectorAll('.js-filter-item')
-  var activeFilters = []
+  return theList
+}
+
+let initFiltering = (theList, cardLayout) => {
+  let runFiltering = () => {
+    if (activeFilters.length === 0) {
+      resetFiltering()
+      return
+    }
+
+    theList.filter(function (item) {
+      if (activeFilters.length > 0) {
+        return (activeFilters.indexOf(item.values().type)) > -1
+      }
+      return true
+    })
+
+    cardLayout.pack()
+  }
+
+  let resetFiltering = () => {
+    // Reset active states
+    let c
+    let filters = document.querySelectorAll('.js-filter-item')
+
+    activeFilters = []
+
+    for (c = 0; c < filters.length; c++) {
+      filters[c].classList.remove('is-active')
+    }
+
+    document.querySelector('.js-filter-item-all').classList.add('is-active')
+
+    // Reset filter & layout
+    theList.filter()
+    cardLayout.pack()
+  }
+
+  let filters = document.querySelectorAll('.js-filter-item')
+  let activeFilters = []
 
   // Add click listener to each item
-  for (var b = 0; b < filters.length; b++) {
+  for (let b = 0; b < filters.length; b++) {
     filters[b].addEventListener('click', function (event) {
-      var getFilter = this.getAttribute('data-filter')
+      let getFilter = this.getAttribute('data-filter')
       event.preventDefault()
 
       if (getFilter === 'all') {
@@ -163,47 +198,14 @@ var buildList = function () {
   }
 
   // Add change listener to `<select>` for small screens
-  var filterList = document.querySelectorAll('.js-filter-list.list-to-dropdown__select')
-  for (var c = 0; c < filterList.length; c++) {
-    filterList[c].addEventListener('change', function () {
+  let filterList = document.querySelectorAll('.js-filter-list.list-to-dropdown__select')
+  for (let c = 0; c < filterList.length; c++) {
+    filterList[c].addEventListener('change', () => {
     })
   }
+}
 
-  var runFiltering = function () {
-    if (activeFilters.length === 0) {
-      resetFiltering()
-      return
-    }
-
-    theList.filter(function (item) {
-      if (activeFilters.length > 0) {
-        return (activeFilters.indexOf(item.values().type)) > -1
-      }
-      return true
-    })
-
-    cardLayout.pack()
-  }
-
-  var resetFiltering = function () {
-    // Reset active states
-    var c
-    var filters = document.querySelectorAll('.js-filter-item')
-
-    activeFilters = []
-
-    for (c = 0; c < filters.length; c++) {
-      filters[c].classList.remove('is-active')
-    }
-
-    document.querySelector('.js-filter-item-all').classList.add('is-active')
-
-    // Reset filter & layout
-    theList.filter()
-    cardLayout.pack()
-  }
-
-  // Sorting
+let initSorting = (theList, cardLayout) => {
   document.querySelector('.js-sort-dropdown')
     .addEventListener('change', function (event) {
       let sortFields = []
@@ -218,20 +220,18 @@ var buildList = function () {
     })
 }
 
+let buildList = () => {
+  let cardLayout = initBricks()
+  let theList = initList(cardLayout)
+
+  initFiltering(theList, cardLayout)
+  initSorting(theList, cardLayout)
+}
+
 // Full detail view
-var buildCard = function (data) {
-  var openCard = function (el, cardBackOnClick) {
-    var theId = el.getAttribute('data-id')
-    var cardData = Find(theApiData, function (o) { return o.id === theId })
-
-    // hide search
-    document.querySelector('#js-card-search').classList.remove('is-active')
-    document.querySelector('#js-card-search').classList.add('is-hidden')
-
-    // Append object name for Hogan
-    var theCardTemplateData = { card: cardData }
-
-    var cardCallback = function () {
+let buildCard = function (data) {
+  let openCard = function (el, cardBackOnClick) {
+    let cardCallback = () => {
       document.querySelector('.js-card-detail').classList.remove('is-hidden')
       document.querySelector('.js-card-detail').classList.add('is-active')
 
@@ -240,11 +240,12 @@ var buildCard = function (data) {
       Holder.run({})
 
       // TODO: Proper URL support
-      var state = { test: 'TBA' }
+      let state = { test: 'TBA' }
+      let theId = el.getAttribute('data-id')
       history.pushState(state, 'TEST', '?id=' + theId)
 
-      var d
-      var cardBack = document.querySelectorAll('.js-card-back')
+      let d
+      let cardBack = document.querySelectorAll('.js-card-back')
 
       // Add click listener to each item
       for (d = 0; d < cardBack.length; d++) {
@@ -258,51 +259,64 @@ var buildCard = function (data) {
       socialShare.updateSharePageHrefs()
     }
 
-    templating.renderTemplate('js-card-detail-tpl', theCardTemplateData, 'js-card-detail-output', cardCallback)
+    let init = () => {
+      let theId = el.getAttribute('data-id')
+      let cardData = Find(data, function (o) { return o.id === theId })
+
+      // hide search
+      document.querySelector('#js-card-search').classList.remove('is-active')
+      document.querySelector('#js-card-search').classList.add('is-hidden')
+
+      // Append object name for Hogan
+      let theCardTemplateData = { card: cardData }
+
+      templating.renderTemplate('js-card-detail-tpl', theCardTemplateData, 'js-card-detail-output', cardCallback)
+    }
+
+    init()
   }
-  var openIfCardRequested = function () {
-    var cardId = getUrlParams.parameter('id')
+
+  let openIfCardRequested = () => {
+    let cardId = getUrlParams.parameter('id')
     if (cardId) {
-      var card = Find(document.querySelectorAll('.requests-listing__item'), (c) => {
+      let card = Find(document.querySelectorAll('.requests-listing__item'), (c) => {
         return c.getAttribute('data-id') === cardId
       })
-      openCard(card, function () {
+      openCard(card, () => {
         history.pushState({}, 'from openIfCardRequested', '?')
         closeCard()
       })
     }
   }
 
-  var a
-  var items = document.querySelectorAll('.requests-listing__item')
-  var theApiData = data
-
-  // Add click listener to each item
-  for (a = 0; a < items.length; a++) {
-    items[a].addEventListener('click', function (event) {
-      event.preventDefault()
-      openCard(this, rewindHistory)
-    })
-  }
-
-  openIfCardRequested()
-
-  var rewindHistory = function () {
+  let rewindHistory = () => {
     window.history.back()
   }
 
-  window.onpopstate = function () {
-    closeCard()
-    openIfCardRequested()
-  }
-
-  var closeCard = function () {
+  let closeCard = () => {
     document.querySelector('#js-card-search').classList.remove('is-hidden')
     document.querySelector('#js-card-search').classList.add('is-active')
 
     document.querySelector('.js-card-detail').classList.remove('is-active')
     document.querySelector('.js-card-detail').classList.add('is-hidden')
   }
+
+  let items = document.querySelectorAll('.requests-listing__item')
+
+  // Add click listener to each item
+  for (var a = 0; a < items.length; a++) {
+    items[a].addEventListener('click', function (event) {
+      event.preventDefault()
+      openCard(this, rewindHistory)
+    })
+  }
+
+  window.onpopstate = () => {
+    closeCard()
+    openIfCardRequested()
+  }
+
+  openIfCardRequested()
 }
 
 init()
