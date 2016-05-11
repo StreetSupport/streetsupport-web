@@ -127,42 +127,38 @@ page: giveitems
   </section>
 
   \{{#showLocation}}
-  <section class="requests-detail__location">
-    <h3 class="h2 requests-detail__location__heading">Location</h3>
+  <section>
+    <h3 class="h2 requests-detail__heading">Location</h3>
     <iframe frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDDRleVy8KJBzTPu-KZ1aMCoU7gC-u2mfk&q=\{{{postcode}}}" allowfullscreen class="requests-detail__map">
     </iframe>
   </section>
   \{{/showLocation}}
 
   \{{#showContactForm}}
+  <h3 class="h2 requests-detail__heading">I Can Help!</h3>
   <section class="block">
     <div class="container block__inner">
-      <div class="block__content requests-detail__metadata">
-        <h3 class="h2 requests-detail__metadata__heading">I Can Help!</h3>
-        <div>
-          <div id="requests-detail__contact">
-              <form class="form requests-detail__form">
-                <fieldset class="form__fieldset">
-                  <ul class="form__field-list">
-                    <li class="form__field-item form__field-item--full">
-                      <label class="form__label">Subject: \{{{serviceProviderSynopsis}}}</label>
-                    </li>
-                    <li class="form__field-item">
-                      <label class="form__label" for="email">Your Email:</label>
-                      <input type="text" class="form__input form__input" id="email" placeholder="(required)"/>
-                    </li>
-                    <li class="form__field-item form__field-item--full">
-                      <label class="form__label" for="message">How you can help:</label>
-                      <textarea class="form__input form__input--multiline" id="message" placeholder="(required)"></textarea>
-                    </li>
-                  </ul>
-                </fieldset>
-                <button type="submit" class="btn btn--brand-d form__submit">
-                  <span class="btn__text">Send</span>
-                </button>
-              </form>
-          </div>
-        </div>
+      <div class="block__content requests-detail__form">
+        <form class="form">
+          <fieldset class="form__fieldset">
+            <ul class="form__field-list">
+              <li class="form__field-item form__field-item--full">
+                <label class="form__label">Subject: \{{{serviceProviderSynopsis}}}</label>
+              </li>
+              <li class="form__field-item">
+                <label class="form__label" for="email">Your Email:</label>
+                <input type="text" class="form__input form__input" id="email" placeholder="(required)"/>
+              </li>
+              <li class="form__field-item form__field-item--full">
+                <label class="form__label" for="message">How you can help:</label>
+                <textarea class="form__input form__input--multiline" id="message" placeholder="(required)"></textarea>
+              </li>
+            </ul>
+          </fieldset>
+          <button type="submit" class="btn btn--brand-d form__submit">
+            <span class="btn__text">Send</span>
+          </button>
+        </form>
       </div>
     </div>
   </section>
