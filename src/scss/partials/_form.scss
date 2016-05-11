@@ -2,6 +2,12 @@
 
 .form {
   @include cf();
+
+  &--partnership,
+  &--volunteer {
+    @include pre(1 of 6);
+    @include post(1 of 6);
+  }
 }
 
 .form__fieldset {
@@ -29,37 +35,57 @@
   @include mq($from: m) {
     @include span(4 of $grid-column);
   }
-}
 
-.form__field-item--full {
-  @include mq($from: m) {
-    @include span(full);
+  &--full {
+    @include mq($from: m) {
+      @include span(full);
+    }
   }
 }
 
 .form__label {
   display: block;
   margin-bottom: 10px;
-}
 
-.form__label--checkbox {
-  float: left;
-  margin-right: 1em;
+  &--checkbox {
+    margin-right: 1em;
+    display: inline;
+    width: 100%;
+  }
 }
 
 .form__input {
-  border: 1px solid $brand-f;
   padding: 5px;
+  display: block;
+  // appearance: none;
+  border: 0;
+  outline: none;
+  border: 1px solid $brand-f;
+  border-radius: 5px;
+  padding: 10px;
+  color: $brand-m;
   width: 100%;
-}
 
-.form__input--multiline {
-  min-height: 8rem;
-  width: 100%;
-}
+  &--checkbox {
+    vertical-align: middle;
+    display: table-cell;
+    width: 1em;
+    height: 1em;
+  }
 
-.form__input--error {
-  border: 1px solid $brand-g;
+  &--full {
+    width: 100%;
+  }
+
+  &--multiline {
+    min-height: 8rem;
+    width: 100%;
+  }
+
+  &--error {
+    border: 1px solid $brand-g;
+    margin-top: 25px;
+  }
 }
 
 .form__error {
@@ -71,6 +97,7 @@
   position: absolute;
   top: 0;
   right: 0;
+  @extend .small;
 }
 
 .form__submit {

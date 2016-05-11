@@ -1,117 +1,114 @@
-// Give requests detail page specific styles
+.requests-detail {
+  &__type {
+    color: $brand-h;
+    text-transform: capitalize;
 
+    &.with-icon {
+      padding-left: 65px;
+      position: relative;
+    }
+  }
 
-.requests-detail__type {
-  color: $brand-h;
-  text-transform: capitalize;
+  &__icon {
+    @include size(45px);
 
-  &.with-icon {
-    padding-left: 65px;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  &__description {
+  }
+
+  &__name {
+    margin-bottom: 0;
+  }
+
+  &__synopsis {
+    color: $brand-k;
+    margin-bottom: 10px;
+  }
+
+  &__date {
+    color: $brand-h;
+  }
+
+  & .btn {
+    width: 100%;
+    &--plain { margin: 0 }
+
+    @include mq($from: s) {
+      width: inherit;
+      &--plain { margin: inherit }
+    }
+  }
+
+  &__heading {
+    background: linear-gradient($brand-b, $brand-p);
+    font-size: 25px;
     position: relative;
-  }
-}
+    margin: 0 auto;
+    padding: 30px 0;
+    width: 100%;
+    color: white;
+    text-align: center;
 
-.requests-detail__icon {
-  @include size(45px);
+    @include mq($from: l) {
+      &::before,
+      &::after {
+        background: #FFF;
+        content: '';
+        height: 1px;
+        position: absolute;
+        top: 50%;
+        width: 25%;
+      }
 
-  position: absolute;
-  left: 0;
-  top: 0;
-}
+      &::before {
+        left: 15%;
+      }
 
-.request-detail__description {
-}
-
-.requests-detail__name {
-  margin-bottom: 0;
-}
-
-.requests-detail__synopsis {
-  color: $brand-k;
-  margin-bottom: 10px;
-}
-
-.requests-detail__date {
-  color: $brand-h;
-}
-
-.requests-detail__location {
-  color: #FFF;
-  text-align: center;
-}
-
-.requests-detail__location__heading {
-  background: linear-gradient($brand-b, $brand-p);
-  font-size: 25px;
-  position: relative;
-  margin: 0 auto;
-  padding: 30px 0;
-  width: 100%;
-
-  @include mq($from: l) {
-    &::before,
-    &::after {
-      background: #FFF;
-      content: '';
-      height: 1px;
-      position: absolute;
-      top: 50%;
-      width: 25%;
-    }
-
-    &::before {
-      left: 15%;
-    }
-
-    &::after {
-      right: 15%;
+      &::after {
+        right: 15%;
+      }
     }
   }
-}
 
-.requests-detail__map {
-  border: 0;
-  display: block;
-  min-height: 200px;
-  width: 100%;
+  &__map {
+    border: 0;
+    display: block;
+    min-height: 200px;
+    width: 100%;
 
-  @include mq($from: l) {
-    min-height: 440px;
+    @include mq($from: l) {
+      min-height: 440px;
+    }
   }
-}
 
-.requests-detail__metadata {
-  text-align: center;
-}
+  &__form {
 
-.requests-detail__form {
-  text-align: left;
-}
-
-.requests-detail__metadata__heading {
-  font-size: 25px;
-}
-
-.requests-detail__accordion {
-  margin: 0 auto;
-  max-width: 620px;
-}
-
-.requests-detail__share-list {
-  margin-top: 10px;
-}
-
-.requests-detail__share-list__item {
-  margin: 0 20px;
-
-  a {
-    color: $brand-b;
+    @include mq($from: l) {
+      @include pre(1 of 6)
+      @include post(1 of 6)
+    }
   }
-}
 
-.requests-detail__share-list__icon {
-  @include size(60px);
+  &__share-list {
+    margin-top: 10px;
+  }
 
-  display: block;
-  margin: 0 auto 10px;
+  &__share-list__item {
+    margin: 0 20px;
+
+    a {
+      color: $brand-b;
+    }
+  }
+
+  &__share-list__icon {
+    @include size(60px);
+
+    display: block;
+    margin: 0 auto 10px;
+  }
 }
