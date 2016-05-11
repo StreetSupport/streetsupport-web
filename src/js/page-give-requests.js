@@ -254,8 +254,9 @@ var buildCard = function (data) {
   var openIfCardRequested = function () {
     var cardId = getUrlParams.parameter('id')
     if (cardId) {
-      var card = Array.from(document.querySelectorAll('.requests-listing__item'))
-        .filter((c) => c.getAttribute('data-id') === cardId)[0]
+      var card = Find(document.querySelectorAll('.requests-listing__item'), (c) => {
+        return c.getAttribute('data-id') === cardId
+      })
       openCard(card, function () {
         history.pushState({}, 'from openIfCardRequested', '?')
         closeCard()
