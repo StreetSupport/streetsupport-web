@@ -67,6 +67,10 @@
     height: 1em;
   }
 
+  &--full {
+    width: 100%;
+  }
+
   &--multiline {
     min-height: 8rem;
     width: 100%;

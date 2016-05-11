@@ -259,7 +259,9 @@ let buildCard = (data) => {
         }
       })
 
-      ko.applyBindings(new ContactFormModel(), document.querySelector('.requests-detail__form'))
+      let contactFormModel = new ContactFormModel()
+      contactFormModel.needId = theId
+      ko.applyBindings(contactFormModel, document.querySelector('.requests-detail__form'))
 
       Holder.run({})
 

@@ -143,16 +143,16 @@ page: giveitems
           <fieldset class="form__fieldset" data-bind="with: formModel">
             <legend class="h3">Thanks for your offer to help! Please fill in the form below, and the requesting organisation will be in touch as soon as possible!</legend>
             <ul class="form__field-list">
-              <li class="form__field-item">
+              <li class="form__field-item form__field-item--full">
                 <label class="form__label" for="email">Your Email:</label>
-                <input type="text" class="form__input form__input" data-bind="email" id="email" placeholder="(required)"/>
+                <input type="text" class="form__input form__input--full" data-bind="textInput: email" id="email" placeholder="(required)"/>
               </li>
               <li class="form__field-item form__field-item--full">
                 <label class="form__label" for="message">How you can help:</label>
-                <textarea class="form__input form__input--multiline" data-bind="message" id="message" placeholder="(required)"></textarea>
+                <textarea class="form__input form__input--multiline" data-bind="textInput: message" id="message" placeholder="(required)"></textarea>
               </li>
               <li class="form__field-item form__field-item--full">
-                <input type="checkbox" class="form__input form__input--checkbox" data-bind="isOptedIn" id="isOptedIn"/>
+                <input type="checkbox" class="form__input form__input--checkbox" data-bind="checked: isOptedIn" id="isOptedIn"/>
                 <label class="form__label form__label--checkbox" for="isOptedIn">I would like to receive the occasional email from Street Support.</label>
               </li>
             </ul>
