@@ -48,8 +48,15 @@
 }
 
 .form__input {
-  border: 1px solid $brand-f;
   padding: 5px;
+  display: block;
+  appearance: none;
+  border: 0;
+  outline: none;
+  border: 1px solid $brand-f;
+  border-radius: 5px;
+  padding: 10px;
+  color: $brand-m;
   width: 100%;
 }
 
