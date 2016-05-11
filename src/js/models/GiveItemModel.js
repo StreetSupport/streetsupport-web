@@ -26,9 +26,7 @@ var GiveItemModel = function () {
   self.apiErrors = ko.observableArray()
 
   self.submit = function () {
-    console.log('submit')
     if (self.formModel.isValid()) {
-    console.log('valid')
       browser.loading()
 
       var postEndpoint = endpoints.needs + self.needId + '/offers-to-help'
@@ -37,8 +35,6 @@ var GiveItemModel = function () {
         'Message': self.formModel().message(),
         'IsOptedIn': self.formModel().isOptedIn()
       }
-    console.log(postEndpoint)
-    console.log(payload)
 
       postApiData
         .post(postEndpoint, payload)

@@ -139,17 +139,18 @@ page: giveitems
   <section class="block block--requests-detail">
     <div class="container block__inner">
       <div class="block__content requests-detail__form">
+        <!-- ko ifnot: isFormSubmitSuccessful() -->
         <form class="form">
           <fieldset class="form__fieldset" data-bind="with: formModel">
-            <legend class="h3">Thanks for your offer to help! Please fill in the form below, and the requesting organisation will be in touch as soon as possible!</legend>
+            <legend class="h3">Thanks for your offer to help! Please fill in the form below to let us know what you can do:</legend>
             <ul class="form__field-list">
               <li class="form__field-item form__field-item--full">
-                <label class="form__label" for="email">Your Email:</label>
-                <input type="text" class="form__input form__input--full" data-bind="textInput: email" id="email" placeholder="(required)"/>
+                <label class="form__label hide-screen" for="email">Your Email:</label>
+                <input type="text" class="form__input form__input--full" data-bind="textInput: email" id="email" placeholder="Email (required)"/>
               </li>
               <li class="form__field-item form__field-item--full">
-                <label class="form__label" for="message">How you can help:</label>
-                <textarea class="form__input form__input--multiline" data-bind="textInput: message" id="message" placeholder="(required)"></textarea>
+                <label class="form__label hide-screen" for="message">How you can help:</label>
+                <textarea class="form__input form__input--multiline" data-bind="textInput: message" id="message" placeholder="How you can help (required)"></textarea>
               </li>
               <li class="form__field-item form__field-item--full">
                 <input type="checkbox" class="form__input form__input--checkbox" data-bind="checked: isOptedIn" id="isOptedIn"/>
@@ -161,6 +162,10 @@ page: giveitems
             <span class="btn__text">Send</span>
           </button>
         </form>
+        <!-- /ko -->
+        <!-- ko if: isFormSubmitSuccessful() -->
+        <h3 class="h3">Thanks for you offer to help, the requesting organisation will be in touch as soon as possible!</h3>
+        <!-- /ko -->
       </div>
     </div>
   </section>

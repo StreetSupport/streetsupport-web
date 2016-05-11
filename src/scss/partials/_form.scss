@@ -78,6 +78,7 @@
 
   &--error {
     border: 1px solid $brand-g;
+    margin-top: 25px;
   }
 }
 
@@ -90,6 +91,7 @@
   position: absolute;
   top: 0;
   right: 0;
+  @extend .small;
 }
 
 .form__submit {
