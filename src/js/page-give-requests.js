@@ -85,7 +85,7 @@ let init = () => {
 
       if (navigator.geolocation) {
         getLocation.location().then(function (position) {
-          renderNeeds(needuseDistanceForLocation(position, needsFromApi))
+          renderNeeds(useDistanceForLocation(position, needsFromApi))
         }, () => {
           renderNeeds(usePostcodeForLocation(needsFromApi))
         })
