@@ -1,6 +1,4 @@
-/* global history, position */
-
-'use strict'
+/* global history */
 
 import './common'
 
@@ -26,80 +24,66 @@ import Find from 'lodash/collection/find'
 import ForEach from 'lodash/collection/forEach'
 import moment from 'moment'
 
-var renderNeeds = function (theData) {
-  var listCallback = function () {
-    buildList()
-    buildCard(theData.needsFromApi)
-    browser.loaded()
-  }
+listToSelect.init()
+browser.loading()
 
-  templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', listCallback)
-}
+// Get API data using promise
+getApiData.data(apiRoutes.needs)
+  .then(function (result) {
+    var needsFromApi = result.data
 
-var initAutoComplete = (needsFromApi) => {
-  var keywords = needsFromApi
-    .map((n) => n.keywords)
-    .filter((k) => k.length > 0)
-    .join(',')
-
-  var input = document.querySelector('.search')
-  var awesomplete = new Awesomplete(input, {list: keywords}) // eslint-disable-line
-}
-
-let setupNeedsForGeoLocation = (needsFromApi) => {
-  var latitude = position.coords.latitude
-  var longitude = position.coords.longitude
-  needsFromApi.forEach((n) => {
-    var distanceInMetres = geolib.getDistance(
-      { latitude: latitude, longitude: longitude },
-      { latitude: n.latitude, longitude: n.longitude }
-    )
-    n.distanceAwayInMetres = distanceInMetres
-    n.locationDescription = (distanceInMetres * 0.00062137).toFixed(2) + ' miles away'
-  })
-
-  return needsFromApi
-}
-
-let setupNeedsWithoutGeoLocation = (needsFromApi) => {
-  needsFromApi.forEach((n) => {
-    n.locationDescription = n.postcode
-  })
-
-  return needsFromApi
-}
-
-let init = () => {
-  listToSelect.init()
-  browser.loading()
-
-  // Get API data using promise
-  getApiData.data(apiRoutes.needs)
-    .then(function (result) {
-      var needsFromApi = result.data
-
+    var renderNeeds = function () {
       // Change to relative date
       ForEach(needsFromApi, function (data) {
         data.formattedCreationDate = moment(data.creationDate).fromNow()
       })
 
-      initAutoComplete(needsFromApi)
+      // Append object name for Hogan
+      var theData = { card: needsFromApi }
 
-      if (navigator.geolocation) {
-        getLocation.location()
-          .then(function (position) {
-            var theData = { card: setupNeedsForGeoLocation(needsFromApi) }
-            renderNeeds(theData)
-          }, function () {
-            var theData = { card: setupNeedsWithoutGeoLocation(needsFromApi) }
-            renderNeeds(theData)
-          })
-      } else {
-        var theData = { card: setupNeedsWithoutGeoLocation(needsFromApi) }
-        renderNeeds(theData)
+      var keywords = needsFromApi
+        .map((n) => n.keywords)
+        .filter((k) => k.length > 0)
+        .join(',')
+
+      var input = document.querySelector('.search')
+      var awesomplete = new Awesomplete(input, {list: keywords}) // eslint-disable-line
+
+      // Template callback
+      var listCallback = function () {
+        buildList()
+        buildCard(needsFromApi)
+        browser.loaded()
       }
-    })
-}
+
+      templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', listCallback)
+    }
+
+    if (navigator.geolocation) {
+      getLocation.location().then(function (position) {
+        var latitude = position.coords.latitude
+        var longitude = position.coords.longitude
+        needsFromApi.forEach((n) => {
+          var distanceInMetres = geolib.getDistance(
+            { latitude: latitude, longitude: longitude },
+            { latitude: n.latitude, longitude: n.longitude }
+          )
+          n.distanceAwayInMetres = distanceInMetres
+          n.locationDescription = (distanceInMetres * 0.00062137).toFixed(2) + ' miles away'
+        })
+        renderNeeds()
+      }, function (error) {
+        if (error !== null) {
+          console.log(error)
+        }
+      })
+    } else {
+      needsFromApi.forEach((n) => {
+        n.locationDescription = n.postcode
+      })
+      renderNeeds()
+    }
+  })
 
 var buildList = function () {
   // Bricks.js
@@ -129,6 +113,16 @@ var buildList = function () {
 
   const theList = new List('js-card-search', options)
   theList.sort('creationDate', { order: 'desc' })
+  cardLayout.pack()
+
+  // List.js Triggers
+  theList.on('sortStart', () =>
+   cardLayout.pack()
+  )
+
+  theList.on('searchComplete', () =>
+   cardLayout.pack()
+  )
 
   // Filtering
   var b
@@ -300,5 +294,3 @@ var buildCard = function (data) {
     document.querySelector('.js-card-detail').classList.add('is-hidden')
   }
 }
-
-init()

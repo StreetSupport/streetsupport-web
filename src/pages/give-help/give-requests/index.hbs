@@ -19,13 +19,12 @@ page: giveitems
 {{> no-js}}
 
 <div id="js-card-search" class="requests-search is-active">
-  <div class="block block--subpage-header requests-search__intro">
+  <div class="block block--intro requests-search__intro">
     <div class="container block__inner">
-      <h1 class="h1 block__header">Give</h1>
-      <h2 class="h2 block__sub-header">Give time, money and items that are needed</h2>
+      <h1 class="h1 block__header">Requests</h1>
+      <a href="give-help.html">Other ways to give help</a>
     </div>
   </div>
-</div>
 
   <div class="block">
     <div class="container block__inner">
@@ -133,37 +132,38 @@ page: giveitems
   <section class="block">
     <div class="container block__inner">
       <div class="block__content requests-detail__metadata">
-        <h3 class="h2 requests-detail__metadata__heading">I can help!</h3>
+        <h3 class="h2 requests-detail__metadata__heading">Contact details</h3>
 
         <div class="accordion js-accordion requests-detail__accordion">
           <button id="requests-detail__contact" class="h3 accordion__header js-header">
-              Send a message
+              Lorem ipsom dolor amet
               <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
               <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
           </button>
           <div class="accordion__item js-item" id="requests-detail__contact">
             <div class="accordion__inner">
-              <p>Emailing <a href="mailto:\{{{email}}}">\{{{email}}}</a></p>
+              <p>Email: <a href="mailto:\{{{email}}}">\{{{email}}}</a></p>
 
               <form class="form requests-detail__form">
                 <fieldset class="form__fieldset">
+                  <p>* denotes a required field.</p>
                   <ul class="form__field-list">
                     <li class="form__field-item form__field-item--full">
                       <label class="form__label">Subject</label>
-                      <p>Subject: \{{{serviceProviderSynopsis}}}</p>
+                      <p>Re: \{{{serviceProviderSynopsis}}}</p>
                     </li>
                     <li class="form__field-item">
-                      <label class="form__label" for="email">Your Email</label>
+                      <label class="form__label" for="email">Email *</label>
                       <input type="text" class="form__input form__input" id="email"/>
                     </li>
                     <li class="form__field-item form__field-item--full">
-                      <label class="form__label" for="message">Your Message</label>
+                      <label class="form__label" for="message">Message *</label>
                       <textarea class="form__input form__input--multiline" id="message"></textarea>
                     </li>
                   </ul>
                 </fieldset>
                 <button type="submit" class="btn btn--brand-d form__submit">
-                  <span class="btn__text">Send</span>
+                  <span class="btn__text">Submit</span>
                 </button>
               </form>
             </div>
@@ -178,7 +178,7 @@ page: giveitems
       <div class="block__content requests-detail__metadata">
 
         <h3 class="h2 requests-detail__metadata__heading">Share this need</h3>
-        <p>If you cannot help with this yourself but know others who might be able to, please share this need with them on...</p>
+        <p>If you cannot share this need but know someone who can please share this request on:</p>
         <div class="social-share">
           <ul class="list-unstyled list-inline requests-detail__share-list">
             <li class="list-inline__item requests-detail__share-list__item">
