@@ -57,7 +57,7 @@ gulp.task('jsdev', (callback) => {
   runSequence(
     'jasmine',
     'standardlint',
-    'specsstandardlintlint',
+    'specsstandardlint',
     'jsdevwatch',
     callback
   )
