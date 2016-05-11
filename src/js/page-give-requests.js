@@ -21,66 +21,66 @@ var accordion = require('./accordion')
 var socialShare = require('./social-share')
 import listToSelect from './list-to-dropdown'
 
-listToSelect.init()
-browser.loading()
+let init = () => {
+  listToSelect.init()
+  browser.loading()
+  getApiData.data(apiRoutes.needs)
+    .then(function (result) {
+      var needsFromApi = result.data
 
-// Get API data using promise
-getApiData.data(apiRoutes.needs)
-  .then(function (result) {
-    var needsFromApi = result.data
+      var renderNeeds = function () {
+        // Change to relative date
+        ForEach(needsFromApi, function (data) {
+          data.formattedCreationDate = moment(data.creationDate).fromNow()
+        })
 
-    var renderNeeds = function () {
-      // Change to relative date
-      ForEach(needsFromApi, function (data) {
-        data.formattedCreationDate = moment(data.creationDate).fromNow()
-      })
+        // Append object name for Hogan
+        var theData = { card: needsFromApi }
 
-      // Append object name for Hogan
-      var theData = { card: needsFromApi }
+        var keywords = needsFromApi
+          .map((n) => n.keywords)
+          .filter((k) => k.length > 0)
+          .join(',')
 
-      var keywords = needsFromApi
-        .map((n) => n.keywords)
-        .filter((k) => k.length > 0)
-        .join(',')
+        var input = document.querySelector('.search')
+        var awesomplete = new Awesomplete(input, {list: keywords}) // eslint-disable-line
 
-      var input = document.querySelector('.search')
-      var awesomplete = new Awesomplete(input, {list: keywords}) // eslint-disable-line
+        // Template callback
+        var listCallback = function () {
+          buildList()
+          buildCard(needsFromApi)
+          browser.loaded()
+        }
 
-      // Template callback
-      var listCallback = function () {
-        buildList()
-        buildCard(needsFromApi)
-        browser.loaded()
+        templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', listCallback)
       }
 
-      templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', listCallback)
-    }
-
-    if (navigator.geolocation) {
-      getLocation.location().then(function (position) {
-        var latitude = position.coords.latitude
-        var longitude = position.coords.longitude
+      if (navigator.geolocation) {
+        getLocation.location().then(function (position) {
+          var latitude = position.coords.latitude
+          var longitude = position.coords.longitude
+          needsFromApi.forEach((n) => {
+            var distanceInMetres = geolib.getDistance(
+              { latitude: latitude, longitude: longitude },
+              { latitude: n.latitude, longitude: n.longitude }
+            )
+            n.distanceAwayInMetres = distanceInMetres
+            n.locationDescription = (distanceInMetres * 0.00062137).toFixed(2) + ' miles away'
+          })
+          renderNeeds()
+        }, function (error) {
+          if (error !== null) {
+            console.log(error)
+          }
+        })
+      } else {
         needsFromApi.forEach((n) => {
-          var distanceInMetres = geolib.getDistance(
-            { latitude: latitude, longitude: longitude },
-            { latitude: n.latitude, longitude: n.longitude }
-          )
-          n.distanceAwayInMetres = distanceInMetres
-          n.locationDescription = (distanceInMetres * 0.00062137).toFixed(2) + ' miles away'
+          n.locationDescription = n.postcode
         })
         renderNeeds()
-      }, function (error) {
-        if (error !== null) {
-          console.log(error)
-        }
-      })
-    } else {
-      needsFromApi.forEach((n) => {
-        n.locationDescription = n.postcode
-      })
-      renderNeeds()
-    }
-  })
+      }
+    })
+}
 
 var buildList = function () {
   // Bricks.js
@@ -292,3 +292,5 @@ var buildCard = function (data) {
     document.querySelector('.js-card-detail').classList.add('is-hidden')
   }
 }
+
+init()
