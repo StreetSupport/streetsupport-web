@@ -21,6 +21,8 @@ let accordion = require('./accordion')
 let socialShare = require('./social-share')
 import listToSelect from './list-to-dropdown'
 
+const activeClass = 'is-active'
+
 let formatDate = (needs) => {
   // Change to relative date
   ForEach(needs, function (need) {
@@ -161,10 +163,10 @@ let initFiltering = (theList, cardLayout) => {
     activeFilters = []
 
     for (c = 0; c < filters.length; c++) {
-      filters[c].classList.remove('is-active')
+      filters[c].classList.remove(activeClass)
     }
 
-    document.querySelector('.js-filter-item-all').classList.add('is-active')
+    document.querySelector('.js-filter-item-all').classList.add(activeClass)
 
     // Reset filter & layout
     theList.filter()
@@ -183,13 +185,13 @@ let initFiltering = (theList, cardLayout) => {
       if (getFilter === 'all') {
         resetFiltering()
       } else {
-        if (this.classList.contains('is-active')) {
-          this.classList.remove('is-active')
+        if (this.classList.contains(activeClass)) {
+          this.classList.remove(activeClass)
           activeFilters.splice(activeFilters.indexOf(getFilter), 1)
           runFiltering()
         } else {
-          document.querySelector('.js-filter-item-all').classList.remove('is-active')
-          this.classList.add('is-active')
+          document.querySelector('.js-filter-item-all').classList.remove(activeClass)
+          this.classList.add(activeClass)
           activeFilters.push(getFilter)
           runFiltering()
         }
@@ -230,10 +232,14 @@ let buildList = () => {
 
 // Full detail view
 let buildCard = function (data) {
-  let openCard = function (el, cardBackOnClick) {
+  const searchSelector = '#js-card-search'
+  const cardDetailSelector = '.js-card-detail'
+  const hiddenClass = 'is-hidden'
+
+  let openCard = function (el, callback) {
     let cardCallback = () => {
-      document.querySelector('.js-card-detail').classList.remove('is-hidden')
-      document.querySelector('.js-card-detail').classList.add('is-active')
+      document.querySelector(cardDetailSelector).classList.remove(hiddenClass)
+      document.querySelector(cardDetailSelector).classList.add(activeClass)
 
       window.scrollTo(0, 0)
 
@@ -251,7 +257,7 @@ let buildCard = function (data) {
       for (d = 0; d < cardBack.length; d++) {
         cardBack[d].addEventListener('click', function (event) {
           event.preventDefault()
-          cardBackOnClick()
+          callback()
         })
       }
 
@@ -264,8 +270,8 @@ let buildCard = function (data) {
       let cardData = Find(data, function (o) { return o.id === theId })
 
       // hide search
-      document.querySelector('#js-card-search').classList.remove('is-active')
-      document.querySelector('#js-card-search').classList.add('is-hidden')
+      document.querySelector(searchSelector).classList.remove(activeClass)
+      document.querySelector(searchSelector).classList.add(hiddenClass)
 
       // Append object name for Hogan
       let theCardTemplateData = { card: cardData }
@@ -294,11 +300,11 @@ let buildCard = function (data) {
   }
 
   let closeCard = () => {
-    document.querySelector('#js-card-search').classList.remove('is-hidden')
-    document.querySelector('#js-card-search').classList.add('is-active')
+    document.querySelector(searchSelector).classList.remove(hiddenClass)
+    document.querySelector(searchSelector).classList.add(activeClass)
 
-    document.querySelector('.js-card-detail').classList.remove('is-active')
-    document.querySelector('.js-card-detail').classList.add('is-hidden')
+    document.querySelector(cardDetailSelector).classList.remove(activeClass)
+    document.querySelector(cardDetailSelector).classList.add(hiddenClass)
   }
 
   let addClickEvents = () => {
