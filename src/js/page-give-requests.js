@@ -250,12 +250,11 @@ let buildCard = function (data) {
       let theId = el.getAttribute('data-id')
       history.pushState(state, 'TEST', '?id=' + theId)
 
-      let d
-      let cardBack = document.querySelectorAll('.js-card-back')
+      let cardBackLinks = document.querySelectorAll('.js-card-back')
 
       // Add click listener to each item
-      for (d = 0; d < cardBack.length; d++) {
-        cardBack[d].addEventListener('click', function (event) {
+      for (var d = 0; d < cardBackLinks.length; d++) {
+        cardBackLinks[d].addEventListener('click', function (event) {
           event.preventDefault()
           callback()
         })
