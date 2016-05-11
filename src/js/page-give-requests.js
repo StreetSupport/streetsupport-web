@@ -250,15 +250,12 @@ let buildCard = function (data) {
       let theId = el.getAttribute('data-id')
       history.pushState(state, 'TEST', '?id=' + theId)
 
-      let cardBackLinks = document.querySelectorAll('.js-card-back')
-
-      // Add click listener to each item
-      for (var d = 0; d < cardBackLinks.length; d++) {
-        cardBackLinks[d].addEventListener('click', function (event) {
+      ForEach(document.querySelectorAll('.js-card-back'), (link) => {
+        link.addEventListener('click', function (event) {
           event.preventDefault()
           callback()
         })
-      }
+      })
 
       accordion.init(false)
       socialShare.updateSharePageHrefs()
@@ -271,6 +268,8 @@ let buildCard = function (data) {
       console.log(cardData)
 
       cardData.showLocation = cardData.postcode.length > 0 && cardData.type !== 'money'
+      cardData.showContactForm = cardData.type !== 'money'
+      cardData.showDonationLink = cardData.type === 'money'
 
       // hide search
       document.querySelector(searchSelector).classList.remove(activeClass)

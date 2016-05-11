@@ -66,7 +66,7 @@ page: giveitems
 </div>
 
 <div class="requests-detail js-card-detail is-hidden">
-  <div id="js-card-detail-output" class="template"></div>
+  <div id="js-card-detail-output"></div>
 </div>
 
 <script id="js-card-list-tpl" type="text/template">
@@ -92,8 +92,8 @@ page: giveitems
           <div class="requests-listing__secondary-info">
           <p class="requests-listing__provider serviceProviderName">\{{{serviceProviderName}}}</p>
           <p class="requests-listing__location-description locationDescription">\{{{locationDescription}}}</p>
-          <button class="btn btn--brand-d">
-            <span class="btn__text">I can help!</span>
+          <button class="btn btn--brand-e">
+            <span class="btn__text">I Can Help!</span>
           </button>
         </article>
       </a>
@@ -130,10 +130,21 @@ page: giveitems
   </section>
   \{{/showLocation}}
 
+  \{{#showDonationLink}}
+  <section class="block">
+    <div class="container block__inner">
+      <a class="btn btn--large btn--brand-e" href="\{{donationUrl}}">
+        <span class="btn__text">I Can Help!</span>
+      </a>
+    </div>
+  </section>
+  \{{/showDonationLink}}
+
+  \{{#showContactForm}}
   <section class="block">
     <div class="container block__inner">
       <div class="block__content requests-detail__metadata">
-        <h3 class="h2 requests-detail__metadata__heading">I can help!</h3>
+        <h3 class="h2 requests-detail__metadata__heading">I Can Help!</h3>
 
         <div class="accordion js-accordion requests-detail__accordion">
           <button id="requests-detail__contact" class="h3 accordion__header js-header">
@@ -149,16 +160,15 @@ page: giveitems
                 <fieldset class="form__fieldset">
                   <ul class="form__field-list">
                     <li class="form__field-item form__field-item--full">
-                      <label class="form__label">Subject</label>
-                      <p>Subject: \{{{serviceProviderSynopsis}}}</p>
+                      <label class="form__label">Subject: \{{{serviceProviderSynopsis}}}</label>
                     </li>
                     <li class="form__field-item">
                       <label class="form__label" for="email">Your Email</label>
-                      <input type="text" class="form__input form__input" id="email"/>
+                      <input type="text" class="form__input form__input" id="email" placeholder="(required)"/>
                     </li>
                     <li class="form__field-item form__field-item--full">
                       <label class="form__label" for="message">Your Message</label>
-                      <textarea class="form__input form__input--multiline" id="message"></textarea>
+                      <textarea class="form__input form__input--multiline" id="message" placeholder="(required)"></textarea>
                     </li>
                   </ul>
                 </fieldset>
@@ -172,9 +182,12 @@ page: giveitems
       </div>
     </div>
   </section>
+  \{{/showContactForm}}
+
 
   <section class="block">
     <div class="container block__inner">
+      {{> divider}}
       <div class="block__content requests-detail__metadata">
 
         <h3 class="h2 requests-detail__metadata__heading">Share this need</h3>
