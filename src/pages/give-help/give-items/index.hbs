@@ -1,13 +1,12 @@
 ---
-title: Give Items - Street Support
-description: Street support makes it easier to help homeless people. Here's how to get in touch.
+title: Requests for Help - Street Support
+description: Organisations need a variety of help in terms of financial support, donations of items and volunteering help - can you fulfil their needs?
 layout: default.hbs
 permalink: false
-jsBundle: giveitems
+jsBundle: giverequests
 section: givehelp
 page: giveitems
 ---
-
 <div class="block block--breadcrumbs">
   <div class="container">
     <ol class="breadcrumbs__list">
@@ -19,36 +18,191 @@ page: giveitems
 </div>
 {{> no-js}}
 
-<div class="block block--subpage-header">
-  <div class="container">
-    <h1 class="h1 block__header">Give</h1>
-    <h2 class="h2 block__sub-header">Give time, money and items that are needed</h2>
+<div id="js-card-search" class="requests-search is-active">
+  <div class="block block--subpage-header requests-search__intro">
+    <div class="container block__inner">
+      <h1 class="h1 block__header">Give</h1>
+      <h2 class="h2 block__sub-header">Give time, money and items that are needed</h2>
+    </div>
   </div>
-</div>
 
-<div class="block">
-  <div class="container">
-    <div class="block__content">
-      <p>Organisations need a diverse range of resources to provide support to homeless people. If you are able to meet any of their current needs, click the 'I can help!' button, and let us know what you can give.</p>
-      <p>This section of the site is currently being improved, so please check back soon for more ways to give. In the meantime, let us know what skills, time and resources you have to offer by filling in our <a href="/give-help/volunteer/">volunteer form</a>.</p>
+  <div class="block">
+    <div class="container block__inner">
+      <div class="block__content">
+        <div class="requests-search__input" action="#">
+          <div class="requests-search__container">
+            <h2 class="h2 requests-search__input__header">How can you help?</h2>
+            <input autofocus placeholder="Start typing&hellip;" class="search requests-search__autocomplete" />
+          </div>
+        </div>
 
-      <div id="js-need-list-output" class="template"></div>
-      {{> social-share}}
+        <section class="requests-search__filter">
+          <ul class="requests-search__filter__list js-filter-list">
+            <li class="hide-screen"><h3>Filter</h3></li>
+            <li class="requests-search__filter__item js-filter-item js-filter-item-all is-active" data-filter="all">All</li>
+            <li class="requests-search__filter__item js-filter-item" data-filter="items">Items</li>
+            <li class="requests-search__filter__item js-filter-item" data-filter="time">Time</li>
+            <li class="requests-search__filter__item js-filter-item" data-filter="money">Money</li>
+            <li class="requests-search__filter__item" data-filter="money">
+              <select class="requests-search__sort__list js-sort-dropdown">
+                <option value="organisation">Sort by:</option>
+                  <option value="organisation-asc">Organisation name (A-Z)</option>
+                <option value="organisation-desc">Organisation name (Z-A)</option>
+                <option value="date-desc">Date posted (Newest)</option>
+                <option value="date-asc">Date posted (Oldest)</option>
+                <option value="distance-asc">Distance (Nearest)</option>
+                <option value="distance-desc">Distance (Furthest)</option>
+              </select>
+            </li>
+          </ul>
+        </section>
+
+        <div id="js-card-list-output">
+          {{> loading-spinner}}
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
+<div class="requests-detail js-card-detail is-hidden">
+  <div id="js-card-detail-output"></div>
+</div>
 
-<script id="js-need-list-tpl" type="text/template">
-  <dl class="needs">
-    \{{#needs}}
-    <dt class="needs__need">
-      <h3 class="h3">\{{{description}}}</h3>
-      <p>\{{{reason}}}</p>
-    </dt>
-    <dd class="needs__more-info"><a href="\{{link}}" class="btn btn--brand-e"><span class="btn__text">I can help!</span></a></dt>
-    \{{/needs}}
-  </dl>
+<script id="js-card-list-tpl" type="text/template">
+  <ul id="js-card-list" class="requests-listing list">
+  \{{#card}}
+    <li class="requests-listing__item" data-id="\{{id}}">
+      <a class="requests-listing__link" href="#">
+        <article>
+          <p class="h3 requests-listing__type">
+             <svg class="svg-logo-dims requests-listing__icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#\{{{type}}}-alt"></use>
+            </svg>
+            <span class="type">\{{type}}</span>
+          </p>
+          \{{#donationAmountInPounds}}<p class="requests-listing__amount">£\{{{donationAmountInPounds}}}</p>\{{/donationAmountInPounds}}
+          <div class="requests-listing__info">
+            <h3 class="requests-listing__description description">\{{{description}}}</h3>
+            <p class="requests-listing__date formattedCreationDate">Posted: <time datetime={{{formattedCreationDate}}}>\{{{formattedCreationDate}}}</time></p>
+            <p class="hide-screen creationDate">\{{creationDate}}</p>
+            <p class="hide-screen distanceAwayInMetres">\{{distanceAwayInMetres}}</p>
+            <p class="hide-screen keywords">\{{keywords}}</p>
+          </div>
+          <div class="requests-listing__secondary-info">
+          <p class="requests-listing__provider serviceProviderName">\{{{serviceProviderName}}}</p>
+          <p class="requests-listing__location-description locationDescription">\{{{locationDescription}}}</p>
+          <button class="btn btn--brand-e">
+            <span class="btn__text">I Can Help!</span>
+          </button>
+        </article>
+      </a>
+    </li>
+  \{{/card}}
+  </ul>
 </script>
 
-{{> loading-spinner}}
+<script id="js-card-detail-tpl" type="text/template">
+  \{{#card}}
+  <section class="block">
+    <div class="container block__inner">
+      <div class="block__content">
+        <h1 class="h1 block__subheader requests-detail__type with-icon">
+        <svg class="svg-logo-dims requests-detail__icon">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#\{{{type}}}-alt"></use>
+        </svg>
+        Request: \{{{type}}} \{{#donationAmountInPounds}}- £\{{donationAmountInPounds}}\{{/donationAmountInPounds}}</h1>
+        <h2 class="h2 requests-detail__name">\{{{serviceProviderName}}}</h2>
+        <h3 class="h3 requests-detail__synopsis">\{{{serviceProviderSynopsis}}}</h3>
+        <p class="requests-detail__date">Posted: \{{{formattedCreationDate}}}</p>
+        <p>\{{{reason}}}</p>
+        <p>\{{{instructions}}}</p>
+
+        <button class="btn btn--large btn--brand-e js-i-can-help-button">
+          <span class="btn__text">I Can Help!</span>
+        </button>
+        <button class="btn btn--plain js-card-back"><span class="btn__text">Back to Requests</span></button>
+      </div>
+    </div>
+  </section>
+
+  \{{#showLocation}}
+  <section>
+    <h3 class="h2 requests-detail__heading">Location</h3>
+    <iframe frameborder="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDDRleVy8KJBzTPu-KZ1aMCoU7gC-u2mfk&q=\{{{postcode}}}" allowfullscreen class="requests-detail__map">
+    </iframe>
+  </section>
+  \{{/showLocation}}
+
+  \{{#showContactForm}}
+  <h3 class="h2 requests-detail__heading  requests-detail__heading--i-can-help">I Can Help!</h3>
+  <section class="block block--requests-detail">
+    <div class="container block__inner">
+      <div class="block__content requests-detail__form">
+        <!-- ko ifnot: isFormSubmitSuccessful() -->
+        <form class="form">
+          <fieldset class="form__fieldset" data-bind="with: formModel">
+            <legend class="h3">Thanks for your offer to help! Please fill in the form below to let us know what you can do:</legend>
+            <ul class="form__field-list">
+              <li class="form__field-item form__field-item--full">
+                <label class="form__label hide-screen" for="email">Your Email:</label>
+                <input type="text" class="form__input form__input--full" data-bind="textInput: email" id="email" placeholder="Email (required)"/>
+              </li>
+              <li class="form__field-item form__field-item--full">
+                <label class="form__label hide-screen" for="message">How you can help:</label>
+                <textarea class="form__input form__input--multiline" data-bind="textInput: message" id="message" placeholder="How you can help (required)"></textarea>
+              </li>
+              <li class="form__field-item form__field-item--full">
+                <input type="checkbox" class="form__input form__input--checkbox" data-bind="checked: isOptedIn" id="isOptedIn"/>
+                <label class="form__label form__label--checkbox" for="isOptedIn">I would like to receive the occasional email from Street Support.</label>
+              </li>
+            </ul>
+          </fieldset>
+          <button type="submit" class="btn btn--brand-d form__submit" data-bind="click: submit">
+            <span class="btn__text">Send</span>
+          </button>
+        </form>
+        <!-- /ko -->
+        <!-- ko if: isFormSubmitSuccessful() -->
+        <h3 class="h3">Thanks for you offer to help, the requesting organisation will be in touch as soon as possible!</h3>
+        <!-- /ko -->
+      </div>
+    </div>
+  </section>
+  \{{/showContactForm}}
+
+
+  <section class="block">
+    <div class="container block__inner">
+      {{> divider}}
+      <div class="block__content requests-detail__metadata">
+
+        <h3 class="h2 requests-detail__metadata__heading">Share this need</h3>
+        <p>If you cannot help with this yourself but know others who might be able to, please share this need with them on...</p>
+        <div class="social-share">
+          <ul class="list-unstyled list-inline requests-detail__share-list">
+            <li class="list-inline__item requests-detail__share-list__item">
+              <a href="https://twitter.com/intent/tweet?text=\{{{serviceProviderSynopsis}}}&via=streetsupportuk" target="_blank" rel="external" class="js-tweet-page" target="_blank">
+                {{>icon name="twitter-alt" class="requests-detail__share-list__icon"}}
+                Twitter
+              </a>
+            </li>
+            <li class="list-inline__item requests-detail__share-list__item">
+              <a href="https://www.facebook.com/sharer/sharer.php" class="js-fb-share-page" target="_blank">
+                {{>icon name="facebook-alt" class="requests-detail__share-list__icon"}}
+                Facebook
+              </a>
+            </li>
+            <li class="list-inline__item requests-detail__share-list__item">
+              <a href="mailto:?&subject=Request: \{{{serviceProviderSynopsis}}}" class="js-email-page" target="_blank">
+                {{>icon name="email-alt" class="requests-detail__share-list__icon"}}
+                Email
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  \{{/card}}
+</script>
