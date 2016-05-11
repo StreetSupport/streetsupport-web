@@ -75,8 +75,8 @@ let usePostcodeForLocation = (needs) => {
 }
 
 let init = () => {
-  listToSelect.init()
   browser.loading()
+  listToSelect.init()
   getApiData.data(apiRoutes.needs)
     .then(function (result) {
       var needsFromApi = formatDate(result.data)
@@ -95,8 +95,7 @@ let init = () => {
     })
 }
 
-var buildList = function () {
-  // Bricks.js
+let initBricks = () => {
   const sizes = [
    { columns: 1, gutter: 20 }, // assumed to be mobile, because of the missing mq property
    { mq: '360px', columns: 1, gutter: 20 },
@@ -111,9 +110,11 @@ var buildList = function () {
     sizes: sizes
   })
 
-  cardLayout
-   .resize(true) // bind resize handler
-   .pack() // pack initial items
+  return cardLayout
+}
+
+var buildList = function () {
+  let cardLayout = initBricks()
 
    // List.js
   var options = {
@@ -123,7 +124,7 @@ var buildList = function () {
 
   const theList = new List('js-card-search', options)
   theList.sort('creationDate', { order: 'desc' })
-  cardLayout.pack()
+  cardLayout.resize(true).pack()
 
   // List.js Triggers
   theList.on('sortStart', () =>
@@ -135,12 +136,11 @@ var buildList = function () {
   )
 
   // Filtering
-  var b
   var filters = document.querySelectorAll('.js-filter-item')
   var activeFilters = []
 
   // Add click listener to each item
-  for (b = 0; b < filters.length; b++) {
+  for (var b = 0; b < filters.length; b++) {
     filters[b].addEventListener('click', function (event) {
       var getFilter = this.getAttribute('data-filter')
       event.preventDefault()
@@ -163,9 +163,8 @@ var buildList = function () {
   }
 
   // Add change listener to `<select>` for small screens
-  var c
   var filterList = document.querySelectorAll('.js-filter-list.list-to-dropdown__select')
-  for (c = 0; c < filterList.length; c++) {
+  for (var c = 0; c < filterList.length; c++) {
     filterList[c].addEventListener('change', function () {
     })
   }
