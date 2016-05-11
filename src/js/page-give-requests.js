@@ -180,19 +180,20 @@ let initFiltering = (theList, cardLayout) => {
   // Add click listener to each item
   for (let b = 0; b < filters.length; b++) {
     filters[b].addEventListener('click', (event) => {
-      let getFilter = this.getAttribute('data-filter')
+      let self = event.target
+      let getFilter = self.getAttribute('data-filter')
       event.preventDefault()
 
       if (getFilter === 'all') {
         resetFiltering()
       } else {
-        if (this.classList.contains(activeClass)) {
-          this.classList.remove(activeClass)
+        if (self.classList.contains(activeClass)) {
+          self.classList.remove(activeClass)
           activeFilters.splice(activeFilters.indexOf(getFilter), 1)
           runFiltering()
         } else {
           document.querySelector('.js-filter-item-all').classList.remove(activeClass)
-          this.classList.add(activeClass)
+          self.classList.add(activeClass)
           activeFilters.push(getFilter)
           runFiltering()
         }
@@ -216,7 +217,7 @@ let initSorting = (theList, cardLayout) => {
       sortFields['date'] = 'creationDate'
       sortFields['distance'] = 'distanceAwayInMetres'
 
-      let selectedSort = this.options[this.selectedIndex].value
+      let selectedSort = event.target.options[event.target.selectedIndex].value
       let [field, direction] = selectedSort.split('-')
       theList.sort(sortFields[field], { order: direction })
       cardLayout.pack()
