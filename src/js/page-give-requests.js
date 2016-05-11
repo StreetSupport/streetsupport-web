@@ -21,39 +21,39 @@ var accordion = require('./accordion')
 var socialShare = require('./social-share')
 import listToSelect from './list-to-dropdown'
 
+let renderNeeds = (needsFromApi) => {
+  // Change to relative date
+  ForEach(needsFromApi, function (need) {
+    need.formattedCreationDate = moment(need.creationDate).fromNow()
+  })
+
+  // Append object name for Hogan
+  var theData = { card: needsFromApi }
+
+  var keywords = needsFromApi
+    .map((n) => n.keywords)
+    .filter((k) => k.length > 0)
+    .join(',')
+
+  var input = document.querySelector('.search')
+  var awesomplete = new Awesomplete(input, {list: keywords}) // eslint-disable-line
+
+  // Template callback
+  var listCallback = function () {
+    buildList()
+    buildCard(needsFromApi)
+    browser.loaded()
+  }
+
+  templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', listCallback)
+}
+
 let init = () => {
   listToSelect.init()
   browser.loading()
   getApiData.data(apiRoutes.needs)
     .then(function (result) {
       var needsFromApi = result.data
-
-      var renderNeeds = function () {
-        // Change to relative date
-        ForEach(needsFromApi, function (data) {
-          data.formattedCreationDate = moment(data.creationDate).fromNow()
-        })
-
-        // Append object name for Hogan
-        var theData = { card: needsFromApi }
-
-        var keywords = needsFromApi
-          .map((n) => n.keywords)
-          .filter((k) => k.length > 0)
-          .join(',')
-
-        var input = document.querySelector('.search')
-        var awesomplete = new Awesomplete(input, {list: keywords}) // eslint-disable-line
-
-        // Template callback
-        var listCallback = function () {
-          buildList()
-          buildCard(needsFromApi)
-          browser.loaded()
-        }
-
-        templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', listCallback)
-      }
 
       if (navigator.geolocation) {
         getLocation.location().then(function (position) {
@@ -67,7 +67,7 @@ let init = () => {
             n.distanceAwayInMetres = distanceInMetres
             n.locationDescription = (distanceInMetres * 0.00062137).toFixed(2) + ' miles away'
           })
-          renderNeeds()
+          renderNeeds(needsFromApi)
         }, function (error) {
           if (error !== null) {
             console.log(error)
@@ -77,7 +77,7 @@ let init = () => {
         needsFromApi.forEach((n) => {
           n.locationDescription = n.postcode
         })
-        renderNeeds()
+        renderNeeds(needsFromApi)
       }
     })
 }
