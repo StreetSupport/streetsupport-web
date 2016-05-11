@@ -301,14 +301,14 @@ let buildCard = function (data) {
     document.querySelector('.js-card-detail').classList.add('is-hidden')
   }
 
-  let items = document.querySelectorAll('.requests-listing__item')
-
-  // Add click listener to each item
-  for (var a = 0; a < items.length; a++) {
-    items[a].addEventListener('click', function (event) {
-      event.preventDefault()
-      openCard(this, rewindHistory)
-    })
+  let addClickEvents = () => {
+    let addEventListener = (card) => {
+      card.addEventListener('click', function (event) {
+        event.preventDefault()
+        openCard(this, rewindHistory)
+      })
+    }
+    ForEach(document.querySelectorAll('.requests-listing__item'), addEventListener)
   }
 
   window.onpopstate = () => {
@@ -316,6 +316,7 @@ let buildCard = function (data) {
     openIfCardRequested()
   }
 
+  addClickEvents()
   openIfCardRequested()
 }
 
