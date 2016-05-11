@@ -255,7 +255,7 @@ let buildCard = (data) => {
         if (cardData.type === 'money') {
           window.location = cardData.donationUrl
         } else {
-          browser.scrollTo('.requests-detail__metadata')
+          browser.scrollTo('.requests-detail__heading--i-can-help')
         }
       })
 
