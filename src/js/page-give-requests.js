@@ -10,14 +10,15 @@ import Bricks from 'bricks.js'
 import Find from 'lodash/collection/find'
 import ForEach from 'lodash/collection/forEach'
 import moment from 'moment'
+var ko = require('knockout')
 
+let ContactFormModel = require('./models/GiveItemModel')
 let apiRoutes = require('./api')
 let browser = require('./browser')
 let getApiData = require('./get-api-data')
 let getLocation = require('./get-location')
 let templating = require('./template-render')
 let getUrlParams = require('./get-url-parameter')
-let accordion = require('./accordion')
 let socialShare = require('./social-share')
 import listToSelect from './list-to-dropdown'
 
@@ -244,18 +245,21 @@ let buildCard = (data) => {
       window.scrollTo(0, 0)
 
       let theId = el.getAttribute('data-id')
+      let cardData = Find(data, (c) => {
+        return c.id === theId
+      })
+
       let iCanHelpButton = document.querySelector('.js-i-can-help-button')
       iCanHelpButton.addEventListener('click', function (event) {
         event.preventDefault()
-        let cardData = Find(data, (c) => {
-          return c.id === theId
-        })
         if (cardData.type === 'money') {
           window.location = cardData.donationUrl
         } else {
           browser.scrollTo('.requests-detail__metadata')
         }
       })
+
+      ko.applyBindings(new ContactFormModel(), document.querySelector('.requests-detail__form'))
 
       Holder.run({})
 

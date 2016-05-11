@@ -1,7 +1,5 @@
 var ko = require('knockout')
 require('knockout.validation') // No variable here is deliberate!
-var getUrlParams = require('../get-url-parameter')
-var getApiData = require('../get-api-data')
 var postApiData = require('../post-api-data')
 var endpoints = require('../api')
 var browser = require('../browser')
@@ -31,31 +29,19 @@ var GiveItemModel = function () {
   self.fieldErrors = ko.validation.group(self.formModel)
   self.apiErrors = ko.observableArray()
 
-  var needId = getUrlParams.parameter('id')
-  var endpoint = endpoints.needs + needId
-  var postEndpoint = endpoints.needs + needId + '/offers-to-help'
-
-  browser.loading()
-
-  getApiData.data(endpoint)
-    .then(function (success) {
-      browser.loaded()
-      self.providerName(success.data.serviceProviderName)
-      self.needReason(success.data.reason)
-      self.needDescription(success.data.description)
-    }, function () {
-      browser.redirect('/404/')
-    })
-
   self.submit = function () {
     if (self.formModel.isValid()) {
       browser.loading()
+
+      var postEndpoint = endpoints.needs + self.needId + '/offers-to-help'
+      let payload = {
+        'Email': self.formModel().email(),
+        'Message': self.formModel().message(),
+        'IsOptedIn': self.formModel().isOptedIn()
+      }
+
       postApiData
-        .post(postEndpoint, {
-          'Email': self.formModel().email(),
-          'Message': self.formModel().message(),
-          'IsOptedIn': self.formModel().isOptedIn()
-        })
+        .post(postEndpoint, payload)
         .then(function (success) {
           browser.loaded()
           if (success.status === 'error') {

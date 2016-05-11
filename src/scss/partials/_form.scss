@@ -29,28 +29,29 @@
   @include mq($from: m) {
     @include span(4 of $grid-column);
   }
-}
 
-.form__field-item--full {
-  @include mq($from: m) {
-    @include span(full);
+  &--full {
+    @include mq($from: m) {
+      @include span(full);
+    }
   }
 }
 
 .form__label {
   display: block;
   margin-bottom: 10px;
-}
 
-.form__label--checkbox {
-  float: left;
-  margin-right: 1em;
+  &--checkbox {
+    margin-right: 1em;
+    display: inline;
+    width: 100%;
+  }
 }
 
 .form__input {
   padding: 5px;
   display: block;
-  appearance: none;
+  // appearance: none;
   border: 0;
   outline: none;
   border: 1px solid $brand-f;
@@ -58,15 +59,22 @@
   padding: 10px;
   color: $brand-m;
   width: 100%;
-}
 
-.form__input--multiline {
-  min-height: 8rem;
-  width: 100%;
-}
+  &--checkbox {
+    vertical-align: middle;
+    display: table-cell;
+    width: 1em;
+    height: 1em;
+  }
 
-.form__input--error {
-  border: 1px solid $brand-g;
+  &--multiline {
+    min-height: 8rem;
+    width: 100%;
+  }
+
+  &--error {
+    border: 1px solid $brand-g;
+  }
 }
 
 .form__error {
