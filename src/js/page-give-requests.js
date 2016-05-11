@@ -145,7 +145,7 @@ let initFiltering = (theList, cardLayout) => {
       return
     }
 
-    theList.filter(function (item) {
+    theList.filter((item) => {
       if (activeFilters.length > 0) {
         return (activeFilters.indexOf(item.values().type)) > -1
       }
@@ -178,7 +178,7 @@ let initFiltering = (theList, cardLayout) => {
 
   // Add click listener to each item
   for (let b = 0; b < filters.length; b++) {
-    filters[b].addEventListener('click', function (event) {
+    filters[b].addEventListener('click', (event) => {
       let getFilter = this.getAttribute('data-filter')
       event.preventDefault()
 
@@ -209,7 +209,7 @@ let initFiltering = (theList, cardLayout) => {
 
 let initSorting = (theList, cardLayout) => {
   document.querySelector('.js-sort-dropdown')
-    .addEventListener('change', function (event) {
+    .addEventListener('change', (event) => {
       let sortFields = []
       sortFields['organisation'] = 'serviceProviderName'
       sortFields['date'] = 'creationDate'
@@ -231,45 +231,54 @@ let buildList = () => {
 }
 
 // Full detail view
-let buildCard = function (data) {
+let buildCard = (data) => {
   const searchSelector = '#js-card-search'
   const cardDetailSelector = '.js-card-detail'
   const hiddenClass = 'is-hidden'
 
-  let openCard = function (el, callback) {
+  let openCard = (el, callback) => {
     let cardCallback = () => {
       document.querySelector(cardDetailSelector).classList.remove(hiddenClass)
       document.querySelector(cardDetailSelector).classList.add(activeClass)
 
       window.scrollTo(0, 0)
 
+      let theId = el.getAttribute('data-id')
+      let iCanHelpButton = document.querySelector('.js-i-can-help-button')
+      iCanHelpButton.addEventListener('click', function (event) {
+        event.preventDefault()
+        let cardData = Find(data, (c) => {
+          return c.id === theId
+        })
+        if (cardData.type === 'money') {
+          window.location = cardData.donationUrl
+        } else {
+          browser.scrollTo('.requests-detail__metadata')
+        }
+      })
+
       Holder.run({})
 
       // TODO: Proper URL support
       let state = { test: 'TBA' }
-      let theId = el.getAttribute('data-id')
       history.pushState(state, 'TEST', '?id=' + theId)
 
       ForEach(document.querySelectorAll('.js-card-back'), (link) => {
-        link.addEventListener('click', function (event) {
+        link.addEventListener('click', (event) => {
           event.preventDefault()
           callback()
         })
       })
 
-      accordion.init(false)
       socialShare.updateSharePageHrefs()
     }
 
     let init = () => {
       let theId = el.getAttribute('data-id')
-      let cardData = Find(data, function (o) { return o.id === theId })
-
-      console.log(cardData)
+      let cardData = Find(data, (o) => { return o.id === theId })
 
       cardData.showLocation = cardData.postcode.length > 0 && cardData.type !== 'money'
       cardData.showContactForm = cardData.type !== 'money'
-      cardData.showDonationLink = cardData.type === 'money'
 
       // hide search
       document.querySelector(searchSelector).classList.remove(activeClass)

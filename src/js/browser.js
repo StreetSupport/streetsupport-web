@@ -26,9 +26,24 @@ var trackEvent = function (src, action, description) {
   ga('send', 'event', src, action, description)
 }
 
+var scrollTo = function (selector) {
+  let findPos = (obj) => {
+    var curtop = 0
+    if (obj.offsetParent) {
+      do {
+        curtop += obj.offsetTop
+      } while (obj === obj.offsetParent)
+      return [curtop]
+    }
+  }
+  let element = document.querySelector(selector)
+  window.scroll(0, findPos(element))
+}
+
 module.exports = {
   redirect: redirect,
   loading: loading,
   loaded: loaded,
-  trackEvent: trackEvent
+  trackEvent: trackEvent,
+  scrollTo: scrollTo
 }

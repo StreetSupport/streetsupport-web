@@ -117,7 +117,11 @@ page: giveitems
         <p class="requests-detail__date">Posted: \{{{formattedCreationDate}}}</p>
         <p>\{{{reason}}}</p>
         <p>\{{{instructions}}}</p>
-        <button class="btn btn--brand-d js-card-back"><span class="btn__text">Back to Requests</span></button>
+
+        <button class="btn btn--large btn--brand-e js-i-can-help-button">
+          <span class="btn__text">I Can Help!</span>
+        </button>
+        <button class="btn btn--plain js-card-back"><span class="btn__text">Back to Requests</span></button>
       </div>
     </div>
   </section>
@@ -130,32 +134,13 @@ page: giveitems
   </section>
   \{{/showLocation}}
 
-  \{{#showDonationLink}}
-  <section class="block">
-    <div class="container block__inner">
-      <a class="btn btn--large btn--brand-e" href="\{{donationUrl}}">
-        <span class="btn__text">I Can Help!</span>
-      </a>
-    </div>
-  </section>
-  \{{/showDonationLink}}
-
   \{{#showContactForm}}
   <section class="block">
     <div class="container block__inner">
       <div class="block__content requests-detail__metadata">
         <h3 class="h2 requests-detail__metadata__heading">I Can Help!</h3>
-
-        <div class="accordion js-accordion requests-detail__accordion">
-          <button id="requests-detail__contact" class="h3 accordion__header js-header">
-              Send a message
-              <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
-              <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
-          </button>
-          <div class="accordion__item js-item" id="requests-detail__contact">
-            <div class="accordion__inner">
-              <p>Emailing <a href="mailto:\{{{email}}}">\{{{email}}}</a></p>
-
+        <div>
+          <div id="requests-detail__contact">
               <form class="form requests-detail__form">
                 <fieldset class="form__fieldset">
                   <ul class="form__field-list">
@@ -163,11 +148,11 @@ page: giveitems
                       <label class="form__label">Subject: \{{{serviceProviderSynopsis}}}</label>
                     </li>
                     <li class="form__field-item">
-                      <label class="form__label" for="email">Your Email</label>
+                      <label class="form__label" for="email">Your Email:</label>
                       <input type="text" class="form__input form__input" id="email" placeholder="(required)"/>
                     </li>
                     <li class="form__field-item form__field-item--full">
-                      <label class="form__label" for="message">Your Message</label>
+                      <label class="form__label" for="message">How you can help:</label>
                       <textarea class="form__input form__input--multiline" id="message" placeholder="(required)"></textarea>
                     </li>
                   </ul>
@@ -176,7 +161,6 @@ page: giveitems
                   <span class="btn__text">Send</span>
                 </button>
               </form>
-            </div>
           </div>
         </div>
       </div>
