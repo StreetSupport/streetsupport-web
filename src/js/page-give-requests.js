@@ -52,6 +52,28 @@ let initAutoComplete = (needs) => {
   var awesomplete = new Awesomplete(input, {list: keywords}) // eslint-disable-line
 }
 
+let useDistanceForLocation = (position, needs) => {
+  var latitude = position.coords.latitude
+  var longitude = position.coords.longitude
+  needs.forEach((n) => {
+    var distanceInMetres = geolib.getDistance(
+      { latitude: latitude, longitude: longitude },
+      { latitude: n.latitude, longitude: n.longitude }
+    )
+    n.distanceAwayInMetres = distanceInMetres
+    n.locationDescription = (distanceInMetres * 0.00062137).toFixed(2) + ' miles away'
+  })
+
+  return needs
+}
+
+let usePostcodeForLocation = (needs) => {
+  needs.forEach((n) => {
+    n.locationDescription = n.postcode
+  })
+  return needs
+}
+
 let init = () => {
   listToSelect.init()
   browser.loading()
@@ -63,27 +85,12 @@ let init = () => {
 
       if (navigator.geolocation) {
         getLocation.location().then(function (position) {
-          var latitude = position.coords.latitude
-          var longitude = position.coords.longitude
-          needsFromApi.forEach((n) => {
-            var distanceInMetres = geolib.getDistance(
-              { latitude: latitude, longitude: longitude },
-              { latitude: n.latitude, longitude: n.longitude }
-            )
-            n.distanceAwayInMetres = distanceInMetres
-            n.locationDescription = (distanceInMetres * 0.00062137).toFixed(2) + ' miles away'
-          })
-          renderNeeds(needsFromApi)
-        }, function (error) {
-          if (error !== null) {
-            console.log(error)
-          }
+          renderNeeds(needuseDistanceForLocation(position, needsFromApi)sFromApi)
+        }, () => {
+          renderNeeds(usePostcodeForLocation(needsFromApi))
         })
       } else {
-        needsFromApi.forEach((n) => {
-          n.locationDescription = n.postcode
-        })
-        renderNeeds(needsFromApi)
+        renderNeeds(usePostcodeForLocation(needsFromApi))
       }
     })
 }
