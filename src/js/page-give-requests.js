@@ -2,14 +2,15 @@
 
 import './common'
 
-// Page modules
 var Awesomplete = require('awesomplete') // eslint-disable-line
 var geolib = require('geolib')
 import List from 'list.js'
 import Holder from 'holderjs'
 import Bricks from 'bricks.js'
+import Find from 'lodash/collection/find'
+import ForEach from 'lodash/collection/forEach'
+import moment from 'moment'
 
-// Page modules
 var apiRoutes = require('./api')
 var browser = require('./browser')
 var getApiData = require('./get-api-data')
@@ -19,10 +20,6 @@ var getUrlParams = require('./get-url-parameter')
 var accordion = require('./accordion')
 var socialShare = require('./social-share')
 import listToSelect from './list-to-dropdown'
-
-import Find from 'lodash/collection/find'
-import ForEach from 'lodash/collection/forEach'
-import moment from 'moment'
 
 listToSelect.init()
 browser.loading()
