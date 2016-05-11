@@ -42,21 +42,26 @@ page: partnership
       </ul>
 
       <p>If you share our mission to support local people experiencing homelessness, could you help the Street Support Network by donating money or resources?</p>
+    </div>
+  </div>
+</div>
+<h3 class="h2 requests-detail__heading  requests-detail__heading--i-can-help">I Want to Help!</h3>
+<div class="block block--requests-detail">
+  <div class="container">
+    <div class="block__content">
       {{> form-feedback}}
       <!-- ko ifnot: isFormSubmitSuccessful -->
-      <form class="form" data-bind="submit: submit">
-        <p>Please fill in the form below to let us know what you are able to offer.</p>
-        <p>* denotes a required field.</p>
+      <form class="form form--partnership" data-bind="submit: submit">
         <fieldset class="form__fieldset" data-bind="with: formModel">
-          <legend class="h2 form__fieldset-title">I Can Help!</legend>
+          <legend class="form__fieldset-title">Please fill in the form below to let us know what you are able to offer.</legend>
           <ul class="form__field-list">
             <li class="form__field-item form__field-item--full">
-              <label class="form__label" for="email">Email *</label>
-              <input type="text" class="form__input form__input" id="email" data-bind="value: email" />
+              <label class="form__label hide-screen" for="email">Email *</label>
+              <input type="text" class="form__input" id="email" data-bind="value: email" placeholder="Email Address (required)" />
             </li>
             <li class="form__field-item form__field-item--full">
-              <label class="form__label" for="message">Message *</label>
-              <textarea class="form__input form__input--multiline" id="message" data-bind="value: message"></textarea>
+              <label class="form__label hide-screen" for="message">Message *</label>
+              <textarea class="form__input form__input--multiline" id="message" data-bind="value: message" placeholder="Your message (required)"></textarea>
             </li>
             <li class="form__field-item form__field-item--full">
               <label class="form__label--checkbox" for="isOptedIn">I would like occasional updates about Street Support in my inbox</label>
@@ -68,7 +73,7 @@ page: partnership
       </form>
       <!-- /ko -->
 
-      <p>Here are some of the things that have already been generously funded by local organisations...</p>
+      <p>Here are some of the things that have already been generously funded by local organisations:</p>
       <ul>
         <li>Launch The Manchester Homelessness Charter: £5,000</li>
         <li>Apple &amp; Android app versions for use offline: £6,000 each</li>

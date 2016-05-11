@@ -2,6 +2,12 @@
 
 .form {
   @include cf();
+
+  &--partnership,
+  &--volunteer {
+    @include pre(1 of 6);
+    @include post(1 of 6);
+  }
 }
 
 .form__fieldset {
