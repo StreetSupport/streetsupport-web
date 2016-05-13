@@ -111,8 +111,8 @@ page: giveitems
         <svg class="svg-logo-dims requests-detail__icon">
           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#\{{{type}}}-alt"></use>
         </svg>
-        \{{{serviceProviderName}}} \{{#donationAmountInPounds}}- £\{{donationAmountInPounds}}\{{/donationAmountInPounds}}</h1>
-        <h2 class="h2 requests-detail__synopsis">\{{{serviceProviderSynopsis}}}</h2>
+        \{{{description}}} \{{#donationAmountInPounds}}- £\{{donationAmountInPounds}}\{{/donationAmountInPounds}}</h1>
+        <h2 class="h2 requests-detail__synopsis">\{{{serviceProviderName}}}: \{{{serviceProviderSynopsis}}}</h2>
         <p class="requests-detail__date">Posted: \{{{formattedCreationDate}}}</p>
         <p>\{{{reason}}}</p>
         <p>\{{{instructions}}}</p>
@@ -153,7 +153,7 @@ page: giveitems
               </li>
               <li class="form__field-item form__field-item--full">
                 <input type="checkbox" class="form__input form__input--checkbox" data-bind="checked: isOptedIn" id="isOptedIn"/>
-                <label class="form__label form__label--checkbox" for="isOptedIn">I would like to receive the occasional email from Street Support.</label>
+                <label class="form__label form__label--checkbox" for="isOptedIn">I would like to receive occasional update emails from Street Support.</label>
               </li>
             </ul>
           </fieldset>

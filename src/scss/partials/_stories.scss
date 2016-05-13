@@ -1,0 +1,45 @@
+.floated-image {
+  margin-bottom: 20px;
+  @include mq($from: m) {
+    width: 33%;
+
+    &--right {
+      float: right;
+      margin-left: 30px;
+    }
+  }
+}
+
+.quote {
+  color: $brand-h;
+  font-style: italic;
+  font-size: 32px;
+
+  &::before {
+    content: open-quote;
+  }
+
+  margin-bottom: 20px;
+
+
+  @include mq($from: m) {
+    width: 40%;
+  }
+
+  &--right {
+    border-top: 3px solid $brand-i;
+    border-bottom: 3px solid $brand-i;
+    padding: 30px 0;
+
+    @include mq($from: m) {
+      float: right;
+      margin-left: 30px;
+      padding: 0 30px;
+      border: none;
+      border-left: 3px solid $brand-i;
+    }
+    @include mq($from: m) {
+      padding-right: 0px;
+    }
+  }
+}
