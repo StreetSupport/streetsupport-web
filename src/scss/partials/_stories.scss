@@ -1,0 +1,29 @@
+.floated-image {
+  margin-bottom: 20px;
+  @include mq($from: m) {
+    width: 33%;
+
+    &--right {
+      float: right;
+      margin-left: 30px;
+    }
+  }
+}
+
+.quote {
+  color: $brand-h;
+  &::before {
+    content: &lquot;
+  }
+  font-style: italic;
+
+  margin-bottom: 20px;
+  @include mq($from: m) {
+    width: 33%;
+
+    &--right {
+      float: right;
+      margin-left: 30px;
+    }
+  }
+}
