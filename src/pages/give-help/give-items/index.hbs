@@ -1,6 +1,6 @@
 ---
 title: Requests for Help - Street Support
-description: Organisations need specific items, skills and money to support homeless people in Manchester - can you help? 
+description: Organisations need specific items, skills and money to support homeless people in Manchester - can you help?
 layout: default.hbs
 permalink: false
 jsBundle: giverequests
@@ -111,13 +111,12 @@ page: giveitems
         <svg class="svg-logo-dims requests-detail__icon">
           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#\{{{type}}}-alt"></use>
         </svg>
-        Request: \{{{type}}} \{{#donationAmountInPounds}}- £\{{donationAmountInPounds}}\{{/donationAmountInPounds}}</h1>
-        <h2 class="h2 requests-detail__name">\{{{serviceProviderName}}}</h2>
-        <h3 class="h3 requests-detail__synopsis">\{{{serviceProviderSynopsis}}}</h3>
+        \{{{serviceProviderName}}} \{{#donationAmountInPounds}}- £\{{donationAmountInPounds}}\{{/donationAmountInPounds}}</h1>
+        <h2 class="h2 requests-detail__synopsis">\{{{serviceProviderSynopsis}}}</h2>
         <p class="requests-detail__date">Posted: \{{{formattedCreationDate}}}</p>
         <p>\{{{reason}}}</p>
         <p>\{{{instructions}}}</p>
-
+        \{{#moreInfoUrl}}<p><a href="\{{moreInfoUrl}}" target="_blank" rel="noreferrer noopener">View more information</a></p>\{{/moreInfoUrl}}
         <button class="btn btn--large btn--brand-e js-i-can-help-button">
           <span class="btn__text">I Can Help!</span>
         </button>
