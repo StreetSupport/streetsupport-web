@@ -1,6 +1,6 @@
 ---
 title: Requests for Help - Street Support
-description: Organisations need specific items, skills and money to support homeless people in Manchester - can you help? 
+description: Organisations need specific items, skills and money to support homeless people in Manchester - can you help?
 layout: default.hbs
 permalink: false
 jsBundle: giverequests
@@ -117,7 +117,7 @@ page: giveitems
         <p class="requests-detail__date">Posted: \{{{formattedCreationDate}}}</p>
         <p>\{{{reason}}}</p>
         <p>\{{{instructions}}}</p>
-
+        \{{#moreInfoUrl}}<p><a href="\{{moreInfoUrl}}" target="_blank" rel="noreferrer noopener">Additional information</a></p>\{{/moreInfoUrl}}
         <button class="btn btn--large btn--brand-e js-i-can-help-button">
           <span class="btn__text">I Can Help!</span>
         </button>
