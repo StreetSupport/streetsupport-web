@@ -122,7 +122,10 @@
   list-style: none;
   margin: 20px auto;
   padding: 0;
-  max-width: 100%;
+  // max-width: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .requests-listing__item {
@@ -130,28 +133,36 @@
   border-radius: 5px;
   box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);
   margin-bottom: 20px;
-  max-width: 100%;
-  width: 290px;
+  // max-width: 100%;
+  // width: 290px;
   word-wrap: break-word;
 
-  @include mq($from: xs) {
-    width: 330px;
-  }
+   margin-right: 3.33%;
+  margin-bottom: 1em;
+  width: 31%;
 
-  @include mq($from: s) {
-    width: 220px;
-    height: 430px;
-  }
+  &:nth-of-type(3n) {
+  margin-right: 0;
+}
 
-  @include mq($from: m) {
-    width: 330px;
-    height: 410px;
-  }
+  // @include mq($from: xs) {
+  //   width: 330px;
+  // }
 
-  @include mq($from: l) {
-    width: 240px;
-    height: 430px;
-  }
+  // @include mq($from: s) {
+  //   width: 220px;
+  //   height: 430px;
+  // }
+
+  // @include mq($from: m) {
+  //   width: 330px;
+  //   height: 410px;
+  // }
+
+  // @include mq($from: l) {
+  //   width: 240px;
+  //   height: 430px;
+  // }
 }
 
 .requests-listing__info {
@@ -170,6 +181,7 @@
 
 .requests-listing__date {
   color: $brand-j;
+  font-size: smaller;
   margin-bottom: 0;
 }
 
@@ -212,8 +224,14 @@
   }
 }
 
+.requests-listing__provider {
+  margin-bottom: $base-font-size/4;
+}
+
 .requests-listing__location-description {
+  font-size: smaller;
   font-weight: $font-headline-weight;
+  margin-top: 0;
 }
 
 .requests-listing__description {
