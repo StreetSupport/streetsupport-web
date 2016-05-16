@@ -69,7 +69,6 @@
   },
   "dependencies": {
     "awesomplete": "github:leaverou/awesomplete#gh-pages",
-    "bricks.js": "1.1.0",
     "fastclick": "1.0.6",
     "geolib": "2.0.20",
     "hogan.js": "3.0.2",
