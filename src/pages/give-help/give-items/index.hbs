@@ -1,6 +1,6 @@
 ---
 title: Requests for Help - Street Support
-description: Organisations need specific items, skills and money to support homeless people in Manchester - can you help? 
+description: Organisations need specific items, skills and money to support homeless people in Manchester - can you help?
 layout: default.hbs
 permalink: false
 jsBundle: giverequests
@@ -111,13 +111,12 @@ page: giveitems
         <svg class="svg-logo-dims requests-detail__icon">
           <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#\{{{type}}}-alt"></use>
         </svg>
-        Request: \{{{type}}} \{{#donationAmountInPounds}}- £\{{donationAmountInPounds}}\{{/donationAmountInPounds}}</h1>
-        <h2 class="h2 requests-detail__name">\{{{serviceProviderName}}}</h2>
-        <h3 class="h3 requests-detail__synopsis">\{{{serviceProviderSynopsis}}}</h3>
+        \{{{description}}} \{{#donationAmountInPounds}}- £\{{donationAmountInPounds}}\{{/donationAmountInPounds}}</h1>
+        <h2 class="h2 requests-detail__synopsis">\{{{serviceProviderName}}}: \{{{serviceProviderSynopsis}}}</h2>
         <p class="requests-detail__date">Posted: \{{{formattedCreationDate}}}</p>
         <p>\{{{reason}}}</p>
         <p>\{{{instructions}}}</p>
-
+        \{{#moreInfoUrl}}<p><a href="\{{moreInfoUrl}}" target="_blank" rel="noreferrer noopener">View more information</a></p>\{{/moreInfoUrl}}
         <button class="btn btn--large btn--brand-e js-i-can-help-button">
           <span class="btn__text">I Can Help!</span>
         </button>
@@ -154,7 +153,7 @@ page: giveitems
               </li>
               <li class="form__field-item form__field-item--full">
                 <input type="checkbox" class="form__input form__input--checkbox" data-bind="checked: isOptedIn" id="isOptedIn"/>
-                <label class="form__label form__label--checkbox" for="isOptedIn">I would like to receive the occasional email from Street Support.</label>
+                <label class="form__label form__label--checkbox" for="isOptedIn">I would like to receive occasional update emails from Street Support.</label>
               </li>
             </ul>
           </fieldset>
