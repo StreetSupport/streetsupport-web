@@ -183,10 +183,14 @@
 .requests-listing__info {
   background-image: url('../img/header-background.png');
   background-repeat: repeat;
-  height: 150px;
+  height: 160px;
   margin-left: -1px;
   margin-right: -1px;
   padding: 20px;
+
+  @include mq($from: l) {
+    height: 140px;
+  }
 }
 
 .requests-listing__secondary-info {
