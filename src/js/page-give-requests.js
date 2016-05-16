@@ -6,7 +6,6 @@ let Awesomplete = require('awesomplete') // eslint-disable-line
 let geolib = require('geolib')
 import List from 'list.js'
 import Holder from 'holderjs'
-import Bricks from 'bricks.js'
 import Find from 'lodash/collection/find'
 import ForEach from 'lodash/collection/forEach'
 import moment from 'moment'
@@ -98,25 +97,7 @@ let init = () => {
     })
 }
 
-let initBricks = () => {
-  const sizes = [
-   { columns: 1, gutter: 20 }, // assumed to be mobile, because of the missing mq property
-   { mq: '360px', columns: 1, gutter: 20 },
-   { mq: '480px', columns: 2, gutter: 20 },
-   { mq: '600px', columns: 2, gutter: 20 },
-   { mq: '800px', columns: 3, gutter: 20 }
-  ]
-
-  const cardLayout = Bricks({
-    container: '#js-card-list',
-    packed: 'data-packed', // if not prefixed with 'data-', it will be added
-    sizes: sizes
-  })
-
-  return cardLayout
-}
-
-let initList = (cardLayout) => {
+let initList = () => {
    // List.js
   let options = {
     valueNames: [ 'type', 'serviceProviderName', 'creationDate', 'description', 'keywords', 'distanceAwayInMetres' ],
@@ -125,21 +106,11 @@ let initList = (cardLayout) => {
 
   let theList = new List('js-card-search', options)
   theList.sort('creationDate', { order: 'desc' })
-  cardLayout.resize(true).pack()
-
-  // List.js Triggers
-  theList.on('sortStart', () =>
-   cardLayout.pack()
-  )
-
-  theList.on('searchComplete', () =>
-   cardLayout.pack()
-  )
 
   return theList
 }
 
-let initFiltering = (theList, cardLayout) => {
+let initFiltering = (theList) => {
   let runFiltering = () => {
     if (activeFilters.length === 0) {
       resetFiltering()
@@ -152,8 +123,6 @@ let initFiltering = (theList, cardLayout) => {
       }
       return true
     })
-
-    cardLayout.pack()
   }
 
   let resetFiltering = () => {
@@ -171,7 +140,6 @@ let initFiltering = (theList, cardLayout) => {
 
     // Reset filter & layout
     theList.filter()
-    cardLayout.pack()
   }
 
   let filters = document.querySelectorAll('.js-filter-item')
@@ -209,7 +177,7 @@ let initFiltering = (theList, cardLayout) => {
   }
 }
 
-let initSorting = (theList, cardLayout) => {
+let initSorting = (theList) => {
   document.querySelector('.js-sort-dropdown')
     .addEventListener('change', (event) => {
       let sortFields = []
@@ -220,16 +188,14 @@ let initSorting = (theList, cardLayout) => {
       let selectedSort = event.target.options[event.target.selectedIndex].value
       let [field, direction] = selectedSort.split('-')
       theList.sort(sortFields[field], { order: direction })
-      cardLayout.pack()
     })
 }
 
 let buildList = () => {
-  let cardLayout = initBricks()
-  let theList = initList(cardLayout)
+  let theList = initList()
 
-  initFiltering(theList, cardLayout)
-  initSorting(theList, cardLayout)
+  initFiltering(theList)
+  initSorting(theList)
 }
 
 // Full detail view
