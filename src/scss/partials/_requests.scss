@@ -110,72 +110,104 @@
   border-radius: 5px;
   box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
   padding: 10px;
+  max-width: 100%;
 }
 
 .requests-container {
   position: relative;
 }
 
-// NOTE: Items need to be fixed width for bricks.js support
 .requests-listing {
   clear: both;
   list-style: none;
   margin: 20px auto;
   padding: 0;
-  max-width: 100%;
+
+  @include mq($from: s) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  @include mq($from: m) {
+    max-width: 75%;
+  }
+
+  @include mq($from: l) {
+    max-width: 90%;
+  }
 }
 
 .requests-listing__item {
   border: 1px solid $brand-k;
   border-radius: 5px;
   box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);
-  margin-bottom: 20px;
-  max-width: 100%;
-  width: 290px;
+  margin: 0 auto 20px;
+  max-width: 330px;
   word-wrap: break-word;
+
+  @include mq($from: s) {
+    @supports not (display: flex) {
+      float: left;
+    }
+  }
 
   @include mq($from: xs) {
     width: 330px;
   }
 
   @include mq($from: s) {
-    width: 220px;
-    height: 430px;
-  }
+    margin-left: 0;
+    margin-right: 4%;
+    width: 48%;
 
-  @include mq($from: m) {
-    width: 330px;
-    height: 410px;
+    &:nth-of-type(2n) {
+      margin-right: 0;
+    }
   }
 
   @include mq($from: l) {
-    width: 240px;
-    height: 430px;
+    margin-right: 3.33%;
+    width: 31%;
+
+    &:nth-of-type(2n) {
+      margin-right: 3.33%;
+      width: 31%;
+    }
+
+    &:nth-of-type(3n) {
+      margin-right: 0;
+    }
   }
 }
 
 .requests-listing__info {
   background-image: url('../img/header-background.png');
   background-repeat: repeat;
+  height: 160px;
   margin-left: -1px;
   margin-right: -1px;
   padding: 20px;
-  height: 180px;
+
+  @include mq($from: l) {
+    height: 140px;
+  }
 }
 
 .requests-listing__secondary-info {
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   position: relative;
 }
 
 .requests-listing__date {
   color: $brand-j;
+  font-size: smaller;
   margin-bottom: 0;
 }
 
 .requests-listing__link {
   color: inherit!important; // @todo wean out
   display: block;
+  position: relative;
   text-decoration: inherit;
 
   & .btn {
@@ -212,8 +244,14 @@
   }
 }
 
+.requests-listing__provider {
+  margin-bottom: $base-font-size/4;
+}
+
 .requests-listing__location-description {
+  font-size: smaller;
   font-weight: $font-headline-weight;
+  margin-top: 0;
 }
 
 .requests-listing__description {
