@@ -3,8 +3,11 @@
 var init = function () {
   var el = '.social-share'
   twttr.widgets.load(document.querySelectorAll(el))
-  var fbElement = document.querySelectorAll('.fb-share-button')
-  fbElement.setAttribute('data-href', window.location.href)
+
+  var fbElements = document.querySelectorAll('.fb-share-button')
+  for (let i = 0; i < fbElements.length; i++) {
+    fbElements[i].setAttribute('data-href', window.location.href)
+  }
 }
 
 function updateSharePageHrefs () {
