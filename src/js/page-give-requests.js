@@ -155,16 +155,11 @@ let initFiltering = (theList) => {
       if (getFilter === 'all') {
         resetFiltering()
       } else {
-        if (self.classList.contains(activeClass)) {
-          self.classList.remove(activeClass)
-          activeFilters.splice(activeFilters.indexOf(getFilter), 1)
-          runFiltering()
-        } else {
-          document.querySelector('.js-filter-item-all').classList.remove(activeClass)
-          self.classList.add(activeClass)
-          activeFilters.push(getFilter)
-          runFiltering()
-        }
+        document.querySelector('.js-filter-item-all').classList.remove(activeClass)
+        ForEach(filters, (f) => f.classList.remove(activeClass))
+        self.classList.add(activeClass)
+        activeFilters = [getFilter]
+        runFiltering()
       }
     })
   }
