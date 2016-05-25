@@ -71,7 +71,7 @@
     transition: max-height 250ms, visibility 250ms, opacity 250ms;
 
     &.is-active {
-      max-height: 300rem;
+      max-height: 1000rem;
       opacity: 1;
       visibility: visible;
     }
