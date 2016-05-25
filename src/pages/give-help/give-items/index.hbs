@@ -46,12 +46,10 @@ page: giveitems
             <li class="requests-search__filter__item" data-filter="money">
               <select class="requests-search__sort__list js-sort-dropdown">
                 <option value="organisation">Sort by:</option>
-                  <option value="organisation-asc">Organisation name (A-Z)</option>
-                <option value="organisation-desc">Organisation name (Z-A)</option>
+                <option value="organisation-asc">Organisation name (A-Z)</option>
                 <option value="date-desc">Date posted (Newest)</option>
                 <option value="date-asc">Date posted (Oldest)</option>
                 <option value="distance-asc">Distance (Nearest)</option>
-                <option value="distance-desc">Distance (Furthest)</option>
               </select>
             </li>
           </ul>
@@ -152,8 +150,10 @@ page: giveitems
                 <textarea class="form__input form__input--multiline" data-bind="textInput: message" id="message" placeholder="How you can help (required)"></textarea>
               </li>
               <li class="form__field-item form__field-item--full">
-                <input type="checkbox" class="form__input form__input--checkbox" data-bind="checked: isOptedIn" id="isOptedIn"/>
-                <label class="form__label form__label--checkbox" for="isOptedIn">I would like to receive occasional update emails from Street Support.</label>
+                <label class="form__label form__label--checkbox" for="isOptedIn">
+                  <input type="checkbox" class="form__input form__input--checkbox" data-bind="checked: isOptedIn" id="isOptedIn"/>
+                  I would like to receive occasional update emails from Street Support.
+                </label>
               </li>
             </ul>
           </fieldset>
@@ -181,7 +181,7 @@ page: giveitems
         <div class="social-share">
           <ul class="list-unstyled list-inline requests-detail__share-list">
             <li class="list-inline__item requests-detail__share-list__item">
-              <a href="https://twitter.com/intent/tweet?text=\{{{serviceProviderSynopsis}}}&via=streetsupportuk" target="_blank" rel="external" class="js-tweet-page" target="_blank">
+              <a href="https://twitter.com/intent/tweet?text=\{{{description}}}&via=streetsupportuk" target="_blank" rel="external" class="js-tweet-page" target="_blank">
                 {{>icon name="twitter-alt" class="requests-detail__share-list__icon"}}
                 Twitter
               </a>
@@ -193,7 +193,7 @@ page: giveitems
               </a>
             </li>
             <li class="list-inline__item requests-detail__share-list__item">
-              <a href="mailto:?&subject=Request: \{{{serviceProviderSynopsis}}}" class="js-email-page" target="_blank">
+              <a href="mailto:?&subject=Request: \{{{description}}}" class="js-email-page" target="_blank">
                 {{>icon name="email-alt" class="requests-detail__share-list__icon"}}
                 Email
               </a>
