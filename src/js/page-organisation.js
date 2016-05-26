@@ -4,6 +4,7 @@ import './common'
 // Page modules
 var urlParameter = require('./get-url-parameter')
 var accordion = require('./accordion')
+var htmlEncode = require('htmlEncode')
 var socialShare = require('./social-share')
 var sortBy = require('lodash/collection/sortBy')
 var forEach = require('lodash/collection/forEach')
@@ -24,7 +25,7 @@ var organisationUrl = apiRoutes.organisation += theOrganisation
 getApiData.data(organisationUrl).then(function (result) {
   var data = result.data
   // Get organisation name and edit page title
-  var theTitle = data.name + ' - Street Support'
+  var theTitle = htmlEncode.htmlDecode(data.name + ' - Street Support')
   document.title = theTitle
 
   data.providedServices = sortBy(data.providedServices, function (item) {
