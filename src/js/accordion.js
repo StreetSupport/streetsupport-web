@@ -47,12 +47,10 @@ var reOpen = function (el, context, noAnalytics) {
 }
 
 var baseOpen = function (el, context, noAnalytics) {
-  // Check to see if clicked header is already active
-  if (el.classList.contains(activeClass)) {
-    close(el, context)
-  } else {
-    close(el, context)
+  close(el, context)
 
+  // Check to see if clicked header is already active
+  if (!el.classList.contains(activeClass)) {
     // Add active classes for clicked header and the item div
     el.classList.add(activeClass)
     el.nextElementSibling.classList.add(activeClass)
