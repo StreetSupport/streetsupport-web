@@ -31,12 +31,11 @@ page: organisation
     <div class="container">
       \{{#organisation}}
         <h1 class="h1 block__header">\{{{name}}}</h1>
-        <h2 class="h2 block__sub-header">\{{#isVerified}}
-          verified
-        \{{/isVerified}}
         \{{^isVerified}}
+        <h2 class="h2 block__sub-header">
           under review
-        \{{/isVerified}}</h2>
+        </h2>
+        \{{/isVerified}}
       \{{/organisation}}
     </div>
   </div>
@@ -127,7 +126,7 @@ page: organisation
               \{{/facebook}}
             </dl>
           \{{^isVerified}}
-          <p>This site is currently under review. If you see something missing, incorrect or incomplete, or you would like to know more, please <a href="/contact/">get in touch</a>.</p>
+          <p>If you see something missing, incorrect or incomplete, or you would like to know more, please <a href="/contact/">get in touch</a>.</p>
           \{{/isVerified}}
           \{{/organisation}}
           {{> social-share}}
