@@ -73,6 +73,7 @@
     "geolib": "2.0.20",
     "hogan.js": "3.0.2",
     "holderjs": "^2.9.3",
+    "htmlencode": "0.0.4",
     "knockout": "3.4.0",
     "knockout.validation": "2.0.3",
     "list.fuzzysearch.js": "github:javve/list.fuzzysearch.js#v0.1.0",
