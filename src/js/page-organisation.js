@@ -4,7 +4,7 @@ import './common'
 // Page modules
 var urlParameter = require('./get-url-parameter')
 var accordion = require('./accordion')
-var htmlEncode = require('htmlEncode')
+var htmlEncode = require('htmlencode')
 var socialShare = require('./social-share')
 var sortBy = require('lodash/collection/sortBy')
 var forEach = require('lodash/collection/forEach')
