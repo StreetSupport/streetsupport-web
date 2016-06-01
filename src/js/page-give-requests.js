@@ -236,6 +236,8 @@ let buildCard = (data) => {
       contactFormModel.needId = theId
       ko.applyBindings(contactFormModel, document.querySelector('.requests-detail__form'))
 
+      initFbShare()
+
       Holder.run({})
 
       // TODO: Proper URL support
@@ -250,6 +252,23 @@ let buildCard = (data) => {
       })
 
       socialShare.updateSharePageHrefs()
+    }
+
+    let initFbShare = () => {
+      let el = document.querySelector('.js-fb-share-page')
+      console.log(el)
+
+      el.addEventListener('click', function (e) {
+        e.preventDefault()
+        var facebookAppID = '244120752609710'
+        let url = 'https://www.facebook.com/dialog/feed?app_id=' + facebookAppID +
+        '&link=' + encodeURIComponent(window.location.href) +
+        '&name=' + encodeURIComponent(document.title) +
+        '&description=' + encodeURIComponent(document.description) +
+        '&redirect_uri=https://www.facebook.com'
+        console.log(url)
+        window.open(url)
+      })
     }
 
     let init = () => {
