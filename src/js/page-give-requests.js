@@ -248,6 +248,11 @@ let buildCard = (data) => {
       cardData.showLocation = cardData.postcode.length > 0 && cardData.type !== 'money'
       cardData.showContactForm = cardData.type !== 'money'
 
+      console.log(cardData)
+
+      document.querySelector('meta[property="og:title"]').setAttribute('content', cardData.description + " needed for " + cardData.serviceProviderName)
+      document.querySelector('meta[property="og:description"]').setAttribute('content', cardData.reason)
+
       // hide search
       document.querySelector(searchSelector).classList.remove(activeClass)
       document.querySelector(searchSelector).classList.add(hiddenClass)
