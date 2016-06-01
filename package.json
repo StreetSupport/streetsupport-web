@@ -69,6 +69,7 @@
   },
   "dependencies": {
     "awesomplete": "1.1.0",
+    "classlist.js": "1.1.20150312",
     "fastclick": "1.0.6",
     "geolib": "2.0.20",
     "hogan.js": "3.0.2",

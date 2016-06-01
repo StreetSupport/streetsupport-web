@@ -9,6 +9,8 @@ let removeNoJS = () => {
   html.classList.add('js')
 }
 
+import 'classlist.js' // <=IE10 classlist polyfill
+
 let fastClickCheck = () => {
   if ('touchAction' in document.body.style) {
     document.body.style.touchAction = 'manipulation'
