@@ -20,7 +20,8 @@
 }
 
 .requests-search__input {
-  background: linear-gradient($brand-b, $brand-p);
+  background: $brand-p;
+  background: linear-gradient(to bottom, $brand-b, $brand-p);
   border-radius: 5px 5px 0 0;
   padding: 10px 20px 20px 20px;
   text-align: center;
@@ -36,7 +37,8 @@
 }
 
 .requests-search__input__header {
-  color: #FFF!important; margin-top: 20px;
+  color: #FFF!important;
+  margin-top: 20px;
 }
 
 .requests-search__autocomplete {

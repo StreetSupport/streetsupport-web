@@ -166,7 +166,8 @@
   }
 
   &--highlight {
-    background: linear-gradient($brand-b, $brand-c);
+    background: $brand-c;
+    background: linear-gradient(to bottom, $brand-b, $brand-c);
     color: #fff;
 
     .h1,
