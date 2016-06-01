@@ -73,6 +73,13 @@
   width: 100%;
 }
 
+.form__input--checkbox {
+  width: 1em;
+  margin-right: 1em;
+  margin-top: 5px;
+  float: left;
+}
+
 .form__input--error {
   border: 1px solid $brand-g;
   margin-top: 25px;
