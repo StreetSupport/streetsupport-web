@@ -9,12 +9,12 @@ var postApiData = function (url, data) {
   req.setRequestHeader('content-type', 'application/json')
 
   req.onload = function () {
-    if (this.status === 201) {
+    if (req.status === 201) {
       deferred.resolve({
         'status': 'created',
         'statusCode': this.status
       })
-    } else if (this.status === 200) {
+    } else if (req.status === 200) {
       deferred.resolve({
         'status': 'ok',
         'statusCode': this.status
@@ -22,8 +22,8 @@ var postApiData = function (url, data) {
     } else {
       deferred.resolve({
         'status': 'error',
-        'statusCode': this.status,
-        'messages': JSON.parse(this.responseText).messages
+        'statusCode': req.status,
+        'messages': JSON.parse(req.responseText).messages
       })
     }
   }

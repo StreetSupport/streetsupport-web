@@ -9,7 +9,7 @@ var getApiData = function (url) {
   req.open('GET', url, true)
 
   req.onload = function () {
-    if (this.status === 200) {
+    if (req.status === 200) {
       var json = JSON.parse(req.responseText)
       deferred.resolve({
         'status': 'ok',
@@ -18,8 +18,8 @@ var getApiData = function (url) {
     } else {
       deferred.resolve({
         'status': 'error',
-        'statusCode': this.status,
-        'message': this.responseText
+        'statusCode': req.status,
+        'message': req.responseText
       })
     }
   }
