@@ -1,0 +1,33 @@
+// generic card styles
+
+$radius: 7px;
+$spacing: 20px;
+
+.card {
+  border-radius: $radius;
+  margin-bottom: $spacing;
+  text-align: center;
+}
+
+.card__details {
+  padding: $spacing;
+}
+
+.card__title {
+  margin-top: 0;
+}
+
+.card--donate {
+  background: $brand-p;
+  background: linear-gradient(to bottom, $brand-b, $brand-p);
+  color: #FFF;
+
+  .card__footer {
+    background: $brand-i;
+    border-bottom-right-radius: $radius;
+    border-bottom-left-radius: $radius;
+    color: $brand-k;
+    padding: $spacing;
+    position: relative;
+  }
+}
