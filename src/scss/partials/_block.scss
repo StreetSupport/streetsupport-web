@@ -158,6 +158,21 @@
 
     .block__header {
       color: $brand-h;
+
+      &.has-icon {
+        margin: 20px 0;
+        padding-left: 60px;
+        position: relative;
+        text-align: left;
+      }
+
+      &__icon {
+        @include size(50px);
+
+        position: absolute;
+        top: -5px;
+        left: 0;
+      }
     }
 
     .block__sub-header {
