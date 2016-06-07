@@ -53,6 +53,14 @@
     }
   }
 
+  &__section {
+    margin-bottom: 60px;
+
+    &:last-of-type {
+      margin-bottom: 40px; // cater for site container
+    }
+  }
+
   &__cta {
     @include cf();
     padding: 10px 0 0 0;

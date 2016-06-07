@@ -102,4 +102,12 @@
       border-radius: 0;
     }
   }
+
+  &--full {
+    width: 100%;
+
+    @include mq($from: m) {
+      width: auto;
+    }
+  }
 }
