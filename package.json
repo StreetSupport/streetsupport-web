@@ -83,8 +83,7 @@
     "moment": "2.12.0",
     "q": "1.4.1",
     "spin.js": "2.3.2",
-    "svg4everybody": "2.0.3",
-    "webfontloader": "1.6.24"
+    "svg4everybody": "2.0.3"
   },
   "babel": {
     "presets": [
