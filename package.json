@@ -68,7 +68,8 @@
     "sinon": "1.17.3"
   },
   "dependencies": {
-    "awesomplete": "github:leaverou/awesomplete#gh-pages",
+    "awesomplete": "1.1.0",
+    "classlist.js": "1.1.20150312",
     "fastclick": "1.0.6",
     "geolib": "2.0.20",
     "hogan.js": "3.0.2",
@@ -82,8 +83,7 @@
     "moment": "2.12.0",
     "q": "1.4.1",
     "spin.js": "2.3.2",
-    "svg4everybody": "2.0.3",
-    "webfontloader": "1.6.24"
+    "svg4everybody": "2.0.3"
   },
   "babel": {
     "presets": [

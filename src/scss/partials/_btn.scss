@@ -22,7 +22,8 @@
   &__icon {
     width: 100%;
     display: block;
-    background: linear-gradient(#ADE1F9, #FFFFFF);
+    background: #ADE1F9;
+    background: linear-gradient(to bottom, #ADE1F9, #FFFFFF);
     border-radius: 10px 10px 0 0;
     position: relative;
 
@@ -43,7 +44,7 @@
     transition: background-color 250ms linear, box-shadow 250ms linear;
     margin-bottom: 3px; // safari box-shadow fix
     font-family: $font-headline;
-    font-weight: $font-headline-weight;   
+    font-weight: $font-headline-weight;
   }
 
   &__overlay {

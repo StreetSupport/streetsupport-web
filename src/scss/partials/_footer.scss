@@ -1,7 +1,8 @@
 // Footer - global page footer styles
 
 .footer {
-  background: linear-gradient($brand-l, $brand-m);
+  background: $brand-m;
+  background: linear-gradient(to bottom, $brand-l, $brand-m);
   color: #fff;
   padding-top: 30px;
   padding-bottom: 30px;

@@ -21,5 +21,18 @@
 
       ga('create', 'UA-71468202-1', 'auto');
     </script>
+    <script>
+      WebFontConfig = {
+        custom: ['museo_sans_rounded300', 'museo_sans_rounded500']
+      }
+
+      var loadFonts = function (d) {
+        var wf = d.createElement('script')
+        var s = d.scripts[0]
+        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js'
+        s.parentNode.insertBefore(wf, s)
+      }
+      loadFonts(document)
+    </script>
   </head>
   <body class="page--{{page}} section--{{section}} {{#if nosubnav}}section--nosubnav{{/if}}">
