@@ -1,7 +1,6 @@
 var nav = require('./nav.js')
 var analytics = require('./analytics')
 import Svg4everybody from 'svg4everybody'
-import webFontLoader from 'webfontloader'
 
 let removeNoJS = () => {
   var html = document.querySelector('html')
@@ -23,15 +22,8 @@ let fastClickCheck = () => {
   }
 }
 
-let loadWebFonts = () => {
-  webFontLoader.load({
-    custom: ['museo_sans_rounded300', 'museo_sans_rounded500']
-  })
-}
-
 removeNoJS()
 nav.init()
 analytics.init()
 fastClickCheck()
 Svg4everybody()
-loadWebFonts()
