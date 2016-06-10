@@ -43,17 +43,16 @@ var VolunteerModel = function () {
     if (self.errors().length === 0) {
       loading = new Spinner().spin(spin)
 
-      // TODO: Use knockout stuff for this
       var payload = {
-        'FirstName': document.getElementById('firstname').value,
-        'LastName': document.getElementById('lastname').value,
-        'Email': document.getElementById('email').value,
-        'Telephone': document.getElementById('telephone').value,
-        'Postcode': document.getElementById('postcode').value,
-        'SkillsAndExperienceDescription': document.getElementById('skillsAndExperience').value,
-        'AvailabilityDescription': document.getElementById('availability').value,
-        'ResourcesDescription': document.getElementById('resources').value,
-        'IsOptedIn': document.getElementById('isOptedIn').value
+        'FirstName': self.firstName(),
+        'LastName': self.lastName(),
+        'Email': self.email(),
+        'Telephone': self.telephone(),
+        'Postcode': self.postcode(),
+        'SkillsAndExperienceDescription': self.skillsAndExperience(),
+        'AvailabilityDescription': self.availability(),
+        'ResourcesDescription': self.resources(),
+        'IsOptedIn': self.isOptedIn()
       }
 
       // TODO: Nice notification on success/fail
