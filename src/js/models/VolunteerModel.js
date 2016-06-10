@@ -34,6 +34,7 @@ var VolunteerModel = function () {
   self.skillsAndExperience = ko.observable('')
   self.availability = ko.observable('')
   self.resources = ko.observable('')
+  self.isOptedIn = ko.observable(false)
 
   self.submitForm = function () {
     var loading
@@ -51,7 +52,8 @@ var VolunteerModel = function () {
         'Postcode': document.getElementById('postcode').value,
         'SkillsAndExperienceDescription': document.getElementById('skillsAndExperience').value,
         'AvailabilityDescription': document.getElementById('availability').value,
-        'ResourcesDescription': document.getElementById('resources').value
+        'ResourcesDescription': document.getElementById('resources').value,
+        'IsOptedIn': document.getElementById('isOptedIn').value
       }
 
       // TODO: Nice notification on success/fail
