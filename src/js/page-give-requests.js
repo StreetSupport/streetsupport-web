@@ -9,6 +9,7 @@ import Holder from 'holderjs'
 import Find from 'lodash/collection/find'
 import ForEach from 'lodash/collection/forEach'
 import moment from 'moment'
+import htmlEncode from 'htmlencode'
 var ko = require('knockout')
 
 let ContactFormModel = require('./models/GiveItemModel')
@@ -199,6 +200,16 @@ let buildCard = (data) => {
   const cardDetailSelector = '.js-card-detail'
   const hiddenClass = 'is-hidden'
 
+  let updateMeta = (title, description) => {
+    let newTitle = htmlEncode.htmlDecode(title)
+    let newDescription = htmlEncode.htmlDecode(description)
+
+    document.querySelector('meta[property="og:title"]').setAttribute('content', newTitle)
+    document.querySelector('meta[property="og:description"]').setAttribute('content', newDescription)
+    document.title = newTitle
+    document.description = newDescription
+  }
+
   let openCard = (el, callback) => {
     let cardCallback = () => {
       document.querySelector(cardDetailSelector).classList.remove(hiddenClass)
@@ -225,6 +236,8 @@ let buildCard = (data) => {
       contactFormModel.needId = theId
       ko.applyBindings(contactFormModel, document.querySelector('.requests-detail__form'))
 
+      initFbShare()
+
       Holder.run({})
 
       // TODO: Proper URL support
@@ -241,12 +254,28 @@ let buildCard = (data) => {
       socialShare.updateSharePageHrefs()
     }
 
+    let initFbShare = () => {
+      let el = document.querySelector('.js-fb-share-page')
+      el.addEventListener('click', function (e) {
+        e.preventDefault()
+        var facebookAppID = '244120752609710'
+        let url = 'https://www.facebook.com/dialog/feed?app_id=' + facebookAppID +
+        '&link=' + encodeURIComponent(window.location.href) +
+        '&name=' + encodeURIComponent(document.title) +
+        '&description=' + encodeURIComponent(document.description) +
+        '&redirect_uri=https://www.facebook.com'
+        window.open(url)
+      })
+    }
+
     let init = () => {
       let theId = el.getAttribute('data-id')
       let cardData = Find(data, (o) => { return o.id === theId })
 
       cardData.showLocation = cardData.postcode.length > 0 && cardData.type !== 'money'
       cardData.showContactForm = cardData.type !== 'money'
+
+      updateMeta(cardData.description + ' needed for ' + cardData.serviceProviderName, cardData.reason)
 
       // hide search
       document.querySelector(searchSelector).classList.remove(activeClass)
@@ -284,6 +313,8 @@ let buildCard = (data) => {
 
     document.querySelector(cardDetailSelector).classList.remove(activeClass)
     document.querySelector(cardDetailSelector).classList.add(hiddenClass)
+
+    updateMeta('Requests for Help - Street Support', 'Organisations need specific items, skills and money to support homeless people in Manchester - can you help?')
   }
 
   let addClickEvents = () => {

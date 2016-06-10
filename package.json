@@ -68,11 +68,12 @@
     "sinon": "1.17.3"
   },
   "dependencies": {
-    "awesomplete": "github:leaverou/awesomplete#gh-pages",
+    "awesomplete": "1.1.0",
+    "classlist.js": "1.1.20150312",
     "fastclick": "1.0.6",
     "geolib": "2.0.20",
     "hogan.js": "3.0.2",
-    "holderjs": "^2.9.3",
+    "holderjs": "2.9.3",
     "htmlencode": "0.0.4",
     "knockout": "3.4.0",
     "knockout.validation": "2.0.3",

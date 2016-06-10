@@ -56,9 +56,33 @@ $brand-n: #9886bf;
 $brand-p: #086149;
 
 // Fonts
-$font-primary: 'museo-sans-rounded', sans-serif;
+@font-face {
+    font-family: 'museo_sans_rounded300';
+    src: url('/assets/fonts/MuseoSansRounded-300-webfont.eot');
+    src: url('/assets/fonts/MuseoSansRounded-300-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/MuseoSansRounded-300-webfont.woff2') format('woff2'),
+         url('/assets/fonts/MuseoSansRounded-300-webfont.woff') format('woff'),
+         url('/assets/fonts/MuseoSansRounded-300-webfont.ttf') format('truetype'),
+         url('/assets/fonts/MuseoSansRounded-300-webfont.svg#museo_sans_rounded300') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'museo_sans_rounded500';
+    src: url('/assets/fonts/MuseoSansRounded-500-webfont.eot');
+    src: url('/assets/fonts/MuseoSansRounded-500-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/MuseoSansRounded-500-webfont.woff2') format('woff2'),
+         url('/assets/fonts/MuseoSansRounded-500-webfont.woff') format('woff'),
+         url('/assets/fonts/MuseoSansRounded-500-webfont.ttf') format('truetype'),
+         url('/assets/fonts/MuseoSansRounded-500-webfont.svg#museo_sans_rounded500') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+$font-primary: 'museo_sans_rounded300', sans-serif;
 $font-primary-weight: 300;
-$font-headline: 'museo-sans-rounded', sans-serif;
+$font-headline: 'museo_sans_rounded500', sans-serif;
 $font-headline-weight: 500;
 
 // Header & Nav

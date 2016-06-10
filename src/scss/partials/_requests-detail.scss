@@ -44,7 +44,8 @@
   }
 
   &__heading {
-    background: linear-gradient($brand-b, $brand-p);
+    background: $brand-p;
+    background: linear-gradient(to bottom, $brand-b, $brand-p);
     font-size: 25px;
     position: relative;
     margin: 0 auto;
@@ -70,6 +71,15 @@
 
       &::after {
         right: 15%;
+      }
+    }
+
+    &--i-want-to-volunteer {
+      @include mq($from: l) {
+        &::before,
+        &::after {
+          width: 20%;
+        }
       }
     }
   }

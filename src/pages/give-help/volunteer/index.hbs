@@ -33,7 +33,7 @@ page: volunteer
     </div>
   </div>
 </div>
-<h3 class="h2 requests-detail__heading  requests-detail__heading--i-can-help">I Want to Volunteer!</h3>
+<h3 class="h2 requests-detail__heading requests-detail__heading--i-want-to-volunteer">I Want to Volunteer!</h3>
 <div class="block block--requests-detail">
   <div class="container">
     <div class="block__content">
@@ -90,6 +90,16 @@ page: volunteer
 	    			</li>
 	    		</ul>
 	    	</fieldset>
+        <fieldset class="form__fieldset">
+          <ul class="form__field-list">
+            <li class="form__field-item form__field-item--full">
+              <label class="form__label--checkbox" for="isOptedIn">
+                Opt-In if you want to get occasional updates about Street Support to your inbox
+                <input type="checkbox" id="isOptedIn" data-bind="attr: { value: isOptedIn }, checked: isOptedIn" class="form__input--checkbox" />
+                </label>
+            </li>
+          </ul>
+        </fieldset>
 	    	<button type="submit" class="btn btn--brand-d form__submit"><span class="btn__text">Submit</span></button>
     	</form>
 
