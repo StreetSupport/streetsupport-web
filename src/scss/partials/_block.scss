@@ -12,6 +12,7 @@
   &__header {
     text-align: center;
     margin: 0;
+
     &--story {
       margin-bottom: 30px;
     }
@@ -50,16 +51,6 @@
     .h1,
     .h2 {
       color: $brand-h;
-    }
-  }
-
-  &__section {
-    @include cf;
-    
-    margin-bottom: 60px;
-
-    &:last-of-type {
-      margin-bottom: 40px; // cater for site container
     }
   }
 
@@ -166,34 +157,6 @@
       padding-bottom: 0px;
     }
 
-    .block__header {
-      color: $brand-h;
-
-      &.has-icon--left {
-        margin: 20px 0;
-        padding-left: 60px;
-        position: relative;
-        text-align: left;
-
-        @include mq($from: m) {
-          padding-left: 0;
-          text-align: center;
-        }
-
-        .block__header__icon {
-          @include size(50px);
-
-          position: absolute;
-          top: -5px;
-          left: 0;
-
-          @include mq($from: m) {
-            position: static;
-          }
-        }
-      }
-    }
-
     .block__sub-header {
       color: $brand-m;
     }
@@ -220,5 +183,51 @@
   &--requests-detail {
     padding: 20px 0;
     background: $brand-i;
+  }
+}
+
+// Components
+.block__section {
+  @include cf;
+
+  margin-bottom: 60px;
+
+  &:last-of-type {
+    margin-bottom: 40px; // cater for site container
+  }
+
+  @include mq($from: m) {
+    margin-bottom: 60px;
+  }
+}
+
+.block--subpage-header {
+  .block__header {
+    color: $brand-h;
+
+    &.has-icon--left {
+      margin: 20px 0;
+      padding-left: 60px;
+      position: relative;
+      text-align: left;
+
+      @include mq($from: m) {
+        margin: 20px 0 10px;
+        padding-left: 0;
+        text-align: center;
+      }
+
+      .block__header__icon {
+        @include size(50px);
+
+        position: absolute;
+        top: -5px;
+        left: 0;
+
+        @include mq($from: m) {
+          position: static;
+        }
+      }
+    }
   }
 }

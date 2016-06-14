@@ -1,6 +1,10 @@
-// figure styles for containing logos
+// Figure styles for containing logos
 
 .logo {
   margin: 40px 0;
   text-align: center;
+
+  @include mq($from: m) {
+    margin-bottom: 0;
+  }
 }
