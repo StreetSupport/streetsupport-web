@@ -73,6 +73,15 @@
         right: 15%;
       }
     }
+
+    &--i-want-to-volunteer {
+      @include mq($from: l) {
+        &::before,
+        &::after {
+          width: 20%;
+        }
+      }
+    }
   }
 
   &__map {

@@ -256,8 +256,6 @@ let buildCard = (data) => {
 
     let initFbShare = () => {
       let el = document.querySelector('.js-fb-share-page')
-      console.log(el)
-
       el.addEventListener('click', function (e) {
         e.preventDefault()
         var facebookAppID = '244120752609710'
@@ -266,7 +264,6 @@ let buildCard = (data) => {
         '&name=' + encodeURIComponent(document.title) +
         '&description=' + encodeURIComponent(document.description) +
         '&redirect_uri=https://www.facebook.com'
-        console.log(url)
         window.open(url)
       })
     }
