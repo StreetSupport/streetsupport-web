@@ -54,6 +54,8 @@
   }
 
   &__section {
+    @include cf;
+    
     margin-bottom: 60px;
 
     &:last-of-type {
@@ -167,19 +169,28 @@
     .block__header {
       color: $brand-h;
 
-      &.has-icon {
+      &.has-icon--left {
         margin: 20px 0;
         padding-left: 60px;
         position: relative;
         text-align: left;
-      }
 
-      &__icon {
-        @include size(50px);
+        @include mq($from: m) {
+          padding-left: 0;
+          text-align: center;
+        }
 
-        position: absolute;
-        top: -5px;
-        left: 0;
+        .block__header__icon {
+          @include size(50px);
+
+          position: absolute;
+          top: -5px;
+          left: 0;
+
+          @include mq($from: m) {
+            position: static;
+          }
+        }
       }
     }
 
