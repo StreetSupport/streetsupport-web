@@ -1,4 +1,4 @@
-<span class="cta">
+{{#unless nowrap}}<span class="cta">{{/unless}}
   <a class="btn btn--brand-{{brand}}" href="{{link}}">
     {{#if icon}}
       <span class="btn__icon">
@@ -11,4 +11,4 @@
   {{#if label}}
     <p class="cta__description">{{{label}}}</p>
   {{/if}}
-</span>
+{{#unless nowrap}}</span>{{/unless}}

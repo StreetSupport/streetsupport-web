@@ -56,17 +56,23 @@ page: donate
         <p>Money donated to the fund is distributed to individuals who are homeless - paying for deposits, training courses, clothes for a job interview, furnishing a new flat, purchasing crockery, pots and pans and bed linen, and transport to travel to new accommodation.</p>
       </div>
 
-      <div class="block__section text-center--m">
-        <h2 class="h2 text-center">If you gave &pound;1&hellip;</h2>
-        <figure>
-          <img src="../../assets/img/donate-graph--1.png" alt="" />
-          <img src="../../assets/img/donate-graph--2.png" alt="" />
-          <img src="../../assets/img/donate-graph--3.png" alt="" />
-          <figcaption>figcaption</figcaption>
-        </figure>
-      </div>
+      <div class="block__section">
+        <h2 class="h2 text-center--s">If you gave &pound;1&hellip;</h2>
+        <div class="figure--donate-chart">
+          <figure>
+            <img src="../../assets/img/donate-graph--1.png" alt="5%" />
+            <figcaption>Just Giving<span class="hide-screen"> takes 5%</span></figcaption>
+          </figure>
+          <figure>
+            <img src="../../assets/img/donate-graph--2.png" alt="10%" />
+            <figcaption>Admin<span class="hide-screen"> takes 10%</span></figcaption>
+          </figure>
+          <figure>
+            <img src="../../assets/img/donate-graph--3.png" alt="85%" />
+            <figcaption>Individual<span class="hide-screen"> gets 85%</span></figcaption>
+          </figure>
+        </div>
 
-      <div class="block__section text-center--m">
         <article class="card card--donate">
           <div class="card__details">
             <h3 class="card__title">Under &pound;100</h3>
@@ -121,13 +127,17 @@ page: donate
 
       {{>divider}}
 
-      <div class="block__section text-center--m">
-        <h2 class="h2">What else can i do to help?</h2>
-        <p>You could also <a href="/volunteer/">volunteer your time</a>, <a href="/give-items/">respond to things that organisations need</a>, <a href="/sponsor/">support Street Support</a>, and <a href="/find-help/">learn more about local services</a>.</p>
+      <div class="block__section">
+        <div class="grid--2-of-3--m">
+          <h2 class="h2">What else can i do to help?</h2>
+          <p>You could also <a href="/volunteer/">volunteer your time</a>, <a href="/give-items/">respond to things that organisations need</a>, <a href="/sponsor/">support Street Support</a>, and <a href="/find-help/">learn more about local services</a>.</p>
 
-        <p>Charities and voluntary groups are looking for people to help out with specific time, items and money all over Manchester. Or sign up to our <a href="/give-help/volunteer">volunteer list</a> for us to contact you when something comes up.</p>
+          <p>Charities and voluntary groups are looking for people to help out with specific time, items and money all over Manchester. Or sign up to our <a href="/give-help/volunteer">volunteer list</a> for us to contact you when something comes up.</p>
+        </div>
 
-        {{>cta brand="e" link="give-items/" icon="give" name="Find out how you can help"}}
+        <div class="grid--1-of-3--m">
+          {{>cta brand="e" link="give-items/" icon="give" name="Find out how you can help" nowrap="true"}}
+        </div>
       </div>
 
       <div class="block__section">

@@ -77,6 +77,14 @@ strong {
 .text-center {
   text-align: center;
 
+  &--s {
+    text-align: center;
+
+    @include mq($from: m) {
+      text-align: left;
+    }
+  }
+
   &--m {
     @include mq($from: m) {
       text-align: center;

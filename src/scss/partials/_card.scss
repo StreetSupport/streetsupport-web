@@ -9,7 +9,7 @@ $spacing: 20px;
   text-align: center;
 }
 
-.card__details {
+.card__details { 
   padding: $spacing;
 }
 
@@ -21,6 +21,11 @@ $spacing: 20px;
   background: $brand-p;
   background: linear-gradient(to bottom, $brand-b, $brand-p);
   color: #FFF;
+
+  @include mq($from: m) {
+    float: right;
+    width: 80%;
+  }
 
   .card__footer {
     background: $brand-i;
