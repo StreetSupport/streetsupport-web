@@ -1,6 +1,7 @@
 /* global history */
 var categoryEndpoint = require('./category-endpoint')
 var urlParameter = require('./get-url-parameter')
+var browser = require('./browser')
 
 var FindHelp = function () {
   var self = this
@@ -19,10 +20,18 @@ var FindHelp = function () {
       '&location=' + self.getLocation())
   }
 
+  self.scrollTo = (subCategoryId) => {
+    window.setTimeout(() => {
+      browser.scrollTo('#' + subCategoryId)
+    }, 300)
+  }
+
   self.buildListener = function (pageName, subCategoryKey) {
     return {
       accordionOpened: function (element, context) {
-        self.setUrl(pageName, subCategoryKey, element.getAttribute('id'))
+        const subCategoryId = element.getAttribute('id')
+        self.setUrl(pageName, subCategoryKey, subCategoryId)
+        self.scrollTo(subCategoryId)
       }
     }
   }
