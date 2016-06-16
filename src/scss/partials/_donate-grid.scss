@@ -1,0 +1,17 @@
+// Very specific dimension to the Donate page - different than the main site grid layout
+
+.grid--1-of-3--m {
+  @include mq($from: m) {
+    float: right;
+    padding-left: 3%;
+    width: 33.33%;
+  }
+}
+
+.grid--2-of-3--m {
+  @include mq($from: m) {
+    float: left;
+    padding-right: 3%;
+    width: 66%;
+  }
+}

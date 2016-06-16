@@ -1,0 +1,55 @@
+// generic card styles
+
+$radius: 7px;
+$spacing: 20px;
+
+.card {
+  border-radius: $radius;
+  margin-bottom: $spacing;
+  text-align: center;
+}
+
+.card__details {
+  padding: $spacing;
+}
+
+.card__title {
+  margin-top: 0;
+}
+
+.card--donate {
+  background: $brand-p;
+  background: linear-gradient(to bottom, $brand-b, $brand-p);
+  color: #FFF;
+  position: relative;
+
+  @include mq($from: m) {
+    float: right;
+    width: 80%;
+  }
+
+  .card__details {
+    @include mq($from: m) {
+      float:left;
+      width: 33.33%;
+    }
+  }
+
+  .card__footer {
+    background: $brand-i;
+    border-bottom-right-radius: $radius;
+    border-bottom-left-radius: $radius;
+    color: $brand-k;
+    padding: $spacing;
+    // position: relative;
+
+    @include mq($from: m) {
+      border-radius: 0 $radius $radius 0;
+      height: 100%;
+      padding-top: 60px; // Have to be specific to account for heading in .card__details - see designs
+      position: absolute;
+      right: 0;
+      width: 66.66%;
+    }
+  }
+}

@@ -1,0 +1,48 @@
+// Image container styles
+
+.figure--donate-chart {
+  @include cf;
+
+  @include mq($from: m) {
+    float: left;
+    margin: 0;
+    width: 15%;
+  }
+
+  figure {
+    float: left;
+    margin: 0 1.5% 40px;
+    width: 30%;
+
+    @include mq($from: s) {
+      width: 28%;
+    }
+
+    @include mq($from: m) {
+      float: none;
+      display: block;
+      margin: 0 0 40px;
+      width: 100%;
+    }
+
+    figcaption {
+      margin: 0 auto;
+      max-width: 80px;
+      text-align: center;
+
+      @include mq($from: m) {
+        max-width: 100px;
+      }
+    }
+
+    img {
+      display: block;
+      margin: 0 auto 10px;
+      max-width: 80px;
+
+      @include mq($from: m) {
+        max-width: 100px;
+      }
+    }
+  }
+}
