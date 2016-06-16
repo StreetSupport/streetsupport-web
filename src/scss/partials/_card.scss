@@ -9,7 +9,7 @@ $spacing: 20px;
   text-align: center;
 }
 
-.card__details { 
+.card__details {
   padding: $spacing;
 }
 
@@ -21,10 +21,18 @@ $spacing: 20px;
   background: $brand-p;
   background: linear-gradient(to bottom, $brand-b, $brand-p);
   color: #FFF;
+  position: relative;
 
   @include mq($from: m) {
     float: right;
     width: 80%;
+  }
+
+  .card__details {
+    @include mq($from: m) {
+      float:left;
+      width: 33.33%;
+    }
   }
 
   .card__footer {
@@ -33,6 +41,15 @@ $spacing: 20px;
     border-bottom-left-radius: $radius;
     color: $brand-k;
     padding: $spacing;
-    position: relative;
+    // position: relative;
+
+    @include mq($from: m) {
+      border-radius: 0 $radius $radius 0;
+      height: 100%;
+      padding-top: 60px; // Have to be specific to account for heading in .card__details - see designs
+      position: absolute;
+      right: 0;
+      width: 66.66%;
+    }
   }
 }
