@@ -1,5 +1,13 @@
 // Generic utility classes
 
-.u-display-block {
-  display: block;
+.display-block {
+  display: block!important;
+}
+
+.is-hidden--smallscreen {
+  display: none!important;
+
+  @include mq($from: m) {
+    display: block!important;
+  }
 }

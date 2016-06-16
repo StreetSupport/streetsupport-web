@@ -14,7 +14,6 @@
 // Street Support Base Partials
 
 @import 'partials/base';
-@import 'partials/utilities';
 @import 'partials/svgsprite';
 @import 'partials/container';
 @import 'partials/typography';
@@ -50,3 +49,6 @@
 @import 'partials/stories';
 @import 'partials/requests';
 @import 'partials/requests-detail';
+
+// Utilitites - trumps
+@import 'partials/utilities';

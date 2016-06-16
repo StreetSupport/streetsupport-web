@@ -11,23 +11,38 @@
 
   figure {
     float: left;
-    margin: 0 10px 40px;
-    width: 27%;
+    margin: 0 1.5% 40px;
+    width: 30%;
+
+    @include mq($from: s) {
+      width: 28%;
+    }
 
     @include mq($from: m) {
       float: none;
       display: block;
       margin: 0 0 40px;
+      width: 100%;
     }
 
     figcaption {
+      margin: 0 auto;
+      max-width: 80px;
       text-align: center;
-      width: 100px;
+
+      @include mq($from: m) {
+        max-width: 100px;
+      }
     }
 
     img {
-      margin-bottom: 10px;
-      max-width: 100px;
+      display: block;
+      margin: 0 auto 10px;
+      max-width: 80px;
+
+      @include mq($from: m) {
+        max-width: 100px;
+      }
     }
   }
 }

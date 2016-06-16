@@ -1,5 +1,5 @@
-{{#unless nowrap}}<span class="cta">{{/unless}}
-  <a class="btn btn--brand-{{brand}}" href="{{link}}">
+{{#unless noWrapper}}<span class="cta">{{/unless}}
+  <a class="btn btn--brand-{{brand}}{{#if btnClass}} {{btnClass}}{{/if}}" href="{{link}}">
     {{#if icon}}
       <span class="btn__icon">
         {{>icon name=this.icon}}
@@ -11,4 +11,4 @@
   {{#if label}}
     <p class="cta__description">{{{label}}}</p>
   {{/if}}
-{{#unless nowrap}}</span>{{/unless}}
+{{#unless noWrapper}}</span>{{/unless}}
