@@ -17,37 +17,132 @@ page: donate
     </ol>
   </div>
 </div>
-{{> no-js}}
+
+{{>no-js}}
 
 <div class="block block--subpage-header">
   <div class="container">
-    <h1 class="h1 block__header">Donate</h1>
-    <h2 class="h2 block__sub-header">Donate money to the Big Change Fund</h2>
+    <h1 class="h1 block__header has-icon--left">
+      <svg class="block__header__icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#big-change--small"></use></svg>
+      Donate
+    </h1>
   </div>
 </div>
 
 <div class="block">
   <div class="container">
     <div class="block__content">
-      <h2 class="h2">What is The Big Change Fund?</h2>
-      <p>A coalition of Manchester charities and voluntary groups have teamed up to create a central fund to pay for practical items that homeless people need, so they can build new lives off the streets.</p>
-      <a class="btn btn--brand-d" href="http://campaign.justgiving.com/charity/forevermanchester/bigchangemcr"><span class="btn__text">Donate to the Big Change Fund</span></a>
+      <div class="block__section text-center--m">
+        <p>Big Change Manchester aims to help rough sleepers get off – and stay off – the streets.</p>
+        <p>A group of charities and organisations has teamed up to create a special ‘Essential’ fund which will be used to provide homeless people with practical items they need to build new lives off the streets.</p>
+        <p>The campaign is urging people who live in, work in and visit the city centre to donate money to the fund if they want to help rough sleepers, rather than give money directly to people who are begging on the street.</p>
 
-      <h2 class="h2">Where will my money go?</h2>
-      <p>Money donated to the fund is distributed to individuals who are homeless - paying for deposits, training courses, clothes for a job interview, furnishing a new flat, purchasing crockery, pots and pans and bed linen, and transport to travel to new accommodation.</p>
-      <p>Just Giving charge a 5% admin fee, and Forever Manchester charge 10% to manage the fund, the rest goes directly to individuals experiencing homelessness.</p>
+        <p class="text-center">
+          <a href="http://campaign.justgiving.com/charity/forevermanchester/bigchangemcr" class="btn btn--brand-e btn--full">
+            <span class="btn__text">Donate to Big Change</span>
+          </a>
+        </p>
+        <a href="http://campaign.justgiving.com/charity/forevermanchester/bigchangemcr" class="display-block">
+          <figure class="logo">
+            <img src="../../assets/img/justgiving.png" alt="Just Giving" />
+          </figure>
+        </a>
+      </div>
 
-      <h2 class="h2">Why is this better than giving money on the streets?</h2>
-      <p>Those who provide support to rough sleepers advise that giving money to people who are begging isn't an effective way to support them to move them away from the streets. By giving money via this network of experts, you can be sure that your donation will go directly to meet genuine needs, and make a real difference. To address the complicated range of problems which made them homeless, including mental health issues and drug and alcohol addiction, people experiencing homelessness need long term support.</p>
+      {{>divider class="is-hidden--smallscreen"}}
 
-      <h2 class="h2">What other projects could i donate to?</h2>
-      <p>There are many fantastic charities in Manchester providing support to homeless people. You can find out more about all these charities and grassroots groups on our <a href="/find-help/all-service-providers/">organisations list</a>. Here are just a few examples of organisations that currently need donations to run their services: <a href="http://www.boothcentre.org.uk/donate.html">The Booth Centre</a>, <a href="http://www.mustardtree.org.uk/donate/donate-money/">Mustard Tree</a>, <a href="http://www.cornerstonecds.org.uk/online-donation">Cornerstone</a>.</p>
+      <div class="block__section text-center--m">
+        <h2 class="h2">Where will my money go?</h2>
+        <p>Money donated to the fund is distributed to individuals who are homeless - paying for deposits, training courses, clothes for a job interview, furnishing a new flat, purchasing crockery, pots and pans and bed linen, and transport to travel to new accommodation.</p>
+      </div>
 
-      <h2 class="h2">What else can i do to help?</h2>
-      <p>You could also <a href="/volunteer/">volunteer your time</a>, <a href="/give-items/">respond to things that organisations need</a>, <a href="/sponsor/">support Street Support</a>, and <a href="/find-help/">learn more about local services</a>.</p>
+      <div class="block__section">
+        <h2 class="h2 text-center--s">If you gave &pound;1&hellip;</h2>
+        <div class="figure--donate-chart">
+          <figure>
+            <img src="../../assets/img/donate-graph--1.png" alt="5%" />
+            <figcaption>Just Giving<span class="hide-screen"> takes 5%</span></figcaption>
+          </figure>
+          <figure>
+            <img src="../../assets/img/donate-graph--2.png" alt="10%" />
+            <figcaption>Admin<span class="hide-screen"> takes 10%</span></figcaption>
+          </figure>
+          <figure>
+            <img src="../../assets/img/donate-graph--3.png" alt="85%" />
+            <figcaption>Individual<span class="hide-screen"> gets 85%</span></figcaption>
+          </figure>
+        </div>
 
-      <a class="btn btn--brand-d" href="http://campaign.justgiving.com/charity/forevermanchester/bigchangemcr"><span class="btn__text">Donate to The Big Change Fund</span></a>
-      {{> social-share}}
+        <article class="card card--donate">
+          <div class="card__details">
+            <h3 class="card__title">Under &pound;100</h3>
+            <ul class="list-unstyled">
+              <li>Furniture or small househould etc</li>
+              <li>Educational/training courses</li>
+              <li>Special travel costs</li>
+              <li>Clothes</li>
+            </ul>
+          </div>
+          <div class="card__footer">
+            <p>Requested by online application</p>
+          </div>
+        </article>
+
+        <article class="card card--donate">
+          <div class="card__details">
+            <h3 class="card__title">Over &pound;100</h3>
+            <ul class="list-unstyled">
+              <li>White goods over &pound;100</li>
+              <li>Furnishings for a flat such as: Bed, Sofa, TV</li>
+            </ul>
+          </div>
+          <div class="card__footer">
+            <p>Agreed by small panel Coalition</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="block__section text-center--m">
+        <h2 class="h2">Why is this better than giving money on the streets?</h2>
+        <p>Those who provide support to rough sleepers advise that giving money to people who are begging isn't an effective way to support them to move them away from the streets. By giving money via this network of experts, you can be sure that your donation will go directly to meet genuine needs, and make a real difference. To address the complicated range of problems which made them homeless, including mental health issues and drug and alcohol addiction, people experiencing homelessness need long term support.</p>
+
+        <p class="text-center">
+          <a href="http://campaign.justgiving.com/charity/forevermanchester/bigchangemcr" class="btn btn--brand-e btn--full">
+            <span class="btn__text">Donate to Big Change</span>
+          </a>
+        </p>
+        <a href="http://campaign.justgiving.com/charity/forevermanchester/bigchangemcr" class="display-block">
+          <figure class="logo">
+            <img src="../../assets/img/justgiving.png" alt="Just Giving" />
+          </figure>
+        </a>
+      </div>
+
+      {{>divider class="is-hidden--smallscreen"}}
+
+      <div class="block__section text-center--m">
+        <h2 class="h2">What other projects could I donate to?</h2>
+        <p>There are many fantastic charities in Manchester providing support to homeless people. You can find out more about all these charities and grassroots groups on our <a href="/find-help/all-service-providers/">organisations list</a>. Here are just a few examples of organisations that currently need donations to run their services: <a href="http://www.boothcentre.org.uk/donate.html">The Booth Centre</a>, <a href="http://www.mustardtree.org.uk/donate/donate-money/">Mustard Tree</a>, <a href="http://www.cornerstonecds.org.uk/online-donation">Cornerstone</a>.</p>
+      </div>
+
+      {{>divider class="is-hidden--smallscreen"}}
+
+      <div class="block__section">
+        <div class="grid--2-of-3--m">
+          <h2 class="h2">What else can i do to help?</h2>
+          <p>You could also <a href="/volunteer/">volunteer your time</a>, <a href="/give-items/">respond to things that organisations need</a>, <a href="/sponsor/">support Street Support</a>, and <a href="/find-help/">learn more about local services</a>.</p>
+
+          <p>Charities and voluntary groups are looking for people to help out with specific time, items and money all over Manchester. Or sign up to our <a href="/give-help/volunteer">volunteer list</a> for us to contact you when something comes up.</p>
+        </div>
+
+        <div class="grid--1-of-3--m">
+          {{>cta brand="e" link="give-items/" btnClass="cta--centered" icon="give" name="Find out how you can help" noWrapper="true"}}
+        </div>
+      </div>
+
+      <div class="block__section">
+        <p class="text-center"><a href="#" class="back-top">Back to top</a></p>
+      </div>
     </div>
   </div>
 </div>
