@@ -192,6 +192,10 @@
 
   margin-bottom: 40px;
 
+  &:first-of-type {
+    margin-top: 0px;
+  }
+
   &:last-of-type {
     margin-bottom: 20px; // cater for site container
   }
@@ -210,7 +214,7 @@
       margin: 20px 0;
       padding-left: 60px;
       position: relative;
-      text-align: left;
+      text-align: center;
 
       @include mq($from: m) {
         margin: 20px 0 10px;
@@ -227,6 +231,15 @@
 
         @include mq($from: m) {
           position: static;
+        }
+
+        &--big-change {
+          left: 50%;
+          margin-left: -90px;
+          @include mq($from: m) {
+            left: 0;
+            margin-left: 0;
+          }
         }
       }
     }
