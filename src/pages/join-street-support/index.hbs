@@ -77,7 +77,7 @@ nosubnav: true
 {{> loading-spinner}}
 
 <script type="text/html" id="form-submit-success-template">
-  <h2>Thank you for submitting your details</h2>
+  <h2 class="h2">Thank you for submitting your details</h2>
   <p>Thank you for joining forces with us to support people who are homeless in Manchester. We are working hard alongside local charities and voluntary groups to add the features that are most useful.</p>
   <p>In the meantime you can:</p>
   <ul>
@@ -89,7 +89,7 @@ nosubnav: true
 </script>
 
 <script type="text/html" id="form-submit-failure-template">
-  <h2>There was a problem with your submission:</h2>
+  <h2 class="h2">There was a problem with your submission:</h2>
   <ul data-bind="foreach: apiErrors">
     <li data-bind="text: $data"></li>
   </ul>
