@@ -32,21 +32,22 @@ $spacing: 20px;
     @include mq($from: m) {
       float:left;
       width: 33.33%;
+      padding: 25px;
     }
   }
 
   .card__footer {
+    text-align: left;
     background: $brand-i;
     border-bottom-right-radius: $radius;
     border-bottom-left-radius: $radius;
     color: $brand-k;
     padding: $spacing;
-    // position: relative;
 
     @include mq($from: m) {
       border-radius: 0 $radius $radius 0;
       height: 100%;
-      padding-top: 60px; // Have to be specific to account for heading in .card__details - see designs
+      padding-top: 20px; // Have to be specific to account for heading in .card__details - see designs
       position: absolute;
       right: 0;
       width: 66.66%;
