@@ -241,6 +241,18 @@
             margin-left: 0;
           }
         }
+
+        &--give {
+          height: 110px;
+          width: 100%;
+          top: -40px;
+          left: -55px;
+
+          @include mq($from: m) {
+            left: 0;
+            margin-left: 0;
+          }
+        }
       }
     }
   }
