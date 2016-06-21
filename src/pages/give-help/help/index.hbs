@@ -21,8 +21,10 @@ page: giveitems
 <div id="js-card-search" class="requests-search is-active">
   <div class="block block--subpage-header">
     <div class="container block__inner">
-      <h1 class="h1 block__header has-icon--left">
-        <svg class="block__header__icon block__header__icon--give"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#give"></use></svg>
+      <h1 class="h1 block__header requests__title">
+        <svg class="requests__title__icon">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#give"></use>
+        </svg>
         Help
       </h1>
     </div>
@@ -43,31 +45,31 @@ page: giveitems
             <li class="requests-search__filter__item js-filter-item" data-filter="money">Money</li>
           </ul>
           <div class="requests">
-            <div class="requests-search__filter">
-              <div class="requests-search__input" action="#">
-                <div class="requests-search__container">
-                  <h2 class="h2 requests-search__input__header">Showing <span>all listings</span> you could help with.</h2>
-                  <label for="search-for-requests" class="hide-screen">Search requests for help</label>
-                  <input autofocus id="search-for-requests" class="search requests-search__autocomplete" />
-                </div>
+            <div class="requests-search__input" action="#">
+              <div class="requests-search__container">
+                <h2 class="h2 requests-search__input__header">Showing <span class="">all listings</span> you could help with.</h2>
+                <label for="search-for-requests" class="hide-screen">Search requests for help</label>
+                <input autofocus id="search-for-requests" class="search requests-search__autocomplete" placeholder="Search requests for help" />
               </div>
-            <!--   <ul class="requests-search__filter__list js-filter-list">
-                <li><h3>Sort by:</h3></li>
-                <li class="requests-search__filter__item" data-filter="money">
-                  <select class="requests-search__sort__list js-sort-dropdown">
-                    <option value="organisation">Sort by:</option>
-                    <option value="organisation-asc">Organisation name (A-Z)</option>
-                    <option value="date-desc">Date posted (Newest)</option>
-                    <option value="date-asc">Date posted (Oldest)</option>
-                    <option value="distance-asc">Distance (Nearest)</option>
-                  </select>
-                </li>
-              </ul> -->
             </div>
+            <div class="requests-search__sort">
+              <h3 class="h3 requests-search__sort__title">Sort by:</h3>
+              <ul class="requests-search__sort__list">
+                  <li class="requests-search__sort__item">
+                    <button class="requests-search__sort__criteria" data-sort="date-desc">Date Added</button>
+                  </li>
+                  <li class="requests-search__sort__item">
+                    <button class="requests-search__sort__criteria" data-sort="organisation-asc">Organisation</button>
+                  </li>
+                  <li class="requests-search__sort__item">
+                    <button class="requests-search__sort__criteria" data-sort="distance-asc">Distance</button>
+                  </li>
+              </li>
+            </ul>
+          </div>
 
-            <div id="js-card-list-output">
-              {{> loading-spinner}}
-            </div>
+          <div id="js-card-list-output">
+            {{> loading-spinner}}
           </div>
         </section>
       </div>

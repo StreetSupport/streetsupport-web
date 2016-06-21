@@ -244,13 +244,14 @@
 
         &--give {
           height: 110px;
-          width: 100%;
+          width: 140px;
           top: -40px;
-          left: -55px;
+          right: 38px;
 
           @include mq($from: m) {
-            left: 0;
-            margin-left: 0;
+            margin-right: -28px;
+            margin-top: -30px;
+            vertical-align: middle;
           }
         }
       }
