@@ -1,5 +1,11 @@
 // Give requests page specific styles
 
+.requests {
+  background: $brand-i;
+  color: $brand-k;
+  padding: 30px 20px 20px 20px;
+}
+
 .requests-search {
   &.is-active {
     display: block;
@@ -10,20 +16,7 @@
   }
 }
 
-.requests-search__intro {
-  // @todo see if this needs to be globally applied?
-  text-align: center;
-
-  .block__header {
-    text-align: center;
-  }
-}
-
 .requests-search__input {
-  background: $brand-p;
-  background: linear-gradient(to bottom, $brand-b, $brand-p);
-  border-radius: 5px 5px 0 0;
-  padding: 10px 20px 20px 20px;
   text-align: center;
 }
 
@@ -34,11 +27,6 @@
   @include mq($from: l) {
     width: 75%;
   }
-}
-
-.requests-search__input__header {
-  color: #FFF!important;
-  margin-top: 20px;
 }
 
 .requests-search__autocomplete {
@@ -77,33 +65,34 @@
 }
 
 .requests-search__filter__list {
-  background: #ECECEC;
-  border-bottom: 1px solid $brand-k;
-  list-style-type: none;
-  margin: 5px 0 30px;
+  list-style: none;
+  margin: 0;
   padding: 0;
-  text-align: center;
-
-  @include mq($from: l) {
-    margin-bottom: 50px;
-  }
+  @include cf();
 }
 
 .requests-search__filter__item {
-  color: #898989;
+  text-align: center;
+  border-radius: 5px 5px 0 0;
+  padding: 5px;
+  margin-top: 8px;
+  margin-bottom: 0;
+  background: $brand-j;
+  color: white;
+  @include span(1 of 4);
   cursor: pointer;
-  font-weight: $font-headline-weight;
-  padding: 15px 25px;
 
-  @include mq($from: l) {
-    display: inline-block;
-    margin: 0 0 0 20px;
+  &:last-of-type {
+    margin-right: 0px;
   }
 
   &.is-active,
   &:hover {
+    margin-top: 0;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    background: $brand-i;
     color: $brand-k;
-    text-decoration: underline;
   }
 }
 
@@ -127,6 +116,7 @@
 }
 
 .requests-listing__item {
+  background: white;
   border: 1px solid $brand-k;
   border-radius: 5px;
   box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);
