@@ -128,19 +128,28 @@
   padding: 0;
   @include cf();
 
-  @include mq($from: m) {
-    width: 50%;
+  @include mq($from: s) {
+    width: 400px;
     margin: 0 auto;
   }
 }
 
 .requests-search__sort__item {
-  float: left;
-  margin-right: 13.5%;
+  width: 100%;
   text-align: center;
 
   &:last-of-type {
     margin-right: 0;
+  }
+
+  .is-active {
+    font-weight: bold;
+  }
+
+  @include mq($from: s) {
+    width: auto;
+    float: left;
+    margin-right: 13.5%;
   }
 }
 
