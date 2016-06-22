@@ -12,6 +12,7 @@
   &__header {
     text-align: center;
     margin: 0;
+
     &--story {
       margin-bottom: 30px;
     }
@@ -156,10 +157,6 @@
       padding-bottom: 0px;
     }
 
-    .block__header {
-      color: $brand-h;
-    }
-
     .block__sub-header {
       color: $brand-m;
     }
@@ -186,5 +183,88 @@
   &--requests-detail {
     padding: 20px 0;
     background: $brand-i;
+  }
+}
+
+// Components
+.block__section {
+  @include cf;
+
+  margin-bottom: 40px;
+
+  &:first-of-type {
+    margin-top: 0px;
+  }
+
+  &:last-of-type {
+    margin-bottom: 20px; // cater for site container
+  }
+
+  @include mq($from: m) {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  &--about-your-donation {
+    margin-bottom: 20px;
+    @include mq($from: m) {
+      margin-bottom: 20px;
+      & + .block__section {
+        margin-top: 0px;
+      }
+    }
+  }
+}
+
+.block--subpage-header {
+  .block__header {
+    color: $brand-h;
+
+    &.has-icon--left {
+      margin: 20px 0;
+      padding-left: 60px;
+      position: relative;
+      text-align: center;
+
+      @include mq($from: m) {
+        margin: 20px 0 10px;
+        padding-left: 0;
+        text-align: center;
+      }
+
+      .block__header__icon {
+        @include size(50px);
+
+        position: absolute;
+        top: -5px;
+        left: 0;
+
+        @include mq($from: m) {
+          position: static;
+        }
+
+        &--big-change {
+          left: 50%;
+          margin-left: -90px;
+          @include mq($from: m) {
+            left: 0;
+            margin-left: 0;
+          }
+        }
+
+        &--give {
+          height: 110px;
+          width: 140px;
+          top: -40px;
+          right: 38px;
+
+          @include mq($from: m) {
+            margin-right: -28px;
+            margin-top: -30px;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
   }
 }

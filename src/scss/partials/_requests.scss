@@ -1,5 +1,25 @@
 // Give requests page specific styles
 
+.requests {
+  background: $brand-i;
+  color: $brand-k;
+  padding: 30px 20px 20px 20px;
+  @include cf();
+}
+
+.requests__title {
+    padding-top: 18px;
+    margin-left: -80px;
+}
+
+.requests__title__icon {
+  width: 200px;
+  height: 110px;
+  vertical-align: middle;
+  margin-right: -58px;
+  margin-top: -20px;
+}
+
 .requests-search {
   &.is-active {
     display: block;
@@ -10,20 +30,7 @@
   }
 }
 
-.requests-search__intro {
-  // @todo see if this needs to be globally applied?
-  text-align: center;
-
-  .block__header {
-    text-align: center;
-  }
-}
-
 .requests-search__input {
-  background: $brand-p;
-  background: linear-gradient(to bottom, $brand-b, $brand-p);
-  border-radius: 5px 5px 0 0;
-  padding: 10px 20px 20px 20px;
   text-align: center;
 }
 
@@ -34,11 +41,6 @@
   @include mq($from: l) {
     width: 75%;
   }
-}
-
-.requests-search__input__header {
-  color: #FFF!important;
-  margin-top: 20px;
 }
 
 .requests-search__autocomplete {
@@ -77,46 +79,88 @@
 }
 
 .requests-search__filter__list {
-  background: #ECECEC;
-  border-bottom: 1px solid $brand-k;
-  list-style-type: none;
-  margin: 5px 0 30px;
+  list-style: none;
+  margin: 0;
   padding: 0;
-  text-align: center;
+  @include cf();
 
-  @include mq($from: l) {
-    margin-bottom: 50px;
+  @include mq($from: m) {
+    width: 50%;
+    margin: 0 auto;
   }
 }
 
 .requests-search__filter__item {
-  color: #898989;
+  text-align: center;
+  border-radius: 5px 5px 0 0;
+  padding: 5px;
+  margin-top: 8px;
+  margin-bottom: 0;
+  background: $brand-j;
+  color: white;
   cursor: pointer;
-  font-weight: $font-headline-weight;
-  padding: 15px 25px;
+  float: left;
+  width: 24.25%;
+  margin-right: 1%;
+  transition: background-color 250ms linear, color 250ms linear;
 
-  @include mq($from: l) {
-    display: inline-block;
-    margin: 0 0 0 20px;
+  &:last-of-type {
+    margin-right: 0;
   }
 
   &.is-active,
   &:hover {
+    margin-top: 0;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    background: $brand-i;
     color: $brand-k;
-    text-decoration: underline;
   }
 }
 
-.requests-search__sort__list {
-  border: 1px solid #939598;
-  border-radius: 5px;
-  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.25);
-  padding: 10px;
-  max-width: 100%;
+.requests-search__sort__title {
+  text-align: center;
+  margin: 10px 0;
 }
 
-.requests-container {
-  position: relative;
+.requests-search__sort__list {
+  list-style: none;
+  margin: 0 0 20px 0;
+  padding: 0;
+  @include cf();
+
+  @include mq($from: s) {
+    width: 400px;
+    margin: 0 auto;
+  }
+}
+
+.requests-search__sort__item {
+  width: 100%;
+  text-align: center;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  .is-active {
+    font-weight: bold;
+  }
+
+  @include mq($from: s) {
+    width: auto;
+    float: left;
+    margin-right: 13.5%;
+  }
+}
+
+.requests-search__sort__criteria {
+  background-color: transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
 }
 
 .requests-listing {
@@ -127,6 +171,7 @@
 }
 
 .requests-listing__item {
+  background: white;
   border: 1px solid $brand-k;
   border-radius: 5px;
   box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);

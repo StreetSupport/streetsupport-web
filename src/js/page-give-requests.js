@@ -174,17 +174,24 @@ let initFiltering = (theList) => {
 }
 
 let initSorting = (theList) => {
-  document.querySelector('.js-sort-dropdown')
-    .addEventListener('change', (event) => {
+  const sortCriteriaButtons = document.querySelectorAll('.js-sort-criteria')
+  ForEach(sortCriteriaButtons, (b) => {
+    b.addEventListener('click', (event) => {
       let sortFields = []
       sortFields['organisation'] = 'serviceProviderName'
       sortFields['date'] = 'creationDate'
       sortFields['distance'] = 'distanceAwayInMetres'
 
-      let selectedSort = event.target.options[event.target.selectedIndex].value
+      let selectedSort = event.target.getAttribute('data-sort')
       let [field, direction] = selectedSort.split('-')
       theList.sort(sortFields[field], { order: direction })
+
+      ForEach(sortCriteriaButtons, (cb) => {
+        cb.classList.remove(activeClass)
+      })
+      event.target.classList.add(activeClass)
     })
+  })
 }
 
 let buildList = () => {

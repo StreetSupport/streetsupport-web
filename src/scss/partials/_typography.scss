@@ -9,7 +9,7 @@ body {
   font-family: $font-headline;
   font-weight: $font-headline-weight;
   margin: 0 0 20px 0;
-  line-height: 1.5;
+  line-height: 1.3;
 }
 
 .h1 {
@@ -76,6 +76,20 @@ strong {
 
 .text-center {
   text-align: center;
+
+  &--s {
+    text-align: center;
+
+    @include mq($from: m) {
+      text-align: left;
+    }
+  }
+
+  &--m {
+    @include mq($from: m) {
+      text-align: center;
+    }
+  }
 }
 
 .text-right {
