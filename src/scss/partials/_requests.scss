@@ -102,6 +102,7 @@
   float: left;
   width: 24.25%;
   margin-right: 1%;
+  transition: background-color 250ms linear, color 250ms linear;
 
   &:last-of-type {
     margin-right: 0;
