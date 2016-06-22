@@ -17,6 +17,7 @@ var organisationUrl = '/v2/service-providers/show/'
 var needsUrl = '/v1/service-provider-needs/'
 var allServiceProvidersUrl = '/v1/all-service-providers/'
 var volunteerEnquiryUrl = '/v1/volunteer-enquiries/'
+var createOfferOfItemsUrl = '/v1/offers-of-items/'
 var joinStreetSupportApplicationsUrl = '/v1/join-street-support-applications/'
 var offerSponsorshipUrl = '/v1/sponsorship-offers/'
 
@@ -33,6 +34,7 @@ module.exports = {
   organisation: p(organisationUrl),
   needs: p(needsUrl),
   createVolunteerEnquiry: p(volunteerEnquiryUrl),
+  createOfferOfItems: p(createOfferOfItemsUrl),
   joinStreetSupportApplications: p(joinStreetSupportApplicationsUrl),
   offerSponsorship: p(offerSponsorshipUrl)
 }

@@ -25,6 +25,7 @@ module.exports = {
     giverequests: path.join(__dirname, '/src/js/page-give-requests'),
     sponsor: path.join(__dirname, '/src/js/page-sponsor'),
     volunteer: path.join(__dirname, '/src/js/page-volunteer'),
+    offeritems: path.join(__dirname, '/src/js/page-offer-items'),
     joinstreetsupport: path.join(__dirname, '/src/js/page-join-street-support')
   },
   output: {
