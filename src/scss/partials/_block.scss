@@ -204,6 +204,16 @@
     margin-top: 40px;
     margin-bottom: 40px;
   }
+
+  &--about-your-donation {
+    margin-bottom: 20px;
+    @include mq($from: m) {
+      margin-bottom: 20px;
+      & + .block__section {
+        margin-top: 0px;
+      }
+    }
+  }
 }
 
 .block--subpage-header {
