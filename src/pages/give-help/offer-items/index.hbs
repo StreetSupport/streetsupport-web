@@ -1,0 +1,112 @@
+---
+title: Offer Items - Street Support
+description: Street support makes it easier to help homeless people. Here's how to get in touch.
+layout: default.hbs
+permalink: false
+jsBundle: offeritems
+section: givehelp
+page: offeritems
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item"><a href="/give-help/">Give Help</a></li>
+      <li class="breadcrumbs__item">Offer Items</li>
+    </ol>
+  </div>
+</div>
+{{> no-js}}
+
+<div class="block block--subpage-header">
+  <div class="container">
+    <h1 class="h1 block__header">Offer Items</h1>
+    <h2 class="h2 block__sub-header">Offer your spare items to local organisations</h2>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <p>Organisations and charities are always in need of items to help with a wide variety of tasks and services. This can range from hot drink supplies, to IT equipment. If you have any items that you think may be useful, please fill in the form below, and when an organisation has interest in your offer, they can get in touch.</p>
+    </div>
+  </div>
+</div>
+<h3 class="h2 requests-detail__heading requests-detail__heading--i-want-to-volunteer">I Have Items to Offer!</h3>
+<div class="block block--requests-detail">
+  <div class="container">
+    <div class="block__content">
+    	<form id="js-form" class="form form--volunteer" data-bind="submit: submitForm">
+	    	<fieldset class="form__fieldset">
+	    		<legend class="h2 form__fieldset-title">About You</legend>
+	    		<ul class="form__field-list">
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="firstname">First Name *</label>
+	    				<input class="form__input" type="text" data-bind="textInput: firstName" placeholder="First Name (required)"></input>
+	    			</li>
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="lastname">Last Name *</label>
+	    				<input class="form__input" type="text" data-bind="textInput: lastName" placeholder="Last Name (required)"></input>
+	    			</li>
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="email">Email *</label>
+	    				<input class="form__input" type="email" data-bind="textInput: email" placeholder="Email Address (required)"></input>
+	    			</li>
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="telephone">Telephone</label>
+	    				<input class="form__input" type="text" data-bind="textInput: telephone" placeholder="Telephone Number"></input>
+	    			</li>
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="postcode">Postcode *</label>
+	    				<input class="form__input" type="text" data-bind="textInput: postcode" placeholder="Postcode (required)"></input>
+	    			</li>
+	    		</ul>
+	    	</fieldset>
+	    	<fieldset class="form__fieldset">
+	    		<legend class="h2 form__fieldset-title">Description</legend>
+	    		<ul class="form__field-list">
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen form__label hide-screen" for="description">What are you able to offer?</label>
+	    				<input class="form__input" type="text" data-bind="textInput: description" placeholder="What are you able to offer?"></textarea>
+	    			</li>
+	    		</ul>
+	    	</fieldset>
+	    	<fieldset class="form__fieldset">
+	    		<legend class="h2 form__fieldset-title">Additional Information</legend>
+	    		<ul class="form__field-list">
+	    			<li class="form__field-item--full">
+	    				<label class="form__label hide-screen form__label hide-screen" for="additionalInfo">eg: quantity available, size of item, are you able to drop the items off?</label>
+	    				<textarea class="form__input form__input--multiline" data-bind="textInput: additionalInfo" placeholder="eg: quantity available, size of item, are you able to drop the items off?"></textarea>
+	    			</li>
+	    		</ul>
+	    	</fieldset>
+        <fieldset class="form__fieldset">
+          <ul class="form__field-list">
+            <li class="form__field-item form__field-item--full">
+              <label class="form__label--checkbox" for="isOptedIn">
+                Opt-In if you want to get occasional updates about Street Support to your inbox
+                <input type="checkbox" id="isOptedIn" data-bind="attr: { value: isOptedIn }, checked: isOptedIn" class="form__input--checkbox" />
+                </label>
+            </li>
+          </ul>
+        </fieldset>
+	    	<button type="submit" class="btn btn--brand-d form__submit"><span class="btn__text">Submit</span></button>
+    	</form>
+
+      <div id="js-fail" class="hide">
+        <h2 class="h2">Technical Error</h2>
+        <p>There has been a technical error. Please <a href="/contact/">contact Street Support</a>.</p>
+      </div>
+
+      <div id="js-success" class="hide">
+        <h2 class="h2">Thank you for submitting your details!</h2>
+        <p>You have been added to our central database. Should an organisation require your help, they will contact you directly with more information. In the meantime, have a look at <a href="give-help/">other ways to give</a>.</p>
+      </div>
+
+      {{> social-share}}
+    </div>
+  </div>
+</div>
+
+<div id="spin"></div>
