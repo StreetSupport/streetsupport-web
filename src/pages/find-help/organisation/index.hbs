@@ -47,6 +47,11 @@ page: organisation
           \{{#organisation}}
            <h3 class="h3">\{{{shortDescription}}}</h3>
            <p>\{{{description}}}</p>
+           <ul class="result-detail__provider-tag-list">
+           \{{#formattedTags}}
+            <li class="result-detail__provider-tag-item result-detail__provider-tag-item--\{{ id }}">\{{ name }}</li>
+           \{{/formattedTags}}
+           </ul>
            <h2 class="h3">Locations</h2>
            \{{#addresses}}
               <ul class="result-detail__address-list">

@@ -32,6 +32,12 @@ getApiData.data(organisationUrl).then(function (result) {
     return item.name
   })
 
+
+  data.formattedTags = []
+  forEach(data.tags, function (tag) {
+    data.formattedTags.push({ id: tag, name: tag.replace(/-/g, ' ')})
+  })
+
   forEach(data.providedServices, function (provider) {
     if (provider.tags !== null) {
       provider.tags = provider.tags.join(', ')
