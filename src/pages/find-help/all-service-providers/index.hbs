@@ -46,6 +46,11 @@ page: allorganisations
             <h2 class="h2 result-list__header"><a href="/find-help/organisation/?organisation=\{{key}}">\{{{name}}}</a></h2>
             <h3 class="h3">\{{{shortDescription}}}</h3>
             <p>\{{{description}}}</p>
+            <ul class="result-detail__provider-tag-list">
+              \{{#formattedTags}}
+              <li class="result-detail__provider-tag-item result-detail__tag-item--\{{ id }}">\{{ name }}</li>
+              \{{/formattedTags}}
+            </ul>
             <a class="btn btn--brand-d result-list__btn" href="/find-help/organisation/?organisation=\{{key}}">
               <span class="btn__text">More information about \{{{name}}}</span>
             </a>
