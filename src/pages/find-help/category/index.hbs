@@ -15,7 +15,7 @@ page: category
 <div id="spin"></div>
 
 <script id="js-category-no-results-result-tpl" type="text/template">
-  <div class="block block--breadcrumbs">
+<div ss="block block--breadcrumbs">
     <div class="container">
       <ol class="breadcrumbs__list">
         <li class="breadcrumbs__item"><a href="/">Home</a></li>
@@ -31,16 +31,15 @@ page: category
     <div class="container">
       \{{#organisations}}
       <h2 class="h1 block__header">\{{{name}}}</h2>
+      <h3 class="h2 block__sub-header">\{{synopsis}}</h3>
       \{{/organisations}}
-      <div class="block__content">
-        {{> location-description}}
-      </div>
     </div>
   </div>
 
   <div class="block">
     <div class="container">
       <div class="block__content">
+        {{> location-description}}
         <div class="result-detail">
           <p>We can't find any services listed near your current location.</p>
           <p>We are currently trialing Street Support in Manchester UK, so if you are trying to access it from elsewhere you won't yet be able to find service information for your city.</p>
@@ -70,22 +69,16 @@ page: category
     <div class="container">
       \{{#organisations}}
       <h1 class="h1 block__header">\{{{name}}}</h1>
+      <h3 class="h2 block__sub-header">\{{synopsis}}</h3>
       <p>\{{{synopsis}}}</p>
       \{{/organisations}}
-      <div class="block__content">
-        \{{#useGeoLocation}}
-        <p>Showing \{{category}} within 10k of your location. Change location to <a href="\{{pageAsFromManchester}}">Central Manchester</a>.</p>
-        \{{/useGeoLocation}}
-        \{{#useManchesterAsLocation}}
-        <p>Showing \{{category}} within 10k of Central Manchester. Use my <a href="\{{pageFromCurrentLocation}}">current location</a>.</p>
-        \{{/useManchesterAsLocation}}
-      </div>
     </div>
   </div>
 
   <div class="block">
     <div class="container">
       <div class="block__content">
+        {{> location-description}}
         <div class="result-detail">
           \{{#organisations}}
           <div class="accordion__incopy">
