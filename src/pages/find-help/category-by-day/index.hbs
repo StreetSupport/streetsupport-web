@@ -32,9 +32,15 @@ page: categorybyday
     <div class="container">
       \{{#organisations}}
       <h2 class="h1 block__header">\{{categoryName}}</h2>
+      <p>\{{{synopsis}}}</p>
       \{{/organisations}}
       <div class="block__content">
-        {{> location-description}}
+        \{{#useGeoLocation}}
+        <p>Showing \{{category}} within 10k of your location. Change location to <a href="\{{pageAsFromManchester}}">Central Manchester</a>.</p>
+        \{{/useGeoLocation}}
+        \{{#useManchesterAsLocation}}
+        <p>Showing \{{category}} within 10k of Central Manchester. Use my <a href="\{{pageFromCurrentLocation}}">current location</a>.</p>
+        \{{/useManchesterAsLocation}}
       </div>
     </div>
   </div>
