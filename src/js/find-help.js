@@ -74,7 +74,7 @@ var FindHelp = function () {
   self.buildViewModel = function (pagename, data) {
     var hasSetManchesterAsLocation = self.getLocation() === 'manchester'
 
-    var result = {
+    return {
       organisations: data,
       category: data.name === undefined ? data.categoryName : data.name,
       pageAsFromManchester: '?category=' + self.theCategory + '&location=manchester',
@@ -82,9 +82,6 @@ var FindHelp = function () {
       useManchesterAsLocation: hasSetManchesterAsLocation,
       useGeoLocation: !hasSetManchesterAsLocation
     }
-
-    console.log(result)
-    return result
   }
 }
 
