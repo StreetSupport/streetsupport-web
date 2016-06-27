@@ -64,6 +64,25 @@
     }
   }
 
+  &__provider-tag-list {
+    margin: 20px 0;
+    padding: 0;
+    @include cf();
+  }
+
+  &__provider-tag-item {
+    display: inline;
+    &:after {
+      content: '; '
+    }
+
+    &:last-of-type {
+      &:after {
+        content: ''
+      }
+    }
+  }
+
   &__tags-item {
     margin: 0;
     padding: 0;
