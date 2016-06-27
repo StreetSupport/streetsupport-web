@@ -3,6 +3,8 @@ var categoryEndpoint = require('./category-endpoint')
 var urlParameter = require('./get-url-parameter')
 var browser = require('./browser')
 
+var marked = require('marked')
+
 var FindHelp = function () {
   var self = this
 
@@ -74,8 +76,11 @@ var FindHelp = function () {
   self.buildViewModel = function (pagename, data) {
     var hasSetManchesterAsLocation = self.getLocation() === 'manchester'
 
+    data.synopsis = marked(data.synopsis)
+
     return {
       organisations: data,
+      category: data.name === undefined ? data.categoryName : data.name,
       pageAsFromManchester: '?category=' + self.theCategory + '&location=manchester',
       pageFromCurrentLocation: '?category=' + self.theCategory + '&location=my-location',
       useManchesterAsLocation: hasSetManchesterAsLocation,
