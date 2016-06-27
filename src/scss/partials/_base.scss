@@ -20,6 +20,21 @@ html {
 
 body {
   font-size: $base-font-size;
+  position: relative;
+}
+
+.page-loading {
+  // <body>
+  &::before {
+    background: rgba(0, 0, 0, .2);
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+  }
 }
 
 @include mq($until: m) {
