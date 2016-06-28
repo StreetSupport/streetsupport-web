@@ -5,7 +5,7 @@ require('knockout.validation') // No variable here is deliberate!
 
 var apiRoutes = require('../api')
 var postApi = require('../post-api-data')
-var Spinner = require('spin.js')
+var browser = require('../browser')
 
 var formId = 'js-form'
 var failId = 'js-fail'
@@ -37,11 +37,8 @@ var VolunteerModel = function () {
   self.isOptedIn = ko.observable(false)
 
   self.submitForm = function () {
-    var loading
-    var spin = document.getElementById('spin')
-
     if (self.errors().length === 0) {
-      loading = new Spinner().spin(spin)
+      browser.loading()
 
       var payload = {
         'FirstName': self.firstName(),
@@ -57,7 +54,7 @@ var VolunteerModel = function () {
 
       // TODO: Nice notification on success/fail
       postApi.post(apiRoutes.createVolunteerEnquiry, payload).then(function (result) {
-        loading.stop()
+        browser.loaded()
         if (result.statusCode.toString().charAt(0) !== '2') {
           theForm.classList.add(hideClass)
           theFail.classList.remove(hideClass)

@@ -14,19 +14,17 @@ var findIndex = require('lodash/array/findIndex')
 
 var getApiData = require('./get-api-data')
 var templating = require('./template-render')
-var Spinner = require('spin.js')
 var analytics = require('./analytics')
 var socialShare = require('./social-share')
-
-// Spinner
-var spin = document.getElementById('spin')
-var loading = new Spinner().spin(spin)
+var browser = require('./browser')
 
 var findHelp = new FindHelp()
 findHelp.handleSubCategoryChange('sub-category', accordion)
 findHelp.buildCategories(apiRoutes.categoryServiceProviders, buildList)
 
 function buildList (url) {
+  browser.loading()
+
   // Get API data using promise
   getApiData.data(url).then(function (result) {
     if (result.status === 'error') {
@@ -64,7 +62,7 @@ function buildList (url) {
 
     callback = function () {
       accordion.init(false, subCategoryIndexToOpen, findHelp.buildListener('category', 'sub-category'))
-      loading.stop()
+      browser.loaded()
       socialShare.init()
     }
 

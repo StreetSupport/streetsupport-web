@@ -8,12 +8,9 @@ var sortByOrder = require('lodash/collection/sortByOrder')
 var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
 var templating = require('./template-render')
-var Spinner = require('spin.js')
+var browser = require('./browser')
 
-// Spinner
-var spin = document.getElementById('spin')
-var loading = new Spinner().spin(spin)
-
+browser.loading()
 // Get API data using promise
 getApiData
   .data(apiRoutes.serviceCategories)
@@ -33,7 +30,7 @@ getApiData
     var theData = { categories: sorted }
 
     var callback = function () {
-      loading.stop()
+      browser.loaded()
       socialShare.init()
     }
 
