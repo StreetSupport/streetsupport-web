@@ -15,18 +15,17 @@ var findIndex = require('lodash/array/findIndex')
 var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
 var templating = require('./template-render')
-var Spinner = require('spin.js')
 var analytics = require('./analytics')
 var socialShare = require('./social-share')
-
-var spin = document.getElementById('spin')
-var loading = new Spinner().spin(spin)
+var browser = require('./browser')
 
 var findHelp = new FindHelp()
 findHelp.handleSubCategoryChange('day', accordion)
 findHelp.buildCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
 
 function buildList (url) {
+  browser.loading()
+
   getApiData.data(url).then(function (result) {
     if (result.status === 'error') {
       window.location.replace('/find-help/')
@@ -65,7 +64,7 @@ function buildList (url) {
 
     templating.renderTemplate(template, findHelp.buildViewModel('category-by-day', data), 'js-category-result-output', callback)
 
-    loading.stop()
+    browser.loaded()
     analytics.init(theTitle)
     socialShare.init()
   })

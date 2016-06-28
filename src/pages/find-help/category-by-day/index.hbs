@@ -32,16 +32,15 @@ page: categorybyday
     <div class="container">
       \{{#organisations}}
       <h2 class="h1 block__header">\{{categoryName}}</h2>
+      <h3 class="h2 block__sub-header">\{{{synopsis}}}</h3>
       \{{/organisations}}
-      <div class="block__content">
-        {{> location-description}}
-      </div>
     </div>
   </div>
 
   <div class="block">
     <div class="container block__inner">
       <div class="block__content">
+        {{> location-description}}
         <div class="result-detail">
           <p>We can't find any services listed near your current location.</p>
           <p>We are trialling Street Support in Manchester UK, so if you are trying to access it from elsewhere you won't yet be able to find service information for your city.</p>
@@ -71,18 +70,17 @@ page: categorybyday
     <div class="container">
       \{{#organisations}}
       <h2 class="h1 block__header">\{{categoryName}}</h2>
+      <h3 class="h2 block__sub-header">\{{{synopsis}}}</h3>
       \{{/organisations}}
-      <div class="block__content">
-        {{> location-description}}
-      </div>
     </div>
   </div>
 
   <div class="block">
     <div class="container block__inner">
       <div class="block__content">
+        {{> location-description}}
         \{{#organisations}}
-        <div class="accordion__incopy">
+        <div class="result-detail">
           <div class="accordion accordion--day js-accordion">
             \{{#daysServices}}
             <button id="\{{{name}}}" class="h3 accordion__header js-header">

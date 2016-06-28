@@ -10,16 +10,14 @@ var sortBy = require('lodash/collection/sortBy')
 var forEach = require('lodash/collection/forEach')
 var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
-var Spinner = require('spin.js')
 var analytics = require('./analytics')
 var templating = require('./template-render')
-
-// Spinner
-var spin = document.getElementById('spin')
-var loading = new Spinner().spin(spin)
+var browser = require('./browser')
 
 var theOrganisation = urlParameter.parameter('organisation')
 var organisationUrl = apiRoutes.organisation += theOrganisation
+
+browser.loading()
 
 // Get API data using promise
 getApiData.data(organisationUrl).then(function (result) {
@@ -49,7 +47,7 @@ getApiData.data(organisationUrl).then(function (result) {
 
   var callback = function () {
     accordion.init()
-    loading.stop()
+    browser.loaded()
     analytics.init(theTitle)
     socialShare.init()
   }
