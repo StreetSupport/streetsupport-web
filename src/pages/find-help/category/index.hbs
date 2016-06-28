@@ -80,52 +80,50 @@ page: category
         {{> location-description}}
         <div class="result-detail">
           \{{#organisations}}
-          <div class="accordion__incopy">
-            <div class="accordion js-accordion">
-              \{{#subCategories}}
-              <button id="\{{{key}}}" class="h3 accordion__header js-header">
-                \{{{name}}}
-                <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
-                <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
-              </button>
-              <div class="accordion__item js-item" id="\{{key}}">
-                <div class="accordion__inner">
-                  \{{#serviceProviders}}
-                  <div class="result-detail__item">
-                    <h3 class="h2 result-detail__header"><a href="/find-help/organisation/?organisation=\{{key}}">\{{{name}}}</a></h3>
-                    \{{#tags}}
-                    <p>You must be: <span class="result-detail__tags-item">\{{tags}}</span></p>
-                    \{{/tags}}
-                    <p class="result-detail__description">\{{{serviceInfo}}}</p>
-                    <h2 class="h3">Location</h2>
-                    \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
-                    \{{#address}}
-                    \{{#street}}
-                    <ul class="result-detail__address-list">
-                      <li class="result-detail__address-item">\{{#street}} \{{street}}, \{{/street}} \{{#street1}} \{{street1}}, \{{/street1}} \{{#street2}} \{{street2}}, \{{/street2}}
-                        \{{#street3}} \{{street3}}, \{{/street3}}</li>
-                        <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
-                        <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a></li>
-                      </ul>
-                      \{{/street}}
-                      \{{/address}}
-                      <h2 class="h3">Opening Times</h2>
-                      <dl class="result-detail__times-list">
-                       \{{#openingTimes}}
-                       <dt class="result-detail__times-title">\{{day}}</dt>
-                       <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
-                       \{{/openingTimes}}
-                     </dl>
-                     <a class="btn btn--brand-d result-detail__btn" href="/find-help/organisation/?organisation=\{{key}}">
-                      <span class="btn__text">More information about \{{{name}}}</span>
-                    </a>
-                  </div>
-                  \{{/serviceProviders}}
+          <div class="accordion js-accordion">
+            \{{#subCategories}}
+            <button id="\{{{key}}}" class="h3 accordion__header js-header">
+              \{{{name}}}
+              <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
+              <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
+            </button>
+            <div class="accordion__item js-item" id="\{{key}}">
+              <div class="accordion__inner">
+                \{{#serviceProviders}}
+                <div class="result-detail__item">
+                  <h3 class="h2 result-detail__header"><a href="/find-help/organisation/?organisation=\{{key}}">\{{{name}}}</a></h3>
+                  \{{#tags}}
+                  <p>You must be: <span class="result-detail__tags-item">\{{tags}}</span></p>
+                  \{{/tags}}
+                  <p class="result-detail__description">\{{{serviceInfo}}}</p>
+                  <h2 class="h3">Location</h2>
+                  \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
+                  \{{#address}}
+                  \{{#street}}
+                  <ul class="result-detail__address-list">
+                    <li class="result-detail__address-item">\{{#street}} \{{street}}, \{{/street}} \{{#street1}} \{{street1}}, \{{/street1}} \{{#street2}} \{{street2}}, \{{/street2}}
+                      \{{#street3}} \{{street3}}, \{{/street3}}</li>
+                      <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
+                      <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a></li>
+                    </ul>
+                    \{{/street}}
+                    \{{/address}}
+                    <h2 class="h3">Opening Times</h2>
+                    <dl class="result-detail__times-list">
+                     \{{#openingTimes}}
+                     <dt class="result-detail__times-title">\{{day}}</dt>
+                     <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
+                     \{{/openingTimes}}
+                   </dl>
+                   <a class="btn btn--brand-d result-detail__btn" href="/find-help/organisation/?organisation=\{{key}}">
+                    <span class="btn__text">More information about \{{{name}}}</span>
+                  </a>
                 </div>
+                \{{/serviceProviders}}
               </div>
-              \{{/subCategories}}
             </div>
-        </div>
+            \{{/subCategories}}
+          </div>
         \{{/organisations}}
       </div>
 
