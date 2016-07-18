@@ -20,7 +20,7 @@ getApiData.data(apiRoutes.serviceProviders)
     forEach(sorted, function (sp) {
       sp.formattedTags = []
       forEach(sp.tags, function (tag) {
-        sp.formattedTags.push({ id: tag, name: tag.replace(/-/g, ' ')})
+        sp.formattedTags.push({ id: tag, name: tag.replace(/-/g, ' ') })
       })
     })
 
