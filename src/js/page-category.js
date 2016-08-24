@@ -2,71 +2,91 @@
 import './common'
 
 // Page modules
-var urlParameter = require('./get-url-parameter')
-var accordion = require('./accordion')
-var FindHelp = require('./find-help')
-var apiRoutes = require('./api')
+let urlParameter = require('./get-url-parameter')
+let accordion = require('./accordion')
+let FindHelp = require('./find-help')
+let apiRoutes = require('./api')
 
 // Lodash
-var sortBy = require('lodash/collection/sortBy')
-var forEach = require('lodash/collection/forEach')
-var findIndex = require('lodash/array/findIndex')
+let sortBy = require('lodash/collection/sortBy')
+let forEach = require('lodash/collection/forEach')
+let findIndex = require('lodash/array/findIndex')
 
-var getApiData = require('./get-api-data')
-var templating = require('./template-render')
-var analytics = require('./analytics')
-var socialShare = require('./social-share')
-var browser = require('./browser')
+let getApiData = require('./get-api-data')
+let templating = require('./template-render')
+let analytics = require('./analytics')
+let socialShare = require('./social-share')
+let browser = require('./browser')
 
-var findHelp = new FindHelp()
+let findHelp = new FindHelp()
 findHelp.handleSubCategoryChange('sub-category', accordion)
-findHelp.buildCategories(apiRoutes.categoryServiceProviders, buildList)
+findHelp.buildCategories(apiRoutes.servicesByCategory, buildList)
 
 function buildList (url) {
   browser.loading()
 
   // Get API data using promise
-  getApiData.data(url).then(function (result) {
-    if (result.status === 'error') {
+  getApiData.data(url)
+  .then(function (result) {
+    if (result.status === 'error' || result.data.length === 0) {
       window.location.replace('/find-help/')
     }
-    var data = result.data
-
-    var theTitle = data.name + ' - Street Support'
+    let theTitle = result.data[0].categoryName + ' - Street Support'
     document.title = theTitle
 
-    var template = ''
-    var callback = function () {}
+    let template = ''
+    let callback = function () {}
 
-    if (data.subCategories.length) {
+    let formattedData = []
+
+    if (result.data.length > 0) {
       template = 'js-category-result-tpl'
 
-      data.subCategories = sortBy(data.subCategories, function (item) {
-        return item.name
-      })
+      forEach(result.data, function (provider) {
+        let service = {
+          info: provider.info,
+          location: provider.location,
+          openingTimes: provider.openingTimes
+        }
+        let match = formattedData.filter((p) => p.providerId === provider.providerId)
 
-      forEach(data.subCategories, function (subCat) {
-        forEach(subCat.serviceProviders, function (provider) {
-          if (provider.tags !== null) {
-            provider.tags = provider.tags.join(', ')
+        if (match.length === 1) {
+          match[0].services.push(service)
+        } else {
+          let newProvider = {
+            categoryId: provider.categoryId,
+            categoryName: provider.categoryName,
+            categorySynopsis: provider.categorySynopsis,
+            providerId: provider.providerId,
+            providerName: provider.providerName,
+            services: [service]
           }
-        })
-      })
-
-      var subCategoryIndexToOpen = findIndex(data.subCategories, function (subCat) {
-        return subCat.key === urlParameter.parameter('sub-category')
+          if (provider.tags !== null) {
+            newProvider.tags = provider.tags.join(', ')
+          }
+          if (provider.subCategories !== null) {
+            newProvider.subCategories = provider.subCategories
+              .map((sc) => sc.name)
+              .join(', ')
+          }
+          formattedData.push(newProvider)
+        }
       })
     } else {
       template = 'js-category-no-results-result-tpl'
     }
 
     callback = function () {
-      accordion.init(false, subCategoryIndexToOpen, findHelp.buildListener('category', 'sub-category'))
+      accordion.init(true, 0, findHelp.buildListener('category', 'sub-category'))
       browser.loaded()
       socialShare.init()
     }
 
+    console.log(formattedData)
+
     analytics.init(theTitle)
-    templating.renderTemplate(template, findHelp.buildViewModel('category', data), 'js-category-result-output', callback)
+
+    let viewModel = findHelp.buildViewModel('category', formattedData)
+    templating.renderTemplate(template, viewModel, 'js-category-result-output', callback)
   })
 }
