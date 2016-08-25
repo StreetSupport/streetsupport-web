@@ -82,10 +82,9 @@ page: category
               <div class="accordion__inner">
                 \{{#services}}
                 <div class="result-detail__item">
-                  <h3 class="h2 result-detail__header"><a href="/find-help/organisation/?organisation=\{{providerId}}">\{{{providerName}}}</a></h3>
+                  <p class="result-detail__description">\{{{info}}}</p>
                   <p>You must be: <span class="result-detail__tags-item">\{{tags}}</span></p>
                   <p>Categories: <span class="result-detail__tags-item">\{{subCategories}}</span></p>
-                  <p class="result-detail__description">\{{{info}}}</p>
                   <h2 class="h3">Location</h2>
                   \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
                   \{{#location}}
@@ -105,11 +104,11 @@ page: category
                     <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
                     \{{/openingTimes}}
                   </dl>
-                  <a class="btn btn--brand-d result-detail__btn" href="/find-help/organisation/?organisation=\{{providerId}}">
-                    <span class="btn__text">More information about \{{{providerName}}}</span>
-                  </a>
                 </div>
                 \{{/services}}
+                <a class="btn btn--brand-d result-detail__btn" href="/find-help/organisation/?organisation=\{{providerId}}">
+                  <span class="btn__text">More information about \{{{providerName}}}</span>
+                </a>
               </div>
             </div>
           </div>
