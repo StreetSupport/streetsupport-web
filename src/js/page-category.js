@@ -2,15 +2,12 @@
 import './common'
 
 // Page modules
-let urlParameter = require('./get-url-parameter')
 let accordion = require('./accordion')
 let FindHelp = require('./find-help')
 let apiRoutes = require('./api')
 
 // Lodash
-let sortBy = require('lodash/collection/sortBy')
 let forEach = require('lodash/collection/forEach')
-let findIndex = require('lodash/array/findIndex')
 
 let getApiData = require('./get-api-data')
 let templating = require('./template-render')

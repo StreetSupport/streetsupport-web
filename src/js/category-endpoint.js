@@ -3,9 +3,9 @@ var find = require('lodash/collection/find')
 var Q = require('q')
 
 var getEndpointUrl = function (categoryUrl, theLocation) {
-
-  let getUrl = (categoryUrl, latitude ,longitude) => {
-      return categoryUrl += '/' + latitude + '/' + longitude
+  console.log(categoryUrl)
+  let getUrl = (categoryUrl, latitude, longitude) => {
+    return categoryUrl + '/' + latitude + '/' + longitude
   }
 
   var self = this

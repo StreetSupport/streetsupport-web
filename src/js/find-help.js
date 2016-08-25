@@ -73,6 +73,16 @@ var FindHelp = function () {
       })
   }
 
+  self.buildTimeTabledCategories = function (endpoint, buildList) {
+    var categoryUrl = endpoint += self.theCategory
+
+    categoryEndpoint.getEndpointUrl(categoryUrl, self.getLocation())
+      .then(function (success) {
+        buildList(success)
+      }, function () {
+      })
+  }
+
   self.buildViewModel = function (pagename, data) {
     var hasSetManchesterAsLocation = self.getLocation() === 'manchester'
 

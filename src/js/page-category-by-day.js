@@ -21,7 +21,7 @@ var browser = require('./browser')
 
 var findHelp = new FindHelp()
 findHelp.handleSubCategoryChange('day', accordion)
-findHelp.buildCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
+findHelp.buildTimeTabledCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
 
 function buildList (url) {
   browser.loading()
