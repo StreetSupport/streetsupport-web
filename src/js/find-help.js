@@ -77,9 +77,9 @@ var FindHelp = function () {
     var hasSetManchesterAsLocation = self.getLocation() === 'manchester'
 
     return {
-      organisations: data,
-      categoryName: data[0].categoryName,
-      categorySynopsis: marked(data[0].categorySynopsis),
+      organisations: data.providers,
+      categoryName: data.category.name,
+      categorySynopsis: marked(data.category.synopsis),
       pageAsFromManchester: '?category=' + self.theCategory + '&location=manchester',
       pageFromCurrentLocation: '?category=' + self.theCategory + '&location=my-location',
       useManchesterAsLocation: hasSetManchesterAsLocation,
@@ -89,8 +89,6 @@ var FindHelp = function () {
 
   self.buildTimeTabledViewModel = function (pagename, data) {
     var hasSetManchesterAsLocation = self.getLocation() === 'manchester'
-
-    data.synopsis = marked(data.synopsis)
 
     return {
       organisations: data,

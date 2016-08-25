@@ -24,32 +24,32 @@ function buildList (url) {
     if (result.status === 'error') {
       window.location.replace('/find-help/')
     }
-    let theTitle = result.data[0].categoryName + ' - Street Support'
+    let theTitle = result.data.category.name + ' - Street Support'
     document.title = theTitle
 
     let template = ''
-    let callback = function () {}
+    let callback = function () {
+      browser.loaded()
+      socialShare.init()
+    }
 
-    let formattedData = []
+    let formattedProviders = []
 
-    if (result.data.length > 0) {
+    if (result.data.providers.length > 0) {
       template = 'js-category-result-tpl'
 
-      forEach(result.data, function (provider) {
+      forEach(result.data.providers, function (provider) {
         let service = {
           info: provider.info,
           location: provider.location,
           openingTimes: provider.openingTimes
         }
-        let match = formattedData.filter((p) => p.providerId === provider.providerId)
+        let match = formattedProviders.filter((p) => p.providerId === provider.providerId)
 
         if (match.length === 1) {
           match[0].services.push(service)
         } else {
           let newProvider = {
-            categoryId: provider.categoryId,
-            categoryName: provider.categoryName,
-            categorySynopsis: provider.categorySynopsis,
             providerId: provider.providerId,
             providerName: provider.providerName,
             services: [service]
@@ -62,22 +62,27 @@ function buildList (url) {
               .map((sc) => sc.name)
               .join(', ')
           }
-          formattedData.push(newProvider)
+          formattedProviders.push(newProvider)
         }
       })
+      callback = function () {
+        accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'))
+        browser.loaded()
+        socialShare.init()
+      }
     } else {
       template = 'js-category-no-results-result-tpl'
     }
 
-    callback = function () {
-      accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'))
-      browser.loaded()
-      socialShare.init()
-    }
-
     analytics.init(theTitle)
 
+    var formattedData = {
+      category: result.data.category,
+      providers: formattedProviders
+    }
+
     let viewModel = findHelp.buildViewModel('category', formattedData)
+
     templating.renderTemplate(template, viewModel, 'js-category-result-output', callback)
   })
 }

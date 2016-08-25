@@ -140,7 +140,6 @@ const data = {
   }
 }
 const callback = () => {
-  console.log('rendered')
 }
 
 templating.renderTemplate(template, data, 'js-category-result-output', callback)

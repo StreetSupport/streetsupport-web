@@ -57,14 +57,11 @@ function buildList (url) {
       })
 
       callback = function () {
-        console.log('callback!')
         accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', 'day'))
       }
     } else {
       template = 'js-category-no-results-result-tpl'
     }
-
-    console.log(data)
 
     templating.renderTemplate(template, findHelp.buildTimeTabledViewModel('category-by-day', data), 'js-category-result-output', callback)
 
