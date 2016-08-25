@@ -5,6 +5,10 @@ var Q = require('q')
 var getEndpointUrl = function (categoryUrl, theLocation) {
   console.log(categoryUrl)
   let getUrl = (categoryUrl, latitude, longitude) => {
+    let isTimetabled = (categoryUrl) => {
+      return categoryUrl.indexOf('timetabled-service-providers') >= 0
+    }
+    if (isTimetabled(categoryUrl)) return categoryUrl + '/long/' + longitude + '/lat/' + latitude
     return categoryUrl + '/' + latitude + '/' + longitude
   }
 

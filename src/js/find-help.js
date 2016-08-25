@@ -73,16 +73,6 @@ var FindHelp = function () {
       })
   }
 
-  self.buildTimeTabledCategories = function (endpoint, buildList) {
-    var categoryUrl = endpoint += self.theCategory
-
-    categoryEndpoint.getEndpointUrl(categoryUrl, self.getLocation())
-      .then(function (success) {
-        buildList(success)
-      }, function () {
-      })
-  }
-
   self.buildViewModel = function (pagename, data) {
     var hasSetManchesterAsLocation = self.getLocation() === 'manchester'
 
@@ -90,6 +80,22 @@ var FindHelp = function () {
       organisations: data,
       categoryName: data[0].categoryName,
       categorySynopsis: marked(data[0].categorySynopsis),
+      pageAsFromManchester: '?category=' + self.theCategory + '&location=manchester',
+      pageFromCurrentLocation: '?category=' + self.theCategory + '&location=my-location',
+      useManchesterAsLocation: hasSetManchesterAsLocation,
+      useGeoLocation: !hasSetManchesterAsLocation
+    }
+  }
+
+  self.buildTimeTabledViewModel = function (pagename, data) {
+    var hasSetManchesterAsLocation = self.getLocation() === 'manchester'
+
+    data.synopsis = marked(data.synopsis)
+
+    return {
+      organisations: data,
+      categoryName: data.categoryName,
+      categorySynopsis: marked(data.synopsis),
       pageAsFromManchester: '?category=' + self.theCategory + '&location=manchester',
       pageFromCurrentLocation: '?category=' + self.theCategory + '&location=my-location',
       useManchesterAsLocation: hasSetManchesterAsLocation,

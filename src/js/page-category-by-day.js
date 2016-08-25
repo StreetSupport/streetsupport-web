@@ -21,12 +21,13 @@ var browser = require('./browser')
 
 var findHelp = new FindHelp()
 findHelp.handleSubCategoryChange('day', accordion)
-findHelp.buildTimeTabledCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
+findHelp.buildCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
 
 function buildList (url) {
   browser.loading()
 
-  getApiData.data(url).then(function (result) {
+  getApiData.data(url)
+  .then(function (result) {
     if (result.status === 'error') {
       window.location.replace('/find-help/')
     }
@@ -56,13 +57,16 @@ function buildList (url) {
       })
 
       callback = function () {
+        console.log('callback!')
         accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', 'day'))
       }
     } else {
       template = 'js-category-no-results-result-tpl'
     }
 
-    templating.renderTemplate(template, findHelp.buildViewModel('category-by-day', data), 'js-category-result-output', callback)
+    console.log(data)
+
+    templating.renderTemplate(template, findHelp.buildTimeTabledViewModel('category-by-day', data), 'js-category-result-output', callback)
 
     browser.loaded()
     analytics.init(theTitle)
