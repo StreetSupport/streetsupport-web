@@ -21,7 +21,7 @@ function buildList (url) {
 
   getApiData.data(url)
   .then(function (result) {
-    if (result.status === 'error' || result.data.length === 0) {
+    if (result.status === 'error') {
       window.location.replace('/find-help/')
     }
     let theTitle = result.data[0].categoryName + ' - Street Support'
