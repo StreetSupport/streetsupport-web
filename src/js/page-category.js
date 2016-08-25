@@ -1,12 +1,9 @@
-// Common modules
 import './common'
 
-// Page modules
 let accordion = require('./accordion')
 let FindHelp = require('./find-help')
 let apiRoutes = require('./api')
 
-// Lodash
 let forEach = require('lodash/collection/forEach')
 
 let getApiData = require('./get-api-data')
@@ -22,7 +19,6 @@ findHelp.buildCategories(apiRoutes.servicesByCategory, buildList)
 function buildList (url) {
   browser.loading()
 
-  // Get API data using promise
   getApiData.data(url)
   .then(function (result) {
     if (result.status === 'error' || result.data.length === 0) {
@@ -74,12 +70,10 @@ function buildList (url) {
     }
 
     callback = function () {
-      accordion.init(true, 0, findHelp.buildListener('category', 'sub-category'))
+      accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'))
       browser.loaded()
       socialShare.init()
     }
-
-    console.log(formattedData)
 
     analytics.init(theTitle)
 
