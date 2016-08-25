@@ -76,8 +76,6 @@ var FindHelp = function () {
   self.buildViewModel = function (pagename, data) {
     var hasSetManchesterAsLocation = self.getLocation() === 'manchester'
 
-    // data.synopsis = marked(data.synopsis)
-
     return {
       organisations: data,
       categoryName: data[0].categoryName,
