@@ -3,7 +3,6 @@ var find = require('lodash/collection/find')
 var Q = require('q')
 
 var getEndpointUrl = function (categoryUrl, theLocation) {
-  console.log(categoryUrl)
   let getUrl = (categoryUrl, latitude, longitude) => {
     let isTimetabled = (categoryUrl) => {
       return categoryUrl.indexOf('timetabled-service-providers') >= 0
