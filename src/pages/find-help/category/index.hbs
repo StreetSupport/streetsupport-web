@@ -82,11 +82,9 @@ page: category
         <div class="result-detail">
           \{{#organisations}}
           <div class="accordion js-accordion">
-            <button id="\{{{providerId}}}" class="h3 accordion__header js-header" data-subcats="\{{#subCategories}} \{{id}} \{{/subCategories}}">
+            <h3 id="\{{{providerId}}}" class="h3 accordion__header js-header" data-subcats="\{{#subCategories}} \{{id}} \{{/subCategories}}">
               \{{{providerName}}}
-              <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
-              <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
-            </button>
+            </h3>
             <div class="accordion__item js-item" id="\{{providerId}}" data-subcats="\{{#subCategories}} \{{id}} \{{/subCategories}}">
               <div class="accordion__inner">
                 \{{#services}}

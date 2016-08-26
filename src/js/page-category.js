@@ -74,7 +74,7 @@ function buildList (url) {
         }
       })
       callback = function () {
-        accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'))
+        accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'), true)
         browser.loaded()
         socialShare.init()
 
