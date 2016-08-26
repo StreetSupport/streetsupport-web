@@ -41,7 +41,6 @@ var init = function (showFirst, indexToOpen, listener, showAll) {
 }
 
 var open = function (el, context, noAnalytics) {
-  console.log(el)
   myListener.accordionOpened(el, context)
   baseOpen(el, context, noAnalytics)
 }
