@@ -7,7 +7,7 @@ var myListener = {
   accordionOpened: function () { }
 }
 
-var init = function (showFirst, indexToOpen, listener) {
+var init = function (showFirst, indexToOpen, listener, showAll) {
   // If not supported, exit out
   if (!document.querySelector || !document.querySelectorAll || !document.body.classList) {
     return
@@ -22,10 +22,10 @@ var init = function (showFirst, indexToOpen, listener) {
   var itemCount = headers.length
 
   // Add active class to first elements or if there is only one panel
-  if (showFirst || itemCount === 1) {
+  if (!showAll && (showFirst || itemCount === 1)) {
     var firstHeader = headers[0]
     open(firstHeader, el, true)
-  } else if (indexToOpen >= 0) {
+  } else if (!showAll && indexToOpen >= 0) {
     open(headers[indexToOpen], el, true)
   }
 
@@ -34,10 +34,14 @@ var init = function (showFirst, indexToOpen, listener) {
     headers[i].addEventListener('click', function (e) {
       open(this, el)
     })
+    if (showAll) {
+      headers[i].nextElementSibling.classList.add(activeClass)
+    }
   }
 }
 
 var open = function (el, context, noAnalytics) {
+  console.log(el)
   myListener.accordionOpened(el, context)
   baseOpen(el, context, noAnalytics)
 }

@@ -20,6 +20,7 @@ module.exports = {
     findhelp: path.join(__dirname, '/src/js/page-find-help'),
     category: path.join(__dirname, '/src/js/page-category'),
     categorybyday: path.join(__dirname, '/src/js/page-category-by-day'),
+    subcattags: path.join(__dirname, '/src/js/page-subcat-tags'),
     organisation: path.join(__dirname, '/src/js/page-organisation'),
     allserviceproviders: path.join(__dirname, '/src/js/page-all-service-providers'),
     giverequests: path.join(__dirname, '/src/js/page-give-requests'),

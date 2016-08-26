@@ -20,19 +20,15 @@ page: category
       <ol class="breadcrumbs__list">
         <li class="breadcrumbs__item"><a href="/">Home</a></li>
         <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
-        \{{#organisations}}
-        <li class="breadcrumbs__item">\{{{name}}}</li>
-        \{{/organisations}}
+        <li class="breadcrumbs__item">\{{{categoryName}}}</li>
       </ol>
     </div>
   </div>
 
   <div class="block block--subpage-header">
     <div class="container">
-      \{{#organisations}}
-      <h2 class="h1 block__header">\{{{name}}}</h2>
-      <h3 class="h2 block__sub-header">\{{{synopsis}}}</h3>
-      \{{/organisations}}
+      <h2 class="h1 block__header">\{{{categoryName}}}</h2>
+      <h3 class="h2 block__sub-header">\{{{categorySynopsis}}}</h3>
     </div>
   </div>
 
@@ -58,19 +54,15 @@ page: category
       <ol class="breadcrumbs__list">
         <li class="breadcrumbs__item"><a href="/">Home</a></li>
         <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
-        \{{#organisations}}
-        <li class="breadcrumbs__item">\{{{name}}}</li>
-        \{{/organisations}}
+        <li class="breadcrumbs__item">\{{{categoryName}}}</li>
       </ol>
     </div>
   </div>
 
   <div class="block block--subpage-header">
     <div class="container">
-      \{{#organisations}}
-      <h1 class="h1 block__header">\{{{name}}}</h1>
-      <h3 class="h2 block__sub-header">\{{{synopsis}}}</h3>
-      \{{/organisations}}
+      <h1 class="h1 block__header">\{{{categoryName}}}</h1>
+      <h3 class="h2 block__sub-header">\{{{categorySynopsis}}}</h3>
     </div>
   </div>
 
@@ -78,51 +70,54 @@ page: category
     <div class="container">
       <div class="block__content">
         {{> location-description}}
+        <div class="subcat-filter">
+          <p class="subcat-filter__label">Filter by service provided:</p>
+          <ul class="subcat-filter__items">
+            <li class="subcat-filter__item js-filter-item on" data-id="">All</li>
+            \{{#subCategories}}
+            <li class="subcat-filter__item js-filter-item" data-id="\{{id}}">\{{name}}</li>
+            \{{/subCategories}}
+          </ul>
+        </div>
         <div class="result-detail">
           \{{#organisations}}
           <div class="accordion js-accordion">
-            \{{#subCategories}}
-            <button id="\{{{key}}}" class="h3 accordion__header js-header">
-              \{{{name}}}
-              <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
-              <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
-            </button>
-            <div class="accordion__item js-item" id="\{{key}}">
+            <h3 id="\{{{providerId}}}" class="h3 accordion__header js-header" data-subcats="\{{#subCategories}} \{{id}} \{{/subCategories}}">
+              \{{{providerName}}}
+            </h3>
+            <div class="accordion__item js-item" id="\{{providerId}}" data-subcats="\{{#subCategories}} \{{id}} \{{/subCategories}}">
               <div class="accordion__inner">
-                \{{#serviceProviders}}
+                \{{#services}}
                 <div class="result-detail__item">
-                  <h3 class="h2 result-detail__header"><a href="/find-help/organisation/?organisation=\{{key}}">\{{{name}}}</a></h3>
-                  \{{#tags}}
+                  <p class="result-detail__description">\{{{info}}}</p>
                   <p>You must be: <span class="result-detail__tags-item">\{{tags}}</span></p>
-                  \{{/tags}}
-                  <p class="result-detail__description">\{{{serviceInfo}}}</p>
+                  <p>Categories: <span class="result-detail__tags-item">\{{subCategoryList}}</span></p>
                   <h2 class="h3">Location</h2>
                   \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
-                  \{{#address}}
-                  \{{#street}}
+                  \{{#location}}
+                  \{{#streetLine1}}
                   <ul class="result-detail__address-list">
-                    <li class="result-detail__address-item">\{{#street}} \{{street}}, \{{/street}} \{{#street1}} \{{street1}}, \{{/street1}} \{{#street2}} \{{street2}}, \{{/street2}}
-                      \{{#street3}} \{{street3}}, \{{/street3}}</li>
-                      <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
-                      <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a></li>
-                    </ul>
-                    \{{/street}}
-                    \{{/address}}
-                    <h2 class="h3">Opening Times</h2>
-                    <dl class="result-detail__times-list">
-                     \{{#openingTimes}}
-                     <dt class="result-detail__times-title">\{{day}}</dt>
-                     <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
-                     \{{/openingTimes}}
-                   </dl>
-                   <a class="btn btn--brand-d result-detail__btn" href="/find-help/organisation/?organisation=\{{key}}">
-                    <span class="btn__text">More information about \{{{name}}}</span>
-                  </a>
+                    <li class="result-detail__address-item">\{{#streetLine1}} \{{streetLine1}}, \{{/streetLine1}} \{{#streetLine2}} \{{streetLine2}}, \{{/streetLine2}} \{{#streetLine3}} \{{streetLine3}}, \{{/streetLine3}}
+                      \{{#streetLine4}} \{{streetLine4}}, \{{/streetLine4}}</li>
+                    <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
+                    <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a></li>
+                  </ul>
+                  \{{/streetLine1}}
+                  \{{/location}}
+                  <h2 class="h3">Opening Times</h2>
+                  <dl class="result-detail__times-list">
+                    \{{#openingTimes}}
+                    <dt class="result-detail__times-title">\{{day}}</dt>
+                    <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
+                    \{{/openingTimes}}
+                  </dl>
                 </div>
-                \{{/serviceProviders}}
+                \{{/services}}
+                <a class="btn btn--brand-d result-detail__btn" href="/find-help/organisation/?organisation=\{{providerId}}">
+                  <span class="btn__text">More information about \{{{providerName}}}</span>
+                </a>
               </div>
             </div>
-            \{{/subCategories}}
           </div>
         \{{/organisations}}
       </div>

@@ -97,13 +97,13 @@
     padding-bottom: 30px;
     border-bottom: 1px solid $brand-f;
 
-    &:first-child {
+    &:first-of-type {
       padding-top: 0;
     }
 
-    &:last-child {
-      padding-bottom: 0;
-      border-bottom: 0;
+    &:last-of-type {
+      padding-bottom: none;
+      border-bottom: none;
     }
   }
 }

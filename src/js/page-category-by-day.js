@@ -26,7 +26,8 @@ findHelp.buildCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
 function buildList (url) {
   browser.loading()
 
-  getApiData.data(url).then(function (result) {
+  getApiData.data(url)
+  .then(function (result) {
     if (result.status === 'error') {
       window.location.replace('/find-help/')
     }
@@ -62,7 +63,7 @@ function buildList (url) {
       template = 'js-category-no-results-result-tpl'
     }
 
-    templating.renderTemplate(template, findHelp.buildViewModel('category-by-day', data), 'js-category-result-output', callback)
+    templating.renderTemplate(template, findHelp.buildTimeTabledViewModel('category-by-day', data), 'js-category-result-output', callback)
 
     browser.loaded()
     analytics.init(theTitle)
