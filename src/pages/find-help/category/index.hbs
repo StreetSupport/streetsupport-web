@@ -70,21 +70,30 @@ page: category
     <div class="container">
       <div class="block__content">
         {{> location-description}}
+        <div class="subcat-filter">
+          <p class="subcat-filter__label">Filter by service provided:</p>
+          <ul class="subcat-filter__items">
+            <li class="subcat-filter__item js-filter-item on" data-id="">All</li>
+            \{{#subCategories}}
+            <li class="subcat-filter__item js-filter-item" data-id="\{{id}}">\{{name}}</li>
+            \{{/subCategories}}
+          </ul>
+        </div>
         <div class="result-detail">
           \{{#organisations}}
           <div class="accordion js-accordion">
-            <button id="\{{{providerId}}}" class="h3 accordion__header js-header">
+            <button id="\{{{providerId}}}" class="h3 accordion__header js-header" data-subcats="\{{#subCategories}} \{{id}} \{{/subCategories}}">
               \{{{providerName}}}
               <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
               <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
             </button>
-            <div class="accordion__item js-item" id="\{{providerId}}">
+            <div class="accordion__item js-item" id="\{{providerId}}" data-subcats="\{{#subCategories}} \{{id}} \{{/subCategories}}">
               <div class="accordion__inner">
                 \{{#services}}
                 <div class="result-detail__item">
                   <p class="result-detail__description">\{{{info}}}</p>
                   <p>You must be: <span class="result-detail__tags-item">\{{tags}}</span></p>
-                  <p>Categories: <span class="result-detail__tags-item">\{{subCategories}}</span></p>
+                  <p>Categories: <span class="result-detail__tags-item">\{{subCategoryList}}</span></p>
                   <h2 class="h3">Location</h2>
                   \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
                   \{{#location}}

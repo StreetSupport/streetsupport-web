@@ -78,6 +78,7 @@ var FindHelp = function () {
 
     return {
       organisations: data.providers,
+      subCategories: data.subCategories,
       categoryName: data.category.name,
       categorySynopsis: marked(data.category.synopsis),
       pageAsFromManchester: '?category=' + self.theCategory + '&location=manchester',

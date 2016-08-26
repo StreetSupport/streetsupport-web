@@ -34,6 +34,7 @@ function buildList (url) {
     }
 
     let formattedProviders = []
+    let subCategories = []
 
     if (result.data.providers.length > 0) {
       template = 'js-category-result-tpl'
@@ -58,7 +59,14 @@ function buildList (url) {
             newProvider.tags = provider.tags.join(', ')
           }
           if (provider.subCategories !== null) {
+            provider.subCategories
+              .forEach((sc) => {
+                if (subCategories.filter((esc) => esc.id === sc.id).length === 0) {
+                  subCategories.push(sc)
+                }
+              })
             newProvider.subCategories = provider.subCategories
+            newProvider.subCategoryList = provider.subCategories
               .map((sc) => sc.name)
               .join(', ')
           }
@@ -69,6 +77,36 @@ function buildList (url) {
         accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'))
         browser.loaded()
         socialShare.init()
+
+        let providerItems = document.querySelectorAll('.js-item, .js-header')
+        let filterItems = document.querySelectorAll('.js-filter-item')
+
+        let filterClickHandler = (e) => {
+          forEach(document.querySelectorAll('.js-filter-item'), (item) => {
+            item.classList.remove('on')
+          })
+
+          e.target.classList.add('on')
+
+          forEach(providerItems, (item) => {
+            item.classList.remove('hide')
+          })
+
+          let id = e.target.getAttribute('data-id')
+          if (id.length > 0) {
+            console.log(id)
+            forEach(providerItems, (item) => {
+              console.log(item.getAttribute('data-subcats').indexOf(id))
+              if (item.getAttribute('data-subcats').indexOf(id) < 0) {
+                item.classList.add('hide')
+              }
+            })
+          }
+        }
+
+        forEach(filterItems, (item) => {
+          item.addEventListener('click', filterClickHandler)
+        })
       }
     } else {
       template = 'js-category-no-results-result-tpl'
@@ -78,7 +116,8 @@ function buildList (url) {
 
     var formattedData = {
       category: result.data.category,
-      providers: formattedProviders
+      providers: formattedProviders,
+      subCategories: subCategories
     }
 
     let viewModel = findHelp.buildViewModel('category', formattedData)

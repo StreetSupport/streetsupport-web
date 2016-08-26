@@ -1,0 +1,24 @@
+.subcat-filter {
+  text-align: center;
+}
+
+.subcat-filter__label {
+  display: inline;
+}
+
+.subcat-filter__items {
+  display: inline;
+  padding: 16px 0 20px 0;
+  list-style: none;
+}
+
+.subcat-filter__item {
+  display: inline-block;
+  padding: 0 5px;
+  &:hover {
+    cursor: pointer
+  }
+  &.on {
+    font-weight: bold;
+  }
+}
