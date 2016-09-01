@@ -94,9 +94,7 @@ function buildList (url) {
 
           let id = e.target.getAttribute('data-id')
           if (id.length > 0) {
-            console.log(id)
             forEach(providerItems, (item) => {
-              console.log(item.getAttribute('data-subcats').indexOf(id))
               if (item.getAttribute('data-subcats').indexOf(id) < 0) {
                 item.classList.add('hide')
               }
