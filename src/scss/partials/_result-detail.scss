@@ -5,6 +5,10 @@
     margin-top: 0;
   }
 
+  &__sub-header {
+    margin-top: 20px;
+  }
+
   &__btn {
     margin-bottom: 5px;
   }
@@ -94,7 +98,7 @@
 
   &__item {
     padding-top: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
     border-bottom: 1px solid $brand-f;
 
     &:first-of-type {
