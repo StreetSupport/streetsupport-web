@@ -1,0 +1,39 @@
+{
+  "form": {
+    "hideInitValidationError": true
+  },
+  "fields": {
+    "shortDescription": {
+      "type": "textarea"
+    },
+    "longDescription": {
+      "type": "textarea"
+    },
+    "addresses": {
+      "toolbarSticky": true,
+      "fields": {
+        "item": {
+          "fields": {
+            "addressLine1": {
+              "label": "Line 1"
+            },
+            "postcode": {
+              "label": "Postcode"
+            },
+            "openingTimes": {
+              "fields": {
+                "item": {
+                  "fields": {
+                    "day": {
+                      "optionLabels": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+---
+title: Register - Street Support
+description: Register your organisation with Street Support.
+layout: alpaca.hbs
+permalink: false
+jsBundle: generic
+section: register
+page: register
+nosubnav: true
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item">Join Street Support</li>
+    </ol>
+  </div>
+</div>
+
+<div class="block block--header">
+  <div class="container">
+    <h1 class="h1 block__header">Join Street Support</h1>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <h1>Register</h1>
+      <div id="form" class="alpaca-form"></div>
+      <script type="text/javascript">
+            $(document).ready(function() {
+                $(".alpaca-form").alpaca({
+                  "dataSource": "/registration-data.json",
+                  "schemaSource": "/registration-schema.json",
+                  "optionsSource": "/registration-options.json",
+                  "view": {
+                      "parent": "bootstrap-edit-horizontal",
+                      "wizard": {
+                          "title": "Welcome to the Wizard",
+                          "description": "Please fill things in as you wish",
+                          "bindings": {
+                              "name": 1,
+                              "shortDescription": 1,
+                              "longDescription": 1,
+                              "telephone": 2,
+                              "email": 2,
+                              "website": 2,
+                              "facebook": 2,
+                              "twitter": 2,
+                              "addresses": 3,
+                              "services": 4
+                          },
+                          "steps": [{
+                              "title": "Getting Started",
+                              "description": "Basic Information"
+                          }, {
+                              "title": "Contact Details",
+                              "description": "Contact Information"
+                          }, {
+                              "title": "Locations",
+                              "description": "Physical Locations"
+                          }, {
+                              "title": "Services",
+                              "description": "Services Offered"
+                          }]
+                      }
+                  }
+              });
+            });
+        </script>
+      {{> social-share}}
+    </div>
+  </div>
+</div>
