@@ -27,7 +27,8 @@ module.exports = {
     sponsor: path.join(__dirname, '/src/js/page-sponsor'),
     volunteer: path.join(__dirname, '/src/js/page-volunteer'),
     offeritems: path.join(__dirname, '/src/js/page-offer-items'),
-    joinstreetsupport: path.join(__dirname, '/src/js/page-join-street-support')
+    joinstreetsupport: path.join(__dirname, '/src/js/page-join-street-support'),
+    register: path.join(__dirname, '/src/js/page-register')
   },
   output: {
     path: path.join(__dirname, '/_dist/assets/js/'),
