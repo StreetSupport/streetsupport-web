@@ -1,3 +1,9 @@
+/* global $, console */
+
+let browser = require('../browser')
+let endpoints = require('../api')
+let ajax = require('../post-api-data')
+
 module.exports = {
   'parent': 'bootstrap-edit-horizontal',
   'wizard': {
@@ -15,10 +21,12 @@ module.exports = {
       'addresses': 3,
       'adminEmail': 4
     },
-    'steps': [{
-      'title': 'Getting Started',
-      'description': 'Basic Information'
-    }, {
+    'steps': [
+      {
+        'title': 'Getting Started',
+        'description': 'Basic Information'
+      },
+      {
         'title': 'Contact Details',
         'description': 'Contact Information'
       }, {
@@ -27,7 +35,8 @@ module.exports = {
       }, {
         'title': 'Login Details',
         'description': 'Access Street Support'
-      }],
+      }
+    ],
     'buttons': {
       'submit': {
         'title': 'All Done!',
@@ -36,7 +45,18 @@ module.exports = {
           callback(true)
         },
         'click': function (e) {
-          console.log(JSON.stringify(this.getValue(), null, '  '))
+          browser.loading()
+          let formData = this.getValue()
+
+          console.log(formData)
+
+          ajax
+            .post(endpoints.newlyRegisteredProviders, formData)
+            .then((success) => {
+              browser.redirect('/register/thank-you')
+            }, () => {
+              browser.redirect('/500/')
+            })
         }
       }
     }
