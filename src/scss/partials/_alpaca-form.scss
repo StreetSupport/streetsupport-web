@@ -105,7 +105,7 @@
       @include span(1 of 1);
       padding-bottom: 20px;
       border-bottom: 1px solid $brand-b;
-      &:last-child() {
+      &:last-child {
         padding-bottom: 0px;
         border-bottom: none;
       }
@@ -115,7 +115,7 @@
       padding-bottom: 0px!important;
       border-bottom: none!important;
       @include mq($until: m) {
-        &:first-child() {
+        &:first-child {
           @include span(1 of 1);
         }
         &:nth-child(1n + 2) {
@@ -126,12 +126,10 @@
         }
       }
       @include mq($from: m) {
-        &:first-child() {
-          @include span(1 of 5);
-          float: left!important;
-        }
         @include span(1 of 5);
-        &:last-child() { @include last(); }
+        &:last-child {
+          @include last();
+        }
       }
     }
   }
