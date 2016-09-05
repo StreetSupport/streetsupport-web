@@ -112,10 +112,23 @@
     }
 
     div[data-alpaca-field-name*="_openingTimes_"] > div > div {
-      @include mq($from: s) {
+      padding-bottom: 0px;
+      border-bottom: none;
+      @include mq($until: m) {
+        @include span(1 of 2);
+        &:first-child() {
+          @include span(1 of 1);
+        }
+        &:nth-child(2n + 1) {
+          @include last();
+        }
+      }
+      @include mq($from: m) {
+        &:first-child() {
+          @include span(1 of 5);
+          float: left!important;
+        }
         @include span(1 of 5);
-        padding-bottom: 0px;
-        border-bottom: none;
         &:last-child() { @include last(); }
       }
     }
