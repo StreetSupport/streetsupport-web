@@ -3,7 +3,7 @@ title: Register - Street Support
 description: Register your organisation with Street Support.
 layout: alpaca.hbs
 permalink: false
-jsBundle: generic
+jsBundle: register
 section: register
 page: register
 nosubnav: true
@@ -30,47 +30,6 @@ nosubnav: true
       <h1>Register Your Details</h1>
       <p>If you would like your organisation to be listed on Street Support, please fill in the form below. We will then send you a link to administer your details.</p>
       <div id="form" class="alpaca-form"></div>
-      <script type="text/javascript">
-            $(document).ready(function() {
-                $(".alpaca-form").alpaca({
-                  "dataSource": "/registration-data.js",
-                  "schemaSource": "/registration-schema.js",
-                  "optionsSource": "/registration-options.js",
-                  "view": {
-                      "parent": "bootstrap-edit-horizontal",
-                      "wizard": {
-                          "title": "Welcome to the Wizard",
-                          "description": "Please fill things in as you wish",
-                          "bindings": {
-                              "name": 1,
-                              "shortDescription": 1,
-                              "longDescription": 1,
-                              "telephone": 2,
-                              "email": 2,
-                              "website": 2,
-                              "facebook": 2,
-                              "twitter": 2,
-                              "addresses": 3,
-                              "adminEmail": 4
-                          },
-                          "steps": [{
-                              "title": "Getting Started",
-                              "description": "Basic Information"
-                          }, {
-                              "title": "Contact Details",
-                              "description": "Contact Information"
-                          }, {
-                              "title": "Locations",
-                              "description": "Physical Locations"
-                          }, {
-                              "title": "Login Details",
-                              "description": "Access Street Support"
-                          }]
-                      }
-                  }
-              });
-            });
-        </script>
       {{> social-share}}
     </div>
   </div>

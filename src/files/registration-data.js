@@ -1,9 +1,0 @@
-{
-  "addresses": [
-    {
-      "openingTimes": [
-        {}
-      ]
-    }
-  ]
-}
