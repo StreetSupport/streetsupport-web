@@ -28,8 +28,16 @@ module.exports = {
       'placeholder': 'eg https://twitter.com/streetsupportuk'
     },
     'addresses': {
+      'label': 'Addresses',
+      'helper': 'Add the location(s) of your premises.',
       'toolbarSticky': true,
       'hideToolbarWithChildren': false,
+      'actionbar': {
+        'actions': [{
+          'action': 'add',
+          'enabled': false
+        }]
+      },
       'fields': {
         'item': {
           'fields': {
@@ -42,6 +50,14 @@ module.exports = {
             'openingTimes': {
               'toolbarSticky': true,
               'hideToolbarWithChildren': false,
+              'actionbar': {
+                'actions': [{
+                  'action': 'add',
+                  'enabled': false
+                }]
+              },
+              'label': 'Opening Times',
+              'helper': 'Add the opening times of this location.',
               'fields': {
                 'item': {
                   'fields': {

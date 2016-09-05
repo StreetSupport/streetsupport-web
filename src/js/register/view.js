@@ -18,7 +18,7 @@ module.exports = {
       'website': 2,
       'facebook': 2,
       'twitter': 2,
-      'addresses': 3,
+      'addresses': 1,
       'adminEmail': 4
     },
     'steps': [

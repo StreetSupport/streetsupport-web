@@ -49,6 +49,41 @@
     height: 15px;
   }
 
+  legend.alpaca-container-label {
+    @extend .h2;
+    padding-top: 10px;
+  }
+
+  .alpaca-array-toolbar {
+    margin: 0!important;
+    .btn {
+      margin-bottom: 0;
+      padding: 5px;
+    }
+  }
+
+  .alpaca-array-actionbar button {
+    margin: 0;
+    padding: 5px;
+    &.alpaca-button-disabled i {
+      color: $brand-a;
+    }
+  }
+
+  .alpaca-field-object,
+  .alpaca-field-array {
+    border: none;
+    padding: 0;
+  }
+  div[data-alpaca-field-name="addresses"] > .alpaca-container > div[data-alpaca-container-item-name^="addresses_"] {
+    & > div {
+      padding: 20px;
+    }
+    &:nth-child(2n) > div {
+      background: #efefef;
+    }
+  }
+
   div[data-alpaca-field-name^="addresses_"] {
     @include cf();
 
@@ -61,18 +96,25 @@
     @include mq($from: s) {
       @include span(1 of 2);
       &:nth-child(2n) { @include last(); }
-      &:last-child() { @include span(1 of 1); }
+      &:nth-child(1n + 7) { @include span(1 of 1); }
     }
 
     margin-top: 10px!important;
 
-    div[data-alpaca-field-name*="_openingTimes_"] {
-      @include cf();
-      width: 100%!important;
-      float: none!important;
+    div[data-alpaca-container-item-name*="_openingTimes_"] {
+      @include span(1 of 1);
+      padding-bottom: 20px;
+      border-bottom: 1px solid $brand-b;
+      &:last-child() {
+        padding-bottom: 0px;
+        border-bottom: none;
+      }
     }
+
     div[data-alpaca-field-name*="_openingTimes_"] > div > div {
       @include span(1 of 5);
+      padding-bottom: 0px;
+      border-bottom: none;
       &:last-child() { @include last(); }
     }
   }
