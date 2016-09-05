@@ -27,6 +27,11 @@ nosubnav: true
 <div class="block">
   <div class="container">
     <div class="block__content">
+      <div class="form-errors hide">
+        <h2>There was a problem with your submission:</h2>
+        <ul class="form-errors__list" data-bind="foreach: apiErrors">
+        </ul>
+      </div>
       <h1>Register Your Details</h1>
       <p>If you would like your organisation to be listed on Street Support, please fill in the form below. We will then send you a link to administer your details.</p>
       <div id="form" class="alpaca-form"></div>

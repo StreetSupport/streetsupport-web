@@ -48,12 +48,18 @@ module.exports = {
           browser.loading()
           let formData = this.getValue()
 
-          console.log(formData)
+          $('.form-errors').addClass('hide')
 
           ajax
             .post(endpoints.newlyRegisteredProviders, formData)
-            .then((success) => {
-              browser.redirect('/register/thank-you')
+            .then((result) => {
+              browser.loaded()
+              if (result.statusCode === 201) browser.redirect('/register/thank-you')
+              $('.form-errors').removeClass('hide')
+              $('.form-errors__list').empty()
+              for (var i = 0; i < result.messages.length; i++) {
+                $('.form-errors__list').append('<li>' + result.messages[i] + '</li>')
+              }
             }, () => {
               browser.redirect('/500/')
             })

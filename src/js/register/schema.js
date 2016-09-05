@@ -124,7 +124,8 @@ module.exports = {
     'adminEmail': {
       'title': 'Administrator\'s Email Address',
       'type': 'string',
-      'format': 'email'
+      'format': 'email',
+      'required': true
     }
   }
 }
