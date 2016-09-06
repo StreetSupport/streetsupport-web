@@ -1,5 +1,6 @@
 const getLocation = require('./get-location')
 const geolib = require('geolib')
+const Q = require('q')
 
 let SupportedCities = () => {
   let self = this
@@ -19,12 +20,14 @@ let SupportedCities = () => {
   ]
 
   self.nearest = () => {
+    let deferred = Q.defer()
+
     if (navigator.geolocation) {
       getLocation.location().then((position) => {
         let currLatitude = position.coords.latitude
         let currLongitude = position.coords.longitude
 
-        for(let i = 0; i < self.locations.length; i++) {
+        for (let i = 0; i < self.locations.length; i++) {
           let distanceInMetres = geolib.getDistance(
             { latitude: currLatitude, longitude: currLongitude },
             { latitude: self.locations[i].latitude, longitude: self.locations[i].longitude }
@@ -39,11 +42,13 @@ let SupportedCities = () => {
             return 0
           })
 
-        return sorted[0]
-      }
+        deferred.resolve(sorted[0])
+      })
+    } else {
+      deferred.resolve(self.locations[0])
     }
 
-    return self.locations[0]
+    return deferred.promise
   }
 }
 
