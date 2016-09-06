@@ -12,6 +12,7 @@ var FindHelp = function () {
     var location = urlParameter.parameter('location')
     var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
     if (savedLocationCookie.length && location.length === 0) return savedLocationCookie
+
     if (location === 'my-location') return ''
     return location
   }
