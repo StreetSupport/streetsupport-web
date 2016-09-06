@@ -75,8 +75,6 @@ function buildList (url) {
       })
       callback = function () {
         accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'), true)
-        browser.loaded()
-        socialShare.init()
 
         let providerItems = document.querySelectorAll('.js-item, .js-header')
         let filterItems = document.querySelectorAll('.js-filter-item')
@@ -105,6 +103,9 @@ function buildList (url) {
         forEach(filterItems, (item) => {
           item.addEventListener('click', filterClickHandler)
         })
+
+        browser.loaded()
+        socialShare.init()
       }
     } else {
       template = 'js-category-no-results-result-tpl'
