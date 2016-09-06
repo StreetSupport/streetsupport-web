@@ -45,7 +45,7 @@ function buildList (url) {
           location: provider.location,
           openingTimes: provider.openingTimes
         }
-        let match = formattedProviders.filter((p) => p.providerId === provider.providerId)
+        let match = formattedProviders.filter((p) => p.providerId === provider.serviceProviderId)
 
         if (match.length === 1) {
           match[0].services.push(service)
