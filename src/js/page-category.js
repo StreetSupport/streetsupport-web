@@ -51,8 +51,8 @@ function buildList (url) {
           match[0].services.push(service)
         } else {
           let newProvider = {
-            providerId: provider.providerId,
-            providerName: provider.providerName,
+            providerId: provider.serviceProviderId,
+            providerName: provider.serviceProviderName,
             services: [service]
           }
           if (provider.tags !== null) {
