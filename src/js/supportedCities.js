@@ -19,6 +19,14 @@ let SupportedCities = () => {
     }
   ]
 
+  self.getCurrent = () => {
+    return document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+  }
+
+  self.setCurrent = (newCity) => {
+    document.cookie = 'desired-location=' + newCity
+  }
+
   self.nearest = () => {
     let deferred = Q.defer()
 
