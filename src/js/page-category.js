@@ -11,6 +11,7 @@ let templating = require('./template-render')
 let analytics = require('./analytics')
 let socialShare = require('./social-share')
 let browser = require('./browser')
+let locationSelector = require('./locationSelector')
 
 let findHelp = new FindHelp()
 findHelp.handleSubCategoryChange('sub-category', accordion)
@@ -31,6 +32,7 @@ function buildList (url) {
     let callback = function () {
       browser.loaded()
       socialShare.init()
+      locationSelector.handler()
     }
 
     let formattedProviders = []
@@ -105,6 +107,8 @@ function buildList (url) {
         forEach(filterItems, (item) => {
           item.addEventListener('click', filterClickHandler)
         })
+
+        locationSelector.handler()
       }
     } else {
       template = 'js-category-no-results-result-tpl'
@@ -115,7 +119,8 @@ function buildList (url) {
     var formattedData = {
       category: result.data.category,
       providers: formattedProviders,
-      subCategories: subCategories
+      subCategories: subCategories,
+      locations: locationSelector.viewModel
     }
 
     let viewModel = findHelp.buildViewModel('category', formattedData)
