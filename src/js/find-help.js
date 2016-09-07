@@ -12,8 +12,8 @@ var FindHelp = function () {
   self.getLocation = function () {
     var locationInQuerystring = urlParameter.parameter('location')
     return (locationInQuerystring.length === 0)
-      ? locationInQuerystring
-      : locationSelector.getCurrent()
+      ? locationSelector.getCurrent()
+      : locationInQuerystring
   }
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
@@ -74,31 +74,21 @@ var FindHelp = function () {
   }
 
   self.buildViewModel = function (pagename, data) {
-    var hasSetManchesterAsLocation = self.getLocation() === 'manchester'
     return {
       organisations: data.providers,
       subCategories: data.subCategories,
       categoryName: data.category.name,
       categorySynopsis: marked(data.category.synopsis),
-      locations: locationSelector.viewModel.cities,
-      pageAsFromManchester: '?category=' + self.theCategory + '&location=manchester',
-      pageFromCurrentLocation: '?category=' + self.theCategory + '&location=my-location',
-      useManchesterAsLocation: hasSetManchesterAsLocation,
-      useGeoLocation: !hasSetManchesterAsLocation
+      locations: locationSelector.viewModel.cities
     }
   }
 
   self.buildTimeTabledViewModel = function (pagename, data) {
-    var hasSetManchesterAsLocation = self.getLocation() === 'manchester'
-
     return {
       organisations: data,
       categoryName: data.categoryName,
       categorySynopsis: marked(data.synopsis),
-      pageAsFromManchester: '?category=' + self.theCategory + '&location=manchester',
-      pageFromCurrentLocation: '?category=' + self.theCategory + '&location=my-location',
-      useManchesterAsLocation: hasSetManchesterAsLocation,
-      useGeoLocation: !hasSetManchesterAsLocation
+      locations: locationSelector.viewModel.cities
     }
   }
 }

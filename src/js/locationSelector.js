@@ -21,12 +21,12 @@ let locationSelector = {
       return newLocation
     })
   },
-  handler: () => {
-    console.log('handler')
+  handler: (onChangeLocationCallback) => {
     let locationSelector = document.querySelector('.js-location-select')
     locationSelector.addEventListener('change', () => {
       var selectedLocation = locationSelector.options[locationSelector.selectedIndex].value
       _setCurrent(selectedLocation)
+      onChangeLocationCallback(selectedLocation)
     })
   }
 }

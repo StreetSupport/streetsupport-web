@@ -1,6 +1,8 @@
 var getLocation = require('./get-location')
+var SupportedCities = require('./supportedCities')
 var find = require('lodash/collection/find')
 var Q = require('q')
+var supportedCities = new SupportedCities()
 
 var getEndpointUrl = function (categoryUrl, theLocation) {
   let getUrl = (categoryUrl, latitude, longitude) => {
@@ -15,22 +17,8 @@ var getEndpointUrl = function (categoryUrl, theLocation) {
   self.deferred = Q.defer()
 
   if (theLocation.length) {
-    var locations = [
-      {
-        'key': 'manchester',
-        'name': 'Manchester',
-        'longitude': -2.24455696347558,
-        'latitude': 53.4792777155671
-      },
-      {
-        'key': 'leeds',
-        'name': 'Leeds',
-        'longitude': -1.54511238485298,
-        'latitude': 53.7954906003838
-      }
-    ]
-    var requestedLocation = find(locations, function (loc) {
-      return loc.key === theLocation
+    var requestedLocation = find(supportedCities.locations, function (loc) {
+      return loc.id === theLocation
     })
 
     if (requestedLocation !== false) {

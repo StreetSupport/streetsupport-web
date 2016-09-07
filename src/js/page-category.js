@@ -17,6 +17,10 @@ let findHelp = new FindHelp()
 findHelp.handleSubCategoryChange('sub-category', accordion)
 findHelp.buildCategories(apiRoutes.servicesByCategory, buildList)
 
+let onChangeLocation = (newLocation) => {
+  window.location.href = '/find-help/category?category=' + findHelp.theCategory + '&location=' + newLocation
+}
+
 function buildList (url) {
   browser.loading()
 
@@ -30,7 +34,7 @@ function buildList (url) {
 
     let template = ''
     let callback = function () {
-      locationSelector.handler()
+      locationSelector.handler(onChangeLocation)
       browser.loaded()
       socialShare.init()
     }
@@ -105,7 +109,7 @@ function buildList (url) {
         forEach(filterItems, (item) => {
           item.addEventListener('click', filterClickHandler)
         })
-        locationSelector.handler()
+        locationSelector.handler(onChangeLocation)
         browser.loaded()
         socialShare.init()
       }

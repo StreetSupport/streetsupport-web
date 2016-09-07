@@ -18,10 +18,15 @@ var templating = require('./template-render')
 var analytics = require('./analytics')
 var socialShare = require('./social-share')
 var browser = require('./browser')
+let locationSelector = require('./locationSelector')
 
 var findHelp = new FindHelp()
 findHelp.handleSubCategoryChange('day', accordion)
 findHelp.buildCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
+
+let onChangeLocation = (newLocation) => {
+  window.location.href = '/find-help/category-by-day?category=' + findHelp.theCategory + '&location=' + newLocation
+}
 
 function buildList (url) {
   browser.loading()
@@ -37,7 +42,9 @@ function buildList (url) {
     document.title = theTitle
 
     var template = ''
-    var callback = function () {}
+    var callback = function () {
+        locationSelector.handler(onChangeLocation)
+    }
 
     if (data.daysServices.length) {
       template = 'js-category-result-tpl'
@@ -65,6 +72,7 @@ function buildList (url) {
 
     templating.renderTemplate(template, findHelp.buildTimeTabledViewModel('category-by-day', data), 'js-category-result-output', callback)
 
+    locationSelector.handler(onChangeLocation)
     browser.loaded()
     analytics.init(theTitle)
     socialShare.init()
