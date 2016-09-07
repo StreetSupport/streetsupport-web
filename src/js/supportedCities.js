@@ -21,16 +21,6 @@ var SupportedCities = function () {
 
   self.default = self.locations[1]
 
-  self.getCurrent = () => {
-    var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-    if (saved.length > 0) return saved
-    return self.default.id
-  }
-
-  self.setCurrent = (newCity) => {
-    document.cookie = 'desired-location=' + newCity
-  }
-
   self.nearest = () => {
     let deferred = Q.defer()
 

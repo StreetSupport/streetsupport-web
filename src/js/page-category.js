@@ -30,9 +30,9 @@ function buildList (url) {
 
     let template = ''
     let callback = function () {
+      locationSelector.handler()
       browser.loaded()
       socialShare.init()
-      locationSelector.handler()
     }
 
     let formattedProviders = []
@@ -118,8 +118,7 @@ function buildList (url) {
     var formattedData = {
       category: result.data.category,
       providers: formattedProviders,
-      subCategories: subCategories,
-      locations: locationSelector.viewModel
+      subCategories: subCategories
     }
 
     let viewModel = findHelp.buildViewModel('category', formattedData)

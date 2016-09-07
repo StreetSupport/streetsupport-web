@@ -32,6 +32,7 @@ var getEndpointUrl = function (categoryUrl, theLocation) {
     var requestedLocation = find(locations, function (loc) {
       return loc.key === theLocation
     })
+
     if (requestedLocation !== false) {
       document.cookie = 'desired-location=' + theLocation
 

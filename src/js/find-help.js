@@ -2,6 +2,7 @@
 var categoryEndpoint = require('./category-endpoint')
 var urlParameter = require('./get-url-parameter')
 var browser = require('./browser')
+let locationSelector = require('./locationSelector')
 
 var marked = require('marked')
 
@@ -9,12 +10,10 @@ var FindHelp = function () {
   var self = this
 
   self.getLocation = function () {
-    var location = urlParameter.parameter('location')
-    var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-    if (savedLocationCookie.length && location.length === 0) return savedLocationCookie
-
-    if (location === 'my-location') return ''
-    return location
+    var locationInQuerystring = urlParameter.parameter('location')
+    return (locationInQuerystring.length === 0)
+      ? locationInQuerystring
+      : locationSelector.getCurrent()
   }
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
@@ -76,12 +75,12 @@ var FindHelp = function () {
 
   self.buildViewModel = function (pagename, data) {
     var hasSetManchesterAsLocation = self.getLocation() === 'manchester'
-
     return {
       organisations: data.providers,
       subCategories: data.subCategories,
       categoryName: data.category.name,
       categorySynopsis: marked(data.category.synopsis),
+      locations: locationSelector.viewModel.cities,
       pageAsFromManchester: '?category=' + self.theCategory + '&location=manchester',
       pageFromCurrentLocation: '?category=' + self.theCategory + '&location=my-location',
       useManchesterAsLocation: hasSetManchesterAsLocation,

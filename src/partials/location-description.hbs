@@ -1,6 +1,6 @@
-\{{#useGeoLocation}}
-<p class="text-center">Showing \{{category}} within 10k of your location. Change location to <a href="\{{pageAsFromManchester}}">Central Manchester</a>.</p>
-\{{/useGeoLocation}}
-\{{#useManchesterAsLocation}}
-<p class="text-center">Showing \{{category}} within 10k of Central Manchester. Use my <a href="\{{pageFromCurrentLocation}}">current location</a>.</p>
-\{{/useManchesterAsLocation}}
+<p class="text-center">Showing \{{category}} within 10k of </p>
+<select class="js-location-select" name="location" id="location">
+  \{{#locations}}
+  <option \{{#isSelected}}selected\{{/isSelected}} value="\{{id}}">\{{name}}</option>
+  \{{/locations}}
+</select>
