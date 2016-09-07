@@ -32,6 +32,13 @@ module.exports = {
       'helper': 'Add the location(s) of your premises.',
       'toolbarSticky': true,
       'hideToolbarWithChildren': false,
+      'toolbar': {
+        'showLabels': true,
+        'actions': [{
+          'label': 'Add new Address',
+          'action': 'add'
+        }]
+      },
       'actionbar': {
         'actions': [{
           'action': 'add',
@@ -50,6 +57,13 @@ module.exports = {
             'openingTimes': {
               'toolbarSticky': true,
               'hideToolbarWithChildren': false,
+              'toolbar': {
+                'showLabels': true,
+                'actions': [{
+                  'label': 'Add new Time Slot',
+                  'action': 'add'
+                }]
+              },
               'actionbar': {
                 'actions': [{
                   'action': 'add',

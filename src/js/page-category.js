@@ -53,8 +53,8 @@ function buildList (url) {
           match[0].services.push(service)
         } else {
           let newProvider = {
-            providerId: provider.providerId,
-            providerName: provider.providerName,
+            providerId: provider.serviceProviderId,
+            providerName: provider.serviceProviderName,
             services: [service]
           }
           if (provider.tags !== null) {
@@ -77,8 +77,6 @@ function buildList (url) {
       })
       callback = function () {
         accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'), true)
-        browser.loaded()
-        socialShare.init()
 
         let providerItems = document.querySelectorAll('.js-item, .js-header')
         let filterItems = document.querySelectorAll('.js-filter-item')
@@ -107,8 +105,9 @@ function buildList (url) {
         forEach(filterItems, (item) => {
           item.addEventListener('click', filterClickHandler)
         })
-
         locationSelector.handler()
+        browser.loaded()
+        socialShare.init()
       }
     } else {
       template = 'js-category-no-results-result-tpl'
