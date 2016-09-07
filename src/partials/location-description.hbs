@@ -1,6 +1,8 @@
-<p class="text-center">Showing \{{category}} within 10k of </p>
-<select class="js-location-select" name="location" id="location">
+<div class="location-selector">
+<label for="location" class="location-selector__label">Showing \{{category}} within 10k of </label>
+<select class="js-location-select location-selector__select form__input" name="location" id="location">
   \{{#locations}}
   <option \{{#isSelected}}selected\{{/isSelected}} value="\{{id}}">\{{name}}</option>
   \{{/locations}}
 </select>
+</div>
