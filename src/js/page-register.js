@@ -1,3 +1,7 @@
+/*
+  global $
+*/
+
 // Common modules
 import './common'
 

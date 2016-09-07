@@ -2,25 +2,29 @@ const getLocation = require('./get-location')
 const geolib = require('geolib')
 const Q = require('q')
 
-let SupportedCities = () => {
+var SupportedCities = function () {
   let self = this
   self.locations = [
     {
-      'key': 'manchester',
+      'id': 'manchester',
       'name': 'Manchester',
       'longitude': -2.24455696347558,
       'latitude': 53.4792777155671
     },
     {
-      'key': 'leeds',
+      'id': 'leeds',
       'name': 'Leeds',
       'longitude': -1.54511238485298,
       'latitude': 53.7954906003838
     }
   ]
 
+  self.default = self.locations[1]
+
   self.getCurrent = () => {
-    return document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+    var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+    if (saved.length > 0) return saved
+    return self.default.id
   }
 
   self.setCurrent = (newCity) => {
