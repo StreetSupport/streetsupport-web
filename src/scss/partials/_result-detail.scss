@@ -118,12 +118,16 @@
 .result-detail__location {
   @include mq($from: s) {
     @include span(1 of 2);
+    @include last();
   }
+}
+
+.result-detail__address-map {
+  margin-top: 10px;
 }
 
 .result-detail__opening-times {
   @include mq($from: s) {
     @include span(1 of 2);
-    @include last();
   }
 }

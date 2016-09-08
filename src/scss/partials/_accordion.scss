@@ -1,6 +1,6 @@
 .accordion {
-  margin-bottom: 20px;
-
+  margin: 0 auto 20px;
+  max-width: 640px;
 
   &__incopy {
     @include cf();
