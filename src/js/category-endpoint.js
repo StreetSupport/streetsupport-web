@@ -28,6 +28,8 @@ var getEndpointUrl = function (categoryUrl, theLocation) {
       var longitude = requestedLocation.longitude
       var locationUrl = getUrl(categoryUrl, latitude, longitude)
       self.deferred.resolve(locationUrl)
+    } else {
+
     }
   }
 

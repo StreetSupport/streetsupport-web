@@ -5,6 +5,7 @@ import './common'
 var urlParameter = require('./get-url-parameter')
 var accordion = require('./accordion')
 var FindHelp = require('./find-help')
+var marked = require('marked')
 
 // Lodash
 var forEach = require('lodash/collection/forEach')
@@ -18,11 +19,10 @@ var templating = require('./template-render')
 var analytics = require('./analytics')
 var socialShare = require('./social-share')
 var browser = require('./browser')
-let locationSelector = require('./locationSelector')
+let LocationSelector = require('./locationSelector')
 
-var findHelp = new FindHelp()
-findHelp.handleSubCategoryChange('day', accordion)
-findHelp.buildCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
+let locationSelector = new LocationSelector()
+let findHelp = null
 
 let onChangeLocation = (newLocation) => {
   window.location.href = '/find-help/category-by-day?category=' + findHelp.theCategory + '&location=' + newLocation
@@ -42,8 +42,11 @@ function buildList (url) {
     document.title = theTitle
 
     var template = ''
-    var callback = function () {
-        locationSelector.handler(onChangeLocation)
+    var onRenderCallback = function () {
+      console.log('onRenderCallback a')
+      locationSelector.handler(onChangeLocation)
+      browser.loaded()
+      socialShare.init()
     }
 
     if (data.daysServices.length) {
@@ -63,19 +66,31 @@ function buildList (url) {
         return day.name === urlParameter.parameter('day')
       })
 
-      callback = function () {
+      onRenderCallback = function () {
+        console.log('onRenderCallback b')
+        locationSelector.handler(onChangeLocation)
         accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', 'day'))
+        analytics.init(theTitle)
+        browser.loaded()
+        socialShare.init()
       }
     } else {
       template = 'js-category-no-results-result-tpl'
     }
-
-    templating.renderTemplate(template, findHelp.buildTimeTabledViewModel('category-by-day', data), 'js-category-result-output', callback)
-
-    locationSelector.handler(onChangeLocation)
-    browser.loaded()
-    analytics.init(theTitle)
-    socialShare.init()
+    console.log('getting view model')
+    locationSelector.getViewModel()
+      .then((locationViewModel) => {
+        console.log(locationViewModel)
+        let viewModel = {
+          organisations: data,
+          categoryName: data.categoryName,
+          categorySynopsis: marked(data.synopsis),
+          locations: locationViewModel
+        }
+        console.log(viewModel)
+        templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
+      }, (_) => {
+      })
   })
 }
 
@@ -95,3 +110,12 @@ function sortDaysFromToday (days) {
   var todayToTail = slice(days, today)
   return todayToTail.concat(past)
 }
+
+locationSelector
+  .getCurrent()
+  .then((result) => {
+    findHelp = new FindHelp(result)
+    findHelp.handleSubCategoryChange('day', accordion)
+    findHelp.buildCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
+  }, (_) => {
+  })

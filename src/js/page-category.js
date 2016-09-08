@@ -5,6 +5,7 @@ let FindHelp = require('./find-help')
 let apiRoutes = require('./api')
 
 let forEach = require('lodash/collection/forEach')
+let marked = require('marked')
 
 let getApiData = require('./get-api-data')
 let templating = require('./template-render')
@@ -12,11 +13,9 @@ let analytics = require('./analytics')
 let socialShare = require('./social-share')
 let browser = require('./browser')
 let listToDropdown = require('./list-to-dropdown')
-let locationSelector = require('./locationSelector')
-
-let findHelp = new FindHelp()
-findHelp.handleSubCategoryChange('sub-category', accordion)
-findHelp.buildCategories(apiRoutes.servicesByCategory, buildList)
+let LocationSelector = require('./locationSelector')
+let locationSelector = new LocationSelector()
+let findHelp = null
 
 let onChangeLocation = (newLocation) => {
   window.location.href = '/find-help/category?category=' + findHelp.theCategory + '&location=' + newLocation
@@ -51,7 +50,7 @@ function buildList (url) {
     document.title = theTitle
 
     let template = ''
-    let callback = function () {
+    let onRenderCallback = function () {
       listToDropdown.init()
       locationSelector.handler(onChangeLocation)
       browser.loaded()
@@ -99,7 +98,7 @@ function buildList (url) {
           formattedProviders.push(newProvider)
         }
       })
-      callback = function () {
+      onRenderCallback = function () {
         accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'), true)
 
         let providerItems = document.querySelectorAll('.js-item, .js-header')
@@ -146,6 +145,7 @@ function buildList (url) {
           dropdown.addEventListener('change', dropdownChangeHandler)
         }
         listToDropdown.init(initDropdownChangeHandler)
+
         browser.loaded()
         socialShare.init()
       }
@@ -155,14 +155,26 @@ function buildList (url) {
 
     analytics.init(theTitle)
 
-    var formattedData = {
-      category: result.data.category,
-      providers: formattedProviders,
-      subCategories: subCategories
-    }
-
-    let viewModel = findHelp.buildViewModel('category', formattedData)
-
-    templating.renderTemplate(template, viewModel, 'js-category-result-output', callback)
+    locationSelector.getViewModel()
+      .then((locationViewModel) => {
+        let viewModel = {
+          organisations: formattedProviders,
+          subCategories: subCategories,
+          categoryName: result.data.category.name,
+          categorySynopsis: marked(result.data.category.synopsis),
+          locations: locationViewModel
+        }
+        templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
+      }, (_) => {
+      })
   })
 }
+
+locationSelector
+  .getCurrent()
+  .then((result) => {
+    findHelp = new FindHelp(result)
+    findHelp.handleSubCategoryChange('sub-category', accordion)
+    findHelp.buildCategories(apiRoutes.servicesByCategory, buildList)
+  }, (_) => {
+  })

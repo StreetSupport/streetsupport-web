@@ -20,7 +20,6 @@ module.exports = {
     findhelp: path.join(__dirname, '/src/js/page-find-help'),
     category: path.join(__dirname, '/src/js/page-category'),
     categorybyday: path.join(__dirname, '/src/js/page-category-by-day'),
-    subcattags: path.join(__dirname, '/src/js/page-subcat-tags'),
     organisation: path.join(__dirname, '/src/js/page-organisation'),
     allserviceproviders: path.join(__dirname, '/src/js/page-all-service-providers'),
     giverequests: path.join(__dirname, '/src/js/page-give-requests'),
@@ -28,8 +27,7 @@ module.exports = {
     volunteer: path.join(__dirname, '/src/js/page-volunteer'),
     offeritems: path.join(__dirname, '/src/js/page-offer-items'),
     joinstreetsupport: path.join(__dirname, '/src/js/page-join-street-support'),
-    register: path.join(__dirname, '/src/js/page-register'),
-    'my-location': path.join(__dirname, '/src/js/page-my-location')
+    register: path.join(__dirname, '/src/js/page-register')
   },
   output: {
     path: path.join(__dirname, '/_dist/assets/js/'),
