@@ -58,11 +58,8 @@ var FindHelp = function (location) {
   self.buildCategories = function (endpoint, buildList) {
     var categoryUrl = endpoint += self.theCategory
 
-    categoryEndpoint.getEndpointUrl(categoryUrl, self.currentLocation)
-      .then(function (success) {
-        buildList(success)
-      }, function () {
-      })
+    let url = categoryEndpoint.getEndpointUrl(categoryUrl, self.currentLocation)
+    buildList(url)
   }
 }
 

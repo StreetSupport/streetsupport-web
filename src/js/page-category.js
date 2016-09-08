@@ -63,7 +63,6 @@ function buildList (url) {
     if (result.data.providers.length > 0) {
       template = 'js-category-result-tpl'
 
-
       forEach(result.data.providers, function (provider) {
         let service = {
           info: provider.info,

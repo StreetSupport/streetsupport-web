@@ -1,7 +1,5 @@
-var getLocation = require('./get-location')
 var SupportedCities = require('./supportedCities')
 var find = require('lodash/collection/find')
-var Q = require('q')
 var supportedCities = new SupportedCities()
 
 var getEndpointUrl = function (categoryUrl, theLocation) {
@@ -13,38 +11,16 @@ var getEndpointUrl = function (categoryUrl, theLocation) {
     return categoryUrl + '/' + latitude + '/' + longitude
   }
 
-  var self = this
-  self.deferred = Q.defer()
+  var requestedLocation = find(supportedCities.locations, function (loc) {
+    return loc.id === theLocation
+  })
 
-  if (theLocation.length) {
-    var requestedLocation = find(supportedCities.locations, function (loc) {
-      return loc.id === theLocation
-    })
+  document.cookie = 'desired-location=' + theLocation
 
-    if (requestedLocation !== false) {
-      document.cookie = 'desired-location=' + theLocation
-
-      var latitude = requestedLocation.latitude
-      var longitude = requestedLocation.longitude
-      var locationUrl = getUrl(categoryUrl, latitude, longitude)
-      self.deferred.resolve(locationUrl)
-    } else {
-
-    }
-  }
-
-  if (navigator.geolocation) {
-    getLocation.location().then(function (position) {
-      var latitude = position.coords.latitude
-      var longitude = position.coords.longitude
-      var locationUrl = getUrl(categoryUrl, latitude, longitude)
-      self.deferred.resolve(locationUrl)
-    }).fail(function () {
-      self.deferred.resolve(categoryUrl)
-    })
-  }
-
-  return self.deferred.promise
+  var latitude = requestedLocation.latitude
+  var longitude = requestedLocation.longitude
+  var locationUrl = getUrl(categoryUrl, latitude, longitude)
+  return locationUrl
 }
 
 module.exports = {

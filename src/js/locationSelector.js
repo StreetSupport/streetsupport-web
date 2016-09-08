@@ -9,6 +9,7 @@ let _nearest = () => {
   let deferred = Q.defer()
 
   if (navigator.geolocation) {
+    console.log('ls: getting user location')
     getLocation.location()
     .then((position) => {
       let currLatitude = position.coords.latitude
