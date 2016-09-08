@@ -14,11 +14,15 @@
 
 .subcat-filter__item {
   display: inline-block;
-  padding: 0 5px;
+  padding: 10px 15px;
+  border-radius: 15px;
+  background: $brand-i;
   &:hover {
     cursor: pointer
   }
   &.on {
     font-weight: bold;
+    background: $brand-j;
+    color: white;
   }
 }
