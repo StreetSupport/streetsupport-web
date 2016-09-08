@@ -11,6 +11,7 @@ let templating = require('./template-render')
 let analytics = require('./analytics')
 let socialShare = require('./social-share')
 let browser = require('./browser')
+let listToDropdown = require('./list-to-dropdown')
 let locationSelector = require('./locationSelector')
 
 let findHelp = new FindHelp()
@@ -19,6 +20,23 @@ findHelp.buildCategories(apiRoutes.servicesByCategory, buildList)
 
 let onChangeLocation = (newLocation) => {
   window.location.href = '/find-help/category?category=' + findHelp.theCategory + '&location=' + newLocation
+}
+
+let groupOpeningTimes = (ungrouped) => {
+  let grouped = []
+  for (let i = 0; i < ungrouped.length; i++) {
+    let curr = ungrouped[i]
+    let sameDay = grouped.filter((d) => d.day === curr.day)
+    if (sameDay.length === 0) {
+      grouped.push({
+        day: curr.day,
+        openingTimes: [curr.startTime + '-' + curr.endTime]
+      })
+    } else {
+      sameDay[0].openingTimes.push(curr.startTime + '-' + curr.endTime)
+    }
+  }
+  return grouped
 }
 
 function buildList (url) {
@@ -34,6 +52,7 @@ function buildList (url) {
 
     let template = ''
     let callback = function () {
+      listToDropdown.init()
       locationSelector.handler(onChangeLocation)
       browser.loaded()
       socialShare.init()
@@ -45,13 +64,14 @@ function buildList (url) {
     if (result.data.providers.length > 0) {
       template = 'js-category-result-tpl'
 
+
       forEach(result.data.providers, function (provider) {
         let service = {
           info: provider.info,
           location: provider.location,
-          openingTimes: provider.openingTimes
+          days: groupOpeningTimes(provider.openingTimes)
         }
-        let match = formattedProviders.filter((p) => p.providerId === provider.providerId)
+        let match = formattedProviders.filter((p) => p.providerId === provider.serviceProviderId)
 
         if (match.length === 1) {
           match[0].services.push(service)
@@ -110,6 +130,22 @@ function buildList (url) {
           item.addEventListener('click', filterClickHandler)
         })
         locationSelector.handler(onChangeLocation)
+
+        let dropdownChangeHandler = (e) => {
+          forEach(filterItems, (item) => {
+            if (item.innerText === e.target.value) {
+              filterClickHandler({target: item})
+            }
+          })
+        }
+
+        let initDropdownChangeHandler = () => {
+          let dropdown = document.querySelector('.list-to-dropdown__select')
+          let filterItems = document.querySelector('.js-filter-item.on')
+          dropdown.value = filterItems.innerText
+          dropdown.addEventListener('change', dropdownChangeHandler)
+        }
+        listToDropdown.init(initDropdownChangeHandler)
         browser.loaded()
         socialShare.init()
       }

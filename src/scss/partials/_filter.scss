@@ -6,6 +6,12 @@
   display: inline;
 }
 
+.list-to-dropdown__select {
+  @extend .form__input;
+  padding: 10px!important;
+  margin-top: 10px;
+}
+
 .subcat-filter__items {
   display: inline;
   padding: 16px 0 20px 0;
@@ -14,11 +20,15 @@
 
 .subcat-filter__item {
   display: inline-block;
-  padding: 0 5px;
+  padding: 10px 15px;
+  border-radius: 15px;
+  background: $brand-i;
   &:hover {
     cursor: pointer
   }
   &.on {
     font-weight: bold;
+    background: $brand-j;
+    color: white;
   }
 }
