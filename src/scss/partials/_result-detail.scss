@@ -5,11 +5,8 @@
     margin-top: 0;
   }
 
-  &__sub-header {
-    margin-top: 20px;
-  }
-
   &__btn {
+    clear: both;
     margin-bottom: 5px;
   }
 
@@ -59,10 +56,6 @@
       float: none;
     }
 
-    @include mq($from: s) {
-      float: left; margin-right: 1em
-    }
-
     ul {
       margin: 0;
       padding: 0;
@@ -103,6 +96,7 @@
   &__item {
     padding-top: 30px;
     padding-bottom: 20px;
+    @include cf();
     border-bottom: 1px solid $brand-f;
 
     &:first-of-type {
@@ -113,5 +107,23 @@
       padding-bottom: none;
       border-bottom: none;
     }
+  }
+}
+
+.result-detail__content {
+  @include cf();
+  margin-bottom: 20px;
+}
+
+.result-detail__location {
+  @include mq($from: s) {
+    @include span(1 of 2);
+  }
+}
+
+.result-detail__opening-times {
+  @include mq($from: s) {
+    @include span(1 of 2);
+    @include last();
   }
 }
