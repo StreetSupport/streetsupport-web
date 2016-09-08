@@ -11,6 +11,7 @@ let templating = require('./template-render')
 let analytics = require('./analytics')
 let socialShare = require('./social-share')
 let browser = require('./browser')
+let listToDropdown = require('./list-to-dropdown')
 
 let findHelp = new FindHelp()
 findHelp.handleSubCategoryChange('sub-category', accordion)
@@ -46,6 +47,7 @@ function buildList (url) {
 
     let template = ''
     let callback = function () {
+      listToDropdown.init()
       browser.loaded()
       socialShare.init()
     }
@@ -122,6 +124,21 @@ function buildList (url) {
           item.addEventListener('click', filterClickHandler)
         })
 
+        let dropdownChangeHandler = (e) => {
+          forEach(filterItems, (item) => {
+            if (item.innerText === e.target.value) {
+              filterClickHandler({target: item})
+            }
+          })
+        }
+
+        let initDropdownChangeHandler = () => {
+          let dropdown = document.querySelector('.list-to-dropdown__select')
+          let filterItems = document.querySelector('.js-filter-item.on')
+          dropdown.value = filterItems.innerText
+          dropdown.addEventListener('change', dropdownChangeHandler)
+        }
+        listToDropdown.init(initDropdownChangeHandler)
         browser.loaded()
         socialShare.init()
       }
