@@ -16,6 +16,23 @@ let findHelp = new FindHelp()
 findHelp.handleSubCategoryChange('sub-category', accordion)
 findHelp.buildCategories(apiRoutes.servicesByCategory, buildList)
 
+let groupOpeningTimes = (ungrouped) => {
+  let grouped = []
+  for (let i = 0; i < ungrouped.length; i++) {
+    let curr = ungrouped[i]
+    let sameDay = grouped.filter((d) => d.day === curr.day)
+    if (sameDay.length === 0) {
+      grouped.push({
+        day: curr.day,
+        openingTimes: [curr.startTime + '-' + curr.endTime]
+      })
+    } else {
+      sameDay[0].openingTimes.push(curr.startTime + '-' + curr.endTime)
+    }
+  }
+  return grouped
+}
+
 function buildList (url) {
   browser.loading()
 
@@ -39,11 +56,12 @@ function buildList (url) {
     if (result.data.providers.length > 0) {
       template = 'js-category-result-tpl'
 
+
       forEach(result.data.providers, function (provider) {
         let service = {
           info: provider.info,
           location: provider.location,
-          openingTimes: provider.openingTimes
+          days: groupOpeningTimes(provider.openingTimes)
         }
         let match = formattedProviders.filter((p) => p.providerId === provider.serviceProviderId)
 

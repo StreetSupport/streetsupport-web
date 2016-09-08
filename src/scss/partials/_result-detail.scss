@@ -42,7 +42,7 @@
     padding: 0 0 5px 0;
     min-width: 85px;
     float: left;
-    clear: left;
+    clear: both;
     font-weight: $font-headline-weight;
 
     .accordion--day & {
@@ -53,10 +53,14 @@
   &__times-item {
     margin: 0;
     padding: 0px 0 5px 0;
-    float: left;
+    float: right;
 
     .accordion--day & {
       float: none;
+    }
+
+    @include mq($from: s) {
+      float: left; margin-right: 1em
     }
 
     ul {

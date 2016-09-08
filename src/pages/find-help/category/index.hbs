@@ -106,10 +106,12 @@ page: category
                   \{{/location}}
                   <h2 class="h3">Opening Times</h2>
                   <dl class="result-detail__times-list">
-                    \{{#openingTimes}}
+                    \{{#days}}
                     <dt class="result-detail__times-title">\{{day}}</dt>
-                    <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
+                    \{{#openingTimes}}
+                    <dd class="result-detail__times-item">\{{ . }}</dd>
                     \{{/openingTimes}}
+                    \{{/days}}
                   </dl>
                 </div>
                 \{{/services}}
