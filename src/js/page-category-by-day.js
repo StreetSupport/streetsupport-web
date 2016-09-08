@@ -117,5 +117,6 @@ locationSelector
     findHelp = new FindHelp(result)
     findHelp.handleSubCategoryChange('day', accordion)
     findHelp.buildCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
+    findHelp.setUrl('category-by-day', 'day', '')
   }, (_) => {
   })

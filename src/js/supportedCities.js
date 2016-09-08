@@ -15,7 +15,7 @@ var SupportedCities = function () {
     }
   ]
 
-  self.default = self.locations[1]
+  self.default = self.locations[0]
 }
 
 module.exports = SupportedCities

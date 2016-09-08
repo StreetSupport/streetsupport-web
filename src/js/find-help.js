@@ -9,9 +9,13 @@ var FindHelp = function (location) {
   self.currentLocation = location
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
-    history.pushState({}, '', '?category=' + self.theCategory +
-      '&' + subCategoryKey + '=' + subCategoryId +
-      '&location=' + self.currentLocation)
+    console.log('seturl')
+    let url = '?category=' + self.theCategory +
+      '&location=' + self.currentLocation
+    if (subCategoryId.length > 0) {
+      url += '&' + subCategoryKey + '=' + subCategoryId
+    }
+    history.pushState({}, '', url)
   }
 
   self.scrollTo = (subCategoryId) => {
