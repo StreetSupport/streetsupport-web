@@ -9,7 +9,6 @@ var FindHelp = function (location) {
   self.currentLocation = location
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
-    console.log('seturl')
     let url = '?category=' + self.theCategory +
       '&location=' + self.currentLocation
     if (subCategoryId.length > 0) {

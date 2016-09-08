@@ -43,7 +43,6 @@ function buildList (url) {
 
     var template = ''
     var onRenderCallback = function () {
-      console.log('onRenderCallback a')
       locationSelector.handler(onChangeLocation)
       browser.loaded()
       socialShare.init()
@@ -67,7 +66,6 @@ function buildList (url) {
       })
 
       onRenderCallback = function () {
-        console.log('onRenderCallback b')
         locationSelector.handler(onChangeLocation)
         accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', 'day'))
         analytics.init(theTitle)
@@ -77,17 +75,14 @@ function buildList (url) {
     } else {
       template = 'js-category-no-results-result-tpl'
     }
-    console.log('getting view model')
     locationSelector.getViewModel()
       .then((locationViewModel) => {
-        console.log(locationViewModel)
         let viewModel = {
           organisations: data,
           categoryName: data.categoryName,
           categorySynopsis: marked(data.synopsis),
           locations: locationViewModel
         }
-        console.log(viewModel)
         templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
       }, (_) => {
       })
