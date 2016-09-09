@@ -106,12 +106,16 @@ function sortDaysFromToday (days) {
   return todayToTail.concat(past)
 }
 
-locationSelector
-  .getCurrent()
-  .then((result) => {
-    findHelp = new FindHelp(result)
-    findHelp.handleSubCategoryChange('day', accordion)
-    findHelp.buildCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
-    findHelp.setUrl('category-by-day', 'day', '')
-  }, (_) => {
-  })
+let init = () => {
+  locationSelector
+    .getCurrent()
+    .then((result) => {
+      findHelp = new FindHelp(result)
+      findHelp.handleSubCategoryChange('day', accordion)
+      findHelp.buildCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
+      findHelp.setUrl('category-by-day', 'day', '')
+    }, (_) => {
+    })
+}
+
+init()
