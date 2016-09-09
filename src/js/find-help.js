@@ -1,5 +1,4 @@
 /* global history */
-var categoryEndpoint = require('./category-endpoint')
 var urlParameter = require('./get-url-parameter')
 var browser = require('./browser')
 
@@ -57,13 +56,6 @@ var FindHelp = function (location) {
   }
 
   self.theCategory = urlParameter.parameter('category')
-
-  self.buildCategories = function (endpoint, buildList) {
-    var categoryUrl = endpoint += self.theCategory
-
-    let url = categoryEndpoint.getEndpointUrl(categoryUrl, self.currentLocation)
-    buildList(url)
-  }
 }
 
 module.exports = FindHelp
