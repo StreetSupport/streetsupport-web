@@ -174,7 +174,8 @@ locationSelector
   .then((result) => {
     findHelp = new FindHelp(result)
     findHelp.handleSubCategoryChange('sub-category', accordion)
-    findHelp.buildCategories(apiRoutes.servicesByCategory, buildList)
     findHelp.setUrl('category-by-day', 'provider', '')
+    let url = apiRoutes.cities + result + '/services/' + findHelp.theCategory
+    buildList(url)
   }, (_) => {
   })

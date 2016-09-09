@@ -112,8 +112,9 @@ let init = () => {
     .then((result) => {
       findHelp = new FindHelp(result)
       findHelp.handleSubCategoryChange('day', accordion)
-      findHelp.buildCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
       findHelp.setUrl('category-by-day', 'day', '')
+      let url = apiRoutes.cities + result + '/services-by-day/' + findHelp.theCategory
+      buildList(url)
     }, (_) => {
     })
 }

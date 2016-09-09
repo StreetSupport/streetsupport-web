@@ -26,5 +26,6 @@ module.exports = {
   joinStreetSupportApplications: p('/v1/join-street-support-applications/'),
   offerSponsorship: p('/v1/sponsorship-offers/'),
   servicesByCategory: p('/v2/service-categories/'),
-  newlyRegisteredProviders: p('/v1/newly-registered-providers')
+  newlyRegisteredProviders: p('/v1/newly-registered-providers'),
+  cities: p('/v1/cities/')
 }
