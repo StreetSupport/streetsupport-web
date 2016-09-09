@@ -65,6 +65,21 @@ let changeSubCatFilter = (e) => {
   findHelp.setUrl('category-by-day', 'sub-category', id)
 }
 
+let dropdownChangeHandler = (e) => {
+  forEach(filterItems, (item) => {
+    if (item.innerText === e.target.value) {
+      changeSubCatFilter({target: item})
+    }
+  })
+}
+
+let initDropdownChangeHandler = () => {
+  let dropdown = document.querySelector('.list-to-dropdown__select')
+  let filterItems = document.querySelector('.js-filter-item.on')
+  dropdown.value = filterItems.innerText
+  dropdown.addEventListener('change', dropdownChangeHandler)
+}
+
 function buildList (url) {
   browser.loading()
 
@@ -142,20 +157,6 @@ function buildList (url) {
         })
         locationSelector.handler(onChangeLocation)
 
-        let dropdownChangeHandler = (e) => {
-          forEach(filterItems, (item) => {
-            if (item.innerText === e.target.value) {
-              changeSubCatFilter({target: item})
-            }
-          })
-        }
-
-        let initDropdownChangeHandler = () => {
-          let dropdown = document.querySelector('.list-to-dropdown__select')
-          let filterItems = document.querySelector('.js-filter-item.on')
-          dropdown.value = filterItems.innerText
-          dropdown.addEventListener('change', dropdownChangeHandler)
-        }
         listToDropdown.init(initDropdownChangeHandler)
 
         browser.loaded()
