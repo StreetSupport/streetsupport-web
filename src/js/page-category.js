@@ -8,6 +8,7 @@ let forEach = require('lodash/collection/forEach')
 let marked = require('marked')
 
 let getApiData = require('./get-api-data')
+let querystring = require('./get-url-parameter')
 let templating = require('./template-render')
 let analytics = require('./analytics')
 let socialShare = require('./social-share')
@@ -36,6 +37,32 @@ let groupOpeningTimes = (ungrouped) => {
     }
   }
   return grouped
+}
+
+let filterItems = null
+let providerItems = null
+
+let changeSubCatFilter = (e) => {
+  console.log(e)
+  forEach(document.querySelectorAll('.js-filter-item'), (item) => {
+    item.classList.remove('on')
+  })
+
+  e.target.classList.add('on')
+
+  forEach(providerItems, (item) => {
+    item.classList.remove('hide')
+  })
+
+  let id = e.target.getAttribute('data-id')
+  if (id.length > 0) {
+    forEach(providerItems, (item) => {
+      if (item.getAttribute('data-subcats').indexOf(id) < 0) {
+        item.classList.add('hide')
+      }
+    })
+  }
+  findHelp.setUrl('category-by-day', 'sub-category', id)
 }
 
 function buildList (url) {
@@ -100,39 +127,25 @@ function buildList (url) {
       onRenderCallback = function () {
         accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'), true)
 
-        let providerItems = document.querySelectorAll('.js-item, .js-header')
-        let filterItems = document.querySelectorAll('.js-filter-item')
-
-        let filterClickHandler = (e) => {
-          forEach(document.querySelectorAll('.js-filter-item'), (item) => {
-            item.classList.remove('on')
-          })
-
-          e.target.classList.add('on')
-
-          forEach(providerItems, (item) => {
-            item.classList.remove('hide')
-          })
-
-          let id = e.target.getAttribute('data-id')
-          if (id.length > 0) {
-            forEach(providerItems, (item) => {
-              if (item.getAttribute('data-subcats').indexOf(id) < 0) {
-                item.classList.add('hide')
-              }
-            })
-          }
-        }
+        providerItems = document.querySelectorAll('.js-item, .js-header')
+        filterItems = document.querySelectorAll('.js-filter-item')
 
         forEach(filterItems, (item) => {
-          item.addEventListener('click', filterClickHandler)
+          item.addEventListener('click', changeSubCatFilter)
+        })
+
+        let reqSubCat = querystring.parameter('sub-category')
+        forEach(filterItems, (item) => {
+          if (item.getAttribute('data-id') === reqSubCat) {
+            changeSubCatFilter({target: item})
+          }
         })
         locationSelector.handler(onChangeLocation)
 
         let dropdownChangeHandler = (e) => {
           forEach(filterItems, (item) => {
             if (item.innerText === e.target.value) {
-              filterClickHandler({target: item})
+              changeSubCatFilter({target: item})
             }
           })
         }
@@ -173,8 +186,8 @@ locationSelector
   .getCurrent()
   .then((result) => {
     findHelp = new FindHelp(result)
-    findHelp.handleSubCategoryChange('sub-category', accordion)
-    findHelp.setUrl('category-by-day', 'provider', '')
+    let reqSubCat = querystring.parameter('sub-category')
+    findHelp.setUrl('category-by-day', 'sub-category', reqSubCat)
     let url = apiRoutes.cities + result + '/services/' + findHelp.theCategory
     buildList(url)
   }, (_) => {
