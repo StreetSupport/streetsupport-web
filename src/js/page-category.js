@@ -43,7 +43,6 @@ let filterItems = null
 let providerItems = null
 
 let changeSubCatFilter = (e) => {
-  console.log(e)
   forEach(document.querySelectorAll('.js-filter-item'), (item) => {
     item.classList.remove('on')
   })
