@@ -6,6 +6,12 @@ module.exports = {
       'type': 'string',
       'required': true
     },
+    'city': {
+      'title': 'Associated City',
+      'type': 'select',
+      'enum': ['manchester', 'leeds'],
+      'required': true
+    },
     'shortDescription': {
       'title': 'Synopsis',
       'type': 'string',

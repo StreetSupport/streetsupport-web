@@ -11,6 +11,7 @@ module.exports = {
     'description': 'Please fill things in as you wish',
     'bindings': {
       'name': 1,
+      'city': 1,
       'shortDescription': 1,
       'longDescription': 1,
       'telephone': 2,
