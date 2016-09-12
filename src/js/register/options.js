@@ -4,6 +4,12 @@ module.exports = {
     'name': {
       'placeholder': 'The name of your organisation.'
     },
+    'city': {
+      'optionLabels': [
+        'Manchester',
+        'Leeds'
+      ]
+    },
     'shortDescription': {
       'type': 'textarea',
       'placeholder': 'A short description of your organisation.'

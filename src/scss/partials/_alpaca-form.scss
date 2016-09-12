@@ -70,6 +70,11 @@
     }
   }
 
+  .alpaca-control.radio {
+    border: none;
+    input { margin-right: 10px; }
+  }
+
   .alpaca-field-object,
   .alpaca-field-array {
     border: none;
