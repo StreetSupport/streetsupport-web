@@ -5,11 +5,8 @@
     margin-top: 0;
   }
 
-  &__sub-header {
-    margin-top: 20px;
-  }
-
   &__btn {
+    clear: both;
     margin-bottom: 5px;
   }
 
@@ -42,7 +39,7 @@
     padding: 0 0 5px 0;
     min-width: 85px;
     float: left;
-    clear: left;
+    clear: both;
     font-weight: $font-headline-weight;
 
     .accordion--day & {
@@ -53,7 +50,7 @@
   &__times-item {
     margin: 0;
     padding: 0px 0 5px 0;
-    float: left;
+    float: right;
 
     .accordion--day & {
       float: none;
@@ -99,6 +96,7 @@
   &__item {
     padding-top: 30px;
     padding-bottom: 20px;
+    @include cf();
     border-bottom: 1px solid $brand-f;
 
     &:first-of-type {
@@ -109,5 +107,27 @@
       padding-bottom: none;
       border-bottom: none;
     }
+  }
+}
+
+.result-detail__content {
+  @include cf();
+  margin-bottom: 20px;
+}
+
+.result-detail__location {
+  @include mq($from: s) {
+    @include span(1 of 2);
+    @include last();
+  }
+}
+
+.result-detail__address-map {
+  margin-top: 10px;
+}
+
+.result-detail__opening-times {
+  @include mq($from: s) {
+    @include span(1 of 2);
   }
 }

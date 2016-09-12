@@ -41,7 +41,6 @@ module.exports = {
       'submit': {
         'title': 'All Done!',
         'validate': function (callback) {
-          console.log('Submit validate()')
           callback(true)
         },
         'click': function (e) {
