@@ -9,21 +9,32 @@ var envs = [local, dev, staging, live]
 
 var domainRoot = envs[env]
 
+var serviceProvidersUrl = '/v2/service-providers/'
+var serviceCategoriesUrl = '/v2/service-categories/'
+var categoryServiceProvidersUrl = '/v2/categorised-service-providers/show/'
+var categoryServiceProvidersByDayUrl = '/v2/timetabled-service-providers/show/'
+var organisationUrl = '/v2/service-providers/show/'
+var needsUrl = '/v1/service-provider-needs/'
+var allServiceProvidersUrl = '/v1/all-service-providers/'
+var volunteerEnquiryUrl = '/v1/volunteer-enquiries/'
+var createOfferOfItemsUrl = '/v1/offers-of-items/'
+var joinStreetSupportApplicationsUrl = '/v1/join-street-support-applications/'
+var offerSponsorshipUrl = '/v1/sponsorship-offers/'
+
 var p = function (url) {
   return domainRoot + url
 }
 
 module.exports = {
-  serviceProviders: p('/v2/service-providers/'),
-  allServiceProviders: p('/v1/all-service-providers/'),
-  serviceCategories: p('/v2/service-categories/'),
-  categoryServiceProviders: p('/v2/categorised-service-providers/show/'),
-  categoryServiceProvidersByDay: p('/v2/timetabled-service-providers/show/'),
-  organisation: p('/v2/service-providers/show/'),
-  needs: p('/v1/service-provider-needs/'),
-  createVolunteerEnquiry: p('/v1/volunteer-enquiries/'),
-  createOfferOfItems: p('/v1/offers-of-items/'),
-  joinStreetSupportApplications: p('/v1/join-street-support-applications/'),
-  offerSponsorship: p('/v1/sponsorship-offers/'),
-  servicesByCategory: p('/v2/service-categories/')
+  serviceProviders: p(serviceProvidersUrl),
+  allServiceProviders: p(allServiceProvidersUrl),
+  serviceCategories: p(serviceCategoriesUrl),
+  categoryServiceProviders: p(categoryServiceProvidersUrl),
+  categoryServiceProvidersByDay: p(categoryServiceProvidersByDayUrl),
+  organisation: p(organisationUrl),
+  needs: p(needsUrl),
+  createVolunteerEnquiry: p(volunteerEnquiryUrl),
+  createOfferOfItems: p(createOfferOfItemsUrl),
+  joinStreetSupportApplications: p(joinStreetSupportApplicationsUrl),
+  offerSponsorship: p(offerSponsorshipUrl)
 }

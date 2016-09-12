@@ -12,16 +12,12 @@ import utils from './utils'
 
 var resizeTimer
 var $listToSelect
-var $dropdownCreatedCallback
 
 /**
 * @function init
 * @memberOf listToDropdown
 */
-var init = function (dropdownCreatedCallback) {
-  $dropdownCreatedCallback = dropdownCreatedCallback
-  $listToSelect = document.querySelectorAll('.list-to-dropdown')
-  convertToDropdown()
+var init = function () {
   // bind events
   document.addEventListener('DOMContentLoaded', function () {
     $listToSelect = document.querySelectorAll('.list-to-dropdown')
@@ -96,7 +92,6 @@ function createDropdown (j, $list) {
       $select.appendChild($option)
     }
   }
-  $dropdownCreatedCallback()
 }
 
 module.exports = {
