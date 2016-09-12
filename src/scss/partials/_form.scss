@@ -43,6 +43,7 @@
   }
 }
 
+.alpaca-control-label,
 .form__label {
   display: block;
   margin-bottom: 10px;
@@ -54,6 +55,7 @@
   width: 100%;
 }
 
+.alpaca-control,
 .form__input {
   border: 1px solid $brand-f;
   border-radius: 5px;

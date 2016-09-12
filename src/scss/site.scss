@@ -8,6 +8,7 @@
 // Sass-mq & susy are from NPM
 
 @import 'vendor/normalize';
+@import 'vendor/_bootstrap-glyphicons';
 @import 'sass-mq';
 @import 'susy';
 
@@ -39,6 +40,7 @@
 @import 'partials/images';
 @import 'partials/highlight';
 @import 'partials/list-to-dropdown';
+@import 'partials/location-selector';
 @import 'partials/template';
 @import 'partials/give-help';
 @import 'partials/needs';
@@ -52,6 +54,8 @@
 @import 'partials/stories';
 @import 'partials/requests';
 @import 'partials/requests-detail';
+@import 'partials/alpaca-form';
 
-// Utilitites - trumps
+// Utilities - trumps
 @import 'partials/utilities';
+
