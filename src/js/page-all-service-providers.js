@@ -17,13 +17,6 @@ getApiData.data(apiRoutes.serviceProviders)
       return provider.name.toLowerCase()
     })
 
-    forEach(sorted, function (sp) {
-      sp.formattedTags = []
-      forEach(sp.tags, function (tag) {
-        sp.formattedTags.push({ id: tag, name: tag.replace(/-/g, ' ') })
-      })
-    })
-
     // Append object name for Hogan
     var theData = { organisations: sorted }
 

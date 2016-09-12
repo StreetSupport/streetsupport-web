@@ -3,6 +3,14 @@ var find = require('lodash/collection/find')
 var Q = require('q')
 
 var getEndpointUrl = function (categoryUrl, theLocation) {
+  let getUrl = (categoryUrl, latitude, longitude) => {
+    let isTimetabled = (categoryUrl) => {
+      return categoryUrl.indexOf('timetabled-service-providers') >= 0
+    }
+    if (isTimetabled(categoryUrl)) return categoryUrl + '/long/' + longitude + '/lat/' + latitude
+    return categoryUrl + '/' + latitude + '/' + longitude
+  }
+
   var self = this
   self.deferred = Q.defer()
 
@@ -29,7 +37,7 @@ var getEndpointUrl = function (categoryUrl, theLocation) {
 
       var latitude = requestedLocation.latitude
       var longitude = requestedLocation.longitude
-      var locationUrl = categoryUrl += '/long/' + longitude + '/lat/' + latitude
+      var locationUrl = getUrl(categoryUrl, latitude, longitude)
       self.deferred.resolve(locationUrl)
     }
   }
@@ -38,7 +46,7 @@ var getEndpointUrl = function (categoryUrl, theLocation) {
     getLocation.location().then(function (position) {
       var latitude = position.coords.latitude
       var longitude = position.coords.longitude
-      var locationUrl = categoryUrl += '/long/' + longitude + '/lat/' + latitude
+      var locationUrl = getUrl(categoryUrl, latitude, longitude)
       self.deferred.resolve(locationUrl)
     }).fail(function () {
       self.deferred.resolve(categoryUrl)

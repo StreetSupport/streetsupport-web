@@ -76,11 +76,25 @@ var FindHelp = function () {
   self.buildViewModel = function (pagename, data) {
     var hasSetManchesterAsLocation = self.getLocation() === 'manchester'
 
-    data.synopsis = marked(data.synopsis)
+    return {
+      organisations: data.providers,
+      subCategories: data.subCategories,
+      categoryName: data.category.name,
+      categorySynopsis: marked(data.category.synopsis),
+      pageAsFromManchester: '?category=' + self.theCategory + '&location=manchester',
+      pageFromCurrentLocation: '?category=' + self.theCategory + '&location=my-location',
+      useManchesterAsLocation: hasSetManchesterAsLocation,
+      useGeoLocation: !hasSetManchesterAsLocation
+    }
+  }
+
+  self.buildTimeTabledViewModel = function (pagename, data) {
+    var hasSetManchesterAsLocation = self.getLocation() === 'manchester'
 
     return {
       organisations: data,
-      category: data.name === undefined ? data.categoryName : data.name,
+      categoryName: data.categoryName,
+      categorySynopsis: marked(data.synopsis),
       pageAsFromManchester: '?category=' + self.theCategory + '&location=manchester',
       pageFromCurrentLocation: '?category=' + self.theCategory + '&location=my-location',
       useManchesterAsLocation: hasSetManchesterAsLocation,
