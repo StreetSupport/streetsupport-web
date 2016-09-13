@@ -124,12 +124,12 @@ function buildList (url) {
             newProvider.tags = provider.tags.join(', ')
           }
           if (provider.subCategories !== null) {
-            provider.subCategories
-              .forEach((sc) => {
-                if (subCategories.filter((esc) => esc.id === sc.id).length === 0) {
-                  subCategories.push(sc)
-                }
-              })
+            for (let i = 0; i < provider.subCategories.length; i++) {
+              let sc = provider.subCategories[i]
+              if (subCategories.filter((esc) => esc.id === sc.id).length === 0) {
+                subCategories.push(sc)
+              }
+            }
             newProvider.subCategories = provider.subCategories
             newProvider.subCategoryList = provider.subCategories
               .map((sc) => sc.name)
