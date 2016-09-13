@@ -1,25 +1,19 @@
 /* global history */
-var categoryEndpoint = require('./category-endpoint')
 var urlParameter = require('./get-url-parameter')
 var browser = require('./browser')
 
-var marked = require('marked')
-
-var FindHelp = function () {
+var FindHelp = function (location) {
   var self = this
 
-  self.getLocation = function () {
-    var location = urlParameter.parameter('location')
-    var savedLocationCookie = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-    if (savedLocationCookie.length && location.length === 0) return savedLocationCookie
-    if (location === 'my-location') return ''
-    return location
-  }
+  self.currentLocation = location
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
-    history.pushState({}, '', '?category=' + self.theCategory +
-      '&' + subCategoryKey + '=' + subCategoryId +
-      '&location=' + self.getLocation())
+    let url = '?category=' + self.theCategory +
+      '&location=' + self.currentLocation
+    if (subCategoryId.length > 0) {
+      url += '&' + subCategoryKey + '=' + subCategoryId
+    }
+    history.pushState({}, '', url)
   }
 
   self.scrollTo = (subCategoryId) => {
@@ -62,45 +56,6 @@ var FindHelp = function () {
   }
 
   self.theCategory = urlParameter.parameter('category')
-
-  self.buildCategories = function (endpoint, buildList) {
-    var categoryUrl = endpoint += self.theCategory
-
-    categoryEndpoint.getEndpointUrl(categoryUrl, self.getLocation())
-      .then(function (success) {
-        buildList(success)
-      }, function () {
-      })
-  }
-
-  self.buildViewModel = function (pagename, data) {
-    var hasSetManchesterAsLocation = self.getLocation() === 'manchester'
-
-    return {
-      organisations: data.providers,
-      subCategories: data.subCategories,
-      categoryName: data.category.name,
-      categorySynopsis: marked(data.category.synopsis),
-      pageAsFromManchester: '?category=' + self.theCategory + '&location=manchester',
-      pageFromCurrentLocation: '?category=' + self.theCategory + '&location=my-location',
-      useManchesterAsLocation: hasSetManchesterAsLocation,
-      useGeoLocation: !hasSetManchesterAsLocation
-    }
-  }
-
-  self.buildTimeTabledViewModel = function (pagename, data) {
-    var hasSetManchesterAsLocation = self.getLocation() === 'manchester'
-
-    return {
-      organisations: data,
-      categoryName: data.categoryName,
-      categorySynopsis: marked(data.synopsis),
-      pageAsFromManchester: '?category=' + self.theCategory + '&location=manchester',
-      pageFromCurrentLocation: '?category=' + self.theCategory + '&location=my-location',
-      useManchesterAsLocation: hasSetManchesterAsLocation,
-      useGeoLocation: !hasSetManchesterAsLocation
-    }
-  }
 }
 
 module.exports = FindHelp

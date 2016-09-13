@@ -37,10 +37,8 @@ page: category
       <div class="block__content">
         {{> location-description}}
         <div class="result-detail">
-          <p>We can't find any services listed near your current location.</p>
-          <p>We are currently trialing Street Support in Manchester UK, so if you are trying to access it from elsewhere you won't yet be able to find service information for your city.</p>
-          <p>We will be rolling out across the UK and beyond in 2016, so if you are interested in Street Support coming to your city, <a href="/contact/">please get in touch</a>.</p>
-          <p>If you would like to see how it works, <a href="\{{pageAsFromManchester}}">click here to set your location to Manchester</a>.</p>
+          <p>Sorry, we can't find any services listed near your selected location.</p>
+          <p>If you know of an organisation that should be here, <a href="/contact/">please get in touch</a> to learn how you can get it added.</p>
         </div>
       </div>
     </div>
@@ -91,9 +89,9 @@ page: category
                 <div class="result-detail__item">
                   <div class="result-detail__content">
                     \{{#info}}<p class="result-detail__description">\{{{info}}}</p>\{{/info}}
-                    <h2 class="h2 result-detail__sub-header">Additional Info</h2>
-                    \{{#tags}}<p>You must be: <span class="result-detail__tags-item">\{{tags}}</span></p>\{{/tags}}
-                    <p>Categories: <span class="result-detail__tags-item">\{{subCategoryList}}</span></p>
+                    <p>Services available: <span class="result-detail__tags-item">\{{subCategoryList}}</span></p>
+                    \{{#tags}}<h2 class="h2 result-detail__sub-header">Additional Info</h2>
+                    <p>Suitable for: <span class="result-detail__tags-item">\{{tags}}</span></p>\{{/tags}}
                   </div>
                   <div class="result-detail__opening-times">
                     <h2 class="h2">Opening Times</h2>
@@ -112,8 +110,8 @@ page: category
                     \{{#location}}
                     \{{#streetLine1}}
                     <ul class="result-detail__address-list">
-                      <li class="result-detail__address-item">\{{#streetLine1}} \{{streetLine1}}, \{{/streetLine1}} \{{#streetLine2}} \{{streetLine2}}, \{{/streetLine2}} \{{#streetLine3}} \{{streetLine3}}, \{{/streetLine3}}
-                        \{{#streetLine4}} \{{streetLine4}}, \{{/streetLine4}}</li>
+                      <li class="result-detail__address-item">\{{#streetLine1}} \{{{streetLine1}}, \{{/streetLine1}} \{{#streetLine2}} \{{{streetLine2}}, \{{/streetLine2}} \{{#streetLine3}} \{{{streetLine3}}, \{{/streetLine3}}
+                        \{{#streetLine4}} \{{{streetLine4}}, \{{/streetLine4}}</li>
                       <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
                       <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">View on Map</a></li>
                     </ul>
@@ -131,7 +129,7 @@ page: category
         \{{/organisations}}
       </div>
 
-      <p>If you see something missing, incorrect or incomplete, or you would like to know more, please <a href="/contact/">get in touch</a>.</p>
+      <p class="text-center">If you see something missing, incorrect or incomplete, or you would like to know more, please <a href="/contact/">get in touch</a>.</p>
 
       {{> social-share}}
 

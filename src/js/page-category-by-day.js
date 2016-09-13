@@ -5,6 +5,7 @@ import './common'
 var urlParameter = require('./get-url-parameter')
 var accordion = require('./accordion')
 var FindHelp = require('./find-help')
+var marked = require('marked')
 
 // Lodash
 var forEach = require('lodash/collection/forEach')
@@ -18,10 +19,14 @@ var templating = require('./template-render')
 var analytics = require('./analytics')
 var socialShare = require('./social-share')
 var browser = require('./browser')
+let LocationSelector = require('./locationSelector')
 
-var findHelp = new FindHelp()
-findHelp.handleSubCategoryChange('day', accordion)
-findHelp.buildCategories(apiRoutes.categoryServiceProvidersByDay, buildList)
+let locationSelector = new LocationSelector()
+let findHelp = null
+
+let onChangeLocation = (newLocation) => {
+  window.location.href = '/find-help/category-by-day?category=' + findHelp.theCategory + '&location=' + newLocation
+}
 
 function buildList (url) {
   browser.loading()
@@ -37,7 +42,11 @@ function buildList (url) {
     document.title = theTitle
 
     var template = ''
-    var callback = function () {}
+    var onRenderCallback = function () {
+      locationSelector.handler(onChangeLocation)
+      browser.loaded()
+      socialShare.init()
+    }
 
     if (data.daysServices.length) {
       template = 'js-category-result-tpl'
@@ -56,18 +65,27 @@ function buildList (url) {
         return day.name === urlParameter.parameter('day')
       })
 
-      callback = function () {
+      onRenderCallback = function () {
+        locationSelector.handler(onChangeLocation)
         accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', 'day'))
+        analytics.init(theTitle)
+        browser.loaded()
+        socialShare.init()
       }
     } else {
       template = 'js-category-no-results-result-tpl'
     }
-
-    templating.renderTemplate(template, findHelp.buildTimeTabledViewModel('category-by-day', data), 'js-category-result-output', callback)
-
-    browser.loaded()
-    analytics.init(theTitle)
-    socialShare.init()
+    locationSelector.getViewModel()
+      .then((locationViewModel) => {
+        let viewModel = {
+          organisations: data,
+          categoryName: data.categoryName,
+          categorySynopsis: marked(data.synopsis),
+          locations: locationViewModel
+        }
+        templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
+      }, (_) => {
+      })
   })
 }
 
@@ -87,3 +105,18 @@ function sortDaysFromToday (days) {
   var todayToTail = slice(days, today)
   return todayToTail.concat(past)
 }
+
+let init = () => {
+  locationSelector
+    .getCurrent()
+    .then((result) => {
+      findHelp = new FindHelp(result)
+      findHelp.handleSubCategoryChange('day', accordion)
+      findHelp.setUrl('category-by-day', 'day', '')
+      let url = apiRoutes.cities + result + '/services-by-day/' + findHelp.theCategory
+      buildList(url)
+    }, (_) => {
+    })
+}
+
+init()

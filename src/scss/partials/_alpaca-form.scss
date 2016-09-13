@@ -1,0 +1,162 @@
+.alpaca-form {
+  margin-top: 20px;
+
+  .nav {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px 0;
+
+    @include cf();
+
+    li {
+      @include mq($from: s) {
+        @include span(1 of 4);
+
+        &:last-child {
+          @include last();
+        }
+      }
+
+      &.active {
+        border-right: 2px solid $brand-d;
+      }
+
+      div.holder {
+        padding-left: 20px!important;
+      }
+    }
+  }
+
+
+  .alpaca-invalid {
+    .alpaca-control {
+      border: 1px solid $brand-g;
+    }
+  }
+
+  .alpaca-message {
+    color: $brand-g;
+    display: block;
+    font-family: $font-headline;
+    font-weight: $font-headline-weight;
+    @extend .small;
+    text-align: right;
+    padding-top: 10px;
+  }
+
+  .alpaca-array-actionbar-action btn {
+    width: 15px;
+    height: 15px;
+  }
+
+  legend.alpaca-container-label {
+    @extend .h2;
+    padding-top: 10px;
+  }
+
+  .alpaca-array-toolbar {
+    margin: 0!important;
+    .btn {
+      margin-bottom: 0;
+      padding: 5px;
+    }
+  }
+
+  .alpaca-array-actionbar button {
+    margin: 0;
+    padding: 5px;
+    &.alpaca-button-disabled i {
+      color: $brand-a;
+    }
+  }
+
+  .alpaca-control.radio {
+    border: none;
+    input { margin-right: 10px; }
+  }
+
+  .alpaca-field-object,
+  .alpaca-field-array {
+    border: none;
+    padding: 0;
+  }
+  div[data-alpaca-field-name="addresses"] > .alpaca-container > div[data-alpaca-container-item-name^="addresses_"] {
+    & > div {
+      padding: 20px;
+    }
+    &:nth-child(2n) > div {
+      background: #efefef;
+    }
+  }
+
+  div[data-alpaca-field-name^="addresses_"] {
+    @include cf();
+
+    .alpaca-array-toolbar {
+      @include cf();
+      @include span(1 of 1);
+    }
+  }
+  div[data-alpaca-field-name^="addresses_"] > div > div {
+    @include mq($from: s) {
+      @include span(1 of 2);
+      &:nth-child(2n) { @include last(); }
+      &:nth-child(1n + 7) { @include span(1 of 1); }
+    }
+
+    margin-top: 10px!important;
+
+    div[data-alpaca-container-item-name*="_openingTimes_"] {
+      @include span(1 of 1);
+      padding-bottom: 20px;
+      border-bottom: 1px solid $brand-b;
+      &:last-child {
+        padding-bottom: 0px;
+        border-bottom: none;
+      }
+    }
+
+    div[data-alpaca-field-name*="_openingTimes_"] > div > div {
+      padding-bottom: 0px!important;
+      border-bottom: none!important;
+      @include mq($until: m) {
+        &:first-child {
+          @include span(1 of 1);
+        }
+        &:nth-child(1n + 2) {
+          @include span(1 of 2);
+        }
+        &:nth-child(2n + 1) {
+          @include last();
+        }
+      }
+      @include mq($from: m) {
+        @include span(1 of 5);
+        &:last-child {
+          @include last();
+        }
+      }
+    }
+  }
+
+  .alpaca-wizard-buttons {
+    .pull-left { float: left; }
+    .pull-right { float: right; }
+    .btn {
+      display: block;
+      padding: 15px 20px;
+      border-radius: 10px;
+      transition: background-color 250ms linear, box-shadow 250ms linear;
+      margin-bottom: 3px;
+      font-family: "museo_sans_rounded500", sans-serif;
+      font-weight: 500;
+      background-color: $brand-d;
+      color: #fff;
+      box-shadow: 0px 3px 0px 0px darken( $brand-e, 15% );
+      &:hover {
+        background-color: darken( $brand-d, 5% );
+        box-shadow: none;
+      }
+    }
+  }
+}
