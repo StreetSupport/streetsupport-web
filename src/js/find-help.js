@@ -1,6 +1,7 @@
 /* global history */
 var urlParameter = require('./get-url-parameter')
 var browser = require('./browser')
+var forEach = require('lodash/collection/forEach')
 
 var FindHelp = function (location) {
   var self = this
@@ -46,8 +47,9 @@ var FindHelp = function (location) {
   }
 
   self.formatTags = function (subCategories) {
-    subCategories.forEach((subCat) => {
-      subCat.serviceProviders.forEach((provider) => {
+
+    forEach(subCategories, (subCat) => {
+      forEach(subCat.serviceProviders, (provider) => {
         if (provider.tags !== null) {
           provider.tags = provider.tags.join(', ')
         }

@@ -154,8 +154,7 @@ function buildList (url) {
           }
         })
         locationSelector.handler(onChangeLocation)
-
-        // listToDropdown.init(initDropdownChangeHandler)
+        listToDropdown.init(initDropdownChangeHandler)
 
         browser.loaded()
         socialShare.init()

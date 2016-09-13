@@ -20,12 +20,12 @@ var $dropdownCreatedCallback
 */
 var init = function (dropdownCreatedCallback) {
   $dropdownCreatedCallback = dropdownCreatedCallback
+
   $listToSelect = document.querySelectorAll('.list-to-dropdown')
   convertToDropdown()
   // bind events
   document.addEventListener('DOMContentLoaded', function () {
     $listToSelect = document.querySelectorAll('.list-to-dropdown')
-
     convertToDropdown()
   })
 
@@ -78,11 +78,13 @@ function createDropdown (j, $list) {
     $select.classList.add('list-to-dropdown__select')
 
     var cssClasses = $list.classList
-    cssClasses.forEach(function (cssClass) {
+
+    for (var i = 0; i < cssClasses.length; i++) {
+      var cssClass = cssClasses[i]
       if (cssClass !== 'list-to-dropdown') {
         $select.classList.add(cssClass)
       }
-    })
+    }
 
     var $parent = $list.parentNode
     $parent.insertBefore($select, $list)
