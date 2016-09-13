@@ -153,7 +153,7 @@ function buildList (url) {
             changeSubCatFilter({target: item})
           }
         })
-        // locationSelector.handler(onChangeLocation)
+        locationSelector.handler(onChangeLocation)
 
         // listToDropdown.init(initDropdownChangeHandler)
 
