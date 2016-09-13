@@ -183,10 +183,12 @@ function buildList (url) {
 locationSelector
   .getCurrent()
   .then((result) => {
-    findHelp = new FindHelp(result)
+    console.log('exec page-category.init()')
+    console.log(result)
+    findHelp = new FindHelp(result.id)
     let reqSubCat = querystring.parameter('sub-category')
     findHelp.setUrl('category-by-day', 'sub-category', reqSubCat)
-    let url = apiRoutes.cities + result + '/services/' + findHelp.theCategory
+    let url = apiRoutes.cities + result.id + '/services/' + findHelp.theCategory
     buildList(url)
   }, (_) => {
   })

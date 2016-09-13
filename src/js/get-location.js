@@ -21,6 +21,11 @@ var getLocation = function () {
   return deferred.promise
 }
 
+let isAvailable = () => {
+  return navigator.geolocation == true
+}
+
 module.exports = {
-  location: getLocation
+  location: getLocation,
+  isAvailable: isAvailable
 }

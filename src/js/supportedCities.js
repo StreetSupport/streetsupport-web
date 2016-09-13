@@ -16,6 +16,10 @@ var SupportedCities = function () {
   ]
 
   self.default = self.locations[0]
+
+  self.get = (id) => {
+    return self.locations.filter((l) => l.id === id)[0]
+  }
 }
 
 module.exports = SupportedCities

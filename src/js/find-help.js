@@ -8,12 +8,16 @@ var FindHelp = function (location) {
 
   self.currentLocation = location
 
+  console.log('exec: FindHelp')
+  console.log(self.currentLocation)
+
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
     let url = '?category=' + self.theCategory +
-      '&location=' + self.currentLocation
+              '&location=' + self.currentLocation
     if (subCategoryId.length > 0) {
       url += '&' + subCategoryKey + '=' + subCategoryId
     }
+    console.log('exec: findhelp.seturl' + url)
     history.pushState({}, '', url)
   }
 
