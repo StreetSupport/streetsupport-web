@@ -183,7 +183,7 @@ locationSelector
     currentLocation = result
     findHelp = new FindHelp(result.id)
     let reqSubCat = querystring.parameter('sub-category')
-    findHelp.setUrl('category-by-day', 'sub-category', reqSubCat)
+    findHelp.setUrl('category', 'sub-category', reqSubCat)
 
     let category = querystring.parameter('category')
     let location = querystring.parameter('location')
