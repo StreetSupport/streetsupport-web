@@ -15,7 +15,9 @@ var FindHelp = function (location) {
     if (subCategoryId.length > 0) {
       url += '&' + subCategoryKey + '=' + subCategoryId
     }
-    history.pushState({}, '', url)
+    console.log(window.location.search)
+    console.log(url)
+    if (url !== window.location.search) history.pushState({}, '', url)
   }
 
   self.scrollTo = (subCategoryId) => {

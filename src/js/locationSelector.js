@@ -45,6 +45,7 @@ let _getCurrent = () => {
   let deferred = Q.defer()
   let locationInQueryString = querystring.parameter('location')
   if (locationInQueryString === 'my-location' && getLocation.isAvailable()) {
+    console.log('_getCurrent - my-location and location available')
     getLocation.location()
       .then((result) => {
         deferred.resolve({
@@ -58,8 +59,10 @@ let _getCurrent = () => {
   } else if (locationInQueryString !== 'undefined' && locationInQueryString.length > 0 && locationInQueryString !== 'my-location') {
     let requestedCity = supportedCities.get(locationInQueryString)
     if (requestedCity !== undefined) {
+      console.log('_getCurrent - valid location in qs')
       deferred.resolve(requestedCity)
     } else {
+      console.log('_getCurrent - invalid location in qs; get nearest supported')
       _nearestSupported()
         .then((result) => {
           deferred.resolve(result)
@@ -88,28 +91,20 @@ let _setCurrent = (newCity) => {
 let locationSelector = function () {
   var self = this
   self.getCurrent = _getCurrent
-  self.getViewModel = () => {
-    let deferred = Q.defer()
-
-    _getCurrent()
-      .then((current) => {
-        let cities = supportedCities.locations.map((l) => {
-          let newLocation = l
-          newLocation.isSelected = l.id === current.id
-          return newLocation
-        })
-        if (getLocation.isAvailable()) {
-          cities.push({
-            id: 'my-location',
-            isSelected: querystring.parameter('location') === 'my-location',
-            name: 'my location'
-          })
-        }
-        deferred.resolve(cities)
-      }, (_) => {
+  self.getViewModel = (current) => {
+    let cities = supportedCities.locations.map((l) => {
+      let newLocation = l
+      newLocation.isSelected = l.id === current.id
+      return newLocation
+    })
+    if (getLocation.isAvailable()) {
+      cities.push({
+        id: 'my-location',
+        isSelected: querystring.parameter('location') === 'my-location',
+        name: 'my location'
       })
-
-    return deferred.promise
+    }
+    return cities
   }
   self.handler = (onChangeLocationCallback) => {
     let locationSelector = document.querySelector('.js-location-select')
