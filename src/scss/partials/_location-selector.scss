@@ -1,8 +1,7 @@
 .location-selector {
-  display: table;
   @include cf();
-  width: auto;
   margin: 0 auto 20px;
+  text-align: center;
 }
 
 .location-selector__label {
@@ -10,7 +9,7 @@
   display: block;
   padding-bottom: 10px;
   @include mq($from: s) {
-    float: left;
+    display: inline-block;
     margin-right: 1em;
     padding-top: 10px;
   }
@@ -19,6 +18,6 @@
 .location-selector__select {
   @include mq($from: s) {
     width: 220px;
-    margin: 0 auto;
+    display: inline-block;
   }
 }

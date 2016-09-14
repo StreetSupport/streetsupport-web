@@ -2,7 +2,7 @@
 import './common'
 
 // Page modules
-var urlParameter = require('./get-url-parameter')
+var querystring = require('./get-url-parameter')
 var accordion = require('./accordion')
 var FindHelp = require('./find-help')
 var marked = require('marked')
@@ -23,14 +23,13 @@ let LocationSelector = require('./locationSelector')
 
 let locationSelector = new LocationSelector()
 let findHelp = null
+let currentLocation = null
 
 let onChangeLocation = (newLocation) => {
   window.location.href = '/find-help/category-by-day?category=' + findHelp.theCategory + '&location=' + newLocation
 }
 
 function buildList (url) {
-  browser.loading()
-
   getApiData.data(url)
   .then(function (result) {
     if (result.status === 'error') {
@@ -62,7 +61,7 @@ function buildList (url) {
       })
 
       var dayIndexToOpen = findIndex(data.daysServices, function (day) {
-        return day.name === urlParameter.parameter('day')
+        return day.name === querystring.parameter('day')
       })
 
       onRenderCallback = function () {
@@ -75,17 +74,14 @@ function buildList (url) {
     } else {
       template = 'js-category-no-results-result-tpl'
     }
-    locationSelector.getViewModel()
-      .then((locationViewModel) => {
-        let viewModel = {
-          organisations: data,
-          categoryName: data.categoryName,
-          categorySynopsis: marked(data.synopsis),
-          locations: locationViewModel
-        }
-        templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
-      }, (_) => {
-      })
+    let locationViewModel = locationSelector.getViewModel(currentLocation)
+    let viewModel = {
+      organisations: data,
+      categoryName: data.categoryName,
+      categorySynopsis: marked(data.synopsis),
+      locations: locationViewModel
+    }
+    templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
   })
 }
 
@@ -107,13 +103,24 @@ function sortDaysFromToday (days) {
 }
 
 let init = () => {
+  browser.loading()
   locationSelector
     .getCurrent()
     .then((result) => {
-      findHelp = new FindHelp(result)
+      currentLocation = result
+      findHelp = new FindHelp(result.id)
       findHelp.handleSubCategoryChange('day', accordion)
-      findHelp.setUrl('category-by-day', 'day', '')
-      let url = apiRoutes.cities + result + '/services-by-day/' + findHelp.theCategory
+      let reqSubCat = querystring.parameter('sub-category')
+      findHelp.setUrl('category-by-day', 'sub-category', reqSubCat)
+
+      let category = querystring.parameter('category')
+      let location = querystring.parameter('location')
+
+      let url = apiRoutes.cities + result.id + '/services-by-day/' + findHelp.theCategory
+      if (location === 'my-location') {
+        url = apiRoutes.categoryServiceProvidersByDay + category + '/long/' + result.longitude + '/lat/' + result.latitude
+      }
+
       buildList(url)
     }, (_) => {
     })

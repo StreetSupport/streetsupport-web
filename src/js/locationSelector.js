@@ -47,7 +47,7 @@ let _getCurrent = () => {
   if (locationInQueryString === 'my-location' && getLocation.isAvailable()) {
     getLocation.location()
       .then((result) => {
-        console.og(result)
+        console.log(result)
         deferred.resolve({
           id: 'my-location',
           isSelected: true,
@@ -102,6 +102,19 @@ let locationSelector = function () {
         name: 'my location'
       })
     }
+    return cities
+  }
+  self.getViewModelAll = (current) => {
+    let cities = supportedCities.locations.map((l) => {
+      let newLocation = l
+      newLocation.isSelected = l.id === current.id
+      return newLocation
+    })
+    cities.push({
+      id: '',
+      isSelected: querystring.parameter('location') === '',
+      name: 'All'
+    })
     return cities
   }
   self.handler = (onChangeLocationCallback) => {
