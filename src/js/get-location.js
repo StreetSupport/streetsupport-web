@@ -9,10 +9,12 @@ var getLocation = function () {
   }
 
   function success (position) {
+    console.log('getlocation.location() success')
     deferred.resolve(position)
   }
 
   function error (error) {
+    console.log('getlocation.location() error')
     deferred.reject(error)
   }
 
