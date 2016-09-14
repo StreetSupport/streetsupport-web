@@ -3,8 +3,7 @@ var Q = require('q')
 var getLocation = function () {
   var deferred = Q.defer()
   var options = {
-    enableHighAccuracy: true,
-    maximumAge: 0,
+    maximumAge: 5 * 60 * 1000,
     timeout: 5000
   }
 
@@ -14,7 +13,7 @@ var getLocation = function () {
   }
 
   function error (error) {
-    console.log('getlocation.location() error')
+    console.log('Error occurred. Error code: ' + error.code);
     deferred.reject(error)
   }
 
