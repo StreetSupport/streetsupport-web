@@ -22,7 +22,8 @@ var getLocation = function () {
 }
 
 let isAvailable = () => {
-  return navigator.geolocation == true
+  if (navigator.geolocation) return true
+  return false
 }
 
 module.exports = {
