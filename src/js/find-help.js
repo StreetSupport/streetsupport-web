@@ -7,9 +7,7 @@ var FindHelp = function (location) {
   var self = this
 
   self.currentLocation = location
-
-  console.log('exec: FindHelp')
-  console.log(self.currentLocation)
+  self.theCategory = urlParameter.parameter('category')
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
     let url = '?category=' + self.theCategory +
@@ -17,7 +15,6 @@ var FindHelp = function (location) {
     if (subCategoryId.length > 0) {
       url += '&' + subCategoryKey + '=' + subCategoryId
     }
-    console.log('exec: findhelp.seturl' + url)
     history.pushState({}, '', url)
   }
 
@@ -51,7 +48,6 @@ var FindHelp = function (location) {
   }
 
   self.formatTags = function (subCategories) {
-
     forEach(subCategories, (subCat) => {
       forEach(subCat.serviceProviders, (provider) => {
         if (provider.tags !== null) {
@@ -60,8 +56,6 @@ var FindHelp = function (location) {
       })
     })
   }
-
-  self.theCategory = urlParameter.parameter('category')
 }
 
 module.exports = FindHelp
