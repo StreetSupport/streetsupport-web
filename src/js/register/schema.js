@@ -6,7 +6,7 @@ module.exports = {
       'type': 'string',
       'required': true
     },
-    'city': {
+    'associatedCity': {
       'title': 'Associated City',
       'type': 'select',
       'enum': ['manchester', 'leeds'],
