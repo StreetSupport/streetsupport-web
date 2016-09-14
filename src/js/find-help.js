@@ -1,19 +1,23 @@
 /* global history */
 var urlParameter = require('./get-url-parameter')
 var browser = require('./browser')
+var forEach = require('lodash/collection/forEach')
 
 var FindHelp = function (location) {
   var self = this
 
   self.currentLocation = location
+  self.theCategory = urlParameter.parameter('category')
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
     let url = '?category=' + self.theCategory +
-      '&location=' + self.currentLocation
+              '&location=' + self.currentLocation
     if (subCategoryId.length > 0) {
       url += '&' + subCategoryKey + '=' + subCategoryId
     }
-    history.pushState({}, '', url)
+    console.log(window.location.search)
+    console.log(url)
+    if (url !== window.location.search) history.pushState({}, '', url)
   }
 
   self.scrollTo = (subCategoryId) => {
@@ -46,16 +50,14 @@ var FindHelp = function (location) {
   }
 
   self.formatTags = function (subCategories) {
-    subCategories.forEach((subCat) => {
-      subCat.serviceProviders.forEach((provider) => {
+    forEach(subCategories, (subCat) => {
+      forEach(subCat.serviceProviders, (provider) => {
         if (provider.tags !== null) {
           provider.tags = provider.tags.join(', ')
         }
       })
     })
   }
-
-  self.theCategory = urlParameter.parameter('category')
 }
 
 module.exports = FindHelp

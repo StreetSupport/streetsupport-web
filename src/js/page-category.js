@@ -17,6 +17,7 @@ let listToDropdown = require('./list-to-dropdown')
 let LocationSelector = require('./locationSelector')
 let locationSelector = new LocationSelector()
 let findHelp = null
+let currentLocation = null
 
 let onChangeLocation = (newLocation) => {
   window.location.href = '/find-help/category?category=' + findHelp.theCategory + '&location=' + newLocation
@@ -80,8 +81,6 @@ let initDropdownChangeHandler = () => {
 }
 
 function buildList (url) {
-  browser.loading()
-
   getApiData.data(url)
   .then(function (result) {
     if (result.status === 'error') {
@@ -124,12 +123,11 @@ function buildList (url) {
             newProvider.tags = provider.tags.join(', ')
           }
           if (provider.subCategories !== null) {
-            provider.subCategories
-              .forEach((sc) => {
-                if (subCategories.filter((esc) => esc.id === sc.id).length === 0) {
-                  subCategories.push(sc)
-                }
-              })
+            forEach(provider.subCategories, (sc) => {
+              if (subCategories.filter((esc) => esc.id === sc.id).length === 0) {
+                subCategories.push(sc)
+              }
+            })
             newProvider.subCategories = provider.subCategories
             newProvider.subCategoryList = provider.subCategories
               .map((sc) => sc.name)
@@ -155,7 +153,6 @@ function buildList (url) {
           }
         })
         locationSelector.handler(onChangeLocation)
-
         listToDropdown.init(initDropdownChangeHandler)
 
         browser.loaded()
@@ -167,28 +164,34 @@ function buildList (url) {
 
     analytics.init(theTitle)
 
-    locationSelector.getViewModel()
-      .then((locationViewModel) => {
-        let viewModel = {
-          organisations: formattedProviders,
-          subCategories: subCategories,
-          categoryName: result.data.category.name,
-          categorySynopsis: marked(result.data.category.synopsis),
-          locations: locationViewModel
-        }
-        templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
-      }, (_) => {
-      })
+    let locationViewModel = locationSelector.getViewModel(currentLocation)
+    let viewModel = {
+      organisations: formattedProviders,
+      subCategories: subCategories,
+      category: result.data.category.name,
+      categorySynopsis: marked(result.data.category.synopsis),
+      locations: locationViewModel
+    }
+    templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
   })
 }
-
+browser.loading()
 locationSelector
   .getCurrent()
   .then((result) => {
-    findHelp = new FindHelp(result)
+    currentLocation = result
+    findHelp = new FindHelp(result.id)
     let reqSubCat = querystring.parameter('sub-category')
     findHelp.setUrl('category-by-day', 'sub-category', reqSubCat)
-    let url = apiRoutes.cities + result + '/services/' + findHelp.theCategory
+
+    let category = querystring.parameter('category')
+    let location = querystring.parameter('location')
+
+    let url = apiRoutes.cities + result.id + '/services/' + findHelp.theCategory
+    if (location === 'my-location') {
+      url = apiRoutes.servicesByCategory + category + '/' + result.latitude + '/' + result.longitude
+    }
+
     buildList(url)
   }, (_) => {
   })

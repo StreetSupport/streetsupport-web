@@ -3,16 +3,17 @@ var Q = require('q')
 var getLocation = function () {
   var deferred = Q.defer()
   var options = {
-    enableHighAccuracy: true,
-    maximumAge: 0,
+    maximumAge: 5 * 60 * 1000,
     timeout: 5000
   }
 
   function success (position) {
+    console.log('getlocation.location() success')
     deferred.resolve(position)
   }
 
   function error (error) {
+    console.log('Error occurred. Error code: ' + error)
     deferred.reject(error)
   }
 
@@ -21,6 +22,12 @@ var getLocation = function () {
   return deferred.promise
 }
 
+let isAvailable = () => {
+  if (navigator.geolocation) return true
+  return false
+}
+
 module.exports = {
-  location: getLocation
+  location: getLocation,
+  isAvailable: isAvailable
 }
