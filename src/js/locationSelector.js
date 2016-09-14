@@ -47,6 +47,7 @@ let _getCurrent = () => {
   if (locationInQueryString === 'my-location' && getLocation.isAvailable()) {
     getLocation.location()
       .then((result) => {
+        console.log(result)
         deferred.resolve({
           id: 'my-location',
           isSelected: true,
