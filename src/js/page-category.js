@@ -168,7 +168,7 @@ function buildList (url) {
     let viewModel = {
       organisations: formattedProviders,
       subCategories: subCategories,
-      categoryName: result.data.category.name,
+      category: result.data.category.name,
       categorySynopsis: marked(result.data.category.synopsis),
       locations: locationViewModel
     }
