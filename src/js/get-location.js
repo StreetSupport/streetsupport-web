@@ -13,7 +13,7 @@ var getLocation = function () {
   }
 
   function error (error) {
-    console.log('Error occurred. Error code: ' + error.code);
+    console.log('Error occurred. Error code: ' + error)
     deferred.reject(error)
   }
 
