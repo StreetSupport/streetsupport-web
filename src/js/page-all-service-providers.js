@@ -1,27 +1,52 @@
 // Common modules
 import './common'
+let sortBy = require('lodash/collection/sortBy')
 
-// Lodash
-var sortBy = require('lodash/collection/sortBy')
-var apiRoutes = require('./api')
-var getApiData = require('./get-api-data')
-var templating = require('./template-render')
-var browser = require('./browser')
+let apiRoutes = require('./api')
+let getApiData = require('./get-api-data')
+let templating = require('./template-render')
+let browser = require('./browser')
+let querystring = require('./get-url-parameter')
+let LocationSelector = require('./locationSelector')
+let locationSelector = new LocationSelector()
 
-browser.loading()
-// Get API data using promise
-getApiData.data(apiRoutes.serviceProviders)
-  .then(function (result) {
-    var sorted = sortBy(result.data, function (provider) {
-      return provider.name.toLowerCase()
+let currentLocation = null
+
+let onChangeLocation = (newLocation) => {
+  window.location.href = '/find-help/all-service-providers/?location=' + newLocation
+}
+
+let getData = () => {
+  let location = querystring.parameter('location')
+  getApiData.data(apiRoutes.serviceProviders + location)
+    .then(function (result) {
+      let sorted = sortBy(result.data, function (provider) {
+        return provider.name.toLowerCase()
+      })
+
+      let locationViewModel = locationSelector.getViewModelAll(currentLocation)
+      let theData = {
+        organisations: sorted,
+        locations: locationViewModel
+      }
+
+      let callback = function () {
+        locationSelector.handler(onChangeLocation)
+        browser.loaded()
+      }
+
+      templating.renderTemplate('js-category-result-tpl', theData, 'js-category-result-output', callback)
     })
+}
 
-    // Append object name for Hogan
-    var theData = { organisations: sorted }
+let init = () => {
+  browser.loading()
+  locationSelector
+    .getCurrent()
+    .then((result) => {
+      currentLocation = result
+      getData()
+    })
+}
 
-    var callback = function () {
-      browser.loaded()
-    }
-
-    templating.renderTemplate('js-category-result-tpl', theData, 'js-category-result-output', callback)
-  })
+init()

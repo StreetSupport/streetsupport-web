@@ -104,6 +104,19 @@ let locationSelector = function () {
     }
     return cities
   }
+  self.getViewModelAll = (current) => {
+    let cities = supportedCities.locations.map((l) => {
+      let newLocation = l
+      newLocation.isSelected = l.id === current.id
+      return newLocation
+    })
+    cities.push({
+      id: '',
+      isSelected: querystring.parameter('location') === '',
+      name: 'All'
+    })
+    return cities
+  }
   self.handler = (onChangeLocationCallback) => {
     let locationSelector = document.querySelector('.js-location-select')
     locationSelector.addEventListener('change', () => {
