@@ -48,6 +48,7 @@ let _getCurrent = () => {
     console.log('_getCurrent - my-location and location available')
     getLocation.location()
       .then((result) => {
+        console.log(result)
         deferred.resolve({
           id: 'my-location',
           isSelected: true,
