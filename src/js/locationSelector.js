@@ -47,12 +47,11 @@ let _getCurrent = () => {
   if (locationInQueryString === 'my-location' && getLocation.isAvailable()) {
     getLocation.location()
       .then((result) => {
-        console.log(result)
         deferred.resolve({
           id: 'my-location',
           isSelected: true,
-          latitude: result.latitude,
-          longitude: result.longitude,
+          latitude: result.coords.latitude,
+          longitude: result.coords.longitude,
           name: 'my location'
         })
       }, (_) => {})
