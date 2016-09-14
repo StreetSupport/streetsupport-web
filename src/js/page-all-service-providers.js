@@ -3,7 +3,6 @@ import './common'
 
 // Lodash
 var sortBy = require('lodash/collection/sortBy')
-var forEach = require('lodash/collection/forEach')
 var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
 var templating = require('./template-render')
