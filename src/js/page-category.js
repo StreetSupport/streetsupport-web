@@ -104,6 +104,7 @@ function buildList (url) {
       template = 'js-category-result-tpl'
 
       forEach(result.data.providers, function (provider) {
+        provider.location.locationDescription = provider.locationDescription
         let service = {
           info: provider.info,
           location: provider.location,

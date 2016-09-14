@@ -45,10 +45,9 @@ let _getCurrent = () => {
   let deferred = Q.defer()
   let locationInQueryString = querystring.parameter('location')
   if (locationInQueryString === 'my-location' && getLocation.isAvailable()) {
-    console.log('_getCurrent - my-location and location available')
     getLocation.location()
       .then((result) => {
-        console.log(result)
+        console.og(result)
         deferred.resolve({
           id: 'my-location',
           isSelected: true,
@@ -60,10 +59,8 @@ let _getCurrent = () => {
   } else if (locationInQueryString !== 'undefined' && locationInQueryString.length > 0 && locationInQueryString !== 'my-location') {
     let requestedCity = supportedCities.get(locationInQueryString)
     if (requestedCity !== undefined) {
-      console.log('_getCurrent - valid location in qs')
       deferred.resolve(requestedCity)
     } else {
-      console.log('_getCurrent - invalid location in qs; get nearest supported')
       _nearestSupported()
         .then((result) => {
           deferred.resolve(result)
