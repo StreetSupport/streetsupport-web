@@ -34,7 +34,6 @@ let getData = () => {
         browser.loaded()
       }
       if (result.data.length === 0) {
-        console.log('no data')
         let theData = {
           locations: locationViewModel
         }
