@@ -41,44 +41,63 @@ let _nearestSupported = () => {
   return deferred.promise
 }
 
+let _useMyLocation = (deferred) => {
+  getLocation.location()
+    .then((result) => {
+      deferred.resolve({
+        id: 'my-location',
+        isSelected: true,
+        latitude: result.coords.latitude,
+        longitude: result.coords.longitude,
+        name: 'my location'
+      })
+    }, (_) => {
+      _useNearest(deferred)
+    })
+}
+
+let _useNearest = (deferred) => {
+  _nearestSupported()
+    .then((result) => {
+      deferred.resolve(result)
+    }, (_) => {
+      deferred.resolve(supportedCities.default)
+    })
+}
+
+let _useRequested = (deferred, locationInQueryString) => {
+  let requestedCity = supportedCities.get(locationInQueryString)
+  if (requestedCity !== undefined) {
+    deferred.resolve(requestedCity)
+  } else {
+    _useNearest(deferred)
+  }
+}
+
+let _useSaved = (deferred) => {
+  var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+  if (saved !== undefined && saved.length > 0 && saved !== 'my-location') {
+    deferred.resolve(supportedCities.get(saved))
+  } else {
+    _useNearest(deferred)
+  }
+}
+
+let _determineLocationRetrieval = (deferred, locationInQueryString) => {
+  if (locationInQueryString === 'my-location' && getLocation.isAvailable()) {
+    return _useMyLocation
+  }
+  if (locationInQueryString !== 'undefined' && locationInQueryString.length > 0 && locationInQueryString !== 'my-location') {
+    return _useRequested
+  }
+  return _useSaved
+}
+
 let _getCurrent = () => {
   let deferred = Q.defer()
   let locationInQueryString = querystring.parameter('location')
-  if (locationInQueryString === 'my-location' && getLocation.isAvailable()) {
-    getLocation.location()
-      .then((result) => {
-        console.log(result)
-        deferred.resolve({
-          id: 'my-location',
-          isSelected: true,
-          latitude: result.coords.latitude,
-          longitude: result.coords.longitude,
-          name: 'my location'
-        })
-      }, (_) => {})
-  } else if (locationInQueryString !== 'undefined' && locationInQueryString.length > 0 && locationInQueryString !== 'my-location') {
-    let requestedCity = supportedCities.get(locationInQueryString)
-    if (requestedCity !== undefined) {
-      deferred.resolve(requestedCity)
-    } else {
-      _nearestSupported()
-        .then((result) => {
-          deferred.resolve(result)
-        }, (_) => {
-        })
-    }
-  } else {
-    var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
-    if (saved !== undefined && saved.length > 0 && saved !== 'my-location') {
-      deferred.resolve(supportedCities.get(saved))
-    } else {
-      _nearestSupported()
-        .then((result) => {
-          deferred.resolve(result)
-        }, (_) => {
-        })``
-    }
-  }
+  let getLocation = _determineLocationRetrieval(deferred, locationInQueryString)
+  getLocation(deferred, locationInQueryString)
   return deferred.promise
 }
 
