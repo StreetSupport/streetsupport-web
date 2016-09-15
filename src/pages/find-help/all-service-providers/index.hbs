@@ -37,6 +37,19 @@ page: allorganisations
 </div>
 
 <div id="spin"></div>
+<script id="js-category-no-result-tpl" type="text/template">
+  <div class="location-selector">
+    <label for="location" class="location-selector__label">Filter organisations by: </label>
+    <select class="js-location-select location-selector__select form__input" name="location" id="location">
+      \{{#locations}}
+      <option \{{#isSelected}}selected\{{/isSelected}} value="\{{id}}">\{{name}}</option>
+      \{{/locations}}
+    </select>
+  </div>
+  <div class="result-list">
+    <p>No organisations for your selected location were found. If you would like to add an organisation, please use our <a href="/register">registration form.</a></p>
+  </div>
+</script>
 
 <script id="js-category-result-tpl" type="text/template">
   <div class="location-selector">
