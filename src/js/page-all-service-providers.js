@@ -17,7 +17,15 @@ let onChangeLocation = (newLocation) => {
 }
 
 let getData = () => {
+  if (window.location.search.length === 0) {
+    var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+    if (saved !== undefined && saved.length > 0 && saved !== 'my-location') {
+      onChangeLocation(saved)
+    }
+  }
+
   let location = querystring.parameter('location')
+
   getApiData.data(apiRoutes.serviceProviders + location)
     .then(function (result) {
       let locationViewModel = locationSelector.getViewModelAll(currentLocation)
