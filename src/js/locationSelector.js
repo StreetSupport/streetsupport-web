@@ -76,14 +76,14 @@ let _getCurrent = () => {
         .then((result) => {
           deferred.resolve(result)
         }, (_) => {
-        })
+        })``
     }
   }
   return deferred.promise
 }
 
 let _setCurrent = (newCity) => {
-  document.cookie = 'desired-location=' + newCity
+  if (newCity.length > 0) document.cookie = 'desired-location=' + newCity
 }
 
 let locationSelector = function () {

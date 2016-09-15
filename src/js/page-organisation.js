@@ -1,7 +1,5 @@
-// Common modules
 import './common'
 
-// Page modules
 var urlParameter = require('./get-url-parameter')
 var accordion = require('./accordion')
 var htmlEncode = require('htmlencode')
@@ -19,10 +17,8 @@ var organisationUrl = apiRoutes.organisation += theOrganisation
 
 browser.loading()
 
-// Get API data using promise
 getApiData.data(organisationUrl).then(function (result) {
   var data = result.data
-  // Get organisation name and edit page title
   var theTitle = htmlEncode.htmlDecode(data.name + ' - Street Support')
   document.title = theTitle
 
@@ -43,6 +39,8 @@ getApiData.data(organisationUrl).then(function (result) {
 
   // Append object name for Hogan
   var theData = { organisation: data }
+
+  console.log(theData)
 
   var callback = function () {
     accordion.init()
