@@ -36,20 +36,19 @@ let getData = () => {
         locationSelector.handler(onChangeLocation)
         browser.loaded()
       }
+      let theData = {
+        locations: locationViewModel
+      }
       if (result.data.length === 0) {
-        let theData = {
-          locations: locationViewModel
-        }
         templating.renderTemplate('js-no-result-tpl', theData, 'js-result-output', callback)
       } else {
         let sorted = sortBy(result.data, function (provider) {
           return provider.providerName.toLowerCase()
         })
 
-        let theData = {
-          organisations: sorted,
-          locations: locationViewModel
-        }
+        theData.organisations = sorted
+        theData.isManchester = location === 'manchester'
+
         templating.renderTemplate('js-result-tpl', theData, 'js-result-output', callback)
       }
     })
