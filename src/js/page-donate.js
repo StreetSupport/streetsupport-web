@@ -13,7 +13,7 @@ let locationSelector = new LocationSelector()
 let currentLocation = null
 
 let onChangeLocation = (newLocation) => {
-  window.location.href = '/give-help/donate/donate2.html?location=' + newLocation
+  window.location.href = '/give-help/donate/?location=' + newLocation
 }
 
 let getData = () => {
