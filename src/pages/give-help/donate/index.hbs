@@ -39,15 +39,8 @@ page: donate
 </div>
 
 <script id="js-result-tpl" type="text/template">
-  <div class="location-selector">
-    <label for="location" class="location-selector__label">Filter organisations by: </label>
-    <select class="js-location-select location-selector__select form__input" name="location" id="location">
-      \{{#locations}}
-      <option \{{#isSelected}}selected\{{/isSelected}} value="\{{id}}">\{{name}}</option>
-      \{{/locations}}
-    </select>
-  </div>
-  
+  {{> location-description-all}}
+
   \{{#isManchester}}
   <div class="block__section">
     <p>Donating to the Big Change Fund is an effective way to support people who are homeless in Manchester. Donations pay for practical items that individuals need to build new lives off the streets, such as rent deposits and training courses. If everyone who lives, works or visits Manchester donates, together we can make Big Changes in our city!</p>
