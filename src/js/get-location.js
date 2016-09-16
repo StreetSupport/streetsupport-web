@@ -3,8 +3,7 @@ var Q = require('q')
 var getLocation = function () {
   var deferred = Q.defer()
   var options = {
-    enableHighAccuracy: true,
-    maximumAge: 0,
+    maximumAge: 5 * 60 * 1000,
     timeout: 5000
   }
 
@@ -22,7 +21,8 @@ var getLocation = function () {
 }
 
 let isAvailable = () => {
-  return navigator.geolocation == true
+  if (navigator.geolocation) return true
+  return false
 }
 
 module.exports = {

@@ -20,14 +20,14 @@ page: category
       <ol class="breadcrumbs__list">
         <li class="breadcrumbs__item"><a href="/">Home</a></li>
         <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
-        <li class="breadcrumbs__item">\{{{categoryName}}}</li>
+        <li class="breadcrumbs__item">\{{{category}}}</li>
       </ol>
     </div>
   </div>
 
   <div class="block block--subpage-header">
     <div class="container">
-      <h2 class="h1 block__header">\{{{categoryName}}}</h2>
+      <h2 class="h1 block__header">\{{{category}}}</h2>
       <h3 class="h2 block__sub-header">\{{{categorySynopsis}}}</h3>
     </div>
   </div>
@@ -52,14 +52,14 @@ page: category
       <ol class="breadcrumbs__list">
         <li class="breadcrumbs__item"><a href="/">Home</a></li>
         <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
-        <li class="breadcrumbs__item">\{{{categoryName}}}</li>
+        <li class="breadcrumbs__item">\{{{category}}}</li>
       </ol>
     </div>
   </div>
 
   <div class="block block--subpage-header">
     <div class="container">
-      <h1 class="h1 block__header">\{{{categoryName}}}</h1>
+      <h1 class="h1 block__header">\{{{category}}}</h1>
       <h3 class="h2 block__sub-header">\{{{categorySynopsis}}}</h3>
     </div>
   </div>
@@ -104,20 +104,20 @@ page: category
                       \{{/days}}
                     </dl>
                   </div>
+                  \{{#location}}
+                  \{{#streetLine1}}
                   <div class="result-detail__location">
                     <h2 class="h2 result-detail__sub-header">Location</h2>
                     \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
-                    \{{#location}}
-                    \{{#streetLine1}}
                     <ul class="result-detail__address-list">
                       <li class="result-detail__address-item">\{{#streetLine1}} \{{{streetLine1}}, \{{/streetLine1}} \{{#streetLine2}} \{{{streetLine2}}, \{{/streetLine2}} \{{#streetLine3}} \{{{streetLine3}}, \{{/streetLine3}}
                         \{{#streetLine4}} \{{{streetLine4}}, \{{/streetLine4}}</li>
                       <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
                       <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">View on Map</a></li>
                     </ul>
-                    \{{/streetLine1}}
-                    \{{/location}}
                   </div>
+                  \{{/streetLine1}}
+                  \{{/location}}
                 </div>
                 \{{/services}}
                 <a class="btn btn--brand-d result-detail__btn" href="/find-help/organisation/?organisation=\{{providerId}}">

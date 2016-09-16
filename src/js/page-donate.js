@@ -13,7 +13,7 @@ let locationSelector = new LocationSelector()
 let currentLocation = null
 
 let onChangeLocation = (newLocation) => {
-  window.location.href = '/find-help/all-service-providers/?location=' + newLocation
+  window.location.href = '/give-help/donate/donate2.html?location=' + newLocation
 }
 
 let getData = () => {
@@ -25,30 +25,31 @@ let getData = () => {
   }
 
   let location = querystring.parameter('location')
-
-  getApiData.data(apiRoutes.serviceProviders + location)
+  let url = apiRoutes.serviceProviders + 'donation-information/'
+  if (location.length > 0) {
+    url = apiRoutes.serviceProviders + location + '/donation-information/'
+  }
+  getApiData.data(url)
     .then(function (result) {
       let locationViewModel = locationSelector.getViewModelAll(currentLocation)
       let callback = function () {
         locationSelector.handler(onChangeLocation)
         browser.loaded()
       }
+      let theData = {
+        locations: locationViewModel
+      }
       if (result.data.length === 0) {
-        let theData = {
-          locations: locationViewModel
-        }
-        templating.renderTemplate('js-category-no-result-tpl', theData, 'js-category-result-output', callback)
+        templating.renderTemplate('js-no-result-tpl', theData, 'js-result-output', callback)
       } else {
         let sorted = sortBy(result.data, function (provider) {
-          return provider.name.toLowerCase()
+          return provider.providerName.toLowerCase()
         })
 
-        let theData = {
-          organisations: sorted,
-          locations: locationViewModel
-        }
+        theData.organisations = sorted
+        theData.isManchester = location === 'manchester'
 
-        templating.renderTemplate('js-category-result-tpl', theData, 'js-category-result-output', callback)
+        templating.renderTemplate('js-result-tpl', theData, 'js-result-output', callback)
       }
     })
 }
