@@ -49,7 +49,7 @@ let getData = () => {
 
 locationSelector
   .getCurrent()
-  .then((result) =>{
+  .then((result) => {
     currentLocation = result
     getData()
   }, (_) => {
