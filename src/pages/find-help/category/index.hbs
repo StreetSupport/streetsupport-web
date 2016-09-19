@@ -15,7 +15,7 @@ page: category
 <div id="spin"></div>
 
 <script id="js-category-no-results-result-tpl" type="text/template">
-<div class="block block--breadcrumbs">
+  <div class="block block--breadcrumbs">
     <div class="container">
       <ol class="breadcrumbs__list">
         <li class="breadcrumbs__item"><a href="/">Home</a></li>
@@ -36,7 +36,10 @@ page: category
     <div class="container">
       <div class="block__content">
         {{> location-description}}
-        {{> no-items-for-location }}
+        <div class="block__section">
+          <p>Sorry, no services for your location could be found. Please choose another location above, or <a href="/find-help">go back</a> and choose another category.</p>
+          <p>If you know of local organisations that could be included in this category, please use our <a href="/register">registration form, or <a href="mailto:info@streetsupport.net">let us know</a>.</a></p>
+        </div>
       </div>
     </div>
   </div>

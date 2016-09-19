@@ -50,7 +50,10 @@ page: giveitems
 
 <script id="js-no-data-tpl" type="text/template">
   {{> location-description-all }}
-  {{> no-items-for-location }}
+  <div class="block__section">
+    <p>There are currently no needs registered in this location. Please choose another location above.</p>
+    <p>If you know of local organisations that could be included in this category, please use our <a href="/register">registration form, or <a href="mailto:info@streetsupport.net">let us know</a>.</a></p>
+  </div>
 </script>
 
 <script id="js-card-list-tpl" type="text/template">
