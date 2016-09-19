@@ -1,7 +1,8 @@
 .header {
   @include cf();
 
-  background-color: $brand-a;
+  background: $brand-a;
+  background: linear-gradient(to bottom, $brand-a, #339378);
 
   @include mq($from: m) {
     margin-bottom: $header-subnav-margin;
