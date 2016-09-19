@@ -36,42 +36,9 @@ page: giveitems
         <section class="block__section">
           <p>Organisations are in need of items, volunteer and cash donations to continue their work - can you help? If you can't find anything suitable right now, let us know your skills through our <a href="/give-help/volunteer/">volunteer form</a>, or <a href="/give-help/offer-items/">tell us of any items</a> that you think may of use. Interested organisations will get in touch directly.</p>
         </section>
-
-        <section class="block__section">
-          <ul class="requests-search__filter__list">
-            <li class="requests-search__filter__item js-filter-item js-filter-item-all is-active" data-filter="all">All</li>
-            <li class="requests-search__filter__item js-filter-item" data-filter="items">Items</li>
-            <li class="requests-search__filter__item js-filter-item" data-filter="time">Time</li>
-            <li class="requests-search__filter__item js-filter-item" data-filter="money">Money</li>
-          </ul>
-          <div class="requests">
-            <div class="requests-search__input" action="#">
-              <div class="requests-search__container">
-                <h2 class="h2 requests-search__input__header">Showing <span class="">all listings</span> you could help with.</h2>
-                <label for="search-for-requests" class="hide-screen">Search requests for help</label>
-                <input autofocus id="search-for-requests" class="search requests-search__autocomplete" placeholder="Search requests for help" />
-              </div>
-            </div>
-            <div class="requests-search__sort">
-              <h3 class="h3 requests-search__sort__title">Sort by:</h3>
-              <ul class="requests-search__sort__list">
-                  <li class="requests-search__sort__item">
-                    <button class="requests-search__sort__criteria js-sort-criteria is-active" data-sort="date-desc">Date Added</button>
-                  </li>
-                  <li class="requests-search__sort__item">
-                    <button class="requests-search__sort__criteria js-sort-criteria" data-sort="organisation-asc">Organisation</button>
-                  </li>
-                  <li class="requests-search__sort__item">
-                    <button class="requests-search__sort__criteria js-sort-criteria" data-sort="distance-asc">Distance</button>
-                  </li>
-              </li>
-            </ul>
-          </div>
-
-          <div id="js-card-list-output">
-            {{> loading-spinner}}
-          </div>
-        </section>
+        <div id="js-card-list-output">
+          {{> loading-spinner}}
+        </div>
       </div>
     </div>
   </div>
@@ -81,7 +48,46 @@ page: giveitems
   <div id="js-card-detail-output"></div>
 </div>
 
+<script id="js-no-data-tpl" type="text/template">
+  {{> location-description-all }}
+  {{> no-items-for-location }}
+</script>
+
 <script id="js-card-list-tpl" type="text/template">
+  {{> location-description-all }}
+
+  <section class="block__section">
+    <ul class="requests-search__filter__list">
+      <li class="requests-search__filter__item js-filter-item js-filter-item-all is-active" data-filter="all">All</li>
+      <li class="requests-search__filter__item js-filter-item" data-filter="items">Items</li>
+      <li class="requests-search__filter__item js-filter-item" data-filter="time">Time</li>
+      <li class="requests-search__filter__item js-filter-item" data-filter="money">Money</li>
+    </ul>
+    <div class="requests">
+      <div class="requests-search__input" action="#">
+        <div class="requests-search__container">
+          <h2 class="h2 requests-search__input__header">Showing <span class="">all listings</span> you could help with.</h2>
+          <label for="search-for-requests" class="hide-screen">Search requests for help</label>
+          <input autofocus id="search-for-requests" class="search requests-search__autocomplete" placeholder="Search requests for help" />
+        </div>
+      </div>
+      <div class="requests-search__sort">
+        <h3 class="h3 requests-search__sort__title">Sort by:</h3>
+        <ul class="requests-search__sort__list">
+            <li class="requests-search__sort__item">
+              <button class="requests-search__sort__criteria js-sort-criteria is-active" data-sort="date-desc">Date Added</button>
+            </li>
+            <li class="requests-search__sort__item">
+              <button class="requests-search__sort__criteria js-sort-criteria" data-sort="organisation-asc">Organisation</button>
+            </li>
+            <li class="requests-search__sort__item">
+              <button class="requests-search__sort__criteria js-sort-criteria" data-sort="distance-asc">Distance</button>
+            </li>
+        </li>
+      </ul>
+    </div>
+
+  </section>
   <ul id="js-card-list" class="requests-listing list">
     \{{#card}}
     <li class="requests-listing__item" data-id="\{{id}}">
