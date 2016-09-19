@@ -102,7 +102,12 @@ let _getCurrent = () => {
 }
 
 let _setCurrent = (newCity) => {
-  if (newCity.length > 0) document.cookie = 'desired-location=' + newCity
+  if (newCity.length > 0) {
+    var now = new Date()
+    var expireTime = now.getTime() + 1000 * 36000
+    now.setTime(expireTime)
+    document.cookie = 'desired-location=' + newCity + ';expires=' + +now.toUTCString() + ';path=/'
+  }
 }
 
 let locationSelector = function () {

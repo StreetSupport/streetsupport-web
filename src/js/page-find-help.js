@@ -9,30 +9,49 @@ var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
 var templating = require('./template-render')
 var browser = require('./browser')
+var LocationSelector = require('./locationSelector')
+var locationSelector = new LocationSelector()
 
 browser.loading()
 // Get API data using promise
-getApiData
-  .data(apiRoutes.serviceCategories)
-  .then(function (result) {
-    var data = result.data
-    forEach(data, function (category) {
-      if (category.key === 'meals' || category.key === 'dropin') {
-        category.page = 'category-by-day'
-      } else {
-        category.page = 'category'
+
+let currentLocation = null
+
+let getData = () => {
+  getApiData
+    .data(apiRoutes.serviceCategories)
+    .then(function (result) {
+      var data = result.data
+      forEach(data, function (category) {
+        if (category.key === 'meals' || category.key === 'dropin') {
+          category.page = 'category-by-day'
+        } else {
+          category.page = 'category'
+        }
+      })
+
+      var sorted = sortByOrder(data, ['sortOrder'], ['desc'])
+
+      // Append object name for Hogan
+      var theData = {
+        categories: sorted,
+        location: currentLocation.id
       }
+
+      var callback = function () {
+        browser.loaded()
+        socialShare.init()
+      }
+
+      templating.renderTemplate('js-category-list-tpl', theData, 'js-category-list-output', callback)
     })
+}
 
-    var sorted = sortByOrder(data, ['sortOrder'], ['desc'])
+locationSelector
+  .getCurrent()
+  .then((result) => {
+    currentLocation = result
+    getData()
+  }, (_) => {
 
-    // Append object name for Hogan
-    var theData = { categories: sorted }
-
-    var callback = function () {
-      browser.loaded()
-      socialShare.init()
-    }
-
-    templating.renderTemplate('js-category-list-tpl', theData, 'js-category-list-output', callback)
   })

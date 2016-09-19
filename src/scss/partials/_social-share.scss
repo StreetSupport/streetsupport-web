@@ -4,6 +4,10 @@
   display: block;
   text-align: center;
 
+  &--home {
+    margin-top: 20px;
+  }
+
   &__text {
     margin-right: 10px;
   }
