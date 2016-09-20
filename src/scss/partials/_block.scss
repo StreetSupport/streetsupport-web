@@ -129,7 +129,9 @@
   &--breadcrumbs {
     padding-top: 6px !important;
     padding-bottom: 6px !important;
-    background-color: $brand-h;
+    background-color: rgba(black, 0.5);
+    position: absolute;
+    width: 100%;
 
     @media print {
       & { display: none }
@@ -140,11 +142,11 @@
     background-image: url('../img/header-background.png');
     background-repeat: repeat;
     color: #fff;
-    padding-top: 50px;
+    padding-top: 80px;
     padding-bottom: 50px;
 
     @include mq($from: m) {
-      padding-top: 80px;
+      padding-top: 110px;
       padding-bottom: 80px;
     }
   }
@@ -213,6 +215,7 @@
 
   .block__header {
     color: $brand-h;
+    padding-top: 50px;
 
     &.has-icon--left {
       margin: 20px 0;
