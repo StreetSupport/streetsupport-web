@@ -1,5 +1,5 @@
 $big-change-yellow: #FFF001;
-$big-change-height: 346px;
+$big-change-height: 376px;
 
 .big-change-banner {
   background: $big-change-yellow;
@@ -11,7 +11,7 @@ $big-change-height: 346px;
   @include container();
   text-align: center;
   background: #383735;
-  padding: 30px 0 40px 0;
+  padding: 45px 0 40px 0;
   position:relative;
   height: $big-change-height;
 }

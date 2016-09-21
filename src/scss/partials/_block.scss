@@ -131,6 +131,7 @@
     padding-bottom: 6px !important;
     background-color: rgba(black, 0.5);
     position: absolute;
+    z-index: 100;
     width: 100%;
 
     @media print {
