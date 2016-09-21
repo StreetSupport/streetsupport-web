@@ -97,12 +97,6 @@ $big-change-height: 346px;
     width: 52px;
     color: white;
 
-    &--mhp {
-      width: 100px;
-      height: 110px;
-      color: white;
-    }
-
     .big-change-social__item--share & {
       margin: 0 2em;
 
@@ -123,4 +117,10 @@ $big-change-height: 346px;
     clear: both;
     text-align: center;
   }
+}
+
+.big-change__icon--mhp {
+  width: 100px;
+  height: 110px;
+  color: white;
 }
