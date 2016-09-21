@@ -28,7 +28,8 @@ module.exports = {
     offeritems: path.join(__dirname, '/src/js/page-offer-items'),
     joinstreetsupport: path.join(__dirname, '/src/js/page-join-street-support'),
     register: path.join(__dirname, '/src/js/page-register'),
-    donate: path.join(__dirname, '/src/js/page-donate')
+    donate: path.join(__dirname, '/src/js/page-donate'),
+    emergencyHelpRedirect: path.join(__dirname, 'src/js/page-emergency-help-redirect')
   },
   output: {
     path: path.join(__dirname, '/_dist/assets/js/'),
