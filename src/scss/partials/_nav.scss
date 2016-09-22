@@ -18,8 +18,13 @@
       text-decoration: underline;
 
       @include mq($from: m) {
-        background-color: white;
+        background-color: $brand-i;
         text-decoration: none;
+      }
+    }
+    .nav__item--sub-item.nav__item--#{$page} > a {
+      @include mq($from: m) {
+        background-color: white;
       }
     }
   }
