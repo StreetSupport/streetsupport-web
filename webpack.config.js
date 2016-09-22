@@ -15,7 +15,7 @@ if (argv.production) {
 
 module.exports = {
   entry: {
-    home: path.join(__dirname, '/src/js/page-generic'),
+    home: path.join(__dirname, '/src/js/page-home'),
     generic: path.join(__dirname, '/src/js/page-generic'),
     findhelp: path.join(__dirname, '/src/js/page-find-help'),
     giveHelp: path.join(__dirname, '/src/js/page-give-help'),
