@@ -83,7 +83,7 @@ let _useSaved = (deferred) => {
   }
 }
 
-let _determineLocationRetrieval = (deferred, locationInQueryString) => {
+let _determineLocationRetrievalMethod = (deferred, locationInQueryString) => {
   if (locationInQueryString === 'my-location' && getLocation.isAvailable()) {
     return _useMyLocation
   }
@@ -96,12 +96,13 @@ let _determineLocationRetrieval = (deferred, locationInQueryString) => {
 let _getCurrent = () => {
   let deferred = Q.defer()
   let locationInQueryString = querystring.parameter('location')
-  let getLocation = _determineLocationRetrieval(deferred, locationInQueryString)
+  let getLocation = _determineLocationRetrievalMethod(deferred, locationInQueryString)
   getLocation(deferred, locationInQueryString)
   return deferred.promise
 }
 
 let _setCurrent = (newCity) => {
+  console.log(newCity)
   if (newCity.length > 0) {
     var now = new Date()
     var expireTime = now.getTime() + 1000 * 36000
