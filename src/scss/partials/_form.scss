@@ -47,12 +47,17 @@
 .form__label {
   display: block;
   margin-bottom: 10px;
+
+  &--inline {
+    float: left;
+    margin-right: 10px;
+    padding-top: 9px;
+  }
 }
 
 .form__label--checkbox {
   display: inline;
   margin-right: 1em;
-  width: 100%;
 }
 
 .alpaca-control,
@@ -64,6 +69,10 @@
   outline: none;
   padding: 10px;
   width: 100%;
+}
+
+.form__input--inline {
+  width: auto;
 }
 
 .form__input--full {
