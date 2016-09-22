@@ -26,6 +26,19 @@
 }
 
 // Nav code
+.intermediary {
+ @include mq($from: m) {
+      background-color: $brand-j;
+      box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.7);
+      border-top: 2px solid $brand-i;
+      overflow-y: hidden;
+      margin-top: $header-top;
+
+      .section--nosubnav & {
+        height: $header-height;
+      }
+    }
+}
 .nav {
   &__container {
     position: fixed;
@@ -43,21 +56,20 @@
     background-color: $brand-c;
 
     @include mq($from: m) {
-      background-color: $brand-j;
       position: absolute;
-      top: $header-top;
       width: 100%;
-      height: $header-subnav-height;
+      height: $header-subnav-height + $header-subnav-height + $header-height;
+      overflow-y: hidden;
       transition: none;
       transform: none;
-      box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.7);
-      border-top: 2px solid $brand-i;
-      overflow-y: hidden;
 
       .section--nosubnav & {
         height: $header-height;
       }
+
+      background-color: transparent;
     }
+
 
     &.is-active {
       transform: translate3d(0px, 0, 0);
@@ -141,7 +153,7 @@
       @include mq($from: m) {
         display: none;
         position: absolute;
-        top: 42px;
+        top: $header-height + $header-subnav-height + 32px;
         left: 0px;
         width: 100%;
         margin: 0;
@@ -225,7 +237,7 @@
   padding-right: 20px;
   @include mq($from: m) {
     position: absolute;
-    top: 0px;
+    top: 38px;
     right: 0px;
   }
   label {

@@ -1,6 +1,6 @@
 <nav class="nav__container js-nav-container">
   <button class="btn btn--plain nav__btn js-nav-close" type="button">{{>icon name="close" class="icon"}}<span class="hide-screen">Close</span></button>
-
+  <div class="intermediary">
   <ul class="nav__list">
     <li class="js-global-city-selector global-city-selector">
         <label for="" class="form__label form__label--inline">My city:</label>
@@ -8,7 +8,6 @@
                           optionsText: 'name',
                           optionsValue: 'id',
                           value: selectedCity" class="form__input form__input--inline js-location-select"></select>
-      </div>
     </li>
     <li class="nav__item"><a href="/">Home</a></li>
     <li class="nav__item nav__item--findhelp">
@@ -56,4 +55,5 @@
     <li class="nav__item nav__item--about"><a href="/about/">About</a></li>
     <li class="nav__item nav__item--contact"><a href="/contact/">Contact</a></li>
   </ul>
+  </div>
 </nav>
