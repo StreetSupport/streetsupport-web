@@ -68,21 +68,14 @@ page: donate
 
 
 <script id="js-no-result-tpl" type="text/template">
-  <div class="location-selector">
-    <label for="location" class="location-selector__label">Filter organisations by: </label>
-    <select class="js-location-select location-selector__select form__input" name="location" id="location">
-      \{{#locations}}
-      <option \{{#isSelected}}selected\{{/isSelected}} value="\{{id}}">\{{name}}</option>
-      \{{/locations}}
-    </select>
-  </div>
-
   \{{#isManchester}}
     {{> manchester-big-change-promo }}
   \{{/isManchester}}
 
+  \{{^isManchester}}
   <div class="block__section">
-    <p>There are currently no organisations in this location registered with their own donation links. Please choose another location above.</p>
+    <p>There are currently no organisations in \{{location}} registered with their own donation links. Please choose another location above.</p>
     <p>If you know of local organisations that could be included in this category, please use our <a href="/register">registration form, or <a href="mailto:info@streetsupport.net">let us know</a>.</a></p>
   </div>
+  \{{/isManchester}}
 </script>
