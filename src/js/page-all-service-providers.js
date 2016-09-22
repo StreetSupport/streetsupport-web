@@ -28,14 +28,13 @@ let getData = () => {
 
   getApiData.data(apiRoutes.serviceProviders + location)
     .then(function (result) {
-      let locationViewModel = locationSelector.getViewModelAll(currentLocation)
       let callback = function () {
         locationSelector.handler(onChangeLocation)
         browser.loaded()
       }
       if (result.data.length === 0) {
         let theData = {
-          locations: locationViewModel
+          location: currentLocation.name
         }
         templating.renderTemplate('js-category-no-result-tpl', theData, 'js-category-result-output', callback)
       } else {
@@ -45,7 +44,7 @@ let getData = () => {
 
         let theData = {
           organisations: sorted,
-          locations: locationViewModel
+          location: currentLocation.name
         }
 
         templating.renderTemplate('js-category-result-tpl', theData, 'js-category-result-output', callback)
