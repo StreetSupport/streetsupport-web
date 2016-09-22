@@ -58,13 +58,13 @@
     @include mq($from: m) {
       position: absolute;
       width: 100%;
-      height: $header-subnav-height + $header-subnav-height + $header-height;
+      height: $header-subnav-height + $header-subnav-margin + $header-height;
       overflow-y: hidden;
       transition: none;
       transform: none;
 
       .section--nosubnav & {
-        height: $header-height;
+        height: $header-top + $header-height;
       }
 
       background-color: transparent;
@@ -156,6 +156,7 @@
         top: $header-height + $header-subnav-height + 32px;
         left: 0px;
         width: 100%;
+        height: $header-height;
         margin: 0;
         background-color: $brand-i;
         text-align: center;
