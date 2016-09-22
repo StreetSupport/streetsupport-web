@@ -18,7 +18,7 @@
       text-decoration: underline;
 
       @include mq($from: m) {
-        background-color: $brand-i;
+        background-color: white;
         text-decoration: none;
       }
     }
@@ -26,7 +26,7 @@
 }
 
 // Nav code
-.intermediary {
+.nav__intermediary {
  @include mq($from: m) {
       background-color: $brand-j;
       box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.7);
