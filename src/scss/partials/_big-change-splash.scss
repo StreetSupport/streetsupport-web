@@ -63,18 +63,10 @@ $big-change-height: 376px;
     list-style-type: none;
     @include cf();
 
-    @include mq($from: m) {
+    @include mq($from: s) {
       @include pre(1 of 5);
       @include post(1 of 5);
-    }
-
-    &--pledge {
-      margin-top: 40px;
-    }
-
-    &--action-group {
-      @include pre(1 of 4);
-      @include post(1 of 4);
+      text-align: center;
     }
   }
 
@@ -84,11 +76,9 @@ $big-change-height: 376px;
     display: block;
     text-align: center;
 
-    @include mq($from: m) {
-      @include span(1 of 3);
-      &:last-child {
-        @include last();
-      }
+    @include mq($from: s) {
+      display: inline-block;
+      width: 100px;
     }
   }
 
