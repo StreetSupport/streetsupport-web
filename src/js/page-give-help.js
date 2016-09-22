@@ -1,3 +1,5 @@
+import './common'
+
 let LocationSelector = require('./locationSelector')
 let locationSelector = new LocationSelector()
 let templating = require('./template-render')
