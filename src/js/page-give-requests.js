@@ -43,7 +43,7 @@ let formatDate = (needs) => {
 let renderNeeds = (needs) => {
   let theData = {
     card: needs,
-    locations: locationSelector.getViewModelAll(currentLocation)
+    location: currentLocation.name
   }
 
   if (needs.length === 0) {
