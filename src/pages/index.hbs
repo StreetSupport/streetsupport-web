@@ -79,6 +79,7 @@ nosubnav: true
   </div>
 </div>
 
+{{> loading-spinner}}
 <script id="js-content-tpl" type="text/template">
 \{{#isManchester}}
   {{> manchester-home-promo }}
@@ -86,4 +87,23 @@ nosubnav: true
 \{{#isLeeds}}
   {{> leeds-home-promo }}
 \{{/isLeeds}}
+
+<div class="block">
+  <div class="container">
+    <div class="block__content text-center">
+      {{> divider}}
+      <p>Street Support is currently available in Manchester and Leeds.</p>
+      <div class="location-selector">
+        <label for="location" class="location-selector__label">Select your City: </label>
+        <select class="js-homepage-promo-location-selector js-location-select location-selector__select form__input" name="location" id="location">
+          \{{#locations}}
+          <option \{{#isSelected}}selected\{{/isSelected}} value="\{{id}}">\{{name}}</option>
+          \{{/locations}}
+        </select>
+      </div>
+
+      <p>If you would like to see Street Support in your region, please <a href="/contact">get in touch</a>.</p>
+    </div>
+  </div>
+</div>
 </script>

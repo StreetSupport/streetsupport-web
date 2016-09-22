@@ -102,7 +102,6 @@ let _getCurrent = () => {
 }
 
 let _setCurrent = (newCity) => {
-  console.log(newCity)
   if (newCity.length > 0) {
     var now = new Date()
     var expireTime = now.getTime() + 1000 * 36000
@@ -120,13 +119,6 @@ let locationSelector = function () {
       newLocation.isSelected = l.id === current.id
       return newLocation
     })
-    if (getLocation.isAvailable()) {
-      cities.push({
-        id: 'my-location',
-        isSelected: querystring.parameter('location') === 'my-location',
-        name: 'my location'
-      })
-    }
     return cities
   }
   self.getViewModelAll = (current) => {
@@ -142,8 +134,11 @@ let locationSelector = function () {
     })
     return cities
   }
-  self.handler = (onChangeLocationCallback) => {
-    let locationSelector = document.querySelector('.js-location-select')
+  self.handler = (onChangeLocationCallback, selectorId) => {
+    if (selectorId === undefined) {
+      selectorId = '.js-location-select'
+    }
+    let locationSelector = document.querySelector(selectorId)
     locationSelector.addEventListener('change', () => {
       var selectedLocation = locationSelector.options[locationSelector.selectedIndex].value
       _setCurrent(selectedLocation)
