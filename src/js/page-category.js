@@ -165,13 +165,12 @@ function buildList (url) {
 
     analytics.init(theTitle)
 
-    let locationViewModel = locationSelector.getViewModel(currentLocation)
     let viewModel = {
       organisations: formattedProviders,
       subCategories: subCategories,
-      category: result.data.category.name,
+      categoryName: result.data.category.name,
       categorySynopsis: marked(result.data.category.synopsis),
-      locations: locationViewModel
+      location: currentLocation.name
     }
     templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
   })

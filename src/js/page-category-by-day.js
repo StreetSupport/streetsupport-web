@@ -74,12 +74,12 @@ function buildList (url) {
     } else {
       template = 'js-category-no-results-result-tpl'
     }
-    let locationViewModel = locationSelector.getViewModel(currentLocation)
+
     let viewModel = {
       organisations: data,
       categoryName: data.categoryName,
       categorySynopsis: marked(data.synopsis),
-      locations: locationViewModel
+      location: currentLocation.name
     }
     templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
   })
