@@ -1,0 +1,116 @@
+$big-change-yellow: #FFF001;
+$big-change-height: 350px;
+
+.big-change-banner {
+  background: $big-change-yellow;
+  height: $big-change-height;
+  margin-top: 0px;
+}
+
+.big-change-banner__container {
+  @include container();
+  text-align: center;
+  background: #383735;
+  padding: 45px 0 40px 0;
+  position:relative;
+  height: $big-change-height;
+}
+
+.big-change-banner__heading {
+  @include mq($from: m) {
+    &::before {
+      content: ' ';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: $big-change-height 45px 0 0;
+      border-color: $big-change-yellow transparent transparent transparent;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    &::after {
+      content: ' ';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: $big-change-height 45px 0 0;
+      border-color: transparent $big-change-yellow transparent transparent;
+      position: absolute;
+      top: 0px;
+      right: 0;
+    }
+  }
+}
+
+.big-change-banner__heading-part {
+  color: white;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0;
+}
+
+.big-change-banner__heading-part--highlight {
+  color: $big-change-yellow;
+}
+
+.big-change-social {
+  margin: 20px 0 10px 0;
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    @include cf();
+
+    @include mq($from: s) {
+      @include pre(1 of 5);
+      @include post(1 of 5);
+      text-align: center;
+    }
+  }
+
+  &__item {
+    margin: 0 0 10px 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+
+    @include mq($from: s) {
+      display: inline-block;
+      width: 100px;
+    }
+  }
+
+  &__icon {
+    height: 52px;
+    width: 52px;
+    color: white;
+
+    .big-change-social__item--share & {
+      margin: 0 2em;
+
+      &--facebook {
+        @include mq($from: m) {
+          margin: 0 6.8em 0 3.4em;
+        }
+        .big-change-social__list--action-group & {
+          @include mq($from: m) {
+            margin: 0 6.8em 0 2.2em;
+          }
+        }
+      }
+    }
+  }
+
+  &__title {
+    clear: both;
+    text-align: center;
+  }
+}
+
+.big-change__icon--mhp {
+  width: 100px;
+  height: 110px;
+  color: white;
+}

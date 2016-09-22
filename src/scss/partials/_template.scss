@@ -1,4 +1,8 @@
 .template {
   @include cf();
   min-height: 80vh;
+
+  &--maybe-empty {
+    min-height: 0;
+  }
 }

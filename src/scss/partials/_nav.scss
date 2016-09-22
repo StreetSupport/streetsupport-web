@@ -18,7 +18,7 @@
       text-decoration: underline;
 
       @include mq($from: m) {
-        background-color: #fff;
+        background-color: $brand-i;
         text-decoration: none;
       }
     }

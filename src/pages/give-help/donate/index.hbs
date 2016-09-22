@@ -43,31 +43,7 @@ page: donate
   {{> location-description-all}}
 
   \{{#isManchester}}
-  <div class="block__section">
-    <p>Donating to the Big Change Fund is an effective way to support people who are homeless in Manchester. Donations pay for practical items that individuals need to build new lives off the streets, such as rent deposits and training courses. If everyone who lives, works or visits Manchester donates, together we can make Big Changes in our city!</p>
-    <p class="text-center">
-      <a href="http://campaign.justgiving.com/charity/forevermanchester/bigchangemcr" class="btn btn--brand-e btn--full">
-        <span class="btn__text">Donate to Big Change</span>
-      </a>
-    </p>
-    <a href="http://campaign.justgiving.com/charity/forevermanchester/bigchangemcr" class="display-block">
-      <figure class="logo">
-        <img src="../../assets/img/justgiving.png" alt="Just Giving" />
-      </figure>
-    </a>
-  </div>
-  {{>divider class="is-hidden--smallscreen"}}
-
-  <div class="block__section">
-    <p>Big Change brings together charities, organisations and people who have experienced homelessness, to ensure that donations get to those who need it most. To find out more about why Big Change matters, and how the fund works, visit the Big Change Manchester page.</p>
-    <p class="text-center">
-      <a href="/manchester/bigchangemcr" class="btn btn--brand-e btn--full">
-        <span class="btn__text">Read more about Big Change</span>
-      </a>
-    </p>
-  </div>
-  {{>divider class="is-hidden--smallscreen"}}
-
+    {{> manchester-big-change-promo }}
   \{{/isManchester}}
 
   <div class="block__section">
@@ -100,7 +76,13 @@ page: donate
       \{{/locations}}
     </select>
   </div>
+
+  \{{#isManchester}}
+    {{> manchester-big-change-promo }}
+  \{{/isManchester}}
+
   <div class="block__section">
-    <p>No organisations for your selected location were found. If you know of local organisations that could be included here, please use our <a href="/register">registration form, or <a href="mailto:info@streetsupport.net">let us know</a>.</a></p>
+    <p>There are currently no organisations in this location registered with their own donation links. Please choose another location above.</p>
+    <p>If you know of local organisations that could be included in this category, please use our <a href="/register">registration form, or <a href="mailto:info@streetsupport.net">let us know</a>.</a></p>
   </div>
 </script>

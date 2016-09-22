@@ -37,8 +37,10 @@ let getData = () => {
         browser.loaded()
       }
       let theData = {
-        locations: locationViewModel
+        locations: locationViewModel,
+        isManchester: location === 'manchester'
       }
+
       if (result.data.length === 0) {
         templating.renderTemplate('js-no-result-tpl', theData, 'js-result-output', callback)
       } else {
@@ -47,8 +49,6 @@ let getData = () => {
         })
 
         theData.organisations = sorted
-        theData.isManchester = location === 'manchester'
-
         templating.renderTemplate('js-result-tpl', theData, 'js-result-output', callback)
       }
     })

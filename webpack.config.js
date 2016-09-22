@@ -18,6 +18,7 @@ module.exports = {
     home: path.join(__dirname, '/src/js/page-generic'),
     generic: path.join(__dirname, '/src/js/page-generic'),
     findhelp: path.join(__dirname, '/src/js/page-find-help'),
+    giveHelp: path.join(__dirname, '/src/js/page-give-help'),
     category: path.join(__dirname, '/src/js/page-category'),
     categorybyday: path.join(__dirname, '/src/js/page-category-by-day'),
     organisation: path.join(__dirname, '/src/js/page-organisation'),
@@ -28,7 +29,8 @@ module.exports = {
     offeritems: path.join(__dirname, '/src/js/page-offer-items'),
     joinstreetsupport: path.join(__dirname, '/src/js/page-join-street-support'),
     register: path.join(__dirname, '/src/js/page-register'),
-    donate: path.join(__dirname, '/src/js/page-donate')
+    donate: path.join(__dirname, '/src/js/page-donate'),
+    emergencyHelpRedirect: path.join(__dirname, 'src/js/page-emergency-help-redirect')
   },
   output: {
     path: path.join(__dirname, '/_dist/assets/js/'),
