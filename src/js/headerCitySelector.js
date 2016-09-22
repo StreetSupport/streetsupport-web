@@ -17,11 +17,11 @@ const init = () => {
     .then((result) => {
       model.selectedCity(result.id)
     }, (_) => {
-
     })
   let model = new Model()
   ko.applyBindings(model, document.getElementById('js-global-city-selector'))
   location.handler(() => {
+    window.location.reload()
   })
 }
 
