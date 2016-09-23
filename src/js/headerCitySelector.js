@@ -1,28 +1,36 @@
 const LocationSelector = require('./locationSelector')
 const location = new LocationSelector()
-const ko = require('knockout')
 const SupportedCities = require('./supportedCities')
 const supportedCities = new SupportedCities()
 
 var Model = function () {
   const self = this
-  let locations = supportedCities.locations
-  self.cities = ko.observableArray(locations)
-  self.selectedCity = ko.observable()
+  self.cities = supportedCities.locations
+  self.selectedCity = ''
 }
 
 const init = () => {
   location
     .getCurrent()
     .then((result) => {
-      model.selectedCity(result.id)
+      let model = new Model()
+      model.selectedCity = result.id
+
+      let locationSelector = document.querySelector('.js-global-city-selector select')
+      for (var i = 0; i < model.cities.length; i++) {
+        let option = document.createElement('option')
+        option.setAttribute('value', model.cities[i].id)
+        option.innerHTML = model.cities[i].name
+        if (model.cities[i].id === model.selectedCity) {
+          option.setAttribute('selected', 'selected')
+        }
+        locationSelector.appendChild(option)
+      }
+      location.handler(() => {
+        window.location.reload()
+      })
     }, (_) => {
     })
-  let model = new Model()
-  ko.applyBindings(model, document.getElementById('js-global-city-selector'))
-  location.handler(() => {
-    window.location.reload()
-  })
 }
 
 module.exports = {
