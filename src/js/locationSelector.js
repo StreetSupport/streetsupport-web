@@ -113,6 +113,7 @@ let _setCurrent = (newCity) => {
 let locationSelector = function () {
   var self = this
   self.getCurrent = _getCurrent
+  self.setCurrent = _setCurrent
   self.getViewModel = (current) => {
     let cities = supportedCities.locations.map((l) => {
       let newLocation = l

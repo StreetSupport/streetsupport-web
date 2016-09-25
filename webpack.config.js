@@ -30,7 +30,9 @@ module.exports = {
     joinstreetsupport: path.join(__dirname, '/src/js/page-join-street-support'),
     register: path.join(__dirname, '/src/js/page-register'),
     donate: path.join(__dirname, '/src/js/page-donate'),
-    emergencyHelpRedirect: path.join(__dirname, 'src/js/page-emergency-help-redirect')
+    emergencyHelpRedirect: path.join(__dirname, 'src/js/page-emergency-help-redirect'),
+    bigchange: path.join(__dirname, 'src/js/pages/manchester/page-big-change'),
+    leedsbigchange: path.join(__dirname, 'src/js/pages/leeds/page-big-change')
   },
   output: {
     path: path.join(__dirname, '/_dist/assets/js/'),
