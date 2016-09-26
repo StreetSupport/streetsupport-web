@@ -4,11 +4,6 @@ let browser = require('./browser')
 let LocationSelector = require('./locationSelector')
 let locationSelector = new LocationSelector()
 
-locationSelector.handler((selectedLocation) => {
-  console.log('/' + selectedLocation + '/emergency-help/')
-  // browser.redirect('/' + selectedLocation + '/emergency-help/')
-})
-
 locationSelector
   .getCurrent()
   .then((result) => {
