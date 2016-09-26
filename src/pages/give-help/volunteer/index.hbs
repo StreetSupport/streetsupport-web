@@ -58,6 +58,15 @@ page: volunteer
 	    				<input class="form__input" type="text" id="telephone" data-bind="value: telephone" placeholder="Telephone Number"></input>
 	    			</li>
 	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="city">City</label>
+              <select class="form__input" data-bind="
+                  options: cities,
+                  optionsText: 'name',
+                  optionsValue: 'id',
+                  value: city">
+              </select>
+	    			</li>
+	    			<li class="form__field-item">
 	    				<label class="form__label hide-screen" for="postcode">Postcode *</label>
 	    				<input class="form__input" type="text" id="postcode" data-bind="value: postcode" placeholder="Postcode (required)"></input>
 	    			</li>

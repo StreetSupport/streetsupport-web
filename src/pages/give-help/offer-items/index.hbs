@@ -58,6 +58,15 @@ page: offeritems
 	    				<input class="form__input" type="text" data-bind="textInput: telephone" placeholder="Telephone Number"></input>
 	    			</li>
 	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="city">City</label>
+              <select class="form__input" data-bind="
+                  options: cities,
+                  optionsText: 'name',
+                  optionsValue: 'id',
+                  value: city">
+              </select>
+	    			</li>
+	    			<li class="form__field-item">
 	    				<label class="form__label hide-screen" for="postcode">Postcode *</label>
 	    				<input class="form__input" type="text" data-bind="textInput: postcode" placeholder="Postcode (required)"></input>
 	    			</li>
