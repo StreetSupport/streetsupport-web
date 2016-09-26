@@ -141,6 +141,7 @@ let locationSelector = function () {
     }
     let locationSelector = document.querySelector(selectorId)
     locationSelector.addEventListener('change', () => {
+      console.log('change')
       var selectedLocation = locationSelector.options[locationSelector.selectedIndex].value
       _setCurrent(selectedLocation)
       onChangeLocationCallback(selectedLocation)
