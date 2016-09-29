@@ -1,5 +1,7 @@
 var nav = require('./nav.js')
 var analytics = require('./analytics')
+const headerCitySelector = require('./headerCitySelector')
+
 import Svg4everybody from 'svg4everybody'
 
 let removeNoJS = () => {
@@ -61,3 +63,5 @@ nav.init()
 analytics.init()
 fastClickCheck()
 Svg4everybody()
+
+headerCitySelector.init()

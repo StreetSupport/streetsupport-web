@@ -1,6 +1,6 @@
 ---
-title: Street Support - Working together to end homelessness in Manchester
-description: Street Support - Find help, and give help, to support people who are homeless in Manchester
+title: Street Support - Working together to end homelessness
+description: Street Support - Find help, and give help, to support people who are homeless in Manchester and Leeds
 layout: default.hbs
 permalink: false
 jsBundle: home
@@ -11,7 +11,7 @@ nosubnav: true
 
 <div class="block block--header">
   <div class="container">
-    <h1 class="h1 block__header">Supporting homeless people together</h1>
+    <h1 class="h1 block__header">Let's end homelessness together!</h1>
     <div class="block__cta block__cta--2">
       {{>cta brand="d" link="/find-help/" name="Find Help"}}
       {{>cta brand="e" link="/give-help/" name="Give Help"}}
@@ -36,8 +36,8 @@ nosubnav: true
   <div class="container">
       <div class="block__content">
         <div class="block__cta block__cta--incopy block__cta--2 block--pushup">
-          {{>cta brand="d" icon="big-change" link="/find-help/" name="Find Help"}}
-          {{>cta brand="e" icon="give" link="/give-help/" name="Give Help"}}
+          {{>cta brand="d" icon="findhelp" link="/find-help/" name="Find Help"}}
+          {{>cta brand="e" icon="givehelp" link="/give-help/" name="Give Help"}}
         </div>
 
       <div class="highlight">
@@ -60,27 +60,7 @@ nosubnav: true
  </div>
 </div>
 
-<div class="block block--image">
-  <div class="block__content">
-    <div class="block__image-image">
-      <a href="http://charter.streetsupport.net">
-        <picture>
-        <source media="(max-width: 600px)" srcset="assets/img/town-hall_400x267.jpg">
-        <source media="(min-width: 800px)" srcset="assets/img/town-hall_600x400.jpg">
-        <source media="(min-width: 1000px)" srcset="assets/img/town-hall_900x600.jpg">
-          <img src="assets/img/town-hall_900x600.jpg" alt="The Street Support Charter Launch" />
-        </picture>
-      </a>
-    </div>
-    <div class="block__image-description">
-      <div class="block__image-copy">
-        <h2 class="h1">End Homelessness!</h2>
-        <p>The Manchester Homelessness Charter is a mission to end homelessness in the city, co-created by people experiencing homelessness, alongside the organisations and individuals working to support them. </p>
-        <p><strong><a href="http://charter.streetsupport.net">Find out about the charter&hellip;</a></strong></p>
-      </div>
-    </div>
-  </div>
-</div>
+<div id="js-template-output" class="template--maybe-empty"></div>
 
 <div class="block block--highlight block--promo">
   <div class="container">
@@ -98,3 +78,32 @@ nosubnav: true
     </div>
   </div>
 </div>
+
+{{> loading-spinner}}
+<script id="js-content-tpl" type="text/template">
+\{{#isManchester}}
+  {{> manchester-home-promo }}
+\{{/isManchester}}
+\{{#isLeeds}}
+  {{> leeds-home-promo }}
+\{{/isLeeds}}
+
+<div class="block">
+  <div class="container">
+    <div class="block__content text-center">
+      {{> divider}}
+      <p>Street Support is currently available in Manchester and Leeds.</p>
+      <div class="location-selector">
+        <label for="location" class="location-selector__label">Select your City: </label>
+        <select class="js-homepage-promo-location-selector js-location-select location-selector__select form__input" name="location" id="location">
+          \{{#locations}}
+          <option \{{#isSelected}}selected\{{/isSelected}} value="\{{id}}">\{{name}}</option>
+          \{{/locations}}
+        </select>
+      </div>
+
+      <p>If you think Street Support is needed in your area, please <a href="/contact">let us know</a>!</p>
+    </div>
+  </div>
+</div>
+</script>

@@ -31,13 +31,12 @@ let getData = () => {
   }
   getApiData.data(url)
     .then(function (result) {
-      let locationViewModel = locationSelector.getViewModelAll(currentLocation)
       let callback = function () {
         locationSelector.handler(onChangeLocation)
         browser.loaded()
       }
       let theData = {
-        locations: locationViewModel,
+        location: currentLocation.name,
         isManchester: location === 'manchester'
       }
 

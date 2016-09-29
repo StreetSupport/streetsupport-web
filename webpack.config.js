@@ -15,7 +15,7 @@ if (argv.production) {
 
 module.exports = {
   entry: {
-    home: path.join(__dirname, '/src/js/page-generic'),
+    home: path.join(__dirname, '/src/js/page-home'),
     generic: path.join(__dirname, '/src/js/page-generic'),
     findhelp: path.join(__dirname, '/src/js/page-find-help'),
     giveHelp: path.join(__dirname, '/src/js/page-give-help'),
@@ -30,6 +30,9 @@ module.exports = {
     joinstreetsupport: path.join(__dirname, '/src/js/page-join-street-support'),
     register: path.join(__dirname, '/src/js/page-register'),
     donate: path.join(__dirname, '/src/js/page-donate'),
+    bigchange: path.join(__dirname, 'src/js/pages/manchester/page-big-change'),
+    leedsbigchange: path.join(__dirname, 'src/js/pages/leeds/page-big-change'),
+    emergencyhelp: path.join(__dirname, 'src/js/page-emergency-help'),
     emergencyHelpRedirect: path.join(__dirname, 'src/js/page-emergency-help-redirect')
   },
   output: {

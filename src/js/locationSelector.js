@@ -83,7 +83,7 @@ let _useSaved = (deferred) => {
   }
 }
 
-let _determineLocationRetrieval = (deferred, locationInQueryString) => {
+let _determineLocationRetrievalMethod = (deferred, locationInQueryString) => {
   if (locationInQueryString === 'my-location' && getLocation.isAvailable()) {
     return _useMyLocation
   }
@@ -96,7 +96,7 @@ let _determineLocationRetrieval = (deferred, locationInQueryString) => {
 let _getCurrent = () => {
   let deferred = Q.defer()
   let locationInQueryString = querystring.parameter('location')
-  let getLocation = _determineLocationRetrieval(deferred, locationInQueryString)
+  let getLocation = _determineLocationRetrievalMethod(deferred, locationInQueryString)
   getLocation(deferred, locationInQueryString)
   return deferred.promise
 }
@@ -113,19 +113,13 @@ let _setCurrent = (newCity) => {
 let locationSelector = function () {
   var self = this
   self.getCurrent = _getCurrent
+  self.setCurrent = _setCurrent
   self.getViewModel = (current) => {
     let cities = supportedCities.locations.map((l) => {
       let newLocation = l
       newLocation.isSelected = l.id === current.id
       return newLocation
     })
-    if (getLocation.isAvailable()) {
-      cities.push({
-        id: 'my-location',
-        isSelected: querystring.parameter('location') === 'my-location',
-        name: 'my location'
-      })
-    }
     return cities
   }
   self.getViewModelAll = (current) => {
@@ -141,9 +135,13 @@ let locationSelector = function () {
     })
     return cities
   }
-  self.handler = (onChangeLocationCallback) => {
-    let locationSelector = document.querySelector('.js-location-select')
+  self.handler = (onChangeLocationCallback, selectorId) => {
+    if (selectorId === undefined) {
+      selectorId = '.js-location-select'
+    }
+    let locationSelector = document.querySelector(selectorId)
     locationSelector.addEventListener('change', () => {
+      console.log('change')
       var selectedLocation = locationSelector.options[locationSelector.selectedIndex].value
       _setCurrent(selectedLocation)
       onChangeLocationCallback(selectedLocation)

@@ -6,6 +6,8 @@ require('knockout.validation') // No variable here is deliberate!
 var apiRoutes = require('../api')
 var postApi = require('../post-api-data')
 var browser = require('../browser')
+var SupportedCities = require('../supportedCities')
+var supportedCities = new SupportedCities()
 
 var formId = 'js-form'
 var failId = 'js-fail'
@@ -15,7 +17,7 @@ var theFail = document.getElementById(failId)
 var theSuccess = document.getElementById(successId)
 var hideClass = 'hide'
 
-var VolunteerModel = function () {
+var VolunteerModel = function (currCityId) {
   var self = this
 
   ko.validation.init({
@@ -30,6 +32,12 @@ var VolunteerModel = function () {
   self.lastName = ko.observable('').extend({ required: true })
   self.email = ko.observable('').extend({ required: true })
   self.telephone = ko.observable('')
+  self.city = ko.observable(currCityId)
+  self.cities = supportedCities.locations
+  self.cities.push({
+    id: '',
+    name: 'Other'
+  })
   self.postcode = ko.observable('').extend({ required: true })
   self.skillsAndExperience = ko.observable('')
   self.availability = ko.observable('')
@@ -45,6 +53,7 @@ var VolunteerModel = function () {
         'LastName': self.lastName(),
         'Email': self.email(),
         'Telephone': self.telephone(),
+        'City': self.city(),
         'Postcode': self.postcode(),
         'SkillsAndExperienceDescription': self.skillsAndExperience(),
         'AvailabilityDescription': self.availability(),
