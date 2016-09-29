@@ -131,7 +131,7 @@
     padding-bottom: 6px !important;
     background-color: rgba(black, 0.5);
     position: absolute;
-    z-index: 100;
+    z-index: $zIndex-breadcrumb;
     width: 100%;
 
     @media print {
@@ -151,11 +151,11 @@
     background-image: url('../img/header-background.png');
     background-repeat: repeat;
     color: #fff;
-    padding-top: 80px;
+    padding-top: 140px;
     padding-bottom: 50px;
 
     @include mq($from: m) {
-      padding-top: 110px;
+      padding-top: 260px;
       padding-bottom: 80px;
     }
   }
@@ -215,10 +215,11 @@
 }
 
 .block--subpage-header {
+  padding-top: 90px;
   padding-bottom: 0px;
 
   @include mq($from: m) {
-    padding-top: 40px;
+    padding-top: 250px;
     padding-bottom: 0px;
   }
 

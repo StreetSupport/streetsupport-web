@@ -1,0 +1,182 @@
+.header--mobile {
+  display: block;
+
+  .header__title {
+    display: block;
+    float: left;
+    padding: 10px 0 0 10px;
+    margin: 0;
+  }
+
+  .header__btn {
+    float: right;
+    width: auto;
+    padding: 20px;
+    margin: 0;
+    background-color:$brand-j;
+
+    a {
+      color: $brand-k;
+    }
+
+    @include mq($from: m) {
+      display: none;
+    }
+
+    .icon {
+      height: 12px;
+      width: 12px;
+    }
+  }
+
+  @include mq($from: m) {
+    display: none;
+  }
+
+  .current-city {
+    display: block;
+    clear: both;
+    background: $brand-j;
+    padding: 10px;
+    box-shadow: 0 2px 5px 0 rgba(50,50,50,.7);
+  }
+}
+
+.nav--mobile {
+  @include mq($from: m) {
+    display: none;
+  }
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: $nav-width;
+  z-index: $zIndex-mobileNav;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+
+  transition: transform 250ms cubic-bezier(.16, .68, .43, .99);
+  transform: translate3d($nav-width, 0, 0);
+
+  background-color: $brand-c;
+
+  &.is-active {
+    transform: translate3d(0px, 0, 0);
+  }
+
+  .nav__push {
+    transition: transform 250ms cubic-bezier(.16, .68, .43, .99);
+
+    &.is-active {
+      transform: translate3d(-$nav-width, 0, 0);
+    }
+  }
+
+  .nav__btn {
+    float: right;
+    width: auto;
+    padding: 10px;
+    margin: 0;
+    color: #fff;
+
+    @include mq($from: m) {
+      display: none;
+    }
+
+    .icon {
+      height: 12px;
+      width: 12px;
+    }
+  }
+
+  .nav__list {
+    list-style-type: none;
+
+    &--sub-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .nav__item {
+    color: #fff;
+    margin: 0;
+    padding: 0px;
+    font-weight: $font-headline-weight;
+
+    &--city-specific {
+      border-top: 1px solid $brand-b;
+      border-bottom: 1px solid $brand-b;
+
+      ul {
+        display: none;
+      }
+
+      ul a {
+        color: $brand-k;
+      }
+    }
+
+    &--city-specific.is-active {
+      border: none;
+      background: $brand-j;
+      color: $brand-k;
+
+      ul {
+        display: block;
+      }
+
+      .nav__list--sub-list a {
+        padding: 10px;
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+    }
+  }
+
+  @media print {
+    & {
+      display: none;
+    }
+  }
+}
+
+.nav__overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $zIndex-navOverlay;
+  background-color: rgba(0, 0, 0, 0.8);
+  animation: fade 500ms;
+
+  display: none;
+  opacity: 0;
+
+  &.is-active {
+    opacity: 1;
+    display: block;
+
+    @include mq($from: m) {
+      display: none;
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

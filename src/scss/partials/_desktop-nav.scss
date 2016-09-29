@@ -1,0 +1,178 @@
+
+.sticky {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: $zIndex-fixedHeader;
+}
+
+.header {
+  background: $brand-a;
+  background: linear-gradient(to bottom, $brand-a, #339378);
+}
+
+.header__title {
+  color: #FFF;
+
+  @include mq($from: m) {
+    display: inline-block;
+    padding: 35px 35px 35px 0;
+    float: left;
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+    display: block;
+    text-decoration: none;
+  }
+
+  .icon {
+    display: inline-block;
+    height: 40px;
+    margin-right: 10px;
+    width: 38px;
+  }
+
+  .text {
+    display: inline-block;
+    line-height: 43px;
+    vertical-align: top;
+
+    @include mq($from: m) {
+      font-size: 22px;
+    }
+  }
+}
+
+.nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header--desktop {
+  display: none;
+
+  @include mq($from: m) {
+    display: block;
+
+    .header__nav {
+      float: left;
+      margin-top: 35px;
+
+      .nav__item {
+        float: left;
+        a {
+          display: inline-block;
+          color: white;
+          padding: 12px 20px;
+        }
+      }
+    }
+  }
+}
+
+.city-nav {
+  display: none;
+
+  @include mq($from: m) {
+    display: block;
+    text-align: center;
+    box-shadow: 0 2px 5px 0 rgba(50,50,50,.7);
+    border-top: 2px solid $brand-i;
+
+    .nav__list {
+      background: $brand-j;
+
+      &--city {
+        display: none;
+        &.is-active {
+          display: block;
+        }
+      }
+    }
+
+    .nav__item {
+      display: inline-block;
+      margin: 0;
+      a {
+        display: inline-block;
+        color: $brand-k;
+        padding: 10px 30px;
+        margin: 0;
+
+        &:hover {
+          background: $brand-i;
+          text-decoration: none;
+        }
+      }
+    }
+
+    .nav__list--sub-list {
+      display: none;
+      position: absolute;
+      z-index: $zIndex-SubNav;
+      left: 0;
+      right: 0;
+      background: $brand-i;
+      box-shadow: 0 2px 2px 0 rgba(50,50,50,.3);
+    }
+  }
+}
+
+.global-city-selector {
+  @include mq($from: m) {
+    float: right;
+    margin-top: 40px;
+  }
+  label {
+    color: white;
+  }
+
+  select {
+    width: 100%;
+    @include mq($from: m) {
+      width: auto;
+    }
+  }
+}
+
+
+// Active Subnav
+@include mq($from: m) {
+  @each $section in $nav-sections {
+    .section--#{$section} .city-nav .nav__item--#{$section} {
+      background-color: $brand-i;
+
+      .nav__list--sub-list {
+        display: block;
+      }
+    }
+  }
+}
+
+// Active page
+@each $page in $nav-pages {
+  .page--#{$page} {
+    .header__nav .nav__item--#{$page} > a {
+      @include mq($from: m) {
+        text-decoration: underline;
+      }
+    }
+
+    .city-nav .nav__item--#{$page} > a {
+      text-decoration: underline;
+
+      @include mq($from: m) {
+        background-color: $brand-i;
+        text-decoration: none;
+      }
+    }
+    .nav__item--sub-item.nav__item--#{$page} > a {
+      @include mq($from: m) {
+        background-color: white;
+      }
+    }
+  }
+}

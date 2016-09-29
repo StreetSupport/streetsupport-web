@@ -5,15 +5,19 @@ var activeClass = 'is-active'
 var el = document.querySelectorAll('.js-nav-container, .js-nav-push, .js-nav-overlay, html, body')
 const LocationSelector = require('./locationSelector')
 const location = new LocationSelector()
+const SupportedCities = require('./supportedCities')
+const supportedCities = new SupportedCities()
 
 const hideForCity = (cityId) => {
   var citySpecificElements = document.querySelectorAll('[data-city]')
   for (let i = 0; i < citySpecificElements.length; i++) {
     let citiesRequired = citySpecificElements[i].getAttribute('data-city')
-    if (citiesRequired.indexOf(cityId) === -1) {
-      citySpecificElements[i].classList.add('hidden')
+    if (citiesRequired.indexOf(cityId) > -1) {
+      citySpecificElements[i].classList.add('is-active') // desktop
     }
   }
+  var currentCity = document.querySelector('.js-current-city')
+  currentCity.innerHTML = supportedCities.get(cityId).name
 }
 
 var init = function () {
