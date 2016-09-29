@@ -1,0 +1,11 @@
+<div class="js-location-select-modal modal">
+  <button class="btn btn--plain nav__btn js-modal-close modal-close" type="button">{{>icon name="close" class="icon"}}<span class="hide-screen">Close</span></button>
+  <div class="modal-body text-center">
+    <h1 class="h1 modal-title">We're in two cities - tell us where you are:</h1>
+    <div class="location-select__cta-container">
+    {{>cta brand="d" noWrapper=true btnClass="js-location-select-manchester location-select__cta location-select--manchester" icon="findhelp" link="#" name="I'm in Manchester"}}
+    {{>cta brand="d" noWrapper=true btnClass="js-location-select-leeds location-select__cta location-select--leeds" icon="givehelp" link="#" name="I'm in Leeds"}}
+    </div>
+    <p>If you think Street Support is needed in your area, <a href="/contact/">please let us know</a>!</p>
+  </div>
+</div>

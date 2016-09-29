@@ -20,7 +20,7 @@ const init = () => {
       for (var i = 0; i < model.cities.length; i++) {
         let option = document.createElement('option')
         option.setAttribute('value', model.cities[i].id)
-        option.innerHTML = model.cities[i].name
+        option.innerHTML = 'I\'m in ' + model.cities[i].name
         if (model.cities[i].id === model.selectedCity) {
           option.setAttribute('selected', 'selected')
         }

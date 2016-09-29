@@ -8,9 +8,35 @@ let supportedCities = new SupportedCities()
 let _nearestSupported = () => {
   let deferred = Q.defer()
 
+  let getDefault = () => {
+    let modal = document.querySelector('.js-location-select-modal')
+    modal.classList.add('is-active')
+
+    let modalCloser = document.querySelector('.js-modal-close')
+    modalCloser.addEventListener('click', (e) => {
+      modal.classList.remove('is-active')
+      _setCurrent(supportedCities.default.id)
+      window.location.reload()
+    })
+
+    document.querySelector('.js-location-select-manchester')
+      .addEventListener('click', (e) => {
+        e.preventDefault()
+        _setCurrent('manchester')
+        window.location.reload()
+      })
+    document.querySelector('.js-location-select-leeds')
+      .addEventListener('click', (e) => {
+        e.preventDefault()
+        _setCurrent('leeds')
+        window.location.reload()
+      })
+  }
+
   if (getLocation.isAvailable()) {
     getLocation.location()
       .then((position) => {
+
         let getNearest = (position) => {
           let currLatitude = position.coords.latitude
           let currLongitude = position.coords.longitude
@@ -23,19 +49,23 @@ let _nearestSupported = () => {
           }
 
           let sorted = supportedCities.locations
+            .filter((l) => l.distance <= 10000)
             .sort((a, b) => {
               if (a.distance < b.distance) return -1
               if (a.distance > b.distance) return 1
               return 0
             })
+
+          if (sorted.length === 0) return getDefault()
+
           return sorted[0]
         }
         deferred.resolve(getNearest(position))
       }, (_) => {
-        deferred.resolve(supportedCities.default)
+        deferred.resolve(getDefault())
       })
   } else {
-    deferred.resolve(supportedCities.default)
+    deferred.resolve(getDefault())
   }
 
   return deferred.promise
@@ -141,7 +171,6 @@ let locationSelector = function () {
     }
     let locationSelector = document.querySelector(selectorId)
     locationSelector.addEventListener('change', () => {
-      console.log('change')
       var selectedLocation = locationSelector.options[locationSelector.selectedIndex].value
       _setCurrent(selectedLocation)
       onChangeLocationCallback(selectedLocation)
