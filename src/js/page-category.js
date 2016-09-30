@@ -108,12 +108,16 @@ function buildList (url) {
         let service = {
           info: provider.info,
           location: provider.location,
-          days: groupOpeningTimes(provider.openingTimes)
+          days: groupOpeningTimes(provider.openingTimes),
+          servicesAvailable: provider.subCategories
+            .map((sc) => sc.name)
+            .join(', ')
         }
         let match = formattedProviders.filter((p) => p.providerId === provider.serviceProviderId)
 
         if (match.length === 1) {
           match[0].services.push(service)
+          match[0].subCategories = match[0].subCategories.concat(provider.subCategories)
         } else {
           let newProvider = {
             providerId: provider.serviceProviderId,
@@ -129,10 +133,8 @@ function buildList (url) {
                 subCategories.push(sc)
               }
             })
+
             newProvider.subCategories = provider.subCategories
-            newProvider.subCategoryList = provider.subCategories
-              .map((sc) => sc.name)
-              .join(', ')
           }
           formattedProviders.push(newProvider)
         }
