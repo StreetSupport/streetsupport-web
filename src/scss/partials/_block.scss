@@ -175,11 +175,11 @@
   background-image: url('../img/header-background.png');
   background-repeat: repeat;
   color: #fff;
-  padding-top: 140px;
+  padding-top: 160px;
   padding-bottom: 50px;
 
   @include mq($from: m) {
-    padding-top: 260px;
+    padding-top: 280px;
     padding-bottom: 80px;
   }
 }
