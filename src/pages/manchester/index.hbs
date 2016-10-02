@@ -1,71 +1,80 @@
 ---
-title: Street Support Manchester UK - Street Support
-description: Street support makes it easier to help homeless people. Here's how its happening in Manchester.
+title: Street Support - Working together to end homelessness
+description: Street Support - Find help, and give help, to support people who are homeless in Manchester and Leeds
 layout: default.hbs
 permalink: false
-jsBundle: generic
-section: locations
+jsBundle: home
+section: home
 page: manchester
 nosubnav: true
 ---
 
-<div class="block block--breadcrumbs">
+<div class="block block--header block--manchester-header">
   <div class="container">
-    <ol class="breadcrumbs__list">
-      <li class="breadcrumbs__item"><a href="/">Home</a></li>
-
-      <li class="breadcrumbs__item">Manchester</li>
-    </ol>
+    <h1 class="h1 block__header">Let's end homelessness together!</h1>
+    <div class="block__cta block__cta--2">
+      {{>cta brand="d" link="/find-help/" name="Find Help"}}
+      {{>cta brand="e" link="/give-help/" name="Give Help"}}
+    </div>
   </div>
 </div>
 
-<div class="block block--subpage-header">
-  <div class="container">
-    <h1 class="h1 block__header">Street Support in Manchester</h1>
-  </div>
-</div>
-
-<div class="block">
+<div class="block block--promo block--pulldown">
   <div class="container">
     <div class="block__content">
-
-      <div class="block__section">
-        <p>Street Support is part of a wide network of organisations in Manchester who are working together to end homelessness. Here are some of the current initiatives happening in the city...</p>
+      <p>Street Support is a network of charities, voluntary groups and kind-hearted folk, working together to end homelessness. Through this site you can find services for people experiencing homelessness, and offer your time and resources to local organisations.</p>
+      <div class="social-share social-share--home">
+        <span class="social-share__text">Share Street Support with your friends to show your commitment to making a big change: </span>
+        <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="streetsupportuk" data-dnt="true">Tweet</a>
+        <div class="fb-share-button" data-href="" data-layout="button" data-mobile-iframe="true"></div>
       </div>
+    </div>
+  </div>
+</div>
 
-      <div class="block__section">
-        <h2 class="h2">Manchester Homelessness Charter</h2>
-        <p>The Manchester Homelessness Charter is a shared vision and set of values, which has been co-written with people experiencing homelessness, alongside experts from local charities and service providers. The ultimate goal is to end homelessness in Manchester.</p>
-        <a href="http://charter.streetsupport.net/" class="btn btn--brand-e btn--full">
-          <span class="btn__text">Find out about Manchester Homelessness Charter</span>
-        </a>
-      </div>
+<div class="block block--highlight">
+  <div class="container">
+      <div class="block__content">
+        <div class="block__cta block__cta--incopy block__cta--2 block--pushup">
+          {{>cta brand="d" icon="findhelp" link="/find-help/" name="Find Help"}}
+          {{>cta brand="e" icon="givehelp" link="/give-help/" name="Give Help"}}
+        </div>
 
-      <div class="block__section">
-        <h2 class="h2">Big Change Manchester</h2>
-        <p>Big Change Manchester is a fund set up to provide local people who are homeless with practical items they need, so they can build new lives off the streets. Find out more about the fund, and why it matters.</p>
-        <a href="/manchester/bigchangemcr/fund/" class="btn btn--brand-e btn--full">
-          <span class="btn__text">Find out about Big Change Manchester</span>
-        </a>
-      </div>
+      <div class="highlight">
+        <ul class="highlight__list">
+          <li class="highlight__item">
+           <span class="highlight__title">46</span>
+           <span class="h3 highlight__description">Organisations</span>
+         </li>
+         <li class="highlight__item">
+           <span class="highlight__title">111</span>
+           <span class="h3 highlight__description">Pledges</span>
+         </li>
+         <li class="highlight__item">
+           <span class="highlight__title">82</span>
+           <span class="h3 highlight__description">Volunteers</span>
+         </li>
+       </ul>
+     </div>
+   </div>
+ </div>
+</div>
 
-      <div class="block__section">
-        <h2 class="h2">Coalition of Relief</h2>
-        <p>Coalition of Relief (COR) is a network of grassroots organisations that work together to provide sustainable long-term support solutions for homelessness.</p>
-        <a href="cor" class="btn btn--brand-e btn--full">
-          <span class="btn__text">Find out about Coalition of Relief</span>
-        </a>
-      </div>
+{{> manchester-home-promo }}
 
-      <div class="block__section">
-        <h2 class="h2">Manchester Homelessness News</h2>
-        <p>The Street Support news section contains stories, articles and updates related to homelessness in Manchester. Find out the latest news about the Charter, Big Change, and other projects.</p>
-        <a href="http://news.streetsupport.net/tag/manchester/" class="btn btn--brand-e btn--full">
-          <span class="btn__text">Find out what's happening in Manchester</span>
-        </a>
-      </div>
-
-      {{> social-share}}
+<div class="block block--highlight block--promo">
+  <div class="container">
+    <div class="block__content partners">
+      <h2 class="h2">Supported by&hellip;</h2>
+      <ul class="partners__list">
+        <li class="partners__logo partners__logo--booth-centre"><a href="http://www.boothcentre.org.uk/"><span class="hide-screen">Booth Centre</span></a></li>
+        <li class="partners__logo partners__logo--mustard-tree"><a href="http://www.mustardtree.org.uk/"><span class="hide-screen">Mustard Tree</span></a></li>
+        <li class="partners__logo partners__logo--holy-name-manchester"><a href="http://www.holyname.info/">{{> icon name="holy-name-manchester"}}</a></li>
+        <li class="partners__logo partners__logo--leedsbid"><a href="http://www.leedsbid.co.uk/">{{> icon name="leedsbid"}}</a></li>
+        <li class="partners__logo partners__logo--bruntwood"><a href="http://bruntwood.co.uk/"><span class="hide-screen">Bruntwood</span></a></li>
+      </ul>
+      <p>We are looking for businesses and organisations to <a href="/give-help/partnership/">partner with us</a> so that we can continue to develop this resource.</p>
+      <p>If you share our vision of a world without homelessness, please <a href="mailto:sponsorship@streetsupport.net">get in touch</a>.</p>
     </div>
   </div>
 </div>

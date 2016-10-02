@@ -22,7 +22,7 @@
   position: absolute;
   width: 20px;
   height: 20px;
-  top: 20px;
+  top: 0px;
   right: 20px;
 }
 
@@ -39,24 +39,23 @@
 }
 
 .location-select__cta {
-  @include mq($from: m) {
+  width: 100%;
+  @include mq($from: s) {
     @include span(1 of 2);
     &:last-child {
       @include last();
-    }
-  }
-  @include mq($from: xl) {
-    @include span(2 of 6);
-    &:first-child {
-      @include pre(1 of 6);
-    }
-    &:last-child {
-      @include last();
-      @include post(1 of 6);
     }
   }
 }
 
 .location-select__cta-container {
   @include cf();
+}
+
+.location-select--manchester {
+
+}
+
+.location-select--leeds {
+
 }

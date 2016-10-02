@@ -16,6 +16,9 @@ const init = () => {
       let model = new Model()
       model.selectedCity = result.id
 
+      let body = document.querySelector('body')
+      body.classList.add(result.id)
+
       let locationSelector = document.querySelector('.js-global-city-selector select')
       for (var i = 0; i < model.cities.length; i++) {
         let option = document.createElement('option')

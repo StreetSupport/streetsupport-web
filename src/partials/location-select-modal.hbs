@@ -3,8 +3,16 @@
   <div class="modal-body text-center">
     <h1 class="h1 modal-title">We're in two cities - tell us where you are:</h1>
     <div class="location-select__cta-container">
-    {{>cta brand="d" noWrapper=true btnClass="js-location-select-manchester location-select__cta location-select--manchester" link="#" name="I'm in Manchester"}}
-    {{>cta brand="d" noWrapper=true btnClass="js-location-select-leeds location-select__cta location-select--leeds" link="#" name="I'm in Leeds"}}
+
+      <btn class="btn btn--brand-d js-location-select-manchester location-select__cta">
+        <span class="btn__icon location-select-icon location-select-icon--manchester"></span>
+        <span class="btn__text">I'm in Manchester</span>
+      </btn>
+
+      <btn class="btn btn--brand-d js-location-select-leeds location-select__cta">
+        <span class="btn__icon location-select-icon location-select-icon--leeds"></span>
+        <span class="btn__text">I'm in Leeds</span>
+      </btn>
     </div>
     <p>If you think Street Support is needed in your area, <a href="/contact/">please let us know</a>!</p>
   </div>

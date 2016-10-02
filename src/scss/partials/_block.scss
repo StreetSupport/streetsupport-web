@@ -147,19 +147,6 @@
     }
   }
 
-  &--header {
-    background-image: url('../img/header-background.png');
-    background-repeat: repeat;
-    color: #fff;
-    padding-top: 140px;
-    padding-bottom: 50px;
-
-    @include mq($from: m) {
-      padding-top: 260px;
-      padding-bottom: 80px;
-    }
-  }
-
   &--highlight {
     background: $brand-c;
     background: linear-gradient(to bottom, $brand-b, $brand-c);
@@ -182,6 +169,39 @@
     padding: 20px 0;
     background: $brand-i;
   }
+}
+
+.block--header {
+  background-image: url('../img/header-background.png');
+  background-repeat: repeat;
+  color: #fff;
+  padding-top: 140px;
+  padding-bottom: 50px;
+
+  @include mq($from: m) {
+    padding-top: 260px;
+    padding-bottom: 80px;
+  }
+}
+
+.manchester .block--header {
+  background-image: url('../img/header-background-manchester.png');
+  background-position: bottom;
+  background-size: 940px;
+}
+
+.leeds .block--header{
+  background-image: url('../img/header-background-leeds.png');
+  background-position: bottom;
+  background-size: 940px;
+}
+
+.leeds .block--manchester-header {
+  background-image: url('../img/header-background-manchester.png');
+}
+
+.manchester .block--leeds-header {
+  background-image: url('../img/header-background-leeds.png');
 }
 
 // Components
@@ -287,6 +307,6 @@
   }
 }
 
-.block--home-promo {
-  padding-bottom: 0!important;
+.template--maybe-empty .block--home-promo {
+  padding-bottom: 0px!important;
 }
