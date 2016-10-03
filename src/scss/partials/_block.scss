@@ -187,7 +187,9 @@
 .manchester .block--header {
   background-image: url('../img/header-background-manchester.png');
   background-position: bottom;
+  background-repeat: repeat-x;
   background-size: 940px;
+  background-color: #636466;
 }
 
 .leeds .block--header{
@@ -305,6 +307,10 @@
       margin-bottom: 0;
     }
   }
+}
+
+.leeds .block__sub-header {
+  color: $brand-c;
 }
 
 .template--maybe-empty .block--home-promo {

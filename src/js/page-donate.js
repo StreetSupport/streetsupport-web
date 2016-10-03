@@ -32,12 +32,15 @@ let getData = () => {
   getApiData.data(url)
     .then(function (result) {
       let callback = function () {
-        locationSelector.handler(onChangeLocation)
+        locationSelector.handler(onChangeLocation, '.js-donation-location-selector')
         browser.loaded()
       }
+      let locations = locationSelector.getViewModelAll(currentLocation)
+      console.log(currentLocation)
       let theData = {
         location: currentLocation.name,
-        isManchester: location === 'manchester'
+        isManchester: location === 'manchester',
+        locations: locations
       }
 
       if (result.data.length === 0) {
