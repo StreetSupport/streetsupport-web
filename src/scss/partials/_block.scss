@@ -184,26 +184,62 @@
   }
 }
 
-.manchester .block--header {
+.manchester-header {
   background-image: url('../img/header-background-manchester.png');
   background-position: bottom;
-  background-repeat: repeat-x;
   background-size: 940px;
-  background-color: #636466;
+  position: relative;
+
+  &:before {
+    @include mq($from: xxl) {
+      position: absolute;
+      display: inline-block;
+      content: '';
+      width: 420px;
+      height: 370px;
+      background: url(../img/manchester-townhall.png) no-repeat;
+      background-size: 370px;
+      left: -6vw;
+      bottom: -57px;
+    }
+    @include mq($from: xxxl) {
+      left: 5vw;
+    }
+  }
 }
 
-.leeds .block--header{
+.leeds-header {
   background-image: url('../img/header-background-leeds.png');
   background-position: bottom;
   background-size: 940px;
+  position: relative;
+
+  &:before {
+    @include mq($from: xxl) {
+      position: absolute;
+      display: inline-block;
+      content: '';
+      width: 420px;
+      height: 370px;
+      background: url(../img/leeds-townhall.png) no-repeat;
+      background-size: 370px;
+      left: -6vw;
+      bottom: -43px;
+    }
+    @include mq($from: xxxl) {
+      left: 5vw;
+    }
+  }
 }
 
+.manchester .block--header,
 .leeds .block--manchester-header {
-  background-image: url('../img/header-background-manchester.png');
+  @extend .manchester-header;
 }
 
+.leeds .block--header,
 .manchester .block--leeds-header {
-  background-image: url('../img/header-background-leeds.png');
+  @extend .leeds-header;
 }
 
 // Components
