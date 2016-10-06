@@ -3,6 +3,7 @@ var closeElement = '.js-nav-close'
 var overlayElement = '.js-nav-overlay'
 var activeClass = 'is-active'
 var el = document.querySelectorAll('.js-nav-container, .js-nav-push, .js-nav-overlay, html, body')
+const stickyNavShrinker = require('./sticky-nav-shrink')
 const LocationSelector = require('./locationSelector')
 const location = new LocationSelector()
 const SupportedCities = require('./supportedCities')
@@ -38,6 +39,8 @@ var init = function () {
     .then((result) => {
       hideForCity(result.id)
     })
+
+  stickyNavShrinker.init()
 }
 
 var open = function () {
@@ -55,18 +58,6 @@ var close = function () {
     el[i].classList.remove(activeClass)
   }
 }
-
-window.addEventListener("scroll", (e) => {
-  let doc = document.documentElement
-  let top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0)
-  let header = document.querySelector('.header')
-  const smallStickyClass = 'header--small'
-  if (top >= 200) {
-    header.classList.add(smallStickyClass)
-  } else {
-    header.classList.remove(smallStickyClass)
-  }
-})
 
 module.exports = {
   init: init,
