@@ -1,7 +1,7 @@
 const stickyNavShrinker = require('./sticky-nav-shrink')
 const mobileCitySelect = require('./mobile-city-selection')
 const LocationSelector = require('../locationSelector')
-const supportedCities = require('../supportedCities')
+const supportedCities = require('../location/supportedCities')
 
 const openElement = '.js-nav-open'
 const closeElement = '.js-nav-close'

@@ -2,7 +2,7 @@ const Q = require('q')
 const getLocation = require('./get-location')
 const geolib = require('geolib')
 const querystring = require('./get-url-parameter')
-let supportedCities = require('./supportedCities')
+let supportedCities = require('./location/supportedCities')
 
 let _nearestSupported = () => {
   let deferred = Q.defer()
