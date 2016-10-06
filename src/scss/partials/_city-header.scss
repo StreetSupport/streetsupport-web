@@ -1,12 +1,12 @@
-.manchester-header {
+%manchester-header {
   background-image: url('../img/header-background-manchester.png');
 
   &:before {
     height: 370px;
     background-image: url('../img/manchester-townhall.png');
-    background-position: center bottom;
+    background-position: bottom right;
     background-repeat: no-repeat;
-    margin-left: -213px;
+    margin-left: -335px;
 
     @include mq($from: m) {
       left: 22%;
@@ -14,14 +14,15 @@
   }
 }
 
-.leeds-header {
+%leeds-header {
   background-image: url('../img/header-background-leeds.png');
 
   &:before {
     height: 324px;
     background-image: url('../img/leeds-townhall.png');
     background-repeat: no-repeat;
-    margin-left: -185px;
+    margin-left: -330px;
+    background-position: right;
 
     @include mq($from: m) {
       left: 22%;
@@ -30,7 +31,7 @@
 }
 
 .city-header {
-  background-position: bottom;
+  background-position: left bottom;
   background-size: 940px;
   position: relative;
   height: 500px;
@@ -40,7 +41,7 @@
     position: absolute;
     display: inline-block;
     content: '';
-    width: 420px;
+    width: 320px;
     background-size: 370px;
     left: 50%;
     bottom: 3px;
@@ -56,10 +57,10 @@
 
 .manchester .city-header,
 .leeds .city-header--manchester {
-  @extend .manchester-header;
+  @extend %manchester-header;
 }
 
 .leeds .city-header,
 .manchester .city-header--leeds {
-  @extend .leeds-header;
+  @extend %leeds-header;
 }
