@@ -104,6 +104,7 @@ $nav-pages: home findhelp emergencyhelp allorganisations givehelp giveitems volu
 
 // z-indices
 $zIndex-modal: 200;
+$zIndex-loadingSpinner: 180; // see browser.js
 $zIndex-mobileNav: 160;
 $zIndex-navOverlay: 140;
 $zIndex-fixedHeader: 120;
