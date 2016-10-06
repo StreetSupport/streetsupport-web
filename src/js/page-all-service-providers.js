@@ -7,8 +7,7 @@ let getApiData = require('./get-api-data')
 let templating = require('./template-render')
 let browser = require('./browser')
 let querystring = require('./get-url-parameter')
-let LocationSelector = require('./locationSelector')
-let locationSelector = new LocationSelector()
+let locationSelector = require('./location/locationSelector')
 
 let currentLocation = null
 

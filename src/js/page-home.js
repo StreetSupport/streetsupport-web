@@ -1,7 +1,5 @@
 import './common'
-
-const Location = require('./locationSelector')
-const location = new Location()
+let location = require('./location/locationSelector')
 const templating = require('./template-render')
 const browser = require('./browser')
 const socialShare = require('./social-share')

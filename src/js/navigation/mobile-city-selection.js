@@ -1,7 +1,5 @@
-const LocationSelector = require('../locationSelector')
+const location = require('../location/locationSelector')
 const browser = require('../browser')
-
-const location = new LocationSelector()
 
 const handleClick = (e) => {
   e.preventDefault()

@@ -1,8 +1,8 @@
 const Q = require('q')
-const getLocation = require('./get-location')
+const getLocation = require('../get-location')
 const geolib = require('geolib')
-const querystring = require('./get-url-parameter')
-let supportedCities = require('./location/supportedCities')
+const querystring = require('../get-url-parameter')
+let supportedCities = require('./supportedCities')
 
 let _nearestSupported = () => {
   let deferred = Q.defer()
@@ -14,20 +14,20 @@ let _nearestSupported = () => {
     let modalCloser = document.querySelector('.js-modal-close')
     modalCloser.addEventListener('click', (e) => {
       modal.classList.remove('is-active')
-      _setCurrent(supportedCities.default().id)
+      setCurrent(supportedCities.default().id)
       window.location.reload()
     })
 
     document.querySelector('.js-location-select-manchester')
       .addEventListener('click', (e) => {
         e.preventDefault()
-        _setCurrent('manchester')
+        setCurrent('manchester')
         window.location.reload()
       })
     document.querySelector('.js-location-select-leeds')
       .addEventListener('click', (e) => {
         e.preventDefault()
-        _setCurrent('leeds')
+        setCurrent('leeds')
         window.location.reload()
       })
   }
@@ -35,7 +35,6 @@ let _nearestSupported = () => {
   if (getLocation.isAvailable()) {
     getLocation.location()
       .then((position) => {
-
         let getNearest = (position) => {
           let currLatitude = position.coords.latitude
           let currLongitude = position.coords.longitude
@@ -122,7 +121,7 @@ let _determineLocationRetrievalMethod = (deferred, locationInQueryString) => {
   return _useSaved
 }
 
-let _getCurrent = () => {
+let getCurrent = () => {
   let deferred = Q.defer()
   let locationInQueryString = querystring.parameter('location')
   let getLocation = _determineLocationRetrievalMethod(deferred, locationInQueryString)
@@ -130,7 +129,7 @@ let _getCurrent = () => {
   return deferred.promise
 }
 
-let _setCurrent = (newCity) => {
+let setCurrent = (newCity) => {
   if (newCity.length > 0) {
     var now = new Date()
     var expireTime = now.getTime() + 1000 * 36000
@@ -139,42 +138,45 @@ let _setCurrent = (newCity) => {
   }
 }
 
-let locationSelector = function () {
-  var self = this
-  self.getCurrent = _getCurrent
-  self.setCurrent = _setCurrent
-  self.getViewModel = (current) => {
-    let cities = supportedCities.locations.map((l) => {
-      let newLocation = l
-      newLocation.isSelected = l.id === current.id
-      return newLocation
-    })
-    return cities
-  }
-  self.getViewModelAll = (current) => {
-    let cities = supportedCities.locations.map((l) => {
-      let newLocation = l
-      newLocation.isSelected = l.id === current.id
-      return newLocation
-    })
-    cities.push({
-      id: '',
-      isSelected: querystring.parameter('location') === '',
-      name: 'All'
-    })
-    return cities
-  }
-  self.handler = (onChangeLocationCallback, selectorId) => {
-    if (selectorId === undefined) {
-      selectorId = '.js-location-select'
-    }
-    let locationSelector = document.querySelector(selectorId)
-    locationSelector.addEventListener('change', () => {
-      var selectedLocation = locationSelector.options[locationSelector.selectedIndex].value
-      _setCurrent(selectedLocation)
-      onChangeLocationCallback(selectedLocation)
-    })
-  }
+const getViewModel = (current) => {
+  let cities = supportedCities.locations.map((l) => {
+    let newLocation = l
+    newLocation.isSelected = l.id === current.id
+    return newLocation
+  })
+  return cities
 }
 
-module.exports = locationSelector
+const getViewModelAll = (current) => {
+  let cities = supportedCities.locations.map((l) => {
+    let newLocation = l
+    newLocation.isSelected = l.id === current.id
+    return newLocation
+  })
+  cities.push({
+    id: '',
+    isSelected: querystring.parameter('location') === '',
+    name: 'All'
+  })
+  return cities
+}
+
+const onChange = (onChangeLocationCallback, selectorId) => {
+  if (selectorId === undefined) {
+    selectorId = '.js-location-select'
+  }
+  let locationSelector = document.querySelector(selectorId)
+  locationSelector.addEventListener('change', () => {
+    var selectedLocation = locationSelector.options[locationSelector.selectedIndex].value
+    setCurrent(selectedLocation)
+    onChangeLocationCallback(selectedLocation)
+  })
+}
+
+module.exports = {
+  getCurrent: getCurrent,
+  setCurrent: setCurrent,
+  getViewModel: getViewModel,
+  getViewModelAll: getViewModelAll,
+  handler: onChange
+}

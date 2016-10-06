@@ -19,8 +19,7 @@ let getApiData = require('./get-api-data')
 let getLocation = require('./get-location')
 let templating = require('./template-render')
 let getUrlParams = require('./get-url-parameter')
-let LocationSelector = require('./locationSelector')
-let locationSelector = new LocationSelector()
+let locationSelector = require('./location/locationSelector')
 let socialShare = require('./social-share')
 import listToSelect from './list-to-dropdown'
 

@@ -1,5 +1,4 @@
-const Location = require('../locationSelector')
-const location = new Location()
+const location = require('./locationSelector')
 const supportedCities = require('./supportedCities')
 
 const init = () => {
