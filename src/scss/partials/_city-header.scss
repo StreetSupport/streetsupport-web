@@ -4,7 +4,7 @@
   &:before {
     height: 370px;
     background-image: url('../img/manchester-townhall.png');
-    background-position: bottom right;
+    background-position: 33% bottom;
     background-repeat: no-repeat;
     margin-left: -335px;
 
@@ -22,7 +22,7 @@
     background-image: url('../img/leeds-townhall.png');
     background-repeat: no-repeat;
     margin-left: -330px;
-    background-position: right;
+    background-position: 33% bottom;
 
     @include mq($from: m) {
       left: 22%;
