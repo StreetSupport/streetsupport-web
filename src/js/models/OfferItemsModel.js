@@ -6,8 +6,7 @@ require('knockout.validation') // No variable here is deliberate!
 var apiRoutes = require('../api')
 var postApi = require('../post-api-data')
 var browser = require('../browser')
-var SupportedCities = require('../supportedCities')
-var supportedCities = new SupportedCities()
+var supportedCities = require('../supportedCities')
 
 var formId = 'js-form'
 var failId = 'js-fail'

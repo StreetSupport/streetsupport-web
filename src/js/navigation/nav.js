@@ -1,14 +1,13 @@
 const stickyNavShrinker = require('./sticky-nav-shrink')
 const mobileCitySelect = require('./mobile-city-selection')
 const LocationSelector = require('../locationSelector')
-const SupportedCities = require('../supportedCities')
+const supportedCities = require('../supportedCities')
 
 const openElement = '.js-nav-open'
 const closeElement = '.js-nav-close'
 const overlayElement = '.js-nav-overlay'
 const activeClass = 'is-active'
 const el = document.querySelectorAll('.js-nav-container, .js-nav-push, .js-nav-overlay, html, body')
-const supportedCities = new SupportedCities()
 const location = new LocationSelector()
 
 const hideForCity = (cityId) => {

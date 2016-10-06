@@ -2,8 +2,7 @@ const Q = require('q')
 const getLocation = require('./get-location')
 const geolib = require('geolib')
 const querystring = require('./get-url-parameter')
-let SupportedCities = require('./supportedCities')
-let supportedCities = new SupportedCities()
+let supportedCities = require('./supportedCities')
 
 let _nearestSupported = () => {
   let deferred = Q.defer()
@@ -15,7 +14,7 @@ let _nearestSupported = () => {
     let modalCloser = document.querySelector('.js-modal-close')
     modalCloser.addEventListener('click', (e) => {
       modal.classList.remove('is-active')
-      _setCurrent(supportedCities.default.id)
+      _setCurrent(supportedCities.default().id)
       window.location.reload()
     })
 
@@ -91,7 +90,7 @@ let _useNearest = (deferred) => {
     .then((result) => {
       deferred.resolve(result)
     }, (_) => {
-      deferred.resolve(supportedCities.default)
+      deferred.resolve(supportedCities.default())
     })
 }
 
