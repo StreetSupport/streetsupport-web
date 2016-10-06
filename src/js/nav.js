@@ -1,6 +1,7 @@
 const stickyNavShrinker = require('./sticky-nav-shrink')
 const LocationSelector = require('./locationSelector')
 const SupportedCities = require('./supportedCities')
+const mobileCitySelect = require('./navigation/mobile-city-selection')
 
 const openElement = '.js-nav-open'
 const closeElement = '.js-nav-close'
@@ -20,10 +21,6 @@ const hideForCity = (cityId) => {
   }
   var currentCity = document.querySelector('.js-current-city')
   currentCity.innerHTML = supportedCities.get(cityId).name
-}
-
-const mobileCityChangeInit = () => {
-
 }
 
 var init = function () {
@@ -46,6 +43,7 @@ var init = function () {
     })
 
   stickyNavShrinker.init()
+  mobileCitySelect.init()
 }
 
 var open = function () {
