@@ -129,10 +129,7 @@ const getCurrent = () => {
 
 const setCurrent = (newCity) => {
   if (newCity.length > 0) {
-    var now = new Date()
-    var expireTime = now.getTime() + 1000 * 36000
-    now.setTime(expireTime)
-    document.cookie = 'desired-location=' + newCity + ';expires=' + +now.toUTCString() + ';path=/'
+    document.cookie = 'desired-location=' + newCity + ';expires=Fri, 31 Dec 9999 23:59:59 GMT;path=/'
   }
 }
 
