@@ -38,6 +38,9 @@ let getData = () => {
       }
 
       var callback = function () {
+        document.querySelector('.js-city-label')
+          .innerHTML = 'in ' + currentLocation.name
+
         browser.loaded()
         socialShare.init()
       }
