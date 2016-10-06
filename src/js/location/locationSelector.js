@@ -3,33 +3,13 @@ const getLocation = require('../get-location')
 const geolib = require('geolib')
 const querystring = require('../get-url-parameter')
 let supportedCities = require('./supportedCities')
+let modal = require('./modal')
 
 let _nearestSupported = () => {
   let deferred = Q.defer()
 
   let getDefault = () => {
-    let modal = document.querySelector('.js-location-select-modal')
-    modal.classList.add('is-active')
-
-    let modalCloser = document.querySelector('.js-modal-close')
-    modalCloser.addEventListener('click', (e) => {
-      modal.classList.remove('is-active')
-      setCurrent(supportedCities.default().id)
-      window.location.reload()
-    })
-
-    document.querySelector('.js-location-select-manchester')
-      .addEventListener('click', (e) => {
-        e.preventDefault()
-        setCurrent('manchester')
-        window.location.reload()
-      })
-    document.querySelector('.js-location-select-leeds')
-      .addEventListener('click', (e) => {
-        e.preventDefault()
-        setCurrent('leeds')
-        window.location.reload()
-      })
+    modal.init(exportedObj)
   }
 
   if (getLocation.isAvailable()) {
@@ -121,7 +101,7 @@ let _determineLocationRetrievalMethod = (deferred, locationInQueryString) => {
   return _useSaved
 }
 
-let getCurrent = () => {
+const getCurrent = () => {
   let deferred = Q.defer()
   let locationInQueryString = querystring.parameter('location')
   let getLocation = _determineLocationRetrievalMethod(deferred, locationInQueryString)
@@ -129,7 +109,7 @@ let getCurrent = () => {
   return deferred.promise
 }
 
-let setCurrent = (newCity) => {
+const setCurrent = (newCity) => {
   if (newCity.length > 0) {
     var now = new Date()
     var expireTime = now.getTime() + 1000 * 36000
@@ -173,10 +153,13 @@ const onChange = (onChangeLocationCallback, selectorId) => {
   })
 }
 
-module.exports = {
+const exportedObj = {
   getCurrent: getCurrent,
   setCurrent: setCurrent,
   getViewModel: getViewModel,
   getViewModelAll: getViewModelAll,
   handler: onChange
 }
+
+
+module.exports = exportedObj

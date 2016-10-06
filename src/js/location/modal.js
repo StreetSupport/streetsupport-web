@@ -1,7 +1,6 @@
-const location = require('./locationSelector')
 const supportedCities = require('./supportedCities')
 
-const init = () => {
+const init = (location) => {
   let modal = document.querySelector('.js-location-select-modal')
   modal.classList.add('is-active')
 
