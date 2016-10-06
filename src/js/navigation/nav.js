@@ -2,6 +2,7 @@ const stickyNavShrinker = require('./sticky-nav-shrink')
 const mobileCitySelect = require('./mobile-city-selection')
 const location = require('../location/locationSelector')
 const supportedCities = require('../location/supportedCities')
+const modal = require('../location/modal')
 
 const openElement = '.js-nav-open'
 const closeElement = '.js-nav-close'
@@ -42,6 +43,10 @@ var init = function () {
 
   stickyNavShrinker.init()
   mobileCitySelect.init()
+  document.querySelector('.js-location-pin')
+    .addEventListener('click', (e) => {
+      modal.init(location)
+    })
 }
 
 var open = function () {
