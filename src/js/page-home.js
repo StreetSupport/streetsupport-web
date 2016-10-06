@@ -13,6 +13,10 @@ location
       locations: location.getViewModel(result)
     }
     var callback = function () {
+      location.handler(() => {
+        window.location.reload()
+      }, '.js-homepage-promo-location-selector')
+
       browser.loaded()
       socialShare.init()
     }
