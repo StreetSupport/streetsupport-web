@@ -16,7 +16,9 @@ let ContactFormModel = require('./models/GiveItemModel')
 let apiRoutes = require('./api')
 let browser = require('./browser')
 let getApiData = require('./get-api-data')
-let getLocation = require('./get-location')
+
+
+let getLocation = require('./location/get-location')
 let templating = require('./template-render')
 let getUrlParams = require('./get-url-parameter')
 let locationSelector = require('./location/locationSelector')
