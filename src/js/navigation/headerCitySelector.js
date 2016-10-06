@@ -1,6 +1,6 @@
-const LocationSelector = require('./locationSelector')
+const LocationSelector = require('../locationSelector')
 const location = new LocationSelector()
-const SupportedCities = require('./supportedCities')
+const SupportedCities = require('../supportedCities')
 const supportedCities = new SupportedCities()
 
 var Model = function () {

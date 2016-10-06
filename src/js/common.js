@@ -1,6 +1,6 @@
-var nav = require('./nav.js')
+var nav = require('./navigation/nav.js')
 var analytics = require('./analytics')
-const headerCitySelector = require('./headerCitySelector')
+const headerCitySelector = require('./navigation/headerCitySelector')
 
 import Svg4everybody from 'svg4everybody'
 
