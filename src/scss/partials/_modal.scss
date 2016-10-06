@@ -5,7 +5,7 @@
     display: block;
   }
 
-  position: fixed;
+  position: absolute;
   z-index: $zIndex-modal;
   top: 0;
   bottom: 0;
