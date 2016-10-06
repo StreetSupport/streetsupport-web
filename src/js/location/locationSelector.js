@@ -1,5 +1,5 @@
 const Q = require('q')
-const getLocation = require('../get-location')
+const getLocation = require('./get-location')
 const geolib = require('geolib')
 const querystring = require('../get-url-parameter')
 let supportedCities = require('./supportedCities')
@@ -91,21 +91,39 @@ let _useSaved = (deferred) => {
   }
 }
 
-let _determineLocationRetrievalMethod = (deferred, locationInQueryString) => {
+let _determineLocationRetrievalMethod = () => {
+  let method = _useSaved
+  let id = ''
+
+  let locationInQueryString = querystring.parameter('location')
+  let locationInPath = window.location.pathname.split('/')[1]
+
   if (locationInQueryString === 'my-location' && getLocation.isAvailable()) {
-    return _useMyLocation
+    method = _useMyLocation
   }
   if (locationInQueryString !== 'undefined' && locationInQueryString.length > 0 && locationInQueryString !== 'my-location') {
-    return _useRequested
+    method = _useRequested
+    id = locationInQueryString
   }
-  return _useSaved
+  let cities = supportedCities.locations.map((l) => l.id)
+  if (locationInPath !== 'undefined' && locationInPath.length > 0 && cities.indexOf(locationInPath) > -1) {
+    method = _useRequested
+    id = locationInPath
+
+    setCurrent(id)
+  }
+
+  return {
+    method: method,
+    id: id
+  }
 }
 
 const getCurrent = () => {
   let deferred = Q.defer()
-  let locationInQueryString = querystring.parameter('location')
-  let getLocation = _determineLocationRetrievalMethod(deferred, locationInQueryString)
-  getLocation(deferred, locationInQueryString)
+
+  let getLocation = _determineLocationRetrievalMethod()
+  getLocation.method(deferred, getLocation.id)
   return deferred.promise
 }
 
