@@ -1,13 +1,14 @@
-var openElement = '.js-nav-open'
-var closeElement = '.js-nav-close'
-var overlayElement = '.js-nav-overlay'
-var activeClass = 'is-active'
-var el = document.querySelectorAll('.js-nav-container, .js-nav-push, .js-nav-overlay, html, body')
 const stickyNavShrinker = require('./sticky-nav-shrink')
 const LocationSelector = require('./locationSelector')
-const location = new LocationSelector()
 const SupportedCities = require('./supportedCities')
+
+const openElement = '.js-nav-open'
+const closeElement = '.js-nav-close'
+const overlayElement = '.js-nav-overlay'
+const activeClass = 'is-active'
+const el = document.querySelectorAll('.js-nav-container, .js-nav-push, .js-nav-overlay, html, body')
 const supportedCities = new SupportedCities()
+const location = new LocationSelector()
 
 const hideForCity = (cityId) => {
   var citySpecificElements = document.querySelectorAll('[data-city]')
@@ -19,6 +20,10 @@ const hideForCity = (cityId) => {
   }
   var currentCity = document.querySelector('.js-current-city')
   currentCity.innerHTML = supportedCities.get(cityId).name
+}
+
+const mobileCityChangeInit = () => {
+
 }
 
 var init = function () {
