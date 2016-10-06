@@ -92,9 +92,9 @@ nosubnav: true
   <div class="container">
     <div class="block__content text-center">
       {{> divider}}
-      <p>Street Support is currently available in Manchester and Leeds.</p>
+      <p>Street Support is currently only available in Manchester and Leeds, but we would love to see the network expand to more locations. If you think Street Support would be useful in your area, please <a href="/contact">let us know</a>!</p>
       <div class="location-selector">
-        <label for="location" class="location-selector__label">Select your City: </label>
+        <label for="location" class="location-selector__label">Select a City: </label>
         <select class="js-homepage-promo-location-selector js-location-select location-selector__select form__input" name="location" id="location">
           \{{#locations}}
           <option \{{#isSelected}}selected\{{/isSelected}} value="\{{id}}">\{{name}}</option>
@@ -102,7 +102,6 @@ nosubnav: true
         </select>
       </div>
 
-      <p>If you think Street Support is needed in your area, please <a href="/contact">let us know</a>!</p>
     </div>
   </div>
 </div>
