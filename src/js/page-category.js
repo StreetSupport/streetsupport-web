@@ -14,8 +14,7 @@ let analytics = require('./analytics')
 let socialShare = require('./social-share')
 let browser = require('./browser')
 let listToDropdown = require('./list-to-dropdown')
-let LocationSelector = require('./locationSelector')
-let locationSelector = new LocationSelector()
+let locationSelector = require('./location/locationSelector')
 let findHelp = null
 let currentLocation = null
 

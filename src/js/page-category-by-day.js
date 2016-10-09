@@ -19,9 +19,7 @@ var templating = require('./template-render')
 var analytics = require('./analytics')
 var socialShare = require('./social-share')
 var browser = require('./browser')
-let LocationSelector = require('./locationSelector')
-
-let locationSelector = new LocationSelector()
+let locationSelector = require('./location/locationSelector')
 let findHelp = null
 let currentLocation = null
 

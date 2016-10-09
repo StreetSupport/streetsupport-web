@@ -9,8 +9,7 @@ var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
 var templating = require('./template-render')
 var browser = require('./browser')
-var LocationSelector = require('./locationSelector')
-var locationSelector = new LocationSelector()
+let locationSelector = require('./location/locationSelector')
 
 browser.loading()
 // Get API data using promise
@@ -39,6 +38,9 @@ let getData = () => {
       }
 
       var callback = function () {
+        document.querySelector('.js-city-label')
+          .innerHTML = 'in ' + currentLocation.name
+
         browser.loaded()
         socialShare.init()
       }

@@ -1,12 +1,16 @@
 const Q = require('q')
 const getLocation = require('./get-location')
 const geolib = require('geolib')
-const querystring = require('./get-url-parameter')
-let SupportedCities = require('./supportedCities')
-let supportedCities = new SupportedCities()
+const querystring = require('../get-url-parameter')
+let supportedCities = require('./supportedCities')
+let modal = require('./modal')
 
 let _nearestSupported = () => {
   let deferred = Q.defer()
+
+  let getDefault = () => {
+    modal.init(exportedObj)
+  }
 
   if (getLocation.isAvailable()) {
     getLocation.location()
@@ -23,19 +27,23 @@ let _nearestSupported = () => {
           }
 
           let sorted = supportedCities.locations
+            .filter((l) => l.distance <= 10000)
             .sort((a, b) => {
               if (a.distance < b.distance) return -1
               if (a.distance > b.distance) return 1
               return 0
             })
+
+          if (sorted.length === 0) return getDefault()
+
           return sorted[0]
         }
         deferred.resolve(getNearest(position))
       }, (_) => {
-        deferred.resolve(supportedCities.default)
+        deferred.resolve(getDefault())
       })
   } else {
-    deferred.resolve(supportedCities.default)
+    deferred.resolve(getDefault())
   }
 
   return deferred.promise
@@ -61,7 +69,7 @@ let _useNearest = (deferred) => {
     .then((result) => {
       deferred.resolve(result)
     }, (_) => {
-      deferred.resolve(supportedCities.default)
+      deferred.resolve(supportedCities.default())
     })
 }
 
@@ -83,70 +91,90 @@ let _useSaved = (deferred) => {
   }
 }
 
-let _determineLocationRetrievalMethod = (deferred, locationInQueryString) => {
+let _determineLocationRetrievalMethod = () => {
+  let method = _useSaved
+  let id = ''
+
+  let locationInQueryString = querystring.parameter('location')
+  let locationInPath = window.location.pathname.split('/')[1]
+
   if (locationInQueryString === 'my-location' && getLocation.isAvailable()) {
-    return _useMyLocation
+    method = _useMyLocation
   }
   if (locationInQueryString !== 'undefined' && locationInQueryString.length > 0 && locationInQueryString !== 'my-location') {
-    return _useRequested
+    method = _useRequested
+    id = locationInQueryString
   }
-  return _useSaved
+  let cities = supportedCities.locations.map((l) => l.id)
+  if (locationInPath !== 'undefined' && locationInPath.length > 0 && cities.indexOf(locationInPath) > -1) {
+    method = _useRequested
+    id = locationInPath
+
+    setCurrent(id)
+  }
+
+  return {
+    method: method,
+    id: id
+  }
 }
 
-let _getCurrent = () => {
+const getCurrent = () => {
   let deferred = Q.defer()
-  let locationInQueryString = querystring.parameter('location')
-  let getLocation = _determineLocationRetrievalMethod(deferred, locationInQueryString)
-  getLocation(deferred, locationInQueryString)
+
+  let getLocation = _determineLocationRetrievalMethod()
+  getLocation.method(deferred, getLocation.id)
   return deferred.promise
 }
 
-let _setCurrent = (newCity) => {
+const setCurrent = (newCity) => {
   if (newCity.length > 0) {
-    var now = new Date()
-    var expireTime = now.getTime() + 1000 * 36000
-    now.setTime(expireTime)
-    document.cookie = 'desired-location=' + newCity + ';expires=' + +now.toUTCString() + ';path=/'
+    document.cookie = 'desired-location=' + newCity + ';expires=Fri, 31 Dec 9999 23:59:59 GMT;path=/'
   }
 }
 
-let locationSelector = function () {
-  var self = this
-  self.getCurrent = _getCurrent
-  self.setCurrent = _setCurrent
-  self.getViewModel = (current) => {
-    let cities = supportedCities.locations.map((l) => {
-      let newLocation = l
-      newLocation.isSelected = l.id === current.id
-      return newLocation
-    })
-    return cities
-  }
-  self.getViewModelAll = (current) => {
-    let cities = supportedCities.locations.map((l) => {
-      let newLocation = l
-      newLocation.isSelected = l.id === current.id
-      return newLocation
-    })
-    cities.push({
-      id: '',
-      isSelected: querystring.parameter('location') === '',
-      name: 'All'
-    })
-    return cities
-  }
-  self.handler = (onChangeLocationCallback, selectorId) => {
-    if (selectorId === undefined) {
-      selectorId = '.js-location-select'
-    }
-    let locationSelector = document.querySelector(selectorId)
-    locationSelector.addEventListener('change', () => {
-      console.log('change')
-      var selectedLocation = locationSelector.options[locationSelector.selectedIndex].value
-      _setCurrent(selectedLocation)
-      onChangeLocationCallback(selectedLocation)
-    })
-  }
+const getViewModel = (current) => {
+  let cities = supportedCities.locations.map((l) => {
+    let newLocation = l
+    newLocation.isSelected = l.id === current.id
+    return newLocation
+  })
+  return cities
 }
 
-module.exports = locationSelector
+const getViewModelAll = (current) => {
+  let cities = supportedCities.locations.map((l) => {
+    let newLocation = l
+    newLocation.isSelected = l.id === current.id
+    return newLocation
+  })
+  cities.push({
+    id: '',
+    isSelected: querystring.parameter('location') === '',
+    name: 'All'
+  })
+  return cities
+}
+
+const onChange = (onChangeLocationCallback, selectorId) => {
+  if (selectorId === undefined) {
+    selectorId = '.js-location-select'
+  }
+  let locationSelector = document.querySelector(selectorId)
+  locationSelector.addEventListener('change', () => {
+    var selectedLocation = locationSelector.options[locationSelector.selectedIndex].value
+    setCurrent(selectedLocation)
+    onChangeLocationCallback(selectedLocation)
+  })
+}
+
+const exportedObj = {
+  getCurrent: getCurrent,
+  setCurrent: setCurrent,
+  getViewModel: getViewModel,
+  getViewModelAll: getViewModelAll,
+  handler: onChange
+}
+
+
+module.exports = exportedObj

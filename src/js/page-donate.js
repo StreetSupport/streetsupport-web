@@ -7,8 +7,7 @@ let getApiData = require('./get-api-data')
 let templating = require('./template-render')
 let browser = require('./browser')
 let querystring = require('./get-url-parameter')
-let LocationSelector = require('./locationSelector')
-let locationSelector = new LocationSelector()
+let locationSelector = require('./location/locationSelector')
 
 let currentLocation = null
 
@@ -32,15 +31,17 @@ let getData = () => {
   getApiData.data(url)
     .then(function (result) {
       let callback = function () {
-        locationSelector.handler(onChangeLocation)
         browser.loaded()
       }
+      let locations = locationSelector.getViewModelAll(currentLocation)
       let theData = {
         location: currentLocation.name,
-        isManchester: location === 'manchester'
+        isManchester: location === 'manchester',
+        locations: locations
       }
 
       if (result.data.length === 0) {
+        console.log(theData)
         templating.renderTemplate('js-no-result-tpl', theData, 'js-result-output', callback)
       } else {
         let sorted = sortBy(result.data, function (provider) {

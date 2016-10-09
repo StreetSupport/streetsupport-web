@@ -1,0 +1,14 @@
+.title-with-button {
+  text-align: center;
+}
+
+.title-with-button__title {
+  display: inline-block;
+  padding-top: 20px;
+  margin-right: 10px;
+  margin-bottom: 0;
+
+  @include mq($from: m) {
+    margin-bottom: 20px;
+  }
+}

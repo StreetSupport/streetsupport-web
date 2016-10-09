@@ -25,7 +25,7 @@ page: findhelp
 
   <div class="block block--header">
     <div class="container">
-      <h1 class="h1 block__header">Find Help</h1>
+      <h1 class="h1 block__header">Find Help <span class="js-city-label"></span></h1>
       <h2 class="h2 block__sub-header">Find local services to meet specific needs</h2>
     </div>
   </div>
@@ -33,15 +33,11 @@ page: findhelp
   <div class="block">
     <div class="container">
       <div class="block__content">
-        <div class="content-grid">
-          <div class="content-grid__element">
-            <h2 class="h3 content-grid__header">Are you recently homeless?</h2>
-          </div>
-          <div class="content-grid__element">
-            <a class="btn btn--brand-g content-grid__btn" href="/\{{location}}/emergency-help/">
-              <span class="btn__text">Emergency Advice</span>
-            </a>
-          </div>
+        <div class="title-with-button">
+          <h2 class="h2 title-with-button__title">Recently homeless?</h2>
+          <a class="btn btn--brand-g title-with-button__btn" href="/\{{location}}/emergency-help/">
+            <span class="btn__text">How to get Emergency Advice</span>
+          </a>
         </div>
 
         <div class="block__cta--grid result-grid">
@@ -58,26 +54,14 @@ page: findhelp
           \{{/categories}}
         </div>
 
-        <div class="content-grid">
-          <div class="content-grid__element">
-            <h2 class="h3 content-grid__header">Looking for an organisation?</h2>
-          </div>
-          <div class="content-grid__element">
-            <a class="btn btn--brand-d content-grid__btn" href="/find-help/all-service-providers/">
-              <span class="btn__text">All organisations</span>
-            </a>
-          </div>
-          <div class="content-grid__element">
-            <h2 class="h3 content-grid__header">Need something else?</h2>
-          </div>
-          <div class="content-grid__element">
-            <a class="btn btn--brand-d content-grid__btn" href="/contact/">
-              <span class="btn__text">Tell us</span>
-            </a>
-          </div>
+        <div class="title-with-button">
+          <h2 class="h3 title-with-button__title">Looking for an organisation?</h2>
+          <a class="btn btn--brand-d title-with-button__btn" href="/find-help/all-service-providers/">
+            <span class="btn__text">All organisations</span>
+          </a>
         </div>
 
-        <p>If you know of other services, have ideas, or you would like to know more, please <a href="/contact/">get in touch</a>.</p>
+        <p class="text-center">If there are other local services that you know about, or you would like to help us bring Street Support to your area, please <a href="/contact/">get in touch</a>.</p>
 
         {{> social-share}}
 

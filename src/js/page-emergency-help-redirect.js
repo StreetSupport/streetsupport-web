@@ -1,6 +1,5 @@
 let browser = require('./browser')
-let LocationSelector = require('./locationSelector')
-let locationSelector = new LocationSelector()
+let locationSelector = require('./location/locationSelector')
 
 locationSelector
   .getCurrent()

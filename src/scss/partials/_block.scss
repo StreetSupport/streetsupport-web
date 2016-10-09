@@ -131,7 +131,7 @@
     padding-bottom: 6px !important;
     background-color: rgba(black, 0.5);
     position: absolute;
-    z-index: 100;
+    z-index: $zIndex-breadcrumb;
     width: 100%;
 
     @media print {
@@ -144,19 +144,6 @@
       .section--nosubnav & {
         top: $header-top + $header-height;
       }
-    }
-  }
-
-  &--header {
-    background-image: url('../img/header-background.png');
-    background-repeat: repeat;
-    color: #fff;
-    padding-top: 80px;
-    padding-bottom: 50px;
-
-    @include mq($from: m) {
-      padding-top: 110px;
-      padding-bottom: 80px;
     }
   }
 
@@ -181,6 +168,19 @@
   &--requests-detail {
     padding: 20px 0;
     background: $brand-i;
+  }
+}
+
+.block--header {
+  background-image: url('../img/header-background.png');
+  background-repeat: repeat;
+  color: #fff;
+  padding-top: 160px;
+  padding-bottom: 50px;
+
+  @include mq($from: m) {
+    padding-top: 280px;
+    padding-bottom: 80px;
   }
 }
 
@@ -215,10 +215,11 @@
 }
 
 .block--subpage-header {
+  padding-top: 90px;
   padding-bottom: 0px;
 
   @include mq($from: m) {
-    padding-top: 40px;
+    padding-top: 250px;
     padding-bottom: 0px;
   }
 
@@ -242,7 +243,7 @@
         @include size(50px);
 
         position: absolute;
-        top: -5px;
+        top: 40px;
         left: 0;
 
         @include mq($from: m) {
@@ -286,6 +287,6 @@
   }
 }
 
-.block--home-promo {
-  padding-bottom: 0!important;
+.template--maybe-empty .block--home-promo {
+  padding-bottom: 0px!important;
 }

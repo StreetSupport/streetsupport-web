@@ -5,7 +5,6 @@
 var Spinner = require('spin.js')
 
 var redirect = function (url) {
-  console.log('browser.redirect ' + url)
   window.location = url
 }
 
@@ -13,7 +12,9 @@ var loaderAnim
 
 var getLoader = function () {
   if (loaderAnim === undefined) {
-    loaderAnim = new Spinner()
+    loaderAnim = new Spinner({
+      zIndex: 180
+    })
   }
   return loaderAnim
 }

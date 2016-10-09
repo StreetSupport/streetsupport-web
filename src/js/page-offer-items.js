@@ -1,7 +1,6 @@
 // Common modules
 import './common'
-const Location = require('./locationSelector')
-const location = new Location()
+const location = require('./location/locationSelector')
 
 // Page modules
 var ko = require('knockout')

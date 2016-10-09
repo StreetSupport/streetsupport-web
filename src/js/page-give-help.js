@@ -1,7 +1,6 @@
 import './common'
 
-let LocationSelector = require('./locationSelector')
-let locationSelector = new LocationSelector()
+let locationSelector = require('./location/locationSelector')
 let templating = require('./template-render')
 
 locationSelector
@@ -11,7 +10,8 @@ locationSelector
       isManchester: result.id === 'manchester'
     }
     let callback = () => {
-
+      document.querySelector('.js-city-label')
+        .innerHTML = 'in ' + result.name
     }
     templating.renderTemplate('js-charter-tpl', theData, 'js-charter-output', callback)
   }, (_) => {

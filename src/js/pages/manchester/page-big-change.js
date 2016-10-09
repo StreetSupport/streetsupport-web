@@ -1,8 +1,7 @@
 // Common modules
 import '../../common'
 
-const Location = require('../../locationSelector')
-const location = new Location()
+const location = require('../../location/locationSelector')
 const browser = require('../../browser')
 
 location

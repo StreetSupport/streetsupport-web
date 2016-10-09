@@ -1,19 +1,25 @@
-var openElement = '.js-nav-open'
-var closeElement = '.js-nav-close'
-var overlayElement = '.js-nav-overlay'
-var activeClass = 'is-active'
-var el = document.querySelectorAll('.js-nav-container, .js-nav-push, .js-nav-overlay, html, body')
-const LocationSelector = require('./locationSelector')
-const location = new LocationSelector()
+const stickyNavShrinker = require('./sticky-nav-shrink')
+const mobileCitySelect = require('./mobile-city-selection')
+const location = require('../location/locationSelector')
+const supportedCities = require('../location/supportedCities')
+const modal = require('../location/modal')
+
+const openElement = '.js-nav-open'
+const closeElement = '.js-nav-close'
+const overlayElement = '.js-nav-overlay'
+const activeClass = 'is-active'
+const el = document.querySelectorAll('.js-nav-container, .js-nav-push, .js-nav-overlay, html, body')
 
 const hideForCity = (cityId) => {
   var citySpecificElements = document.querySelectorAll('[data-city]')
   for (let i = 0; i < citySpecificElements.length; i++) {
     let citiesRequired = citySpecificElements[i].getAttribute('data-city')
-    if (citiesRequired.indexOf(cityId) === -1) {
-      citySpecificElements[i].classList.add('hidden')
+    if (citiesRequired.indexOf(cityId) > -1) {
+      citySpecificElements[i].classList.add('is-active') // desktop
     }
   }
+  var currentCity = document.querySelector('.js-current-city')
+  currentCity.innerHTML = supportedCities.get(cityId).name
 }
 
 var init = function () {
@@ -33,6 +39,13 @@ var init = function () {
     .getCurrent()
     .then((result) => {
       hideForCity(result.id)
+    })
+
+  stickyNavShrinker.init()
+  mobileCitySelect.init()
+  document.querySelector('.js-location-pin')
+    .addEventListener('click', (e) => {
+      modal.init(location)
     })
 }
 
