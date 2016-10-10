@@ -29,12 +29,12 @@
 .modal-body {
   background: white;
   padding: 30px;
+  @include cf();
 
   @include mq($from: m) {
     max-width: 640px;
     max-height: 480px;
     margin: 25vh auto;
-    height: 50vh;
   }
 }
 
