@@ -9,8 +9,7 @@ let _nearestSupported = () => {
   let deferred = Q.defer()
 
   let getDefault = () => {
-    return supportedCities.default()
-    // modal.init(exportedObj)
+    modal.init(exportedObj)
   }
 
   if (getLocation.isAvailable()) {
@@ -125,7 +124,6 @@ const getCurrent = () => {
 
   let getLocation = _determineLocationRetrievalMethod()
   getLocation.method(deferred, getLocation.id)
-
   return deferred.promise
 }
 
@@ -159,15 +157,15 @@ const getViewModelAll = (current) => {
 }
 
 const onChange = (onChangeLocationCallback, selectorId) => {
-  // if (selectorId === undefined) {
-  //   selectorId = '.js-location-select'
-  // }
-  // let locationSelector = document.querySelector(selectorId)
-  // locationSelector.addEventListener('change', () => {
-  //   var selectedLocation = locationSelector.options[locationSelector.selectedIndex].value
-  //   setCurrent(selectedLocation)
-  //   onChangeLocationCallback(selectedLocation)
-  // })
+  if (selectorId === undefined) {
+    selectorId = '.js-location-select'
+  }
+  let locationSelector = document.querySelector(selectorId)
+  locationSelector.addEventListener('change', () => {
+    var selectedLocation = locationSelector.options[locationSelector.selectedIndex].value
+    setCurrent(selectedLocation)
+    onChangeLocationCallback(selectedLocation)
+  })
 }
 
 const exportedObj = {
