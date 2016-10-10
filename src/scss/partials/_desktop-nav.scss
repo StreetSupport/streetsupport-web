@@ -120,6 +120,11 @@ $normalPadding: 35px;
       background: $brand-i;
       box-shadow: 0 2px 2px 0 rgba(50,50,50,.3);
     }
+    .nav__item--sub-item {
+      &:hover a {
+        background: white;
+      }
+    }
   }
 }
 
