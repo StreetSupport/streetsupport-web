@@ -103,11 +103,12 @@ $nav-sections: home findhelp givehelp locations charter bigchange about contact;
 $nav-pages: home findhelp emergencyhelp allorganisations givehelp giveitems volunteer offeritems donate partnership manchester leeds charter readthecharter pledgeyoursupport joinactiongroup aboutthecharter bigchangeabout bigchangefund about contact;
 
 // z-indices
-$zIndex-modal: 200;
-$zIndex-loadingSpinner: 180; // see browser.js
-$zIndex-mobileNav: 160;
-$zIndex-navOverlay: 140;
-$zIndex-fixedHeader: 120;
+$zIndex-modal: 2000;
+$zIndex-loadingSpinner: 1800; // see browser.js
+$zIndex-pageLoadingOverlay: 1700;
+$zIndex-mobileNav: 1600;
+$zIndex-navOverlay: 1400;
+$zIndex-fixedHeader: 1200;
 $zIndex-SubNav: 100;
 $zIndex-breadcrumb: 80;
 
