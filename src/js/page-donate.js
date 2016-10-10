@@ -41,7 +41,6 @@ let getData = () => {
       }
 
       if (result.data.length === 0) {
-        console.log(theData)
         templating.renderTemplate('js-no-result-tpl', theData, 'js-result-output', callback)
       } else {
         let sorted = sortBy(result.data, function (provider) {
