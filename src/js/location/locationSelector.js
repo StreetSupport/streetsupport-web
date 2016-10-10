@@ -9,7 +9,8 @@ let _nearestSupported = () => {
   let deferred = Q.defer()
 
   let getDefault = () => {
-    modal.init(exportedObj)
+    return supportedCities.default()
+    // modal.init(exportedObj)
   }
 
   if (getLocation.isAvailable()) {
