@@ -1,0 +1,61 @@
+.modal {
+  display: none;
+
+  &.is-active {
+    display: block;
+  }
+
+  position: absolute;
+  z-index: $zIndex-modal;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  animation: fade 500ms;
+}
+.modal-title {
+  color: $brand-h;
+}
+
+.modal-close {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 0px;
+  right: 20px;
+}
+
+.modal-body {
+  background: white;
+  padding: 30px;
+  @include cf();
+
+  @include mq($from: m) {
+    max-width: 640px;
+    max-height: 480px;
+    margin: 25vh auto;
+  }
+}
+
+.location-select__cta {
+  width: 100%;
+  @include mq($from: s) {
+    @include span(1 of 2);
+    &:last-child {
+      @include last();
+    }
+  }
+}
+
+.location-select__cta-container {
+  @include cf();
+}
+
+.location-select-icon--manchester {
+  padding-top: 28px;
+}
+
+.location-select-icon--leeds {
+  padding-top: 19px;
+}

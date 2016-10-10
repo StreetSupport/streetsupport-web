@@ -109,7 +109,7 @@ page: organisation
 
             <h2 class="h2">Donate</h2>
             <p>\{{donationDescription}}</p>
-            <a href="\{{donationUrl}}" target="_blank" rel="noopener noreferrer" class="btn btn--brand-d">
+            <a href="\{{donationUrl}}" target="_blank" rel="noreferrer noopener" class="btn btn--brand-d">
               <span class="btn__text">Donate to \{{{name}}}</span>
             </a>
             <h2 class="h2">Contact</h2>
@@ -135,7 +135,8 @@ page: organisation
                 <dd class="result-detail__times-item"><a href="\{{facebook}}">Facebook page</a></dd>
               \{{/facebook}}
             </dl>
-          <p>If you see something missing, incorrect or incomplete, or you would like to know more, please <a href="/contact/">get in touch</a>.</p>
+          
+          <p class="text-center">Please note, the information here is provided and maintained by this organisation. If you see anything that is incorrect or incomplete, please <a href="/contact/">get in touch</a>.</p>
           \{{/organisation}}
           {{> social-share}}
 

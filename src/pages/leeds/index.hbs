@@ -1,0 +1,76 @@
+---
+title: Street Support - Working together to end homelessness in Leeds
+description: Street Support - Find help, and give help, to support people who are homeless in Leeds
+layout: default.hbs
+permalink: false
+jsBundle: home
+section: home
+page: leeds
+nosubnav: true
+---
+
+<div class="block block--city-header city-header city-header--leeds">
+  <div class="container container--city-header">
+    <h1 class="h1 block__header">Street Support in Leeds!</h1>
+    <div class="block__cta block__cta--city-header">
+      {{>cta brand="d" link="/find-help/" name="Find Help"}}
+      {{>cta brand="e" link="/give-help/" name="Give Help"}}
+    </div>
+  </div>
+</div>
+
+<div class="block block--promo block--pulldown">
+  <div class="container">
+    <div class="block__content">
+      <p>Street Support is a network of charities, voluntary groups and kind-hearted folk, working together to end homelessness in Leeds. Through this site you can find services for people experiencing homelessness, and offer your time and resources to local organisations.</p>
+      <div class="social-share social-share--home">
+        <span class="social-share__text">Share Street Support with your friends to show your commitment to ending homelessness in Leeds: </span>
+        <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="streetsupportuk" data-dnt="true">Tweet</a>
+        <div class="fb-share-button" data-href="" data-layout="button" data-mobile-iframe="true"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="block block--highlight">
+  <div class="container">
+      <div class="block__content">
+        <div class="block__cta block__cta--incopy block__cta--2 block--pushup">
+          {{>cta brand="d" icon="findhelp" link="/find-help/" name="Find Help"}}
+          {{>cta brand="e" icon="givehelp" link="/give-help/" name="Give Help"}}
+        </div>
+
+      <div class="highlight">
+        <ul class="highlight__list">
+          <li class="highlight__item">
+           <span class="highlight__title">46</span>
+           <span class="h3 highlight__description">Organisations</span>
+         </li>
+         <li class="highlight__item">
+           <span class="highlight__title">111</span>
+           <span class="h3 highlight__description">Pledges</span>
+         </li>
+         <li class="highlight__item">
+           <span class="highlight__title">82</span>
+           <span class="h3 highlight__description">Volunteers</span>
+         </li>
+       </ul>
+     </div>
+   </div>
+ </div>
+</div>
+
+{{> leeds-home-promo }}
+
+<div class="block block--highlight block--promo">
+  <div class="container">
+    <div class="block__content partners">
+      <h2 class="h2">Supported by&hellip;</h2>
+      <ul class="partners__list">
+        <li class="partners__logo partners__logo--leedsbid"><a href="http://www.leedsbid.co.uk/">{{> icon name="leedsbid"}}</a></li>
+      </ul>
+      <p>We are looking for businesses and organisations to <a href="/give-help/partnership/">support us</a> so that we can continue to develop this resource.</p>
+      <p>If you share our vision of a world without homelessness, please <a href="mailto:sponsorship@streetsupport.net">get in touch</a>.</p>
+    </div>
+  </div>
+</div>

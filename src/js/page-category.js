@@ -14,8 +14,7 @@ let analytics = require('./analytics')
 let socialShare = require('./social-share')
 let browser = require('./browser')
 let listToDropdown = require('./list-to-dropdown')
-let LocationSelector = require('./locationSelector')
-let locationSelector = new LocationSelector()
+let locationSelector = require('./location/locationSelector')
 let findHelp = null
 let currentLocation = null
 
@@ -167,13 +166,12 @@ function buildList (url) {
 
     analytics.init(theTitle)
 
-    let locationViewModel = locationSelector.getViewModel(currentLocation)
     let viewModel = {
       organisations: formattedProviders,
       subCategories: subCategories,
-      category: result.data.category.name,
+      categoryName: result.data.category.name,
       categorySynopsis: marked(result.data.category.synopsis),
-      locations: locationViewModel
+      location: currentLocation.name
     }
     templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
   })

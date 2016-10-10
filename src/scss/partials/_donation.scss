@@ -1,0 +1,48 @@
+.donation {
+  text-align: center;
+}
+
+.donation__container {
+  text-align: center;
+  padding-top: 30px;
+}
+
+.donation__item {
+  text-align: left;
+  background-color: $brand-i;
+  margin-bottom: 30px;
+
+  @include mq($from: s) {
+    @include span(1 of 2);
+    &:nth-child(2n) {
+      @include last();
+    }
+  }
+}
+
+.donation__item-inner {
+  padding: 30px;
+}
+
+.donation__header {
+  background-color: $brand-d;
+  color: #fff;
+  margin: 0;
+  padding: 15px;
+  border: 0;
+  border-bottom: 1px solid #fff;
+}
+
+.donation__heading {
+  margin: 0;
+}
+
+.donation__btn {
+  width: 100%;
+  @include mq($from: m) {
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

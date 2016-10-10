@@ -15,19 +15,19 @@ page: category
 <div id="spin"></div>
 
 <script id="js-category-no-results-result-tpl" type="text/template">
-<div class="block block--breadcrumbs">
+  <div class="block block--breadcrumbs">
     <div class="container">
       <ol class="breadcrumbs__list">
         <li class="breadcrumbs__item"><a href="/">Home</a></li>
         <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
-        <li class="breadcrumbs__item">\{{{category}}}</li>
+        <li class="breadcrumbs__item">\{{{categoryName}}}</li>
       </ol>
     </div>
   </div>
 
   <div class="block block--subpage-header">
     <div class="container">
-      <h2 class="h1 block__header">\{{{category}}}</h2>
+      <h2 class="h1 block__header">\{{{categoryName}}}</h2>
       <h3 class="h2 block__sub-header">\{{{categorySynopsis}}}</h3>
     </div>
   </div>
@@ -36,9 +36,9 @@ page: category
     <div class="container">
       <div class="block__content">
         {{> location-description}}
-        <div class="result-detail">
-          <p>Sorry, we can't find any services listed near your selected location.</p>
-          <p>If you know of an organisation that should be here, <a href="/contact/">please get in touch</a> to learn how you can get it added.</p>
+        <div class="block__section">
+          <p>Sorry, no services near your location could be found. Please choose another location from the list, or <a href="/find-help">go back</a> and choose another category.</p>
+          <p>If you know of organisations nearby that should be included in here, please use our <a href="/register">registration form, or <a href="mailto:info@streetsupport.net">get in touch</a>.</a></p>
         </div>
       </div>
     </div>
@@ -52,14 +52,14 @@ page: category
       <ol class="breadcrumbs__list">
         <li class="breadcrumbs__item"><a href="/">Home</a></li>
         <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
-        <li class="breadcrumbs__item">\{{{category}}}</li>
+        <li class="breadcrumbs__item">\{{{categoryName}}}</li>
       </ol>
     </div>
   </div>
 
   <div class="block block--subpage-header">
     <div class="container">
-      <h1 class="h1 block__header">\{{{category}}}</h1>
+      <h1 class="h1 block__header">\{{{categoryName}}}</h1>
       <h3 class="h2 block__sub-header">\{{{categorySynopsis}}}</h3>
     </div>
   </div>
@@ -129,7 +129,7 @@ page: category
         \{{/organisations}}
       </div>
 
-      <p class="text-center">If you see something missing, incorrect or incomplete, or you would like to know more, please <a href="/contact/">get in touch</a>.</p>
+      <p class="text-center">Please note, the information here is provided and maintained by the organisations. If you see anything that is incorrect or incomplete, please <a href="/contact/">get in touch</a>.</p>
 
       {{> social-share}}
 

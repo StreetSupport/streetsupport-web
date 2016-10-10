@@ -19,9 +19,7 @@ var templating = require('./template-render')
 var analytics = require('./analytics')
 var socialShare = require('./social-share')
 var browser = require('./browser')
-let LocationSelector = require('./locationSelector')
-
-let locationSelector = new LocationSelector()
+let locationSelector = require('./location/locationSelector')
 let findHelp = null
 let currentLocation = null
 
@@ -74,12 +72,12 @@ function buildList (url) {
     } else {
       template = 'js-category-no-results-result-tpl'
     }
-    let locationViewModel = locationSelector.getViewModel(currentLocation)
+
     let viewModel = {
       organisations: data,
       categoryName: data.categoryName,
       categorySynopsis: marked(data.synopsis),
-      locations: locationViewModel
+      location: currentLocation.name
     }
     templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
   })

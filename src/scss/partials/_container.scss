@@ -1,4 +1,9 @@
 .container {
   @include container();
   padding: 0 $site-gutter;
+
+  &--city-header {
+    margin-left: inherit;
+    margin-right: inherit;
+  }
 }

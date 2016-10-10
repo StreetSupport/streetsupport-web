@@ -1,8 +1,13 @@
 // Common modules
 import './common'
+const location = require('./location/locationSelector')
 
 // Page modules
 var ko = require('knockout')
 var Model = require('./models/VolunteerModel')
 
-ko.applyBindings(new Model(), document.getElementById('js-form'))
+location
+  .getCurrent()
+  .then((result) => {
+    ko.applyBindings(new Model(result.id), document.getElementById('js-form'))
+  })

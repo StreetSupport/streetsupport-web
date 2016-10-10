@@ -16,16 +16,23 @@ let ContactFormModel = require('./models/GiveItemModel')
 let apiRoutes = require('./api')
 let browser = require('./browser')
 let getApiData = require('./get-api-data')
-let getLocation = require('./get-location')
+
+let getLocation = require('./location/get-location')
 let templating = require('./template-render')
 let getUrlParams = require('./get-url-parameter')
+let locationSelector = require('./location/locationSelector')
 let socialShare = require('./social-share')
 import listToSelect from './list-to-dropdown'
 
 const activeClass = 'is-active'
 
+let currentLocation = null
+
+let onChangeLocation = (newLocation) => {
+  window.location.href = '/give-help/help/?location=' + newLocation
+}
+
 let formatDate = (needs) => {
-  // Change to relative date
   ForEach(needs, function (need) {
     need.formattedCreationDate = moment(need.creationDate).fromNow()
   })
@@ -34,15 +41,26 @@ let formatDate = (needs) => {
 }
 
 let renderNeeds = (needs) => {
-  let theData = { card: needs }
-
-  let listCallback = () => {
-    buildList()
-    buildCard(needs)
-    browser.loaded()
+  let theData = {
+    card: needs,
+    location: currentLocation.name
   }
 
-  templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', listCallback)
+  if (needs.length === 0) {
+    templating.renderTemplate('js-no-data-tpl', theData, 'js-card-list-output', () => {
+      locationSelector.handler(onChangeLocation)
+      browser.loaded()
+    })
+  } else {
+    templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', () => {
+      buildList()
+      buildCard(needs)
+      listToSelect.init()
+      locationSelector.handler(onChangeLocation)
+      initAutoComplete(needs)
+      browser.loaded()
+    })
+  }
 }
 
 let initAutoComplete = (needs) => {
@@ -78,13 +96,22 @@ let usePostcodeForLocation = (needs) => {
 }
 
 let init = () => {
-  browser.loading()
-  listToSelect.init()
-  getApiData.data(apiRoutes.needs)
+  if (window.location.search.length === 0) {
+    var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+    if (saved !== undefined && saved.length > 0 && saved !== 'my-location') {
+      onChangeLocation(saved)
+    }
+  }
+
+  let location = getUrlParams.parameter('location')
+
+  let url = apiRoutes.needs
+  if (location.length > 0) {
+    url = apiRoutes.serviceProviders + location + '/needs/'
+  }
+  getApiData.data(url)
     .then(function (result) {
       let needsFromApi = formatDate(result.data)
-
-      initAutoComplete(needsFromApi)
 
       if (navigator.geolocation) {
         getLocation.location().then(function (position) {
@@ -275,7 +302,7 @@ let buildCard = (data) => {
       })
     }
 
-    let init = () => {
+    let initCardDetail = () => {
       let theId = el.getAttribute('data-id')
       let cardData = Find(data, (o) => { return o.id === theId })
 
@@ -294,7 +321,7 @@ let buildCard = (data) => {
       templating.renderTemplate('js-card-detail-tpl', theCardTemplateData, 'js-card-detail-output', cardCallback)
     }
 
-    init()
+    initCardDetail()
   }
 
   let openIfCardRequested = () => {
@@ -343,4 +370,12 @@ let buildCard = (data) => {
   openIfCardRequested()
 }
 
-init()
+browser.loading()
+locationSelector
+  .getCurrent()
+  .then((result) => {
+    currentLocation = result
+    init()
+  }, (_) => {
+
+  })

@@ -15,9 +15,10 @@ if (argv.production) {
 
 module.exports = {
   entry: {
-    home: path.join(__dirname, '/src/js/page-generic'),
+    home: path.join(__dirname, '/src/js/page-home'),
     generic: path.join(__dirname, '/src/js/page-generic'),
     findhelp: path.join(__dirname, '/src/js/page-find-help'),
+    giveHelp: path.join(__dirname, '/src/js/page-give-help'),
     category: path.join(__dirname, '/src/js/page-category'),
     categorybyday: path.join(__dirname, '/src/js/page-category-by-day'),
     organisation: path.join(__dirname, '/src/js/page-organisation'),
@@ -27,7 +28,12 @@ module.exports = {
     volunteer: path.join(__dirname, '/src/js/page-volunteer'),
     offeritems: path.join(__dirname, '/src/js/page-offer-items'),
     joinstreetsupport: path.join(__dirname, '/src/js/page-join-street-support'),
-    register: path.join(__dirname, '/src/js/page-register')
+    register: path.join(__dirname, '/src/js/page-register'),
+    donate: path.join(__dirname, '/src/js/page-donate'),
+    bigchange: path.join(__dirname, 'src/js/pages/manchester/page-big-change'),
+    leedsbigchange: path.join(__dirname, 'src/js/pages/leeds/page-big-change'),
+    emergencyhelp: path.join(__dirname, 'src/js/page-emergency-help'),
+    emergencyHelpRedirect: path.join(__dirname, 'src/js/page-emergency-help-redirect')
   },
   output: {
     path: path.join(__dirname, '/_dist/assets/js/'),
