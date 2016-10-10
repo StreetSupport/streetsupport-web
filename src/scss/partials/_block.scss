@@ -113,6 +113,18 @@
         }
       }
     }
+
+    &--city-header {
+      @include mq($from: m) {
+        .cta {
+          @include span(1 of 2);
+        }
+
+        .cta:last-of-type {
+          @include last();
+        }
+      }
+    }
   }
 
   &__primary {
@@ -180,6 +192,19 @@
 
   @include mq($from: m) {
     padding-top: 280px;
+    padding-bottom: 80px;
+  }
+}
+
+.block--city-header {
+  background-image: url('../img/header-background.png');
+  background-repeat: repeat;
+  color: #fff;
+  padding-top: 120px;
+  padding-bottom: 50px;
+
+  @include mq($from: m) {
+    padding-top: 230px;
     padding-bottom: 80px;
   }
 }
