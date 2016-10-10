@@ -94,15 +94,6 @@ nosubnav: true
       {{> divider}}
       <p>Street Support is currently available in Manchester and Leeds, and we would love to see the network expand to more locations.</p>
       <p>If you think Street Support might be useful in your area, please <a href="/contact">get in touch</a>!</p>
-      <div class="location-selector">
-        <label for="location" class="location-selector__label">Select a City: </label>
-        <select class="js-homepage-promo-location-selector js-location-select location-selector__select form__input" name="location" id="location">
-          \{{#locations}}
-          <option \{{#isSelected}}selected\{{/isSelected}} value="\{{id}}">\{{name}}</option>
-          \{{/locations}}
-        </select>
-      </div>
-
     </div>
   </div>
 </div>
