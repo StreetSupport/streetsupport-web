@@ -13,39 +13,41 @@ let _nearestSupported = () => {
     // modal.init(exportedObj)
   }
 
-  if (getLocation.isAvailable()) {
-    getLocation.location()
-      .then((position) => {
-        let getNearest = (position) => {
-          let currLatitude = position.coords.latitude
-          let currLongitude = position.coords.longitude
-          for (let i = 0; i < supportedCities.locations.length; i++) {
-            let distanceInMetres = geolib.getDistance(
-              { latitude: currLatitude, longitude: currLongitude },
-              { latitude: supportedCities.locations[i].latitude, longitude: supportedCities.locations[i].longitude }
-            )
-            supportedCities.locations[i].distance = distanceInMetres
-          }
+  deferred.resolve(getDefault())
 
-          let sorted = supportedCities.locations
-            .filter((l) => l.distance <= 10000)
-            .sort((a, b) => {
-              if (a.distance < b.distance) return -1
-              if (a.distance > b.distance) return 1
-              return 0
-            })
+  // if (getLocation.isAvailable()) {
+  //   getLocation.location()
+  //     .then((position) => {
+  //       let getNearest = (position) => {
+  //         let currLatitude = position.coords.latitude
+  //         let currLongitude = position.coords.longitude
+  //         for (let i = 0; i < supportedCities.locations.length; i++) {
+  //           let distanceInMetres = geolib.getDistance(
+  //             { latitude: currLatitude, longitude: currLongitude },
+  //             { latitude: supportedCities.locations[i].latitude, longitude: supportedCities.locations[i].longitude }
+  //           )
+  //           supportedCities.locations[i].distance = distanceInMetres
+  //         }
 
-          if (sorted.length === 0) return getDefault()
+  //         let sorted = supportedCities.locations
+  //           .filter((l) => l.distance <= 10000)
+  //           .sort((a, b) => {
+  //             if (a.distance < b.distance) return -1
+  //             if (a.distance > b.distance) return 1
+  //             return 0
+  //           })
 
-          return sorted[0]
-        }
-        deferred.resolve(getNearest(position))
-      }, (_) => {
-        deferred.resolve(getDefault())
-      })
-  } else {
-    deferred.resolve(getDefault())
-  }
+  //         if (sorted.length === 0) return getDefault()
+
+  //         return sorted[0]
+  //       }
+  //       deferred.resolve(getNearest(position))
+  //     }, (_) => {
+  //       deferred.resolve(getDefault())
+  //     })
+  // } else {
+  //   deferred.resolve(getDefault())
+  // }
 
   return deferred.promise
 }
