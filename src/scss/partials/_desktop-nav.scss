@@ -182,7 +182,7 @@ $normalPadding: 35px;
       }
     }
 
-    .city-nav .nav__item--#{$page} > a {
+    .nav__item--#{$page} > a {
       text-decoration: underline;
 
       @include mq($from: m) {
