@@ -1,44 +1,75 @@
 $big-change-yellow: #FFF001;
-$big-change-height: 650px;
+$big-change-height: 420px;
+$big-change-height-m: 650px;
+$padding-for-header: 64px;
+$padding-for-header-m: 220px;
 
 .big-change-banner {
   background: $big-change-yellow;
   height: $big-change-height;
   margin-top: 0px;
+
+  @include mq($from: m) {
+    height: $big-change-height-m;
+  }
 }
 
 .big-change-banner__container {
   @include container();
   text-align: center;
   background: #383735;
-  padding: 220px 0 40px 0;
+  padding: $padding-for-header 0 0px 0;
   position:relative;
   height: $big-change-height;
+
+  @include mq($from: m) {
+    padding-top: $padding-for-header-m;
+    height: $big-change-height-m;
+  }
 }
 
 .big-change-banner__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  margin: 0;
+  padding: 0 10vw;
+
+  img {
+  }
+
+  &::before {
+    content: ' ';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 356px 45px 0 0;
+    border-color: $big-change-yellow transparent transparent transparent;
+    position: absolute;
+    top: 64px;
+    left: 0;
+  }
+  &::after {
+    content: ' ';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 356px 45px 0 0;
+    border-color: transparent $big-change-yellow transparent transparent;
+    position: absolute;
+    top: 64px;
+    right: 0;
+  }
   @include mq($from: m) {
     &::before {
-      content: ' ';
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: $big-change-height 45px 0 0;
-      border-color: $big-change-yellow transparent transparent transparent;
-      position: absolute;
-      top: 0;
-      left: 0;
+      border-top-width: 445px;
+      top: 205px;
     }
     &::after {
-      content: ' ';
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: $big-change-height 45px 0 0;
-      border-color: transparent $big-change-yellow transparent transparent;
-      position: absolute;
-      top: 0px;
-      right: 0;
+      border-top-width: 445px;
+      top: 205px;
     }
   }
 }
