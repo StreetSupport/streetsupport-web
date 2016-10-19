@@ -38,7 +38,10 @@ $padding-for-header-m: 220px;
   padding: 0 10vw;
 
   .no-flexboxlegacy & {
-    padding-top: 100px
+    padding-top: 50px;
+    @include mq($from: m) {
+      padding-top: 100px
+    }
   }
 
   img {
