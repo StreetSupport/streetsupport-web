@@ -37,6 +37,10 @@ $padding-for-header-m: 220px;
   margin: 0;
   padding: 0 10vw;
 
+  .no-flexboxlegacy & {
+    padding-top: 100px
+  }
+
   img {
   }
 
