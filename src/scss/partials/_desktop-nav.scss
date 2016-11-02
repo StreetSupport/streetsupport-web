@@ -182,12 +182,13 @@ $normalPadding: 35px;
       }
     }
 
-    .city-nav .nav__item--#{$page} > a {
-      text-decoration: underline;
+    .city-nav .nav__item--#{$page} > a,
+    .nav__item--#{$page} > a {
+      text-decoration: underline!important;
 
       @include mq($from: m) {
         background-color: $brand-i;
-        text-decoration: none;
+        text-decoration: none!important;
       }
     }
     .nav__item--sub-item.nav__item--#{$page} > a {
