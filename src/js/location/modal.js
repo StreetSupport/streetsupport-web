@@ -8,14 +8,19 @@ const init = (location) => {
   modal.classList.add('is-active')
 
   const changeCity = (newCity) => {
-    location.setCurrent(newCity)
-    let currCity = urlParams.parameter('location')
-    if (currCity.length > 0) {
-      console.log(window.location.href)
-      browser.redirect(window.location.href.replace(currCity, newCity))
-    } else {
-      window.location.reload()
-    }
+    location.getCurrent()
+      .then((currLocation) => {
+        console.log(currLocation)
+        location.setCurrent(newCity)
+        let currCity = currLocation.id
+        if (currCity.length > 0) {
+          browser.redirect(window.location.href.replace(currCity, newCity))
+        } else {
+          window.location.reload()
+        }
+      }, (_) => {
+        window.location.reload()
+      })
   }
 
   const modalCloser = document.querySelector('.js-modal-close')
