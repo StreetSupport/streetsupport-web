@@ -176,5 +176,4 @@ const exportedObj = {
   handler: onChange
 }
 
-
 module.exports = exportedObj

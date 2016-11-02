@@ -1,6 +1,8 @@
 // Common modules
 import './common'
+
 let sortBy = require('lodash/collection/sortBy')
+let htmlencode = require('htmlencode')
 
 let apiRoutes = require('./api')
 let getApiData = require('./get-api-data')
@@ -33,6 +35,7 @@ let getData = () => {
       let callback = function () {
         browser.loaded()
       }
+      locationSelector.handler(onChangeLocation)
       let locations = locationSelector.getViewModelAll(currentLocation)
       let theData = {
         location: currentLocation.name,
@@ -46,6 +49,9 @@ let getData = () => {
         let sorted = sortBy(result.data, function (provider) {
           return provider.providerName.toLowerCase()
         })
+        sorted.forEach((element) => {
+          element.providerName = htmlencode.htmlDecode(element.providerName)
+        }, this)
 
         theData.organisations = sorted
         templating.renderTemplate('js-result-tpl', theData, 'js-result-output', callback)

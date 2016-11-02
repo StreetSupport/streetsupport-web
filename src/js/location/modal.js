@@ -1,27 +1,38 @@
 const supportedCities = require('./supportedCities')
+const urlParams = require('../get-url-parameter')
+const browser = require('../browser')
 
 const init = (location) => {
-  let modal = document.querySelector('.js-location-select-modal')
+
+  const modal = document.querySelector('.js-location-select-modal')
   modal.classList.add('is-active')
 
-  let modalCloser = document.querySelector('.js-modal-close')
+  const changeCity = (newCity) => {
+    location.setCurrent(newCity)
+    let currCity = urlParams.parameter('location')
+    if (currCity.length > 0) {
+      console.log(window.location.href)
+      browser.redirect(window.location.href.replace(currCity, newCity))
+    } else {
+      window.location.reload()
+    }
+  }
+
+  const modalCloser = document.querySelector('.js-modal-close')
   modalCloser.addEventListener('click', (e) => {
     modal.classList.remove('is-active')
-    location.setCurrent(supportedCities.default().id)
-    window.location.reload()
+    changeCity(supportedCities.default().id)
   })
 
   document.querySelector('.js-location-select-manchester')
     .addEventListener('click', (e) => {
       e.preventDefault()
-      location.setCurrent('manchester')
-      window.location.reload()
+      changeCity('manchester')
     })
   document.querySelector('.js-location-select-leeds')
     .addEventListener('click', (e) => {
       e.preventDefault()
-      location.setCurrent('leeds')
-      window.location.reload()
+      changeCity('leeds')
     })
 }
 
