@@ -16,7 +16,7 @@
     "data": "src/data/"
   },
   "autoprefixer": {
-    "browsers": ["last 3 versions, safari 8, ios 8, android 4, android 3"]
+    "browsers": ["last 3 versions", "safari 8", "ios 8", "android 4", "android 3"]
   },
   "critical": {
     "dimensions": [{
