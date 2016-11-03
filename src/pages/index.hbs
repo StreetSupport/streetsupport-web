@@ -62,23 +62,6 @@ nosubnav: true
 
 <div id="js-template-output" class="template--maybe-empty"></div>
 
-<div class="block block--highlight block--promo">
-  <div class="container">
-    <div class="block__content partners">
-      <h2 class="h2">Supported by&hellip;</h2>
-      <ul class="partners__list">
-        <li class="partners__logo partners__logo--booth-centre"><a href="http://www.boothcentre.org.uk/"><span class="hide-screen">Booth Centre</span></a></li>
-        <li class="partners__logo partners__logo--mustard-tree"><a href="http://www.mustardtree.org.uk/"><span class="hide-screen">Mustard Tree</span></a></li>
-        <li class="partners__logo partners__logo--holy-name-manchester"><a href="http://www.holyname.info/">{{> icon name="holy-name-manchester"}}</a></li>
-        <li class="partners__logo partners__logo--leedsbid"><a href="http://www.leedsbid.co.uk/">{{> icon name="leedsbid"}}</a></li>
-        <li class="partners__logo partners__logo--bruntwood"><a href="http://bruntwood.co.uk/"><span class="hide-screen">Bruntwood</span></a></li>
-      </ul>
-      <p>We are looking for businesses and organisations to <a href="/give-help/partnership/">partner with us</a> so that we can continue to develop this resource.</p>
-      <p>If you share our vision of a world without homelessness, please <a href="mailto:sponsorship@streetsupport.net">get in touch</a>.</p>
-    </div>
-  </div>
-</div>
-
 {{> loading-spinner}}
 <script id="js-content-tpl" type="text/template">
 \{{#isManchester}}
@@ -103,6 +86,22 @@ nosubnav: true
         </select>
       </div>
 
+    </div>
+  </div>
+</div>
+
+<div class="block block--highlight block--promo">
+  <div class="container">
+
+    <div class="block__content partners">
+      \{{#isManchester}}
+        {{> manchester-supporters }}
+      \{{/isManchester}}
+      \{{#isLeeds}}
+        {{> leeds-supporters }}
+      \{{/isLeeds}}
+      <p>We are looking for businesses and organisations to <a href="/give-help/partnership/">partner with us</a> so that we can continue to develop this resource.</p>
+      <p>If you share our vision of a world without homelessness, please <a href="mailto:sponsorship@streetsupport.net">get in touch</a>.</p>
     </div>
   </div>
 </div>
