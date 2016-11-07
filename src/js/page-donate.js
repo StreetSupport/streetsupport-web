@@ -48,9 +48,10 @@ let getData = () => {
         let sorted = sortBy(result.data, function (provider) {
           return provider.providerName.toLowerCase()
         })
-        forEach(result.data, (p) => {
+        forEach(sorted, (p) => {
           p.description = htmlencode.htmlDecode(p.description)
         })
+
 
         theData.organisations = sorted
         templating.renderTemplate('js-result-tpl', theData, 'js-result-output', callback)
