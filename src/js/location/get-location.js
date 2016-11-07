@@ -1,5 +1,4 @@
 var Q = require('q')
-var supportedCities = require('./supportedCities')
 
 var getLocation = function () {
   var deferred = Q.defer()
@@ -23,13 +22,7 @@ var getLocation = function () {
 
   setTimeout(() => {
     if (!result) {
-      let defaultCity = supportedCities.default()
-      deferred.resolve({
-        coords: {
-          latitude: defaultCity.latitude,
-          longitude: defaultCity.longitude
-        }
-      })
+      deferred.resolve(null)
     }
   }, options.timeout + 1000)
 

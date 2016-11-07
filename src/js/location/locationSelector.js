@@ -15,6 +15,10 @@ let _nearestSupported = () => {
   if (getLocation.isAvailable()) {
     getLocation.location()
       .then((position) => {
+        if (position === null) { // get location has timed out
+          modal.init(exportedObj)
+          return
+        }
         let getNearest = (position) => {
           let currLatitude = position.coords.latitude
           let currLongitude = position.coords.longitude
