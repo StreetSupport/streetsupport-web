@@ -40,14 +40,6 @@ page: donate
 </div>
 
 <script id="js-result-tpl" type="text/template">
-  <!--<div class="location-selector">
-    <label for="location" class="location-selector__label">Filter organisations by: </label>
-    <select class="js-donation-location-selector location-selector__select form__input" name="location" id="location">
-      \{{#locations}}
-      <option \{{#isSelected}}selected\{{/isSelected}} value="\{{id}}">\{{name}}</option>
-      \{{/locations}}
-    </select>
-  </div>-->
 
   \{{#isManchester}}
     {{> manchester-big-change-promo }}
@@ -66,6 +58,9 @@ page: donate
           <a href="\{{url}}" class="donation__btn btn btn--brand-d" target="_blank" rel="noopener noreferrer">
             <span class="btn__text">Donate</span>
           </a>
+          <p class="text-center">
+            <a href="/find-help/organisation/?organisation=\{{providerId}}">Learn more about \{{providerName}}</a>
+          </p>
         </div>
       </article>
       \{{/organisations}}

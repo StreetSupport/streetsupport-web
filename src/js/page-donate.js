@@ -2,7 +2,7 @@
 import './common'
 
 let sortBy = require('lodash/collection/sortBy')
-let htmlencode = require('htmlencode')
+var forEach = require('lodash/collection/forEach')
 
 let apiRoutes = require('./api')
 let getApiData = require('./get-api-data')
@@ -10,6 +10,7 @@ let templating = require('./template-render')
 let browser = require('./browser')
 let querystring = require('./get-url-parameter')
 let locationSelector = require('./location/locationSelector')
+let htmlencode = require('htmlencode')
 
 let currentLocation = null
 
@@ -49,9 +50,10 @@ let getData = () => {
         let sorted = sortBy(result.data, function (provider) {
           return provider.providerName.toLowerCase()
         })
-        sorted.forEach((element) => {
-          element.providerName = htmlencode.htmlDecode(element.providerName)
-        }, this)
+        forEach(sorted, (p) => {
+          p.description = htmlencode.htmlDecode(p.description)
+        })
+
 
         theData.organisations = sorted
         templating.renderTemplate('js-result-tpl', theData, 'js-result-output', callback)
