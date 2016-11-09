@@ -52,6 +52,7 @@ let getData = () => {
         })
         forEach(sorted, (p) => {
           p.description = htmlencode.htmlDecode(p.description)
+          p.providerName = htmlencode.htmlDecode(p.providerName)
         })
 
 
