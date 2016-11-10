@@ -3,14 +3,9 @@
 
   &:before {
     height: 370px;
-    background-image: url('../img/manchester-townhall.png');
+    background-image: url('../img/manc-buildings.png');
     background-position: 33% bottom;
     background-repeat: no-repeat;
-    margin-left: -335px;
-
-    @include mq($from: m) {
-      left: 22%;
-    }
   }
 }
 
@@ -19,13 +14,11 @@
 
   &:before {
     height: 324px;
-    background-image: url('../img/leeds-townhall.png');
+    background-image: url('../img/leeds-buildings.png');
     background-repeat: no-repeat;
-    margin-left: -330px;
     background-position: 33% bottom;
 
     @include mq($from: m) {
-      left: 22%;
     }
   }
 }
@@ -45,10 +38,10 @@
     position: absolute;
     display: inline-block;
     content: '';
-    width: 370px;
-    background-size: 370px;
-    left: 50%;
-    bottom: 3px;
+    width: 600px;
+    background-size: 600px;
+    left: 0px;
+    bottom: 18px;
   }
 
   & .container {
