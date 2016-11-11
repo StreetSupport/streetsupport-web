@@ -27,5 +27,6 @@ module.exports = {
   offerSponsorship: p('/v1/sponsorship-offers/'),
   servicesByCategory: p('/v2/service-categories/'),
   newlyRegisteredProviders: p('/v1/newly-registered-providers'),
-  cities: p('/v1/cities/')
+  cities: p('/v1/cities/'),
+  statistics: p('/v1/statistics/')
 }
