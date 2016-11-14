@@ -14,8 +14,6 @@ const init = (result) => {
   api
     .data(endpoints.statistics + result.id + '/latest')
     .then((stats) => {
-      console.log(stats)
-
       let theData = {
         isManchester: result.id === 'manchester',
         isLeeds: result.id === 'leeds',
