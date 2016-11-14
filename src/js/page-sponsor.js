@@ -18,7 +18,5 @@ location
       ko.applyBindings(new Model())
     }
 
-    console.log(theData)
-
     templating.renderTemplate('js-content-tpl', theData, 'js-template-output', callback)
   })
