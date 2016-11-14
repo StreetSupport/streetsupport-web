@@ -32,7 +32,6 @@ page: categorybyday
     <div class="container">
       \{{#organisations}}
       <h2 class="h1 block__header">\{{categoryName}}</h2>
-      <h3 class="h2 block__sub-header">\{{{categorySynopsis}}}</h3>
       \{{/organisations}}
     </div>
   </div>
@@ -41,8 +40,11 @@ page: categorybyday
     <div class="container block__inner">
       <div class="block__content">
         <div class="result-detail">
-          <p>Sorry, we can't find any services listed in \{{location}}.</p>
-          <p>If you know of an organisation that should be here, <a href="/contact/">please get in touch</a> to learn how you can get it added.</p>
+          <div class="text-center">
+            \{{{categorySynopsis}}}
+            <p>Sorry, we can't find any services listed in \{{location}}.</p>
+            <p>If you know of an organisation that should be here, <a href="/contact/">please get in touch</a> to learn how you can get it added.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -67,7 +69,6 @@ page: categorybyday
     <div class="container">
       \{{#organisations}}
       <h2 class="h1 block__header">\{{categoryName}}</h2>
-      <h3 class="h2 block__sub-header">\{{{categorySynopsis}}}</h3>
       \{{/organisations}}
     </div>
   </div>
@@ -75,6 +76,7 @@ page: categorybyday
   <div class="block">
     <div class="container block__inner">
       <div class="block__content">
+        <div class="text-center">\{{{categorySynopsis}}}</div>
         {{> location-description}}
         \{{#organisations}}
         <div class="result-detail">
