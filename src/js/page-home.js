@@ -14,16 +14,12 @@ const init = (result) => {
   api
     .data(endpoints.statistics + result.id + '/latest')
     .then((stats) => {
-      console.log(stats)
-
       let theData = {
         isManchester: result.id === 'manchester',
         isLeeds: result.id === 'leeds',
         locations: location.getViewModel(result),
         statistics: stats.data
       }
-
-      console.log(theData)
 
       var callback = function () {
         location.handler(() => {
