@@ -23,8 +23,6 @@ const init = (result) => {
         statistics: stats.data
       }
 
-      console.log(theData)
-
       var callback = function () {
         location.handler(() => {
           window.location.reload()
