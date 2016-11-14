@@ -1,5 +1,6 @@
 // Common modules
 import './common'
+
 let sortBy = require('lodash/collection/sortBy')
 var forEach = require('lodash/collection/forEach')
 
@@ -35,6 +36,7 @@ let getData = () => {
       let callback = function () {
         browser.loaded()
       }
+      locationSelector.handler(onChangeLocation)
       let locations = locationSelector.getViewModelAll(currentLocation)
       let theData = {
         location: currentLocation.name,

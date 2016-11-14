@@ -200,7 +200,7 @@
   background-image: url('../img/header-background.png');
   background-repeat: repeat;
   color: #fff;
-  padding-top: 70px;
+  padding-top: 120px;
   padding-bottom: 50px;
 
   @include mq($from: m) {
@@ -310,6 +310,10 @@
       margin-bottom: 0;
     }
   }
+}
+
+.block--city-header .block__sub-header {
+  color: white!important;
 }
 
 .template--maybe-empty .block--home-promo {

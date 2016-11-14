@@ -33,7 +33,7 @@
 
   @include mq($from: m) {
     max-width: 640px;
-    max-height: 480px;
+    max-height: 520px;
     margin: 25vh auto;
   }
 }
@@ -53,9 +53,9 @@
 }
 
 .location-select-icon--manchester {
-  padding-top: 28px;
+  padding-top: 73px;
 }
 
 .location-select-icon--leeds {
-  padding-top: 19px;
+  padding-top: 64px;
 }

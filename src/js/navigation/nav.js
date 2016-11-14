@@ -43,10 +43,10 @@ var init = function () {
 
   stickyNavShrinker.init()
   mobileCitySelect.init()
-  // document.querySelector('.js-location-pin')
-  //   .addEventListener('click', (e) => {
-  //     modal.init(location)
-  //   })
+  document.querySelector('.js-location-pin')
+    .addEventListener('click', (e) => {
+      modal.init(location)
+    })
 }
 
 var open = function () {

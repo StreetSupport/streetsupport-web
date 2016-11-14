@@ -9,45 +9,46 @@ let _nearestSupported = () => {
   let deferred = Q.defer()
 
   let getDefault = () => {
-    return supportedCities.default()
-    // modal.init(exportedObj)
+    modal.init(exportedObj)
   }
 
-  deferred.resolve(getDefault())
+  if (getLocation.isAvailable()) {
+    getLocation.location()
+      .then((position) => {
+        if (position === null) { // get location has timed out
+          modal.init(exportedObj)
+          return
+        }
+        let getNearest = (position) => {
+          let currLatitude = position.coords.latitude
+          let currLongitude = position.coords.longitude
+          for (let i = 0; i < supportedCities.locations.length; i++) {
+            let distanceInMetres = geolib.getDistance(
+              { latitude: currLatitude, longitude: currLongitude },
+              { latitude: supportedCities.locations[i].latitude, longitude: supportedCities.locations[i].longitude }
+            )
+            supportedCities.locations[i].distance = distanceInMetres
+          }
 
-  // if (getLocation.isAvailable()) {
-  //   getLocation.location()
-  //     .then((position) => {
-  //       let getNearest = (position) => {
-  //         let currLatitude = position.coords.latitude
-  //         let currLongitude = position.coords.longitude
-  //         for (let i = 0; i < supportedCities.locations.length; i++) {
-  //           let distanceInMetres = geolib.getDistance(
-  //             { latitude: currLatitude, longitude: currLongitude },
-  //             { latitude: supportedCities.locations[i].latitude, longitude: supportedCities.locations[i].longitude }
-  //           )
-  //           supportedCities.locations[i].distance = distanceInMetres
-  //         }
+          let sorted = supportedCities.locations
+            .filter((l) => l.distance <= 10000)
+            .sort((a, b) => {
+              if (a.distance < b.distance) return -1
+              if (a.distance > b.distance) return 1
+              return 0
+            })
 
-  //         let sorted = supportedCities.locations
-  //           .filter((l) => l.distance <= 10000)
-  //           .sort((a, b) => {
-  //             if (a.distance < b.distance) return -1
-  //             if (a.distance > b.distance) return 1
-  //             return 0
-  //           })
+          if (sorted.length === 0) return getDefault()
 
-  //         if (sorted.length === 0) return getDefault()
-
-  //         return sorted[0]
-  //       }
-  //       deferred.resolve(getNearest(position))
-  //     }, (_) => {
-  //       deferred.resolve(getDefault())
-  //     })
-  // } else {
-  //   deferred.resolve(getDefault())
-  // }
+          return sorted[0]
+        }
+        deferred.resolve(getNearest(position))
+      }, (_) => {
+        deferred.resolve(getDefault())
+      })
+  } else {
+    deferred.resolve(getDefault())
+  }
 
   return deferred.promise
 }
@@ -127,7 +128,6 @@ const getCurrent = () => {
 
   let getLocation = _determineLocationRetrievalMethod()
   getLocation.method(deferred, getLocation.id)
-
   return deferred.promise
 }
 
@@ -161,15 +161,15 @@ const getViewModelAll = (current) => {
 }
 
 const onChange = (onChangeLocationCallback, selectorId) => {
-  // if (selectorId === undefined) {
-  //   selectorId = '.js-location-select'
-  // }
-  // let locationSelector = document.querySelector(selectorId)
-  // locationSelector.addEventListener('change', () => {
-  //   var selectedLocation = locationSelector.options[locationSelector.selectedIndex].value
-  //   setCurrent(selectedLocation)
-  //   onChangeLocationCallback(selectedLocation)
-  // })
+  if (selectorId === undefined) {
+    selectorId = '.js-location-select'
+  }
+  let locationSelector = document.querySelector(selectorId)
+  locationSelector.addEventListener('change', () => {
+    var selectedLocation = locationSelector.options[locationSelector.selectedIndex].value
+    setCurrent(selectedLocation)
+    onChangeLocationCallback(selectedLocation)
+  })
 }
 
 const exportedObj = {
@@ -179,6 +179,5 @@ const exportedObj = {
   getViewModelAll: getViewModelAll,
   handler: onChange
 }
-
 
 module.exports = exportedObj
