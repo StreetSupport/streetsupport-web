@@ -32,7 +32,6 @@ page: categorybyday
     <div class="container">
       \{{#organisations}}
       <h2 class="h1 block__header">\{{categoryName}}</h2>
-      <h3 class="h2 block__sub-header">\{{{categorySynopsis}}}</h3>
       \{{/organisations}}
     </div>
   </div>
@@ -41,8 +40,11 @@ page: categorybyday
     <div class="container block__inner">
       <div class="block__content">
         <div class="result-detail">
-          <p>Sorry, we can't find any services listed in \{{location}}.</p>
-          <p>If you know of an organisation that should be here, <a href="/contact/">please get in touch</a> to learn how you can get it added.</p>
+          <div class="text-center">
+            \{{{categorySynopsis}}}
+            <p>Sorry, we can't find any services listed in \{{location}}.</p>
+            <p>If you know of an organisation that should be here, <a href="/contact/">please get in touch</a> to learn how you can get it added.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -66,8 +68,11 @@ page: categorybyday
   <div class="block block--subpage-header">
     <div class="container">
       \{{#organisations}}
-      <h2 class="h1 block__header">\{{categoryName}}</h2>
-      <h3 class="h2 block__sub-header">\{{{categorySynopsis}}}</h3>
+      <h2 class="h1  block__header block__header--find-help has-icon--left">
+        <svg class="block__header__icon--find-help svg-\{{categoryId}}-dims">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#\{{categoryId}}"></use>
+        </svg>
+        \{{categoryName}}</h2>
       \{{/organisations}}
     </div>
   </div>
@@ -75,6 +80,7 @@ page: categorybyday
   <div class="block">
     <div class="container block__inner">
       <div class="block__content">
+        <div class="text-center">\{{{categorySynopsis}}}</div>
         {{> location-description}}
         \{{#organisations}}
         <div class="result-detail">

@@ -255,11 +255,12 @@
     &.has-icon--left {
       margin: 20px 0;
       padding-left: 60px;
+      padding-top: 50px;
       position: relative;
       text-align: center;
 
       @include mq($from: m) {
-        margin: 20px 0 10px;
+        margin: 0px 0 10px;
         padding-left: 0;
         text-align: center;
       }
@@ -296,7 +297,21 @@
             vertical-align: middle;
           }
         }
+
+        &--find-help {
+          @include size(100px);
+          position: absolute;
+          left: 0;
+          top: 15px;
+          @include mq($from: m) {
+            position: inherit;
+            top: 35px;
+          }
+        }
       }
+    }
+    &--find-help.has-icon--left {
+      padding-top: 0px;
     }
   }
 
