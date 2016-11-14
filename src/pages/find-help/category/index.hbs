@@ -59,7 +59,12 @@ page: category
 
   <div class="block block--subpage-header">
     <div class="container">
-      <h1 class="h1 block__header">\{{{categoryName}}}</h1>
+      <h2 class="h1  block__header block__header--find-help has-icon--left">
+        <svg class="block__header__icon--find-help svg-\{{categoryId}}-dims">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#\{{categoryId}}"></use>
+        </svg>
+        \{{{categoryName}}}
+      </h1>
     </div>
   </div>
 
