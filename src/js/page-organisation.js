@@ -4,6 +4,7 @@ var urlParameter = require('./get-url-parameter')
 var accordion = require('./accordion')
 var htmlEncode = require('htmlencode')
 var marked = require('marked')
+marked.setOptions({sanitize: true})
 var socialShare = require('./social-share')
 var sortBy = require('lodash/collection/sortBy')
 var forEach = require('lodash/collection/forEach')
@@ -32,20 +33,21 @@ getApiData.data(organisationUrl).then(function (result) {
     data.formattedTags.push({ id: tag, name: tag.replace(/-/g, ' ') })
   })
 
-  forEach(data.providedServices, function (provider) {
-    console.log(provider)
-    if (provider.tags !== null) {
-      provider.tags = provider.tags.join(', ')
+  forEach(data.providedServices, function (service) {
+    if (service.tags !== null) {
+      service.tags = service.tags.join(', ')
     }
-    provider.info = marked(provider.info)
+    if (service.info !== null) {
+      service.info = marked(service.info)
+    }
   })
 
   // Append object name for Hogan
   var theData = { organisation: data }
 
   var callback = function () {
-    accordion.init()
     browser.loaded()
+    accordion.init()
     analytics.init(theTitle)
     socialShare.init()
   }
