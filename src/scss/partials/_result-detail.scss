@@ -47,7 +47,7 @@
     }
   }
 
-  &__times-item {
+  &__times-items {
     margin: 0 0 0 20px;
     padding: 0px 0px 5px 0px;
     float: right;
@@ -55,12 +55,10 @@
     .accordion--day & {
       float: none;
     }
+  }
 
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style-type: none;
-    }
+  &__times-item {
+    margin-left: 10px
   }
 
   &__provider-tag-list {

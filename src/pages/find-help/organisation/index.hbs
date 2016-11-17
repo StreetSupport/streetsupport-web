@@ -63,9 +63,11 @@ page: organisation
               <dl class="result-detail__times-list">
               \{{#openingDays}}
                 <dt class="result-detail__times-title">\{{day}}</dt>
+                <dd class="result-detail__times-items">
                 \{{#openingTimes}}
-                <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
+                  <span class="result-detail__times-item">\{{startTime}} - \{{endTime}}</span>
                 \{{/openingTimes}}
+                </dd>
               \{{/openingDays}}
               </dl>
             \{{/addresses}}
