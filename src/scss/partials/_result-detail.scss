@@ -10,13 +10,17 @@
     margin-bottom: 5px;
   }
 
+  &__target-audience {
+    margin-bottom: 20px!important;
+  }
+
   &__address-list {
     margin: 0;
     padding: 0 0 20px 0;
     list-style-type: none;
 
     .accordion--organisation & {
-      padding-bottom: 0;
+      padding-bottom: 20px;
     }
   }
 

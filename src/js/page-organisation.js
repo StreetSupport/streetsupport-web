@@ -33,6 +33,15 @@ getApiData.data(organisationUrl).then(function (result) {
     data.formattedTags.push({ id: tag, name: tag.replace(/-/g, ' ') })
   })
 
+  forEach(data.providedServices, function (service) {
+    if (service.tags !== null) {
+      service.tags = service.tags.join(', ')
+    }
+    if (service.info !== null) {
+      service.info = marked(service.info)
+    }
+  })
+
   forEach(data.addresses, (a) => {
     let groupedOpeningTimes = []
     forEach(a.openingTimes, (ot) => {
@@ -54,15 +63,14 @@ getApiData.data(organisationUrl).then(function (result) {
       }
     })
     a.openingDays = groupedOpeningTimes
-  })
+    a.services = data.providedServices
+      .filter((s) => s.address.postcode.replace(/\s/gi, '') === a.postcode.replace(/\s/gi, ''))
+    a.hasServices = a.services.length > 0
 
-  forEach(data.providedServices, function (service) {
-    if (service.tags !== null) {
-      service.tags = service.tags.join(', ')
-    }
-    if (service.info !== null) {
-      service.info = marked(service.info)
-    }
+    data.providedServices = data.providedServices
+      .filter((s) => {
+        return s.address.postcode.replace(/\s/gi, '') !== a.postcode.replace(/\s/gi, '')
+      })
   })
 
   // Append object name for Hogan
