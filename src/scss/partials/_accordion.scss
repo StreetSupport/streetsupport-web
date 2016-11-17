@@ -69,6 +69,7 @@
     opacity: 0;
     visibility: hidden;
     transition: max-height 250ms, visibility 250ms, opacity 250ms;
+    text-align: left;
 
     &.is-active {
       max-height: 1000rem;
