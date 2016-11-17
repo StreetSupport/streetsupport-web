@@ -175,7 +175,6 @@ function buildList (url) {
       categorySynopsis: marked(result.data.category.synopsis),
       location: currentLocation.name
     }
-    console.log(viewModel)
     templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
   })
 }
