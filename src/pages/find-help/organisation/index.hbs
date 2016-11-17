@@ -61,10 +61,12 @@ page: organisation
                 <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a> \{{/postcode}}</li>
               </ul>
               <dl class="result-detail__times-list">
-                \{{#openingTimes}}
+              \{{#openingDays}}
                 <dt class="result-detail__times-title">\{{day}}</dt>
+                \{{#openingTimes}}
                 <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
                 \{{/openingTimes}}
+              \{{/openingDays}}
               </dl>
             \{{/addresses}}
             <h2 class="h2">Services Provided</h2>

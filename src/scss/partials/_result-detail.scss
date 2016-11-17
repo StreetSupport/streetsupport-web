@@ -48,8 +48,8 @@
   }
 
   &__times-item {
-    margin: 0;
-    padding: 0px 0 5px 0;
+    margin: 0 0 0 20px;
+    padding: 0px 0px 5px 0px;
     float: right;
 
     .accordion--day & {
@@ -60,10 +60,6 @@
       margin: 0;
       padding: 0;
       list-style-type: none;
-    }
-
-    li {
-
     }
   }
 
