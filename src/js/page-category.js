@@ -170,10 +170,12 @@ function buildList (url) {
     let viewModel = {
       organisations: formattedProviders,
       subCategories: subCategories,
+      categoryId: result.data.category.id,
       categoryName: result.data.category.name,
       categorySynopsis: marked(result.data.category.synopsis),
       location: currentLocation.name
     }
+    console.log(viewModel)
     templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
   })
 }

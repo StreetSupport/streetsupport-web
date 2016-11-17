@@ -3,6 +3,7 @@ import './common'
 var urlParameter = require('./get-url-parameter')
 var accordion = require('./accordion')
 var htmlEncode = require('htmlencode')
+var marked = require('marked')
 var socialShare = require('./social-share')
 var sortBy = require('lodash/collection/sortBy')
 var forEach = require('lodash/collection/forEach')
@@ -32,9 +33,11 @@ getApiData.data(organisationUrl).then(function (result) {
   })
 
   forEach(data.providedServices, function (provider) {
+    console.log(provider)
     if (provider.tags !== null) {
       provider.tags = provider.tags.join(', ')
     }
+    provider.info = marked(provider.info)
   })
 
   // Append object name for Hogan

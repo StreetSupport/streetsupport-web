@@ -76,6 +76,7 @@ function buildList (url) {
 
     let viewModel = {
       organisations: data,
+      categoryId: data.categoryKey,
       categoryName: data.categoryName,
       categorySynopsis: marked(data.synopsis),
       location: currentLocation.name
