@@ -6,6 +6,7 @@ let apiRoutes = require('./api')
 
 let forEach = require('lodash/collection/forEach')
 let marked = require('marked')
+marked.setOptions({sanitize: true})
 
 let getApiData = require('./get-api-data')
 let querystring = require('./get-url-parameter')

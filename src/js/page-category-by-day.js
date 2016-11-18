@@ -6,6 +6,7 @@ var querystring = require('./get-url-parameter')
 var accordion = require('./accordion')
 var FindHelp = require('./find-help')
 var marked = require('marked')
+marked.setOptions({sanitize: true})
 
 // Lodash
 var forEach = require('lodash/collection/forEach')
