@@ -10,13 +10,17 @@
     margin-bottom: 5px;
   }
 
+  &__target-audience {
+    margin-bottom: 20px!important;
+  }
+
   &__address-list {
     margin: 0;
     padding: 0 0 20px 0;
     list-style-type: none;
 
     .accordion--organisation & {
-      padding-bottom: 0;
+      padding-bottom: 20px;
     }
   }
 
@@ -47,24 +51,18 @@
     }
   }
 
-  &__times-item {
-    margin: 0;
-    padding: 0px 0 5px 0;
+  &__times-items {
+    margin: 0 0 0 20px;
+    padding: 0px 0px 5px 0px;
     float: right;
 
     .accordion--day & {
       float: none;
     }
+  }
 
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style-type: none;
-    }
-
-    li {
-
-    }
+  &__times-item {
+    margin-left: 10px
   }
 
   &__provider-tag-list {

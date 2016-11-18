@@ -42,6 +42,37 @@ getApiData.data(organisationUrl).then(function (result) {
     }
   })
 
+  forEach(data.addresses, (a) => {
+    let groupedOpeningTimes = []
+    forEach(a.openingTimes, (ot) => {
+      let match = groupedOpeningTimes.filter((got) => got.day === ot.day)
+      if (match.length === 1) {
+        match[0].openingTimes.push({
+          endTime: ot.endTime,
+          startTime: ot.startTime
+        })
+      } else {
+        let newDay = {
+          day: ot.day,
+          openingTimes: [{
+            endTime: ot.endTime,
+            startTime: ot.startTime
+          }]
+        }
+        groupedOpeningTimes.push(newDay)
+      }
+    })
+    a.openingDays = groupedOpeningTimes
+    a.services = data.providedServices
+      .filter((s) => s.address.postcode.replace(/\s/gi, '') === a.postcode.replace(/\s/gi, ''))
+    a.hasServices = a.services.length > 0
+
+    data.providedServices = data.providedServices
+      .filter((s) => {
+        return s.address.postcode.replace(/\s/gi, '') !== a.postcode.replace(/\s/gi, '')
+      })
+  })
+
   // Append object name for Hogan
   var theData = { organisation: data }
 

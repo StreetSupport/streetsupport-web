@@ -52,22 +52,73 @@ page: organisation
             <li class="result-detail__provider-tag-item result-detail__provider-tag-item--\{{ id }}">\{{ name }}</li>
            \{{/formattedTags}}
            </ul>
-           <h2 class="h3">Locations</h2>
+           <h2 class="h2">Locations</h2>
            \{{#addresses}}
-              <ul class="result-detail__address-list">
+              <ul class="result-detail__address-list h3">
                 <li class="result-detail__address-item">\{{#street}} \{{{street}}}, \{{/street}} \{{#street1}} \{{{street1}}}, \{{/street1}} \{{#street2}} \{{{street2}}}, \{{/street2}}
                 \{{#street3}} \{{{street3}}}, \{{/street3}}</li>
                 <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
                 <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a> \{{/postcode}}</li>
               </ul>
               <dl class="result-detail__times-list">
-                \{{#openingTimes}}
+              \{{#openingDays}}
                 <dt class="result-detail__times-title">\{{day}}</dt>
-                <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
+                <dd class="result-detail__times-items">
+                \{{#openingTimes}}
+                  <span class="result-detail__times-item">\{{startTime}} - \{{endTime}}</span>
                 \{{/openingTimes}}
+                </dd>
+              \{{/openingDays}}
               </dl>
+
+
+              \{{#hasServices}}
+              <h4 class="h4">Services Provided</h4>
+              \{{/hasServices}}
+              <div class="accordion__incopy">
+                <div class="accordion accordion--organisation js-accordion">
+                  \{{#services}}
+                    <button class="h3 accordion__header js-header">
+                      \{{{name}}}
+                      <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
+                      <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
+                    </button>
+                    <div class="accordion__item js-item">
+                      <div class="accordion__inner">
+                        <p>\{{{info}}}</p>
+                        \{{#tags}}
+                          <p class="result-detail__target-audience">You must be: <span class="result-detail__tags-item">\{{{tags}}}</span></p>
+                        \{{/tags}}
+                        <h2 class="h3">Location</h2>
+                        \{{#locationDescription}}<p>\{{{locationDescription}}}</p>\{{/locationDescription}}
+                        \{{#address}}
+                          \{{#street}}
+                          <ul class="result-detail__address-list">
+                            <li class="result-detail__address-item">\{{#street}} \{{{street}}}, \{{/street}} \{{#street1}} \{{{street1}}}, \{{/street1}} \{{#street2}} \{{{street2}}}, \{{/street2}}
+                            \{{#street3}} \{{{street3}}}, \{{/street3}}</li>
+                            <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
+                            <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a></li>
+                          </ul>
+                          \{{/street}}
+                        \{{/address}}
+                        <h2 class="h3">Opening Times</h2>
+                        <dl class="result-detail__times-list">
+                          \{{#openingTimes}}
+                          <dt class="result-detail__times-title">\{{day}}</dt>
+                          <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
+                          \{{/openingTimes}}
+                        </dl>
+                      </div>
+                    </div>
+                  \{{/services}}
+                </div>
+              </div>
+
+
             \{{/addresses}}
-            <h2 class="h2">Services Provided</h2>
+
+            \{{#providedServices}}
+            <h2 class="h2">Other Services Provided</h2>
             <div class="accordion__incopy">
               <div class="accordion accordion--organisation js-accordion">
                 \{{#providedServices}}
@@ -106,6 +157,7 @@ page: organisation
                 \{{/providedServices}}
               </div>
             </div>
+            \{{/providedServices}}
 
             \{{#donationUrl}}
             <h2 class="h2">Donate</h2>

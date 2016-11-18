@@ -17,7 +17,7 @@ var init = function (showFirst, indexToOpen, listener, showAll) {
   }
 
   var i
-  var el = document.querySelector(accordion)
+  var el = document.querySelectorAll(accordion)
   var headers = document.querySelectorAll(header)
   var itemCount = headers.length
 
@@ -68,12 +68,14 @@ var baseOpen = function (el, context, noAnalytics) {
 }
 
 var close = function (el, context) {
-  var b
-  var children = context.children
+  for (var i = 0; i < context.length; i++) {
+    var currAccordion = context[i]
+    var children = currAccordion.children
 
-  // Remove active classes in accordion
-  for (b = 0; b < children.length; b++) {
-    children[b].classList.remove(activeClass)
+    // Remove active classes in accordion
+    for (var b = 0; b < children.length; b++) {
+      children[b].classList.remove(activeClass)
+    }
   }
 }
 
