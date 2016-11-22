@@ -14,7 +14,6 @@ location
     }
 
     let callback = () => {
-      console.log('callback')
       ko.applyBindings(new Model())
     }
 

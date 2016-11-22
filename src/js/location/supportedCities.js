@@ -1,12 +1,14 @@
 const locations = [
   {
     'id': 'leeds',
+    'findHelpId': 'leeds',
     'name': 'Leeds',
     'longitude': -1.54511238485298,
     'latitude': 53.7954906003838
   },
   {
     'id': 'manchester',
+    'findHelpId': 'manchester',
     'name': 'Manchester',
     'longitude': -2.24455696347558,
     'latitude': 53.4792777155671
