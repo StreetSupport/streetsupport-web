@@ -18,15 +18,30 @@
 .location-selector__text {
   margin-bottom: 10px!important;
   @include mq($from: m) {
-    margin-right: 1em;
+    margin-right: 0.5em;
     display: inline-block;
+  }
+  &--middle-of-sentence {
+    @include mq($from: m) {
+      margin-left: 0.5em;
+    }
   }
 }
 
 .location-selector__select {
   margin: 0 auto;
+  width: 100%;
   @include mq($from: m) {
-    width: 220px;
+    width: auto;
+    display: inline-block;
+  }
+}
+
+.location-selector__button {
+  width: 100%;
+  @include mq($from: m) {
+    width: auto;
+    margin-left: 1em;
     display: inline-block;
   }
 }

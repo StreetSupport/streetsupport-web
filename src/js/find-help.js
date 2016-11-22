@@ -11,9 +11,12 @@ var FindHelp = function (location) {
 
   self.currentLocation = location
   self.theCategory = urlParameter.parameter('category')
+  self.currentRange = urlParameter.parameter('range').length === 0
+    ? 10000
+    : urlParameter.parameter('range')
 
   self.initFindHelpLocationSelector = () => {
-    let dropdown = document.querySelector('.js-find-help-location-selector')
+    let dropdown = document.querySelector('.js-find-help-dropdown')
     let options = supportedCities.locations
       .map((c) => {
         return {
@@ -38,18 +41,36 @@ var FindHelp = function (location) {
       dropdown.appendChild(option)
     })
 
-    dropdown.addEventListener('change', (event) => {
-      console.log(window.location)
-      let newLocation = event.target.value
-      let newQueryString = window.location.search.replace(querystring.parameter('location'), newLocation)
-      window.location.href = window.location.pathname + newQueryString
+    let range = document.querySelector('.js-find-help-range')
+    forEach(range.children, (c) => {
+      if (c.value == self.currentRange) {
+        c.setAttribute('selected', 'selected')
+      }
     })
+
+    document.querySelector('.js-find-help-form')
+      .addEventListener('submit', (event) => {
+        event.preventDefault()
+        let location = document.querySelector('.js-find-help-dropdown').value
+        let range = document.querySelector('.js-find-help-range').value
+        let newQueryString = window.location.search
+          .replace(querystring.parameter('location'), location)
+
+        if (newQueryString.indexOf('range') >= 0) {
+          newQueryString = newQueryString.replace(querystring.parameter('range'), range)
+        } else {
+          newQueryString += '&range=' + range
+        }
+
+        window.location.href = window.location.pathname + newQueryString
+      })
   }
 
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
     let url = '?category=' + self.theCategory +
-              '&location=' + self.currentLocation
+              '&location=' + self.currentLocation +
+              '&range=' + self.currentRange
     if (subCategoryId.length > 0) {
       url += '&' + subCategoryKey + '=' + subCategoryId
     }
