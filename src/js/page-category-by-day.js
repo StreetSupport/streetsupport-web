@@ -67,6 +67,7 @@ function buildList (url) {
         locationSelector.handler(onChangeLocation)
         accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', 'day'))
         analytics.init(theTitle)
+        findHelp.initFindHelpLocationSelector()
         browser.loaded()
         socialShare.init()
       }
@@ -108,7 +109,7 @@ let init = () => {
     .getCurrent()
     .then((result) => {
       currentLocation = result
-      findHelp = new FindHelp(result.id)
+      findHelp = new FindHelp(result.findHelpId)
       findHelp.handleSubCategoryChange('day', accordion)
       let reqSubCat = querystring.parameter('sub-category')
       findHelp.setUrl('category-by-day', 'sub-category', reqSubCat)

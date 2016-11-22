@@ -15,9 +15,19 @@
   }
 }
 
+.location-selector__text {
+  margin-bottom: 10px!important;
+  @include mq($from: m) {
+    margin-right: 1em;
+    display: inline-block;
+  }
+}
+
 .location-selector__select {
-  @include mq($from: s) {
+  margin: 0 auto;
+  @include mq($from: m) {
     width: 220px;
     display: inline-block;
   }
 }
+

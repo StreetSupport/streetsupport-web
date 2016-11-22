@@ -158,6 +158,8 @@ function buildList (url) {
         locationSelector.handler(onChangeLocation)
         listToDropdown.init(initDropdownChangeHandler)
 
+        findHelp.initFindHelpLocationSelector()
+
         browser.loaded()
         socialShare.init()
       }
@@ -178,23 +180,23 @@ function buildList (url) {
     templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
   })
 }
+
 browser.loading()
 locationSelector
   .getCurrent()
   .then((result) => {
     currentLocation = result
-    findHelp = new FindHelp(result.id)
+    findHelp = new FindHelp(result.findHelpId)
     let reqSubCat = querystring.parameter('sub-category')
     findHelp.setUrl('category', 'sub-category', reqSubCat)
 
     let category = querystring.parameter('category')
     let location = querystring.parameter('location')
 
-    let url = apiRoutes.cities + result.id + '/services/' + findHelp.theCategory
+    let url = apiRoutes.cities + result.findHelpId + '/services/' + findHelp.theCategory
     if (location === 'my-location') {
       url = apiRoutes.servicesByCategory + category + '/' + result.latitude + '/' + result.longitude
     }
-
     buildList(url)
   }, (_) => {
   })

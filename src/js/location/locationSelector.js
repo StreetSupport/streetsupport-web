@@ -56,8 +56,15 @@ let _nearestSupported = () => {
 let _useMyLocation = (deferred) => {
   getLocation.location()
     .then((result) => {
+      let cityId = 'my-location'
+      var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+      if (saved !== undefined && saved.length > 0) {
+        cityId = supportedCities.get(saved).id
+      }
+
       deferred.resolve({
-        id: 'my-location',
+        id: cityId,
+        findHelpId: 'my-location',
         isSelected: true,
         latitude: result.coords.latitude,
         longitude: result.coords.longitude,
@@ -104,17 +111,17 @@ let _determineLocationRetrievalMethod = () => {
 
   if (locationInQueryString === 'my-location' && getLocation.isAvailable()) {
     method = _useMyLocation
-  }
-  if (locationInQueryString !== 'undefined' && locationInQueryString.length > 0 && locationInQueryString !== 'my-location') {
+  } else if (locationInQueryString !== 'undefined' && locationInQueryString.length > 0 && locationInQueryString !== 'my-location') {
     method = _useRequested
     id = locationInQueryString
-  }
-  let cities = supportedCities.locations.map((l) => l.id)
-  if (locationInPath !== 'undefined' && locationInPath.length > 0 && cities.indexOf(locationInPath) > -1) {
-    method = _useRequested
-    id = locationInPath
+  } else {
+    let cities = supportedCities.locations.map((l) => l.id)
+    if (locationInPath !== 'undefined' && locationInPath.length > 0 && cities.indexOf(locationInPath) > -1) {
+      method = _useRequested
+      id = locationInPath
 
-    setCurrent(id)
+      setCurrent(id)
+    }
   }
 
   return {
@@ -125,7 +132,6 @@ let _determineLocationRetrievalMethod = () => {
 
 const getCurrent = () => {
   let deferred = Q.defer()
-
   let getLocation = _determineLocationRetrievalMethod()
   getLocation.method(deferred, getLocation.id)
   return deferred.promise
