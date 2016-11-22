@@ -4,6 +4,7 @@ var browser = require('./browser')
 var forEach = require('lodash/collection/forEach')
 let supportedCities = require('./location/supportedCities')
 let querystring = require('./get-url-parameter')
+let getLocation = require('./location/get-location')
 
 var FindHelp = function (location) {
   var self = this
@@ -20,10 +21,12 @@ var FindHelp = function (location) {
           name: c.name
         }
       })
-    options.unshift({
-      id: 'my-location',
-      name: 'my location'
-    })
+    if (getLocation.isAvailable()) {
+      options.unshift({
+        id: 'my-location',
+        name: 'my location'
+      })
+    }
     forEach(options, (c) => {
       let option = document.createElement('option')
       option.setAttribute('value', c.id)
