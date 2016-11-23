@@ -1,3 +1,14 @@
-<div class="location-selector">
-<p>Showing \{{categoryName}} within 10k of \{{location}}</p>
-</div>
+<form class="location-selector js-find-help-form">
+  <p class="location-selector__text">Showing \{{categoryName}} within </p>
+  <select class="location-selector__select form__input form__input--inline js-find-help-range">
+    <option value="1000">1km</option>
+    <option value="2000">2km</option>
+    <option value="5000">5km</option>
+    <option value="10000">10km</option>
+  </select>
+  <p class="location-selector__text location-selector__text--middle-of-sentence"> of </p>
+  <select class="location-selector__select form__input form__input--inline js-find-help-dropdown"></select>
+  <button type="submit" class="js-find-help-submit btn btn--brand-e location-selector__button">
+    <span class="btn__text">Search</span>
+  </button>
+</form>

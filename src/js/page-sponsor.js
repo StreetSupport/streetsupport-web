@@ -10,11 +10,10 @@ location
   .then((result) => {
     let theData = {
       isManchester: result.id === 'manchester',
-      isLeeds: result.id === 'leeds',
+      isLeeds: result.id === 'leeds'
     }
 
     let callback = () => {
-      console.log('callback')
       ko.applyBindings(new Model())
     }
 

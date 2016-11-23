@@ -33,7 +33,7 @@
       }
 
       &:last-of-type {
-        margin-bottom: 0;
+        margin-bottom: 0px;
       }
 
       .btn {
@@ -255,13 +255,13 @@
     &.has-icon--left {
       margin: 20px 0;
       padding-left: 60px;
-      padding-top: 50px;
       position: relative;
       text-align: center;
 
       @include mq($from: m) {
         margin: 0px 0 10px;
         padding-left: 0;
+        padding-top: 0px;
         text-align: center;
       }
 
@@ -311,7 +311,7 @@
       }
     }
     &--find-help.has-icon--left {
-      padding-top: 0px;
+      padding-top: 50px;
     }
   }
 

@@ -35,7 +35,6 @@ const init = (result) => {
 
       templating.renderTemplate('js-content-tpl', theData, 'js-template-output', callback)
     }, (_) => {
-      console.log(_)
     })
 }
 
