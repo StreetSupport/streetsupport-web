@@ -52,6 +52,9 @@
 
     @include mq($from: m) {
       width: 120px;
+      &--timetabled {
+        width: auto;
+      }
     }
   }
 
