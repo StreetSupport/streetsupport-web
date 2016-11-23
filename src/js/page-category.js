@@ -93,6 +93,7 @@ function buildList (url) {
     let onRenderCallback = function () {
       listToDropdown.init()
       locationSelector.handler(onChangeLocation)
+      findHelp.initFindHelpLocationSelector()
       browser.loaded()
       socialShare.init()
     }
@@ -192,11 +193,13 @@ locationSelector
 
     let category = querystring.parameter('category')
     let location = querystring.parameter('location')
+    let range = querystring.parameter('range')
 
     let url = apiRoutes.cities + result.findHelpId + '/services/' + findHelp.theCategory
     if (location === 'my-location') {
       url = apiRoutes.servicesByCategory + category + '/' + result.latitude + '/' + result.longitude
     }
+    url += '?range=' + range
     buildList(url)
   }, (_) => {
   })

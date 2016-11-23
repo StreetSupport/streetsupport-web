@@ -49,12 +49,20 @@
     .accordion--day & {
       float: none;
     }
+
+    @include mq($from: m) {
+      width: 120px;
+    }
   }
 
   &__times-items {
     margin: 0 0 0 20px;
     padding: 0px 0px 5px 0px;
     float: right;
+
+    @include mq($from: m) {
+      float: left;
+    }
 
     .accordion--day & {
       float: none;
