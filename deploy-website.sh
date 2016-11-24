@@ -51,8 +51,20 @@ cat > env.js << EOF
 module.exports = $APIENVIRONMENT
 EOF
 
-echo "env file rewritten to:"
+echo "env.js file rewritten to:"
 cat env.js
+cd ../../
+
+# Update cache busting
+cd src/data
+
+DATE=`date +%Y%m%d%H%M`
+
+sed -i "/^  \"jsVersion\":/c \  \"jsVersion\": \"$DATE\"," site.json
+sed -i "/^  \"cssVersion\":/c \  \"cssVersion\": \"$DATE\"," site.json
+
+echo "site.json file rewritten to:"
+cat site.json
 
 cd ../../
 
