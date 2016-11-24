@@ -35,7 +35,6 @@ gulp.task('default', (callback) => {
     'metalsmith',
     ['htmlmin', 'svgsprite', 'scss', 'webpack', 'img', 'copy'],
     ['browsersync', 'watch'],
-    'casper',
     callback
   )
 })

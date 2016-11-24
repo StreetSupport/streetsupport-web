@@ -10,7 +10,6 @@
     "img": "src/img/",
     "js": "src/js/",
     "spec": "spec/",
-    "browserTests": "browser-tests/",
     "layouts": "src/layouts/",
     "pages": "src/pages/",
     "partials": "src/partials/",
