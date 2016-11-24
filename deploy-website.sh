@@ -68,9 +68,14 @@ cat site.json
 
 cd ../../
 
+# Create version.txt
+cd src/files
+
 cat > version.txt << EOF
 $DATE
 EOF
+
+cd ../../
 
 # Run gulp
 gulp deploy --debug --production
