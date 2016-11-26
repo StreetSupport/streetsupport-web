@@ -38,10 +38,13 @@
     position: absolute;
     display: inline-block;
     content: '';
-    width: 600px;
-    background-size: 600px;
     left: 0px;
     bottom: 18px;
+    width: 100%;
+    background-size: 600px;
+    @include mq($from: m) {
+      width: 600px;
+    }
   }
 
   & .container {
