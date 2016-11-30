@@ -32,6 +32,9 @@ var VolunteerModel = function (currCityId) {
   self.email = ko.observable('').extend({ required: true })
   self.telephone = ko.observable('')
   self.city = ko.observable(currCityId)
+  self.isManchester = ko.computed(function () {
+    return self.city() === 'manchester'
+  }, self)
   self.cities = supportedCities.locations
   self.cities.push({
     id: '',

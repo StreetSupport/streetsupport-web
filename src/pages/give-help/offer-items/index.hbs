@@ -110,7 +110,13 @@ page: offeritems
 
       <div id="js-success" class="hide">
         <h2 class="h2">Thank you for submitting your details!</h2>
-        <p>You have been added to our central database. Should an organisation require your help, they will contact you directly with more information. In the meantime, have a look at <a href="/give-help/">other ways to give</a>.</p>
+        <p>Your offer will be matched with any organisations who would welcome your offer. If no-one needs it at the moment, the offer will be retained for future matching.</p>
+        <div class="block__cta block__cta--3" data-bind="visible: isManchester">
+          <p class="text-left">For now, why not look at other ways you can help Manchester end homelessness:</p>
+          {{>cta brand="e" link="http://campaign.justgiving.com/charity/forevermanchester/bigchangemcr" icon="big-change" name="Donate to Big Change" label=""}}
+          {{>cta brand="e" link="https://charter.streetsupport.net/pledge-your-support/" icon="pledge" name="Pledge to the Charter" label=""}}
+          {{>cta brand="e" link="https://charter.streetsupport.net/join-action-group/" icon="join" name="Join an Action Group" label=""}}
+        </div>
       </div>
 
       {{> social-share}}

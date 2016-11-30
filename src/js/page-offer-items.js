@@ -9,5 +9,5 @@ var Model = require('./models/OfferItemsModel')
 location
   .getCurrent()
   .then((result) => {
-    ko.applyBindings(new Model(result.id), document.getElementById('js-form'))
+    ko.applyBindings(new Model(result.id))
   })
