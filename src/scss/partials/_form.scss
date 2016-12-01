@@ -99,6 +99,10 @@
   top: 0;
   right: 0;
   @extend .small;
+
+  .form__label--checkbox + input + & {
+    top: 25px;
+  }
 }
 
 .form__submit {

@@ -1,5 +1,3 @@
- /* global location, history */
-
 var ko = require('knockout')
 require('knockout.validation') // No variable here is deliberate!
 
@@ -8,8 +6,6 @@ var getApi = require('../get-api-data')
 var postApi = require('../post-api-data')
 var browser = require('../browser')
 var supportedCities = require('../location/supportedCities')
-
-var formId = 'js-form'
 
 var OfferItemModel = function (currCityId) {
   var self = this
@@ -25,12 +21,6 @@ var OfferItemModel = function (currCityId) {
     errorElementClass: 'form__input--error'
   }, true)
 
-  self.categories = ko.observableArray()
-  self.selectedCategories = ko.computed(function () {
-    return self.categories()
-      .filter((c) => c.isChecked())
-      .map((c) => c.key)
-  }, self)
   self.firstName = ko.observable('').extend({ required: true })
   self.lastName = ko.observable('').extend({ required: true })
   self.email = ko.observable('').extend({ required: true })
@@ -47,7 +37,27 @@ var OfferItemModel = function (currCityId) {
   self.postcode = ko.observable('').extend({ required: true })
   self.description = ko.observable('').extend({ required: true })
   self.additionalInfo = ko.observable('')
-  self.otherCategory = ko.observable()
+
+  self.categories = ko.observableArray()
+  self.selectedCategories = ko.computed(function () {
+    return self.categories()
+      .filter((c) => c.isChecked())
+      .map((c) => c.key)
+  }, self)
+
+  self.otherCategory = ko.observable('').extend({
+    required: {
+      message: 'Please select a category or provide an alternative',
+      onlyIf: function () {
+        const selected = self.categories()
+          .filter((c) => c.isChecked())
+        return selected.length === 0
+      }
+    }
+  })
+  self.otherCategoryChecked = ko.computed(function () {
+    return self.otherCategory().length > 0
+  }, self)
   self.isOptedIn = ko.observable(false)
 
   self.submitForm = function () {
@@ -63,10 +73,10 @@ var OfferItemModel = function (currCityId) {
         'Description': self.description(),
         'AdditionalInfo': self.additionalInfo(),
         'SelectedCategories': self.selectedCategories(),
-        'IsOptedIn': self.isOptedIn()
+        'IsOptedIn': self.isOptedIn(),
+        'OtherCategory': self.otherCategory()
       }
 
-      // TODO: Nice notification on success/fail
       postApi.post(apiRoutes.createOfferOfItems, payload)
         .then(function (result) {
           self.isSubmitted(true)
@@ -82,10 +92,7 @@ var OfferItemModel = function (currCityId) {
     } else {
       self.errors.showAllMessages()
 
-      // Jump to top of form
-      var url = location.href
-      location.href = '#' + formId
-      history.replaceState(null, null, url)
+      browser.jumpTo('#js-form')
     }
   }
 

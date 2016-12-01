@@ -1,3 +1,4 @@
+
 /* global describe, beforeEach, afterEach, it, expect */
 
 var getApi = require('../../src/js/get-api-data')
@@ -7,7 +8,7 @@ var Model = require('../../src/js/models/OfferItemsModel')
 var endpoints = require('../../src/js/api')
 var browser = require('../../src/js/browser')
 
-describe('Offer Items', () => {
+describe('Offer Items - No Categories Other Description Supplied', () => {
   let model = null
   let browserLoadingStub = null
   let browserLoadedStub = null
@@ -62,7 +63,7 @@ describe('Offer Items', () => {
       model.email('email@test.com')
       model.postcode('postcode')
       model.description('description')
-      model.categories()[0].isChecked(true)
+      model.otherCategory('other category description')
 
       model.submitForm()
     })
@@ -87,9 +88,9 @@ describe('Offer Items', () => {
           'Postcode': 'postcode',
           'Description': 'description',
           'AdditionalInfo': '',
-          'SelectedCategories': [catData[0].key],
+          'SelectedCategories': [],
           'IsOptedIn': false,
-          'OtherCategory': ''
+          'OtherCategory': 'other category description'
         }).calledAfter(browserLoadingStub)).toBeTruthy()
     })
 
