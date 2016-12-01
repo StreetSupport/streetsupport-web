@@ -73,6 +73,27 @@ page: offeritems
 	    		</ul>
 	    	</fieldset>
 	    	<fieldset class="form__fieldset">
+	    		<legend class="h2 form__fieldset-title">Offer Type</legend>
+          <p>Please tick all the categories that relate to your offer.</p>
+	    		<ul class="form__field-list">
+            <div data-bind="foreach: categories">
+              <li class="form__field-item">
+                <label class="form__label--checkbox" data-bind="attr: { for: key }">
+                  <input type="checkbox" data-bind="attr: { value: value, name: key, id: key }, checked: isChecked" class="form__input--checkbox" />
+                  <span data-bind="text: value"></span>
+                </label>
+              </li>
+            </div>
+              <li class="form__field-item">
+                <label class="form__label--checkbox" for="other">
+                  <input type="checkbox" name="other" class="form__input--checkbox" />
+                  Other; please describe below
+                </label>
+                <input type="text" class="form__input" data-bind="otherCategory" placeholder="Other category" />
+              </li>
+	    		</ul>
+	    	</fieldset>
+	    	<fieldset class="form__fieldset">
 	    		<legend class="h2 form__fieldset-title">Description</legend>
 	    		<ul class="form__field-list">
 	    			<li class="form__field-item">
