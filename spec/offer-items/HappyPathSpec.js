@@ -11,7 +11,6 @@ describe('Offer Items', () => {
   let model = null
   let browserLoadingStub = null
   let browserLoadedStub = null
-  let browserTrackEventStub = null
 
   beforeEach(() => {
     browserLoadingStub = sinon.stub(browser, 'loading')
@@ -20,14 +19,14 @@ describe('Offer Items', () => {
       .returns({
         then: function (success, error) {
           success({
-            'status': 'created',
+            'status': 'ok',
             'statusCode': 200,
             'data': catData
           })
         }
       })
 
-    model = new Model()
+    model = new Model('manchester')
   })
 
   afterEach(() => {
@@ -38,6 +37,72 @@ describe('Offer Items', () => {
 
   it('- Should populate categories', () => {
     expect(model.categories().length).toEqual(10)
+  })
+
+  describe('- Post Offer', () => {
+    let postStub = null
+
+    beforeEach(() => {
+      postStub = sinon
+        .stub(postToApi, 'post')
+        .returns({
+          then: function (success, error) {
+            success({
+              'status': 'created',
+              'statusCode': 201
+            })
+          }
+        })
+
+      browserLoadingStub.reset()
+      browserLoadedStub.reset()
+
+      model.firstName('first')
+      model.lastName('last')
+      model.email('email@test.com')
+      model.postcode('postcode')
+      model.description('description')
+      model.categories()[0].isChecked(true)
+
+      model.submitForm()
+    })
+
+    afterEach(() => {
+      postToApi.post.restore()
+    })
+
+    it('- Should notify user it is loading', () => {
+      expect(browserLoadingStub.calledOnce).toBeTruthy
+    })
+
+    it('- Should post payload', () => {
+      expect(postStub
+        .withArgs(endpoints.createOfferOfItems,
+        {
+          'FirstName': 'first',
+          'LastName': 'last',
+          'Email': 'email@test.com',
+          'Telephone': '',
+          'City': 'manchester',
+          'Postcode': 'postcode',
+          'Description': 'description',
+          'AdditionalInfo': '',
+          'SelectedCategories': [catData[0].key],
+          'IsOptedIn': false
+        }).calledAfter(browserLoadingStub)).toBeTruthy()
+    })
+
+    it('- Should notify user it is loaded', () => {
+      expect(browserLoadingStub.calledAfter(postStub)).toBeTruthy
+    })
+
+    it('- Should set isSubmitted', () => {
+      expect(model.isSubmitted()).toBeTruthy()
+    })
+
+    it('- Should set isSuccess', () => {
+      expect(model.isSuccess()).toBeTruthy()
+    })
   })
 })
 

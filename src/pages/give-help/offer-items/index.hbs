@@ -124,12 +124,15 @@ page: offeritems
 	    	<button type="submit" class="btn btn--brand-d form__submit"><span class="btn__text">Submit</span></button>
     	</form>
 
-      <div id="js-fail" class="hide">
+      <!-- ko if: isSubmitted -->
+      <!-- ko ifnot: isSuccess -->
+      <div id="js-fail">
         <h2 class="h2">Technical Error</h2>
         <p>There has been a technical error. Please <a href="/contact/">contact Street Support</a>.</p>
       </div>
-
-      <div id="js-success" class="hide">
+      <!-- /ko -->
+      <!-- ko if: isSuccess -->
+      <div id="js-success">
         <h2 class="h2">Thank you for submitting your details!</h2>
         <p>Your offer will be matched with any organisations who would welcome your offer. If no-one needs it at the moment, the offer will be retained for future matching.</p>
         <div class="block__cta block__cta--3" data-bind="visible: isManchester">
@@ -139,7 +142,8 @@ page: offeritems
           {{>cta brand="e" link="https://charter.streetsupport.net/join-action-group/" icon="join" name="Join an Action Group" label=""}}
         </div>
       </div>
-
+      <!-- /ko -->
+      <!-- /ko -->
       {{> social-share}}
     </div>
   </div>

@@ -1,4 +1,4 @@
-/* global location, history */
+ /* global location, history */
 
 var ko = require('knockout')
 require('knockout.validation') // No variable here is deliberate!
@@ -10,15 +10,12 @@ var browser = require('../browser')
 var supportedCities = require('../location/supportedCities')
 
 var formId = 'js-form'
-var failId = 'js-fail'
-var successId = 'js-success'
-var theForm = document.getElementById(formId)
-var theFail = document.getElementById(failId)
-var theSuccess = document.getElementById(successId)
-var hideClass = 'hide'
 
 var OfferItemModel = function (currCityId) {
   var self = this
+
+  self.isSubmitted = ko.observable(false)
+  self.isSuccess = ko.observable(false)
 
   ko.validation.init({
     insertMessages: true,
@@ -30,8 +27,9 @@ var OfferItemModel = function (currCityId) {
 
   self.categories = ko.observableArray()
   self.selectedCategories = ko.computed(function () {
-    self.categories()
-      .filter((c) => c.isChecked)
+    return self.categories()
+      .filter((c) => c.isChecked())
+      .map((c) => c.key)
   }, self)
   self.firstName = ko.observable('').extend({ required: true })
   self.lastName = ko.observable('').extend({ required: true })
@@ -55,7 +53,6 @@ var OfferItemModel = function (currCityId) {
   self.submitForm = function () {
     if (self.errors().length === 0) {
       browser.loading()
-
       var payload = {
         'FirstName': self.firstName(),
         'LastName': self.lastName(),
@@ -65,19 +62,19 @@ var OfferItemModel = function (currCityId) {
         'Postcode': self.postcode(),
         'Description': self.description(),
         'AdditionalInfo': self.additionalInfo(),
+        'SelectedCategories': self.selectedCategories(),
         'IsOptedIn': self.isOptedIn()
       }
 
       // TODO: Nice notification on success/fail
       postApi.post(apiRoutes.createOfferOfItems, payload)
         .then(function (result) {
+          self.isSubmitted(true)
           browser.loaded()
           if (result.statusCode.toString().charAt(0) !== '2') {
-            theForm.classList.add(hideClass)
-            theFail.classList.remove(hideClass)
+            self.isSuccess(false)
           } else {
-            theForm.classList.add(hideClass)
-            theSuccess.classList.remove(hideClass)
+            self.isSuccess(true)
           }
         }, () => {
           browser.redirect('/500/')
@@ -106,7 +103,6 @@ var OfferItemModel = function (currCityId) {
           c.isChecked = ko.observable(false)
         })
         self.categories(cats)
-        console.log(self.categories())
       }, (_) => {
         browser.redirect('/500/')
       })
