@@ -39,6 +39,7 @@
 
   &__image-image {
     margin-bottom: 20px;
+    position: relative;
 
     @include mq($from: l) {
       width: 50%;
@@ -57,6 +58,13 @@
       @include mq($from: l) {
         max-width: none;
         margin: 0;
+      }
+    }
+
+    &--overlaid {
+      margin-bottom: 100px;
+      @include mq($from: m) {
+        margin-bottom: 40px;
       }
     }
   }

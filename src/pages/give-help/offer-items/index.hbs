@@ -37,6 +37,7 @@ page: offeritems
 <div class="block block--requests-detail">
   <div class="container">
     <div class="block__content">
+      <!-- ko ifnot: isSubmitted -->
     	<form id="js-form" class="form form--volunteer" data-bind="submit: submitForm">
 	    	<fieldset class="form__fieldset">
 	    		<legend class="h2 form__fieldset-title">About You</legend>
@@ -73,6 +74,27 @@ page: offeritems
 	    		</ul>
 	    	</fieldset>
 	    	<fieldset class="form__fieldset">
+	    		<legend class="h2 form__fieldset-title">Offer Type</legend>
+          <p>Please tick all the categories that relate to your offer.</p>
+	    		<ul class="form__field-list">
+            <div data-bind="foreach: categories">
+              <li class="form__field-item">
+                <label class="form__label--checkbox" data-bind="attr: { for: key }">
+                  <input type="checkbox" data-bind="attr: { value: value, name: key, id: key }, checked: isChecked" class="form__input--checkbox" />
+                  <span data-bind="text: value"></span>
+                </label>
+              </li>
+            </div>
+              <li class="form__field-item">
+                <label class="form__label--checkbox" for="other">
+                  <input type="checkbox" name="other" id="other" data-bind="checked: otherCategoryChecked" class="form__input--checkbox" />
+                  Other; please describe below
+                </label>
+                <input type="text" class="form__input" data-bind="textInput: otherCategory" placeholder="Other category" />
+              </li>
+	    		</ul>
+	    	</fieldset>
+	    	<fieldset class="form__fieldset">
 	    		<legend class="h2 form__fieldset-title">Description</legend>
 	    		<ul class="form__field-list">
 	    			<li class="form__field-item">
@@ -102,13 +124,17 @@ page: offeritems
         </fieldset>
 	    	<button type="submit" class="btn btn--brand-d form__submit"><span class="btn__text">Submit</span></button>
     	</form>
+      <!-- /ko -->
 
-      <div id="js-fail" class="hide">
+      <!-- ko if: isSubmitted -->
+      <!-- ko ifnot: isSuccess -->
+      <div id="js-fail">
         <h2 class="h2">Technical Error</h2>
         <p>There has been a technical error. Please <a href="/contact/">contact Street Support</a>.</p>
       </div>
-
-      <div id="js-success" class="hide">
+      <!-- /ko -->
+      <!-- ko if: isSuccess -->
+      <div id="js-success">
         <h2 class="h2">Thank you for submitting your details!</h2>
         <p>Your offer will be matched with any organisations who would welcome your offer. If no-one needs it at the moment, the offer will be retained for future matching.</p>
         <div class="block__cta block__cta--3" data-bind="visible: isManchester">
@@ -118,7 +144,8 @@ page: offeritems
           {{>cta brand="e" link="https://charter.streetsupport.net/join-action-group/" icon="join" name="Join an Action Group" label=""}}
         </div>
       </div>
-
+      <!-- /ko -->
+      <!-- /ko -->
       {{> social-share}}
     </div>
   </div>
