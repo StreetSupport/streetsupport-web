@@ -1,23 +1,17 @@
-/* global location, history */
-
 var ko = require('knockout')
 require('knockout.validation') // No variable here is deliberate!
 
 var apiRoutes = require('../api')
+var getApi = require('../get-api-data')
 var postApi = require('../post-api-data')
 var browser = require('../browser')
 var supportedCities = require('../location/supportedCities')
 
-var formId = 'js-form'
-var failId = 'js-fail'
-var successId = 'js-success'
-var theForm = document.getElementById(formId)
-var theFail = document.getElementById(failId)
-var theSuccess = document.getElementById(successId)
-var hideClass = 'hide'
-
-var VolunteerModel = function (currCityId) {
+var OfferItemModel = function (currCityId) {
   var self = this
+
+  self.isSubmitted = ko.observable(false)
+  self.isSuccess = ko.observable(false)
 
   ko.validation.init({
     insertMessages: true,
@@ -32,6 +26,9 @@ var VolunteerModel = function (currCityId) {
   self.email = ko.observable('').extend({ required: true })
   self.telephone = ko.observable('')
   self.city = ko.observable(currCityId)
+  self.isManchester = ko.computed(function () {
+    return self.city() === 'manchester'
+  }, self)
   self.cities = supportedCities.locations
   self.cities.push({
     id: '',
@@ -40,12 +37,32 @@ var VolunteerModel = function (currCityId) {
   self.postcode = ko.observable('').extend({ required: true })
   self.description = ko.observable('').extend({ required: true })
   self.additionalInfo = ko.observable('')
+
+  self.categories = ko.observableArray()
+  self.selectedCategories = ko.computed(function () {
+    return self.categories()
+      .filter((c) => c.isChecked())
+      .map((c) => c.key)
+  }, self)
+
+  self.otherCategory = ko.observable('').extend({
+    required: {
+      message: 'Please select a category or provide an alternative',
+      onlyIf: function () {
+        const selected = self.categories()
+          .filter((c) => c.isChecked())
+        return selected.length === 0
+      }
+    }
+  })
+  self.otherCategoryChecked = ko.computed(function () {
+    return self.otherCategory().length > 0
+  }, self)
   self.isOptedIn = ko.observable(false)
 
   self.submitForm = function () {
     if (self.errors().length === 0) {
       browser.loading()
-
       var payload = {
         'FirstName': self.firstName(),
         'LastName': self.lastName(),
@@ -55,31 +72,50 @@ var VolunteerModel = function (currCityId) {
         'Postcode': self.postcode(),
         'Description': self.description(),
         'AdditionalInfo': self.additionalInfo(),
-        'IsOptedIn': self.isOptedIn()
+        'SelectedCategories': self.selectedCategories(),
+        'IsOptedIn': self.isOptedIn(),
+        'OtherCategory': self.otherCategory()
       }
 
-      // TODO: Nice notification on success/fail
-      postApi.post(apiRoutes.createOfferOfItems, payload).then(function (result) {
-        browser.loaded()
-        if (result.statusCode.toString().charAt(0) !== '2') {
-          theForm.classList.add(hideClass)
-          theFail.classList.remove(hideClass)
-        } else {
-          theForm.classList.add(hideClass)
-          theSuccess.classList.remove(hideClass)
-        }
-      })
+      postApi.post(apiRoutes.createOfferOfItems, payload)
+        .then(function (result) {
+          self.isSubmitted(true)
+          browser.loaded()
+          if (result.statusCode.toString().charAt(0) !== '2') {
+            self.isSuccess(false)
+          } else {
+            self.isSuccess(true)
+          }
+        }, () => {
+          browser.redirect('/500/')
+        })
     } else {
       self.errors.showAllMessages()
 
-      // Jump to top of form
-      var url = location.href
-      location.href = '#' + formId
-      history.replaceState(null, null, url)
+      browser.jumpTo('#js-form')
     }
   }
 
   self.errors = ko.validation.group(self)
+
+  self.init = () => {
+    browser.loading()
+
+    getApi
+      .data(apiRoutes.needCategories)
+      .then((result) => {
+        browser.loaded()
+        const cats = result.data
+        cats.forEach((c) => {
+          c.isChecked = ko.observable(false)
+        })
+        self.categories(cats)
+      }, (_) => {
+        browser.redirect('/500/')
+      })
+  }
+
+  self.init()
 }
 
-module.exports = VolunteerModel
+module.exports = OfferItemModel
