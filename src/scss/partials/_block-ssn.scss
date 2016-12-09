@@ -65,6 +65,9 @@
       margin-bottom: 100px;
       @include mq($from: m) {
         margin-bottom: 40px;
+        &:last-child {
+          margin-bottom: 0
+        }
       }
     }
   }
