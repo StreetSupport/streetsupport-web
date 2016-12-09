@@ -73,6 +73,8 @@ getApiData.data(organisationUrl).then(function (result) {
       })
   })
 
+  data.donationDescription = htmlEncode.htmlDecode(data.donationDescription)
+
   // Append object name for Hogan
   var theData = { organisation: data }
 
