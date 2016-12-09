@@ -16,6 +16,7 @@ describe('Offer Items - No Categories Other Description Supplied', () => {
   beforeEach(() => {
     browserLoadingStub = sinon.stub(browser, 'loading')
     browserLoadedStub = sinon.stub(browser, 'loaded')
+    sinon.stub(browser, 'scrollTo')
     sinon.stub(getApi, 'data')
       .returns({
         then: function (success, error) {
@@ -33,6 +34,7 @@ describe('Offer Items - No Categories Other Description Supplied', () => {
   afterEach(() => {
     browser.loading.restore()
     browser.loaded.restore()
+    browser.scrollTo.restore()
     getApi.data.restore()
   })
 
