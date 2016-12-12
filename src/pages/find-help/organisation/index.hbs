@@ -160,12 +160,22 @@ page: organisation
             \{{/providedServices}}
 
             \{{#donationUrl}}
-            <h2 class="h2">Donate</h2>
-            <p>\{{donationDescription}}</p>
+            <h2 class="h2">Donate Money</h2>
+            <p>\{{{donationDescription}}}</p>
             <a href="\{{donationUrl}}" target="_blank" rel="noreferrer noopener" class="btn btn--brand-d">
               <span class="btn__text">Donate to \{{{name}}}</span>
             </a>
             \{{/donationUrl}}
+
+            \{{#itemsDonationDescription}}
+            <h2 class="h2">Donate Items</h2>
+            <p>\{{{itemsDonationDescription}}}</p>
+            \{{#itemsDonationUrl}}
+            <a href="\{{itemsDonationUrl}}" target="_blank" rel="noreferrer noopener" class="btn btn--brand-d">
+              <span class="btn__text">Donate items to \{{{name}}}</span>
+            </a>
+            \{{/itemsDonationUrl}}
+            \{{/itemsDonationDescription}}
 
             <h2 class="h2">Contact</h2>
             <dl class="result-detail__times-list">

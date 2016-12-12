@@ -76,6 +76,8 @@ getApiData.data(organisationUrl).then(function (result) {
   // Append object name for Hogan
   var theData = { organisation: data }
 
+  console.log(theData)
+
   var callback = function () {
     browser.loaded()
     accordion.init()
