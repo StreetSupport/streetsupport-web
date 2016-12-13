@@ -27,6 +27,8 @@
       height: 12px;
       width: 12px;
     }
+
+    @include printHide();
   }
 
   @include mq($from: m) {
@@ -39,6 +41,8 @@
     background: $brand-j;
     padding: 10px;
     box-shadow: 0 2px 5px 0 rgba(50,50,50,.7);
+
+    @include printHide();
   }
 }
 
