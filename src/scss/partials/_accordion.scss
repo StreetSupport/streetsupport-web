@@ -42,6 +42,18 @@
         }
       }
     }
+
+    @media print {
+      & {
+        padding-left: 0px;
+        color: black;
+        font-size: 20px;
+
+        svg {
+          display: none;
+        }
+      }
+    }
   }
 
   &__icon {
@@ -75,6 +87,14 @@
       max-height: 1000rem;
       opacity: 1;
       visibility: visible;
+    }
+
+    @media print {
+      & {
+        max-height: 1000rem;
+        opacity: 1;
+        visibility: visible;
+      }
     }
 
     a {

@@ -8,6 +8,8 @@
   &__btn {
     clear: both;
     margin-bottom: 5px;
+
+    @include printHide();
   }
 
   &__target-audience {
@@ -73,7 +75,7 @@
   }
 
   &__times-item {
-    margin-left: 10px
+    margin-left: 140px
   }
 
   &__provider-tag-list {

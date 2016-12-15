@@ -8,6 +8,12 @@
   padding-bottom: 30px;
   text-align: center;
 
+  @media print {
+    & {
+      color: black;
+    }
+  }
+
   &__header {
     margin-top: 0;
   }

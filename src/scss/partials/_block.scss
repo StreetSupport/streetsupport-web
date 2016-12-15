@@ -243,6 +243,10 @@
   padding-top: 90px;
   padding-bottom: 0px;
 
+  @media print {
+    & { padding-top: 0px; }
+  }
+
   @include mq($from: m) {
     padding-top: 250px;
     padding-bottom: 0px;

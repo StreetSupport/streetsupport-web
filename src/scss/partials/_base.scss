@@ -20,6 +20,11 @@ html {
 
 body {
   font-size: $base-font-size;
+
+  @media print {
+    & { font-size: 14px; }
+  }
+
   position: relative;
 }
 

@@ -11,6 +11,8 @@ $normalPadding: 35px;
 .header {
   background: $brand-a;
   background: linear-gradient(to bottom, $brand-a, #339378);
+
+  @include printHide();
 }
 
 .header__title {
