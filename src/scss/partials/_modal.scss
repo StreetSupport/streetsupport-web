@@ -53,9 +53,17 @@
 }
 
 .location-select-icon--manchester {
-  padding-top: 73px;
+  img {
+    position: absolute;
+    left: 0px;
+    bottom: 12px;
+  }
 }
 
 .location-select-icon--leeds {
-  padding-top: 64px;
+  img {
+    position: absolute;
+    left: 0px;
+    bottom: 12px;
+  }
 }
