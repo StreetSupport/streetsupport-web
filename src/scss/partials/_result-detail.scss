@@ -75,7 +75,10 @@
   }
 
   &__times-item {
-    margin-left: 140px
+    margin-left: 140px;
+    &--timetabled {
+      margin-left: 0
+    }
   }
 
   &__provider-tag-list {
