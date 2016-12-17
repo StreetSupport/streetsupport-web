@@ -14,6 +14,7 @@ describe('Offer Items - No Categories, No Other Description', () => {
     sinon.stub(browser, 'loading')
     sinon.stub(browser, 'loaded')
     sinon.stub(browser, 'jumpTo')
+    sinon.stub(browser, 'scrollTo')
     sinon.stub(getApi, 'data')
       .returns({
         then: function (success, error) {
@@ -44,6 +45,7 @@ describe('Offer Items - No Categories, No Other Description', () => {
     browser.loading.restore()
     browser.loaded.restore()
     browser.jumpTo.restore()
+    browser.scrollTo.restore()
   })
 
   it('- Should not post payload', () => {

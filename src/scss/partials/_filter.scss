@@ -1,5 +1,6 @@
 .subcat-filter {
   text-align: center;
+  @include printHide();
 }
 
 .subcat-filter__label {
