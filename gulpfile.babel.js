@@ -73,12 +73,3 @@ gulp.task('auditcode', (callback) => {
     callback
   )
 })
-
-// Run the test task to visually test the website -
-// @note run when localhost is already serving the website
-gulp.task('visualtest', (callback) => {
-  runSequence(
-    'visualTesting',
-     callback
-   )
-})
