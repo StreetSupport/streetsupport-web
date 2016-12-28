@@ -33,10 +33,6 @@
         "directory": "./src/data/**/*.json"
       },
       "metalsmith-drafts": true,
-      "metalsmith-discover-helpers": {
-        "directory": "./src/helpers",
-        "pattern": "/\\.js$/"
-      },
       "metalsmith-layouts": {
         "engine": "handlebars",
         "directory": "./src/layouts",
@@ -45,6 +41,9 @@
       },
       "metalsmith-in-place": {
         "engine": "handlebars"
+      },
+      "metalsmith-register-helpers": {
+        "directory": "./src/helpers"
       }
     }
   }
