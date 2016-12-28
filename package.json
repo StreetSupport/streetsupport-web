@@ -47,6 +47,7 @@
     "metalsmith-drafts": "0.0.1",
     "metalsmith-in-place": "1.4.3",
     "metalsmith-layouts": "1.6.4",
+    "metalsmith-mapsite": "1.0.4",
     "metalsmith-metadata-directory": "0.1.1",
     "metalsmith-register-helpers": "0.2.0",
     "postcss-pxtorem": "3.3.1",
