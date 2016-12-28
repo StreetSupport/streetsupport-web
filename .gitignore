@@ -14,6 +14,7 @@ node_modules
 _svgicon
 _dist
 npm-debug.log
+cachebusting.json
 
 # Project Specific #
 ######################
