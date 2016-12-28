@@ -16,7 +16,7 @@ if (argv.production) {
   theSourcemap = ''
 }
 else {
-  theSourcemap = 'cheap-module-eval-source-map'
+  theSourcemap = 'source-map'
 }
 
 module.exports = {
@@ -47,6 +47,7 @@ module.exports = {
     chunkFilename: '[id].chunk.js',
     publicPath: '/assets/js/'
   },
+  devtool: theSourcemap,
   plugins: plugins,
   module: {
     loaders: [
