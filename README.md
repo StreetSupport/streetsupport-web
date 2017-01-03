@@ -68,6 +68,12 @@ Each page of the site is found under the `/pages/` directory. Each page is repre
 * page: the navigation item for this page. See `/src/scss/modules/_variables.scss` for list of pages
 * nosubnav: {true|false} if `true`, hide the sub navigation on the page
 
+Page templating is done using [Hogan](http://twitter.github.io/hogan.js/). Note: template parts need to be escaped eg:
+
+```\{{myVariable}}```
+
+[Knockout](http://knockoutjs.com/) data-binding is also used in some pages.
+
 ### Javascript
 
 Page code-behinds are written in plain ol' Javascript, or use [Knockout](http://knockoutjs.com/). Knockout view models are found in `/js/models/` are mostly tested. [ES2015](https://babeljs.io/learn-es2015/) syntax is transpiled using [Babel](https://babeljs.io/).
