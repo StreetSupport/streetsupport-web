@@ -4,7 +4,7 @@ The website codebase for streetsupport.net.
 
 ## Git Branching
 
-Please work in the develop branch first, and use feature branches for significant pieces of work. Only merge to staging when ready, tested and signed off. Travis CI automatically builds on each commit to develop, staging and release. The release branch automatically builds to: [http://streetsupport.net](http://streetsupport.net).
+Please work in the `develop` branch first, and use feature branches for significant pieces of work. Once the feature is completed, submit a pull request into `develop`. Travis CI automatically builds on each commit to `develop`, `uat` and `prod`. The `prod` branch automatically builds to: [http://streetsupport.net](http://streetsupport.net).
 
 ## Build Status
 
@@ -57,12 +57,31 @@ On running the default `gulp` task from the terminal, it will run tests and lint
 
 ### Pages
 
+Each page of the site is found under the `/pages/` directory. Each page is represented by a handlebars file `index.hbs`, in a directory named after the page's url. In each `.hbs` file, meta data is entered to define the page:
+
+* title: the page's title tag
+* description: the page's meta description
+* layout: the master layout file (found in `/layouts/`)
+* permalink: ???
+* jsBundle: the js bundle that will be loaded into the page. Bundles are defined in `/webpack.config.js` and each one points to a js file in `/src/js/`
+* section: the top level navigation item this page belongs to. See `/src/scss/modules/_variables.scss` for list of sections
+* page: the navigation item for this page. See `/src/scss/modules/_variables.scss` for list of pages
+* nosubnav: {true|false} if `true`, hide the sub navigation on the page
+
 #### Creating new pages
+
+*todo*
 
 ### Testing
 
-Tests reside in the `/spec` directory, and are written using [Jasmine](https://jasmine.github.io/) and [Sinon](http://sinonjs.org/). *Most* pages are tested...
+Tests reside in the `/spec` directory, and are written using [Jasmine](https://jasmine.github.io/) and [Sinon](http://sinonjs.org/). *Most* pages are tested...Please ensure any features submitted via pull request are covered by tests.
+
+A number of happy paths are covered by automated browsers tests at: [https://github.com/StreetSupport/web-automated-testing](https://github.com/StreetSupport/web-automated-testing).
 
 ### Styling
 
+*todo*
+
 #### Mobile-First
+
+*todo*
