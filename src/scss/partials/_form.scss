@@ -53,6 +53,14 @@
     margin-right: 10px;
     padding-top: 9px;
   }
+
+  &--checkbox {
+    .form__input--checkbox {
+      width: inherit;
+      float: left;
+      margin: 5px 0.5em 0 0;
+    }
+  }
 }
 
 .form__label--checkbox {
