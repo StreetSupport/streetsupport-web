@@ -9,7 +9,7 @@ Please work in the `develop` branch first, and use feature branches for signific
 ## Build Status
 
 * develop - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=develop)](https://travis-ci.org/StreetSupport/streetsupport-web) [![Browser Tests](https://travis-ci.org/StreetSupport/web-automated-testing.svg?branch=master)](https://travis-ci.org/StreetSupport/web-automated-testing)
-* staging - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=staging)](https://travis-ci.org/StreetSupport/streetsupport-web)
+* staging - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=uat)](https://travis-ci.org/StreetSupport/streetsupport-web)
 * release - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=release)](https://travis-ci.org/StreetSupport/streetsupport-web)
 
 ## Install
