@@ -68,13 +68,13 @@ Each page of the site is found under the `/pages/` directory. Each page is repre
 * page: the navigation item for this page. See `/src/scss/modules/_variables.scss` for list of pages
 * nosubnav: {true|false} if `true`, hide the sub navigation on the page
 
-#### Creating new pages
+### Javascript
 
-*todo*
+Page code-behinds are written in plain ol' Javascript, or use [Knockout](http://knockoutjs.com/). Knockout view models are found in `/js/models/` are mostly tested. [ES2015](https://babeljs.io/learn-es2015/) syntax is transpiled using [Babel](https://babeljs.io/).
 
 ### Testing
 
-Tests reside in the `/spec` directory, and are written using [Jasmine](https://jasmine.github.io/) and [Sinon](http://sinonjs.org/). *Most* pages are tested...Please ensure any features submitted via pull request are covered by tests.
+Tests reside in the `/spec` directory, and are written using [Jasmine](https://jasmine.github.io/) and [Sinon](http://sinonjs.org/). Please ensure any features submitted via pull request are covered by tests.
 
 A number of happy paths are covered by automated browsers tests at: [https://github.com/StreetSupport/web-automated-testing](https://github.com/StreetSupport/web-automated-testing).
 
