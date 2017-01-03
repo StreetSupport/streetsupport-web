@@ -47,7 +47,7 @@ var OfferItemModel = function (currCityId) {
 
   self.otherCategory = ko.observable('').extend({
     required: {
-      message: 'Please select a category or provide an alternative',
+      message: 'Select a category or describe here.',
       onlyIf: function () {
         const selected = self.categories()
           .filter((c) => c.isChecked())
@@ -83,11 +83,9 @@ var OfferItemModel = function (currCityId) {
           browser.loaded()
           if (result.statusCode.toString().charAt(0) !== '2') {
             self.isSuccess(false)
-            console.log('scrolling')
             browser.scrollTo('.requests-detail__heading--i-want-to-volunteer')
           } else {
             self.isSuccess(true)
-            console.log('scrolling')
             browser.scrollTo('.requests-detail__heading--i-want-to-volunteer')
           }
         }, () => {

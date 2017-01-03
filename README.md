@@ -14,10 +14,9 @@ Please work in the develop branch first, and use feature branches for significan
 
 ## Install
 
-* Install Node 4 LTS,
-* (Recommended) Run in Terminal: `npm i npm -g` (Update NPM to latest version),
+* Install Node 6 LTS,
 * Run in Terminal: `npm i gulp-cli -g` (Gulp does not need to be installed globally),
-* Navigate to the workflow folder in command line Terminal,
+* In your command line terminal, navigate to the street support project folder,
 * Run: `npm i`.
 
 See [https://github.com/fephil/garrus](https://github.com/fephil/garrus) for more information about the Frontend workflow.

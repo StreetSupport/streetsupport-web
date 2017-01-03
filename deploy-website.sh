@@ -55,19 +55,6 @@ echo "env.js file rewritten to:"
 cat env.js
 cd ../../
 
-# Update cache busting
-cd src/data
-
-DATE=`date +%Y%m%d%H%M`
-
-sed -i "/^  \"jsVersion\":/c \  \"jsVersion\": \"$DATE\"," site.json
-sed -i "/^  \"cssVersion\":/c \  \"cssVersion\": \"$DATE\"," site.json
-
-echo "site.json file rewritten to:"
-cat site.json
-
-cd ../../
-
 # Create version.txt
 cd src/files
 
