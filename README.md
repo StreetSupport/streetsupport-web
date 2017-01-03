@@ -80,8 +80,4 @@ A number of happy paths are covered by automated browsers tests at: [https://git
 
 ### Styling
 
-*todo*
-
-#### Mobile-First
-
-*todo*
+CSS styling is written in SCSS, based on [Susy](http://susy.oddbird.net/), in the [BEM](http://getbem.com/introduction/) methodology, and is auto-prefixed. Build with a mobile-first approach, using [sass-mq](https://github.com/sass-mq/sass-mq) for media queries.
