@@ -48,3 +48,21 @@ Run these tasks in your command line Terminal:
 * The `gulp jsdev` task only checks and builds javascript with associated tests,
 * The `--production` flag builds minified assets with no sourcemaps,
 * The `--debug` flag shows the files being created in each task (if the task has a pipe).
+
+## Development
+
+### Workflow
+
+On running the default `gulp` task from the terminal, it will run tests and linting, build the site into the `/_dist/` directory, and then launch in your default browser. As you edit files in the `/src/` directory, the site will refresh automatically.
+
+### Pages
+
+#### Creating new pages
+
+### Testing
+
+Tests reside in the `/spec` directory, and are written using [Jasmine](https://jasmine.github.io/) and [Sinon](http://sinonjs.org/). *Most* pages are tested...
+
+### Styling
+
+#### Mobile-First
