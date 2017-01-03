@@ -47,7 +47,7 @@ var OfferItemModel = function (currCityId) {
 
   self.otherCategory = ko.observable('').extend({
     required: {
-      message: 'Please select a category or provide an alternative',
+      message: 'Select a category or describe here.',
       onlyIf: function () {
         const selected = self.categories()
           .filter((c) => c.isChecked())
