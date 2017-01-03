@@ -70,7 +70,7 @@ Each page of the site is found under the `/pages/` directory. Each page is repre
 
 Page templating is done using [Hogan](http://twitter.github.io/hogan.js/). Note: template parts need to be escaped eg:
 
-```\{{myVariable}}```
+``` \{{myVariable}} ```
 
 [Knockout](http://knockoutjs.com/) data-binding is also used in some pages.
 
