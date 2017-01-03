@@ -83,11 +83,9 @@ var OfferItemModel = function (currCityId) {
           browser.loaded()
           if (result.statusCode.toString().charAt(0) !== '2') {
             self.isSuccess(false)
-            console.log('scrolling')
             browser.scrollTo('.requests-detail__heading--i-want-to-volunteer')
           } else {
             self.isSuccess(true)
-            console.log('scrolling')
             browser.scrollTo('.requests-detail__heading--i-want-to-volunteer')
           }
         }, () => {
