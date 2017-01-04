@@ -1,11 +1,14 @@
 .full-width-overlay {
-  width: 480px;
   height: 100%;
   text-align: center;
   position: absolute;
   top: 0px;
-  left: 50%;
-  margin-left: -240px;
+
+  @include mq($from: s) {
+    width: 480px;
+    left: 50%;
+    margin-left: -240px;
+  }
 
   @include mq($from: l) {
     width: 100%;
@@ -15,6 +18,7 @@
 }
 
 .full-width-overlay--big-change {
+    width: 100%;
 }
 
 .full-width-overlay--charter {
@@ -37,6 +41,7 @@
   @include mq($from: l) {
     display: flex;
     padding-top: 0px;
+    margin-top: -40px;
   }
 }
 

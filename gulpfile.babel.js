@@ -32,6 +32,7 @@ gulp.task('default', (callback) => {
     'jasmine',
     'standardlint',
     'clean',
+    'cachebusting',
     'metalsmith',
     ['htmlmin', 'svgsprite', 'scss', 'webpack', 'img', 'copy'],
     ['browsersync', 'watch'],
@@ -45,6 +46,7 @@ gulp.task('deploy', (callback) => {
     'jasmine',
     'standardlint',
     'clean',
+    'cachebusting',
     'metalsmith',
     ['htmlmin', 'svgsprite', 'scss', 'webpack', 'img', 'copy'],
     'crticalcss',
@@ -70,13 +72,4 @@ gulp.task('auditcode', (callback) => {
     'standardlint',
     callback
   )
-})
-
-// Run the test task to visually test the website -
-// @note run when localhost is already serving the website
-gulp.task('visualtest', (callback) => {
-  runSequence(
-    'visualTesting',
-     callback
-   )
 })
