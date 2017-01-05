@@ -97,7 +97,7 @@ let usePostcodeForLocation = (needs) => {
 
 let init = () => {
   if (window.location.search.length === 0) {
-    var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+    var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*=\s*([^;]*).*$)|^.*$/, '$1')
     if (saved !== undefined && saved.length > 0 && saved !== 'my-location') {
       onChangeLocation(saved)
     }

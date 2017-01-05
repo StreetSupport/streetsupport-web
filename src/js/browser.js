@@ -1,5 +1,5 @@
 /*
-  global ga, document, history, window
+  global ga, document, history, window, getComputedStyle
 */
 
 var Spinner = require('spin.js')
@@ -58,10 +58,10 @@ let setOnHistoryPop = (onPopCallback) => {
 
 var scrollTo = function (selector) {
   const mobileHeader = document.querySelector('.header--mobile')
-  
+
   const getDesktopHeaderHeight = () => {
     const desktopHeader = document.querySelector('.sticky')
-    const navSubList = document.querySelector('.nav__list--sub-list')
+    // const navSubList = document.querySelector('.nav__list--sub-list')
     return desktopHeader.offsetHeight + 44 // navSubList.offsetHeight - doesn't return greater than 0!
   }
 
@@ -70,8 +70,8 @@ var scrollTo = function (selector) {
   }
 
   const getIsMobile = () => {
-    const mobileHeaderDisplay = mobileHeader.currentStyle 
-      ? mobileHeader.currentStyle.display 
+    const mobileHeaderDisplay = mobileHeader.currentStyle
+      ? mobileHeader.currentStyle.display
       : getComputedStyle(mobileHeader, null).display
     return mobileHeaderDisplay === 'block'
   }
@@ -82,7 +82,6 @@ var scrollTo = function (selector) {
 
   let findPos = (obj) => {
     var curtop = 0
-    const offsetParent = obj.offsetParent
     if (obj.offsetParent) {
       do {
         curtop += obj.offsetTop
