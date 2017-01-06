@@ -1,7 +1,7 @@
 /* global location */
 
 var getValue = function (needle, haystack) {
-  needle = needle.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]')
+  needle = needle.replace(/[[]/, '\\[').replace(/[\]]/, '\\]')
   var regex = new RegExp('[\\?&]' + needle + '=([^&#]*)')
   var results = regex.exec(haystack)
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))

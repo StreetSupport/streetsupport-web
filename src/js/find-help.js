@@ -43,7 +43,7 @@ var FindHelp = function (location) {
 
     let range = document.querySelector('.js-find-help-range')
     forEach(range.children, (c) => {
-      if (c.value == self.currentRange) {
+      if (parseInt(c.value) === parseInt(self.currentRange)) {
         c.setAttribute('selected', 'selected')
       }
     })
@@ -65,7 +65,6 @@ var FindHelp = function (location) {
         window.location.href = window.location.pathname + newQueryString
       })
   }
-
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
     let url = '?category=' + self.theCategory +
