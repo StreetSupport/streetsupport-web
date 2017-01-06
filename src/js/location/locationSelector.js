@@ -57,7 +57,7 @@ let _useMyLocation = (deferred) => {
   getLocation.location()
     .then((result) => {
       let cityId = 'my-location'
-      var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+      var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*=\s*([^;]*).*$)|^.*$/, '$1')
       if (saved !== undefined && saved.length > 0) {
         cityId = supportedCities.get(saved).id
       }
@@ -94,7 +94,7 @@ let _useRequested = (deferred, locationInQueryString) => {
 }
 
 let _useSaved = (deferred) => {
-  var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*\=\s*([^;]*).*$)|^.*$/, '$1')
+  var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*=\s*([^;]*).*$)|^.*$/, '$1')
   if (saved !== undefined && saved.length > 0 && saved !== 'my-location') {
     deferred.resolve(supportedCities.get(saved))
   } else {
