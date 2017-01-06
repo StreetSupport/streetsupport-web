@@ -19,6 +19,24 @@ nosubnav: true
   </div>
 </div>
 
+<div id="js-template-output"></div>
+
+{{> loading-spinner}}
+<script id="js-content-tpl" type="text/template">
+<div class="block block--highlight">
+  <div class="container">
+    <div class="block__content">
+      <div class="block__cta block__cta--incopy block__cta--2 block--pushup">
+        {{>cta brand="d" icon="findhelp" link="/find-help/" name="Find Help"}}
+        {{>cta brand="e" icon="givehelp" link="/give-help/" name="Give Help"}}
+      </div>
+      {{> manchester-stats }}
+    </div>
+  </div>
+</div>
+
+{{> manchester-home-promo }}
+
 <div class="block block--promo block--pulldown">
   <div class="container">
     <div class="block__content">
@@ -32,20 +50,6 @@ nosubnav: true
   </div>
 </div>
 
-<div class="block block--highlight">
-  <div class="container">
-      <div class="block__content">
-        <div class="block__cta block__cta--incopy block__cta--2 block--pushup">
-          {{>cta brand="d" icon="findhelp" link="/find-help/" name="Find Help"}}
-          {{>cta brand="e" icon="givehelp" link="/give-help/" name="Give Help"}}
-        </div>
-        <div id="js-template-output"></div>
-   </div>
- </div>
-</div>
-
-{{> manchester-home-promo }}
-
 <div class="block block--highlight block--promo">
   <div class="container">
     <div class="block__content partners">
@@ -56,6 +60,4 @@ nosubnav: true
   </div>
 </div>
 
-<script id="js-content-tpl" type="text/template">
-  {{> manchester-stats }}
 </script>
