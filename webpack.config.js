@@ -39,7 +39,8 @@ module.exports = {
     bigchange: path.join(__dirname, 'src/js/pages/manchester/page-big-change'),
     leedsbigchange: path.join(__dirname, 'src/js/pages/leeds/page-big-change'),
     emergencyhelp: path.join(__dirname, 'src/js/page-emergency-help'),
-    emergencyHelpRedirect: path.join(__dirname, 'src/js/page-emergency-help-redirect')
+    emergencyHelpRedirect: path.join(__dirname, 'src/js/page-emergency-help-redirect'),
+    impact: path.join(__dirname, 'src/js/page-impact'),
   },
   output: {
     path: path.join(__dirname, '/_dist/assets/js/'),

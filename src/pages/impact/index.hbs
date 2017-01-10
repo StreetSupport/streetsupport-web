@@ -1,0 +1,66 @@
+---
+title: Impact - Street Support
+description: Street support makes it easier to help homeless people. Here is more information how it has helped.
+layout: default.hbs
+permalink: false
+jsBundle: impact
+section: impact
+page: impact
+nosubnav: true
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item">Impact</li>
+    </ol>
+  </div>
+</div>
+
+<div class="block block--header">
+  <div class="container">
+    <h1 class="h1 block__header">Impact</h1>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac felis volutpat, placerat mauris viverra, lobortis nibh. Pellentesque ut risus faucibus, egestas neque quis, malesuada elit. Etiam felis ante, ultricies eget risus id, blandit varius eros. Morbi lorem felis, semper eget nisl sit amet, rhoncus suscipit ipsum. Proin libero orci, placerat nec vehicula vitae, pretium et ipsum. Nullam non nulla vitae massa fringilla blandit in a lectus.</p>
+
+      <h2>Latest Statistics</h3>
+      <dl class="latest-statistics">
+        <dt class="latest-statistics__title">Service Providers listed:</dt>
+        <dd class="latest-statistics__value" data-bind="text: totalServiceProviders"></dd>
+        <dt class="latest-statistics__title">Services listed:</dt>
+        <dd class="latest-statistics__value" data-bind="text: totalServices"></dd>
+        <dt class="latest-statistics__title">Volunteers registered:</dt>
+        <dd class="latest-statistics__value" data-bind="text: totalVolunteers"></dd>
+        <dt class="latest-statistics__title">Service Providers' needs:</dt>
+        <dd class="latest-statistics__value" data-bind="text: totalNeeds"></dd>
+        <dt class="latest-statistics__title">Responses to Provider needs:</dt>
+        <dd class="latest-statistics__value" data-bind="text: totalNeedResponses"></dd>
+        <dt class="latest-statistics__title">Pledges to the Manchester Homelessness Charter:</dt>
+        <dd class="latest-statistics__value" data-bind="text: totalPledges"></dd>
+        <dt class="latest-statistics__title">Offers of help/items:</dt>
+        <dd class="latest-statistics__value" data-bind="text: totalOffers"></dd>
+      </dl>
+      <section>
+        <h2>Latest Impact News</h3>
+        <div data-bind="foreach: impactUpdates">
+          <article class="impact-update">
+            <h3>
+              <span class="impact-update__display-date" data-bind="text: displayDate"></span> 
+              <span class="impact-update__city" data-bind="text: city"></span>
+            </h3>
+            <div data-bind="html: contentForDisplay"></div>
+          </article>
+        {{> divider}}
+        </div>
+      </section>
+      
+      {{> social-share}}
+    </div>
+  </div>
+</div>
