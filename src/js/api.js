@@ -30,5 +30,7 @@ module.exports = {
   newlyRegisteredProviders: p('/v1/newly-registered-providers'),
   cities: p('/v1/cities/'),
   statistics: p('/v1/statistics/'),
-  impactUpdates: p('/v1/impact-updates/')
+  impactUpdates: p('/v1/impact-updates/'),
+  analyticsSnapshot: p('/v1/analytics-statistics/')
 }
+

@@ -16,6 +16,8 @@ const Model = function () {
   self.totalNeedResponses = ko.observable()
   self.totalPledges = ko.observable()
   self.totalOffers = ko.observable()
+  self.pageViews = ko.observable()
+  self.uniquePageViews = ko.observable()
   self.impactUpdates = ko.observableArray()
   self.shouldShowLoadMoreUpdates = ko.observable(false)
 
@@ -52,10 +54,20 @@ const Model = function () {
       }, onError)
   }
 
+  const loadAnalytics = (url = `${endpoints.analyticsSnapshot}latest`) => {
+    api
+      .data(url)
+      .then((result) => {
+        self.pageViews(result.data.pageViews)
+        self.uniquePageViews(result.data.uniquePageViews)
+      }, onError)
+  }
+
   self.init = () => {
     browser.loaded()
     loadStatistics()
     loadImpactUpdates()
+    loadAnalytics()
   }
 }
 
