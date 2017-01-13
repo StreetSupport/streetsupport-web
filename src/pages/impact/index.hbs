@@ -29,7 +29,7 @@ nosubnav: true
     <div class="block__content">
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac felis volutpat, placerat mauris viverra, lobortis nibh. Pellentesque ut risus faucibus, egestas neque quis, malesuada elit. Etiam felis ante, ultricies eget risus id, blandit varius eros. Morbi lorem felis, semper eget nisl sit amet, rhoncus suscipit ipsum. Proin libero orci, placerat nec vehicula vitae, pretium et ipsum. Nullam non nulla vitae massa fringilla blandit in a lectus.</p>
 
-      <h2>Latest Statistics</h2>
+      <h2 class="h2">Latest Statistics</h2>
       <dl class="latest-statistics">
         <dt class="latest-statistics__title">Service Providers listed:</dt>
         <dd class="latest-statistics__value" data-bind="text: totalServiceProviders"></dd>
@@ -51,11 +51,11 @@ nosubnav: true
         <dd class="latest-statistics__value" data-bind="text: uniquePageViews"></dd>
       </dl>
       <section>
-        <h2>Latest Impact News</h3>
+        <h2 class="h2">Latest Impact News</h2>
         <div data-bind="foreach: impactUpdates">
           <article class="impact-update">
-            <h3>
-              <span class="impact-update__display-date" data-bind="text: displayDate"></span> 
+            <h3 class="h3">
+              <span class="impact-update__display-date" data-bind="text: displayDate"></span>
               <span class="impact-update__city" data-bind="text: city"></span>
             </h3>
             <div data-bind="html: contentForDisplay"></div>
@@ -63,7 +63,7 @@ nosubnav: true
         {{> divider}}
         </div>
       </section>
-      
+
       {{> social-share}}
     </div>
   </div>
