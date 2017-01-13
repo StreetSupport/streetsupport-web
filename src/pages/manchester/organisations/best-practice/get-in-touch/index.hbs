@@ -1,0 +1,105 @@
+---
+title: Get in Touch - Working together to end homelessness in Manchester
+description: Contact us with any queries about Best Practice
+layout: default.hbs
+permalink: false
+jsBundle: generic
+section: organisations
+page: bestpractice
+nosubnav: false
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item"><a href="/manchester">Manchester</a></li>
+      <li class="breadcrumbs__item"><a href="/manchester/organisations">Organisations</a></li>
+      <li class="breadcrumbs__item"><a href="/manchester/organisations/best-practice">Best Practice</a></li>
+      <li class="breadcrumbs__item">Get in Touch</li>
+    </ol>
+  </div>
+</div>
+
+<div class="block block--city-header city-header city-header--manchester">
+  <div class="container container--city-header">
+    <h1 class="h1 block__header">Get in Touch</h1>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <p>Please get in touch if you have a general question, would like further information, or to sign up for the latest news.</p>
+      <p>If you are ready to apply for the Manchester Homelessness Partnership Best Practice awards - or have a question about the awards, please visit our <a href="/manchester/organisations/best-practice/awards/apply">Award Application page</a>.</p>
+
+      <!-- ko if: isFormSubmitSuccessful -->
+        <!-- ko template: { name: 'form-submit-success-template' } -->
+        <!-- /ko -->
+      <!-- /ko -->
+      <!-- ko if: isFormSubmitFailure -->
+        <!-- ko template: { name: 'form-submit-failure-template' } -->
+        <!-- /ko -->
+      <!-- /ko -->
+      <!-- ko ifnot: isFormSubmitSuccessful -->
+      <form class="form" data-bind="submit: submit">
+        <fieldset class="form__fieldset" data-bind="with: formModel">
+          <legend class="h2 form__fieldset-title">Get in Touch</legend>
+          <ul class="form__field-list">
+            <li class="form__field-item">
+              <label class="form__label" for="name">Name</label>
+              <input type="text" class="form__input form__input" id="name" data-bind="value: name" required placeholder="required" />
+            </li>
+            <li class="form__field-item">
+              <label class="form__label" for="organisation-name">Organisation Name</label>
+              <input type="text" class="form__input form__input" id="organisation-name" data-bind="value: orgName" required placeholder="required" />
+            </li>
+            <li class="form__field-item">
+              <label class="form__label" for="email">Email</label>
+              <input type="email" class="form__input form__input" id="email" data-bind="value: email" />
+            </li>
+            <li class="form__field-item">
+              <label class="form__label" for="telephone">Telephone</label>
+              <input type="telephone" class="form__input form__input" id="telephone" data-bind="value: telephone" required placeholder="required" />
+            </li>
+            <li class="form__field-item form__field-item--full">
+              <label class="form__label" for="enquiry">Your enquiry</label>
+              <textarea class="form__input form__input--multiline" id="enquiry" data-bind="value: enquiry"></textarea>
+            </li>
+            <li class="form__field-item form__field-item--full">
+              <label class="form__label--checkbox" for="isOptedIn">
+                <input type="checkbox" id="isOptedIn" data-bind="attr: { value: isOptedIn }, checked: isOptedIn" class="form__input--checkbox" />
+                Opt-In if you want to get occasional updates about Street Support to your inbox
+                </label>
+            </li>
+          </ul>
+        </fieldset>
+        <button type="submit" class="btn btn--brand-d form__submit" data-bind="click: submit"><span class="btn__text">Submit</span></button>
+      </form>
+      <!-- /ko -->
+
+      {{> social-share}}
+    </div>
+  </div>
+</div>
+
+{{> loading-spinner}}
+
+<script type="text/html" id="form-submit-success-template">
+  <h2 class="h2">Thank you for submitting your details</h2>
+  <p>Thank you for joining forces with us to support people who are homeless. We are working hard alongside local charities and voluntary groups to add the features that are most useful.</p>
+  <p>In the meantime you can:</p>
+  <ul>
+    <li><a href="/find-help/">find help</a> for someone who is homeless</li>
+    <li><a href="/give-help/">give help</a> by giving your time, money or unwanted items</li>
+    <li class="social-share social-share--in-list">share us with your networks: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="streetsupportuk" data-dnt="true">Tweet</a>
+  <div class="fb-share-button" data-layout="button"></div></li>
+    <li>follow us on <a href="https://twitter.com/streetsupportuk">Twitter</a> or <a href="https://www.facebook.com/streetsupport">Facebook</a> and keep up to date with news, information and new features of the site</li>
+</script>
+
+<script type="text/html" id="form-submit-failure-template">
+  <h2 class="h2">There was a problem with your submission:</h2>
+  <ul data-bind="foreach: apiErrors">
+    <li data-bind="text: $data"></li>
+  </ul>
+</script>
