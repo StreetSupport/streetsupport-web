@@ -92,9 +92,27 @@
   width: 100%;
 }
 
+.form__radio-group {
+  list-style: none; 
+  padding-left: 0;
+}
+.form__radio-group-item {
+  .form__error {
+    display: none;
+  }
+  &:first-child {
+    .form__error {
+      display: inherit
+    }
+  }
+}
+
 .form__input--error {
   border: 1px solid $brand-g;
   margin-top: 25px;
+  .form__radio-group & {
+    margin-top: 0;
+  }
 }
 
 .form__error {

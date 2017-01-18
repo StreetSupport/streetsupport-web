@@ -49,9 +49,7 @@ var OfferItemModel = function (currCityId) {
     required: {
       message: 'Select a category or describe here.',
       onlyIf: function () {
-        const selected = self.categories()
-          .filter((c) => c.isChecked())
-        return selected.length === 0
+        return self.selectedCategories().length === 0
       }
     }
   })

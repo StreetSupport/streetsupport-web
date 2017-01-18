@@ -57,6 +57,7 @@ $brand-l: #29272a;
 $brand-m: #101011;
 $brand-n: #9886bf;
 $brand-p: #086149;
+$brand-q: #f3f3f3;
 
 // Fonts
 @font-face {
@@ -91,7 +92,7 @@ $font-headline-weight: 500;
 // Header & Nav
 $header-top: 117px;
 
-$header-height: 44px;
+$header-height: 42px;
 $header-margin: 44px;
 
 $header-subnav-height: 85px;
@@ -100,8 +101,8 @@ $header-subnav-margin: 85px;
 $nav-width: 220px;
 
 // Used to automatically generate active CSS classes
-$nav-sections: home findhelp givehelp locations charter bigchange impact about contact;
-$nav-pages: home findhelp emergencyhelp allorganisations givehelp giveitems volunteer offeritems donate partnership manchester leeds charter readthecharter pledgeyoursupport joinactiongroup aboutthecharter bigchangeabout bigchangecampaign impact about contact;
+$nav-sections: home findhelp givehelp locations charter bigchange organisations impact about contact;
+$nav-pages: home findhelp emergencyhelp allorganisations givehelp giveitems volunteer offeritems donate partnership manchester leeds charter readthecharter pledgeyoursupport joinactiongroup aboutthecharter bigchangeabout bigchangecampaign bestpractice training impact about contact;
 
 // z-indices
 $zIndex-modal: 2000;
