@@ -32,6 +32,7 @@ module.exports = {
   statistics: p('/v1/statistics/'),
   impactUpdates: p('/v1/impact-updates/'),
   analyticsSnapshot: p('/v1/analytics-statistics/'),
-  bestPracticeAwardApplications: p('/v1/manchester-best-practice-awards/applications/')
+  bestPracticeAwardApplications: p('/v1/manchester-best-practice-awards/applications/'),
+  bestPracticeEnquiries: p('/v1/manchester-best-practice-enquiries/')
 }
 

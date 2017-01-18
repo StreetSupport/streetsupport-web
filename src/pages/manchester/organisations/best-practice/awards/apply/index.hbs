@@ -32,8 +32,6 @@ nosubnav: false
 <div class="block">
   <div class="container">
     <div class="block__content">
-      <p>Complete the following form to apply for, or make an inquiry about, your Manchester Homelessness Partnership Best Practice Award.</p>
-
       <!-- ko if: isFormSubmitSuccessful -->
         <!-- ko template: { name: 'form-submit-success-template' } -->
         <!-- /ko -->
@@ -43,6 +41,7 @@ nosubnav: false
         <!-- /ko -->
       <!-- /ko -->
       <!-- ko ifnot: isFormSubmitSuccessful -->
+      <p>Complete the following form to apply for, or make an inquiry about, your Manchester Homelessness Partnership Best Practice Award.</p>
       <form class="form" data-bind="submit: submit">
         <fieldset class="form__fieldset">
           <legend class="h2 form__fieldset-title">Apply or enquire about an award</legend>
@@ -96,14 +95,7 @@ nosubnav: false
 
 <script type="text/html" id="form-submit-success-template">
   <h2 class="h2">Thank you for submitting your details</h2>
-  <p>Thank you for joining forces with us to support people who are homeless. We are working hard alongside local charities and voluntary groups to add the features that are most useful.</p>
-  <p>In the meantime you can:</p>
-  <ul>
-    <li><a href="/find-help/">find help</a> for someone who is homeless</li>
-    <li><a href="/give-help/">give help</a> by giving your time, money or unwanted items</li>
-    <li class="social-share social-share--in-list">share us with your networks: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="streetsupportuk" data-dnt="true">Tweet</a>
-  <div class="fb-share-button" data-layout="button"></div></li>
-    <li>follow us on <a href="https://twitter.com/streetsupportuk">Twitter</a> or <a href="https://www.facebook.com/streetsupport">Facebook</a> and keep up to date with news, information and new features of the site</li>
+  <p>Thank you for getting in touch. A member of the Manchester Homelessness Partnership will be in touch shortly.</p>
 </script>
 
 <script type="text/html" id="form-submit-failure-template">
