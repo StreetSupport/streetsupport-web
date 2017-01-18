@@ -26,41 +26,61 @@ nosubnav: true
 
 <div class="block">
   <div class="container">
-    <div class="block__content">
+    <div class="block__content text-center">
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac felis volutpat, placerat mauris viverra, lobortis nibh. Pellentesque ut risus faucibus, egestas neque quis, malesuada elit. Etiam felis ante, ultricies eget risus id, blandit varius eros. Morbi lorem felis, semper eget nisl sit amet, rhoncus suscipit ipsum. Proin libero orci, placerat nec vehicula vitae, pretium et ipsum. Nullam non nulla vitae massa fringilla blandit in a lectus.</p>
 
-      <h2 class="h2">Latest Statistics</h2>
-      <dl class="latest-statistics">
-        <dt class="latest-statistics__title">Service Providers listed:</dt>
-        <dd class="latest-statistics__value" data-bind="text: totalServiceProviders"></dd>
-        <dt class="latest-statistics__title">Services listed:</dt>
-        <dd class="latest-statistics__value" data-bind="text: totalServices"></dd>
-        <dt class="latest-statistics__title">Volunteers registered:</dt>
-        <dd class="latest-statistics__value" data-bind="text: totalVolunteers"></dd>
-        <dt class="latest-statistics__title">Service Providers' needs:</dt>
-        <dd class="latest-statistics__value" data-bind="text: totalNeeds"></dd>
-        <dt class="latest-statistics__title">Responses to Provider needs:</dt>
-        <dd class="latest-statistics__value" data-bind="text: totalNeedResponses"></dd>
-        <dt class="latest-statistics__title">Pledges to the Manchester Homelessness Charter:</dt>
-        <dd class="latest-statistics__value" data-bind="text: totalPledges"></dd>
-        <dt class="latest-statistics__title">Offers of help/items:</dt>
-        <dd class="latest-statistics__value" data-bind="text: totalOffers"></dd>
-        <dt class="latest-statistics__title">Page Views to date:</dt>
-        <dd class="latest-statistics__value" data-bind="text: pageViews"></dd>
-        <dt class="latest-statistics__title">Unique Page Views to date:</dt>
-        <dd class="latest-statistics__value" data-bind="text: uniquePageViews"></dd>
-      </dl>
-      <section>
-        <h2 class="h2">Latest Impact News</h2>
+      <section class="latest-statistics">
+        <h2 class="h1 latest-statistics__heading">Latest Statistics</h2>
+        <ul class="latest-statistics__items">
+          <li class="latest-statistics__item"><dl>
+            <dd class="latest-statistics__item-value h1" data-bind="text: totalServiceProviders"></dd>
+            <dt class="latest-statistics__item-title">Service Providers listed</dt>
+          </dl></li>
+          <li class="latest-statistics__item"><dl>
+          <dd class="latest-statistics__item-value h1" data-bind="text: totalServices"></dd>
+          <dt class="latest-statistics__item-title">Services listed</dt>
+          </dl></li>
+          <li class="latest-statistics__item"><dl>
+          <dd class="latest-statistics__item-value h1" data-bind="text: totalVolunteers"></dd>
+          <dt class="latest-statistics__item-title">Volunteers registered</dt>
+          </dl></li>
+          <li class="latest-statistics__item"><dl>
+          <dd class="latest-statistics__item-value h1" data-bind="text: totalNeeds"></dd>
+          <dt class="latest-statistics__item-title">Service Providers' needs</dt>
+          </dl></li>
+          <li class="latest-statistics__item"><dl>
+          <dd class="latest-statistics__item-value h1" data-bind="text: totalNeedResponses"></dd>
+          <dt class="latest-statistics__item-title">Responses to Provider needs</dt>
+          </dl></li>
+          <li class="latest-statistics__item"><dl>
+          <dd class="latest-statistics__item-value h1" data-bind="text: totalPledges"></dd>
+          <dt class="latest-statistics__item-title">Pledges to the Manchester Charter</dt>
+          </dl></li>
+          <li class="latest-statistics__item"><dl>
+          <dd class="latest-statistics__item-value h1" data-bind="text: totalOffers"></dd>
+          <dt class="latest-statistics__item-title">Offers of help/items</dt>
+          </dl></li>
+          <li class="latest-statistics__item"><dl>
+          <dd class="latest-statistics__item-value h1" data-bind="text: pageViews"></dd>
+          <dt class="latest-statistics__item-title">Page Views to date</dt>
+          </dl></li>
+          <li class="latest-statistics__item"><dl>
+          <dd class="latest-statistics__item-value h1" data-bind="text: uniquePageViews"></dd>
+          <dt class="latest-statistics__item-title">Unique Page Views to date</dt>
+          </dl></li>
+        </ul>
+      </section>
+      {{> divider}}
+      <section class="impact-updates text-left">
+        <h2 class="h1">Latest Impact News</h2>
         <div data-bind="foreach: impactUpdates">
           <article class="impact-update">
-            <h3 class="h3">
+            <h3 class="h2">
               <span class="impact-update__display-date" data-bind="text: displayDate"></span>
               <span class="impact-update__city" data-bind="text: city"></span>
             </h3>
             <div data-bind="html: contentForDisplay"></div>
           </article>
-        {{> divider}}
         </div>
       </section>
 

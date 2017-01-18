@@ -1,11 +1,16 @@
+.impact-updates {
+  @include cf();
+}
+
 .impact-update {
-  
-}
+  background: $brand-q;
+  border-radius: $latest-statistics-border-radius;
+  border-top: solid $latest-statistics-border-radius $brand-h;
+  border-bottom: solid $latest-statistics-border-radius $brand-h;
+  padding: 20px;
+  margin-bottom: 20px;
 
-.impact-update__display-date {
-  
-}
-
-.impact-update__city {
-  
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
