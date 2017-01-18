@@ -41,6 +41,7 @@ module.exports = {
     emergencyhelp: path.join(__dirname, 'src/js/page-emergency-help'),
     emergencyHelpRedirect: path.join(__dirname, 'src/js/page-emergency-help-redirect'),
     impact: path.join(__dirname, 'src/js/page-impact'),
+    bestpracticeawardsapply: path.join(__dirname, 'src/js/pages/best-practice/awards/page-apply')
   },
   output: {
     path: path.join(__dirname, '/_dist/assets/js/'),
