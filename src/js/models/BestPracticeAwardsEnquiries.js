@@ -54,9 +54,9 @@ function BestPracticeApply () {
       .post(endpoint, data)
       .then((result) => {
         browser.loaded()
-        if(result.statusCode === 201) {
+        if (result.statusCode === 201) {
           self.isFormSubmitFailure(false)
-         self.isFormSubmitSuccessful(true)
+          self.isFormSubmitSuccessful(true)
         } else {
           self.apiErrors = ko.observableArray(result.data.messages)
           self.isFormSubmitFailure(true)
