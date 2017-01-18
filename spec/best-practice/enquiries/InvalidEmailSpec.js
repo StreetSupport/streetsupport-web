@@ -35,8 +35,4 @@ describe('Best Practice Enquiries Model - invalid email entered', function () {
   it('- should not post to api', () => {
     expect(apiStub.notCalled).toBeTruthy()
   })
-
-  it('- should set form submit unsuccessful', () => {
-    expect(sut.isFormSubmitFailure()).toBeTruthy()
-  })
 })

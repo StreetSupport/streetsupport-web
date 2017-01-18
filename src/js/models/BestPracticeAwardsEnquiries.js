@@ -54,7 +54,13 @@ function BestPracticeApply () {
       .post(endpoint, data)
       .then((result) => {
         browser.loaded()
-        self.isFormSubmitSuccessful(true)
+        if(result.statusCode === 201) {
+          self.isFormSubmitFailure(false)
+         self.isFormSubmitSuccessful(true)
+        } else {
+          self.apiErrors = ko.observableArray(result.data.messages)
+          self.isFormSubmitFailure(true)
+        }
       }, () => {
         browser.redirect('/500')
       })
@@ -65,7 +71,6 @@ function BestPracticeApply () {
       self.postFormData()
     } else {
       self.errors.showAllMessages()
-      self.isFormSubmitFailure(true)
     }
   }
 }

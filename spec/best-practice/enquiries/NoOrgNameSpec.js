@@ -35,8 +35,4 @@ describe('Best Practice Enquiries Model - no organisation name entered', functio
   it('- should not post to api', () => {
     expect(apiStub.notCalled).toBeTruthy()
   })
-
-  it('- should set form submit unsuccessful', () => {
-    expect(sut.isFormSubmitFailure()).toBeTruthy()
-  })
 })

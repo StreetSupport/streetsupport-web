@@ -36,8 +36,4 @@ describe('Best Practice Awards Enquiries Model - invalid email entered', functio
   it('- should not post to api', () => {
     expect(apiStub.notCalled).toBeTruthy()
   })
-
-  it('- should set form submit unsuccessful', () => {
-    expect(sut.isFormSubmitFailure()).toBeTruthy()
-  })
 })
