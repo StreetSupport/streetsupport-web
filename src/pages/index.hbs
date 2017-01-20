@@ -13,6 +13,7 @@ nosubnav: true
   <div class="container container--city-header">
     <h1 class="h1 block__header">Street Support <span class="js-city-label"></span></h1>
     <div class="block__cta block__cta--city-header">
+      <div id="js-swep-output" class="template--maybe-empty"></div>
       {{>cta brand="d" link="/find-help/" name="Find Help"}}
       {{>cta brand="e" link="/give-help/" name="Give Help"}}
     </div>
@@ -35,6 +36,11 @@ nosubnav: true
 <div id="js-template-output" class="template--maybe-empty"></div>
 
 {{> loading-spinner}}
+
+<script id="js-swep-tpl" type="text/template">
+{{> swep-notification }}
+</script>
+
 <script id="js-content-tpl" type="text/template">
 <div class="block block--highlight">
   <div class="container">

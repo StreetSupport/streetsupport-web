@@ -7,7 +7,8 @@ const endpoints = require('./api')
 const api = require('./get-api-data')
 
 const init = (result) => {
-  let cityLabel = result.id === 'manchester'
+  const cityId = result.id
+  const cityLabel = result.id === 'manchester'
     ? 'Manchester'
     : 'Leeds'
 
@@ -36,6 +37,14 @@ const init = (result) => {
       templating.renderTemplate('js-content-tpl', theData, 'js-template-output', callback)
     }, (_) => {
     })
+
+  api
+    .data(endpoints.cities)
+    .then((result) => {
+      const city = result.data.find((c) => c.id == cityId)
+      const callback = () => {}
+      templating.renderTemplate('js-swep-tpl', city, 'js-swep-output', callback)
+    }, (_) => {})
 }
 
 location

@@ -56,3 +56,14 @@
   margin: 20px auto;
   max-width: 280px;
 }
+
+.cta--swep-notification {
+  @include cf();
+  @include span(8 of $grid-column);
+  float: none;
+
+  & .btn { 
+    width: 100%;
+    margin-bottom: 0
+  }
+}
