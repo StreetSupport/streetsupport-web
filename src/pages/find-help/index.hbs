@@ -27,6 +27,9 @@ page: findhelp
     <div class="container container--city-header">
       <h1 class="h1 block__header">Find Help <span class="js-city-label"></span></h1>
       <h2 class="h2 block__sub-header">Find local services to meet specific needs</h2>
+      \{{#location}}
+      {{> swep-notification }}
+      \{{/location}}
     </div>
   </div>
 
@@ -35,7 +38,7 @@ page: findhelp
       <div class="block__content">
         <div class="title-with-button">
           <h2 class="h2 title-with-button__title">Recently homeless?</h2>
-          <a class="btn btn--brand-g title-with-button__btn" href="/\{{location}}/emergency-help/">
+          <a class="btn btn--brand-g title-with-button__btn" href="/\{{location.id}}/emergency-help/">
             <span class="btn__text">Get Emergency Advice</span>
           </a>
         </div>

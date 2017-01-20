@@ -165,9 +165,11 @@
     color: #fff;
 
     .h1,
-    .h2,
-    a {
+    .h2 {
       color: #fff;
+    }
+    a {
+      color: $brand-e;
     }
   }
 
@@ -200,11 +202,11 @@
   background-image: url('../img/header-background.png');
   background-repeat: repeat;
   color: #fff;
-  padding-top: 120px;
+  padding-top: 100px;
   padding-bottom: 50px;
 
   @include mq($from: m) {
-    padding-top: 230px;
+    padding-top: 280px;
     padding-bottom: 80px;
   }
 }
