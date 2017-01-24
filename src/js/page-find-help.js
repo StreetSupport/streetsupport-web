@@ -31,21 +31,27 @@ let getData = () => {
 
       var sorted = sortByOrder(data, ['sortOrder'], ['desc'])
 
-      // Append object name for Hogan
-      var theData = {
-        categories: sorted,
-        location: currentLocation.id
-      }
+      getApiData
+        .data(apiRoutes.cities)
+        .then((result) => {
+          const city = result.data.find((c) => c.id == currentLocation.id)
 
-      var callback = function () {
-        document.querySelector('.js-city-label')
-          .innerHTML = 'in ' + currentLocation.name
+          // Append object name for Hogan
+          var theData = {
+            categories: sorted,
+            location: city
+          }
 
-        browser.loaded()
-        socialShare.init()
-      }
+          var callback = function () {
+            document.querySelector('.js-city-label')
+              .innerHTML = 'in ' + currentLocation.name
 
-      templating.renderTemplate('js-category-list-tpl', theData, 'js-category-list-output', callback)
+            browser.loaded()
+            socialShare.init()
+          }
+
+          templating.renderTemplate('js-category-list-tpl', theData, 'js-category-list-output', callback)
+        }, (_) => {})
     })
 }
 

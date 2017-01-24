@@ -71,12 +71,12 @@ $padding-for-header-m: 220px;
   }
   @include mq($from: m) {
     &::before {
-      border-top-width: 445px;
-      top: 205px;
+      border-top-width: 448px;
+      top: 202px;
     }
     &::after {
-      border-top-width: 445px;
-      top: 205px;
+      border-top-width: 448px;
+      top: 202px;
     }
   }
 }

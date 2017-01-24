@@ -1,0 +1,37 @@
+.best-practice__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+
+  &:before,
+  &:after {
+    background-color: #fff;
+    content: '\a0';
+    flex-grow: 1;
+    height: 1px;
+    position: relative;
+    top: 24px;
+  }
+
+  &:before {
+    margin-right: 20px;
+  }
+
+  &:after {
+    margin-left: 20px;
+  }
+}
+
+.best-practice-steps {
+  text-align: left;
+
+  & a { 
+    color: $brand-e;
+  }
+}
+
+.best-practice-steps__sub-list {
+  list-style: disc;
+  margin: 10px 0;
+}

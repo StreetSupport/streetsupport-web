@@ -18,9 +18,12 @@ page: emergencyhelp
   </div>
 </div>
 
-<div class="block block--subpage-header">
-  <div class="container">
+<div class="block block--city-header city-header">
+  <div class="container container--city-header">
     <h1 class="h1 block__header">Emergency Advice</h1>
+    <div class="block__cta block__cta--city-header">
+      <div id="js-swep-output" class="template--maybe-empty"></div>
+    </div>
   </div>
 </div>
 
@@ -70,7 +73,7 @@ page: emergencyhelp
       <p>You can also register with <a href="http://www.manchestermove.co.uk/">Manchester Move</a> to be assessed for longer term social housing options. If you are outside of the city centre, <a href="https://www.pinpoint.org.uk/">Pinpoint</a> is the equivalent service for Greater Manchester.</p>
 
       <h2 class="h2">Emergency Accomodation in Winter</h2>
-      <p>During the winter months, additional emergency accomodation is provided. Arrangements for this winter are currently being made, and more information will follow as soon as that is decided.</p>
+      <p>During the winter months, <a href="/manchester/severe-weather-accommodation/">additional emergency accomodation</a> is provided. Arrangements for this winter are currently being made, and more information will follow as soon as that is decided.</p>
 
       <h2 class="h2">Other Support and Advice</h2>
       <p>There are many other services available to rough sleepers - you can check through the other categories in our <a href="/find-help/">'Find Help'</a> section to see if there is someone that can help with what you need. If you can't find what you need, please <a href="/contact/">get in touch</a> and we will try to put you in contact with someone that can help you.</p>
@@ -81,3 +84,8 @@ page: emergencyhelp
     </div>
   </div>
 </div>
+
+
+<script id="js-swep-tpl" type="text/template">
+{{> swep-notification }}
+</script>

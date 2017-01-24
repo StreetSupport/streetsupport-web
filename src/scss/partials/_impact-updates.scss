@@ -1,0 +1,21 @@
+.impact-updates {
+  @include cf();
+}
+
+.impact-update {
+  background: $brand-q;
+  border-radius: $latest-statistics-border-radius;
+  border-top: solid $latest-statistics-border-radius $brand-h;
+  border-bottom: solid $latest-statistics-border-radius $brand-h;
+  padding: 20px;
+  margin-bottom: 20px;
+  @include mq($from: m) {
+    @include span(6);
+    @include pull(1);
+    @include push(1);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

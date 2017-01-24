@@ -29,5 +29,10 @@ module.exports = {
   servicesByCategory: p('/v2/service-categories/'),
   newlyRegisteredProviders: p('/v1/newly-registered-providers'),
   cities: p('/v1/cities/'),
-  statistics: p('/v1/statistics/')
+  statistics: p('/v1/statistics/'),
+  impactUpdates: p('/v1/impact-updates/'),
+  analyticsSnapshot: p('/v1/analytics-statistics/'),
+  bestPracticeAwardApplications: p('/v1/manchester-best-practice-awards/applications/'),
+  bestPracticeEnquiries: p('/v1/manchester-best-practice-enquiries/')
 }
+
