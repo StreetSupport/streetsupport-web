@@ -5,7 +5,6 @@ import './common'
 let FindHelp = require('./find-help')
 let apiRoutes = require('./api')
 
-let forEach = require('lodash/collection/forEach')
 let marked = require('marked')
 marked.setOptions({sanitize: true})
 let htmlEncode = require('htmlencode')
@@ -16,53 +15,12 @@ let templating = require('./template-render')
 let analytics = require('./analytics')
 let socialShare = require('./social-share')
 let browser = require('./browser')
-let listToDropdown = require('./list-to-dropdown')
 let locationSelector = require('./location/locationSelector')
 let findHelp = null
 let currentLocation = null
 
 let onChangeLocation = (newLocation) => {
   window.location.href = '/find-help/category?category=' + findHelp.theCategory + '&location=' + newLocation
-}
-
-let filterItems = null
-let providerItems = null
-
-let changeSubCatFilter = (e) => {
-  forEach(document.querySelectorAll('.js-filter-item'), (item) => {
-    item.classList.remove('on')
-  })
-
-  e.target.classList.add('on')
-
-  forEach(providerItems, (item) => {
-    item.classList.remove('hide')
-  })
-
-  let id = e.target.getAttribute('data-id')
-  if (id.length > 0) {
-    forEach(providerItems, (item) => {
-      if (item.getAttribute('data-subcats').indexOf(id) < 0) {
-        item.classList.add('hide')
-      }
-    })
-  }
-  findHelp.setUrl('category-by-day', 'sub-category', id)
-}
-
-let dropdownChangeHandler = (e) => {
-  forEach(filterItems, (item) => {
-    if (item.innerText === e.target.value) {
-      changeSubCatFilter({target: item})
-    }
-  })
-}
-
-let initDropdownChangeHandler = () => {
-  let dropdown = document.querySelector('.list-to-dropdown__select')
-  let filterItems = document.querySelector('.js-filter-item.on')
-  dropdown.value = filterItems.innerText
-  dropdown.addEventListener('change', dropdownChangeHandler)
 }
 
 const buildFindHelpUrl = (locationResult) => {
@@ -150,7 +108,6 @@ const buildList = (locationResult) => {
 
     let template = ''
     let onRenderCallback = function () {
-      listToDropdown.init()
       locationSelector.handler(onChangeLocation)
       findHelp.initFindHelpLocationSelector()
       browser.loaded()
@@ -164,21 +121,7 @@ const buildList = (locationResult) => {
       template = 'js-category-result-tpl'
 
       onRenderCallback = () => {
-        providerItems = document.querySelectorAll('.js-item, .js-header')
-        filterItems = document.querySelectorAll('.js-filter-item')
-
-        forEach(filterItems, (item) => {
-          item.addEventListener('click', changeSubCatFilter)
-        })
-
-        let reqSubCat = querystring.parameter('sub-category')
-        forEach(filterItems, (item) => {
-          if (item.getAttribute('data-id') === reqSubCat) {
-            changeSubCatFilter({target: item})
-          }
-        })
         locationSelector.handler(onChangeLocation)
-        listToDropdown.init(initDropdownChangeHandler)
 
         findHelp.initFindHelpLocationSelector()
 
