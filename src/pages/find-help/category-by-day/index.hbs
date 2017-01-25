@@ -82,6 +82,9 @@ page: categorybyday
       <div class="block__content">
         <div class="text-center">\{{{categorySynopsis}}}</div>
         {{> location-description}}
+
+        {{> category-view-selector timetable="true" }}
+
         \{{#organisations}}
         <div class="result-detail">
           <div class="accordion accordion--day js-accordion">
