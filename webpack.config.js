@@ -27,6 +27,7 @@ module.exports = {
     giveHelp: path.join(__dirname, '/src/js/page-give-help'),
     category: path.join(__dirname, '/src/js/page-category'),
     categorybyday: path.join(__dirname, '/src/js/page-category-by-day'),
+    categorybylocation: path.join(__dirname, '/src/js/page-category-by-location'),
     organisation: path.join(__dirname, '/src/js/page-organisation'),
     allserviceproviders: path.join(__dirname, '/src/js/page-all-service-providers'),
     giverequests: path.join(__dirname, '/src/js/page-give-requests'),
