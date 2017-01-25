@@ -6,6 +6,7 @@ $normalPadding: 35px;
   left: 0;
   right: 0;
   z-index: $zIndex-fixedHeader;
+  @include printHide();
 }
 
 .header {
