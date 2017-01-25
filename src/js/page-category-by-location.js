@@ -2,20 +2,19 @@
 
 import './common'
 
-let FindHelp = require('./find-help')
+const FindHelp = require('./find-help')
 
-let marked = require('marked')
+const marked = require('marked')
 marked.setOptions({sanitize: true})
 
-let getApiData = require('./get-api-data')
-let querystring = require('./get-url-parameter')
-let templating = require('./template-render')
-let analytics = require('./analytics')
-let socialShare = require('./social-share')
-let browser = require('./browser')
-let locationSelector = require('./location/locationSelector')
+const getApiData = require('./get-api-data')
+const querystring = require('./get-url-parameter')
+const templating = require('./template-render')
+const analytics = require('./analytics')
+const socialShare = require('./social-share')
+const browser = require('./browser')
+const locationSelector = require('./location/locationSelector')
 let findHelp = null
-let currentLocation = null
 
 import { buildFindHelpUrl, buildInfoWindowMarkup } from './pages/find-help/by-location/helpers'
 
@@ -52,6 +51,7 @@ const initMap = (providers, userLocation) => {
         map: map,
         title: `${p.serviceProviderName}`
       })
+
       marker.addListener('click', () => {
         infoWindows
           .forEach((w) => w.close())
@@ -104,7 +104,7 @@ const renderResults = (locationResult, result) => {
     categoryId: result.data.category.id,
     categoryName: result.data.category.name,
     categorySynopsis: marked(result.data.category.synopsis),
-    location: currentLocation.name
+    location: locationResult.name
   }
   templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
 }
@@ -119,14 +119,16 @@ const buildList = (locationResult) => {
   })
 }
 
-browser.loading()
-locationSelector
-  .getCurrent()
-  .then((result) => {
-    currentLocation = result
-    findHelp = new FindHelp(result.findHelpId)
-    let reqSubCat = querystring.parameter('sub-category')
-    findHelp.setUrl('category', 'sub-category', reqSubCat)
-    buildList(result)
-  }, (_) => {
-  })
+const init = () => {
+  browser.loading()
+  locationSelector
+    .getCurrent()
+    .then((locationResult) => {
+      findHelp = new FindHelp(locationResult.findHelpId)
+      findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
+      buildList(locationResult)
+    }, (_) => {
+    })
+}
+
+init()
