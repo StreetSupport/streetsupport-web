@@ -72,6 +72,13 @@ $normalPadding: 35px;
           color: white;
           padding: 12px 20px;
         }
+
+        &--print {
+          .js-print-btn { 
+            margin-top: -2px;
+            margin-bottom: 0;
+          }
+        }
       }
     }
   }
