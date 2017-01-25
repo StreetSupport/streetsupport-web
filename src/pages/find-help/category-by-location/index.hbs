@@ -72,18 +72,29 @@ page: categorybylocation
     <div class="container">
       <div class="block__content">
         <div class="text-center">\{{{categorySynopsis}}}</p>
+
         {{> location-description}}
-        {{!--\{{#shouldShowFilter}}
-        <div class="subcat-filter">
-          <p class="subcat-filter__label">Filter by service provided:</p>
-          <ul class="list-to-dropdown subcat-filter__items">
-            <li class="subcat-filter__item js-filter-item on" data-id="">All</li>
-            \{{#subCategories}}
-            <li class="subcat-filter__item js-filter-item" data-id="\{{id}}">\{{name}}</li>
-            \{{/subCategories}}
+
+        <div class="category-view-options">
+          <p class="category-view-options__title">View as:</p>
+          <ul class="category-view-options__items">
+            <li class="category-view-options__item">
+              <a href="/find-help/category/?category={{categoryId}}" class="btn btn--plain">
+                <span class="btn__text">Provider Listing</span>
+              </a>
+            </li>
+            <li>
+              <a href="/find-help/category-by-day/?category={{categoryId}}" class="btn btn--plain">
+                <span class="btn__text">Timetable</span>
+              </a>
+            </li>
+            <li>
+              <a href="/find-help/category-by-location/?category={{categoryId}}" class="btn btn--plain">
+                <span class="btn__text">Map</span>
+              </a>
+            </li>
           </ul>
         </div>
-        \{{/shouldShowFilter}}--}}
 
         <div class="js-map" style="width: 100%; height: 500px;"></div>
 

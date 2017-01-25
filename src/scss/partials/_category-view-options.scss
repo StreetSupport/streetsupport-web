@@ -1,0 +1,17 @@
+.category-view-options {
+  @include cf();
+}
+
+.category-view-options__title {
+  float: left;
+}
+
+.category-view-options__items {
+  list-style: none;
+  float: left;
+  display: block;
+}
+
+.category-view-options__item {
+  float: left;
+}
