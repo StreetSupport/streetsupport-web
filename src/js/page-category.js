@@ -1,47 +1,32 @@
 import './common'
 
-let accordion = require('./accordion')
-let FindHelp = require('./find-help')
-let apiRoutes = require('./api')
+const accordion = require('./accordion')
+const FindHelp = require('./find-help')
+const apiRoutes = require('./api')
 
-let forEach = require('lodash/collection/forEach')
-let marked = require('marked')
+const forEach = require('lodash/collection/forEach')
+const marked = require('marked')
 marked.setOptions({sanitize: true})
 
-let getApiData = require('./get-api-data')
-let querystring = require('./get-url-parameter')
-let templating = require('./template-render')
-let analytics = require('./analytics')
-let socialShare = require('./social-share')
-let browser = require('./browser')
-let listToDropdown = require('./list-to-dropdown')
-let locationSelector = require('./location/locationSelector')
-let findHelp = null
-let currentLocation = null
+const getApiData = require('./get-api-data')
+const querystring = require('./get-url-parameter')
+const templating = require('./template-render')
+const analytics = require('./analytics')
+const socialShare = require('./social-share')
+const browser = require('./browser')
+const listToDropdown = require('./list-to-dropdown')
+const locationSelector = require('./location/locationSelector')
 
-let onChangeLocation = (newLocation) => {
+import { buildFindHelpUrl, groupOpeningTimes } from './pages/find-help/provider-listing/helpers'
+
+const onChangeLocation = (newLocation) => {
   window.location.href = '/find-help/category?category=' + findHelp.theCategory + '&location=' + newLocation
-}
-
-let groupOpeningTimes = (ungrouped) => {
-  let grouped = []
-  for (let i = 0; i < ungrouped.length; i++) {
-    let curr = ungrouped[i]
-    let sameDay = grouped.filter((d) => d.day === curr.day)
-    if (sameDay.length === 0) {
-      grouped.push({
-        day: curr.day,
-        openingTimes: [curr.startTime + '-' + curr.endTime]
-      })
-    } else {
-      sameDay[0].openingTimes.push(curr.startTime + '-' + curr.endTime)
-    }
-  }
-  return grouped
 }
 
 let filterItems = null
 let providerItems = null
+let findHelp = null
+let currentLocation = null
 
 let changeSubCatFilter = (e) => {
   forEach(document.querySelectorAll('.js-filter-item'), (item) => {
@@ -183,24 +168,18 @@ function buildList (url) {
   })
 }
 
-browser.loading()
-locationSelector
-  .getCurrent()
-  .then((result) => {
-    currentLocation = result
-    findHelp = new FindHelp(result.findHelpId)
-    let reqSubCat = querystring.parameter('sub-category')
-    findHelp.setUrl('category', 'sub-category', reqSubCat)
+const init = () => {
+  browser.loading()
+  locationSelector
+    .getCurrent()
+    .then((locationResult) => {
+      currentLocation = locationResult
+      findHelp = new FindHelp(locationResult.findHelpId)
+      findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
 
-    let category = querystring.parameter('category')
-    let location = querystring.parameter('location')
-    let range = querystring.parameter('range')
+      buildList(buildFindHelpUrl(locationResult))
+    }, (_) => {
+    })
+}
 
-    let url = apiRoutes.cities + result.findHelpId + '/services/' + findHelp.theCategory
-    if (location === 'my-location') {
-      url = apiRoutes.servicesByCategory + category + '/' + result.latitude + '/' + result.longitude
-    }
-    url += '?range=' + range
-    buildList(url)
-  }, (_) => {
-  })
+init()
