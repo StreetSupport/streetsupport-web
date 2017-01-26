@@ -45,3 +45,27 @@
     & { display: none }
   }
 }
+
+.app-store-links {
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.app-store-links__itunes-appstore {
+  width: 135px;
+  height: 40px;
+  float: left;
+  padding-top: 10px;
+  a {
+    display: block;
+    width: 135px;
+    height: 40px;
+  }
+}
+
+.app-store-links__google-playstore {
+  display: inline-block;
+  width: 155px;
+}
