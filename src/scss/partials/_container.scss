@@ -5,5 +5,8 @@
   &--city-header {
     margin-left: inherit;
     margin-right: inherit;
+    @include mq($from: m) {
+      width: 500px;
+    }
   }
 }
