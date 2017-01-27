@@ -9,7 +9,7 @@ module.exports = {
     'associatedCity': {
       'title': 'Associated City',
       'type': 'select',
-      'enum': ['manchester', 'leeds'],
+      'enum': ['bournemouth', 'leeds', 'manchester'],
       'required': true
     },
     'shortDescription': {
