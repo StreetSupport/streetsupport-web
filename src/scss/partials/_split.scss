@@ -35,3 +35,42 @@
     }
   }
 }
+
+.split__element--highlight {
+  background: $brand-c;
+  background: linear-gradient(to bottom, $brand-b, $brand-c);
+  color: #fff;
+  border-radius: 10px;
+
+  @include mq($from: m, $until: xl) {
+    height: 520px;
+  }
+
+  @include mq($from: xl) {
+    height: 440px;
+  }
+
+  .h1,
+  .h2 {
+    color: #fff;
+  }
+  a {
+    color: $brand-e!important;
+  }
+
+  padding: 20px;
+
+  &--benefits {
+    @include mq($from: m, $until: xl) {
+      height: 610px;
+    }
+
+    @include mq($from: xl) {
+      height: 490px;
+    }
+  }
+}
+
+.split__element--title {
+  color: white!important;
+}
