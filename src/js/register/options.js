@@ -6,8 +6,9 @@ module.exports = {
     },
     'city': {
       'optionLabels': [
-        'Manchester',
-        'Leeds'
+        'Bournemouth',
+        'Leeds',
+        'Manchester'
       ]
     },
     'shortDescription': {
