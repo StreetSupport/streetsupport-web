@@ -1,0 +1,29 @@
+.services-map {
+  width: 100%;
+  height: 500px;  
+  margin-bottom: 20px;
+}
+
+.map-info-window {
+  text-align: left;
+  padding-top: 20px;
+  padding-right: 24px;
+  max-width: 350px;
+
+  font-family: "museo_sans_rounded300", sans-serif;
+  font-weight: 300;
+}
+
+.map-info-window__opening-times {
+  @include cf();
+}
+
+.map-info-window__opening-times-day {
+  width: 80px;
+  float: left;
+  clear: left;
+}
+
+.map-info-window__opening-times-time {
+  margin-left: 85px;
+}

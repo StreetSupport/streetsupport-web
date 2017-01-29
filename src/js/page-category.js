@@ -1,49 +1,32 @@
 import './common'
 
-let accordion = require('./accordion')
-let FindHelp = require('./find-help')
-let apiRoutes = require('./api')
+const accordion = require('./accordion')
+const FindHelp = require('./find-help')
+const apiRoutes = require('./api')
 
-let forEach = require('lodash/collection/forEach')
-let marked = require('marked')
+const forEach = require('lodash/collection/forEach')
+const marked = require('marked')
 marked.setOptions({sanitize: true})
 
-let getApiData = require('./get-api-data')
-let querystring = require('./get-url-parameter')
-let templating = require('./template-render')
-let analytics = require('./analytics')
-let socialShare = require('./social-share')
-let browser = require('./browser')
-let listToDropdown = require('./list-to-dropdown')
-let locationSelector = require('./location/locationSelector')
-let findHelp = null
-let currentLocation = null
+const getApiData = require('./get-api-data')
+const querystring = require('./get-url-parameter')
+const templating = require('./template-render')
+const analytics = require('./analytics')
+const socialShare = require('./social-share')
+const browser = require('./browser')
+const listToDropdown = require('./list-to-dropdown')
+const locationSelector = require('./location/locationSelector')
 
-let onChangeLocation = (newLocation) => {
+import { buildFindHelpUrl, groupOpeningTimes, formatProviderData } from './pages/find-help/provider-listing/helpers'
+
+const onChangeLocation = (newLocation) => {
   window.location.href = '/find-help/category?category=' + findHelp.theCategory + '&location=' + newLocation
 }
 
-let groupOpeningTimes = (ungrouped) => {
-  let grouped = []
-  for (let i = 0; i < ungrouped.length; i++) {
-    let curr = ungrouped[i]
-    let sameDay = grouped.filter((d) => d.day === curr.day)
-    if (sameDay.length === 0) {
-      grouped.push({
-        day: curr.day,
-        openingTimes: [curr.startTime + '-' + curr.endTime]
-      })
-    } else {
-      sameDay[0].openingTimes.push(curr.startTime + '-' + curr.endTime)
-    }
-  }
-  return grouped
-}
+let findHelp = null
 
-let filterItems = null
-let providerItems = null
-
-let changeSubCatFilter = (e) => {
+const changeSubCatFilter = (e) => {
+  const providerItems = document.querySelectorAll('.js-item, .js-header')
   forEach(document.querySelectorAll('.js-filter-item'), (item) => {
     item.classList.remove('on')
   })
@@ -54,7 +37,7 @@ let changeSubCatFilter = (e) => {
     item.classList.remove('hide')
   })
 
-  let id = e.target.getAttribute('data-id')
+  const id = e.target.getAttribute('data-id')
   if (id.length > 0) {
     forEach(providerItems, (item) => {
       if (item.getAttribute('data-subcats').indexOf(id) < 0) {
@@ -65,7 +48,7 @@ let changeSubCatFilter = (e) => {
   findHelp.setUrl('category-by-day', 'sub-category', id)
 }
 
-let dropdownChangeHandler = (e) => {
+const dropdownChangeHandler = (e) => {
   forEach(filterItems, (item) => {
     if (item.innerText === e.target.value) {
       changeSubCatFilter({target: item})
@@ -73,134 +56,96 @@ let dropdownChangeHandler = (e) => {
   })
 }
 
-let initDropdownChangeHandler = () => {
-  let dropdown = document.querySelector('.list-to-dropdown__select')
-  let filterItems = document.querySelector('.js-filter-item.on')
+const getTemplate = (providers) => {
+  return providers.length > 0
+  ? 'js-category-result-tpl'
+  : 'js-category-no-results-result-tpl'
+}
+
+const hasProvidersCallback = () => {
+  accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'), true)
+
+  const providerItems = document.querySelectorAll('.js-item, .js-header')
+  const filterItems = document.querySelectorAll('.js-filter-item')
+
+  forEach(filterItems, (item) => {
+    item.addEventListener('click', changeSubCatFilter)
+  })
+
+  const reqSubCat = querystring.parameter('sub-category')
+  forEach(filterItems, (item) => {
+    if (item.getAttribute('data-id') === reqSubCat) {
+      changeSubCatFilter({target: item})
+    }
+  })
+  locationSelector.handler(onChangeLocation)
+  listToDropdown.init(initDropdownChangeHandler)
+  findHelp.initFindHelpLocationSelector()
+  browser.loaded()
+  socialShare.init()
+}
+
+
+const hasNoProvidersCallback = () => {
+  listToDropdown.init()
+  locationSelector.handler(onChangeLocation)
+  findHelp.initFindHelpLocationSelector()
+  browser.loaded()
+  socialShare.init()
+}
+
+const getCallback = (providers) => {
+  return providers.length > 0
+  ? () => hasProvidersCallback()
+  : () => hasNoProvidersCallback()
+}
+
+const initDropdownChangeHandler = () => {
+  const dropdown = document.querySelector('.list-to-dropdown__select')
+  const filterItems = document.querySelector('.js-filter-item.on')
   dropdown.value = filterItems.innerText
   dropdown.addEventListener('change', dropdownChangeHandler)
 }
 
-function buildList (url) {
+function buildList (url, locationResult) {
   getApiData.data(url)
   .then(function (result) {
     if (result.status === 'error') {
       window.location.replace('/find-help/')
     }
-    let theTitle = result.data.category.name + ' - Street Support'
+    const theTitle = result.data.category.name + ' - Street Support'
     document.title = theTitle
-
-    let template = ''
-    let onRenderCallback = function () {
-      listToDropdown.init()
-      locationSelector.handler(onChangeLocation)
-      findHelp.initFindHelpLocationSelector()
-      browser.loaded()
-      socialShare.init()
-    }
-
-    let formattedProviders = []
-    let subCategories = []
-
-    if (result.data.providers.length > 0) {
-      template = 'js-category-result-tpl'
-
-      forEach(result.data.providers, function (provider) {
-        provider.location.locationDescription = provider.locationDescription
-        let service = {
-          info: provider.info,
-          location: provider.location,
-          days: groupOpeningTimes(provider.openingTimes),
-          servicesAvailable: provider.subCategories
-            .map((sc) => sc.name)
-            .join(', ')
-        }
-        let match = formattedProviders.filter((p) => p.providerId === provider.serviceProviderId)
-
-        if (match.length === 1) {
-          match[0].services.push(service)
-          match[0].subCategories = match[0].subCategories.concat(provider.subCategories)
-        } else {
-          let newProvider = {
-            providerId: provider.serviceProviderId,
-            providerName: provider.serviceProviderName,
-            services: [service]
-          }
-          if (provider.tags !== null) {
-            newProvider.tags = provider.tags.join(', ')
-          }
-          if (provider.subCategories !== null) {
-            forEach(provider.subCategories, (sc) => {
-              if (subCategories.filter((esc) => esc.id === sc.id).length === 0) {
-                subCategories.push(sc)
-              }
-            })
-
-            newProvider.subCategories = provider.subCategories
-          }
-          formattedProviders.push(newProvider)
-        }
-      })
-      onRenderCallback = function () {
-        accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'), true)
-
-        providerItems = document.querySelectorAll('.js-item, .js-header')
-        filterItems = document.querySelectorAll('.js-filter-item')
-
-        forEach(filterItems, (item) => {
-          item.addEventListener('click', changeSubCatFilter)
-        })
-
-        let reqSubCat = querystring.parameter('sub-category')
-        forEach(filterItems, (item) => {
-          if (item.getAttribute('data-id') === reqSubCat) {
-            changeSubCatFilter({target: item})
-          }
-        })
-        locationSelector.handler(onChangeLocation)
-        listToDropdown.init(initDropdownChangeHandler)
-
-        findHelp.initFindHelpLocationSelector()
-
-        browser.loaded()
-        socialShare.init()
-      }
-    } else {
-      template = 'js-category-no-results-result-tpl'
-    }
-
     analytics.init(theTitle)
 
-    let viewModel = {
+    const template = getTemplate(result.data.providers)
+    const onRenderCallback = getCallback(result.data.providers)
+
+    const { formattedProviders, subCategories } = formatProviderData(result.data.providers)
+
+    const viewModel = {
       organisations: formattedProviders,
       subCategories: subCategories,
       shouldShowFilter: '' + formattedProviders.length > 1,
       categoryId: result.data.category.id,
       categoryName: result.data.category.name,
       categorySynopsis: marked(result.data.category.synopsis),
-      location: currentLocation.name
+      location: locationResult.name
     }
     templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
   })
 }
 
-browser.loading()
-locationSelector
-  .getCurrent()
-  .then((result) => {
-    currentLocation = result
-    findHelp = new FindHelp(result.findHelpId)
-    let reqSubCat = querystring.parameter('sub-category')
-    findHelp.setUrl('category', 'sub-category', reqSubCat)
+const init = () => {
+  browser.loading()
+  locationSelector
+    .getCurrent()
+    .then((locationResult) => {
+      findHelp = new FindHelp(locationResult.findHelpId)
+      findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
 
-    let category = querystring.parameter('category')
-    let location = querystring.parameter('location')
-    let range = querystring.parameter('range')
+      buildList(buildFindHelpUrl(locationResult), locationResult)
+    }, (_) => {
+    })
+}
 
-    let url = apiRoutes.cities + result.findHelpId + '/services/' + findHelp.theCategory
-    if (location === 'my-location') {
-      url = apiRoutes.servicesByCategory + category + '/' + result.latitude + '/' + result.longitude
-    }
-    url += '?range=' + range
-    buildList(url)
-  }, (_) => {
-  })
+init()

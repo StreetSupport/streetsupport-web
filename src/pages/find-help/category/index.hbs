@@ -73,6 +73,9 @@ page: category
       <div class="block__content">
         <div class="text-center">\{{{categorySynopsis}}}</p>
         {{> location-description}}
+
+        {{> category-view-selector provider="true" }}
+        
         \{{#shouldShowFilter}}
         <div class="subcat-filter">
           <p class="subcat-filter__label">Filter by service provided:</p>
@@ -84,6 +87,7 @@ page: category
           </ul>
         </div>
         \{{/shouldShowFilter}}
+
         <div class="result-detail">
           \{{#organisations}}
           <div class="accordion js-accordion">
@@ -106,7 +110,7 @@ page: category
                       \{{#days}}
                       <dt class="result-detail__times-title">\{{day}}</dt>
                       \{{#openingTimes}}
-                      <dd class="result-detail__times-item">\{{ . }}</dd>
+                      <dd class="result-detail__times-item result-detail__times-item--provider-listing">\{{ . }}</dd>
                       \{{/openingTimes}}
                       \{{/days}}
                     </dl>
