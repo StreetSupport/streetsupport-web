@@ -68,6 +68,9 @@ function buildList (url) {
         accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', 'day'))
         analytics.init(theTitle)
         findHelp.initFindHelpLocationSelector()
+
+        browser.initPrint()
+
         browser.loaded()
         socialShare.init()
       }
