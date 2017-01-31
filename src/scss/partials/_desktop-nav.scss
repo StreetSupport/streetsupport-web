@@ -210,7 +210,7 @@ $normalPadding: 35px;
         text-decoration: none!important;
       }
     }
-    .nav__item.nav__item--#{$page} > a {
+    .city-nav .nav__list--sub-sub-list .nav__item.nav__item--#{$page} > a {
       @include mq($from: m) {
         background-color: white;
       }
