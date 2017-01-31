@@ -1,4 +1,5 @@
 var nav = require('./navigation/nav.js')
+var print = require('./navigation/print.js')
 var analytics = require('./analytics')
 const headerCitySelector = require('./navigation/headerCitySelector')
 
@@ -61,6 +62,7 @@ let fastClickCheck = () => {
 removeNoJS()
 nav.init()
 analytics.init()
+print.init()
 fastClickCheck()
 Svg4everybody()
 

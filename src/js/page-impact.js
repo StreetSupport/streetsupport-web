@@ -45,11 +45,12 @@ const Model = function () {
       .then((result) => {
         const newUpdates = result.data.embedded.items
           .map((u) => {
-            u.city = `${u.cityId.charAt(0).toUpperCase()}${u.cityId.substring(1)}`
+            u.city = u.cityId ? `${u.cityId.charAt(0).toUpperCase()}${u.cityId.substring(1)}` : ''
             u.contentForDisplay = marked(htmlencode.htmlDecode(u.content))
             return u
           })
-        self.impactUpdates([...newUpdates, ...self.impactUpdates])
+          
+        self.impactUpdates([...newUpdates, ...self.impactUpdates()])
         self.shouldShowLoadMoreUpdates(result.data.links.next)
       }, onError)
   }

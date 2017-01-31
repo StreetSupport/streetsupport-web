@@ -45,3 +45,33 @@
     & { display: none }
   }
 }
+
+.app-store-links {
+  text-align: center;
+  padding-top: 30px;
+  @include mq($from: m) {
+    width: 340px;
+    margin: 0 auto;
+  }
+}
+
+.app-store-links__itunes-appstore {
+  width: 135px;
+  height: 40px;
+  margin: 0 auto;
+  a {
+    display: block;
+    width: 135px;
+    height: 40px;
+  }
+  @include mq($from: m) {
+    float: left;
+    margin-right: 25px;
+    padding: 10px 10px 10px 30px;
+  }  
+}
+
+.app-store-links__google-playstore {
+  display: inline-block;
+  width: 155px;
+}

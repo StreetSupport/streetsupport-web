@@ -16,7 +16,7 @@ var FindHelp = function (location) {
     : urlParameter.parameter('range')
 
   self.initFindHelpLocationSelector = () => {
-    let dropdown = document.querySelector('.js-find-help-dropdown')
+    const dropdown = document.querySelector('.js-find-help-dropdown')
     let options = supportedCities.locations
       .map((c) => {
         return {
@@ -31,39 +31,41 @@ var FindHelp = function (location) {
       })
     }
     forEach(options, (c) => {
-      let option = document.createElement('option')
+      const option = document.createElement('option')
       option.setAttribute('value', c.id)
       option.innerHTML = c.name
-      let currLocation = querystring.parameter('location')
+      const currLocation = querystring.parameter('location')
       if (c.id === currLocation) {
         option.setAttribute('selected', 'selected')
       }
       dropdown.appendChild(option)
     })
 
-    let range = document.querySelector('.js-find-help-range')
+    const range = document.querySelector('.js-find-help-range')
     forEach(range.children, (c) => {
       if (parseInt(c.value) === parseInt(self.currentRange)) {
         c.setAttribute('selected', 'selected')
       }
     })
 
-    document.querySelector('.js-find-help-form')
-      .addEventListener('submit', (event) => {
-        event.preventDefault()
-        let location = document.querySelector('.js-find-help-dropdown').value
-        let range = document.querySelector('.js-find-help-range').value
-        let newQueryString = window.location.search
-          .replace(querystring.parameter('location'), location)
+    const updateOnRangeAndLocation = (event) => {
+      event.preventDefault()
+      const location = document.querySelector('.js-find-help-dropdown').value
+      const range = document.querySelector('.js-find-help-range').value
+      let newQueryString = window.location.search
+        .replace(querystring.parameter('location'), location)
 
-        if (newQueryString.indexOf('range') >= 0) {
-          newQueryString = newQueryString.replace(querystring.parameter('range'), range)
-        } else {
-          newQueryString += '&range=' + range
-        }
+      if (newQueryString.indexOf('range') >= 0) {
+        newQueryString = newQueryString.replace(querystring.parameter('range'), range)
+      } else {
+        newQueryString += '&range=' + range
+      }
 
-        window.location.href = window.location.pathname + newQueryString
-      })
+      window.location.href = window.location.pathname + newQueryString
+    }
+
+    range.addEventListener('change', updateOnRangeAndLocation)
+    dropdown.addEventListener('change', updateOnRangeAndLocation)
   }
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
