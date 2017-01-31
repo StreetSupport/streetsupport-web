@@ -101,6 +101,14 @@ var print = function () {
   window.print()
 }
 
+const initPrint = () => {
+  document.querySelector('.js-print-btn')
+    .addEventListener('click', (e) => {
+      e.preventDefault()
+      window.print()
+    })
+}
+
 module.exports = {
   redirect: redirect,
   loading: loading,
@@ -109,6 +117,7 @@ module.exports = {
   scrollTo: scrollTo,
   jumpTo: jumpTo,
   print: print,
+  initPrint: initPrint,
   pushHistory: pushHistory,
   popHistory: popHistory,
   setOnHistoryPop: setOnHistoryPop

@@ -1,0 +1,35 @@
+.training-course-list {
+  @include cf();
+}
+
+.training-course-list__item {
+  border: 1px solid $brand-k;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);
+  margin-bottom: 20px;
+  padding: 10px;
+
+  @include mq($from: l) {
+    margin-right: 10px;
+    width: 31%;
+    float: left;
+    height: 560px;
+    position: relative;
+
+    &:nth-child(3n) {
+      margin-right: 0
+    }
+    &:nth-child(3n + 1) {
+      clear: left;
+    }
+    .btn {
+      width: 92%;
+      text-align: center;
+      position: absolute;
+      bottom: 0px;
+    }
+  }
+  @include mq($from: xl) {
+    height: 470px;
+  }  
+}

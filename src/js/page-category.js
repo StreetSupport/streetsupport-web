@@ -81,6 +81,9 @@ const hasProvidersCallback = () => {
   locationSelector.handler(onChangeLocation)
   listToDropdown.init(initDropdownChangeHandler)
   findHelp.initFindHelpLocationSelector()
+
+  browser.initPrint()
+
   browser.loaded()
   socialShare.init()
 }

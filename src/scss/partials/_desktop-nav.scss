@@ -114,7 +114,7 @@ $normalPadding: 35px;
       }
     }
 
-    .nav__list--sub-list {
+    .nav__list--sub-sub-list {
       display: none;
       position: absolute;
       z-index: $zIndex-SubNav;
@@ -123,6 +123,7 @@ $normalPadding: 35px;
       background: $brand-i;
       box-shadow: 0 2px 2px 0 rgba(50,50,50,.3);
     }
+
     .nav__item--sub-item {
       &:hover a {
         background: white;
@@ -171,13 +172,19 @@ $normalPadding: 35px;
 }
 
 
+
+.header__nav .nav__list--sub-sub-list {
+  display: none;
+}
+
+
 // Active Subnav
 @include mq($from: m) {
   @each $section in $nav-sections {
     .section--#{$section} .city-nav .nav__item--#{$section} {
       background-color: $brand-i;
 
-      .nav__list--sub-list {
+      .nav__list--sub-sub-list {
         display: block;
       }
     }
@@ -203,7 +210,7 @@ $normalPadding: 35px;
         text-decoration: none!important;
       }
     }
-    .nav__item--sub-item.nav__item--#{$page} > a {
+    .city-nav .nav__list--sub-sub-list .nav__item.nav__item--#{$page} > a {
       @include mq($from: m) {
         background-color: white;
       }

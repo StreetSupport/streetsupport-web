@@ -58,6 +58,29 @@ const initMap = (providers, userLocation) => {
         infoWindow.open(map, marker)
       })
     })
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+
+        const myLocation = new google.maps.Marker({
+          position: pos,
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 3,
+            fillColor: 'blue',
+            strokeColor: 'blue'
+          },
+          map: map
+        });
+      }, function() {
+      });
+    } else {
+      // Browser doesn't support Geolocation
+    }
 }
 
 const getTemplate = (providers) => {
@@ -74,6 +97,9 @@ const hasItemsCallback = (providers, locationResult) => {
   locationSelector.handler(onChangeLocation)
   findHelp.initFindHelpLocationSelector()
   initMap(providers, locationResult)
+
+  browser.initPrint()
+
   browser.loaded()
   socialShare.init()
 }
