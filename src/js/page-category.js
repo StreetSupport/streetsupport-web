@@ -2,7 +2,6 @@ import './common'
 
 const accordion = require('./accordion')
 const FindHelp = require('./find-help')
-const apiRoutes = require('./api')
 
 const forEach = require('lodash/collection/forEach')
 const marked = require('marked')
@@ -17,7 +16,7 @@ const browser = require('./browser')
 const listToDropdown = require('./list-to-dropdown')
 const locationSelector = require('./location/locationSelector')
 
-import { buildFindHelpUrl, groupOpeningTimes, formatProviderData } from './pages/find-help/provider-listing/helpers'
+import { buildFindHelpUrl, formatProviderData } from './pages/find-help/provider-listing/helpers'
 
 const onChangeLocation = (newLocation) => {
   window.location.href = '/find-help/category?category=' + findHelp.theCategory + '&location=' + newLocation
@@ -49,6 +48,7 @@ const changeSubCatFilter = (e) => {
 }
 
 const dropdownChangeHandler = (e) => {
+  const filterItems = document.querySelectorAll('.js-filter-item')
   forEach(filterItems, (item) => {
     if (item.innerText === e.target.value) {
       changeSubCatFilter({target: item})
@@ -65,7 +65,6 @@ const getTemplate = (providers) => {
 const hasProvidersCallback = () => {
   accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'), true)
 
-  const providerItems = document.querySelectorAll('.js-item, .js-header')
   const filterItems = document.querySelectorAll('.js-filter-item')
 
   forEach(filterItems, (item) => {
@@ -87,7 +86,6 @@ const hasProvidersCallback = () => {
   browser.loaded()
   socialShare.init()
 }
-
 
 const hasNoProvidersCallback = () => {
   listToDropdown.init()

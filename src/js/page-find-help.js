@@ -34,7 +34,7 @@ let getData = () => {
       getApiData
         .data(apiRoutes.cities)
         .then((result) => {
-          const city = result.data.find((c) => c.id == currentLocation.id)
+          const city = result.data.find((c) => c.id === currentLocation.id)
 
           // Append object name for Hogan
           var theData = {

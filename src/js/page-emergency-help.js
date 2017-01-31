@@ -16,7 +16,7 @@ locationSelector
     getApiData
       .data(apiRoutes.cities)
       .then((result) => {
-        const city = result.data.find((c) => c.id == location.id)
+        const city = result.data.find((c) => c.id === location.id)
 
         console.log(city)
 

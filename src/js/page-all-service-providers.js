@@ -1,3 +1,7 @@
+/*
+  global google
+*/
+
 // Common modules
 import './common'
 let sortBy = require('lodash/collection/sortBy')
@@ -34,7 +38,7 @@ const buildMap = (userLocation) => {
 
 window.initMap = () => {}
 
-const displayMap = function(providers, userLocation) {
+const displayMap = function (providers, userLocation) {
   const map = buildMap(userLocation)
 
   const infoWindows = []
@@ -43,7 +47,7 @@ const displayMap = function(providers, userLocation) {
     .forEach((p) => {
       console.log(p)
 
-      if(p.addresses.length === 0) return
+      if (p.addresses.length === 0) return
 
       const infoWindow = new google.maps.InfoWindow({
         content: buildInfoWindowMarkup(p)
@@ -66,28 +70,28 @@ const displayMap = function(providers, userLocation) {
       })
     })
 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      }
 
-        const myLocation = new google.maps.Marker({
-          position: pos,
-          icon: {
-            path: google.maps.SymbolPath.CIRCLE,
-            scale: 3,
-            fillColor: 'blue',
-            strokeColor: 'blue'
-          },
-          map: map
-        });
-      }, function() {
-      });
-    } else {
-      // Browser doesn't support Geolocation
-    }
+      new google.maps.Marker({ // eslint-disable-line
+        position: pos,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 3,
+          fillColor: 'blue',
+          strokeColor: 'blue'
+        },
+        map: map
+      })
+    }, function () {
+    })
+  } else {
+    // Browser doesn't support Geolocation
+  }
 }
 
 let getData = (currentLocation) => {
