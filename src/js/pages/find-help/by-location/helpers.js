@@ -32,13 +32,15 @@ export const buildInfoWindowMarkup = (p) => {
   ? `<p>Suitable for: ${p.tags.join(', ')}</p>`
   : ''
 
-  return `<div class="map-info-window">
-      <h1 class="h2"><a href="/find-help/organisation/?organisation=${p.serviceProviderId}">${p.serviceProviderName}</a></h1>
+  const output = `<div class="map-info-window">
+      <h1 class="h2"><a href="/find-help/organisation/?organisation=${p.serviceProviderId}">${htmlEncode.htmlDecode(p.serviceProviderName)}</a></h1>
       ${suitableForMarkup}
       <p>${htmlEncode.htmlDecode(p.info)}</p>
       <dl class="map-info-window__opening-times">${timeMarkup}</dl>
       <a href="/find-help/organisation/?organisation=${p.serviceProviderId}" class="btn btn--brand-e">
-        <span class="btn__text">More about ${p.serviceProviderName}</span>
+        <span class="btn__text">More about ${htmlEncode.htmlDecode(p.serviceProviderName)}</span>
       </a>
     </div>`
+
+  return output
 }
