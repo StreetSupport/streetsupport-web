@@ -4,6 +4,7 @@ import './common'
 
 const FindHelp = require('./find-help')
 
+const htmlEncode = require('htmlencode')
 const marked = require('marked')
 marked.setOptions({sanitize: true})
 
@@ -49,7 +50,7 @@ const initMap = (providers, userLocation) => {
       const marker = new google.maps.Marker({
         position: { lat: p.location.latitude, lng: p.location.longitude },
         map: map,
-        title: `${p.serviceProviderName}`
+        title: `${htmlEncode.htmlDecode(p.serviceProviderName)}`
       })
 
       marker.addListener('click', () => {
