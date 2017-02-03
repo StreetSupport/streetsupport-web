@@ -6,9 +6,9 @@ const marked = require('marked')
 marked.setOptions({sanitize: true})
 
 export const buildFindHelpUrl = (locationResult) => {
-  let category = querystring.parameter('category')
-  let location = querystring.parameter('location')
-  let range = querystring.parameter('range')
+  const category = querystring.parameter('category')
+  const location = querystring.parameter('location')
+  const range = querystring.parameter('range')
 
   let url = apiRoutes.cities + locationResult.findHelpId + '/services/' + category
   if (location === 'my-location') {
