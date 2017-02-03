@@ -5,7 +5,7 @@ import { getProvidersForListing } from '../../../src/js/pages/find-help/provider
 describe('Service Categories by Provider Listing', () => {
   it('- should return unique set of providers', () => {
     const result = getProvidersForListing(providerData)
-    expect(result.length).toEqual(2) // boaz-trust has two separate ones
+    expect(result.length).toEqual(2)
   })
 
   it('- should set provider id', () => {

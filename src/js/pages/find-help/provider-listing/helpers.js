@@ -15,23 +15,6 @@ export const buildFindHelpUrl = (locationResult) => {
   return url
 }
 
-export const groupOpeningTimes = (ungrouped) => {
-  const grouped = []
-  for (let i = 0; i < ungrouped.length; i++) {
-    const curr = ungrouped[i]
-    const sameDay = grouped.filter((d) => d.day === curr.day)
-    if (sameDay.length === 0) {
-      grouped.push({
-        day: curr.day,
-        openingTimes: [curr.startTime + '-' + curr.endTime]
-      })
-    } else {
-      sameDay[0].openingTimes.push(curr.startTime + '-' + curr.endTime)
-    }
-  }
-  return grouped
-}
-
 export const getSubCategories = (providers) => {
   const toJustSubCats = (accumulator, provider) => [...accumulator, ...provider.subCategories]
   const toUnique = (acc, subcat) => {
@@ -48,6 +31,30 @@ export const getSubCategories = (providers) => {
 }
 
 export const getProvidersForListing = (providers) => {
+  const groupOpeningTimes = (ungrouped) => {
+    const toUniqueObjectKeys = (acc, curr) => {
+      if (acc[curr.day] === undefined) {
+        acc[curr.day] = [curr.startTime + '-' + curr.endTime]
+      } else {
+        acc[curr.day] = [...acc[curr.day], curr.startTime + '-' + curr.endTime]
+      }
+      return acc
+    }
+
+    const toDataStructure = (day) => {
+      return {
+        day: day,
+        openingTimes: groupedByDay[day]
+      }
+    }
+
+    const groupedByDay = ungrouped
+      .reduce(toUniqueObjectKeys, {})
+
+    return Object.keys(groupedByDay)
+      .map(toDataStructure)
+  }
+
   const extractService = (provider) => {
     provider.location.locationDescription = provider.locationDescription
     return {
@@ -74,6 +81,8 @@ export const getProvidersForListing = (providers) => {
       subCategories: provider.subCategories
     }
   }
+
+  
 
   const formattedProviders = []
 
