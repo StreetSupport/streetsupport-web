@@ -32,7 +32,7 @@ export const getSubCategories = (providers) => {
 
 export const getProvidersForListing = (providers) => {
   const groupOpeningTimes = (ungrouped) => {
-    const toUniqueObjectKeys = (acc, curr) => {
+    const toDictionary = (acc, curr) => {
       if (acc[curr.day] === undefined) {
         acc[curr.day] = [curr.startTime + '-' + curr.endTime]
       } else {
@@ -49,7 +49,7 @@ export const getProvidersForListing = (providers) => {
     }
 
     const groupedByDay = ungrouped
-      .reduce(toUniqueObjectKeys, {})
+      .reduce(toDictionary, {})
 
     return Object.keys(groupedByDay)
       .map(toDataStructure)
@@ -67,34 +67,39 @@ export const getProvidersForListing = (providers) => {
     }
   }
 
-  const updateProvider = (existingProvider, newService, newSubCategories) => {
-    existingProvider.services.push(newService)
-    existingProvider.subCategories = existingProvider.subCategories.concat(newSubCategories)
-  }
+  const formatNewProvider = (id, providersDictionary) => {
+    const services = providersDictionary[id]
+      .map((p) => extractService(p))
+    const subCategories = providersDictionary[id]
+      .reduce((acc, currProvider) => {
+        return [...acc, ...currProvider.subCategories]
+      }, [])
 
-  const formatNewProvider = (provider, service) => {
+    const [head, ...tail] = providersDictionary[id] // eslint-disable-line
+
     return {
-      providerId: provider.serviceProviderId,
-      providerName: provider.serviceProviderName,
-      services: [service],
-      tags: provider.tags ? provider.tags.join(', ') : [],
-      subCategories: provider.subCategories
+      providerId: head.serviceProviderId,
+      providerName: head.serviceProviderName,
+      services,
+      tags: head.tags ? head.tags.join(', ') : [],
+      subCategories: subCategories
     }
   }
 
-  
-
-  const formattedProviders = []
-
-  for (const provider of providers) {
-    const service = extractService(provider)
-    const match = formattedProviders.find((p) => p.providerId === provider.serviceProviderId)
-    if (match) {
-      updateProvider(match, service, provider.subCategories)
+  const toDictionary = (acc, p) => {
+    if (acc[p.serviceProviderId] === undefined) {
+      acc[p.serviceProviderId] = [p]
     } else {
-      formattedProviders.push(formatNewProvider(provider, service))
+      acc[p.serviceProviderId] = [...acc[p.serviceProviderId], p]
     }
+    return acc
   }
 
-  return formattedProviders
+  const providersDictionary = providers
+    .reduce(toDictionary, {})
+
+  const mapped = Object.keys(providersDictionary)
+    .map((id) => formatNewProvider(id, providersDictionary))
+
+  return mapped
 }
