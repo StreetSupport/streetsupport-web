@@ -5,7 +5,7 @@
 // Common modules
 import './common'
 let sortBy = require('lodash/collection/sortBy')
-let htmlEncode = require('htmlEncode')
+let htmlEncode = require('htmlencode')
 
 let apiRoutes = require('./api')
 let getApiData = require('./get-api-data')
@@ -20,10 +20,10 @@ let onChangeLocation = (newLocation) => {
 
 const buildInfoWindowMarkup = (p) => {
   return `<div class="map-info-window">
-      <h1 class="h2"><a href="/find-help/organisation/?organisation=${p.key}">${p.name}</a></h1>
+      <h1 class="h2"><a href="/find-help/organisation/?organisation=${p.key}">${htmlEncode.htmlDecode(p.name)}</a></h1>
       <p>${htmlEncode.htmlDecode(p.shortDescription)}</p>
       <a href="/find-help/organisation/?organisation=${p.key}" class="btn btn--brand-e">
-        <span class="btn__text">More about ${p.name}</span>
+        <span class="btn__text">More about ${htmlEncode.htmlDecode(p.name)}</span>
       </a>
     </div>`
 }
@@ -60,7 +60,7 @@ const displayMap = function (providers, userLocation) {
       const marker = new google.maps.Marker({
         position: { lat: p.addresses[0].latitude, lng: p.addresses[0].longitude },
         map: map,
-        title: `${p.name}`
+        title: `${htmlEncode.htmlDecode(p.name)}`
       })
 
       marker.addListener('click', () => {
