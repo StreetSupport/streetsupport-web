@@ -74,7 +74,50 @@ export const formatProviderData = (providers) => {
   }
 
   return {
-    formattedProviders,
+    formattedProviders: getProvidersForListing(providers),
     subCategories
   }
+}
+
+export const getProvidersForListing = (providers) => {
+  const extractService = (provider) => {
+    provider.location.locationDescription = provider.locationDescription
+    return {
+      info: provider.info,
+      location: provider.location,
+      days: groupOpeningTimes(provider.openingTimes),
+      servicesAvailable: provider.subCategories
+        .map((sc) => sc.name)
+        .join(', ')
+    }
+  }
+
+  const updateProvider = (existingProvider, newService, newSubCategories) => {
+    existingProvider.services.push(newService)
+    existingProvider.subCategories = existingProvider.subCategories.concat(newSubCategories)
+  }
+
+  const formatNewProvider = (provider, service) => {
+    return {
+      providerId: provider.serviceProviderId,
+      providerName: provider.serviceProviderName,
+      services: [service],
+      tags: provider.tags ? provider.tags.join(', ') : [],
+      subCategories: provider.subCategories
+    }
+  }
+
+  const formattedProviders = []
+
+  for (const provider of providers) {
+    const service = extractService(provider)
+    const match = formattedProviders.find((p) => p.providerId === provider.serviceProviderId)
+    if (match) {
+      updateProvider(match, service, provider.subCategories)
+    } else {
+      formattedProviders.push(formatNewProvider(provider, service))
+    }
+  }
+
+  return formattedProviders
 }
