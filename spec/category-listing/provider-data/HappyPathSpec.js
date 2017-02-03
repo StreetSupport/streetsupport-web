@@ -54,7 +54,8 @@ describe('Service Categories by Provider Listing', () => {
 
   it(`- should set service info`, () => {
     const result = getProvidersForListing(providerData)
-    expect(result[1].services[0].info).toEqual('boaz night shelter info')
+    expect(result[1].services[0].info).toEqual(`<p>boaz night shelter info</p>
+`)
   })
 
   it(`- should set service location as its provider's location`, () => {

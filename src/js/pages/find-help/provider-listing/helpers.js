@@ -1,6 +1,10 @@
 const apiRoutes = require('../../../api')
 const querystring = require('../../../get-url-parameter')
 
+const htmlEncode = require('htmlencode')
+const marked = require('marked')
+marked.setOptions({sanitize: true})
+
 export const buildFindHelpUrl = (locationResult) => {
   let category = querystring.parameter('category')
   let location = querystring.parameter('location')
@@ -58,7 +62,7 @@ export const getProvidersForListing = (providers) => {
   const extractService = (provider) => {
     provider.location.locationDescription = provider.locationDescription
     return {
-      info: provider.info,
+      info: marked(htmlEncode.htmlDecode(provider.info)),
       location: provider.location,
       days: groupOpeningTimes(provider.openingTimes),
       servicesAvailable: provider.subCategories
