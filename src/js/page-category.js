@@ -16,7 +16,7 @@ const browser = require('./browser')
 const listToDropdown = require('./list-to-dropdown')
 const locationSelector = require('./location/locationSelector')
 
-import { buildFindHelpUrl, formatProviderData } from './pages/find-help/provider-listing/helpers'
+import { buildFindHelpUrl, getProvidersForListing, getSubCategories } from './pages/find-help/provider-listing/helpers'
 
 const onChangeLocation = (newLocation) => {
   window.location.href = '/find-help/category?category=' + findHelp.theCategory + '&location=' + newLocation
@@ -121,11 +121,11 @@ function buildList (url, locationResult) {
     const template = getTemplate(result.data.providers)
     const onRenderCallback = getCallback(result.data.providers)
 
-    const { formattedProviders, subCategories } = formatProviderData(result.data.providers)
+    const formattedProviders = getProvidersForListing(result.data.providers)
 
     const viewModel = {
       organisations: formattedProviders,
-      subCategories: subCategories,
+      subCategories: getSubCategories(result.data.providers),
       shouldShowFilter: '' + formattedProviders.length > 1,
       categoryId: result.data.category.id,
       categoryName: result.data.category.name,

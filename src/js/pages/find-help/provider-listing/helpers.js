@@ -32,51 +32,19 @@ export const groupOpeningTimes = (ungrouped) => {
   return grouped
 }
 
-export const formatProviderData = (providers) => {
-  const formattedProviders = []
-  const subCategories = []
-
-  for (const provider of providers) {
-    provider.location.locationDescription = provider.locationDescription
-    const service = {
-      info: provider.info,
-      location: provider.location,
-      days: groupOpeningTimes(provider.openingTimes),
-      servicesAvailable: provider.subCategories
-        .map((sc) => sc.name)
-        .join(', ')
-    }
-    const match = formattedProviders.filter((p) => p.providerId === provider.serviceProviderId)
-
-    if (match.length === 1) {
-      match[0].services.push(service)
-      match[0].subCategories = match[0].subCategories.concat(provider.subCategories)
-    } else {
-      const newProvider = {
-        providerId: provider.serviceProviderId,
-        providerName: provider.serviceProviderName,
-        services: [service]
-      }
-      if (provider.tags !== null) {
-        newProvider.tags = provider.tags.join(', ')
-      }
-      if (provider.subCategories !== null) {
-        for (const sc of provider.subCategories) {
-          if (subCategories.filter((esc) => esc.id === sc.id).length === 0) {
-            subCategories.push(sc)
-          }
-        }
-
-        newProvider.subCategories = provider.subCategories
-      }
-      formattedProviders.push(newProvider)
-    }
+export const getSubCategories = (providers) => {
+  const toJustSubCats = (accumulator, provider) => [...accumulator, ...provider.subCategories]
+  const toUnique = (acc, subcat) => {
+    const match = acc.find((sc) => sc.id === subcat.id)
+    const result = match === undefined
+    ? [...acc, subcat]
+    : acc
+    return result
   }
 
-  return {
-    formattedProviders: getProvidersForListing(providers),
-    subCategories
-  }
+  return providers
+    .reduce(toJustSubCats, [])
+    .reduce(toUnique, [])
 }
 
 export const getProvidersForListing = (providers) => {
