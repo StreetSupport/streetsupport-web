@@ -45,8 +45,6 @@ const displayMap = function (providers, userLocation) {
 
   providers
     .forEach((p) => {
-      console.log(p)
-
       if (p.addresses.length === 0) return
 
       const infoWindow = new google.maps.InfoWindow({
@@ -54,8 +52,6 @@ const displayMap = function (providers, userLocation) {
       })
 
       infoWindows.push(infoWindow)
-
-      console.log(infoWindow)
 
       const marker = new google.maps.Marker({
         position: { lat: p.addresses[0].latitude, lng: p.addresses[0].longitude },
