@@ -6,6 +6,8 @@
 import './common'
 let sortBy = require('lodash/collection/sortBy')
 let htmlEncode = require('htmlencode')
+let marked = require('marked')
+marked.setOptions({sanitize: true})
 
 let apiRoutes = require('./api')
 let getApiData = require('./get-api-data')
@@ -113,6 +115,9 @@ let getData = (currentLocation) => {
       } else {
         let sorted = sortBy(result.data, function (provider) {
           return provider.name.toLowerCase()
+        })
+        sorted.forEach((p) => {
+          p.description = marked(htmlEncode.htmlDecode(p.description))
         })
 
         let theData = {
