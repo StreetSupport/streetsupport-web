@@ -1,4 +1,6 @@
 import './common'
+import 'babel-polyfill'
+
 let location = require('./location/locationSelector')
 const templating = require('./template-render')
 const browser = require('./browser')

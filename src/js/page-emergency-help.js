@@ -1,4 +1,5 @@
 import './common'
+import 'babel-polyfill'
 
 const browser = require('./browser')
 const locationSelector = require('./location/locationSelector')
@@ -18,10 +19,7 @@ locationSelector
       .then((result) => {
         const city = result.data.find((c) => c.id === location.id)
 
-        console.log(city)
-
         const callback = () => {
-          console.log('callback')
         }
         templating.renderTemplate('js-swep-tpl', city, 'js-swep-output', callback)
       }, (_) => {})
