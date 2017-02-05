@@ -25,7 +25,8 @@ const buildMap = (userLocation) => {
     '1000': 14,
     '2000': 14,
     '5000': 13,
-    '10000': 11
+    '10000': 11,
+    '20000': 10
   }
   const centre = {lat: userLocation.latitude, lng: userLocation.longitude}
   return new google.maps.Map(document.querySelector('.js-map'), {
