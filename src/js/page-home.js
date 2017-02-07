@@ -1,4 +1,6 @@
 import './common'
+import 'babel-polyfill'
+
 let location = require('./location/locationSelector')
 const templating = require('./template-render')
 const browser = require('./browser')
@@ -41,7 +43,7 @@ const init = (result) => {
   api
     .data(endpoints.cities)
     .then((result) => {
-      const city = result.data.find((c) => c.id == cityId)
+      const city = result.data.find((c) => c.id === cityId)
       const callback = () => {}
       templating.renderTemplate('js-swep-tpl', city, 'js-swep-output', callback)
     }, (_) => {})

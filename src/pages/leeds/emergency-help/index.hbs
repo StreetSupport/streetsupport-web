@@ -21,6 +21,9 @@ page: emergencyhelp
 <div class="block block--subpage-header">
   <div class="container">
     <h1 class="h1 block__header">Emergency Advice</h1>
+    <div class="block__cta block__cta--city-header">
+      <div id="js-swep-output" class="template--maybe-empty"></div>
+    </div>
   </div>
 </div>
 
@@ -32,7 +35,7 @@ page: emergencyhelp
 
       <h2 class="h2">Advice on Housing Options</h2>
       <p><a href="http://www.leeds.gov.uk/residents/pages/leeds-housing-options.aspx">Leeds Housing Options</a> will be able to give you the best advice for your individual circumstances. They can help in lots of different ways to either prevent you from becoming homeless or assist you with moving into a new property.</p>
-      <p>.In order to apply for homelessness assistance from Leeds City Council you will need to take part in a housing needs assessment (*). There are different ways to be assessed:</p> 
+      <p>.In order to apply for homelessness assistance from Leeds City Council you will need to take part in a housing needs assessment (*). There are different ways to be assessed:</p>
       <ul>
         <li>Visit 2 Great George Street on the first floor between 8:30-4:00 Monday to Thursdays or 9:30-4:00 on Fridays.</li>
         <li>Call 0113 222 4412 to request a telephone appointment or a home visit.</li>
@@ -58,3 +61,7 @@ page: emergencyhelp
     </div>
   </div>
 </div>
+
+<script id="js-swep-tpl" type="text/template">
+{{> swep-notification }}
+</script>

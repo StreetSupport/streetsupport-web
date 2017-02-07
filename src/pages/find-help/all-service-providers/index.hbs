@@ -1,7 +1,7 @@
 ---
 title: All Service Providers - Street Support
 description: Street support makes it easier to help homeless people. Find help relevant to your needs.
-layout: default.hbs
+layout: withGoogle.hbs
 permalink: false
 jsBundle: allserviceproviders
 section: findhelp
@@ -47,6 +47,9 @@ page: allorganisations
   <div class="location-selector">
     <p>Showing all organisations in \{{location}}.</p>
   </div>
+
+  <div class="js-map services-map"></div>
+
   <div class="result-list">
     \{{#organisations}}
         <ul class="result-list__list">

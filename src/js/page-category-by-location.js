@@ -25,7 +25,8 @@ const buildMap = (userLocation) => {
     '1000': 14,
     '2000': 14,
     '5000': 13,
-    '10000': 11
+    '10000': 11,
+    '20000': 10
   }
   const centre = {lat: userLocation.latitude, lng: userLocation.longitude}
   return new google.maps.Map(document.querySelector('.js-map'), {
@@ -34,7 +35,9 @@ const buildMap = (userLocation) => {
   })
 }
 
-const initMap = (providers, userLocation) => {
+window.initMap = () => {}
+
+const displayMap = (providers, userLocation) => {
   const map = buildMap(userLocation)
 
   const infoWindows = []
@@ -60,28 +63,28 @@ const initMap = (providers, userLocation) => {
       })
     })
 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      }
 
-        const myLocation = new google.maps.Marker({
-          position: pos,
-          icon: {
-            path: google.maps.SymbolPath.CIRCLE,
-            scale: 3,
-            fillColor: 'blue',
-            strokeColor: 'blue'
-          },
-          map: map
-        });
-      }, function() {
-      });
-    } else {
-      // Browser doesn't support Geolocation
-    }
+      new google.maps.Marker({ // eslint-disable-line
+        position: pos,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 3,
+          fillColor: 'blue',
+          strokeColor: 'blue'
+        },
+        map: map
+      })
+    }, function () {
+    })
+  } else {
+    // Browser doesn't support Geolocation
+  }
 }
 
 const getTemplate = (providers) => {
@@ -97,7 +100,7 @@ const onChangeLocation = (newLocation) => {
 const hasItemsCallback = (providers, locationResult) => {
   locationSelector.handler(onChangeLocation)
   findHelp.initFindHelpLocationSelector()
-  initMap(providers, locationResult)
+  displayMap(providers, locationResult)
 
   browser.initPrint()
 

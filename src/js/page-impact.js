@@ -49,7 +49,7 @@ const Model = function () {
             u.contentForDisplay = marked(htmlencode.htmlDecode(u.content))
             return u
           })
-          
+
         self.impactUpdates([...newUpdates, ...self.impactUpdates()])
         self.shouldShowLoadMoreUpdates(result.data.links.next)
       }, onError)

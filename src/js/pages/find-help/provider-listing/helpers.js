@@ -1,10 +1,16 @@
+import 'babel-polyfill'
+
 const apiRoutes = require('../../../api')
 const querystring = require('../../../get-url-parameter')
 
+const htmlEncode = require('htmlencode')
+const marked = require('marked')
+marked.setOptions({sanitize: true})
+
 export const buildFindHelpUrl = (locationResult) => {
-  let category = querystring.parameter('category')
-  let location = querystring.parameter('location')
-  let range = querystring.parameter('range')
+  const category = querystring.parameter('category')
+  const location = querystring.parameter('location')
+  const range = querystring.parameter('range')
 
   let url = apiRoutes.cities + locationResult.findHelpId + '/services/' + category
   if (location === 'my-location') {
@@ -15,66 +21,91 @@ export const buildFindHelpUrl = (locationResult) => {
   return url
 }
 
-export const groupOpeningTimes = (ungrouped) => {
-  const grouped = []
-  for (let i = 0; i < ungrouped.length; i++) {
-    const curr = ungrouped[i]
-    const sameDay = grouped.filter((d) => d.day === curr.day)
-    if (sameDay.length === 0) {
-      grouped.push({
-        day: curr.day,
-        openingTimes: [curr.startTime + '-' + curr.endTime]
-      })
-    } else {
-      sameDay[0].openingTimes.push(curr.startTime + '-' + curr.endTime)
-    }
+export const getSubCategories = (providers) => {
+  const toJustSubCats = (accumulator, provider) => [...accumulator, ...provider.subCategories]
+  const toUnique = (acc, subcat) => {
+    const match = acc.find((sc) => sc.id === subcat.id)
+    const result = match === undefined
+    ? [...acc, subcat]
+    : acc
+    return result
   }
-  return grouped
+
+  return providers
+    .reduce(toJustSubCats, [])
+    .reduce(toUnique, [])
 }
 
-export const formatProviderData = (providers) => {
-  const formattedProviders = []
-  const subCategories = []
+export const getProvidersForListing = (providers) => {
+  const groupOpeningTimes = (ungrouped) => {
+    const toDictionary = (acc, curr) => {
+      if (acc[curr.day] === undefined) {
+        acc[curr.day] = [curr.startTime + '-' + curr.endTime]
+      } else {
+        acc[curr.day] = [...acc[curr.day], curr.startTime + '-' + curr.endTime]
+      }
+      return acc
+    }
 
-  for (const provider of providers) {
+    const toDataStructure = (day) => {
+      return {
+        day: day,
+        openingTimes: groupedByDay[day]
+      }
+    }
+
+    const groupedByDay = ungrouped
+      .reduce(toDictionary, {})
+
+    return Object.keys(groupedByDay)
+      .map(toDataStructure)
+  }
+
+  const extractService = (provider) => {
     provider.location.locationDescription = provider.locationDescription
-    const service = {
-      info: provider.info,
+    return {
+      info: marked(htmlEncode.htmlDecode(provider.info)),
       location: provider.location,
       days: groupOpeningTimes(provider.openingTimes),
       servicesAvailable: provider.subCategories
         .map((sc) => sc.name)
         .join(', ')
     }
-    const match = formattedProviders.filter((p) => p.providerId === provider.serviceProviderId)
+  }
 
-    if (match.length === 1) {
-      match[0].services.push(service)
-      match[0].subCategories = match[0].subCategories.concat(provider.subCategories)
-    } else {
-      const newProvider = {
-        providerId: provider.serviceProviderId,
-        providerName: provider.serviceProviderName,
-        services: [service]
-      }
-      if (provider.tags !== null) {
-        newProvider.tags = provider.tags.join(', ')
-      }
-      if (provider.subCategories !== null) {
-        for (const sc of provider.subCategories) {
-          if (subCategories.filter((esc) => esc.id === sc.id).length === 0) {
-            subCategories.push(sc)
-          }
-        }
+  const formatNewProvider = (id, providersDictionary) => {
+    const services = providersDictionary[id]
+      .map((p) => extractService(p))
+    const subCategories = providersDictionary[id]
+      .reduce((acc, currProvider) => {
+        return [...acc, ...currProvider.subCategories]
+      }, [])
 
-        newProvider.subCategories = provider.subCategories
-      }
-      formattedProviders.push(newProvider)
+    const [head, ...tail] = providersDictionary[id] // eslint-disable-line
+
+    return {
+      providerId: head.serviceProviderId,
+      providerName: head.serviceProviderName,
+      services,
+      tags: head.tags ? head.tags.join(', ') : [],
+      subCategories: subCategories
     }
   }
 
-  return {
-    formattedProviders,
-    subCategories
+  const toDictionary = (acc, p) => {
+    if (acc[p.serviceProviderId] === undefined) {
+      acc[p.serviceProviderId] = [p]
+    } else {
+      acc[p.serviceProviderId] = [...acc[p.serviceProviderId], p]
+    }
+    return acc
   }
+
+  const providersDictionary = providers
+    .reduce(toDictionary, {})
+
+  const mapped = Object.keys(providersDictionary)
+    .map((id) => formatNewProvider(id, providersDictionary))
+
+  return mapped
 }
