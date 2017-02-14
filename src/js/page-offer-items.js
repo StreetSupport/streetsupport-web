@@ -4,10 +4,10 @@ const location = require('./location/locationSelector')
 
 // Page modules
 var ko = require('knockout')
-var Model = require('./models/OfferItemsModel')
+var Form = require('./models/OfferItemsModel')
 
 location
   .getCurrent()
-  .then((result) => {
-    ko.applyBindings(new Model(result.id))
+  .then((currentLocation) => {
+    ko.applyBindings(new Form(currentLocation.id, document.querySelector('.block--requests-detail')))
   })
