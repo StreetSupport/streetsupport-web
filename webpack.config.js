@@ -42,6 +42,7 @@ module.exports = {
     emergencyhelp: path.join(__dirname, 'src/js/page-emergency-help'),
     swep: path.join(__dirname, 'src/js/page-swep'),
     emergencyHelpRedirect: path.join(__dirname, 'src/js/page-emergency-help-redirect'),
+    swepRedirect: path.join(__dirname, 'src/js/page-swep-redirect'),
     impact: path.join(__dirname, 'src/js/page-impact'),
     bestpracticeawardsapply: path.join(__dirname, 'src/js/pages/best-practice/awards/page-apply'),
     bestpracticeenquiries: path.join(__dirname, 'src/js/pages/best-practice/page-enquiries')
