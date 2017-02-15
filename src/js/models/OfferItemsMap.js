@@ -10,6 +10,7 @@ const getApi = require('../get-api-data')
 var OfferItemModel = function (currentLocation) {
   var self = this
   self.needCategories = ko.observableArray()
+  self.showFilter = ko.observable(false)
   self.infoWindows = []
   self.markers = []
   self.map = null
@@ -106,6 +107,7 @@ var OfferItemModel = function (currentLocation) {
       name: ko.observable('All'),
       cssClass: ko.observable('subcat-filter__item on')
     })
+    self.showFilter(cats.length > 1)
     self.needCategories(cats)
   }
 
