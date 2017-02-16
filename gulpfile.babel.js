@@ -49,7 +49,7 @@ gulp.task('deploy', (callback) => {
     'cachebusting',
     'metalsmith',
     ['htmlmin', 'svgsprite', 'scss', 'webpack', 'img', 'copy'],
-    'crticalcss',
+    'criticalcss',
     callback
   )
 })
