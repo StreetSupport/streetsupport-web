@@ -16,21 +16,19 @@ const init = (location) => {
     }
   }
 
-  const modalCloser = document.querySelector('.js-modal-close')
-  modalCloser.addEventListener('click', (e) => {
-    modal.classList.remove('is-active')
-    changeCity(supportedCities.default().id)
-  })
-
-  document.querySelector('.js-location-select-manchester')
+  document.querySelector('.js-modal-close')
     .addEventListener('click', (e) => {
-      e.preventDefault()
-      changeCity('manchester')
+      modal.classList.remove('is-active')
+      changeCity(supportedCities.default().id)
     })
-  document.querySelector('.js-location-select-leeds')
-    .addEventListener('click', (e) => {
+
+  document.querySelector('.js-modal-location-dropdown')
+    .addEventListener('change', (e) => {
       e.preventDefault()
-      changeCity('leeds')
+      const value = e.target.value
+      if (value.length) {
+        changeCity(value)
+      }
     })
 }
 
