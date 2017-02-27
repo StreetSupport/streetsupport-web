@@ -1,58 +1,8 @@
 const Q = require('q')
 const getLocation = require('./get-location')
-const geolib = require('geolib')
 const querystring = require('../get-url-parameter')
 let supportedCities = require('./supportedCities')
 let modal = require('./modal')
-
-let _nearestSupported = () => {
-  let deferred = Q.defer()
-
-  let getDefault = () => {
-    modal.init(exportedObj)
-  }
-
-  if (getLocation.isAvailable()) {
-    getLocation.location()
-      .then((position) => {
-        if (position === null) { // get location has timed out
-          modal.init(exportedObj)
-          return
-        }
-        let getNearest = (position) => {
-          let currLatitude = position.coords.latitude
-          let currLongitude = position.coords.longitude
-          for (let i = 0; i < supportedCities.locations.length; i++) {
-            let distanceInMetres = geolib.getDistance(
-              { latitude: currLatitude, longitude: currLongitude },
-              { latitude: supportedCities.locations[i].latitude, longitude: supportedCities.locations[i].longitude }
-            )
-            supportedCities.locations[i].distance = distanceInMetres
-          }
-
-          let sorted = supportedCities.locations
-            .filter((l) => l.distance <= 10000)
-            .sort((a, b) => {
-              if (a.distance < b.distance) return -1
-              if (a.distance > b.distance) return 1
-              return 0
-            })
-
-          if (sorted.length === 0) return getDefault()
-
-          return sorted[0]
-        }
-        deferred.resolve(getNearest(position))
-      }, (_) => {
-        deferred.resolve(getDefault())
-      })
-  } else {
-    deferred.resolve(getDefault())
-  }
-    deferred.resolve(getDefault())
-
-  return deferred.promise
-}
 
 let _useMyLocation = (deferred) => {
   getLocation.location()
@@ -77,19 +27,12 @@ let _useMyLocation = (deferred) => {
 }
 
 let _useNearest = (deferred) => {
-  // _nearestSupported()
-  //   .then((result) => {
-  //     deferred.resolve(result)
-  //   }, (_) => {
-  //     deferred.resolve(supportedCities.default())
-  // })
   deferred.resolve(() => {
     modal.init(exportedObj)
   })
 }
 
 let _useRequested = (deferred, locationInQueryString) => {
-  console.log('_useRequested')
   let requestedCity = supportedCities.get(locationInQueryString)
   if (requestedCity !== undefined) {
     deferred.resolve(requestedCity)
@@ -171,10 +114,7 @@ const getViewModelAll = (current) => {
   return cities
 }
 
-const onChange = (onChangeLocationCallback, selectorId) => {
-  if (selectorId === undefined) {
-    selectorId = '.js-location-select'
-  }
+const onChange = (onChangeLocationCallback, selectorId = '.js-location-select') => {
   let locationSelector = document.querySelector(selectorId)
   locationSelector.addEventListener('change', () => {
     var selectedLocation = locationSelector.options[locationSelector.selectedIndex].value

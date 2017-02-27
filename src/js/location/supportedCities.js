@@ -28,7 +28,7 @@ const locations = [
 ]
 
 const get = (id) => {
-  return locations.filter((l) => l.id === id)[0]
+  return locations.find((l) => l.id === id)
 }
 
 const getDefault = () => {

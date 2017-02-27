@@ -10,14 +10,14 @@ const api = require('./get-api-data')
 
 import { suffixer } from './location/suffixer'
 
-const init = (result) => {
+const init = (currentLocation) => {
   api
-    .data(endpoints.statistics + result.id + '/latest')
+    .data(endpoints.statistics + currentLocation.id + '/latest')
     .then((stats) => {
       let theData = {
-        isManchester: result.id === 'manchester',
-        isLeeds: result.id === 'leeds',
-        locations: location.getViewModel(result),
+        isManchester: currentLocation.id === 'manchester',
+        isLeeds: currentLocation.id === 'leeds',
+        locations: location.getViewModel(currentLocation),
         statistics: stats.data
       }
 
@@ -26,7 +26,7 @@ const init = (result) => {
           window.location.reload()
         }, '.js-homepage-promo-location-selector')
 
-        suffixer(result)
+        suffixer(currentLocation)
 
         browser.loaded()
         socialShare.init()
@@ -39,7 +39,7 @@ const init = (result) => {
   api
     .data(endpoints.cities)
     .then((result) => {
-      const city = result.data.find((c) => c.id === cityId)
+      const city = result.data.find((c) => c.id === currentLocation.id)
       const callback = () => {}
       templating.renderTemplate('js-swep-tpl', city, 'js-swep-output', callback)
     }, (_) => {})

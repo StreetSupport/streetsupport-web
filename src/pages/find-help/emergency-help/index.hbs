@@ -1,6 +1,6 @@
 ---
-title: Find Help - Street Support
-description: Street support makes it easier to help homeless people. Find help relevant to your needs.
+title: Emergency Help - Street Support
+description: Emergency help for those facing homelessness or have just become homeless.
 image: https://streetsupport.net/assets/img/og/street-support.png
 layout: default.hbs
 permalink: false
@@ -8,51 +8,28 @@ jsBundle: emergencyHelpRedirect
 section: findhelp
 page: emergencyhelp
 ---
-{{> no-js}}
 
-<div id="js-category-list-output" class="template"></div>
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item"><a href="/find-help">Find Help</a></li>
+      <li class="breadcrumbs__item">Emergency Help</li>
+    </ol>
+  </div>
+</div>
 
-<div id="spin"></div>
+<div class="block block--header">
+  <div class="container">
+    <h1 class="h1 block__header">Emergency Help</h1>
+    <h2 class="h2 block__sub-header">Find local services to meet specific needs</h2>
+  </div>
+</div>
 
-<script id="js-category-list-tpl" type="text/template">
-  <div class="block block--breadcrumbs">
-    <div class="container">
-      <ol class="breadcrumbs__list">
-        <li class="breadcrumbs__item"><a href="/">Home</a></li>
-        <li class="breadcrumbs__item">Find Help</li>
-      </ol>
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      {{> social-share}}
     </div>
   </div>
-
-  <div class="block block--header">
-    <div class="container">
-      <h1 class="h1 block__header">Find Help <span class="js-city-label"></span></h1>
-      <h2 class="h2 block__sub-header">Find local services to meet specific needs</h2>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="container">
-      <div class="block__content">
-        <div class="title-with-button">
-          <h2 class="h2 title-with-button__title">Recently homeless?</h2>
-          <a class="btn btn--brand-g title-with-button__btn" href="/\{{location}}/emergency-help/">
-            <span class="btn__text">How to get Emergency Advice</span>
-          </a>
-        </div>
-
-        <div class="title-with-button">
-          <h2 class="h3 title-with-button__title">Looking for an organisation?</h2>
-          <a class="btn btn--brand-d title-with-button__btn" href="/find-help/all-service-providers/">
-            <span class="btn__text">All organisations</span>
-          </a>
-        </div>
-
-        <p class="text-center">If there are other local services that you know about, or you would like to help us bring Street Support to your area, please <a href="/contact/">get in touch</a>.</p>
-
-        {{> social-share}}
-
-      </div>
-    </div>
-  </div>
-</script>
+</div>
