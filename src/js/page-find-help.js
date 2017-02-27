@@ -3,10 +3,12 @@ import './common'
 import 'babel-polyfill'
 
 // Page modules
-var socialShare = require('./social-share')
-var templating = require('./template-render')
-var browser = require('./browser')
-let locationSelector = require('./location/locationSelector')
+const socialShare = require('./social-share')
+const templating = require('./template-render')
+const browser = require('./browser')
+const locationSelector = require('./location/locationSelector')
+
+import { suffixer } from './location/suffixer'
 import { categories } from '../data/generated/service-categories'
 
 browser.loading()
@@ -37,9 +39,7 @@ let getData = () => {
   }
 
   var callback = function () {
-    document.querySelector('.js-city-label')
-      .innerHTML = 'in ' + currentLocation.name
-
+    suffixer(currentLocation)
     browser.loaded()
     socialShare.init()
   }

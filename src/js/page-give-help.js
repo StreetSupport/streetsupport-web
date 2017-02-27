@@ -2,6 +2,7 @@ import './common'
 
 let locationSelector = require('./location/locationSelector')
 let templating = require('./template-render')
+import { suffixer } from './location/suffixer'
 
 locationSelector
   .getCurrent()
@@ -10,8 +11,7 @@ locationSelector
       isManchester: result.id === 'manchester'
     }
     let callback = () => {
-      document.querySelector('.js-city-label')
-        .innerHTML = 'in ' + result.name
+      suffixer(result)
     }
     templating.renderTemplate('js-charter-tpl', theData, 'js-charter-output', callback)
   }, (_) => {

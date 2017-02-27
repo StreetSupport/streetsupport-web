@@ -49,6 +49,7 @@ let _nearestSupported = () => {
   } else {
     deferred.resolve(getDefault())
   }
+    deferred.resolve(getDefault())
 
   return deferred.promise
 }
@@ -76,15 +77,19 @@ let _useMyLocation = (deferred) => {
 }
 
 let _useNearest = (deferred) => {
-  _nearestSupported()
-    .then((result) => {
-      deferred.resolve(result)
-    }, (_) => {
-      deferred.resolve(supportedCities.default())
-    })
+  // _nearestSupported()
+  //   .then((result) => {
+  //     deferred.resolve(result)
+  //   }, (_) => {
+  //     deferred.resolve(supportedCities.default())
+  // })
+  deferred.resolve(() => {
+    modal.init(exportedObj)
+  })
 }
 
 let _useRequested = (deferred, locationInQueryString) => {
+  console.log('_useRequested')
   let requestedCity = supportedCities.get(locationInQueryString)
   if (requestedCity !== undefined) {
     deferred.resolve(requestedCity)

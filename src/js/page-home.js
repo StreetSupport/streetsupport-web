@@ -8,12 +8,9 @@ const socialShare = require('./social-share')
 const endpoints = require('./api')
 const api = require('./get-api-data')
 
-const init = (result) => {
-  const cityId = result.id
-  const cityLabel = result.id === 'manchester'
-    ? 'Manchester'
-    : 'Leeds'
+import { suffixer } from './location/suffixer'
 
+const init = (result) => {
   api
     .data(endpoints.statistics + result.id + '/latest')
     .then((stats) => {
@@ -29,8 +26,7 @@ const init = (result) => {
           window.location.reload()
         }, '.js-homepage-promo-location-selector')
 
-        document.querySelector('.js-city-label')
-          .innerHTML = 'in ' + cityLabel
+        suffixer(result)
 
         browser.loaded()
         socialShare.init()
