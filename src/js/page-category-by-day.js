@@ -42,6 +42,7 @@ function buildList (url) {
     var template = ''
     var onRenderCallback = function () {
       locationSelector.handler(onChangeLocation)
+      findHelp.initFindHelpLocationSelector()
       browser.loaded()
       socialShare.init()
     }

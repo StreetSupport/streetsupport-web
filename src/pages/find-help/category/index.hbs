@@ -35,12 +35,9 @@ page: category
   <div class="block">
     <div class="container">
       <div class="block__content">
-        <div class="text-center">\{{{categorySynopsis}}}</p>
+        <p class="text-center">\{{{categorySynopsis}}}</p>
         {{> location-description }}
-        <div class="block__section">
-          <p>Sorry, no services near your location could be found. Please choose another location from the list, or <a href="/find-help">go back</a> and choose another category.</p>
-          <p>If you know of organisations nearby that should be included in here, please use our <a href="/register">registration form, or <a href="mailto:info@streetsupport.net">get in touch</a>.</a></p>
-        </div>
+        {{> no-services }}
       </div>
     </div>
   </div>
