@@ -43,6 +43,7 @@ function buildList (url) {
     var onRenderCallback = function () {
       locationSelector.handler(onChangeLocation)
       findHelp.initFindHelpLocationSelector()
+      browser.initPrint()
       browser.loaded()
       socialShare.init()
     }

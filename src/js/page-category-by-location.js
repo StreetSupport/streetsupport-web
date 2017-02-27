@@ -111,6 +111,7 @@ const hasItemsCallback = (providers, locationResult) => {
 const hasNoItemsCallback = () => {
   locationSelector.handler(onChangeLocation)
   findHelp.initFindHelpLocationSelector()
+  browser.initPrint()
   browser.loaded()
   socialShare.init()
 }

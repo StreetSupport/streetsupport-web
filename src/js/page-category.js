@@ -91,6 +91,7 @@ const hasNoProvidersCallback = () => {
   listToDropdown.init()
   locationSelector.handler(onChangeLocation)
   findHelp.initFindHelpLocationSelector()
+  browser.initPrint()
   browser.loaded()
   socialShare.init()
 }
