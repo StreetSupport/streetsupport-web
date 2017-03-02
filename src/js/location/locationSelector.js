@@ -44,7 +44,9 @@ let _useRequested = (deferred, locationInQueryString) => {
 
 let _useSaved = (deferred) => {
   var saved = cookies.get('desired-location')
-  if (saved !== undefined && saved.length > 0 && saved !== 'my-location') {
+  if (saved === 'elsewhere') {
+    _useMyLocation(deferred)
+  } else if (saved !== undefined && saved.length > 0 && saved !== 'my-location') {
     deferred.resolve(supportedCities.get(saved))
   } else {
     _userSelect(deferred)

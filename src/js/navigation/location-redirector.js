@@ -50,7 +50,7 @@ export const redirectTo = (locationId) => {
   const pathName = browser.location().pathname
   const result = redirects[pathName]
 
-  if (result !== undefined) {
+  if (result !== undefined && result.length) {
     browser.redirect(result)
   } else {
     browser.reload()

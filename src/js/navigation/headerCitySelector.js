@@ -1,7 +1,7 @@
 const location = require('../location/locationSelector')
 const supportedCities = require('../location/supportedCities')
 
-import { redirectTo } from '../../../src/js/navigation/location-redirector'
+import { redirectTo } from './location-redirector'
 
 var Model = function () {
   const self = this

@@ -25,6 +25,9 @@ let findHelp = null
 let currentLocation = null
 
 let onChangeLocation = (newLocation) => {
+  if (newLocation === 'elsewhere') {
+    newLocation = 'my-location'
+  }
   window.location.href = '/find-help/category-by-day?category=' + findHelp.theCategory + '&location=' + newLocation
 }
 

@@ -2,7 +2,6 @@
 
 const sut = require('../../../../src/js/location/locationSelector')
 const modal = require('../../../../src/js/location/modal')
-const deviceGeo = require('../../../../src/js/location/get-location')
 
 const browser = require('../../../../src/js/browser')
 const cookies = require('../../../../src/js/cookies')
@@ -15,8 +14,6 @@ describe('Location Selector - get current - first visit', () => {
 
   beforeEach(() => {
     modalInitStub = sinon.stub(modal, 'init')
-    sinon.stub(deviceGeo, 'isAvailable')
-      .returns(false)
     sinon.stub(cookies, 'get')
       .withArgs('desired-location')
       .returns('')
@@ -31,7 +28,6 @@ describe('Location Selector - get current - first visit', () => {
 
   afterEach(() => {
     modal.init.restore()
-    deviceGeo.isAvailable.restore()
     browser.location.restore()
     cookies.get.restore()
     querystring.parameter.restore()

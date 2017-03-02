@@ -2,6 +2,7 @@
 
 const sut = require('../../../../src/js/location/locationSelector')
 const modal = require('../../../../src/js/location/modal')
+const supportedCities = require('../../../../src/js/location/supportedCities')
 
 const browser = require('../../../../src/js/browser')
 const cookies = require('../../../../src/js/cookies')
@@ -45,6 +46,22 @@ describe('Location Selector - get current - location set to a city', () => {
     sut.getCurrent()
       .then((result) => {
         expect(result.id).toEqual('manchester')
+        done()
+      })
+  })
+
+  it('- should return city latitude', (done) => {
+    sut.getCurrent()
+      .then((result) => {
+        expect(result.latitude).toEqual(supportedCities.get('manchester').latitude)
+        done()
+      })
+  })
+
+  it('- should return city longitude', (done) => {
+    sut.getCurrent()
+      .then((result) => {
+        expect(result.longitude).toEqual(supportedCities.get('manchester').longitude)
         done()
       })
   })
