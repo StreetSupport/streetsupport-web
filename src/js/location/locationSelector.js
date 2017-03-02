@@ -2,13 +2,20 @@ const Q = require('q')
 const getLocation = require('./get-location')
 const querystring = require('../get-url-parameter')
 let supportedCities = require('./supportedCities')
+const browser = require('../browser')
+const cookies = require('../cookies')
 let modal = require('./modal')
+
+let _userSelect = (deferred) => {
+  modal.init(exportedObj)
+  deferred.resolve()
+}
 
 let _useMyLocation = (deferred) => {
   getLocation.location()
     .then((result) => {
       let cityId = 'my-location'
-      var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*=\s*([^;]*).*$)|^.*$/, '$1')
+      var saved = cookies.get('desired-location')
       if (saved !== undefined && saved.length > 0) {
         cityId = supportedCities.get(saved).id
       }
@@ -22,14 +29,8 @@ let _useMyLocation = (deferred) => {
         name: 'my location'
       })
     }, (_) => {
-      _useNearest(deferred)
+      _userSelect(deferred)
     })
-}
-
-let _useNearest = (deferred) => {
-  deferred.resolve(() => {
-    modal.init(exportedObj)
-  })
 }
 
 let _useRequested = (deferred, locationInQueryString) => {
@@ -37,16 +38,16 @@ let _useRequested = (deferred, locationInQueryString) => {
   if (requestedCity !== undefined) {
     deferred.resolve(requestedCity)
   } else {
-    _useNearest(deferred)
+    _userSelect(deferred)
   }
 }
 
 let _useSaved = (deferred) => {
-  var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*=\s*([^;]*).*$)|^.*$/, '$1')
+  var saved = cookies.get('desired-location')
   if (saved !== undefined && saved.length > 0 && saved !== 'my-location') {
     deferred.resolve(supportedCities.get(saved))
   } else {
-    _useNearest(deferred)
+    _userSelect(deferred)
   }
 }
 
@@ -55,8 +56,7 @@ let _determineLocationRetrievalMethod = () => {
   let id = ''
 
   let locationInQueryString = querystring.parameter('location')
-  let locationInPath = window.location.pathname.split('/')[1]
-
+  let locationInPath = browser.location().pathname.split('/')[1]
   if (locationInQueryString === 'my-location' && getLocation.isAvailable()) {
     method = _useMyLocation
   } else if (locationInQueryString !== 'undefined' && locationInQueryString.length > 0 && locationInQueryString !== 'my-location') {
@@ -114,6 +114,11 @@ const getViewModelAll = (current) => {
   return cities
 }
 
+/**
+ * inject a callback when location selector changes
+ * @param {function} onChangeLocationCallback
+ * @param {string} selectorId
+ */
 const onChange = (onChangeLocationCallback, selectorId = '.js-location-select') => {
   let locationSelector = document.querySelector(selectorId)
   locationSelector.addEventListener('change', () => {

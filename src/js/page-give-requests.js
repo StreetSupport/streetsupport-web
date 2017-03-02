@@ -103,15 +103,11 @@ let init = () => {
     }
   }
 
-  let location = getUrlParams.parameter('location')
 
-  let url = apiRoutes.needs
-  if (location.length > 0) {
-    url = apiRoutes.serviceProviders + location + '/needs/'
-  }
+  let url = `${apiRoutes.needsHAL}?longitude=${currentLocation.longitude}&latitude=${currentLocation.latitude}&limit=100`
   getApiData.data(url)
     .then(function (result) {
-      let needsFromApi = formatDate(result.data)
+      let needsFromApi = formatDate(result.data.items)
 
       if (navigator.geolocation) {
         getLocation.location().then(function (position) {

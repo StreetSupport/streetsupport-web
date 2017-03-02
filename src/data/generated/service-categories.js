@@ -3,10 +3,6 @@ export const categories = [{
   "sortOrder": 90,
   "name": "Accommodation"
 }, {
-  "key": "activities",
-  "sortOrder": 5,
-  "name": "Activities"
-}, {
   "key": "communications",
   "sortOrder": 20,
   "name": "Communications"
@@ -15,20 +11,16 @@ export const categories = [{
   "sortOrder": 70,
   "name": "Drop-In"
 }, {
-  "key": "employment",
-  "sortOrder": 10,
-  "name": "Employment"
-}, {
   "key": "foodbank",
-  "sortOrder": 30,
+  "sortOrder": 45,
   "name": "Food Banks"
 }, {
   "key": "items",
-  "sortOrder": 50,
+  "sortOrder": 60,
   "name": "Personal Items"
 }, {
   "key": "meals",
-  "sortOrder": 60,
+  "sortOrder": 80,
   "name": "Meals"
 }, {
   "key": "medical",
@@ -36,14 +28,22 @@ export const categories = [{
   "name": "Medical Services"
 }, {
   "key": "services",
-  "sortOrder": 45,
+  "sortOrder": 50,
   "name": "Personal Services"
+}, {
+  "key": "training",
+  "sortOrder": 10,
+  "name": "Training"
+}, {
+  "key": "activities",
+  "sortOrder": 15,
+  "name": "Activities"
 }, {
   "key": "support",
   "sortOrder": 100,
-  "name": "Advice"
+  "name": "Support"
 }, {
-  "key": "training",
-  "sortOrder": 15,
-  "name": "Training"
+  "key": "employment",
+  "sortOrder": 5,
+  "name": "Employment"
 }]
