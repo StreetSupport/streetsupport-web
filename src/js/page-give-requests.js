@@ -103,7 +103,6 @@ let init = () => {
     }
   }
 
-
   let url = `${apiRoutes.needsHAL}?longitude=${currentLocation.longitude}&latitude=${currentLocation.latitude}&limit=100`
   getApiData.data(url)
     .then(function (result) {
