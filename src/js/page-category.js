@@ -131,7 +131,10 @@ function buildList (url, locationResult) {
       categoryId: result.data.category.id,
       categoryName: result.data.category.name,
       categorySynopsis: marked(result.data.category.synopsis),
-      location: locationResult.name
+      location: locationResult.name,
+      geoLocationUnavailable: locationResult.geoLocationUnavailable !== undefined
+        ? locationResult.geoLocationUnavailable
+        : false
     }
     templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
   })

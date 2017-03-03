@@ -88,7 +88,8 @@ function buildList (url) {
       categoryId: data.categoryKey,
       categoryName: data.categoryName,
       categorySynopsis: marked(data.synopsis),
-      location: currentLocation.name
+      location: currentLocation.name,
+      geoLocationUnavailable: currentLocation.geoLocationUnavailable
     }
     templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
   })

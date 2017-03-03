@@ -1,5 +1,5 @@
 const Q = require('q')
-const getLocation = require('./get-location')
+const deviceGeo = require('./get-location')
 const querystring = require('../get-url-parameter')
 let supportedCities = require('./supportedCities')
 const browser = require('../browser')
@@ -12,7 +12,7 @@ let _userSelect = (deferred) => {
 }
 
 let _useMyLocation = (deferred) => {
-  getLocation.location()
+  deviceGeo.location()
     .then((result) => {
       let cityId = 'my-location'
       var saved = cookies.get('desired-location')
@@ -28,8 +28,22 @@ let _useMyLocation = (deferred) => {
         longitude: result.coords.longitude,
         name: 'my location'
       })
-    }, (_) => {
-      _userSelect(deferred)
+    }, (error) => {
+      console.log(error)
+      let cityId = 'my-location'
+      var saved = cookies.get('desired-location')
+      if (saved !== undefined && saved.length > 0) {
+        cityId = supportedCities.get(saved).id
+      }
+      deferred.resolve({
+        id: cityId,
+        findHelpId: 'my-location',
+        isSelected: true,
+        latitude: 0,
+        longitude: 0,
+        name: 'my location',
+        geoLocationUnavailable: true
+      })
     })
 }
 
@@ -44,7 +58,7 @@ let _useRequested = (deferred, locationInQueryString) => {
 
 let _useSaved = (deferred) => {
   var saved = cookies.get('desired-location')
-  if (saved === 'elsewhere') {
+  if (saved === 'elsewhere' && deviceGeo.isAvailable()) {
     _useMyLocation(deferred)
   } else if (saved !== undefined && saved.length > 0 && saved !== 'my-location') {
     deferred.resolve(supportedCities.get(saved))
@@ -58,14 +72,14 @@ let _determineLocationRetrievalMethod = () => {
   let id = ''
 
   let locationInQueryString = querystring.parameter('location')
-  let locationInPath = browser.location().pathname.split('/')[1]
-  if (locationInQueryString === 'my-location' && getLocation.isAvailable()) {
+  if (locationInQueryString === 'my-location' && deviceGeo.isAvailable()) {
     method = _useMyLocation
   } else if (locationInQueryString !== 'undefined' && locationInQueryString.length > 0 && locationInQueryString !== 'my-location') {
     method = _useRequested
     id = locationInQueryString
   } else {
-    let cities = supportedCities.locations.map((l) => l.id)
+    const locationInPath = browser.location().pathname.split('/')[1]
+    const cities = supportedCities.locations.map((l) => l.id)
     if (locationInPath !== 'undefined' && locationInPath.length > 0 && cities.indexOf(locationInPath) > -1) {
       method = _useRequested
       id = locationInPath
