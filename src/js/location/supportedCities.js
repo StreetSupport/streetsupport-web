@@ -1,3 +1,19 @@
+/**
+ * a generic location which the user can choose if they are not near a supported city
+ */
+const elsewhere = {
+  'id': 'elsewhere',
+  'findHelpId': 'my-location',
+  'name': 'somewhere else',
+  'longitude': 0,
+  'latitude': 90,
+  'isSelectableInHeader': true,
+  'isSelectableInBody': false
+}
+
+/**
+ * a collection of supported locations in street support
+ */
 const locations = [
   {
     'id': 'leeds',
@@ -17,26 +33,19 @@ const locations = [
     'isSelectableInHeader': true,
     'isSelectableInBody': true
   },
-  {
-    'id': 'elsewhere',
-    'findHelpId': 'my-location',
-    'name': 'somewhere else',
-    'longitude': 0,
-    'latitude': 90,
-    'isSelectableInHeader': true
-  }
+  elsewhere
 ]
 
-const get = (id) => {
+const getById = (id) => {
   return locations.find((l) => l.id === id)
 }
 
 const getDefault = () => {
-  return get('elsewhere')
+  return elsewhere
 }
 
 module.exports = {
   locations: locations,
-  get: get,
+  get: getById,
   default: getDefault
 }

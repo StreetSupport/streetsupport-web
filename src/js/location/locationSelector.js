@@ -130,7 +130,7 @@ const getViewModelAll = (current) => {
 }
 
 /**
- * inject a callback when location selector changes
+ * initialise location dropdown with selectorId inject a callback when location selector changes
  * @param {function} onChangeLocationCallback
  * @param {string} selectorId
  */

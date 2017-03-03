@@ -2,35 +2,30 @@
 
 import './common'
 
-let Awesomplete = require('awesomplete') // eslint-disable-line
-let geolib = require('geolib')
+const Awesomplete = require('awesomplete')
+const geolib = require('geolib')
 import List from 'list.js'
 import Holder from 'holderjs'
 import Find from 'lodash/collection/find'
 import ForEach from 'lodash/collection/forEach'
 import moment from 'moment'
 import htmlEncode from 'htmlencode'
-var ko = require('knockout')
+const ko = require('knockout')
 
-let ContactFormModel = require('./models/GiveItemModel')
-let apiRoutes = require('./api')
-let browser = require('./browser')
-let getApiData = require('./get-api-data')
-
-let getLocation = require('./location/get-location')
-let templating = require('./template-render')
-let getUrlParams = require('./get-url-parameter')
-let locationSelector = require('./location/locationSelector')
-let socialShare = require('./social-share')
+const apiRoutes = require('./api')
+const browser = require('./browser')
+const ContactFormModel = require('./models/GiveItemModel')
+const getApiData = require('./get-api-data')
+const getLocation = require('./location/get-location')
+const getUrlParams = require('./get-url-parameter')
 import listToSelect from './list-to-dropdown'
+const locationSelector = require('./location/locationSelector')
+const socialShare = require('./social-share')
+const templating = require('./template-render')
 
 const activeClass = 'is-active'
 
-let currentLocation = null
-
-let onChangeLocation = () => {}
-
-let formatDate = (needs) => {
+const formatDate = (needs) => {
   ForEach(needs, function (need) {
     need.formattedCreationDate = moment(need.creationDate).fromNow()
   })
@@ -38,11 +33,15 @@ let formatDate = (needs) => {
   return needs
 }
 
-let renderNeeds = (needs, geoLocationUnavailable = false) => {
-  let theData = {
+const onChangeLocation = function () {
+  browser.redirect('/give-help/help/?my-location')
+}
+
+const renderNeeds = (needs, userLocation) => {
+  const theData = {
     card: needs,
-    location: currentLocation.name,
-    geoLocationUnavailable: geoLocationUnavailable
+    location: userLocation.name,
+    geoLocationUnavailable: userLocation.geoLocationUnavailable
   }
 
   if (needs.length === 0) {
@@ -69,7 +68,7 @@ let initAutoComplete = (needs) => {
     .join(',')
 
   let input = document.querySelector('.search')
-  let awesomplete = new Awesomplete(input, {list: keywords}) // eslint-disable-line
+  new Awesomplete(input, {list: keywords}) // eslint-disable-line
 }
 
 let useDistanceForLocation = (position, needs) => {
@@ -94,28 +93,21 @@ let usePostcodeForLocation = (needs) => {
   return needs
 }
 
-let init = () => {
-  if (window.location.search.length === 0) {
-    var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*=\s*([^;]*).*$)|^.*$/, '$1')
-    if (saved !== undefined && saved.length > 0 && saved !== 'my-location') {
-      onChangeLocation(saved)
-    }
-  }
-
-  let url = `${apiRoutes.needsHAL}?longitude=${currentLocation.longitude}&latitude=${currentLocation.latitude}&limit=100`
+let init = function (userLocation) {
+  let url = `${apiRoutes.needsHAL}?longitude=${userLocation.longitude}&latitude=${userLocation.latitude}&limit=100`
   getApiData.data(url)
     .then(function (result) {
       let needsFromApi = formatDate(result.data.items)
 
-      if (navigator.geolocation) {
+      if (!userLocation.geoLocationUnavailable) {
         getLocation.location()
           .then(function (position) {
-            renderNeeds(useDistanceForLocation(position, needsFromApi), position.geoLocationUnavailable)
+            renderNeeds(useDistanceForLocation(position, needsFromApi), userLocation)
           }, () => {
-            renderNeeds(usePostcodeForLocation(needsFromApi), true)
+            renderNeeds(usePostcodeForLocation(needsFromApi), userLocation)
           })
       } else {
-        renderNeeds(usePostcodeForLocation(needsFromApi), true)
+        renderNeeds(usePostcodeForLocation(needsFromApi), userLocation)
       }
     })
 }
@@ -369,8 +361,7 @@ browser.loading()
 locationSelector
   .getCurrent()
   .then((result) => {
-    currentLocation = result
-    init()
+    init(result)
   }, (_) => {
 
   })
