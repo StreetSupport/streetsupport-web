@@ -51,7 +51,12 @@ page: giveitems
 
 <script id="js-no-data-tpl" type="text/template">
   <div class="block__section">
-    <p>There are currently no needs registered in \{{location}}. Please choose another location above.</p>
+    \{{#geoLocationUnavailable}}
+    <p>Unfortunately, we cannot determine your location. Please ensure location is enabled on your device.</p>
+    \{{/geoLocationUnavailable}}
+    \{{^geoLocationUnavailable}}
+    <p>There are are no needs registered near you yet. Please use the dropdown above to select another location.</p>
+    \{{/geoLocationUnavailable}}
     <p>If you know of local organisations that could be included in this category, please use our <a href="/register">registration form, or <a href="mailto:info@streetsupport.net">let us know</a>.</a></p>
   </div>
 </script>

@@ -28,9 +28,7 @@ const activeClass = 'is-active'
 
 let currentLocation = null
 
-let onChangeLocation = (newLocation) => {
-  window.location.href = '/give-help/help/?location=' + newLocation
-}
+let onChangeLocation = () => {}
 
 let formatDate = (needs) => {
   ForEach(needs, function (need) {
@@ -40,10 +38,11 @@ let formatDate = (needs) => {
   return needs
 }
 
-let renderNeeds = (needs) => {
+let renderNeeds = (needs, geoLocationUnavailable = false) => {
   let theData = {
     card: needs,
-    location: currentLocation.name
+    location: currentLocation.name,
+    geoLocationUnavailable: geoLocationUnavailable
   }
 
   if (needs.length === 0) {
@@ -109,13 +108,14 @@ let init = () => {
       let needsFromApi = formatDate(result.data.items)
 
       if (navigator.geolocation) {
-        getLocation.location().then(function (position) {
-          renderNeeds(useDistanceForLocation(position, needsFromApi))
-        }, () => {
-          renderNeeds(usePostcodeForLocation(needsFromApi))
-        })
+        getLocation.location()
+          .then(function (position) {
+            renderNeeds(useDistanceForLocation(position, needsFromApi), position.geoLocationUnavailable)
+          }, () => {
+            renderNeeds(usePostcodeForLocation(needsFromApi), true)
+          })
       } else {
-        renderNeeds(usePostcodeForLocation(needsFromApi))
+        renderNeeds(usePostcodeForLocation(needsFromApi), true)
       }
     })
 }
