@@ -4,7 +4,7 @@
 const elsewhere = {
   'id': 'elsewhere',
   'findHelpId': 'my-location',
-  'name': 'somewhere else',
+  'name': 'another location',
   'longitude': 0,
   'latitude': 90,
   'isSelectableInHeader': true,
