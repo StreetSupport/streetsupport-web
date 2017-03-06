@@ -68,10 +68,13 @@ page: partnership
 
 
 <script id="js-content-tpl" type="text/template">
-  \{{#isManchester}}
+  \{{#ismanchester}}
     {{> manchester-partnership-content }}
-  \{{/isManchester}}
-  \{{#isLeeds}}
+  \{{/ismanchester}}
+  \{{#isleeds}}
     {{> leeds-partnership-content }}
-  \{{/isLeeds}}
+  \{{/isleeds}}
+  \{{#iselsewhere}}
+    {{> no-location-partnership-content }}
+  \{{/iselsewhere}}
 </script>
