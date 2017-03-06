@@ -7,6 +7,7 @@ var accordion = require('./accordion')
 var FindHelp = require('./find-help')
 var marked = require('marked')
 marked.setOptions({sanitize: true})
+var htmlencode = require('htmlencode')
 
 // Lodash
 var forEach = require('lodash/collection/forEach')
@@ -56,6 +57,7 @@ function buildList (url) {
           if (provider.tags !== null) {
             provider.tags = provider.tags.join(', ')
           }
+          provider.serviceInfo = htmlencode.htmlDecode(provider.serviceInfo)
         })
       })
 
