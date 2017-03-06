@@ -9,6 +9,7 @@ const elsewhere = {
   'name': 'another location',
   'longitude': 0,
   'latitude': 90,
+  'isPublic': true,
   'isSelectableInBody': false
 }
 
