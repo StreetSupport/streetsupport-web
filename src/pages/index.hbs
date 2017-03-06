@@ -53,20 +53,20 @@ nosubnav: true
 
 
         \{{#isManchester}}
-          {{> manchester-stats }}
+          {{> manchester/stats }}
         \{{/isManchester}}
         \{{#isLeeds}}
-          {{> leeds-stats }}
+          {{> leeds/stats }}
         \{{/isLeeds}}
    </div>
  </div>
 </div>
 
 \{{#isManchester}}
-  {{> manchester-home-promo }}
+  {{> manchester/home-promo }}
 \{{/isManchester}}
 \{{#isLeeds}}
-  {{> leeds-home-promo }}
+  {{> leeds/home-promo }}
 \{{/isLeeds}}
 
 <div class="block">
@@ -91,10 +91,10 @@ nosubnav: true
   <div class="container">
     <div class="block__content partners">
       \{{#isManchester}}
-        {{> manchester-supporters }}
+        {{> manchester/supporters }}
       \{{/isManchester}}
       \{{#isLeeds}}
-        {{> leeds-supporters }}
+        {{> leeds/supporters }}
       \{{/isLeeds}}
       <p>We are looking for businesses and organisations to <a href="/give-help/partnership/">partner with us</a> so that we can continue to develop this resource.</p>
       <p>If you share our vision of a world without homelessness, please <a href="mailto:sponsorship@streetsupport.net">get in touch</a>.</p>
