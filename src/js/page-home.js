@@ -7,6 +7,7 @@ const browser = require('./browser')
 const socialShare = require('./social-share')
 const endpoints = require('./api')
 const api = require('./get-api-data')
+const supportedCities = require('./location/supportedCities')
 
 import { suffixer } from './location/suffixer'
 
@@ -15,11 +16,13 @@ const init = (currentLocation) => {
     .data(endpoints.statistics + currentLocation.id + '/latest')
     .then((stats) => {
       let theData = {
-        isManchester: currentLocation.id === 'manchester',
-        isLeeds: currentLocation.id === 'leeds',
         locations: location.getViewModel(currentLocation),
         statistics: stats.data
       }
+      supportedCities.locations
+        .forEach((c) => {
+          theData[`is${c.id}`] = currentLocation.id === c.id
+        })
 
       var callback = function () {
         location.handler(() => {
