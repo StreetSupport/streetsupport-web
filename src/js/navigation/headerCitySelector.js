@@ -6,7 +6,7 @@ import { redirectTo } from './location-redirector'
 var Model = function () {
   const self = this
   self.cities = supportedCities.locations
-    .filter((c) => c.isSelectableInHeader)
+    .filter((c) => c.isPublic)
   self.selectedCity = ''
 }
 
