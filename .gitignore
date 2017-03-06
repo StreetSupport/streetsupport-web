@@ -22,3 +22,4 @@ backstop_data
 *.orig
 *sublime*
 test/visual/results
+src/data/generated/
