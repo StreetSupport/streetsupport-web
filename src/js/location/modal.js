@@ -1,6 +1,9 @@
+
 const supportedCities = require('./supportedCities')
 const browser = require('../browser')
 const urlParams = require('../get-url-parameter')
+
+import { newElement } from '../dom'
 
 const init = (location) => {
   const modal = document.querySelector('.js-location-select-modal')
@@ -24,7 +27,19 @@ const init = (location) => {
         changeCity(supportedCities.default().id)
       })
 
-    document.querySelector('.js-modal-location-dropdown')
+    const dropdown = document.querySelector('.js-modal-location-dropdown')
+    dropdown.innerHTML = ''
+    dropdown.appendChild(newElement('option', '-- please select --'))
+
+    supportedCities.locations
+      .filter((c) => c.isPublic)
+      .forEach((c) => {
+        dropdown.appendChild(newElement('option', c.name, {
+          value: c.id
+        }))
+      })
+
+    dropdown
       .addEventListener('change', (e) => {
         e.preventDefault()
         const value = e.target.value

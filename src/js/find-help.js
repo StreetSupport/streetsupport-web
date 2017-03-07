@@ -6,9 +6,10 @@ let supportedCities = require('./location/supportedCities')
 let querystring = require('./get-url-parameter')
 let getLocation = require('./location/get-location')
 
+import { newElement } from './dom'
+
 var FindHelp = function (location) {
   var self = this
-
   self.currentLocation = location
   self.theCategory = urlParameter.parameter('category')
   self.currentRange = urlParameter.parameter('range').length === 0
@@ -32,14 +33,14 @@ var FindHelp = function (location) {
       })
     }
     forEach(options, (c) => {
-      const option = document.createElement('option')
-      option.setAttribute('value', c.id)
-      option.innerHTML = c.name
-      const currLocation = querystring.parameter('location')
-      if (c.id === currLocation) {
-        option.setAttribute('selected', 'selected')
+      const attrs = {
+        value: c.id
       }
-      dropdown.appendChild(option)
+      if (c.id === location) {
+        attrs['selected'] = 'selected'
+      }
+
+      dropdown.appendChild(newElement('option', c.name, attrs))
     })
 
     const range = document.querySelector('.js-find-help-range')

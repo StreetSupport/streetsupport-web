@@ -14,7 +14,6 @@ location
       .forEach((c) => {
         theData[`is${c.id}`] = result.id === c.id
       })
-    console.log(theData)
     let callback = () => {
       ko.applyBindings(new Model())
     }
