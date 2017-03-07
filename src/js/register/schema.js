@@ -9,7 +9,7 @@ module.exports = {
     'associatedCity': {
       'title': 'Associated City',
       'type': 'select',
-      'enum': ['bournemouth', 'leeds', 'manchester'],
+      'enum': ['bournemouth', 'leeds', 'manchester'], // this gets overwritten by gulp task 'supported-cities'
       'required': true
     },
     'shortDescription': {

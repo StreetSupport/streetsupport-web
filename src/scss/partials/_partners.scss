@@ -56,6 +56,16 @@
         }
       }
     }
+    /* Ben copied the below from above, check out dims */
+
+    &--shelter {
+      a {
+        svg {
+          height: 38px;
+          width: 90px;
+        }
+      }
+    }
     &--leedsbid {
       position: relative;
       width: 120px;
