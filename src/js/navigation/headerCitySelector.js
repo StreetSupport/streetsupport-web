@@ -1,11 +1,12 @@
 const location = require('../location/locationSelector')
 const supportedCities = require('../location/supportedCities')
-const browser = require('../browser')
-const cityPageRedirects = require('./cityPageRedirects')
+
+import { redirectTo } from './location-redirector'
 
 var Model = function () {
   const self = this
   self.cities = supportedCities.locations
+    .filter((c) => c.isPublic)
   self.selectedCity = ''
 }
 
@@ -30,12 +31,7 @@ const init = () => {
         locationSelector.appendChild(option)
       }
       location.handler((selectedLocation) => {
-        let pathname = window.location.pathname
-        if (cityPageRedirects.hasOwnProperty(pathname)) {
-          browser.redirect(cityPageRedirects[pathname])
-        } else {
-          window.location.reload()
-        }
+        redirectTo(selectedLocation)
       })
     }, (_) => {
     })

@@ -111,6 +111,7 @@ const hasItemsCallback = (providers, locationResult) => {
 const hasNoItemsCallback = () => {
   locationSelector.handler(onChangeLocation)
   findHelp.initFindHelpLocationSelector()
+  browser.initPrint()
   browser.loaded()
   socialShare.init()
 }
@@ -134,7 +135,8 @@ const renderResults = (locationResult, result) => {
     categoryId: result.data.category.id,
     categoryName: result.data.category.name,
     categorySynopsis: marked(result.data.category.synopsis),
-    location: locationResult.name
+    location: locationResult.name,
+    geoLocationUnavailable: locationResult.geoLocationUnavailable
   }
   templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
 }
