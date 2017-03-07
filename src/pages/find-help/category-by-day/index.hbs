@@ -41,10 +41,9 @@ page: categorybyday
     <div class="container block__inner">
       <div class="block__content">
         <div class="result-detail">
-          <div class="text-center">
-            \{{{categorySynopsis}}}
-            <p>Sorry, we can't find any services listed in \{{location}}.</p>
-            <p>If you know of an organisation that should be here, <a href="/contact/">please get in touch</a> to learn how you can get it added.</p>
+          <div class="text-center">\{{{categorySynopsis}}}</div>
+          \{{#organisations}}{{> location-description }}\{{/organisations}}
+          {{> no-services geoLocationUnavailable="geoLocationUnavailable" }}
           </div>
         </div>
       </div>

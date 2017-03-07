@@ -18,6 +18,7 @@ var FindHelp = function (location) {
   self.initFindHelpLocationSelector = () => {
     const dropdown = document.querySelector('.js-find-help-dropdown')
     let options = supportedCities.locations
+      .filter((c) => c.isSelectableInBody)
       .map((c) => {
         return {
           id: c.id,

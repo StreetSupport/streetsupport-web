@@ -32,38 +32,7 @@
   @include cf();
 
   @include mq($from: m) {
-    max-width: 640px;
-    max-height: 520px;
+    max-width: 400px;
     margin: 25vh auto;
-  }
-}
-
-.location-select__cta {
-  width: 100%;
-  @include mq($from: s) {
-    @include span(1 of 2);
-    &:last-child {
-      @include last();
-    }
-  }
-}
-
-.location-select__cta-container {
-  @include cf();
-}
-
-.location-select-icon--manchester {
-  img {
-    position: absolute;
-    left: 0px;
-    bottom: 12px;
-  }
-}
-
-.location-select-icon--leeds {
-  img {
-    position: absolute;
-    left: 0px;
-    bottom: 12px;
   }
 }

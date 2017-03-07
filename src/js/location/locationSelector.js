@@ -1,63 +1,21 @@
 const Q = require('q')
-const getLocation = require('./get-location')
-const geolib = require('geolib')
+const deviceGeo = require('./get-location')
 const querystring = require('../get-url-parameter')
 let supportedCities = require('./supportedCities')
+const browser = require('../browser')
+const cookies = require('../cookies')
 let modal = require('./modal')
 
-let _nearestSupported = () => {
-  let deferred = Q.defer()
-
-  let getDefault = () => {
-    modal.init(exportedObj)
-  }
-
-  if (getLocation.isAvailable()) {
-    getLocation.location()
-      .then((position) => {
-        if (position === null) { // get location has timed out
-          modal.init(exportedObj)
-          return
-        }
-        let getNearest = (position) => {
-          let currLatitude = position.coords.latitude
-          let currLongitude = position.coords.longitude
-          for (let i = 0; i < supportedCities.locations.length; i++) {
-            let distanceInMetres = geolib.getDistance(
-              { latitude: currLatitude, longitude: currLongitude },
-              { latitude: supportedCities.locations[i].latitude, longitude: supportedCities.locations[i].longitude }
-            )
-            supportedCities.locations[i].distance = distanceInMetres
-          }
-
-          let sorted = supportedCities.locations
-            .filter((l) => l.distance <= 10000)
-            .sort((a, b) => {
-              if (a.distance < b.distance) return -1
-              if (a.distance > b.distance) return 1
-              return 0
-            })
-
-          if (sorted.length === 0) return getDefault()
-
-          return sorted[0]
-        }
-        deferred.resolve(getNearest(position))
-      }, (_) => {
-        deferred.resolve(getDefault())
-      })
-  } else {
-    deferred.resolve(getDefault())
-  }
-
-  return deferred.promise
+let _userSelect = (deferred) => {
+  modal.init(exportedObj)
+  deferred.resolve()
 }
 
 let _useMyLocation = (deferred) => {
-  getLocation.location()
+  deviceGeo.location()
     .then((result) => {
       let cityId = 'my-location'
-      var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*=\s*([^;]*).*$)|^.*$/, '$1')
+      var saved = cookies.get('desired-location')
       if (saved !== undefined && saved.length > 0) {
         cityId = supportedCities.get(saved).id
       }
@@ -70,17 +28,21 @@ let _useMyLocation = (deferred) => {
         longitude: result.coords.longitude,
         name: 'my location'
       })
-    }, (_) => {
-      _useNearest(deferred)
-    })
-}
-
-let _useNearest = (deferred) => {
-  _nearestSupported()
-    .then((result) => {
-      deferred.resolve(result)
-    }, (_) => {
-      deferred.resolve(supportedCities.default())
+    }, (error) => {
+      let cityId = 'my-location'
+      var saved = cookies.get('desired-location')
+      if (saved !== undefined && saved.length > 0) {
+        cityId = supportedCities.get(saved).id
+      }
+      deferred.resolve({
+        id: cityId,
+        findHelpId: 'my-location',
+        isSelected: true,
+        latitude: 0,
+        longitude: 0,
+        name: 'my location',
+        geoLocationUnavailable: true
+      })
     })
 }
 
@@ -89,16 +51,18 @@ let _useRequested = (deferred, locationInQueryString) => {
   if (requestedCity !== undefined) {
     deferred.resolve(requestedCity)
   } else {
-    _useNearest(deferred)
+    _userSelect(deferred)
   }
 }
 
 let _useSaved = (deferred) => {
-  var saved = document.cookie.replace(/(?:(?:^|.*;\s*)desired-location\s*=\s*([^;]*).*$)|^.*$/, '$1')
-  if (saved !== undefined && saved.length > 0 && saved !== 'my-location') {
+  var saved = cookies.get('desired-location')
+  if (saved === 'elsewhere' && deviceGeo.isAvailable()) {
+    _useMyLocation(deferred)
+  } else if (saved !== undefined && saved.length > 0 && saved !== 'my-location') {
     deferred.resolve(supportedCities.get(saved))
   } else {
-    _useNearest(deferred)
+    _userSelect(deferred)
   }
 }
 
@@ -107,15 +71,14 @@ let _determineLocationRetrievalMethod = () => {
   let id = ''
 
   let locationInQueryString = querystring.parameter('location')
-  let locationInPath = window.location.pathname.split('/')[1]
-
-  if (locationInQueryString === 'my-location' && getLocation.isAvailable()) {
+  if (locationInQueryString === 'my-location' && deviceGeo.isAvailable()) {
     method = _useMyLocation
   } else if (locationInQueryString !== 'undefined' && locationInQueryString.length > 0 && locationInQueryString !== 'my-location') {
     method = _useRequested
     id = locationInQueryString
   } else {
-    let cities = supportedCities.locations.map((l) => l.id)
+    const locationInPath = browser.location().pathname.split('/')[1]
+    const cities = supportedCities.locations.map((l) => l.id)
     if (locationInPath !== 'undefined' && locationInPath.length > 0 && cities.indexOf(locationInPath) > -1) {
       method = _useRequested
       id = locationInPath
@@ -166,10 +129,12 @@ const getViewModelAll = (current) => {
   return cities
 }
 
-const onChange = (onChangeLocationCallback, selectorId) => {
-  if (selectorId === undefined) {
-    selectorId = '.js-location-select'
-  }
+/**
+ * initialise location dropdown with selectorId inject a callback when location selector changes
+ * @param {function} onChangeLocationCallback
+ * @param {string} selectorId
+ */
+const onChange = (onChangeLocationCallback, selectorId = '.js-location-select') => {
   let locationSelector = document.querySelector(selectorId)
   locationSelector.addEventListener('change', () => {
     var selectedLocation = locationSelector.options[locationSelector.selectedIndex].value

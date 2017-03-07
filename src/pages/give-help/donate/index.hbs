@@ -42,9 +42,9 @@ page: donate
 
 <script id="js-result-tpl" type="text/template">
 
-  \{{#isManchester}}
-    {{> manchester-big-change-promo }}
-  \{{/isManchester}}
+  \{{#ismanchester}}
+    {{> manchester/big-change-promo }}
+  \{{/ismanchester}}
 
   <div class="block__section">
     <p>The following organisations rely on donations to continue their work, so they can help people build new lives off the streets.</p>
@@ -71,14 +71,14 @@ page: donate
 
 
 <script id="js-no-result-tpl" type="text/template">
-  \{{#isManchester}}
-    {{> manchester-big-change-promo }}
-  \{{/isManchester}}
+  \{{#ismanchester}}
+    {{> manchester/big-change-promo }}
+  \{{/ismanchester}}
 
-  \{{^isManchester}}
+  \{{#iselsewhere}}
   <div class="block__section">
-    <p>There are currently no organisations in \{{location}} registered with their own donation links. Please choose another location above.</p>
+    <p>Please choose a location above to see how to donate to organisations in that <area shape="" coords="" href="" alt="">.</p>
     <p>If you know of local organisations that could be included in this category, please use our <a href="/register">registration form, or <a href="mailto:info@streetsupport.net">let us know</a>.</a></p>
   </div>
-  \{{/isManchester}}
+  \{{/iselsewhere}}
 </script>
