@@ -61,16 +61,16 @@ gulp.task('clean-generated-files', () => {
 })
 
 gulp.task('make-generated-files-directory', () => {
-  fs.mkdir(generatedPagesSrc)
+  fs.mkdirSync(generatedPagesSrc)
 })
 
 gulp.task('generate-provider-directories', () => {
   categories
     .forEach((c) => {
       const destDir = `${generatedPagesSrc}${c.key}`
-      fs.mkdir(destDir)
-      fs.mkdir(`${destDir}/map`)
-      fs.mkdir(`${destDir}/timetable`)
+      fs.mkdirSync(destDir)
+      fs.mkdirSync(`${destDir}/map`)
+      fs.mkdirSync(`${destDir}/timetable`)
     })
 })
 
