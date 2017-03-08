@@ -48,8 +48,6 @@ let getData = () => {
           theData[`is${c.id}`] = currentLocation.id === c.id
         })
 
-      console.log(theData)
-
       if (result.data.length === 0) {
         templating.renderTemplate('js-no-result-tpl', theData, 'js-result-output', callback)
       } else {

@@ -94,7 +94,7 @@ const getTemplate = (providers) => {
 }
 
 const onChangeLocation = (newLocation) => {
-  window.location.href = '/find-help/category?category=' + findHelp.theCategory + '&location=' + newLocation
+  window.location.href = `/find-help/${findHelp.theCategory}?location=${newLocation}`
 }
 
 const hasItemsCallback = (providers, locationResult) => {
@@ -123,13 +123,10 @@ const getOnRenderCallback = (providers, locationResult) => {
 }
 
 const renderResults = (locationResult, result) => {
-  let theTitle = result.data.category.name + ' - Street Support'
-  document.title = theTitle
-
   const template = getTemplate(result.data.providers)
   const onRenderCallback = getOnRenderCallback(result.data.providers, locationResult)
 
-  analytics.init(theTitle)
+  analytics.init(document.title)
 
   let viewModel = {
     categoryId: result.data.category.id,

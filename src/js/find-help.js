@@ -1,5 +1,4 @@
 /* global history */
-var urlParameter = require('./get-url-parameter')
 var browser = require('./browser')
 var forEach = require('lodash/collection/forEach')
 let supportedCities = require('./location/supportedCities')
@@ -11,10 +10,22 @@ import { newElement } from './dom'
 var FindHelp = function (location) {
   var self = this
   self.currentLocation = location
-  self.theCategory = urlParameter.parameter('category')
-  self.currentRange = urlParameter.parameter('range').length === 0
+  const re = new RegExp(/find-help\/(.*)\//)
+  self.theCategory = browser.location().pathname.match(re)[1].split('/')[0]
+
+  if (self.theCategory.startsWith('category')) {
+    const redirects = {
+      'category': '/',
+      'category-by-day': '/timetable/',
+      'category-by-location': '/map/'
+    }
+    const queryStringCategory = querystring.parameter('category')
+    browser.redirect(`/find-help/${queryStringCategory}${redirects[self.theCategory]}`)
+  }
+
+  self.currentRange = querystring.parameter('range').length === 0
     ? 10000
-    : urlParameter.parameter('range')
+    : querystring.parameter('range')
 
   self.initFindHelpLocationSelector = () => {
     const dropdown = document.querySelector('.js-find-help-dropdown')
@@ -71,8 +82,7 @@ var FindHelp = function (location) {
   }
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
-    let url = '?category=' + self.theCategory +
-              '&location=' + self.currentLocation +
+    let url = '?location=' + self.currentLocation +
               '&range=' + self.currentRange
     if (subCategoryId.length > 0) {
       url += '&' + subCategoryKey + '=' + subCategoryId
@@ -98,7 +108,7 @@ var FindHelp = function (location) {
 
   self.handleSubCategoryChange = function (subCategoryKey, accordion) {
     window.onpopstate = function () {
-      var subCategory = urlParameter.parameter(subCategoryKey)
+      var subCategory = querystring.parameter(subCategoryKey)
       if (subCategory.length) {
         var el = document.getElementById(subCategory)
         var context = document.querySelector('.js-accordion')

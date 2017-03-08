@@ -19,7 +19,7 @@ const locationSelector = require('./location/locationSelector')
 import { buildFindHelpUrl, getProvidersForListing, getSubCategories } from './pages/find-help/provider-listing/helpers'
 
 const onChangeLocation = (newLocation) => {
-  window.location.href = '/find-help/category?category=' + findHelp.theCategory + '&location=' + newLocation
+  window.location.href = `/find-help/${findHelp.theCategory}?location=${newLocation}`
 }
 
 let findHelp = null
@@ -115,9 +115,7 @@ function buildList (url, locationResult) {
     if (result.status === 'error') {
       window.location.replace('/find-help/')
     }
-    const theTitle = result.data.category.name + ' - Street Support'
-    document.title = theTitle
-    analytics.init(theTitle)
+    analytics.init(document.title)
 
     const template = getTemplate(result.data.providers)
     const onRenderCallback = getCallback(result.data.providers)

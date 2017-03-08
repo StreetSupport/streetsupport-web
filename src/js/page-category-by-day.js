@@ -29,7 +29,7 @@ let onChangeLocation = (newLocation) => {
   if (newLocation === 'elsewhere') {
     newLocation = 'my-location'
   }
-  window.location.href = '/find-help/category-by-day?category=' + findHelp.theCategory + '&location=' + newLocation
+  window.location.href = `/find-help/${findHelp.theCategory}/timetable?location=${newLocation}`
 }
 
 function buildList (url) {
@@ -39,9 +39,6 @@ function buildList (url) {
       window.location.replace('/find-help/')
     }
     var data = result.data
-
-    var theTitle = data.categoryName + ' - Street Support'
-    document.title = theTitle
 
     var template = ''
     var onRenderCallback = function () {
@@ -73,7 +70,7 @@ function buildList (url) {
       onRenderCallback = function () {
         locationSelector.handler(onChangeLocation)
         accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', 'day'))
-        analytics.init(theTitle)
+        analytics.init(document.title)
         findHelp.initFindHelpLocationSelector()
 
         browser.initPrint()
@@ -125,12 +122,11 @@ let init = () => {
       let reqSubCat = querystring.parameter('sub-category')
       findHelp.setUrl('category-by-day', 'sub-category', reqSubCat)
 
-      let category = querystring.parameter('category')
       let location = querystring.parameter('location')
 
       let url = apiRoutes.cities + result.id + '/services-by-day/' + findHelp.theCategory
       if (location === 'my-location') {
-        url = apiRoutes.categoryServiceProvidersByDay + category + '/long/' + result.longitude + '/lat/' + result.latitude
+        url = apiRoutes.categoryServiceProvidersByDay + findHelp.theCategory + '/long/' + result.longitude + '/lat/' + result.latitude
       }
 
       buildList(url)
