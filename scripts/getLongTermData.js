@@ -12,11 +12,11 @@ request(endpoints.serviceCategories, function (error, response, body) {
       }
     })
   const output = `export const serviceCategories = ${JSON.stringify(cats)}`
-  fs.writeFileSync(`${config.paths.generatedData}service-categories.js`, output)
+  fs.writeFileSync(`./${config.paths.generatedData}service-categories.js`, output)
 })
 
 request(endpoints.cities, function (error, response, body) {
   const cities = JSON.parse(body)
   const output = `export const cities = ${JSON.stringify(cities)}`
-  fs.writeFileSync(`${config.paths.generatedData}supported-cities.js`, output)
+  fs.writeFileSync(`./${config.paths.generatedData}supported-cities.js`, output)
 })
