@@ -4,7 +4,6 @@ const endpoints = require('../src/js/api')
 const config = require('../foley.json')
 
 request(endpoints.serviceCategories, function (error, response, body) {
-  console.log(__dirname)
   const cats = JSON.parse(body)
     .map((c) => {
       return {
@@ -13,10 +12,10 @@ request(endpoints.serviceCategories, function (error, response, body) {
       }
     })
   const output = `export const serviceCategories = ${JSON.stringify(cats)}`
-  fs.writeFileSync(`./${config.paths.generatedData}service-categories.js`, output)
+  fs.writeFileSync(`../${config.paths.generatedData}service-categories.js`, output)
 })
 
 request(endpoints.cities, function (error, response, body) {
   const output = `export const cities = ${body}`
-  fs.writeFileSync(`./${config.paths.generatedData}supported-cities.js`, output)
+  fs.writeFileSync(`../${config.paths.generatedData}supported-cities.js`, output)
 })
