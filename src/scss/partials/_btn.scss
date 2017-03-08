@@ -117,6 +117,8 @@
   }
 
   &--print {
-    margin-left: 40px;
+    @include mq($from: m) {
+      margin-left: 40px;
+    }
   }
 }
