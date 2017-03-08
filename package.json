@@ -96,7 +96,7 @@
   },
   "scripts": {
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "prepublish": "node scripts/getLongTermData & npm run snyk-protect"
   },
   "snyk": true
 }
