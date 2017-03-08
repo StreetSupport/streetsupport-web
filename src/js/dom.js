@@ -1,4 +1,4 @@
-export const newElement = (tagName, innerHTML, attrs) => {
+export const newElement = (tagName, innerHTML, attrs = {}) => {
   const elem = document.createElement(tagName)
   Object.keys(attrs)
     .forEach((k) => {
