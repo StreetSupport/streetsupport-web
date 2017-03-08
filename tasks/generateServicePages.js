@@ -1,17 +1,20 @@
 import del from 'del'
 import fs from 'fs'
 import gulp from 'gulp'
+import request from 'request'
 import runSequence from 'run-sequence'
 
 import config from '../foley.json'
-import { categories } from '../src/data/generated/service-categories'
+
+import endpoints from '../src/js/api'
 
 const findHelpSrc = `${config.paths.pages}/find-help/`
 const categoryPageSrc = `${findHelpSrc}/category/index.hbs`
 const timetabledPageSrc = `${findHelpSrc}/category-by-day/index.hbs`
 const locationPageSrc = `${findHelpSrc}/category-by-location/index.hbs`
-
 const generatedPagesSrc = `${config.paths.pages}/_generated/`
+
+let categories = []
 
 const getNewContent = function (src, cat) {
   const result = src
@@ -33,6 +36,19 @@ const getNewLocationContent = function (src, cat) {
     .replace('description:', `description: ${cat.name} Services by location available near you`)
   return result
 }
+
+gulp.task('getServiceCategories', (callback) => {
+  request(endpoints.serviceCategories, function (err, res, body) {
+    categories = JSON.parse(body)
+      .map((c) => {
+        return {
+          key: c.key,
+          name: c.name
+        }
+      })
+    callback()
+  })
+})
 
 gulp.task('reset', () => {
   const generatedCategoryDirectories = categories
@@ -98,6 +114,7 @@ gulp.task('copy-to-find-help', () => {
 
 gulp.task('generate-service-pages', (callback) => {
   runSequence(
+    'getServiceCategories',
     'reset',
     'make-generated-files-directory',
     'generate-provider-directories',
