@@ -8,11 +8,11 @@ import config from '../foley.json'
 
 import endpoints from '../src/js/api'
 
-const findHelpSrc = `${config.paths.pages}/find-help/`
-const categoryPageSrc = `${findHelpSrc}/category/index.hbs`
-const timetabledPageSrc = `${findHelpSrc}/category-by-day/index.hbs`
-const locationPageSrc = `${findHelpSrc}/category-by-location/index.hbs`
-const generatedPagesSrc = `${config.paths.pages}_generated`
+const findHelpSrc = `${config.paths.pages}find-help/`
+const categoryPageSrc = `${findHelpSrc}category/index.hbs`
+const timetabledPageSrc = `${findHelpSrc}category-by-day/index.hbs`
+const locationPageSrc = `${findHelpSrc}category-by-location/index.hbs`
+const generatedPagesSrc = `${config.paths.pages}_generated/`
 
 let categories = []
 
@@ -67,7 +67,7 @@ gulp.task('make-generated-files-directory', () => {
 gulp.task('generate-provider-directories', () => {
   categories
     .forEach((c) => {
-      const destDir = `${generatedPagesSrc}/${c.key}`
+      const destDir = `${generatedPagesSrc}${c.key}`
       fs.mkdir(destDir)
       fs.mkdir(`${destDir}/map`)
       fs.mkdir(`${destDir}/timetable`)
@@ -79,9 +79,9 @@ gulp.task('generate-provider-listing-pages', () => {
 
   categories
     .forEach((c) => {
-      const destDir = `${generatedPagesSrc}/${c.key}/`
+      const destDir = `${generatedPagesSrc}${c.key}/`
       const newContent = getNewContent(srcContent, c)
-      fs.writeFileSync(`${destDir}/index.hbs`, newContent)
+      fs.writeFileSync(`${destDir}index.hbs`, newContent)
     })
 })
 
@@ -90,9 +90,9 @@ gulp.task('generate-timetabled-pages', () => {
 
   categories
     .forEach((c) => {
-      const destDir = `${generatedPagesSrc}/${c.key}`
+      const destDir = `${generatedPagesSrc}${c.key}/`
       const newContent = getNewTimeTabledContent(srcContent, c)
-      fs.writeFileSync(`${destDir}/timetable/index.hbs`, newContent)
+      fs.writeFileSync(`${destDir}timetable/index.hbs`, newContent)
     })
 })
 
@@ -101,9 +101,9 @@ gulp.task('generate-map-pages', () => {
 
   categories
     .forEach((c) => {
-      const destDir = `${generatedPagesSrc}/${c.key}`
+      const destDir = `${generatedPagesSrc}/${c.key}/`
       const newContent = getNewLocationContent(srcContent, c)
-      fs.writeFileSync(`${destDir}/map/index.hbs`, newContent)
+      fs.writeFileSync(`${destDir}map/index.hbs`, newContent)
     })
 })
 
