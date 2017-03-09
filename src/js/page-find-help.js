@@ -1,6 +1,5 @@
 // Common modules
 import './common'
-import 'babel-polyfill'
 
 // Page modules
 const socialShare = require('./social-share')
