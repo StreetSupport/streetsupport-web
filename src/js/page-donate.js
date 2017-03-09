@@ -10,6 +10,7 @@ let templating = require('./template-render')
 let browser = require('./browser')
 let querystring = require('./get-url-parameter')
 let locationSelector = require('./location/locationSelector')
+let supportedCities = require('./location/supportedCities')
 let htmlencode = require('htmlencode')
 
 let currentLocation = null
@@ -40,9 +41,14 @@ let getData = () => {
       let locations = locationSelector.getViewModelAll(currentLocation)
       let theData = {
         location: currentLocation.name,
-        isManchester: location === 'manchester',
         locations: locations
       }
+      supportedCities.locations
+        .forEach((c) => {
+          theData[`is${c.id}`] = currentLocation.id === c.id
+        })
+
+      console.log(theData)
 
       if (result.data.length === 0) {
         templating.renderTemplate('js-no-result-tpl', theData, 'js-result-output', callback)

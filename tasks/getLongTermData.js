@@ -33,6 +33,7 @@ gulp.task('supported-cities', (callback) => {
       return cities.map(function (c) {
         return {
           id: c.id,
+          findHelpId: c.id,
           name: c.name,
           latitude: c.latitude,
           longitude: c.longitude,

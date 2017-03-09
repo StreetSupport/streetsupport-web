@@ -1,16 +1,16 @@
-var Q = require('q')
+import * as Q from 'q'
 
-var getLocation = function () {
-  var deferred = Q.defer()
-  var options = {
+/**
+ * returns promise containing browser geo-location
+ */
+const getLocation = function () {
+  const deferred = Q.defer()
+  const options = {
     maximumAge: 5 * 60 * 1000,
     timeout: 3000
   }
 
-  let result = false
-
   function success (position) {
-    result = position
     deferred.resolve(position)
   }
 
@@ -20,18 +20,14 @@ var getLocation = function () {
 
   navigator.geolocation.getCurrentPosition(success, error, options)
 
-  setTimeout(() => {
-    if (!result) {
-      deferred.resolve(null)
-    }
-  }, options.timeout + 1000)
-
   return deferred.promise
 }
 
-let isAvailable = () => {
-  if (navigator.geolocation) return true
-  return false
+/**
+ * returns if browser supports geolocation
+ */
+const isAvailable = function () {
+  return ('geolocation' in navigator)
 }
 
 module.exports = {

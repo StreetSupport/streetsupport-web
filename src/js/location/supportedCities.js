@@ -1,30 +1,39 @@
-const locations = [
-  {
-    'id': 'leeds',
-    'findHelpId': 'leeds',
-    'name': 'Leeds',
-    'longitude': -1.54511238485298,
-    'latitude': 53.7954906003838
-  },
-  {
-    'id': 'manchester',
-    'findHelpId': 'manchester',
-    'name': 'Manchester',
-    'longitude': -2.24455696347558,
-    'latitude': 53.4792777155671
-  }
-]
+import { cities } from '../../data/generated/supported-cities'
 
-const get = (id) => {
-  return locations.filter((l) => l.id === id)[0]
+/**
+ * a generic location which the user can choose if they are not near a supported city
+ */
+const elsewhere = {
+  'id': 'elsewhere',
+  'findHelpId': 'my-location',
+  'name': 'another location',
+  'longitude': 0,
+  'latitude': 90,
+  'isPublic': true,
+  'isSelectableInBody': false
+}
+
+/**
+ * a collection of supported locations in street support
+ */
+const mungedCities = cities
+  .filter((c) => c.isPublic)
+mungedCities
+  .forEach((c) => {
+    c.isSelectableInBody = true
+  })
+const locations = [...mungedCities, elsewhere]
+
+const getById = (id) => {
+  return locations.find((l) => l.id === id)
 }
 
 const getDefault = () => {
-  return get(locations[1].id)
+  return elsewhere
 }
 
 module.exports = {
   locations: locations,
-  get: get,
+  get: getById,
   default: getDefault
 }

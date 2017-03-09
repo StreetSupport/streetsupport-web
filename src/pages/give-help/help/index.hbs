@@ -1,7 +1,7 @@
 ---
 title: Requests for Help - Street Support
 description: Organisations need specific items, skills and money to support homeless people - can you help?
-image: https://streetsupport.net/assets/img/og/street-support-manchester.png
+image: https://streetsupport.net/assets/img/og/street-support.png
 layout: default.hbs
 permalink: false
 jsBundle: giverequests
@@ -51,8 +51,13 @@ page: giveitems
 
 <script id="js-no-data-tpl" type="text/template">
   <div class="block__section">
-    <p>There are currently no needs registered in \{{location}}. Please choose another location above.</p>
-    <p>If you know of local organisations that could be included in this category, please use our <a href="/register">registration form, or <a href="mailto:info@streetsupport.net">let us know</a>.</a></p>
+    \{{#geoLocationUnavailable}}
+    <p>Unfortunately, we cannot determine your location. Please ensure location is enabled on your device.</p>
+    \{{/geoLocationUnavailable}}
+    \{{^geoLocationUnavailable}}
+    <p>There are are no needs registered near you yet. Please use the dropdown above to select another location.</p>
+    \{{/geoLocationUnavailable}}
+    <p>If you know of local organisations that could be included, please use our <a href="/register">registration form, or if they are already included but their needs aren't listed, please <a href="mailto:info@streetsupport.net">let us know</a>.</a></p>
   </div>
 </script>
 
