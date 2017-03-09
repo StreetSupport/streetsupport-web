@@ -155,7 +155,7 @@ let initFiltering = (theList) => {
     theList.filter()
   }
 
-  let filters = document.querySelectorAll('.js-filter-item')
+  let filters = Array.from(document.querySelectorAll('.js-filter-item'))
   let activeFilters = []
 
   // Add click listener to each item
@@ -186,7 +186,7 @@ let initFiltering = (theList) => {
 }
 
 let initSorting = (theList) => {
-  const sortCriteriaButtons = document.querySelectorAll('.js-sort-criteria')
+  const sortCriteriaButtons = Array.from(document.querySelectorAll('.js-sort-criteria'))
   sortCriteriaButtons.forEach((b) => {
     b.addEventListener('click', (event) => {
       let sortFields = []
@@ -261,12 +261,13 @@ let buildCard = (data) => {
       let state = { test: 'TBA' }
       history.pushState(state, 'TEST', '?id=' + theId)
 
-      document.querySelectorAll('.js-card-back').forEach((link) => {
-        link.addEventListener('click', (event) => {
-          event.preventDefault()
-          callback()
+      Array.from(document.querySelectorAll('.js-card-back'))
+        .forEach((link) => {
+          link.addEventListener('click', (event) => {
+            event.preventDefault()
+            callback()
+          })
         })
-      })
 
       socialShare.updateSharePageHrefs()
     }
@@ -339,7 +340,8 @@ let buildCard = (data) => {
         openCard(this, rewindHistory)
       })
     }
-    document.querySelectorAll('.requests-listing__item').forEach(addEventListener)
+    Array.from(document.querySelectorAll('.requests-listing__item'))
+      .forEach(addEventListener)
   }
 
   window.onpopstate = () => {
