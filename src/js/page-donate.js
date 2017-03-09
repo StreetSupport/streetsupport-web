@@ -1,9 +1,6 @@
 // Common modules
 import './common'
 
-let sortBy = require('lodash/collection/sortBy')
-var forEach = require('lodash/collection/forEach')
-
 let apiRoutes = require('./api')
 let getApiData = require('./get-api-data')
 let templating = require('./template-render')
@@ -51,10 +48,12 @@ let getData = () => {
       if (result.data.length === 0) {
         templating.renderTemplate('js-no-result-tpl', theData, 'js-result-output', callback)
       } else {
-        let sorted = sortBy(result.data, function (provider) {
-          return provider.providerName.toLowerCase()
+        let sorted = result.data.sort(function (a, b) {
+          if (a.providerName.toLowerCase() < b.providerName.toLowerCase()) return -1
+          if (a.providerName.toLowerCase() > b.providerName.toLowerCase()) return 1
+          return 0
         })
-        forEach(sorted, (p) => {
+        sorted.forEach((p) => {
           p.description = htmlencode.htmlDecode(p.description)
           p.providerName = htmlencode.htmlDecode(p.providerName)
         })

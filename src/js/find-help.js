@@ -1,6 +1,5 @@
 /* global history */
 var browser = require('./browser')
-var forEach = require('lodash/collection/forEach')
 let supportedCities = require('./location/supportedCities')
 let querystring = require('./get-url-parameter')
 let getLocation = require('./location/get-location')
@@ -43,23 +42,25 @@ var FindHelp = function (location) {
         name: 'my location'
       })
     }
-    forEach(options, (c) => {
+    options.forEach((c) => {
       const attrs = {
         value: c.id
       }
       if (c.id === location) {
         attrs['selected'] = 'selected'
       }
-
       dropdown.appendChild(newElement('option', c.name, attrs))
     })
 
     const range = document.querySelector('.js-find-help-range')
-    forEach(range.children, (c) => {
+    console.log(range.children)
+    Array.prototype.slice.call(range.children).forEach((c) => {
+      console.log(c.value, self.currentRange)
       if (parseInt(c.value) === parseInt(self.currentRange)) {
         c.setAttribute('selected', 'selected')
       }
     })
+    console.log(range)
 
     const updateOnRangeAndLocation = (event) => {
       event.preventDefault()
@@ -78,7 +79,10 @@ var FindHelp = function (location) {
     }
 
     range.addEventListener('change', updateOnRangeAndLocation)
+    console.log(range)
+
     dropdown.addEventListener('change', updateOnRangeAndLocation)
+    console.log(dropdown)
   }
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
@@ -120,8 +124,8 @@ var FindHelp = function (location) {
   }
 
   self.formatTags = function (subCategories) {
-    forEach(subCategories, (subCat) => {
-      forEach(subCat.serviceProviders, (provider) => {
+    subCategories.forEach((subCat) => {
+      subCat.serviceProviders.forEach((provider) => {
         if (provider.tags !== null) {
           provider.tags = provider.tags.join(', ')
         }

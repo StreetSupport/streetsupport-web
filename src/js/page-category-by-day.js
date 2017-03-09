@@ -9,12 +9,6 @@ var marked = require('marked')
 marked.setOptions({sanitize: true})
 var htmlencode = require('htmlencode')
 
-// Lodash
-var forEach = require('lodash/collection/forEach')
-var sortBy = require('lodash/collection/sortBy')
-var slice = require('lodash/array/slice')
-var findIndex = require('lodash/array/findIndex')
-
 var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
 var templating = require('./template-render')
@@ -54,8 +48,8 @@ function buildList (url) {
 
       data.daysServices = sortByOpeningTimes(sortDaysFromToday(data.daysServices))
 
-      forEach(data.daysServices, function (subCat) {
-        forEach(subCat.serviceProviders, function (provider) {
+      data.daysServices.forEach(function (subCat) {
+        subCat.serviceProviders.forEach(function (provider) {
           if (provider.tags !== null) {
             provider.tags = provider.tags.join(', ')
           }
@@ -63,7 +57,7 @@ function buildList (url) {
         })
       })
 
-      var dayIndexToOpen = findIndex(data.daysServices, function (day) {
+      var dayIndexToOpen = data.daysServices.findIndex(function (day) {
         return day.name === querystring.parameter('day')
       })
 
@@ -95,9 +89,11 @@ function buildList (url) {
 }
 
 function sortByOpeningTimes (days) {
-  forEach(days, function (day) {
-    day.serviceProviders = sortBy(day.serviceProviders, function (provider) {
-      return provider.openingTime.startTime
+  days.forEach(function (day) {
+    day.serviceProviders = day.serviceProviders.sort((a, b) => {
+      if (a.openingTime.startTime < b.openingTime.startTime) return -1
+      if (a.openingTime.startTime > b.openingTime.startTime) return 1
+      return 0
     })
   })
   return days
@@ -106,8 +102,8 @@ function sortByOpeningTimes (days) {
 function sortDaysFromToday (days) {
   // api days: monday == 0!
   var today = new Date().getDay() - 1
-  var past = slice(days, 0, today)
-  var todayToTail = slice(days, today)
+  var past = days.slice(0, today)
+  var todayToTail = days.slice(today)
   return todayToTail.concat(past)
 }
 

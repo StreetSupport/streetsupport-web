@@ -3,7 +3,6 @@ import './common'
 const accordion = require('./accordion')
 const FindHelp = require('./find-help')
 
-const forEach = require('lodash/collection/forEach')
 const marked = require('marked')
 marked.setOptions({sanitize: true})
 
@@ -26,34 +25,38 @@ let findHelp = null
 
 const changeSubCatFilter = (e) => {
   const providerItems = document.querySelectorAll('.js-item, .js-header')
-  forEach(document.querySelectorAll('.js-filter-item'), (item) => {
-    item.classList.remove('on')
-  })
+  document.querySelectorAll('.js-filter-item')
+    .forEach((item) => {
+      item.classList.remove('on')
+    })
 
   e.target.classList.add('on')
 
-  forEach(providerItems, (item) => {
-    item.classList.remove('hide')
-  })
+  providerItems
+    .forEach((item) => {
+      item.classList.remove('hide')
+    })
 
   const id = e.target.getAttribute('data-id')
   if (id.length > 0) {
-    forEach(providerItems, (item) => {
-      if (item.getAttribute('data-subcats').indexOf(id) < 0) {
-        item.classList.add('hide')
-      }
-    })
+    providerItems
+      .forEach((item) => {
+        if (item.getAttribute('data-subcats').indexOf(id) < 0) {
+          item.classList.add('hide')
+        }
+      })
   }
   findHelp.setUrl('category-by-day', 'sub-category', id)
 }
 
 const dropdownChangeHandler = (e) => {
   const filterItems = document.querySelectorAll('.js-filter-item')
-  forEach(filterItems, (item) => {
-    if (item.innerText === e.target.value) {
-      changeSubCatFilter({target: item})
-    }
-  })
+  filterItems
+    .forEach((item) => {
+      if (item.innerText === e.target.value) {
+        changeSubCatFilter({target: item})
+      }
+    })
 }
 
 const getTemplate = (providers) => {
@@ -67,16 +70,18 @@ const hasProvidersCallback = () => {
 
   const filterItems = document.querySelectorAll('.js-filter-item')
 
-  forEach(filterItems, (item) => {
-    item.addEventListener('click', changeSubCatFilter)
-  })
+  filterItems
+    .forEach((item) => {
+      item.addEventListener('click', changeSubCatFilter)
+    })
 
   const reqSubCat = querystring.parameter('sub-category')
-  forEach(filterItems, (item) => {
-    if (item.getAttribute('data-id') === reqSubCat) {
-      changeSubCatFilter({target: item})
-    }
-  })
+  filterItems
+    .forEach((item) => {
+      if (item.getAttribute('data-id') === reqSubCat) {
+        changeSubCatFilter({target: item})
+      }
+    })
   locationSelector.handler(onChangeLocation)
   listToDropdown.init(initDropdownChangeHandler)
   findHelp.initFindHelpLocationSelector()
