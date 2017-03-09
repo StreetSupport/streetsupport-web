@@ -1,3 +1,5 @@
+import 'babel-polyfill'
+
 const apiRoutes = require('../../../api')
 const browser = require('../../../browser')
 const querystring = require('../../../get-url-parameter')

@@ -1,4 +1,5 @@
 import './common'
+import 'babel-polyfill'
 
 const browser = require('./browser')
 const locationSelector = require('./location/locationSelector')
