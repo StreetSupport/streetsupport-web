@@ -53,14 +53,12 @@ var FindHelp = function (location) {
     })
 
     const range = document.querySelector('.js-find-help-range')
-    console.log(range.children)
-    Array.prototype.slice.call(range.children).forEach((c) => {
-      console.log(c.value, self.currentRange)
-      if (parseInt(c.value) === parseInt(self.currentRange)) {
-        c.setAttribute('selected', 'selected')
-      }
-    })
-    console.log(range)
+    Array.from(range.children)
+      .forEach((c) => {
+        if (parseInt(c.value) === parseInt(self.currentRange)) {
+          c.setAttribute('selected', 'selected')
+        }
+      })
 
     const updateOnRangeAndLocation = (event) => {
       event.preventDefault()
@@ -79,10 +77,7 @@ var FindHelp = function (location) {
     }
 
     range.addEventListener('change', updateOnRangeAndLocation)
-    console.log(range)
-
     dropdown.addEventListener('change', updateOnRangeAndLocation)
-    console.log(dropdown)
   }
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {

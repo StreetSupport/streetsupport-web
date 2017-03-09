@@ -24,14 +24,14 @@ const onChangeLocation = (newLocation) => {
 let findHelp = null
 
 const changeSubCatFilter = (e) => {
-  const providerItems = document.querySelectorAll('.js-item, .js-header')
-  document.querySelectorAll('.js-filter-item')
+  Array.from(document.querySelectorAll('.js-filter-item'))
     .forEach((item) => {
       item.classList.remove('on')
     })
 
   e.target.classList.add('on')
 
+  const providerItems = Array.from(document.querySelectorAll('.js-item, .js-header'))
   providerItems
     .forEach((item) => {
       item.classList.remove('hide')
@@ -50,8 +50,7 @@ const changeSubCatFilter = (e) => {
 }
 
 const dropdownChangeHandler = (e) => {
-  const filterItems = document.querySelectorAll('.js-filter-item')
-  filterItems
+  Array.from(document.querySelectorAll('.js-filter-item'))
     .forEach((item) => {
       if (item.innerText === e.target.value) {
         changeSubCatFilter({target: item})
@@ -68,7 +67,7 @@ const getTemplate = (providers) => {
 const hasProvidersCallback = () => {
   accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'), true)
 
-  const filterItems = document.querySelectorAll('.js-filter-item')
+  const filterItems = Array.from(document.querySelectorAll('.js-filter-item'))
 
   filterItems
     .forEach((item) => {
@@ -82,6 +81,7 @@ const hasProvidersCallback = () => {
         changeSubCatFilter({target: item})
       }
     })
+
   locationSelector.handler(onChangeLocation)
   listToDropdown.init(initDropdownChangeHandler)
   findHelp.initFindHelpLocationSelector()
