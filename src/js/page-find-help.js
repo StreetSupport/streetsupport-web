@@ -1,6 +1,5 @@
 // Common modules
 import './common'
-import 'babel-polyfill'
 
 // Page modules
 const socialShare = require('./social-share')
@@ -20,9 +19,9 @@ let getData = () => {
   categories
     .forEach((category) => {
       if (category.key === 'meals' || category.key === 'dropin') {
-        category.page = 'category-by-day'
+        category.page = `${category.key}/timetable`
       } else {
-        category.page = 'category'
+        category.page = `${category.key}`
       }
     })
 

@@ -3,7 +3,6 @@ import './common'
 const accordion = require('./accordion')
 const FindHelp = require('./find-help')
 
-const forEach = require('lodash/collection/forEach')
 const marked = require('marked')
 marked.setOptions({sanitize: true})
 
@@ -19,41 +18,44 @@ const locationSelector = require('./location/locationSelector')
 import { buildFindHelpUrl, getProvidersForListing, getSubCategories } from './pages/find-help/provider-listing/helpers'
 
 const onChangeLocation = (newLocation) => {
-  window.location.href = '/find-help/category?category=' + findHelp.theCategory + '&location=' + newLocation
+  window.location.href = `/find-help/${findHelp.theCategory}?location=${newLocation}`
 }
 
 let findHelp = null
 
 const changeSubCatFilter = (e) => {
-  const providerItems = document.querySelectorAll('.js-item, .js-header')
-  forEach(document.querySelectorAll('.js-filter-item'), (item) => {
-    item.classList.remove('on')
-  })
+  Array.from(document.querySelectorAll('.js-filter-item'))
+    .forEach((item) => {
+      item.classList.remove('on')
+    })
 
   e.target.classList.add('on')
 
-  forEach(providerItems, (item) => {
-    item.classList.remove('hide')
-  })
+  const providerItems = Array.from(document.querySelectorAll('.js-item, .js-header'))
+  providerItems
+    .forEach((item) => {
+      item.classList.remove('hide')
+    })
 
   const id = e.target.getAttribute('data-id')
   if (id.length > 0) {
-    forEach(providerItems, (item) => {
-      if (item.getAttribute('data-subcats').indexOf(id) < 0) {
-        item.classList.add('hide')
-      }
-    })
+    providerItems
+      .forEach((item) => {
+        if (item.getAttribute('data-subcats').indexOf(id) < 0) {
+          item.classList.add('hide')
+        }
+      })
   }
   findHelp.setUrl('category-by-day', 'sub-category', id)
 }
 
 const dropdownChangeHandler = (e) => {
-  const filterItems = document.querySelectorAll('.js-filter-item')
-  forEach(filterItems, (item) => {
-    if (item.innerText === e.target.value) {
-      changeSubCatFilter({target: item})
-    }
-  })
+  Array.from(document.querySelectorAll('.js-filter-item'))
+    .forEach((item) => {
+      if (item.innerText === e.target.value) {
+        changeSubCatFilter({target: item})
+      }
+    })
 }
 
 const getTemplate = (providers) => {
@@ -65,18 +67,21 @@ const getTemplate = (providers) => {
 const hasProvidersCallback = () => {
   accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'), true)
 
-  const filterItems = document.querySelectorAll('.js-filter-item')
+  const filterItems = Array.from(document.querySelectorAll('.js-filter-item'))
 
-  forEach(filterItems, (item) => {
-    item.addEventListener('click', changeSubCatFilter)
-  })
+  filterItems
+    .forEach((item) => {
+      item.addEventListener('click', changeSubCatFilter)
+    })
 
   const reqSubCat = querystring.parameter('sub-category')
-  forEach(filterItems, (item) => {
-    if (item.getAttribute('data-id') === reqSubCat) {
-      changeSubCatFilter({target: item})
-    }
-  })
+  filterItems
+    .forEach((item) => {
+      if (item.getAttribute('data-id') === reqSubCat) {
+        changeSubCatFilter({target: item})
+      }
+    })
+
   locationSelector.handler(onChangeLocation)
   listToDropdown.init(initDropdownChangeHandler)
   findHelp.initFindHelpLocationSelector()
@@ -115,9 +120,7 @@ function buildList (url, locationResult) {
     if (result.status === 'error') {
       window.location.replace('/find-help/')
     }
-    const theTitle = result.data.category.name + ' - Street Support'
-    document.title = theTitle
-    analytics.init(theTitle)
+    analytics.init(document.title)
 
     const template = getTemplate(result.data.providers)
     const onRenderCallback = getCallback(result.data.providers)
