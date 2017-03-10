@@ -34,7 +34,10 @@ let getData = () => {
   // Append object name for Hogan
   var theData = {
     categories: sorted,
-    location: currentLocation
+    location: currentLocation,
+    emergencyHelpUrl: currentLocation.id === 'elsewhere'
+      ? '/find-help/emergency-help/'
+      : `/${currentLocation.id}/emergency-help/`
   }
 
   var callback = function () {
