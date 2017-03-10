@@ -21,6 +21,11 @@ gulp.task('service-categories', (callback) => {
           name: c.name
         }
       })
+      .sort((a, b) => {
+        if (a.sortOrder > b.sortOrder) return -1
+        if (a.sortOrder < b.sortOrder) return 1
+        return 0
+      })
     })))
     .pipe(replace('[', 'export const categories = ['))
     .pipe(gulp.dest('./'))
