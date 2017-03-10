@@ -25,16 +25,10 @@ let getData = () => {
         category.page = 'category'
       }
     })
-  var sorted = categories
-    .sort((a, b) => {
-      if (a.sortOrder < b.sortOrder) return -1
-      if (a.sortOrder > b.sortOrder) return 1
-      return 0
-    })
 
   // Append object name for Hogan
   var theData = {
-    categories: sorted,
+    categories: categories,
     location: currentLocation,
     emergencyHelpUrl: currentLocation.id === 'elsewhere'
       ? '/find-help/emergency-help/'
