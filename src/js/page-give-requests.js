@@ -6,8 +6,6 @@ const Awesomplete = require('awesomplete')
 const geolib = require('geolib')
 import List from 'list.js'
 import Holder from 'holderjs'
-import Find from 'lodash/collection/find'
-import ForEach from 'lodash/collection/forEach'
 import moment from 'moment'
 import htmlEncode from 'htmlencode'
 const ko = require('knockout')
@@ -26,7 +24,7 @@ const templating = require('./template-render')
 const activeClass = 'is-active'
 
 const formatDate = (needs) => {
-  ForEach(needs, function (need) {
+  needs.forEach(function (need) {
     need.formattedCreationDate = moment(need.creationDate).fromNow()
   })
 
@@ -157,7 +155,7 @@ let initFiltering = (theList) => {
     theList.filter()
   }
 
-  let filters = document.querySelectorAll('.js-filter-item')
+  let filters = Array.from(document.querySelectorAll('.js-filter-item'))
   let activeFilters = []
 
   // Add click listener to each item
@@ -171,7 +169,7 @@ let initFiltering = (theList) => {
         resetFiltering()
       } else {
         document.querySelector('.js-filter-item-all').classList.remove(activeClass)
-        ForEach(filters, (f) => f.classList.remove(activeClass))
+        filters.forEach((f) => f.classList.remove(activeClass))
         self.classList.add(activeClass)
         activeFilters = [getFilter]
         runFiltering()
@@ -188,8 +186,8 @@ let initFiltering = (theList) => {
 }
 
 let initSorting = (theList) => {
-  const sortCriteriaButtons = document.querySelectorAll('.js-sort-criteria')
-  ForEach(sortCriteriaButtons, (b) => {
+  const sortCriteriaButtons = Array.from(document.querySelectorAll('.js-sort-criteria'))
+  sortCriteriaButtons.forEach((b) => {
     b.addEventListener('click', (event) => {
       let sortFields = []
       sortFields['organisation'] = 'serviceProviderName'
@@ -200,7 +198,7 @@ let initSorting = (theList) => {
       let [field, direction] = selectedSort.split('-')
       theList.sort(sortFields[field], { order: direction })
 
-      ForEach(sortCriteriaButtons, (cb) => {
+      sortCriteriaButtons.forEach((cb) => {
         cb.classList.remove(activeClass)
       })
       event.target.classList.add(activeClass)
@@ -239,9 +237,7 @@ let buildCard = (data) => {
       window.scrollTo(0, 0)
 
       let theId = el.getAttribute('data-id')
-      let cardData = Find(data, (c) => {
-        return c.id === theId
-      })
+      let cardData = data.find((c) => c.id === theId)
 
       let iCanHelpButton = document.querySelector('.js-i-can-help-button')
       iCanHelpButton.addEventListener('click', function (event) {
@@ -265,12 +261,13 @@ let buildCard = (data) => {
       let state = { test: 'TBA' }
       history.pushState(state, 'TEST', '?id=' + theId)
 
-      ForEach(document.querySelectorAll('.js-card-back'), (link) => {
-        link.addEventListener('click', (event) => {
-          event.preventDefault()
-          callback()
+      Array.from(document.querySelectorAll('.js-card-back'))
+        .forEach((link) => {
+          link.addEventListener('click', (event) => {
+            event.preventDefault()
+            callback()
+          })
         })
-      })
 
       socialShare.updateSharePageHrefs()
     }
@@ -291,7 +288,7 @@ let buildCard = (data) => {
 
     let initCardDetail = () => {
       let theId = el.getAttribute('data-id')
-      let cardData = Find(data, (o) => { return o.id === theId })
+      let cardData = data.find((o) => { return o.id === theId })
 
       cardData.showLocation = cardData.postcode.length > 0 && cardData.type !== 'money'
       cardData.showContactForm = cardData.type !== 'money'
@@ -314,9 +311,7 @@ let buildCard = (data) => {
   let openIfCardRequested = () => {
     let cardId = getUrlParams.parameter('id').replace('/', '')
     if (cardId) {
-      let card = Find(document.querySelectorAll('.requests-listing__item'), (c) => {
-        return c.getAttribute('data-id') === cardId
-      })
+      let card = document.querySelectorAll('.requests-listing__item').find((c) => c.getAttribute('data-id') === cardId)
       openCard(card, () => {
         history.pushState({}, 'from openIfCardRequested', '?')
         closeCard()
@@ -345,7 +340,8 @@ let buildCard = (data) => {
         openCard(this, rewindHistory)
       })
     }
-    ForEach(document.querySelectorAll('.requests-listing__item'), addEventListener)
+    Array.from(document.querySelectorAll('.requests-listing__item'))
+      .forEach(addEventListener)
   }
 
   window.onpopstate = () => {

@@ -1,7 +1,5 @@
 /* global history */
-var urlParameter = require('./get-url-parameter')
 var browser = require('./browser')
-var forEach = require('lodash/collection/forEach')
 let supportedCities = require('./location/supportedCities')
 let querystring = require('./get-url-parameter')
 let getLocation = require('./location/get-location')
@@ -11,10 +9,22 @@ import { newElement } from './dom'
 var FindHelp = function (location) {
   var self = this
   self.currentLocation = location
-  self.theCategory = urlParameter.parameter('category')
-  self.currentRange = urlParameter.parameter('range').length === 0
+  const re = new RegExp(/find-help\/(.*)\//)
+  self.theCategory = browser.location().pathname.match(re)[1].split('/')[0]
+
+  if (self.theCategory.startsWith('category')) {
+    const redirects = {
+      'category': '/',
+      'category-by-day': '/timetable/',
+      'category-by-location': '/map/'
+    }
+    const queryStringCategory = querystring.parameter('category')
+    browser.redirect(`/find-help/${queryStringCategory}${redirects[self.theCategory]}`)
+  }
+
+  self.currentRange = querystring.parameter('range').length === 0
     ? 10000
-    : urlParameter.parameter('range')
+    : querystring.parameter('range')
 
   self.initFindHelpLocationSelector = () => {
     const dropdown = document.querySelector('.js-find-help-dropdown')
@@ -32,23 +42,23 @@ var FindHelp = function (location) {
         name: 'my location'
       })
     }
-    forEach(options, (c) => {
+    options.forEach((c) => {
       const attrs = {
         value: c.id
       }
       if (c.id === location) {
         attrs['selected'] = 'selected'
       }
-
       dropdown.appendChild(newElement('option', c.name, attrs))
     })
 
     const range = document.querySelector('.js-find-help-range')
-    forEach(range.children, (c) => {
-      if (parseInt(c.value) === parseInt(self.currentRange)) {
-        c.setAttribute('selected', 'selected')
-      }
-    })
+    Array.from(range.children)
+      .forEach((c) => {
+        if (parseInt(c.value) === parseInt(self.currentRange)) {
+          c.setAttribute('selected', 'selected')
+        }
+      })
 
     const updateOnRangeAndLocation = (event) => {
       event.preventDefault()
@@ -71,8 +81,7 @@ var FindHelp = function (location) {
   }
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
-    let url = '?category=' + self.theCategory +
-              '&location=' + self.currentLocation +
+    let url = '?location=' + self.currentLocation +
               '&range=' + self.currentRange
     if (subCategoryId.length > 0) {
       url += '&' + subCategoryKey + '=' + subCategoryId
@@ -98,7 +107,7 @@ var FindHelp = function (location) {
 
   self.handleSubCategoryChange = function (subCategoryKey, accordion) {
     window.onpopstate = function () {
-      var subCategory = urlParameter.parameter(subCategoryKey)
+      var subCategory = querystring.parameter(subCategoryKey)
       if (subCategory.length) {
         var el = document.getElementById(subCategory)
         var context = document.querySelector('.js-accordion')
@@ -110,8 +119,8 @@ var FindHelp = function (location) {
   }
 
   self.formatTags = function (subCategories) {
-    forEach(subCategories, (subCat) => {
-      forEach(subCat.serviceProviders, (provider) => {
+    subCategories.forEach((subCat) => {
+      subCat.serviceProviders.forEach((provider) => {
         if (provider.tags !== null) {
           provider.tags = provider.tags.join(', ')
         }

@@ -4,7 +4,6 @@
 
 // Common modules
 import './common'
-let sortBy = require('lodash/collection/sortBy')
 let htmlEncode = require('htmlencode')
 let marked = require('marked')
 marked.setOptions({sanitize: true})
@@ -113,8 +112,10 @@ let getData = (currentLocation) => {
         }
         templating.renderTemplate('js-category-no-result-tpl', theData, 'js-category-result-output', callback)
       } else {
-        let sorted = sortBy(result.data, function (provider) {
-          return provider.name.toLowerCase()
+        let sorted = result.data.sort((a, b) => {
+          if (a.name.toLowerCase() < b.name.toLowerCase()) return -1
+          if (a.name.toLowerCase() > b.name.toLowerCase()) return 1
+          return 0
         })
         sorted.forEach((p) => {
           p.description = marked(htmlEncode.htmlDecode(p.description))

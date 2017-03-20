@@ -6,7 +6,11 @@ let theSourcemap
 
 // Create plugins array
 var plugins = [
-  new CommonsChunkPlugin('commons.js')
+  new CommonsChunkPlugin({
+    name: 'common',
+    filename: 'commons.js',
+    minChunks: 2
+  })
 ]
 
 // Add Uglify task to plugins array if there is a production flag

@@ -9,12 +9,6 @@ var marked = require('marked')
 marked.setOptions({sanitize: true})
 var htmlencode = require('htmlencode')
 
-// Lodash
-var forEach = require('lodash/collection/forEach')
-var sortBy = require('lodash/collection/sortBy')
-var slice = require('lodash/array/slice')
-var findIndex = require('lodash/array/findIndex')
-
 var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
 var templating = require('./template-render')
@@ -29,7 +23,7 @@ let onChangeLocation = (newLocation) => {
   if (newLocation === 'elsewhere') {
     newLocation = 'my-location'
   }
-  window.location.href = '/find-help/category-by-day?category=' + findHelp.theCategory + '&location=' + newLocation
+  window.location.href = `/find-help/${findHelp.theCategory}/timetable?location=${newLocation}`
 }
 
 function buildList (url) {
@@ -39,9 +33,6 @@ function buildList (url) {
       window.location.replace('/find-help/')
     }
     var data = result.data
-
-    var theTitle = data.categoryName + ' - Street Support'
-    document.title = theTitle
 
     var template = ''
     var onRenderCallback = function () {
@@ -57,8 +48,8 @@ function buildList (url) {
 
       data.daysServices = sortByOpeningTimes(sortDaysFromToday(data.daysServices))
 
-      forEach(data.daysServices, function (subCat) {
-        forEach(subCat.serviceProviders, function (provider) {
+      data.daysServices.forEach(function (subCat) {
+        subCat.serviceProviders.forEach(function (provider) {
           if (provider.tags !== null) {
             provider.tags = provider.tags.join(', ')
           }
@@ -66,14 +57,14 @@ function buildList (url) {
         })
       })
 
-      var dayIndexToOpen = findIndex(data.daysServices, function (day) {
+      var dayIndexToOpen = data.daysServices.findIndex(function (day) {
         return day.name === querystring.parameter('day')
       })
 
       onRenderCallback = function () {
         locationSelector.handler(onChangeLocation)
         accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', 'day'))
-        analytics.init(theTitle)
+        analytics.init(document.title)
         findHelp.initFindHelpLocationSelector()
 
         browser.initPrint()
@@ -98,9 +89,11 @@ function buildList (url) {
 }
 
 function sortByOpeningTimes (days) {
-  forEach(days, function (day) {
-    day.serviceProviders = sortBy(day.serviceProviders, function (provider) {
-      return provider.openingTime.startTime
+  days.forEach(function (day) {
+    day.serviceProviders = day.serviceProviders.sort((a, b) => {
+      if (a.openingTime.startTime < b.openingTime.startTime) return -1
+      if (a.openingTime.startTime > b.openingTime.startTime) return 1
+      return 0
     })
   })
   return days
@@ -109,8 +102,8 @@ function sortByOpeningTimes (days) {
 function sortDaysFromToday (days) {
   // api days: monday == 0!
   var today = new Date().getDay() - 1
-  var past = slice(days, 0, today)
-  var todayToTail = slice(days, today)
+  var past = days.slice(0, today)
+  var todayToTail = days.slice(today)
   return todayToTail.concat(past)
 }
 
@@ -125,12 +118,11 @@ let init = () => {
       let reqSubCat = querystring.parameter('sub-category')
       findHelp.setUrl('category-by-day', 'sub-category', reqSubCat)
 
-      let category = querystring.parameter('category')
       let location = querystring.parameter('location')
 
       let url = apiRoutes.cities + result.id + '/services-by-day/' + findHelp.theCategory
       if (location === 'my-location') {
-        url = apiRoutes.categoryServiceProvidersByDay + category + '/long/' + result.longitude + '/lat/' + result.latitude
+        url = apiRoutes.categoryServiceProvidersByDay + findHelp.theCategory + '/long/' + result.longitude + '/lat/' + result.latitude
       }
 
       buildList(url)
