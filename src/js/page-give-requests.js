@@ -238,7 +238,6 @@ let buildCard = (data) => {
 
       let theId = el.getAttribute('data-id')
       let cardData = data.find((c) => c.id === theId)
-
       let iCanHelpButton = document.querySelector('.js-i-can-help-button')
       iCanHelpButton.addEventListener('click', function (event) {
         event.preventDefault()
@@ -289,7 +288,6 @@ let buildCard = (data) => {
     let initCardDetail = () => {
       let theId = el.getAttribute('data-id')
       let cardData = data.find((o) => { return o.id === theId })
-
       cardData.showLocation = cardData.postcode.length > 0 && cardData.type !== 'money'
       cardData.showContactForm = cardData.type !== 'money'
 
@@ -308,10 +306,11 @@ let buildCard = (data) => {
     initCardDetail()
   }
 
-  let openIfCardRequested = () => {
-    let cardId = getUrlParams.parameter('id').replace('/', '')
+  const openIfCardRequested = () => {
+    const cardId = getUrlParams.parameter('id').replace('/', '')
     if (cardId) {
-      let card = document.querySelectorAll('.requests-listing__item').find((c) => c.getAttribute('data-id') === cardId)
+      let card = Array.from(document.querySelectorAll('.requests-listing__item'))
+        .find((c) => c.getAttribute('data-id') === cardId)
       openCard(card, () => {
         history.pushState({}, 'from openIfCardRequested', '?')
         closeCard()
