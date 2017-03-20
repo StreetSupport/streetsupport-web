@@ -19,6 +19,7 @@ export const redirectTo = (locationId) => {
         redirects[`/${c.id}/bigchangemcr/`] = '/'
         redirects[`/${c.id}/bigchangemcr/about/`] = '/'
         redirects[`/${c.id}/bigchangemcr/campaign/`] = '/'
+        redirects[`/${c.id}/bigchangemcr/partners/`] = '/'
       })
   }
   const setCityToCity = () => {
@@ -35,6 +36,7 @@ export const redirectTo = (locationId) => {
             redirects[`/${c.id}/bigchangemcr/`] = `/${locationId}/`
             redirects[`/${c.id}/bigchangemcr/about/`] = `/${locationId}/`
             redirects[`/${c.id}/bigchangemcr/campaign/`] = `/${locationId}/`
+            redirects[`/${c.id}/bigchangemcr/partners/`] = `/${locationId}/`
           })
       })
   }
