@@ -133,6 +133,9 @@ const renderResults = (locationResult, result) => {
     categoryName: result.data.category.name,
     categorySynopsis: marked(result.data.category.synopsis),
     location: locationResult.name,
+    nearestSupportedId: locationResult.nearestSupported !== undefined ? locationResult.nearestSupported.id : '',
+    nearestSupportedName: locationResult.nearestSupported !== undefined ? locationResult.nearestSupported.name : '',
+    selectedRange: querystring.parameter('range'),
     geoLocationUnavailable: locationResult.geoLocationUnavailable
   }
   templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)

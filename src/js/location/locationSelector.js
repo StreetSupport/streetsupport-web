@@ -1,10 +1,32 @@
 const Q = require('q')
+const geolib = require('geolib')
 const deviceGeo = require('./get-location')
 const querystring = require('../get-url-parameter')
 let supportedCities = require('./supportedCities')
 const browser = require('../browser')
 const cookies = require('../cookies')
 let modal = require('./modal')
+
+let getNearest = (position) => {
+  let currLatitude = position.coords.latitude
+  let currLongitude = position.coords.longitude
+  for (let i = 0; i < supportedCities.locations.length; i++) {
+    let distanceInMetres = geolib.getDistance(
+      { latitude: currLatitude, longitude: currLongitude },
+      { latitude: supportedCities.locations[i].latitude, longitude: supportedCities.locations[i].longitude }
+    )
+    supportedCities.locations[i].distance = distanceInMetres
+  }
+
+  let sorted = supportedCities.locations
+    .sort((a, b) => {
+      if (a.distance < b.distance) return -1
+      if (a.distance > b.distance) return 1
+      return 0
+    })
+
+  return sorted[0]
+}
 
 let _userSelect = (deferred) => {
   modal.init(exportedObj)
@@ -26,7 +48,8 @@ let _useMyLocation = (deferred) => {
         isSelected: true,
         latitude: result.coords.latitude,
         longitude: result.coords.longitude,
-        name: 'my location'
+        name: 'my location',
+        nearestSupported: getNearest(result)
       })
     }, (error) => {
       let cityId = 'my-location'
