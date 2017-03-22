@@ -36,8 +36,8 @@ describe('Header City Selector - On Location Change', () => {
     {name: 'manchester big change to city', current: '/manchester/bigchangemcr/', reqCityId: 'leeds', expected: '/leeds/'},
     {name: 'manchester big change about to root', current: '/manchester/bigchangemcr/about/', reqCityId: 'elsewhere', expected: '/'},
     {name: 'manchester big change about to city', current: '/manchester/bigchangemcr/about/', reqCityId: 'leeds', expected: '/leeds/'},
-    {name: 'manchester big change campaign to root', current: '/manchester/bigchangemcr/campaign/', reqCityId: 'elsewhere', expected: '/'},
-    {name: 'manchester big change campaign to city', current: '/manchester/bigchangemcr/campaign/', reqCityId: 'leeds', expected: '/leeds/'}
+    {name: 'manchester big change partners to root', current: '/manchester/bigchangemcr/partners/', reqCityId: 'elsewhere', expected: '/'},
+    {name: 'manchester big change partners to city', current: '/manchester/bigchangemcr/partners/', reqCityId: 'leeds', expected: '/leeds/'}
   ]
 
   tests
