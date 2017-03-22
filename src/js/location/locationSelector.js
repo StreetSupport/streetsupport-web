@@ -10,15 +10,17 @@ let modal = require('./modal')
 let getNearest = (position) => {
   let currLatitude = position.coords.latitude
   let currLongitude = position.coords.longitude
-  for (let i = 0; i < supportedCities.locations.length; i++) {
-    let distanceInMetres = geolib.getDistance(
-      { latitude: currLatitude, longitude: currLongitude },
-      { latitude: supportedCities.locations[i].latitude, longitude: supportedCities.locations[i].longitude }
-    )
-    supportedCities.locations[i].distance = distanceInMetres
-  }
 
-  let sorted = supportedCities.locations
+  supportedCities.locations
+    .filter((c) => c.isPublic)
+    .forEach((c) => {
+      const distanceInMetres = geolib.getDistance(
+        { latitude: currLatitude, longitude: currLongitude },
+        { latitude: c.latitude, longitude: c.longitude }
+      )
+      c.distance = distanceInMetres
+    })
+  const sorted = supportedCities.locations
     .sort((a, b) => {
       if (a.distance < b.distance) return -1
       if (a.distance > b.distance) return 1

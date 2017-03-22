@@ -126,7 +126,6 @@ function buildList (url, locationResult) {
     const onRenderCallback = getCallback(result.data.providers)
 
     const formattedProviders = getProvidersForListing(result.data.providers)
-    console.log(locationResult.nearestSupported)
     const viewModel = {
       organisations: formattedProviders,
       subCategories: getSubCategories(result.data.providers),
@@ -143,7 +142,6 @@ function buildList (url, locationResult) {
         : false
     }
 
-    console.log(viewModel)
     templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
   })
 }
