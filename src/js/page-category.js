@@ -126,7 +126,6 @@ function buildList (url, locationResult) {
     const onRenderCallback = getCallback(result.data.providers)
 
     const formattedProviders = getProvidersForListing(result.data.providers)
-
     const viewModel = {
       organisations: formattedProviders,
       subCategories: getSubCategories(result.data.providers),
@@ -135,10 +134,14 @@ function buildList (url, locationResult) {
       categoryName: result.data.category.name,
       categorySynopsis: marked(result.data.category.synopsis),
       location: locationResult.name,
+      nearestSupportedId: locationResult.nearestSupported !== undefined ? locationResult.nearestSupported.id : '',
+      nearestSupportedName: locationResult.nearestSupported !== undefined ? locationResult.nearestSupported.name : '',
+      selectedRange: querystring.parameter('range'),
       geoLocationUnavailable: locationResult.geoLocationUnavailable !== undefined
         ? locationResult.geoLocationUnavailable
         : false
     }
+
     templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
   })
 }
