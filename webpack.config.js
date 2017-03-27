@@ -49,7 +49,8 @@ module.exports = {
     swepRedirect: path.join(__dirname, 'src/js/page-swep-redirect'),
     impact: path.join(__dirname, 'src/js/page-impact'),
     bestpracticeawardsapply: path.join(__dirname, 'src/js/pages/best-practice/awards/page-apply'),
-    bestpracticeenquiries: path.join(__dirname, 'src/js/pages/best-practice/page-enquiries')
+    bestpracticeenquiries: path.join(__dirname, 'src/js/pages/best-practice/page-enquiries'),
+    contact: path.join(__dirname, 'src/js/pages/contact/app')
   },
   output: {
     path: path.join(__dirname, '/_dist/assets/js/'),
