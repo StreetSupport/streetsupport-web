@@ -67,6 +67,7 @@ export const getProvidersForListing = (providers) => {
       info: marked(htmlEncode.htmlDecode(provider.info)),
       location: provider.location,
       days: groupOpeningTimes(provider.openingTimes),
+      isOpen247: provider.isOpen247,
       servicesAvailable: provider.subCategories
         .map((sc) => sc.name)
         .join(', ')
