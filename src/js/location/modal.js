@@ -1,8 +1,6 @@
 
 const supportedCities = require('./supportedCities')
-const browser = require('../browser')
-const urlParams = require('../get-url-parameter')
-
+import { redirectTo } from '../navigation/location-redirector'
 import { newElement } from '../dom'
 
 const init = (location) => {
@@ -13,12 +11,7 @@ const init = (location) => {
 
     const changeCity = (newCity) => {
       location.setCurrent(newCity)
-      let currCity = urlParams.parameter('location')
-      if (currCity.length > 0) {
-        browser.redirect(window.location.href.replace(currCity, newCity))
-      } else {
-        window.location.reload()
-      }
+      redirectTo(newCity)
     }
 
     document.querySelector('.js-modal-close')
@@ -31,12 +24,20 @@ const init = (location) => {
     dropdown.innerHTML = ''
     dropdown.appendChild(newElement('option', '-- please select --'))
 
-    supportedCities.locations
-      .filter((c) => c.isPublic)
-      .forEach((c) => {
-        dropdown.appendChild(newElement('option', c.name, {
-          value: c.id
-        }))
+    location
+      .getCurrent()
+      .then((result) => {
+        supportedCities.locations
+          .filter((c) => c.isPublic)
+          .forEach((c) => {
+            const attributes = {
+              value: c.id
+            }
+            if (result.id === c.id) {
+              attributes['selected'] = 'selected'
+            }
+            dropdown.appendChild(newElement('option', c.name, attributes))
+          })
       })
 
     dropdown

@@ -6,12 +6,12 @@ import './common'
 locationSelector
   .getCurrent()
   .then((result) => {
-    const parentDir = result.id !== 'elsewhere'
+    const parentDir = result.id === 'elsewhere'
       ? 'find-help'
       : result.id
     const redirectTo = `/${parentDir}/emergency-help/`
 
-    if (!`/${window.location.pathname}`.contains(redirectTo)) {
+    if (!`${window.location.pathname}`.endsWith(redirectTo)) {
       browser.redirect(redirectTo)
     }
   }, (_) => {

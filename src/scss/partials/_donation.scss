@@ -5,19 +5,22 @@
 .donation__container {
   text-align: center;
   padding-top: 30px;
+
+  @include mq($from: s) {
+    column-count: 3;
+  }
 }
 
 .donation__item {
   text-align: left;
   background-color: $brand-i;
-  margin-bottom: 30px;
-
-  @include mq($from: s) {
-    @include span(1 of 2);
-    &:nth-child(2n) {
-      @include last();
-    }
-  }
+  margin-bottom: 15px;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  -o-column-break-inside: avoid;
+  -ms-column-break-inside: avoid;
+  column-break-inside: avoid;
+  break-inside: avoid-column;
 }
 
 .donation__item-inner {
