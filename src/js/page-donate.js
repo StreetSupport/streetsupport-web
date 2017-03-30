@@ -10,10 +10,35 @@ let locationSelector = require('./location/locationSelector')
 let supportedCities = require('./location/supportedCities')
 let htmlencode = require('htmlencode')
 
+import { newElement } from './dom'
+
 let currentLocation = null
 
 let onChangeLocation = (newLocation) => {
   window.location.href = '/give-help/donate/?location=' + newLocation
+}
+
+const initialiseDropdown = () => {
+  const dropdown = document.querySelector('.js-donate-location-dropdown')
+  if (dropdown) {
+    dropdown.appendChild(newElement('option', '-- please select --', {}))
+    supportedCities.locations
+      .filter((c) => c.isPublic)
+      .filter((c) => c.id !== supportedCities.default().id)
+      .forEach((c) => {
+        const attributes = {
+          value: c.id
+        }
+        if (currentLocation.id === c.id) {
+          attributes['selected'] = 'selected'
+        }
+        dropdown.appendChild(newElement('option', c.name, attributes))
+      })
+
+    dropdown.addEventListener('change', () => {
+      onChangeLocation(dropdown.value)
+    })
+  }
 }
 
 let getData = () => {
@@ -32,6 +57,7 @@ let getData = () => {
   getApiData.data(url)
     .then(function (result) {
       let callback = function () {
+        initialiseDropdown()
         browser.loaded()
       }
       locationSelector.handler(onChangeLocation)
@@ -44,7 +70,6 @@ let getData = () => {
         .forEach((c) => {
           theData[`is${c.id}`] = currentLocation.id === c.id
         })
-
       if (result.data.length === 0) {
         templating.renderTemplate('js-no-result-tpl', theData, 'js-result-output', callback)
       } else {
