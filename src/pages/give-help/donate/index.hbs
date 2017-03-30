@@ -77,7 +77,14 @@ page: donate
 
   \{{#iselsewhere}}
   <div class="block__section">
-    <p>To see how you can donate to your local organisations, please select a supported location. If you know of an organisation that is not listed, or would like to bring Street Support to your area, <a href="/contact/">please get in touch to let us know</a>.</p>
+    <p>To see how you can donate to your local organisations, please select a supported location:</p>
+    
+    <div class="donate-location__container">
+      <select class="form__input donate-location__dropdown js-donate-location-dropdown">
+    </select>
+    </div>
+
+    <p>If you know of an organisation that is not listed, or would like to bring Street Support to your area, <a href="/contact/">please get in touch to let us know</a>.</p>
   </div>
   \{{/iselsewhere}}
 </script>

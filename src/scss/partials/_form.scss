@@ -139,3 +139,17 @@
 label {
   cursor: pointer;
 }
+
+.donate-location__container {
+  @include mq($from: m) {
+    @include cf();
+  }
+}
+
+.donate-location__dropdown {
+  @include mq($from: m) {
+    @include span(2);
+    @include pull(3);
+    @include push(3);
+  }
+}
