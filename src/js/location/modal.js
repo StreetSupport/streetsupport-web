@@ -23,21 +23,14 @@ const init = (location) => {
     const dropdown = document.querySelector('.js-modal-location-dropdown')
     dropdown.innerHTML = ''
     dropdown.appendChild(newElement('option', '-- please select --'))
-
-    location
-      .getCurrent()
-      .then((result) => {
-        supportedCities.locations
-          .filter((c) => c.isPublic)
-          .forEach((c) => {
-            const attributes = {
-              value: c.id
-            }
-            if (result.id === c.id) {
-              attributes['selected'] = 'selected'
-            }
-            dropdown.appendChild(newElement('option', c.name, attributes))
-          })
+    
+    supportedCities.locations
+      .filter((c) => c.isPublic)
+      .forEach((c) => {
+        const attributes = {
+          value: c.id
+        }
+        dropdown.appendChild(newElement('option', c.name, attributes))
       })
 
     dropdown
