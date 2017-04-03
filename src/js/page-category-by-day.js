@@ -82,6 +82,9 @@ function buildList (url) {
       categoryName: data.categoryName,
       categorySynopsis: marked(data.synopsis),
       location: currentLocation.name,
+      nearestSupportedId: currentLocation.nearestSupported !== undefined ? currentLocation.nearestSupported.id : '',
+      nearestSupportedName: currentLocation.nearestSupported !== undefined ? currentLocation.nearestSupported.name : '',
+      selectedRange: querystring.parameter('range'),
       geoLocationUnavailable: currentLocation.geoLocationUnavailable
     }
     templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
