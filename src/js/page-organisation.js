@@ -17,6 +17,10 @@ var organisationUrl = apiRoutes.organisation += theOrganisation
 
 browser.loading()
 
+const isOpen247 = function (openingTimes) {
+  return openingTimes.length === 7 && openingTimes.filter((ot) => ot.startTime === '00:00' && ot.endTime === '23:59').length === 7
+}
+
 getApiData.data(organisationUrl).then(function (result) {
   var data = result.data
   var theTitle = htmlEncode.htmlDecode(data.name + ' - Street Support')
@@ -42,6 +46,7 @@ getApiData.data(organisationUrl).then(function (result) {
       if (service.info !== null) {
         service.info = marked(service.info)
       }
+      service.isOpen247 = isOpen247(service.openingTimes)
     })
 
   data.addresses.forEach((a) => {
