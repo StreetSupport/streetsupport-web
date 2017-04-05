@@ -102,6 +102,10 @@ page: category
                     <p>Suitable for: <span class="result-detail__tags-item">\{{tags}}</span></p>\{{/tags}}
                   </div>
                   <div class="result-detail__opening-times">
+                    \{{#isOpen247}}
+                    <h2 class="h2">Open 24 hours a day, 7 days a week</h2>
+                    \{{/isOpen247}}
+                    \{{^isOpen247}}
                     <h2 class="h2">Opening Times</h2>
                     <dl class="result-detail__times-list">
                       \{{#days}}
@@ -111,6 +115,7 @@ page: category
                       \{{/openingTimes}}
                       \{{/days}}
                     </dl>
+                    \{{/isOpen247}}
                   </div>
                   \{{#location}}
                   \{{#streetLine1}}
