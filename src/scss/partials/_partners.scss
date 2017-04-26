@@ -2,8 +2,12 @@
   text-align: center;
 
   &__list {
-    list-style: none; margin: 20px 0 30px 0; padding: 0;
+    list-style: none; margin: 50px 0 30px 0; padding: 0;
     @include cf();
+
+    @include mq($from: m) {
+      margin-top: 20px;
+    }
   }
 
   &__list-item {
@@ -14,6 +18,7 @@
     display: inline-block;
     margin: 0 10px;
     padding-top: 10px;
+    line-height: 7;
 
     &:last-child { margin-right: 0 }
 
@@ -30,6 +35,14 @@
       }
     }
     &--booth-centre {
+      margin-top: 30px;
+      margin-bottom: 30px;
+
+      @include mq($from: s) {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
       a {
         background-image: url(/assets/img/booth-centre.png);
         width: 114px;
@@ -62,6 +75,26 @@
           height: 38px;
           width: 90px;
         }
+      }
+    }
+    &--cityco {
+      position: relative;
+      width: 120px;
+      
+      margin-top: 30px;
+      margin-bottom: 30px;
+
+      @include mq($from: s) {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      
+      a {
+        background-image: url(/assets/img/cityco.png);
+        width: 120px;
+        height: 120px;
+        position: absolute;
+        top: -65px;
       }
     }
     &--leedsbid {
