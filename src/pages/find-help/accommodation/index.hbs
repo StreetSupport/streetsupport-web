@@ -1,0 +1,58 @@
+---
+title: Accommodation - Street Support
+description: Accommodation available in your area
+image: https://streetsupport.net/assets/img/og/street-support.png
+layout: withGoogle.hbs
+permalink: false
+jsBundle: accomListing
+section: findhelp
+page: accomListing
+nosubnav: true
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+        <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
+        <li class="breadcrumbs__item">Accommodation</li>
+    </ol>
+  </div>
+</div>
+
+<div class="block block--subpage-header">
+  <div class="container">
+    <h2 class="h1  block__header block__header--find-help has-icon--left">
+      <svg class="block__header__icon--find-help svg-accom-dims">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#accom"></use>
+      </svg>
+      Accommodation
+    </h1>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      
+      <section class="accom-list" data-bind="foreach: items">
+        <article class="accom-list__item">
+          <h1 class="h2 accom-list__item__name" data-bind="html: name"></h1>
+          <h2 class="h3 accom-list__item__address" data-bind="html: address"></h2>
+          <p class="accom-list__item__additional-info" data-bind="html: additionalInfo"></p>
+          <ul>
+            <li>Is Open Access: <span data-bind="text: isOpenAccess"></span></li>
+            <li data-bind="text: accommodationType"></li>
+          </ul>
+          {{!--<a class="btn btn--brand-d" data-bind="attr: { href: detailsUrl }">
+            <span class="btn__text">View Details</span>
+          </a>--}}
+        </article>
+      </section>
+
+      {{> social-share}}
+    </div>
+  </div>
+</div>
+
+{{> loading-spinner }}

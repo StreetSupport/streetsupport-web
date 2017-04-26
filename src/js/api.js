@@ -34,6 +34,7 @@ module.exports = {
   impactUpdates: p('/v1/impact-updates/'),
   analyticsSnapshot: p('/v1/analytics-statistics/'),
   bestPracticeAwardApplications: p('/v1/manchester-best-practice-awards/applications/'),
-  bestPracticeEnquiries: p('/v1/manchester-best-practice-enquiries/')
+  bestPracticeEnquiries: p('/v1/manchester-best-practice-enquiries/'),
+  accommodation: p('/v1/accommodation/')
 }
 
