@@ -29,3 +29,16 @@
 .listing-with-map__listing-item--isActive {
   background: $brand-i;
 }
+
+.listing-with-map__filter-dropdown {
+  margin-top: 30px;
+  @include mq($from: m) {
+    display: none
+  }
+}
+
+.listing-with-map__filter-buttons {
+  @include mq($until: m) {
+    display: none
+  }
+}

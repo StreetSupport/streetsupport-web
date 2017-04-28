@@ -4,7 +4,8 @@ const buildMap = function (userLocation) {
   const centre = { lat: userLocation.latitude, lng: userLocation.longitude }
   return new google.maps.Map(document.querySelector('.js-map'), {
     zoom: 13,
-    center: centre
+    center: centre,
+    draggable: false
   })
 }
 

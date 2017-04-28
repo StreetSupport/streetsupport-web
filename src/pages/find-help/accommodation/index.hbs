@@ -59,15 +59,21 @@ nosubnav: true
 
 <script type="text/html" id="accommodation-listing">
   <p class="text-center">Showing accommodation near your location.</p>
-  
-  <div class="subcat-filter">
-    <p class="subcat-filter__label">Filter by service provided:</p>
-    <ul class="subcat-filter__items" data-bind="foreach: typeFilters">
-      {{!--<li class="subcat-filter__item js-filter-item on" data-id="">All</li>--}}
-      <li class="subcat-filter__item js-filter-item" data-bind="click:select, text: typeName, css: { on: isSelected }"></li>
-    </ul>
-  </div>
   <div class="listing-with-map">
+    <div class="subcat-filter subcat-filter--listing-with-map">
+      <p class="subcat-filter__label">Filter by accommodation type:</p>
+      <select class="form__input listing-with-map__filter-dropdown" data-bind="
+          options: typeFilters,
+          optionsText: 'typeName',
+          optionsValue: 'typeName',
+          value: selectedTypeFilterName,
+          event: { change: typeFilterDropdownSelected }">
+      </select>
+      <ul class="list-to-dropdown subcat-filter__items listing-with-map__filter-buttons" data-bind="foreach: typeFilters">
+        {{!--<li class="subcat-filter__item js-filter-item on" data-id="">All</li>--}}
+        <li class="subcat-filter__item js-filter-item" data-bind="click:select, text: typeName, css: { on: isSelected }"></li>
+      </ul>
+    </div>
     <aside class="listing-with-map__map js-map"></aside>
     <section class="listing-with-map__listing" data-bind="foreach: itemsToDisplay">
       <article class="listing-with-map__listing-item" data-bind="click: selectItem, css: { 'listing-with-map__listing-item--isActive': isActive }">

@@ -1,18 +1,12 @@
 const gMaps = require('./googleMaps')
 
-const buildInfoWindowMarkup = (p) => {
-  return `<div class="map-info-window">
-      <h1 class="h2">${p.name}</h1>
-    </div>`
-}
-
 const MapBuilder = function () {
   const self = this
 
   const updateMarkers = (items) => {
     items
       .forEach((p) => {
-        const infoWindow = gMaps.buildInfoWindow(p, buildInfoWindowMarkup(p))
+        const infoWindow = gMaps.buildInfoWindow(p, self.buildInfoWindowMarkup(p))
 
         self.infoWindows.push(infoWindow)
 
@@ -60,9 +54,11 @@ const MapBuilder = function () {
     updateMarkers(items)
   }
 
-  self.init = function (items, userLocation, container) {
+  self.init = function (items, userLocation, container, buildInfoWindowMarkup) {
     self.map = gMaps.buildMap(userLocation)
+
     self.container = container
+    self.buildInfoWindowMarkup = buildInfoWindowMarkup
 
     self.markers
       .forEach((m) => m.setMap(null))

@@ -259,4 +259,32 @@ describe('Accommodation - Listing', function () {
       })
     })
   })
+
+  describe('- filter selected via dropdown', () => {
+    const selectedType = 'hosted'
+    beforeEach(() => {
+      sut.selectedTypeFilterName(selectedType)
+      sut.typeFilterDropdownSelected()
+    })
+
+    it('- should set is as selected', () => {
+      expect(sut.typeFilters().find((tf) => tf.typeName() === selectedType).isSelected()).toBeTruthy()
+    })
+
+    it('- should set others as not selected', () => {
+      sut.typeFilters()
+        .filter((tf) => tf.typeName() !== selectedType)
+        .forEach((tf) => {
+          expect(tf.isSelected()).toBeFalsy()
+        })
+    })
+
+    it('- should hide accom items not of selected type', () => {
+      expect(sut.itemsToDisplay().length).toEqual(2)
+    })
+
+    it('- should reset markers', () => {
+      expect(sut.map.markers.length).toEqual(2)
+    })
+  })
 })
