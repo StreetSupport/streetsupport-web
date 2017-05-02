@@ -53,7 +53,7 @@ let _useMyLocation = (deferred) => {
         name: 'my location',
         nearestSupported: getNearest(result)
       })
-    }, (error) => {
+    }, () => {
       let cityId = 'my-location'
       var saved = cookies.get('desired-location')
       if (saved !== undefined && saved.length > 0) {

@@ -7,7 +7,7 @@ var endpoints = require('../../../src/js/api')
 var browser = require('../../../src/js/browser')
 
 describe('Best Practice Enquiries Model', function () {
-  const sut = new Model()
+  let sut = null
   let apiStub = null
   let browserLoadingStub = null
   let browserLoadedStub = null
@@ -26,6 +26,8 @@ describe('Best Practice Enquiries Model', function () {
 
     browserLoadingStub = sinon.stub(browser, 'loading')
     browserLoadedStub = sinon.stub(browser, 'loaded')
+
+    sut = new Model()
 
     sut.name('name')
     sut.orgName('org name')

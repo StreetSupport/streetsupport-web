@@ -23,7 +23,7 @@ const init = (location) => {
     const dropdown = document.querySelector('.js-modal-location-dropdown')
     dropdown.innerHTML = ''
     dropdown.appendChild(newElement('option', '-- please select --'))
-    
+
     supportedCities.locations
       .filter((c) => c.isPublic)
       .forEach((c) => {

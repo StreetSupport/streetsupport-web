@@ -23,8 +23,6 @@ const viewModel = {
     })
 }
 
-console.log(viewModel)
-
 const onRenderCallback = function () {
   accordion.init(false, 0, listener, false)
 }
