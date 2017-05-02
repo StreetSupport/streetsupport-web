@@ -7,7 +7,7 @@ permalink: false
 jsBundle: accomListing
 section: findhelp
 page: accomListing
-nosubnav: true
+nosubnav: false
 ---
 
 <div class="block block--breadcrumbs">
@@ -15,7 +15,8 @@ nosubnav: true
     <ol class="breadcrumbs__list">
       <li class="breadcrumbs__item"><a href="/">Home</a></li>
         <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
-        <li class="breadcrumbs__item">Accommodation</li>
+        <li class="breadcrumbs__item"><a href="/find-help/accommodation">Accommodation</a></li>
+        <li class="breadcrumbs__item">Listing</li>
     </ol>
   </div>
 </div>
@@ -76,17 +77,17 @@ nosubnav: true
     </div>
     <aside class="listing-with-map__map js-map"></aside>
     <section class="listing-with-map__listing" data-bind="foreach: itemsToDisplay">
-      <article class="listing-with-map__listing-item" data-bind="click: selectItem, css: { 'listing-with-map__listing-item--isActive': isActive }">
-        <h1 class="h2"><span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span></h1>
-        <h2 class="h3" data-bind="html: address"></h2>
+      <article class="listing-with-map__listing-item" data-bind="css: { 'listing-with-map__listing-item--isActive': isActive }">
+        <h1 class="h2" data-bind="click: selectItem"><span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span></h1>
+        <h2 class="h3" data-bind="click: selectItem, html: address"></h2>
         <p data-bind="html: additionalInfo"></p>
         <ul>
           <li>Is Open Access: <span data-bind="text: isOpenAccess"></span></li>
           <li data-bind="text: accommodationType"></li>
         </ul>
-        {{!--<a class="btn btn--brand-d" data-bind="attr: { href: detailsUrl }">
+        <a class="btn btn--brand-d" data-bind="attr: { href: detailsUrl }">
           <span class="btn__text">View Details</span>
-        </a>--}}
+        </a>
       </article>
     </section>
     </div>
