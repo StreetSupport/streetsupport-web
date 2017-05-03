@@ -60,6 +60,10 @@
   }
 
   // Variants
+  &--in-copy {
+    margin-top: 0;
+  }
+
   &--brand-d {
     .btn__text {
       background-color: $brand-d;
