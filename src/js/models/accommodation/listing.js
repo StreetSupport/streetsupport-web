@@ -1,6 +1,7 @@
 const ajaxGet = require('../../get-api-data')
 const endpoints = require('../../api')
 const browser = require('../../browser')
+const querystring = require('../../get-url-parameter')
 const locationSelector = require('../../location/locationSelector')
 
 import { Accommodation, TypeFilter } from './types'
@@ -22,7 +23,7 @@ const AccommodationListing = function () {
   self.items = ko.observableArray()
   self.selectedTypeFilterName = ko.observable()
   self.itemsToDisplay = ko.computed(() => {
-    return self.selectedTypeFilterName() !== undefined && self.selectedTypeFilterName() !== 'all'
+    return self.selectedTypeFilterName() !== undefined && self.selectedTypeFilterName().length > 0 && self.selectedTypeFilterName() !== 'all'
       ? self.items().filter((i) => i.accommodationType() === self.selectedTypeFilterName())
       : self.items()
   }, self)
@@ -85,6 +86,12 @@ const AccommodationListing = function () {
         browser.loaded()
 
         self.map.init(result.data.items, currentLocation, self, buildInfoWindowMarkup)
+
+        const filterInQs = querystring.parameter('filterId')
+        if (filterInQs !== undefined) {
+          self.selectedTypeFilterName(filterInQs)
+          self.typeFilterDropdownSelected()
+        }
       })
   }
 

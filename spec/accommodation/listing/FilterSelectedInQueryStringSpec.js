@@ -3,13 +3,17 @@
 const ajaxGet = require('../../../src/js/get-api-data')
 const sinon = require('sinon')
 const Model = require('../../../src/js/models/accommodation/listing')
+const gMaps = require('../../../src/js/models/accommodation/googleMaps')
 const browser = require('../../../src/js/browser')
 const querystring = require('../../../src/js/get-url-parameter')
 const locationSelector = require('../../../src/js/location/locationSelector')
-const gMaps = require('../../../src/js/models/accommodation/googleMaps')
 
-describe('Accommodation - Listing - No Accom', function () {
+import { data } from './testdata'
+
+describe('Accommodation - Listing - Filter selected in querystring', function () {
   let sut = null
+
+  const selectedType = 'hosted'
 
   beforeEach(() => {
     sinon.stub(ajaxGet, 'data')
@@ -18,13 +22,15 @@ describe('Accommodation - Listing - No Accom', function () {
           success({
             'status': 'ok',
             'statusCode': 200,
-            'data': noItemsReturned
+            'data': data
           })
         }
       })
     sinon.stub(browser, 'loading')
     sinon.stub(browser, 'loaded')
     sinon.stub(querystring, 'parameter')
+      .withArgs('filterId')
+      .returns(selectedType)
     sinon.stub(locationSelector, 'getCurrent')
       .returns({
         then: function (success, error) {
@@ -35,8 +41,15 @@ describe('Accommodation - Listing - No Accom', function () {
         }
       })
     sinon.stub(gMaps, 'buildMap')
-    sinon.stub(gMaps, 'buildMarker')
-    sinon.stub(gMaps, 'buildInfoWindow')
+    sinon.stub(gMaps, 'buildMarker').returns({
+      addListener: () => { },
+      setVisible: sinon.spy(),
+      setMap: sinon.spy()
+    })
+    sinon.stub(gMaps, 'buildInfoWindow').returns({
+      open: sinon.spy(),
+      close: sinon.spy()
+    })
 
     sut = new Model()
   })
@@ -52,17 +65,23 @@ describe('Accommodation - Listing - No Accom', function () {
     gMaps.buildInfoWindow.restore()
   })
 
-  it('- should set noItemsAvailable to true', () => {
-    expect(sut.noItemsAvailable()).toBeTruthy()
+  it('- should set is as selected', () => {
+    expect(sut.typeFilters().find((tf) => tf.typeName() === selectedType).isSelected()).toBeTruthy()
+  })
+
+  it('- should set others as not selected', () => {
+    sut.typeFilters()
+      .filter((tf) => tf.typeName() !== selectedType)
+      .forEach((tf) => {
+        expect(tf.isSelected()).toBeFalsy()
+      })
+  })
+
+  it('- should hide accom items not of selected type', () => {
+    expect(sut.itemsToDisplay().length).toEqual(2)
+  })
+
+  it('- should reset markers', () => {
+    expect(sut.map.markers.length).toEqual(2)
   })
 })
-
-const noItemsReturned = {
-  'links': {
-    'next': null,
-    'prev': null,
-    'self': '/v1/accommodation?index=0'
-  },
-  'items': [],
-  'total': 0
-}

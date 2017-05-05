@@ -7,6 +7,7 @@ const gMaps = require('../../../src/js/models/accommodation/googleMaps')
 const endpoints = require('../../../src/js/api')
 const browser = require('../../../src/js/browser')
 const locationSelector = require('../../../src/js/location/locationSelector')
+const querystring = require('../../../src/js/get-url-parameter')
 
 import { data } from './testdata'
 
@@ -30,6 +31,7 @@ describe('Accommodation - Listing', function () {
       })
     browserLoadingStub = sinon.stub(browser, 'loading')
     browserLoadedStub = sinon.stub(browser, 'loaded')
+    sinon.stub(querystring, 'parameter')
     sinon.stub(locationSelector, 'getCurrent')
       .returns({
         then: function (success, error) {
@@ -49,7 +51,6 @@ describe('Accommodation - Listing', function () {
       open: sinon.spy(),
       close: sinon.spy()
     })
-
     sut = new Model()
   })
 
@@ -57,6 +58,7 @@ describe('Accommodation - Listing', function () {
     ajaxGet.data.restore()
     browser.loading.restore()
     browser.loaded.restore()
+    querystring.parameter.restore()
     locationSelector.getCurrent.restore()
     gMaps.buildMap.restore()
     gMaps.buildMarker.restore()

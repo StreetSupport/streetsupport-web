@@ -15,7 +15,6 @@ describe('Accommodation - Listing', function () {
   let browserLoadingStub = null
   let ajaxGetStub = null
   let browserLoadedStub = null
-  let gMapsBuildMapStub = null
 
   beforeEach(() => {
     ajaxGetStub = sinon.stub(ajaxGet, 'data')
@@ -30,7 +29,7 @@ describe('Accommodation - Listing', function () {
       })
     browserLoadingStub = sinon.stub(browser, 'loading')
     browserLoadedStub = sinon.stub(browser, 'loaded')
-    gMapsBuildMapStub = sinon.stub(gMaps, 'buildMap')
+    sinon.stub(gMaps, 'buildMap')
     sinon.stub(querystring, 'parameter')
       .withArgs('id')
       .returns(data.id)
