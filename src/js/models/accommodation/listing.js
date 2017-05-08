@@ -63,7 +63,7 @@ const AccommodationListing = function () {
           longitude: i.longitude()
         }
       }))
-    browser.pushHistory({}, `${selectedFilter.typeName()} Accommodation - Street Support`, `browser.location?filterId=${selectedFilter.typeName()}`)
+    browser.pushHistory({}, `${selectedFilter.typeName()} Accommodation - Street Support`, `?filterId=${selectedFilter.typeName()}`)
   }
 
   self.init = (currentLocation) => {

@@ -237,7 +237,7 @@ describe('Accommodation - Listing', function () {
     })
 
     it('- should update url', () => {
-      expect(browserPushHistoryStub.withArgs({}, `hosted Accommodation - Street Support`, `browser.location?filterId=hosted`).calledOnce).toBeTruthy()
+      expect(browserPushHistoryStub.withArgs({}, `hosted Accommodation - Street Support`, `?filterId=hosted`).calledOnce).toBeTruthy()
     })
 
     describe('- clear filter', () => {
@@ -297,7 +297,7 @@ describe('Accommodation - Listing', function () {
     })
 
     it('- should update url', () => {
-      expect(browserPushHistoryStub.withArgs({}, `hosted Accommodation - Street Support`, `browser.location?filterId=hosted`).calledOnce).toBeTruthy()
+      expect(browserPushHistoryStub.withArgs({}, `hosted Accommodation - Street Support`, `?filterId=hosted`).calledOnce).toBeTruthy()
     })
   })
 })
