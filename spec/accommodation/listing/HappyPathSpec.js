@@ -13,9 +13,10 @@ import { data } from './testdata'
 
 describe('Accommodation - Listing', function () {
   let sut = null
-  let browserLoadingStub = null
   let ajaxGetStub = null
+  let browserLoadingStub = null
   let browserLoadedStub = null
+  let browserPushHistoryStub = null
   let gMapsBuildMapStub = null
 
   beforeEach(() => {
@@ -31,6 +32,7 @@ describe('Accommodation - Listing', function () {
       })
     browserLoadingStub = sinon.stub(browser, 'loading')
     browserLoadedStub = sinon.stub(browser, 'loaded')
+    browserPushHistoryStub = sinon.stub(browser, 'pushHistory')
     sinon.stub(querystring, 'parameter')
     sinon.stub(locationSelector, 'getCurrent')
       .returns({
@@ -58,6 +60,7 @@ describe('Accommodation - Listing', function () {
     ajaxGet.data.restore()
     browser.loading.restore()
     browser.loaded.restore()
+    browser.pushHistory.restore()
     querystring.parameter.restore()
     locationSelector.getCurrent.restore()
     gMaps.buildMap.restore()
@@ -233,6 +236,10 @@ describe('Accommodation - Listing', function () {
       expect(sut.map.markers.length).toEqual(2)
     })
 
+    it('- should update url', () => {
+      expect(browserPushHistoryStub.withArgs({}, `hosted Accommodation - Street Support`, `browser.location?filterId=hosted`).calledOnce).toBeTruthy()
+    })
+
     describe('- clear filter', () => {
       const filterIndexToSelect = 0 // all
 
@@ -287,6 +294,10 @@ describe('Accommodation - Listing', function () {
 
     it('- should reset markers', () => {
       expect(sut.map.markers.length).toEqual(2)
+    })
+
+    it('- should update url', () => {
+      expect(browserPushHistoryStub.withArgs({}, `hosted Accommodation - Street Support`, `browser.location?filterId=hosted`).calledOnce).toBeTruthy()
     })
   })
 })

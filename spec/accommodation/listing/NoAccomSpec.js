@@ -24,6 +24,7 @@ describe('Accommodation - Listing - No Accom', function () {
       })
     sinon.stub(browser, 'loading')
     sinon.stub(browser, 'loaded')
+    sinon.stub(browser, 'pushHistory')
     sinon.stub(querystring, 'parameter')
     sinon.stub(locationSelector, 'getCurrent')
       .returns({
@@ -45,6 +46,7 @@ describe('Accommodation - Listing - No Accom', function () {
     ajaxGet.data.restore()
     browser.loading.restore()
     browser.loaded.restore()
+    browser.pushHistory.restore()
     querystring.parameter.restore()
     locationSelector.getCurrent.restore()
     gMaps.buildMap.restore()
