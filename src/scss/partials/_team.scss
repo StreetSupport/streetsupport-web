@@ -1,0 +1,50 @@
+.team__member {
+  @include cf();
+  padding-bottom: 20px;
+}
+  
+.team__member-title {
+  &::before, &::after {
+    content: '';
+    display: block;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px auto;
+    background-position: center center;
+    border-radius: 150px;
+    border: 2px solid $brand-k;
+  }
+
+  &::after {
+    display: none;
+  }
+
+  @include mq($from: m) {
+    &::before {
+      display: none;
+    }
+    &::after {
+      display: block;
+      float: left;
+      margin: 0 20px 0 20px;
+    }
+  }
+}
+
+.team__member-title--viv {
+  &::before, &::after {
+    background-image: url('/assets/img/viv-slack.jpg')
+  }
+}
+
+.team__member-title--gary {
+  &::before, &::after {
+    background-image: url('/assets/img/gary-dunstan.jpg')
+  }
+}
+
+.team__member-title--vince {
+  &::before, &::after {
+    background-image: url('/assets/img/vince-lee.jpg')
+  }
+}

@@ -1,57 +1,51 @@
 ---
-title: Find Help - Street Support
-description: Street support makes it easier to help homeless people. Find help relevant to your needs.
+title: Emergency Help - Street Support
+description: Emergency help for those facing homelessness or have just become homeless.
+image: https://streetsupport.net/assets/img/og/street-support.png
 layout: default.hbs
 permalink: false
 jsBundle: emergencyHelpRedirect
 section: findhelp
 page: emergencyhelp
 ---
-{{> no-js}}
 
-<div id="js-category-list-output" class="template"></div>
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item"><a href="/find-help">Find Help</a></li>
+      <li class="breadcrumbs__item">Emergency Help</li>
+    </ol>
+  </div>
+</div>
 
-<div id="spin"></div>
+<div class="block block--header">
+  <div class="container">
+    <h1 class="h1 block__header">Emergency Help</h1>
+    <h2 class="h2 block__sub-header">What to do if you are facing homelessness</h2>
+  </div>
+</div>
 
-<script id="js-category-list-tpl" type="text/template">
-  <div class="block block--breadcrumbs">
-    <div class="container">
-      <ol class="breadcrumbs__list">
-        <li class="breadcrumbs__item"><a href="/">Home</a></li>
-        <li class="breadcrumbs__item">Find Help</li>
-      </ol>
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <h1 class="h2">If you are facing homelessness, or have recently become homeless:</h1>
+
+      <p>For emergency advice specific to one of our supported locations, please select a location from the list.</p>
+
+      <h2 class="h3">Registering as Homeless</h2>
+      <p>If you are at risk of becoming homeless, or have recently been made homeless, it is important to register as legally homeless with your local council as soon as possible. Advice on how to do this will be available on your council web site.</p>
+
+      <h2 class="h3">Independent Advice</h2>
+      <p>For independent advice on your situation, you can contact <a href="http://www.shelter.org.uk/">Shelter</a>, or visit a <a href="/find-help/category-by-day/?category=dropin">local drop in centre</a> for advice. There can also check our <a href="/find-help/category-by-day/?category=support">list of services offering advice near you</a> for more options.</p>
+
+      <h2 class="h3">Emergency Accommodation</h2>
+      <p>The availability of emergency accommodation depends on your location. It is best to get advice from your council, a <a href="/find-help/category-by-day/?category=dropin">local drop in centre</a>, or through Shelter. During periods of extreme cold weather, councils provide extra emergency accommodation, you can find out more about <a href="/find-help/severe-weather-accommodation/">severe weather accommodation here</a>.</p>
+      
+      <h2 class="h3">Find Out More</h2>
+      <p>It can be confusing to know what support is available to you depending on your circumstances. There is lots of really good information on housing advice and explanations of all the legal terms you might come accross on the <a href="http://england.shelter.org.uk/get_advice">Shelter website</a>.</p>
+      
+      {{> social-share}}
     </div>
   </div>
-
-  <div class="block block--header">
-    <div class="container">
-      <h1 class="h1 block__header">Find Help <span class="js-city-label"></span></h1>
-      <h2 class="h2 block__sub-header">Find local services to meet specific needs</h2>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="container">
-      <div class="block__content">
-        <div class="title-with-button">
-          <h2 class="h2 title-with-button__title">Recently homeless?</h2>
-          <a class="btn btn--brand-g title-with-button__btn" href="/\{{location}}/emergency-help/">
-            <span class="btn__text">How to get Emergency Advice</span>
-          </a>
-        </div>
-
-        <div class="title-with-button">
-          <h2 class="h3 title-with-button__title">Looking for an organisation?</h2>
-          <a class="btn btn--brand-d title-with-button__btn" href="/find-help/all-service-providers/">
-            <span class="btn__text">All organisations</span>
-          </a>
-        </div>
-
-        <p class="text-center">If there are other local services that you know about, or you would like to help us bring Street Support to your area, please <a href="/contact/">get in touch</a>.</p>
-
-        {{> social-share}}
-
-      </div>
-    </div>
-  </div>
-</script>
+</div>

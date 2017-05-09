@@ -18,11 +18,14 @@
   <nav class="city-nav">
     <ul class="nav__list nav__list--city" data-city="manchester">
       <li class="nav__item nav__item--manchester"><a href="/manchester/">Manchester</a></li>
-      {{> manchester-nav }}
+      {{> manchester/nav }}
     </ul>
     <ul class="nav__list nav__list--city" data-city="leeds">
       <li class="nav__item nav__item--leeds"><a href="/leeds/">Leeds</a></li>
-      {{> leeds-nav }}
+      {{> leeds/nav }}
+    </ul>
+    <ul class="nav__list nav__list--city" data-city="elsewhere">
+      {{> no-location/nav }}
     </ul>
   </nav>
 </div>

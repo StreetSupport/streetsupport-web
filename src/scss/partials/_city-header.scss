@@ -49,18 +49,17 @@
 
   & .container {
     position: relative;
-    & .block__header {
-      color: $brand-k;
-    }
   }
 }
 
 .manchester .city-header,
 .leeds .city-header--manchester {
   @extend %manchester-header;
+  color: $brand-k;
 }
 
 .leeds .city-header,
 .manchester .city-header--leeds {
   @extend %leeds-header;
+  color: $brand-k;
 }

@@ -6,7 +6,11 @@ let theSourcemap
 
 // Create plugins array
 var plugins = [
-  new CommonsChunkPlugin('commons.js')
+  new CommonsChunkPlugin({
+    name: 'common',
+    filename: 'commons.js',
+    minChunks: 2
+  })
 ]
 
 // Add Uglify task to plugins array if there is a production flag
@@ -45,7 +49,10 @@ module.exports = {
     swepRedirect: path.join(__dirname, 'src/js/page-swep-redirect'),
     impact: path.join(__dirname, 'src/js/page-impact'),
     bestpracticeawardsapply: path.join(__dirname, 'src/js/pages/best-practice/awards/page-apply'),
-    bestpracticeenquiries: path.join(__dirname, 'src/js/pages/best-practice/page-enquiries')
+    bestpracticeenquiries: path.join(__dirname, 'src/js/pages/best-practice/page-enquiries'),
+    contact: path.join(__dirname, 'src/js/pages/contact/app'),
+    accomListing: path.join(__dirname, 'src/js/pages/accommodation/listing/app'),
+    accomDetails: path.join(__dirname, 'src/js/pages/accommodation/details/app')
   },
   output: {
     path: path.join(__dirname, '/_dist/assets/js/'),

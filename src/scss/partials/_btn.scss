@@ -60,6 +60,10 @@
   }
 
   // Variants
+  &--in-copy {
+    margin-top: 0;
+  }
+
   &--brand-d {
     .btn__text {
       background-color: $brand-d;
@@ -117,6 +121,8 @@
   }
 
   &--print {
-    margin-left: 40px;
+    @include mq($from: m) {
+      margin-left: 40px;
+    }
   }
 }

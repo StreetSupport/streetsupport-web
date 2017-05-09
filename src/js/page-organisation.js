@@ -6,8 +6,6 @@ var htmlEncode = require('htmlencode')
 var marked = require('marked')
 marked.setOptions({sanitize: true})
 var socialShare = require('./social-share')
-var sortBy = require('lodash/collection/sortBy')
-var forEach = require('lodash/collection/forEach')
 var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
 var analytics = require('./analytics')
@@ -19,32 +17,41 @@ var organisationUrl = apiRoutes.organisation += theOrganisation
 
 browser.loading()
 
+const isOpen247 = function (openingTimes) {
+  return openingTimes.length === 7 && openingTimes.filter((ot) => ot.startTime === '00:00' && ot.endTime === '23:59').length === 7
+}
+
 getApiData.data(organisationUrl).then(function (result) {
   var data = result.data
   var theTitle = htmlEncode.htmlDecode(data.name + ' - Street Support')
   document.title = theTitle
 
-  data.providedServices = sortBy(data.providedServices, function (item) {
-    return item.name
-  })
+  data.providedServices = data.providedServices
+    .sort((a, b) => {
+      if (a.name < b.name) return -1
+      if (a.name > b.name) return 1
+      return 0
+    })
 
   data.formattedTags = []
-  forEach(data.tags, function (tag) {
+  data.tags.forEach((tag) => {
     data.formattedTags.push({ id: tag, name: tag.replace(/-/g, ' ') })
   })
 
-  forEach(data.providedServices, function (service) {
-    if (service.tags !== null) {
-      service.tags = service.tags.join(', ')
-    }
-    if (service.info !== null) {
-      service.info = marked(service.info)
-    }
-  })
+  data.providedServices
+    .forEach(function (service) {
+      if (service.tags !== null) {
+        service.tags = service.tags.join(', ')
+      }
+      if (service.info !== null) {
+        service.info = marked(service.info)
+      }
+      service.isOpen247 = isOpen247(service.openingTimes)
+    })
 
-  forEach(data.addresses, (a) => {
+  data.addresses.forEach((a) => {
     let groupedOpeningTimes = []
-    forEach(a.openingTimes, (ot) => {
+    a.openingTimes.forEach((ot) => {
       let match = groupedOpeningTimes.filter((got) => got.day === ot.day)
       if (match.length === 1) {
         match[0].openingTimes.push({

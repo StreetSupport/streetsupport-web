@@ -1,6 +1,7 @@
 ---
 title: Partnership - Street Support
 description: Street support makes it easier to help homeless people. Here's how to get in touch.
+image: https://streetsupport.net/assets/img/og/street-support.png
 layout: default.hbs
 permalink: false
 jsBundle: sponsor
@@ -67,10 +68,13 @@ page: partnership
 
 
 <script id="js-content-tpl" type="text/template">
-  \{{#isManchester}}
-    {{> manchester-partnership-content }}
-  \{{/isManchester}}
-  \{{#isLeeds}}
-    {{> leeds-partnership-content }}
-  \{{/isLeeds}}
+  \{{#ismanchester}}
+    {{> manchester/partnership-content }}
+  \{{/ismanchester}}
+  \{{#isleeds}}
+    {{> leeds/partnership-content }}
+  \{{/isleeds}}
+  \{{#iselsewhere}}
+    {{> no-location/partnership-content }}
+  \{{/iselsewhere}}
 </script>

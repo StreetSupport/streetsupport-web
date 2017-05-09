@@ -94,7 +94,7 @@ const getTemplate = (providers) => {
 }
 
 const onChangeLocation = (newLocation) => {
-  window.location.href = '/find-help/category?category=' + findHelp.theCategory + '&location=' + newLocation
+  window.location.href = `/find-help/${findHelp.theCategory}?location=${newLocation}`
 }
 
 const hasItemsCallback = (providers, locationResult) => {
@@ -111,6 +111,7 @@ const hasItemsCallback = (providers, locationResult) => {
 const hasNoItemsCallback = () => {
   locationSelector.handler(onChangeLocation)
   findHelp.initFindHelpLocationSelector()
+  browser.initPrint()
   browser.loaded()
   socialShare.init()
 }
@@ -122,19 +123,20 @@ const getOnRenderCallback = (providers, locationResult) => {
 }
 
 const renderResults = (locationResult, result) => {
-  let theTitle = result.data.category.name + ' - Street Support'
-  document.title = theTitle
-
   const template = getTemplate(result.data.providers)
   const onRenderCallback = getOnRenderCallback(result.data.providers, locationResult)
 
-  analytics.init(theTitle)
+  analytics.init(document.title)
 
   let viewModel = {
     categoryId: result.data.category.id,
     categoryName: result.data.category.name,
     categorySynopsis: marked(result.data.category.synopsis),
-    location: locationResult.name
+    location: locationResult.name,
+    nearestSupportedId: locationResult.nearestSupported !== undefined ? locationResult.nearestSupported.id : '',
+    nearestSupportedName: locationResult.nearestSupported !== undefined ? locationResult.nearestSupported.name : '',
+    selectedRange: querystring.parameter('range'),
+    geoLocationUnavailable: locationResult.geoLocationUnavailable
   }
   templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
 }

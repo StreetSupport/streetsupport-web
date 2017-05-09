@@ -1,6 +1,10 @@
 .subcat-filter {
   text-align: center;
   @include printHide();
+
+  &--listing-with-map {
+    margin-bottom: 30px;
+  }
 }
 
 .subcat-filter__label {

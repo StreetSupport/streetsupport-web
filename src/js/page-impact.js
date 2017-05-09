@@ -43,7 +43,7 @@ const Model = function () {
     api
       .data(url)
       .then((result) => {
-        const newUpdates = result.data.embedded.items
+        const newUpdates = result.data.items
           .map((u) => {
             u.city = u.cityId ? `${u.cityId.charAt(0).toUpperCase()}${u.cityId.substring(1)}` : ''
             u.contentForDisplay = marked(htmlencode.htmlDecode(u.content))

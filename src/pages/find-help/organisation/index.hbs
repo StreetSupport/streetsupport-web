@@ -1,6 +1,7 @@
 ---
 title: Organisation - Street Support
 description: Street support makes it easier to help homeless people.
+image: https://streetsupport.net/assets/img/og/street-support.png
 layout: default.hbs
 permalink: false
 jsBundle: organisation
@@ -61,16 +62,20 @@ page: organisation
                 <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a> \{{/postcode}}</li>
               </ul>
               <dl class="result-detail__times-list">
-              \{{#openingDays}}
-                <dt class="result-detail__times-title">\{{day}}</dt>
-                <dd class="result-detail__times-items">
-                \{{#openingTimes}}
-                  <span class="result-detail__times-item">\{{startTime}} - \{{endTime}}</span>
-                \{{/openingTimes}}
-                </dd>
-              \{{/openingDays}}
-              </dl>
-
+              \{{#isOpen247}}
+              <p>Open 24 hours a day, 7 days a week</p>
+              \{{/isOpen247}}
+              \{{^isOpen247}}
+                \{{#openingDays}}
+                  <dt class="result-detail__times-title">\{{day}}</dt>
+                  <dd class="result-detail__times-items">
+                  \{{#openingTimes}}
+                    <span class="result-detail__times-item">\{{startTime}} - \{{endTime}}</span>
+                  \{{/openingTimes}}
+                  </dd>
+                \{{/openingDays}}
+                </dl>
+              \{{/isOpen247}}
 
               \{{#hasServices}}
               <h4 class="h4">Services Provided</h4>
@@ -101,13 +106,18 @@ page: organisation
                           </ul>
                           \{{/street}}
                         \{{/address}}
-                        <h2 class="h3">Opening Times</h2>
-                        <dl class="result-detail__times-list">
-                          \{{#openingTimes}}
-                          <dt class="result-detail__times-title">\{{day}}</dt>
-                          <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
-                          \{{/openingTimes}}
-                        </dl>
+                        \{{#isOpen247}}
+                        <p>Open 24 hours a day, 7 days a week</p>
+                        \{{/isOpen247}}
+                        \{{^isOpen247}}
+                          <h2 class="h3">Opening Times</h2>
+                          <dl class="result-detail__times-list">
+                            \{{#openingTimes}}
+                            <dt class="result-detail__times-title">\{{day}}</dt>
+                            <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
+                            \{{/openingTimes}}
+                          </dl>
+                        \{{/isOpen247}}
                       </div>
                     </div>
                   \{{/services}}

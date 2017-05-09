@@ -1,0 +1,93 @@
+---
+title: Accommodation - Street Support
+description: Accommodation available in your area
+image: https://streetsupport.net/assets/img/og/street-support.png
+layout: withGoogle.hbs
+permalink: false
+jsBundle: accomListing
+section: findhelp
+page: accomListing
+nosubnav: false
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+        <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
+        <li class="breadcrumbs__item"><a href="/find-help/accommodation">Accommodation</a></li>
+        <li class="breadcrumbs__item">Listing</li>
+    </ol>
+  </div>
+</div>
+
+<div class="block block--subpage-header">
+  <div class="container">
+    <h2 class="h1  block__header block__header--find-help has-icon--left">
+      <svg class="block__header__icon--find-help svg-accom-dims">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#accom"></use>
+      </svg>
+      Accommodation
+    </h1>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+        <!-- ko ifnot: dataIsLoaded -->
+        <p class="text-center">Please wait whilst we load information.</p>
+        <!-- /ko -->
+      
+        <!-- ko if: dataIsLoaded -->
+          <!-- ko if: noItemsAvailable -->
+            <!-- ko template: { name: 'no-accommodation' } --><!-- /ko -->
+          <!-- /ko -->
+          <!-- ko ifnot: noItemsAvailable -->
+            <!-- ko template: { name: 'accommodation-listing' } --><!-- /ko -->
+          <!-- /ko -->
+        <!-- /ko -->
+      {{> social-share}}
+    </div>
+  </div>
+</div>
+
+{{> loading-spinner }}
+
+<script type="text/html" id="no-accommodation">
+  <p class="text-center">Sorry, there are no accommodation entries listed near your location. Please select a supported location above.</p>
+</script>
+
+<script type="text/html" id="accommodation-listing">
+  <p class="text-center">Showing accommodation near your location.</p>
+  <div class="listing-with-map">
+    <div class="subcat-filter subcat-filter--listing-with-map">
+      <p class="subcat-filter__label">Filter by accommodation type:</p>
+      <select class="form__input listing-with-map__filter-dropdown" data-bind="
+          options: typeFilters,
+          optionsText: 'typeName',
+          optionsValue: 'typeName',
+          value: selectedTypeFilterName,
+          event: { change: typeFilterDropdownSelected }">
+      </select>
+      <ul class="list-to-dropdown subcat-filter__items listing-with-map__filter-buttons" data-bind="foreach: typeFilters">
+        {{!--<li class="subcat-filter__item js-filter-item on" data-id="">All</li>--}}
+        <li class="subcat-filter__item js-filter-item" data-bind="click:select, text: typeName, css: { on: isSelected }"></li>
+      </ul>
+    </div>
+    <aside class="listing-with-map__map js-map"></aside>
+    <section class="listing-with-map__listing" data-bind="foreach: itemsToDisplay">
+      <article class="listing-with-map__listing-item" data-bind="css: { 'listing-with-map__listing-item--isActive': isActive }">
+        <h1 class="h2" data-bind="click: selectItem"><span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span></h1>
+        <h2 class="h3" data-bind="click: selectItem, html: address"></h2>
+        <ul>
+          <li>Is Open Access: <span data-bind="text: isOpenAccess"></span></li>
+          <li data-bind="text: accommodationType"></li>
+        </ul>
+        <a class="btn btn--brand-d" data-bind="attr: { href: detailsUrl }">
+          <span class="btn__text">View Details</span>
+        </a>
+      </article>
+    </section>
+    </div>
+</script>
