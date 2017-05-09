@@ -1,63 +1,14 @@
 const ajaxGet = require('../../get-api-data')
 const endpoints = require('../../api')
 const browser = require('../../browser')
+const querystring = require('../../get-url-parameter')
 const locationSelector = require('../../location/locationSelector')
+
+import { Accommodation, TypeFilter } from './types'
 
 const MapBuilder = require('./MapBuilder')
 
 const ko = require('knockout')
-
-const toUnique = (acc, name) => {
-  const match = acc.find((sc) => sc === name)
-  return match === undefined
-  ? [...acc, name]
-  : acc
-}
-
-const TypeFilter = function (name, listeners, isSelected = false) {
-  this.listeners = listeners
-  this.typeName = ko.observable(name)
-  this.isSelected = ko.observable(isSelected)
-  this.select = () => {
-    this.isSelected(true)
-    this.listeners.forEach((l) => l.typeFilterSelected(this))
-  }
-  this.deselect = () => {
-    this.isSelected(false)
-  }
-}
-
-const Accommodation = function (data, listeners) {
-  const self = this
-
-  const mapAddress = (data) => {
-    const parts = ['street1', 'street2', 'street3', 'city']
-    const result = parts
-      .map((p) => data[p])
-      .filter((p) => p && p !== undefined && p.length > 0)
-      .join(', ')
-    return `${result}. ${data.postcode}`
-  }
-
-  self.mapIndex = ko.observable(data.mapIndex)
-  self.mapIndexToDisplay = ko.observable(data.mapIndex + 1)
-  self.id = ko.observable(data.id)
-  self.name = ko.observable(data.name)
-  self.latitude = ko.observable(data.latitude)
-  self.longitude = ko.observable(data.longitude)
-  self.address = ko.observable(mapAddress(data))
-  self.additionalInfo = ko.observable(data.additionalInfo)
-  self.isOpenAccess = ko.observable(data.isOpenAccess)
-  self.accommodationType = ko.observable(data.accommodationType)
-  self.detailsUrl = ko.observable(`details?id=${data.id}`)
-  self.isActive = ko.observable()
-
-  self.selectItem = () => {
-    self.isActive(true)
-    listeners
-      .forEach((l) => l.itemSelected(self))
-  }
-}
 
 const AccommodationListing = function () {
   const self = this
@@ -72,7 +23,7 @@ const AccommodationListing = function () {
   self.items = ko.observableArray()
   self.selectedTypeFilterName = ko.observable()
   self.itemsToDisplay = ko.computed(() => {
-    return self.selectedTypeFilterName() !== undefined && self.selectedTypeFilterName() !== 'all'
+    return self.selectedTypeFilterName() !== undefined && self.selectedTypeFilterName().length > 0 && self.selectedTypeFilterName() !== 'all'
       ? self.items().filter((i) => i.accommodationType() === self.selectedTypeFilterName())
       : self.items()
   }, self)
@@ -112,6 +63,7 @@ const AccommodationListing = function () {
           longitude: i.longitude()
         }
       }))
+    browser.pushHistory({}, `${selectedFilter.typeName()} Accommodation - Street Support`, `?filterId=${selectedFilter.typeName()}`)
   }
 
   self.init = (currentLocation) => {
@@ -125,9 +77,8 @@ const AccommodationListing = function () {
 
         self.items(result.data.items.map((i) => new Accommodation(i, [self.map, self])))
 
-        const types = result.data.items
-          .map((i) => i.accommodationType)
-          .reduce(toUnique, [])
+        const types = Array.from(new Set(result.data.items
+          .map((i) => i.accommodationType)))
           .map((i) => new TypeFilter(i, [self]))
         const all = new TypeFilter('all', [self], true)
         self.typeFilters([all, ...types])
@@ -136,6 +87,12 @@ const AccommodationListing = function () {
         browser.loaded()
 
         self.map.init(result.data.items, currentLocation, self, buildInfoWindowMarkup)
+
+        const filterInQs = querystring.parameter('filterId')
+        if (filterInQs !== undefined) {
+          self.selectedTypeFilterName(filterInQs)
+          self.typeFilterDropdownSelected()
+        }
       })
   }
 

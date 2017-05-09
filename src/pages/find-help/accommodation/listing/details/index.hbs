@@ -1,0 +1,57 @@
+---
+title: Accommodation Details - Street Support
+description: Accommodation Details
+image: https://streetsupport.net/assets/img/og/street-support.png
+layout: withGoogle.hbs
+permalink: false
+jsBundle: accomDetails
+section: findhelp
+page: accomDetails
+nosubnav: false
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+        <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
+        <li class="breadcrumbs__item"><a href="/find-help/accommodation">Accommodation</a></li>
+        <li class="breadcrumbs__item"><a href="/find-help/accommodation/listing">Listing</a></li>
+        <li class="breadcrumbs__item">Details</li>
+    </ol>
+  </div>
+</div>
+
+<div class="block block--subpage-header">
+  <div class="container">
+    <h2 class="h1  block__header block__header--find-help has-icon--left">
+      <svg class="block__header__icon--find-help svg-accom-dims">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#accom"></use>
+      </svg>
+      Accommodation
+    </h1>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+        <!-- ko ifnot: dataIsLoaded -->
+        <p class="text-center">Please wait whilst we load information.</p>
+        <!-- /ko -->
+      
+        <!-- ko if: dataIsLoaded -->
+          <!-- ko template: { name: 'details' } --><!-- /ko -->
+        <!-- /ko -->
+      {{> social-share}}
+    </div>
+  </div>
+</div>
+
+{{> loading-spinner }}
+
+<script type="text/html" id="details">
+  <article data-bind="with: model">
+    <h1 data-bind="html: name"></p>
+  </article>
+</script>

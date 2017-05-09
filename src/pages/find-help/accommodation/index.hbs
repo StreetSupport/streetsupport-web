@@ -1,13 +1,12 @@
 ---
 title: Accommodation - Street Support
-description: Accommodation available in your area
+description: Accommodation options for those facing homelessness.
 image: https://streetsupport.net/assets/img/og/street-support.png
-layout: withGoogle.hbs
+layout: default.hbs
 permalink: false
-jsBundle: accomListing
+jsBundle: generic
 section: findhelp
-page: accomListing
-nosubnav: true
+page: accommodation
 ---
 
 <div class="block block--breadcrumbs">
@@ -20,74 +19,30 @@ nosubnav: true
   </div>
 </div>
 
-<div class="block block--subpage-header">
+<div class="block block--header">
   <div class="container">
-    <h2 class="h1  block__header block__header--find-help has-icon--left">
-      <svg class="block__header__icon--find-help svg-accom-dims">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#accom"></use>
-      </svg>
-      Accommodation
-    </h1>
+    <h1 class="h1 block__header">Accommodation</h1>
+    <h2 class="h2 block__sub-header">Acommodation options and advice</h2>
   </div>
 </div>
 
 <div class="block">
   <div class="container">
     <div class="block__content">
-        <!-- ko ifnot: dataIsLoaded -->
-        <p class="text-center">Please wait whilst we load information.</p>
-        <!-- /ko -->
+      <p>Your accommodation options depend on your legal situation, location and your needs.</p>
+
+      <p>In most cases, your first port of call is to visit your council houing advice service. Drop in centres and other services can also support you to find accommodation - <a href="/find-help/support/?sub-category=housing">view our list of local housing advice services</a>.</p>
+
+      <h2 class="h3">Accommodation Advice</h2>
+      <p>To understand what options you have, and where to get support, <a href="/find-help/accommodation/advice/">read our advice guide</a>.</p>
+
+      <h2 class="h3">Accommodation Listings</h2>
+      <p>To browse all accommodation available in your area, by location and category, <a href="/find-help/accommodation/listing/">view our full listing</a>.</p>
       
-        <!-- ko if: dataIsLoaded -->
-          <!-- ko if: noItemsAvailable -->
-            <!-- ko template: { name: 'no-accommodation' } --><!-- /ko -->
-          <!-- /ko -->
-          <!-- ko ifnot: noItemsAvailable -->
-            <!-- ko template: { name: 'accommodation-listing' } --><!-- /ko -->
-          <!-- /ko -->
-        <!-- /ko -->
+      <h2 class="h3">More Information</h2>
+      <p>For more detailed housing advice and legal support, you can also <a href="http://england.shelter.org.uk/get_advice">search Shelter's housing advice section</a>, or call their helpline on 0808 800 4444.</p>
+
       {{> social-share}}
     </div>
   </div>
 </div>
-
-{{> loading-spinner }}
-
-<script type="text/html" id="no-accommodation">
-  <p class="text-center">Sorry, there are no accommodation entries listed near your location. Please select a supported location above.</p>
-</script>
-
-<script type="text/html" id="accommodation-listing">
-  <p class="text-center">Showing accommodation near your location.</p>
-  <div class="listing-with-map">
-    <div class="subcat-filter subcat-filter--listing-with-map">
-      <p class="subcat-filter__label">Filter by accommodation type:</p>
-      <select class="form__input listing-with-map__filter-dropdown" data-bind="
-          options: typeFilters,
-          optionsText: 'typeName',
-          optionsValue: 'typeName',
-          value: selectedTypeFilterName,
-          event: { change: typeFilterDropdownSelected }">
-      </select>
-      <ul class="list-to-dropdown subcat-filter__items listing-with-map__filter-buttons" data-bind="foreach: typeFilters">
-        {{!--<li class="subcat-filter__item js-filter-item on" data-id="">All</li>--}}
-        <li class="subcat-filter__item js-filter-item" data-bind="click:select, text: typeName, css: { on: isSelected }"></li>
-      </ul>
-    </div>
-    <aside class="listing-with-map__map js-map"></aside>
-    <section class="listing-with-map__listing" data-bind="foreach: itemsToDisplay">
-      <article class="listing-with-map__listing-item" data-bind="click: selectItem, css: { 'listing-with-map__listing-item--isActive': isActive }">
-        <h1 class="h2"><span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span></h1>
-        <h2 class="h3" data-bind="html: address"></h2>
-        <p data-bind="html: additionalInfo"></p>
-        <ul>
-          <li>Is Open Access: <span data-bind="text: isOpenAccess"></span></li>
-          <li data-bind="text: accommodationType"></li>
-        </ul>
-        {{!--<a class="btn btn--brand-d" data-bind="attr: { href: detailsUrl }">
-          <span class="btn__text">View Details</span>
-        </a>--}}
-      </article>
-    </section>
-    </div>
-</script>
