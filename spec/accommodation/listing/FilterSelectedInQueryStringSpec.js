@@ -3,7 +3,6 @@
 const ajaxGet = require('../../../src/js/get-api-data')
 const sinon = require('sinon')
 const Model = require('../../../src/js/models/accommodation/listing')
-const gMaps = require('../../../src/js/models/accommodation/googleMaps')
 const browser = require('../../../src/js/browser')
 const querystring = require('../../../src/js/get-url-parameter')
 const locationSelector = require('../../../src/js/location/locationSelector')
@@ -41,16 +40,6 @@ describe('Accommodation - Listing - Filter selected in querystring', function ()
           })
         }
       })
-    sinon.stub(gMaps, 'buildMap')
-    sinon.stub(gMaps, 'buildMarker').returns({
-      addListener: () => { },
-      setVisible: sinon.spy(),
-      setMap: sinon.spy()
-    })
-    sinon.stub(gMaps, 'buildInfoWindow').returns({
-      open: sinon.spy(),
-      close: sinon.spy()
-    })
 
     sut = new Model()
   })
@@ -62,9 +51,6 @@ describe('Accommodation - Listing - Filter selected in querystring', function ()
     browser.pushHistory.restore()
     querystring.parameter.restore()
     locationSelector.getCurrent.restore()
-    gMaps.buildMap.restore()
-    gMaps.buildMarker.restore()
-    gMaps.buildInfoWindow.restore()
   })
 
   it('- should set is as selected', () => {
@@ -81,9 +67,5 @@ describe('Accommodation - Listing - Filter selected in querystring', function ()
 
   it('- should hide accom items not of selected type', () => {
     expect(sut.itemsToDisplay().length).toEqual(2)
-  })
-
-  it('- should reset markers', () => {
-    expect(sut.map.markers.length).toEqual(2)
   })
 })

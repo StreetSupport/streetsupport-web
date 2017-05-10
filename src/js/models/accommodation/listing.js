@@ -6,22 +6,13 @@ const locationSelector = require('../../location/locationSelector')
 
 import { Accommodation, TypeFilter } from './types'
 
-const MapBuilder = require('./MapBuilder')
-
 const ko = require('knockout')
 
 const AccommodationListing = function () {
   const self = this
 
-  const buildInfoWindowMarkup = (p) => {
-    return `<div class="map-info-window">
-        <h1 class="h2">${p.name}</h1>
-      </div>`
-  }
-
-  self.map = new MapBuilder()
   self.items = ko.observableArray()
-  self.selectedTypeFilterName = ko.observable()
+  self.selectedTypeFilterName = ko.observable('all')
   self.itemsToDisplay = ko.computed(() => {
     return self.selectedTypeFilterName() !== undefined && self.selectedTypeFilterName().length > 0 && self.selectedTypeFilterName() !== 'all'
       ? self.items().filter((i) => i.accommodationType() === self.selectedTypeFilterName())
@@ -30,13 +21,6 @@ const AccommodationListing = function () {
   self.noItemsAvailable = ko.computed(() => self.itemsToDisplay().length === 0, self)
   self.typeFilters = ko.observableArray()
   self.dataIsLoaded = ko.observable(false)
-
-  self.markerClicked = (mapIndex) => {
-    self.itemsToDisplay()
-      .forEach((item) => {
-        item.isActive(item.mapIndex() === mapIndex)
-      })
-  }
 
   self.itemSelected = (item) => {
     self.itemsToDisplay()
@@ -54,16 +38,12 @@ const AccommodationListing = function () {
       .filter((tf) => tf.typeName() !== selectedFilter.typeName())
       .forEach((tf) => tf.deselect())
     self.selectedTypeFilterName(selectedFilter.typeName())
-    self.map.update(self.itemsToDisplay()
-      .map((i) => {
-        return {
-          name: i.name(),
-          mapIndex: i.mapIndex(),
-          latitude: i.latitude(),
-          longitude: i.longitude()
-        }
-      }))
     browser.pushHistory({}, `${selectedFilter.typeName()} Accommodation - Street Support`, `?filterId=${selectedFilter.typeName()}`)
+  }
+
+  self.displayFilter = ko.observable(false)
+  self.toggleFilterDisplay = () => {
+    self.displayFilter(!self.displayFilter())
   }
 
   self.init = (currentLocation) => {
@@ -75,7 +55,7 @@ const AccommodationListing = function () {
             e.mapIndex = i
           })
 
-        self.items(result.data.items.map((i) => new Accommodation(i, [self.map, self])))
+        self.items(result.data.items.map((i) => new Accommodation(i, [self])))
 
         const types = Array.from(new Set(result.data.items
           .map((i) => i.accommodationType)))
@@ -87,10 +67,8 @@ const AccommodationListing = function () {
         self.dataIsLoaded(true)
         browser.loaded()
 
-        self.map.init(result.data.items, currentLocation, self, buildInfoWindowMarkup)
-
         const filterInQs = querystring.parameter('filterId')
-        if (filterInQs !== undefined) {
+        if (filterInQs !== undefined && filterInQs.length) {
           self.selectedTypeFilterName(filterInQs)
           self.typeFilterDropdownSelected()
         }
