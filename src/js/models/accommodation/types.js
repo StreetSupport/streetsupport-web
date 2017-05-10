@@ -3,6 +3,8 @@ const ko = require('knockout')
 export const Accommodation = function (data, listeners) {
   const self = this
 
+  console.log(data)
+
   const mapAddress = (data) => {
     const parts = ['street1', 'street2', 'street3', 'city']
     const result = parts
