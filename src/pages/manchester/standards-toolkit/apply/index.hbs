@@ -1,12 +1,12 @@
 ---
-title: Get in Touch - Working together to end homelessness in Manchester
-description: Contact us with any queries about Best Practice
+title: Apply for a Best Practice standard for volunteer-led services - Working together to end homelessness in Manchester
+description: Be recognised for the quality of your services
 image: https://streetsupport.net/assets/img/og/manchester-big-change.png
 layout: default.hbs
 permalink: false
-jsBundle: bestpracticeenquiries
+jsBundle: bestpracticeawardsapply
 section: toolkit
-page: get-in-touch
+page: apply
 nosubnav: false
 ---
 
@@ -15,15 +15,16 @@ nosubnav: false
     <ol class="breadcrumbs__list">
       <li class="breadcrumbs__item"><a href="/">Home</a></li>
       <li class="breadcrumbs__item"><a href="/manchester">Manchester</a></li>
-      <li class="breadcrumbs__item"><a href="/manchester/community-toolkit">Coommunity Toolkit</a></li>
-      <li class="breadcrumbs__item">Get in Touch</li>
+      <li class="breadcrumbs__item"><a href="/manchester/standards-toolkit">Standards Toolkit</a></li>
+      <li class="breadcrumbs__item">Apply</li>
     </ol>
   </div>
 </div>
 
 <div class="block block--city-header city-header city-header--manchester">
   <div class="container container--city-header">
-    <h1 class="h1 block__header">Get in Touch</h1>
+    <h1 class="h1 block__header">Apply</h1>
+    <h2 class="h2 block__sub-header">Apply for a Best Practice standard</h2>
   </div>
 </div>
 
@@ -39,9 +40,7 @@ nosubnav: false
         <!-- /ko -->
       <!-- /ko -->
       <!-- ko ifnot: isFormSubmitSuccessful -->
-      <p>Please get in touch if you have a general question, or would like further information. Any complaints will go to the COR group for consideration.</p>
-      <p>If you are ready to apply for the Manchester Homelessness Partnership Best Practice standard, please visit our <a href="/manchester/community-toolkit/best-practice/apply">Standards application page</a>.</p>
-
+      <p>Complete the following form to apply for, or make an inquiry about, your Manchester Homelessness Partnership Best Practice standard.</p>
       <form class="form" data-bind="submit: submit">
         <fieldset class="form__fieldset">
           <legend class="h2 form__fieldset-title">Apply or enquire about a standard</legend>
@@ -61,6 +60,20 @@ nosubnav: false
             <li class="form__field-item">
               <label class="form__label hide-screen" for="telephone">Telephone</label>
               <input type="telephone" class="form__input form__input" id="telephone" data-bind="value: telephone" required placeholder="Telephone (required)" />
+            </li>
+            <li class="form__field-item">
+              <label class="form__label">I am enquiring about:</label>
+              <ul class="form__radio-group">
+                <li class="form__radio-group-item"><label for="commended">
+                  <input type="radio" id="silver" name="awardType" data-bind="checked: selectedAward" /> Silver Best Practice standard</label>
+                </li>
+                <li class="form__radio-group-item"><label for="distinctive">
+                  <input type="radio" id="gold" name="awardType" data-bind="checked: selectedAward" /> Gold Best Practice standard</label>
+                </li>
+                <li class="form__radio-group-item"><label for="not-sure">
+                  <input type="radio" id="not-sure" name="awardType" data-bind="checked: selectedAward" /> Not sure</label>
+                </li>
+              </ul>
             </li>
             <li class="form__field-item form__field-item--full">
               <label class="form__label hide-screen" for="additionalInfo">Please add any additional information in the field below.</label>
@@ -90,3 +103,4 @@ nosubnav: false
     <li data-bind="text: $data"></li>
   </ul>
 </script>
+

@@ -1,0 +1,47 @@
+.listing-with-map {
+  @include cf();
+  margin-top: 50px;
+}
+
+.listing-with-map__map {
+  width: 100%;
+  height: 50vh;
+  margin-bottom: 20px;
+  @include mq($from: m) {
+    @include span(4 of 6);
+    @include last();
+    height: 50vh;
+  }
+}
+
+.listing-with-map__listing {
+  @include mq($from: m) {
+    @include span(2 of 6);
+    @include first();
+  }
+}
+
+.listing-with-map__listing-item {
+  padding: 10px;
+  & > h1,
+  & > h2 {
+    cursor: pointer;
+  }
+}
+
+.listing-with-map__listing-item--isActive {
+  background: $brand-i;
+}
+
+.listing-with-map__filter-dropdown {
+  margin-top: 30px;
+  @include mq($from: m) {
+    display: none
+  }
+}
+
+.listing-with-map__filter-buttons {
+  @include mq($until: m) {
+    display: none
+  }
+}
