@@ -53,6 +53,8 @@ page: organisation
             <li class="result-detail__provider-tag-item result-detail__provider-tag-item--\{{ id }}">\{{ name }}</li>
            \{{/formattedTags}}
            </ul>
+           
+           \{{#hasAddresses}}
            <h2 class="h2">Locations</h2>
            \{{#addresses}}
               <ul class="result-detail__address-list h3">
@@ -123,12 +125,11 @@ page: organisation
                   \{{/services}}
                 </div>
               </div>
-
-
             \{{/addresses}}
+            \{{/hasAddresses}}
 
-            \{{#providedServices}}
-            <h2 class="h2">Other Services Provided</h2>
+            \{{#hasOtherServices}}
+            <h2 class="h2">Services Provided at Other Locations</h2>
             <div class="accordion__incopy">
               <div class="accordion accordion--organisation js-accordion">
                 \{{#providedServices}}
@@ -167,7 +168,7 @@ page: organisation
                 \{{/providedServices}}
               </div>
             </div>
-            \{{/providedServices}}
+            \{{/hasOtherServices}}
 
             \{{#donationUrl}}
             <h2 class="h2">Donate Money</h2>

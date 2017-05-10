@@ -44,6 +44,11 @@
 
     @include printHide();
   }
+
+  .current-city__change-location {
+    cursor: pointer;
+    font-style: italic;
+  }
 }
 
 .nav--mobile {
