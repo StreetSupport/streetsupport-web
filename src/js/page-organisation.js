@@ -51,6 +51,7 @@ getApiData.data(organisationUrl).then(function (result) {
       service.isOpen247 = isOpen247(service.openingTimes)
     })
 
+  data.hasAddresses = data.addresses.length > 0
   data.addresses.forEach((a) => {
     let groupedOpeningTimes = []
     a.openingTimes.forEach((ot) => {
@@ -80,10 +81,14 @@ getApiData.data(organisationUrl).then(function (result) {
       .filter((s) => {
         return s.address.postcode.replace(/\s/gi, '') !== a.postcode.replace(/\s/gi, '')
       })
+
+    data.hasOtherServices = data.providedServices.length > 0
   })
 
   // Append object name for Hogan
   var theData = { organisation: data }
+
+  window.theData = theData
 
   var callback = function () {
     browser.loaded()
