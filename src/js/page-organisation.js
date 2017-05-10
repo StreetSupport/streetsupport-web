@@ -38,6 +38,8 @@ getApiData.data(organisationUrl).then(function (result) {
     data.formattedTags.push({ id: tag, name: tag.replace(/-/g, ' ') })
   })
 
+  data.description = marked(data.description)
+
   data.providedServices
     .forEach(function (service) {
       if (service.tags !== null) {
