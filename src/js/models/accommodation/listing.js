@@ -79,6 +79,7 @@ const AccommodationListing = function () {
 
         const types = Array.from(new Set(result.data.items
           .map((i) => i.accommodationType)))
+          .filter((i) => i.length > 0)
           .map((i) => new TypeFilter(i, [self]))
         const all = new TypeFilter('all', [self], true)
         self.typeFilters([all, ...types])
