@@ -14,6 +14,7 @@ const onRenderCallback = () => {
 const formatAddress = (addressObj) => {
   const addressParts = ['street1', 'street2', 'street3', 'city']
   const formattedAddress = addressParts
+    .filter((p) => addressObj[p])
     .map((p) => addressObj[p].trim())
     .filter((p) => p.length > 0)
     .join(', ')
@@ -32,6 +33,9 @@ const formatFeatures = (features) => {
     .forEach((f) => {
       features[`${f}Formatted`] = readable[features[f]]
     })
+  if (features.price === 0) {
+    features.price = 'TBC'
+  }
   return features
 }
 
@@ -40,7 +44,7 @@ browser.loading()
 getApiData
   .data(`${endpoints.accommodation}/${querystring.parameter('id')}`)
   .then((result) => {
-  console.log(result.data.features)
+    console.log(result.data)
     result.data.address.formattedAddress = formatAddress(result.data.address)
     result.data.generalInfo.formattedSupportOffered = formatSupportOffered(result.data.generalInfo.supportOffered)
     result.data.features = formatFeatures(result.data.features)
