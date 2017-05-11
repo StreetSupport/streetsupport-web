@@ -46,9 +46,9 @@ nosubnav: false
         \{{#generalInfo}}
         <p>\{{{description}}}</p>
         <dl>
-          <dt>Accommodation Type:</dt>
+          <dt>Accommodation type:</dt>
           <dd>\{{{accommodationType}}}</dd>
-          <dt>Supported Offered:</dt>
+          <dt>Supported offered:</dt>
           <dd>\{{{formattedSupportOffered}}}</dd>
         </dl>
         \{{/generalInfo}}
@@ -66,11 +66,21 @@ nosubnav: false
         \{{/contactInformation}}
         </section>
 
-        <p>*** Need to be mindful of wording here</p>
-
         <section>
         \{{#features}}
-        <h2 class="h2">About the Residents</h2>
+        <h2 class="h2">Access Information</h2>
+        <dl>
+          <dt>Reference or referral required</dt>
+          <dd>\{{{referenceReferralIsRequiredFormatted}}}</dd>
+          <dt>Price</dt>
+          <dd>£\{{{price}}}</dd>
+          <dt>Housing benefit accepted</dt>
+          <dd>\{{{acceptsHousingBenefitFormatted}}}</dd>
+          <dt>Accepts those with no housing benefit, but engaging with services</dt>
+          <dd>\{{{acceptsNoHousingBenefitWithServiceProviderSupportFormatted}}}</dd>
+        </dl>
+
+        <h2 class="h2">Resident Information</h2>
         <dl>
           <dt>Couples welcome</dt>
           <dd>\{{{acceptsCouplesFormatted}}}</dd>
@@ -78,55 +88,44 @@ nosubnav: false
           <dd>\{{{acceptsPetsFormatted}}}</dd>
           <dt>Children welcome</dt>
           <dd>\{{{allowsChildrenFormatted}}}</dd>
-          <dt>Disabled Access</dt>
+          <dt>Disabled access</dt>
           <dd>\{{{hasDisabledAccessFormatted}}}</dd>
-          <dt>Suitable for Women</dt>
+          <dt>Suitable for women</dt>
           <dd>\{{{isSuitableForWomenFormatted}}}</dd>
-          <dt>Suitable for Young People (age range?)</dt>
+          <dt>Suitable for under 25s</dt>
           <dd>\{{{isSuitableForYoungPeopleFormatted}}}</dd>
         </dl>
 
         <h2 class="h2">Services Provided</h2>
         <dl>
-          <dt>Meals are included in cost</dt>
+          <dt>Meals included</dt>
           <dd>\{{{foodIsIncludedFormatted}}}</dd>
-          <dt>About Meals Available</dt>
+          <dt>Meals available</dt>
           <dd>\{{{availabilityOfMeals}}}</dd>
-          <dt>Kitchen for Residents</dt>
+          <dt>Residents kitchen</dt>
           <dd>\{{{hasAccessToKitchenFormatted}}}</dd>
-          <dt>Meal times are Flexible</dt>
+          <dt>Flexible meal times</dt>
           <dd>\{{{hasFlexibleMealTimesFormatted}}}</dd>
-          <dt>Lounge Facilities</dt>
+          <dt>Lounge facilities</dt>
           <dd>\{{{hasLoungeFormatted}}}</dd>
-          <dt>On-site Manager</dt>
+          <dt>On-site manager</dt>
           <dd>\{{{hasOnSiteManagerFormatted}}}</dd>
-          <dt>Has Shared Rooms</dt>
+          <dt>Shared rooms</dt>
           <dd>\{{{hasSharedRoomsFormatted}}}</dd>
-          <dt>Has Single Rooms</dt>
+          <dt>Single rooms</dt>
           <dd>\{{{hasSingleRoomsFormatted}}}</dd>
-          <dt>Has Shower/Bathroom Facilities</dt>
+          <dt>Shower or bathroom facilities</dt>
           <dd>\{{{hasShowerBathroomFacilitiesFormatted}}}</dd>
-          <dt>Allows Visitors</dt>
+          <dt>Allows visitors</dt>
           <dd>\{{{allowsVisitorsFormatted}}}</dd>
-          <dt>Provides Clean Bedding</dt>
+          <dt>Provides clean bedding</dt>
           <dd>\{{{providesCleanBeddingFormatted}}}</dd>
-          <dt>Additional Features included in price</dt>
+          <dt>Additional features included</dt>
           <dd>\{{{additionalFeatures}}}</dd>
-          <dt>Features available at additional cost </dt>
+          <dt>Additional features available</dt>
           <dd>\{{{featuresAvailableAtAdditionalCost}}}</dd>
         </dl>
 
-        <h2 class="h2">Getting Access</h2>
-        <dl>
-          <dt>Accepts Housing Benefits</dt>
-          <dd>\{{{acceptsHousingBenefitFormatted}}}</dd>
-          <dt>Accepts those with no housing benefit, but engaging with support from service providers</dt>
-          <dd>\{{{acceptsNoHousingBenefitWithServiceProviderSupportFormatted}}}</dd>
-          <dt>Price</dt>
-          <dd>£\{{{price}}}</dd>
-          <dt>Reference or Referral required</dt>
-          <dd>\{{{referenceReferralIsRequiredFormatted}}}</dd>
-        </dl>
         \{{/features}}
         </section>
       </div>
