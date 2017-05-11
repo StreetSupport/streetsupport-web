@@ -167,7 +167,7 @@ describe('Accommodation - Listing', function () {
     const filterIndexToSelect = 1 // hosted
 
     beforeEach(() => {
-      sut.typeFilters()[filterIndexToSelect].select()
+      sut.selectedTypeFilterName('hosted')
     })
 
     it('- should set is as selected', () => {
@@ -187,7 +187,7 @@ describe('Accommodation - Listing', function () {
     })
 
     it('- should update url', () => {
-      expect(browserPushHistoryStub.withArgs({}, `hosted Accommodation - Street Support`, `?filterId=hosted`).calledOnce).toBeTruthy()
+      expect(browserPushHistoryStub.withArgs({}, `hosted Accommodation - Street Support`, `?filterId=hosted`).called).toBeTruthy()
     })
 
     describe('- clear filter', () => {
@@ -212,34 +212,6 @@ describe('Accommodation - Listing', function () {
       it('- should clear filter', () => {
         expect(sut.itemsToDisplay().length).toEqual(4)
       })
-    })
-  })
-
-  describe('- filter selected via dropdown', () => {
-    const selectedType = 'hosted'
-    beforeEach(() => {
-      sut.selectedTypeFilterName(selectedType)
-      sut.typeFilterDropdownSelected()
-    })
-
-    it('- should set is as selected', () => {
-      expect(sut.typeFilters().find((tf) => tf.typeName() === selectedType).isSelected()).toBeTruthy()
-    })
-
-    it('- should set others as not selected', () => {
-      sut.typeFilters()
-        .filter((tf) => tf.typeName() !== selectedType)
-        .forEach((tf) => {
-          expect(tf.isSelected()).toBeFalsy()
-        })
-    })
-
-    it('- should hide accom items not of selected type', () => {
-      expect(sut.itemsToDisplay().length).toEqual(2)
-    })
-
-    it('- should update url', () => {
-      expect(browserPushHistoryStub.withArgs({}, `hosted Accommodation - Street Support`, `?filterId=hosted`).calledOnce).toBeTruthy()
     })
   })
 })
