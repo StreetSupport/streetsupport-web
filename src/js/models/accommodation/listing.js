@@ -28,10 +28,10 @@ const AccommodationListing = function () {
       .forEach((i) => i.isActive(false))
   }
 
-  self.typeFilterDropdownSelected = () => {
-    const typeFilter = self.typeFilters().find((tf) => tf.typeName() === self.selectedTypeFilterName())
+  self.selectedTypeFilterName.subscribe(function (newValue) {
+    const typeFilter = self.typeFilters().find((tf) => tf.typeName() === newValue)
     typeFilter.select()
-  }
+  })
 
   self.typeFilterSelected = (selectedFilter) => {
     self.typeFilters()
@@ -70,7 +70,6 @@ const AccommodationListing = function () {
         const filterInQs = querystring.parameter('filterId')
         if (filterInQs !== undefined && filterInQs.length) {
           self.selectedTypeFilterName(filterInQs)
-          self.typeFilterDropdownSelected()
         }
       })
   }

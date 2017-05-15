@@ -2,56 +2,133 @@
 title: Accommodation Details - Street Support
 description: Accommodation Details
 image: https://streetsupport.net/assets/img/og/street-support.png
-layout: withGoogle.hbs
+layout: default.hbs
 permalink: false
 jsBundle: accomDetails
 section: findhelp
 page: accomDetails
 nosubnav: false
 ---
-
-<div class="block block--breadcrumbs">
-  <div class="container">
-    <ol class="breadcrumbs__list">
-      <li class="breadcrumbs__item"><a href="/">Home</a></li>
-        <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
-        <li class="breadcrumbs__item"><a href="/find-help/accommodation">Accommodation</a></li>
-        <li class="breadcrumbs__item"><a href="/find-help/accommodation/listing">Listing</a></li>
-        <li class="breadcrumbs__item">Details</li>
-    </ol>
-  </div>
-</div>
-
-<div class="block block--subpage-header">
-  <div class="container">
-    <h2 class="h1  block__header block__header--find-help has-icon--left">
-      <svg class="block__header__icon--find-help svg-accom-dims">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#accom"></use>
-      </svg>
-      Accommodation
-    </h1>
-  </div>
-</div>
-
-<div class="block">
-  <div class="container">
-    <div class="block__content">
-        <!-- ko ifnot: dataIsLoaded -->
-        <p class="text-center">Please wait whilst we load information.</p>
-        <!-- /ko -->
-      
-        <!-- ko if: dataIsLoaded -->
-          <!-- ko template: { name: 'details' } --><!-- /ko -->
-        <!-- /ko -->
-      {{> social-share}}
-    </div>
-  </div>
-</div>
+<div id="js-template-placeholder" class="template"></div>
 
 {{> loading-spinner }}
 
-<script type="text/html" id="details">
-  <article data-bind="with: model">
-    <h1 data-bind="html: name"></p>
-  </article>
+<script id="js-template" type="text/template">
+  <div class="block block--breadcrumbs">
+    <div class="container">
+      <ol class="breadcrumbs__list">
+        <li class="breadcrumbs__item"><a href="/">Home</a></li>
+          <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
+          <li class="breadcrumbs__item"><a href="/find-help/accommodation">Accommodation</a></li>
+          <li class="breadcrumbs__item"><a href="/find-help/accommodation/listing">Listing</a></li>
+          <li class="breadcrumbs__item">\{{{generalInfo.name}}}</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="block block--subpage-header">
+    <div class="container">
+      \{{#generalInfo}}
+      <h1 class="h1  block__header">
+      \{{{name}}}
+      </h1>
+      <h2 class="h2 block__sub-header">\{{{synopsis}}}</h2>
+      \{{/generalInfo}}
+    </div>
+  </div> 
+  <div class="block">
+    <div class="container">
+      <div class="block__content">
+        <section>
+        \{{#address}}
+        <p class="h3">\{{{ formattedAddress }}}</p>
+        \{{/address}}
+        \{{#generalInfo}}
+        <p>\{{{description}}}</p>
+        <dl>
+          <dt>Accommodation type:</dt>
+          <dd>\{{{accommodationType}}}</dd>
+          <dt>Supported offered:</dt>
+          <dd>\{{{formattedSupportOffered}}}</dd>
+        </dl>
+        \{{/generalInfo}}
+        </section>
+
+        <section>
+        \{{#contactInformation}}
+        <h2 class="h2">Contact Information</h2>
+        <ul>
+          \{{#name}}<li>\{{{name}}}</li>\{{/name}}
+          \{{#email}}<li>\{{{email}}}</li>\{{/email}}
+          \{{#telephone}}<li>\{{{telephone}}}</li>\{{/telephone}}
+          \{{#additionalInfo}}<li>\{{{additionalInfo}}}</li>\{{/additionalInfo}}
+        </ul>
+        \{{/contactInformation}}
+        </section>
+
+        <section>
+        \{{#features}}
+        <h2 class="h2">Access Information</h2>
+        <dl>
+          <dt>Reference or referral required</dt>
+          <dd>\{{{referenceReferralIsRequiredFormatted}}}</dd>
+          <dt>Price</dt>
+          <dd>£\{{{price}}}</dd>
+          <dt>Housing benefit accepted</dt>
+          <dd>\{{{acceptsHousingBenefitFormatted}}}</dd>
+          <dt>Accepts those with no housing benefit, but engaging with services</dt>
+          <dd>\{{{acceptsNoHousingBenefitWithServiceProviderSupportFormatted}}}</dd>
+        </dl>
+
+        <h2 class="h2">Resident Information</h2>
+        <dl>
+          <dt>Couples welcome</dt>
+          <dd>\{{{acceptsCouplesFormatted}}}</dd>
+          <dt>Pets welcome</dt>
+          <dd>\{{{acceptsPetsFormatted}}}</dd>
+          <dt>Children welcome</dt>
+          <dd>\{{{allowsChildrenFormatted}}}</dd>
+          <dt>Disabled access</dt>
+          <dd>\{{{hasDisabledAccessFormatted}}}</dd>
+          <dt>Suitable for women</dt>
+          <dd>\{{{isSuitableForWomenFormatted}}}</dd>
+          <dt>Suitable for under 25s</dt>
+          <dd>\{{{isSuitableForYoungPeopleFormatted}}}</dd>
+        </dl>
+
+        <h2 class="h2">Services Provided</h2>
+        <dl>
+          <dt>Meals included</dt>
+          <dd>\{{{foodIsIncludedFormatted}}}</dd>
+          <dt>Meals available</dt>
+          <dd>\{{{availabilityOfMeals}}}</dd>
+          <dt>Residents kitchen</dt>
+          <dd>\{{{hasAccessToKitchenFormatted}}}</dd>
+          <dt>Flexible meal times</dt>
+          <dd>\{{{hasFlexibleMealTimesFormatted}}}</dd>
+          <dt>Lounge facilities</dt>
+          <dd>\{{{hasLoungeFormatted}}}</dd>
+          <dt>On-site manager</dt>
+          <dd>\{{{hasOnSiteManagerFormatted}}}</dd>
+          <dt>Shared rooms</dt>
+          <dd>\{{{hasSharedRoomsFormatted}}}</dd>
+          <dt>Single rooms</dt>
+          <dd>\{{{hasSingleRoomsFormatted}}}</dd>
+          <dt>Shower or bathroom facilities</dt>
+          <dd>\{{{hasShowerBathroomFacilitiesFormatted}}}</dd>
+          <dt>Allows visitors</dt>
+          <dd>\{{{allowsVisitorsFormatted}}}</dd>
+          <dt>Provides clean bedding</dt>
+          <dd>\{{{providesCleanBeddingFormatted}}}</dd>
+          <dt>Additional features included</dt>
+          <dd>\{{{additionalFeatures}}}</dd>
+          <dt>Additional features available</dt>
+          <dd>\{{{featuresAvailableAtAdditionalCost}}}</dd>
+        </dl>
+
+        \{{/features}}
+        </section>
+      </div>
+    </div>
+  </div>
 </script>
