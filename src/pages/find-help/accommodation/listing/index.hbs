@@ -130,8 +130,8 @@ nosubnav: false
       <h1 class="h3" class="text-center">Showing accommodation near your location.</h1>
       <div data-bind="foreach: itemsToDisplay">
         <article class="accommodation-listing__listing-item" data-bind="css: { 'accommodation-listing__listing-item--isActive': isActive }">
-          <h1 class="h2" data-bind="click: selectItem"><span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span></h1>
-          <h2 class="h3" data-bind="click: selectItem, html: address"></h2>
+          <h1 class="h2"><span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span></h1>
+          <h2 class="h3" data-bind="html: address"></h2>
           <ul class="accommodation-list__listing-features">
             <li class="accommodation-list__listing-features-item">Is Open Access: <span data-bind="text: isOpenAccess"></span></li>
             <li class="accommodation-list__listing-features-item">Type: <span data-bind="text: accommodationType"></span></li>
