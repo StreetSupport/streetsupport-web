@@ -35,6 +35,8 @@ nosubnav: false
 <div class="block">
   <div class="container">
     <div class="block__content">
+        {{> accommodation-listing-header }}
+
         <!-- ko ifnot: dataIsLoaded -->
         <p class="text-center">Please wait whilst we load information.</p>
         <!-- /ko -->
@@ -59,7 +61,9 @@ nosubnav: false
 </script>
 
 <script type="text/html" id="accommodation-listing">
-  <p class="text-center">Showing accommodation near your location.</p>
+
+  {{> accommodation-view-options map="true" }}
+
   <div class="listing-with-map">
     <div class="subcat-filter subcat-filter--listing-with-map">
       <p class="subcat-filter__label">Filter by accommodation type:</p>
