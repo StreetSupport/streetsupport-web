@@ -22,10 +22,6 @@
   @include cf();
   padding: 10px 0;
   margin-bottom: 10px;
-  & > h1,
-  & > h2 {
-    cursor: pointer;
-  }
 }
 
 .accommodation-listing__listing-item--isActive {
@@ -83,9 +79,7 @@
 .accommodation-listing__filter-toggle {
   display: block;
   float: right;
-  @include mq($from: m) {
-    display: none;
-  }
+    
   .accommodation-listing__filter-heading > &--is-open {
     display: none;
   }
@@ -94,6 +88,10 @@
   }
   .accommodation-listing__filter-heading.open > &--is-closed {
     display: none;
+  }
+
+  @include mq($from: m) {
+    display: none!important;
   }
 }
 

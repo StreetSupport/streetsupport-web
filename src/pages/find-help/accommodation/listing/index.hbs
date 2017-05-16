@@ -35,12 +35,8 @@ nosubnav: false
 <div class="block">
   <div class="container">
     <div class="block__content">
-        <div class="text-center">
-          <p>Finding suitable and available accommodation can be difficult when you are experiencing homelessness. To find out what your options are, <a href="/find-help/support">visit local services that can give one to one advice</a>, or read our <a href="/find-help/accommodation/advice">advice guide</a>.</p>
-          <a href="/find-help/accommodation/advice" class="btn btn--brand-g">
-            <span class="btn__text">Read our guide to finding accommodation</span>
-          </a>
-        </div>
+
+      {{> accommodation-listing-header }}
 
         <!-- ko ifnot: dataIsLoaded -->
         <p class="text-center">Please wait whilst we load information.</p>
@@ -66,6 +62,9 @@ nosubnav: false
 </script>
 
 <script type="text/html" id="accommodation-listing">
+
+  {{> accommodation-view-options listing="true" }}
+
   <div class="accommodation-listing">
     <aside class="accommodation-listing__filter">
       <h1 class="h2 accommodation-listing__filter-heading" data-bind="click: toggleFilterDisplay, css: {open: displayFilter}">Filter Accommodation
@@ -131,8 +130,8 @@ nosubnav: false
       <h1 class="h3" class="text-center">Showing accommodation near your location.</h1>
       <div data-bind="foreach: itemsToDisplay">
         <article class="accommodation-listing__listing-item" data-bind="css: { 'accommodation-listing__listing-item--isActive': isActive }">
-          <h1 class="h2" data-bind="click: selectItem"><span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span></h1>
-          <h2 class="h3" data-bind="click: selectItem, html: address"></h2>
+          <h1 class="h2"><span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span></h1>
+          <h2 class="h3" data-bind="html: address"></h2>
           <ul class="accommodation-list__listing-features">
             <li class="accommodation-list__listing-features-item">Is Open Access: <span data-bind="text: isOpenAccess"></span></li>
             <li class="accommodation-list__listing-features-item">Type: <span data-bind="text: accommodationType"></span></li>

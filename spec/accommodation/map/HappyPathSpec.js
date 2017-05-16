@@ -2,7 +2,8 @@
 
 const ajaxGet = require('../../../src/js/get-api-data')
 const sinon = require('sinon')
-const Model = require('../../../src/js/models/accommodation/listing')
+const Model = require('../../../src/js/models/accommodation/map')
+const gMaps = require('../../../src/js/models/accommodation/googleMaps')
 const endpoints = require('../../../src/js/api')
 const browser = require('../../../src/js/browser')
 const locationSelector = require('../../../src/js/location/locationSelector')
@@ -16,6 +17,7 @@ describe('Accommodation - Listing', function () {
   let browserLoadingStub = null
   let browserLoadedStub = null
   let browserPushHistoryStub = null
+  let gMapsBuildMapStub = null
 
   beforeEach(() => {
     ajaxGetStub = sinon.stub(ajaxGet, 'data')
@@ -41,6 +43,16 @@ describe('Accommodation - Listing', function () {
           })
         }
       })
+    gMapsBuildMapStub = sinon.stub(gMaps, 'buildMap')
+    sinon.stub(gMaps, 'buildMarker').returns({
+      addListener: () => { },
+      setVisible: sinon.spy(),
+      setMap: sinon.spy()
+    })
+    sinon.stub(gMaps, 'buildInfoWindow').returns({
+      open: sinon.spy(),
+      close: sinon.spy()
+    })
     sut = new Model()
   })
 
@@ -51,6 +63,9 @@ describe('Accommodation - Listing', function () {
     browser.pushHistory.restore()
     querystring.parameter.restore()
     locationSelector.getCurrent.restore()
+    gMaps.buildMap.restore()
+    gMaps.buildMarker.restore()
+    gMaps.buildInfoWindow.restore()
   })
 
   it('- should notify user is loading', () => {
@@ -130,6 +145,16 @@ describe('Accommodation - Listing', function () {
     expect(sut.itemsToDisplay()[0].detailsUrl()).toEqual(`details?id=${data.items[0].id}`)
   })
 
+  it('- should initialise map with current location', () => {
+    const calledAsExpected = gMapsBuildMapStub
+      .withArgs({
+        latitude: 123.4,
+        longitude: 567.8
+      })
+      .calledOnce
+    expect(calledAsExpected).toBeTruthy()
+  })
+
   it('- should set types filters', () => {
     expect(sut.typeFilters().length).toEqual(3)
     expect(sut.typeFilters()[0].typeName()).toEqual('all')
@@ -141,8 +166,17 @@ describe('Accommodation - Listing', function () {
     expect(sut.typeFilters()[0].isSelected()).toBeTruthy()
   })
 
-  it('- should set selected filter as all', () => {
-    expect(sut.selectedTypeFilterName()).toEqual('all')
+  describe('- map marker clicked', () => {
+    beforeEach(() => {
+      sut.markerClicked(0)
+    })
+
+    it('- should set as active', () => {
+      expect(sut.itemsToDisplay()[0].isActive()).toBeTruthy()
+      expect(sut.itemsToDisplay()[1].isActive()).toBeFalsy()
+      expect(sut.itemsToDisplay()[2].isActive()).toBeFalsy()
+      expect(sut.itemsToDisplay()[3].isActive()).toBeFalsy()
+    })
   })
 
   describe('- item clicked', () => {
@@ -161,13 +195,25 @@ describe('Accommodation - Listing', function () {
           expect(e.isActive()).toBeFalsy()
         })
     })
+
+    it('- should open corresponding info window', () => {
+      expect(sut.map.infoWindows[0].open.calledOnce).toBeTruthy()
+    })
+
+    it('- should close other info windows', () => {
+      sut.map.infoWindows
+        .filter((item, i) => i !== 0)
+        .forEach((iw, i) => {
+          expect(iw.close.called).toBeTruthy()
+        })
+    })
   })
 
   describe('- filter selected', () => {
     const filterIndexToSelect = 1 // hosted
 
     beforeEach(() => {
-      sut.selectedTypeFilterName('hosted')
+      sut.typeFilters()[filterIndexToSelect].select()
     })
 
     it('- should set is as selected', () => {
@@ -186,8 +232,12 @@ describe('Accommodation - Listing', function () {
       expect(sut.itemsToDisplay().length).toEqual(2)
     })
 
+    it('- should reset markers', () => {
+      expect(sut.map.markers.length).toEqual(2)
+    })
+
     it('- should update url', () => {
-      expect(browserPushHistoryStub.withArgs({}, `hosted Accommodation - Street Support`, `?filterId=hosted`).called).toBeTruthy()
+      expect(browserPushHistoryStub.withArgs({}, `hosted Accommodation - Street Support`, `?filterId=hosted`).calledOnce).toBeTruthy()
     })
 
     describe('- clear filter', () => {
@@ -212,6 +262,42 @@ describe('Accommodation - Listing', function () {
       it('- should clear filter', () => {
         expect(sut.itemsToDisplay().length).toEqual(4)
       })
+
+      it('- should reset markers', () => {
+        expect(sut.map.markers.length).toEqual(4)
+      })
+    })
+  })
+
+  describe('- filter selected via dropdown', () => {
+    const selectedType = 'hosted'
+    beforeEach(() => {
+      sut.selectedTypeFilterName(selectedType)
+      sut.typeFilterDropdownSelected()
+    })
+
+    it('- should set is as selected', () => {
+      expect(sut.typeFilters().find((tf) => tf.typeName() === selectedType).isSelected()).toBeTruthy()
+    })
+
+    it('- should set others as not selected', () => {
+      sut.typeFilters()
+        .filter((tf) => tf.typeName() !== selectedType)
+        .forEach((tf) => {
+          expect(tf.isSelected()).toBeFalsy()
+        })
+    })
+
+    it('- should hide accom items not of selected type', () => {
+      expect(sut.itemsToDisplay().length).toEqual(2)
+    })
+
+    it('- should reset markers', () => {
+      expect(sut.map.markers.length).toEqual(2)
+    })
+
+    it('- should update url', () => {
+      expect(browserPushHistoryStub.withArgs({}, `hosted Accommodation - Street Support`, `?filterId=hosted`).calledOnce).toBeTruthy()
     })
   })
 })
