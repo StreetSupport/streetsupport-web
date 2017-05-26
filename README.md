@@ -2,9 +2,9 @@
 
 The website codebase for streetsupport.net.
 
-## Git Branching
+## Submitting Updates
 
-Please work in the `develop` branch first, and use feature branches for significant pieces of work. Once the feature is completed, submit a pull request into `develop`. Travis CI automatically builds on each commit to `develop`, `uat` and `prod`. The `prod` branch automatically builds to: [http://streetsupport.net](http://streetsupport.net).
+Please fork and work in the `develop` branch. Once the update is completed, submit a pull request into `develop`. Travis CI automatically builds on each commit to `develop`, `uat` and `prod`. The `prod` branch automatically builds to: [http://streetsupport.net](http://streetsupport.net).
 
 ## Build Status
 
