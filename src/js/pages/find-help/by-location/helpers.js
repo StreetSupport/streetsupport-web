@@ -38,11 +38,14 @@ export const buildInfoWindowMarkup = (p) => {
   const suitableForMarkup = p.tags.length > 0
   ? `<p>Suitable for: ${p.tags.join(', ')}</p>`
   : ''
+  const telephoneMarkup = p.telephone.length > 0
+    ? `<p>Telephone: ${p.telephone}`
+    : ''
 
   const output = `<div class="map-info-window">
       <h1 class="h2"><a href="/find-help/organisation/?organisation=${p.serviceProviderId}">${htmlEncode.htmlDecode(p.serviceProviderName)}</a></h1>
       ${suitableForMarkup}
-      <p>Telephone: ${p.telephone}</p>
+      ${telephoneMarkup}
       <p>${htmlEncode.htmlDecode(p.info)}</p>
       ${timesMarkup}
       <a href="/find-help/organisation/?organisation=${p.serviceProviderId}" class="btn btn--brand-e">
