@@ -117,9 +117,9 @@ page: category
                     </dl>
                     \{{/isOpen247}}
                   </div>
+                  <div class="result-detail__location">
                   \{{#location}}
                   \{{#streetLine1}}
-                  <div class="result-detail__location">
                     <h2 class="h2 result-detail__sub-header">Location</h2>
                     \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
                     <ul class="result-detail__address-list">
@@ -128,9 +128,13 @@ page: category
                       <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
                       <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">View on Map</a></li>
                     </ul>
-                  </div>
                   \{{/streetLine1}}
                   \{{/location}}
+                  \{{#telephone}}
+                    <h2 class="h2 result-detail__sub-header">Telephone</h2>
+                    \{{telephone}}
+                  \{{/telephone}}
+                  </div>
                 </div>
                 \{{/services}}
                 <a class="btn btn--brand-d result-detail__btn" href="/find-help/organisation/?organisation=\{{providerId}}">
