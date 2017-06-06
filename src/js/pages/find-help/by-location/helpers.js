@@ -42,6 +42,7 @@ export const buildInfoWindowMarkup = (p) => {
   const output = `<div class="map-info-window">
       <h1 class="h2"><a href="/find-help/organisation/?organisation=${p.serviceProviderId}">${htmlEncode.htmlDecode(p.serviceProviderName)}</a></h1>
       ${suitableForMarkup}
+      <p>Telephone: ${p.telephone}</p>
       <p>${htmlEncode.htmlDecode(p.info)}</p>
       ${timesMarkup}
       <a href="/find-help/organisation/?organisation=${p.serviceProviderId}" class="btn btn--brand-e">
