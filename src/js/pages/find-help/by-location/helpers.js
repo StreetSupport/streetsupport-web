@@ -36,10 +36,10 @@ export const buildInfoWindowMarkup = (p) => {
     ? '<p>Open 24 hours a day, 7 days a week</p>'
     : `<dl class="map-info-window__opening-times">${getOpeningTimesMarkup()}</dl>`
   const suitableForMarkup = p.tags.length > 0
-  ? `<p>Suitable for: ${p.tags.join(', ')}</p>`
+  ? `<p>Suitable for: <span class="h3">${p.tags.join(', ')}</span></p>`
   : ''
-  const telephoneMarkup = p.telephone.length > 0
-    ? `<p>Telephone: ${p.telephone}`
+  const telephoneMarkup = p.telephone !== null && p.telephone.length > 0
+    ? `<p>Telephone: <span class="h3">${p.telephone}</span></p>`
     : ''
 
   const output = `<div class="map-info-window">
