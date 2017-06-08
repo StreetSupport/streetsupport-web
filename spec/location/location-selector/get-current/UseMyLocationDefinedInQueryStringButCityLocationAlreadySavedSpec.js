@@ -107,10 +107,18 @@ describe('Location Selector - get current - use my location defined in querystri
       })
   })
 
-  it('- should set location name as postcode', (done) => {
+  it('- should set location name as my location', (done) => {
     sut.getCurrent()
       .then((result) => {
-        expect(result.name).toEqual('hull postcode')
+        expect(result.name).toEqual('my location')
+        done()
+      })
+  })
+
+  it('- should set location postcode as nearest postcode', (done) => {
+    sut.getCurrent()
+      .then((result) => {
+        expect(result.postcode).toEqual('hull postcode')
         done()
       })
   })

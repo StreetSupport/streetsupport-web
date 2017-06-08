@@ -55,7 +55,7 @@ const AccommodationListing = function () {
           .forEach((e, i) => {
             e.mapIndex = i
           })
-        self.locationName(currentLocation.name)
+        self.locationName(currentLocation.postcode)
         self.items(result.data.items.map((i) => new Accommodation(i, [self])))
 
         const types = Array.from(new Set(result.data.items

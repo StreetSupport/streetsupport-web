@@ -69,7 +69,8 @@ const _useMyLocation = (deferred) => {
           isSelected: true,
           latitude: userLocation.coords.latitude,
           longitude: userLocation.coords.longitude,
-          name: postcode,
+          name: 'my location',
+          postcode: postcode,
           nearestSupported: getNearest(userLocation)
         })
       }, defaultResolution)

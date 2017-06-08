@@ -37,7 +37,8 @@ describe('Accommodation - Listing', function () {
         then: function (success, error) {
           success({
             latitude: 123.4,
-            longitude: 567.8
+            longitude: 567.8,
+            postcode: 'postcode'
           })
         }
       })
@@ -62,6 +63,10 @@ describe('Accommodation - Listing', function () {
       .withArgs(`${endpoints.accommodation}?latitude=123.4&longitude=567.8`)
       .calledAfter(browserLoadingStub)
     expect(calledAsExpected).toBeTruthy()
+  })
+
+  it('- should set location name to nearest postcode', () => {
+    expect(sut.locationName()).toEqual('postcode')
   })
 
   it('- should map items to collection', () => {
