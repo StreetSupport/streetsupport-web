@@ -3,7 +3,6 @@
 const ajaxGet = require('../get-api-data')
 
 export const getByCoords = ({latitude, longitude}, success, failure) => {
-  console.log('called: ' + Date.now())
   // let cachedPostcode = localStorage.getItem('postcode')
   // if (cachedPostcode) {
   //   success(cachedPostcode)
