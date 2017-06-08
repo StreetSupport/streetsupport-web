@@ -6,8 +6,4 @@ const location = require('./location/locationSelector')
 var ko = require('knockout')
 var Model = require('./models/VolunteerModel')
 
-location
-  .getCurrent()
-  .then((result) => {
-    ko.applyBindings(new Model(result.id), document.getElementById('js-form'))
-  })
+ko.applyBindings(new Model(location.getSelectedLocationId()), document.getElementById('js-form'))

@@ -3,17 +3,12 @@ let locationSelector = require('./location/locationSelector')
 
 import './common'
 
-locationSelector
-  .getCurrent()
-  .then((result) => {
-    const parentDir = result.id === 'elsewhere'
-      ? 'find-help'
-      : result.id
-    const redirectTo = `/${parentDir}/emergency-help/`
+const locationid = locationSelector.getSelectedLocationId()
+const parentDir = locationid === 'elsewhere'
+  ? 'find-help'
+  : locationid
+const redirectTo = `/${parentDir}/emergency-help/`
 
-    if (!`${window.location.pathname}`.endsWith(redirectTo)) {
-      browser.redirect(redirectTo)
-    }
-  }, (_) => {
-
-  })
+if (!`${window.location.pathname}`.endsWith(redirectTo)) {
+  browser.redirect(redirectTo)
+}

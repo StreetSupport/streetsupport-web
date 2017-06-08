@@ -21,6 +21,7 @@ const AccommodationListing = function () {
   self.noItemsAvailable = ko.computed(() => self.itemsToDisplay().length === 0, self)
   self.typeFilters = ko.observableArray()
   self.dataIsLoaded = ko.observable(false)
+  self.locationName = ko.observable()
 
   self.itemSelected = (item) => {
     self.itemsToDisplay()
@@ -54,7 +55,7 @@ const AccommodationListing = function () {
           .forEach((e, i) => {
             e.mapIndex = i
           })
-
+        self.locationName(currentLocation.name)
         self.items(result.data.items.map((i) => new Accommodation(i, [self])))
 
         const types = Array.from(new Set(result.data.items

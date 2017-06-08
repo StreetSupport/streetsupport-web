@@ -4,6 +4,7 @@ const sut = require('../../../../src/js/location/locationSelector')
 const modal = require('../../../../src/js/location/modal')
 const deviceGeo = require('../../../../src/js/location/get-location')
 
+const ajaxGet = require('../../../../src/js/get-api-data')
 const browser = require('../../../../src/js/browser')
 const cookies = require('../../../../src/js/cookies')
 const querystring = require('../../../../src/js/get-url-parameter')
@@ -12,11 +13,30 @@ const sinon = require('sinon')
 
 describe('Location Selector - get current - location set to somewhere else - with geo location', () => {
   let modalInitStub = null
+  const hullCoords = {
+    longitude: -0.336741,
+    latitude: 53.745671
+  }
 
   beforeEach(() => {
     modalInitStub = sinon.stub(modal, 'init')
+    sinon.stub(ajaxGet, 'data')
+      .withArgs(`https://api.postcodes.io/postcodes?lon=${hullCoords.longitude}&lat=${hullCoords.latitude}`)
+      .returns({
+        then: function (success, error) {
+          success({
+            data: {
+              result: [
+                {
+                  postcode: 'hull postcode'
+                }
+              ]
+            }
+          })
+        }
+      })
     sinon.stub(cookies, 'get')
-      .withArgs('desired-location')
+      .withArgs(cookies.keys.location)
       .returns('elsewhere')
     sinon.stub(browser, 'location')
       .returns({
@@ -31,16 +51,14 @@ describe('Location Selector - get current - location set to somewhere else - wit
       .returns({
         then: function (success, error) {
           success({
-            coords: {
-              longitude: -0.336741,
-              latitude: 53.745671 // hull!
-            }
+            coords: hullCoords
           })
         }
       })
   })
 
   afterEach(() => {
+    ajaxGet.data.restore()
     deviceGeo.isAvailable.restore()
     deviceGeo.location.restore()
     modal.init.restore()
@@ -65,7 +83,7 @@ describe('Location Selector - get current - location set to somewhere else - wit
       })
   })
 
-  it('- should return city latitude', (done) => {
+  it('- should return geo latitude', (done) => {
     sut.getCurrent()
       .then((result) => {
         expect(result.latitude).toEqual(53.745671)
@@ -73,7 +91,7 @@ describe('Location Selector - get current - location set to somewhere else - wit
       })
   })
 
-  it('- should return city longitude', (done) => {
+  it('- should return geo longitude', (done) => {
     sut.getCurrent()
       .then((result) => {
         expect(result.longitude).toEqual(-0.336741)

@@ -2,14 +2,17 @@ const Q = require('q')
 const geolib = require('geolib')
 const deviceGeo = require('./get-location')
 const querystring = require('../get-url-parameter')
-let supportedCities = require('./supportedCities')
+const supportedCities = require('./supportedCities')
 const browser = require('../browser')
 const cookies = require('../cookies')
-let modal = require('./modal')
+const modal = require('./modal')
+import { getByCoords } from './postcodes'
 
-let getNearest = (position) => {
-  let currLatitude = position.coords.latitude
-  let currLongitude = position.coords.longitude
+const myLocationId = 'my-location'
+
+const getNearest = (position) => {
+  const currLatitude = position.coords.latitude
+  const currLongitude = position.coords.longitude
 
   supportedCities.locations
     .filter((c) => c.isPublic)
@@ -30,49 +33,53 @@ let getNearest = (position) => {
   return sorted[0]
 }
 
-let _userSelect = (deferred) => {
+const _userSelect = (deferred) => {
   modal.init(exportedObj)
   deferred.resolve()
 }
 
-let _useMyLocation = (deferred) => {
+const _useMyLocation = (deferred) => {
+  const defaultResolution = () => {
+    let cityId = myLocationId
+    const saved = cookies.get(cookies.keys.location)
+    if (saved !== undefined && saved.length > 0) {
+      cityId = supportedCities.get(saved).id
+    }
+    deferred.resolve({
+      id: cityId,
+      findHelpId: myLocationId,
+      isSelected: true,
+      latitude: 0,
+      longitude: 0,
+      name: 'my location',
+      geoLocationUnavailable: true
+    })
+  }
   deviceGeo.location()
-    .then((result) => {
+    .then((userLocation) => {
       let cityId = 'my-location'
-      var saved = cookies.get('desired-location')
-      if (saved !== undefined && saved.length > 0) {
+      const saved = cookies.get(cookies.keys.location)
+      if (cookies.get(cookies.keys.location) !== undefined && saved.length > 0) {
         cityId = supportedCities.get(saved).id
       }
-
-      deferred.resolve({
-        id: cityId,
-        findHelpId: 'my-location',
-        isSelected: true,
-        latitude: result.coords.latitude,
-        longitude: result.coords.longitude,
-        name: 'my location',
-        nearestSupported: getNearest(result)
-      })
+      getByCoords(userLocation.coords, (postcode) => {
+        deferred.resolve({
+          id: cityId,
+          findHelpId: myLocationId,
+          isSelected: true,
+          latitude: userLocation.coords.latitude,
+          longitude: userLocation.coords.longitude,
+          name: postcode,
+          nearestSupported: getNearest(userLocation)
+        })
+      }, defaultResolution)
     }, () => {
-      let cityId = 'my-location'
-      var saved = cookies.get('desired-location')
-      if (saved !== undefined && saved.length > 0) {
-        cityId = supportedCities.get(saved).id
-      }
-      deferred.resolve({
-        id: cityId,
-        findHelpId: 'my-location',
-        isSelected: true,
-        latitude: 0,
-        longitude: 0,
-        name: 'my location',
-        geoLocationUnavailable: true
-      })
+      defaultResolution()
     })
 }
 
-let _useRequested = (deferred, locationInQueryString) => {
-  let requestedCity = supportedCities.get(locationInQueryString)
+const _useRequested = (deferred, locationInQueryString) => {
+  const requestedCity = supportedCities.get(locationInQueryString)
   if (requestedCity !== undefined) {
     deferred.resolve(requestedCity)
   } else {
@@ -80,25 +87,25 @@ let _useRequested = (deferred, locationInQueryString) => {
   }
 }
 
-let _useSaved = (deferred) => {
-  var saved = cookies.get('desired-location')
+const _useSaved = (deferred) => {
+  const saved = cookies.get(cookies.keys.location)
   if (saved === 'elsewhere' && deviceGeo.isAvailable()) {
     _useMyLocation(deferred)
-  } else if (saved !== undefined && saved.length > 0 && saved !== 'my-location') {
+  } else if (saved !== undefined && saved.length > 0 && saved !== myLocationId) {
     deferred.resolve(supportedCities.get(saved))
   } else {
     _userSelect(deferred)
   }
 }
 
-let _determineLocationRetrievalMethod = () => {
+const _determineLocationRetrievalMethod = () => {
   let method = _useSaved
   let id = ''
 
-  let locationInQueryString = querystring.parameter('location')
-  if (locationInQueryString === 'my-location' && deviceGeo.isAvailable()) {
+  const locationInQueryString = querystring.parameter('location')
+  if (locationInQueryString === myLocationId && deviceGeo.isAvailable()) {
     method = _useMyLocation
-  } else if (locationInQueryString !== 'undefined' && locationInQueryString.length > 0 && locationInQueryString !== 'my-location') {
+  } else if (locationInQueryString !== 'undefined' && locationInQueryString.length > 0 && locationInQueryString !== myLocationId) {
     method = _useRequested
     id = locationInQueryString
   } else {
@@ -118,22 +125,30 @@ let _determineLocationRetrievalMethod = () => {
   }
 }
 
+const getSelectedLocationId = () => {
+  const saved = cookies.get(cookies.keys.location)
+  if (cookies.get(cookies.keys.location) !== undefined && saved.length > 0) {
+    return supportedCities.get(saved).id
+  }
+  modal.init(exportedObj)
+}
+
 const getCurrent = () => {
-  let deferred = Q.defer()
-  let getLocation = _determineLocationRetrievalMethod()
+  const deferred = Q.defer()
+  const getLocation = _determineLocationRetrievalMethod()
   getLocation.method(deferred, getLocation.id)
   return deferred.promise
 }
 
 const setCurrent = (newCity) => {
   if (newCity.length > 0) {
-    document.cookie = 'desired-location=' + newCity + ';expires=Fri, 31 Dec 9999 23:59:59 GMT;path=/'
+    document.cookie = `${cookies.keys.location}=${newCity};expires=Fri, 31 Dec 9999 23:59:59 GMT;path=/`
   }
 }
 
 const getViewModel = (current) => {
-  let cities = supportedCities.locations.map((l) => {
-    let newLocation = l
+  const cities = supportedCities.locations.map((l) => {
+    const newLocation = l
     newLocation.isSelected = l.id === current.id
     return newLocation
   })
@@ -141,10 +156,9 @@ const getViewModel = (current) => {
 }
 
 const getViewModelAll = (current) => {
-  let cities = supportedCities.locations.map((l) => {
-    let newLocation = l
-    newLocation.isSelected = l.id === current.id
-    return newLocation
+  const cities = supportedCities.locations.map((l) => {
+    l.isSelected = l.id === current.id
+    return l
   })
   cities.push({
     id: '',
@@ -160,7 +174,7 @@ const getViewModelAll = (current) => {
  * @param {string} selectorId
  */
 const onChange = (onChangeLocationCallback, selectorId = '.js-location-select') => {
-  let locationSelector = document.querySelector(selectorId)
+  const locationSelector = document.querySelector(selectorId)
   locationSelector.addEventListener('change', () => {
     var selectedLocation = locationSelector.options[locationSelector.selectedIndex].value
     setCurrent(selectedLocation)
@@ -169,6 +183,7 @@ const onChange = (onChangeLocationCallback, selectorId = '.js-location-select') 
 }
 
 const exportedObj = {
+  getSelectedLocationId: getSelectedLocationId,
   getCurrent: getCurrent,
   setCurrent: setCurrent,
   getViewModel: getViewModel,

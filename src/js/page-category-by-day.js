@@ -76,8 +76,6 @@ function buildList (url) {
       template = 'js-category-no-results-result-tpl'
     }
 
-    console.log(data)
-
     let viewModel = {
       organisations: data,
       categoryId: data.categoryKey,

@@ -44,7 +44,6 @@ browser.loading()
 getApiData
   .data(`${endpoints.accommodation}/${querystring.parameter('id')}`)
   .then((result) => {
-    console.log(result.data)
     result.data.address.formattedAddress = formatAddress(result.data.address)
     result.data.generalInfo.formattedSupportOffered = formatSupportOffered(result.data.generalInfo.supportOffered)
     result.data.features = formatFeatures(result.data.features)
