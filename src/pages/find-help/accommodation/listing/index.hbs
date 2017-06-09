@@ -127,7 +127,13 @@ nosubnav: false
       </div>
     </aside>
     <section class="accommodation-listing__listing">
-      <h1 class="h3" class="text-center">Showing accommodation near <span data-bind="text: locationName"></span>.</h1>
+      <h1 class="h3" class="text-center">
+        <span>Showing accommodation near</span>
+        <input type="textfield" data-bind="textInput: locationName" class="form__input form__input--inline form__input--short" />
+        <button class="btn btn--brand-e" data-bind="click: updateListing">
+          <span class="btn__text">search</span>
+        </button>
+      </h1>
       <div data-bind="foreach: itemsToDisplay">
         <article class="accommodation-listing__listing-item" data-bind="css: { 'accommodation-listing__listing-item--isActive': isActive }">
           <h1 class="h2"><span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span></h1>

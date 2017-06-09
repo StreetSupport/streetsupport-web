@@ -16,3 +16,12 @@ export const getByCoords = ({latitude, longitude}, success, failure) => {
       }, failure)
   // }
 }
+
+
+export const getCoords = (postcode, success, failure) => {
+  ajaxGet
+    .data(`https://api.postcodes.io/postcodes/${postcode}`)
+    .then((postcodeResult) => {
+      success(postcodeResult.data.result)
+    }, failure)
+}

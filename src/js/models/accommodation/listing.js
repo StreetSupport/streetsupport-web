@@ -5,6 +5,7 @@ const querystring = require('../../get-url-parameter')
 const locationSelector = require('../../location/locationSelector')
 
 import { Accommodation, TypeFilter } from './types'
+import { getCoords } from '../../location/postcodes'
 
 const ko = require('knockout')
 
@@ -45,6 +46,19 @@ const AccommodationListing = function () {
   self.displayFilter = ko.observable(false)
   self.toggleFilterDisplay = () => {
     self.displayFilter(!self.displayFilter())
+  }
+
+  self.updateListing = function () {
+    console.log(`search on ${self.locationName()}`)
+    self.dataIsLoaded(false)
+    getCoords(self.locationName(), (postcodeResult) => {
+      const newLocation = {
+        latitude: postcodeResult.latitude,
+        longitude: postcodeResult.longitude,
+        postcode: postcodeResult.postcode
+      }
+      self.init(newLocation)
+    }, () => { console.log('could not get postcode details') })
   }
 
   self.init = (currentLocation) => {
