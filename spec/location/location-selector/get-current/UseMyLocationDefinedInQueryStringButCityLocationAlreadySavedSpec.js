@@ -11,6 +11,8 @@ const deviceGeo = require('../../../../src/js/location/get-location')
 
 const sinon = require('sinon')
 
+import * as storage from '../../../../src/js/storage'
+
 describe('Location Selector - get current - use my location defined in querystring, but city already saved', () => {
   let modalInitStub = null
   const hullCoords = {
@@ -55,6 +57,8 @@ describe('Location Selector - get current - use my location defined in querystri
           })
         }
       })
+    sinon.stub(storage, 'get')
+    sinon.stub(storage, 'set')
   })
 
   afterEach(() => {
@@ -65,6 +69,8 @@ describe('Location Selector - get current - use my location defined in querystri
     querystring.parameter.restore()
     deviceGeo.location.restore()
     deviceGeo.isAvailable.restore()
+    storage.get.restore()
+    storage.set.restore()
   })
 
   it('- should not display modal', (done) => {

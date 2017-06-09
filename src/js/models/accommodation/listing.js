@@ -49,7 +49,6 @@ const AccommodationListing = function () {
   }
 
   self.updateListing = function () {
-    console.log(`search on ${self.locationName()}`)
     self.dataIsLoaded(false)
     getCoords(self.locationName(), (postcodeResult) => {
       const newLocation = {
@@ -58,7 +57,11 @@ const AccommodationListing = function () {
         postcode: postcodeResult.postcode
       }
       self.init(newLocation)
-    }, () => { console.log('could not get postcode details') })
+    }, () => {
+      self.items([])
+      self.dataIsLoaded(true)
+      browser.loaded()
+    })
   }
 
   self.init = (currentLocation) => {

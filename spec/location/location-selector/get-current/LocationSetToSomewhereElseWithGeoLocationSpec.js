@@ -11,6 +11,8 @@ const querystring = require('../../../../src/js/get-url-parameter')
 
 const sinon = require('sinon')
 
+import * as storage from '../../../../src/js/storage'
+
 describe('Location Selector - get current - location set to somewhere else - with geo location', () => {
   let modalInitStub = null
   const hullCoords = {
@@ -55,6 +57,8 @@ describe('Location Selector - get current - location set to somewhere else - wit
           })
         }
       })
+    sinon.stub(storage, 'get')
+    sinon.stub(storage, 'set')
   })
 
   afterEach(() => {
@@ -65,6 +69,8 @@ describe('Location Selector - get current - location set to somewhere else - wit
     browser.location.restore()
     cookies.get.restore()
     querystring.parameter.restore()
+    storage.get.restore()
+    storage.set.restore()
   })
 
   it('- should not display modal', (done) => {
