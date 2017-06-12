@@ -8,6 +8,8 @@ const browser = require('../../../src/js/browser')
 const locationSelector = require('../../../src/js/location/locationSelector')
 const querystring = require('../../../src/js/get-url-parameter')
 
+import * as storage from '../../../src/js/storage'
+
 import { data } from './testdata'
 
 describe('Accommodation - Listing', function () {
@@ -16,6 +18,7 @@ describe('Accommodation - Listing', function () {
   let browserLoadingStub = null
   let browserLoadedStub = null
   let browserPushHistoryStub = null
+  let storageSetStub = null
 
   beforeEach(() => {
     ajaxGetStub = sinon.stub(ajaxGet, 'data')
@@ -42,6 +45,8 @@ describe('Accommodation - Listing', function () {
           })
         }
       })
+    sinon.stub(storage, 'get')
+    storageSetStub = sinon.stub(storage, 'set')
     sut = new Model()
   })
 
@@ -50,8 +55,10 @@ describe('Accommodation - Listing', function () {
     browser.loading.restore()
     browser.loaded.restore()
     browser.pushHistory.restore()
-    querystring.parameter.restore()
     locationSelector.getCurrent.restore()
+    querystring.parameter.restore()
+    storage.get.restore()
+    storage.set.restore()
   })
 
   it('- should notify user is loading', () => {
@@ -67,6 +74,17 @@ describe('Accommodation - Listing', function () {
 
   it('- should set location name to nearest postcode', () => {
     expect(sut.locationName()).toEqual('postcode')
+  })
+
+  it('- should store user location state', () => {
+    const storageToBeCalledAsExpected = storageSetStub
+      .withArgs(storage.keys.userLocationState, {
+        'postcode': 'postcode',
+        'latitude': 123.4,
+        'longitude': 567.8
+      })
+      .calledOnce
+    expect(storageToBeCalledAsExpected).toBeTruthy()
   })
 
   it('- should map items to collection', () => {

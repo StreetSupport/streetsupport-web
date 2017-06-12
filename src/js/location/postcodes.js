@@ -3,7 +3,7 @@ const storage = require('../storage')
 
 const clean = (input) => {
   return input
-    .replace(/\s/g,'')
+    .replace(/\s/g, '')
     .toUpperCase()
 }
 
@@ -18,11 +18,11 @@ export const getByCoords = ({latitude, longitude}, success, failure) => {
       .then((postcodeResult) => {
         const postcode = postcodeResult.data.result[0].postcode
         storage.set(key, postcode)
-        storage.set(clean(postcode), JSON.stringify({
+        storage.set(clean(postcode), {
           postcode: postcode,
           longitude: longitude,
           latitude: latitude
-        }))
+        })
         success(postcode)
       }, failure)
   }
@@ -31,7 +31,7 @@ export const getByCoords = ({latitude, longitude}, success, failure) => {
 export const getCoords = (postcode, success, failure) => {
   const cachedPostcode = storage.get(clean(postcode))
   if (cachedPostcode) {
-    success(JSON.parse(cachedPostcode))
+    success(cachedPostcode)
   } else {
     ajaxGet
       .data(`https://api.postcodes.io/postcodes/${postcode}`)
@@ -42,7 +42,7 @@ export const getCoords = (postcode, success, failure) => {
             longitude: postcodeResult.data.result.longitude,
             latitude: postcodeResult.data.result.latitude
           }
-          storage.set(clean(postcode), JSON.stringify(result))
+          storage.set(clean(postcode), result)
           success(result)
         } else {
           failure()

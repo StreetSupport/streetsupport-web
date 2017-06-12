@@ -6,6 +6,7 @@ const locationSelector = require('../../location/locationSelector')
 
 import { Accommodation, TypeFilter } from './types'
 import { getCoords } from '../../location/postcodes'
+import * as storage from '../../storage'
 
 const ko = require('knockout')
 
@@ -56,6 +57,7 @@ const AccommodationListing = function () {
         longitude: postcodeResult.longitude,
         postcode: postcodeResult.postcode
       }
+      storage.set(storage.keys.userLocationState, newLocation)
       self.init(newLocation)
     }, () => {
       self.items([])
@@ -92,11 +94,30 @@ const AccommodationListing = function () {
       })
   }
 
-  locationSelector
-    .getCurrent()
-    .then((result) => {
-      self.init(result)
+  const userLocationState = storage.get(storage.keys.userLocationState)
+  if (userLocationState) {
+    self.init({
+      'id': 'my-location',
+      'findHelpId': 'my-location',
+      'name': 'my selected postocde',
+      'longitude': userLocationState.longitude,
+      'latitude': userLocationState.latitude,
+      'isPublic': true,
+      'isSelectableInBody': false,
+      'postcode': userLocationState.postcode
     })
+  } else {
+    locationSelector
+      .getCurrent()
+      .then((result) => {
+        storage.set(storage.keys.userLocationState, {
+          'postcode': result.postcode,
+          'longitude': result.longitude,
+          'latitude': result.latitude
+        })
+        self.init(result)
+      })
+  }
 }
 
 module.exports = AccommodationListing
