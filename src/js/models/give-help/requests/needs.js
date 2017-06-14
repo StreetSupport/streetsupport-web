@@ -21,7 +21,7 @@ const setDistanceAsLocation = (n, {latitude, longitude}) => {
 }
 
 export const formatNeeds = (needs, position) => {
-  const locationFormatter = getLocation.geoLocationUnavailable
+  const locationFormatter = !position || getLocation.geoLocationUnavailable
     ? setPostcodeAsLocation
     : setDistanceAsLocation
   needs

@@ -1,16 +1,16 @@
-import './common'
+import '../../../common'
 
-const apiRoutes = require('./api')
-const browser = require('./browser')
-const getApiData = require('./get-api-data')
-const getUrlParams = require('./get-url-parameter')
-import listToSelect from './list-to-dropdown'
-const locationSelector = require('./location/locationSelector')
-const templating = require('./template-render')
+const apiRoutes = require('../../../api')
+const browser = require('../../../browser')
+const getApiData = require('../../../get-api-data')
+const getUrlParams = require('../../../get-url-parameter')
+import listToSelect from '../../../list-to-dropdown'
+const locationSelector = require('../../../location/locationSelector')
+const templating = require('../../../template-render')
 
-import { formatNeeds } from './models/give-help/requests/needs'
-import { buildList, initAutoComplete } from './models/give-help/requests/listing'
-import { displayCard, displayCardNotFound, displayListing } from './models/give-help/requests/page'
+import { formatNeeds } from '../../../models/give-help/requests/needs'
+import { buildList, initAutoComplete } from '../../../models/give-help/requests/listing'
+import { displayCard, displayCardNotFound, displayListing } from '../../../models/give-help/requests/page'
 
 const onChangeLocation = function () {
   browser.redirect('/give-help/help/?my-location')
