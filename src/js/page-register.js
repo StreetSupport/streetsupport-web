@@ -12,9 +12,10 @@ const view = require('./register/view')
 import { cities } from '../data/generated/supported-cities'
 
 function getAmendedSchema () {
-  schema.properties.associatedCity.enum = cities
+  const ssnCities = cities
     .filter((c) => c.isOpenToRegistrations)
     .map((c) => c.id)
+  schema.properties.associatedCity.enum = ['', ...ssnCities]
   return schema
 }
 

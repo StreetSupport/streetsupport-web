@@ -15,7 +15,8 @@ module.exports = {
     'shortDescription': {
       'title': 'Synopsis',
       'type': 'string',
-      'required': true
+      'required': true,
+      'maxLength': 150
     },
     'longDescription': {
       'title': 'Description',
