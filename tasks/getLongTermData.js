@@ -43,7 +43,8 @@ gulp.task('supported-cities', (callback) => {
           latitude: c.latitude,
           longitude: c.longitude,
           isOpenToRegistrations: c.isOpenToRegistrations,
-          isPublic: c.isPublic
+          isPublic: c.isPublic,
+          postcode: c.postcode
         }
       })
     })))

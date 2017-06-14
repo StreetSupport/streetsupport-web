@@ -16,7 +16,7 @@ describe('Location Selector - get current - location set to a city', () => {
   beforeEach(() => {
     modalInitStub = sinon.stub(modal, 'init')
     sinon.stub(cookies, 'get')
-      .withArgs('desired-location')
+      .withArgs(cookies.keys.location)
       .returns('manchester')
     sinon.stub(browser, 'location')
       .returns({

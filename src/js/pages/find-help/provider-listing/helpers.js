@@ -66,6 +66,7 @@ export const getProvidersForListing = (providers) => {
     return {
       info: marked(htmlEncode.htmlDecode(provider.info)),
       location: provider.location,
+      telephone: provider.telephone,
       days: groupOpeningTimes(provider.openingTimes),
       isOpen247: provider.isOpen247,
       servicesAvailable: provider.subCategories
