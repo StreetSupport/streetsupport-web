@@ -21,13 +21,14 @@ const setDistanceAsLocation = (n, {latitude, longitude}) => {
 }
 
 export const formatNeeds = (needs, position) => {
-  const locationFormatter = getLocation.geoLocationUnavailable
+  const locationFormatter = !position || getLocation.geoLocationUnavailable
     ? setPostcodeAsLocation
     : setDistanceAsLocation
   needs
     .forEach((n) => {
       formatDate(n)
       locationFormatter(n, position)
+      n.detailsUrl = `request/?id=${n.id}`
     })
   return needs
 }
