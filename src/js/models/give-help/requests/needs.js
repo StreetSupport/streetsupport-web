@@ -28,6 +28,7 @@ export const formatNeeds = (needs, position) => {
     .forEach((n) => {
       formatDate(n)
       locationFormatter(n, position)
+      n.detailsUrl = `request/?id=${n.id}`
     })
   return needs
 }

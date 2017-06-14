@@ -97,7 +97,7 @@ page: giveitems
   <ul id="js-card-list" class="requests-listing list">
     \{{#card}}
     <li class="requests-listing__item" data-id="\{{id}}">
-      <a class="requests-listing__link" href="#">
+      <a class="requests-listing__link" href="\{{detailsUrl}}">
         <article>
           <p class="h3 requests-listing__type">
            <svg class="svg-logo-dims requests-listing__icon">
@@ -124,27 +124,4 @@ page: giveitems
     </li>
     \{{/card}}
   </ul>
-</script>
-
-<script id="js-card-not-found-tpl" type="text/template">
-  <section class="block block--subpage-header">
-    <div class="container block__inner">
-      <h1 class="h1 block__header requests__title">
-        <svg class="requests__title__icon">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#give"></use>
-        </svg>
-        Help
-      </h1>
-      <div class="block__content">
-        <p>Sorry, that Need can not be found - it may have been already fulfilled!</P>
-        <button class="js-card-back btn btn--brand-e">
-          <span class="btn__text">View other Needs</span>
-        </button>
-      </div>
-    </div>
-  </section>
-</script>
-
-<script id="js-card-detail-tpl" type="text/template">
-  {{> need-detail }}
 </script>

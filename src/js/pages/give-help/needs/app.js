@@ -10,47 +10,16 @@ const templating = require('../../../template-render')
 
 import { formatNeeds } from '../../../models/give-help/requests/needs'
 import { buildList, initAutoComplete } from '../../../models/give-help/requests/listing'
-import { displayCard, displayCardNotFound, displayListing } from '../../../models/give-help/requests/page'
 
 const onChangeLocation = function () {
   browser.redirect('/give-help/help/?my-location')
 }
 
-const buildDetails = (data) => {
-  const openIfCardRequested = () => {
-    const cardId = getUrlParams.parameter('id').replace('/', '')
-    if (cardId) {
-      const card = Array.from(document.querySelectorAll('.requests-listing__item'))
-        .find((c) => c.getAttribute('data-id') === cardId)
-      if (card) {
-        displayCard(card, data.find((n) => n.id === cardId), () => {
-          browser.pushHistory({}, 'from openIfCardRequested', '')
-          displayListing()
-        })
-      } else {
-        displayCardNotFound()
-      }
-    }
+const openIfCardRequested = () => {
+  const cardId = getUrlParams.parameter('id').replace('/', '')
+  if (cardId) {
+    browser.redirect(`request?id=${cardId}`)
   }
-
-  const addClickEvents = () => {
-    const addEventListener = (card) => {
-      card.addEventListener('click', (event) => {
-        event.preventDefault()
-        displayCard(card, data.find((n) => n.id === card.getAttribute('data-id')), () => browser.popHistory())
-      })
-    }
-    Array.from(document.querySelectorAll('.requests-listing__item'))
-      .forEach(addEventListener)
-  }
-
-  browser.setOnHistoryPop(() => {
-    displayListing()
-    openIfCardRequested()
-  })
-
-  addClickEvents()
-  openIfCardRequested()
 }
 
 const renderNeeds = (needs, userLocation) => {
@@ -70,7 +39,7 @@ const renderNeeds = (needs, userLocation) => {
   } else {
     templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', () => {
       buildList()
-      buildDetails(needs)
+      openIfCardRequested()
       listToSelect.init()
       initAutoComplete(needs)
       defaultCallback()
