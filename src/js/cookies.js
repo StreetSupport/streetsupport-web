@@ -15,5 +15,8 @@ var unset = function (key) {
 module.exports = {
   'set': set,
   'unset': unset,
-  'get': get
+  'get': get,
+  'keys': {
+    location: 'desired-location'
+  }
 }

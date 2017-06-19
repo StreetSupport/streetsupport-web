@@ -5,6 +5,8 @@ const querystring = require('../../get-url-parameter')
 const locationSelector = require('../../location/locationSelector')
 
 import { Accommodation, TypeFilter } from './types'
+import { getCoords } from '../../location/postcodes'
+import * as storage from '../../storage'
 
 const ko = require('knockout')
 
@@ -21,6 +23,7 @@ const AccommodationListing = function () {
   self.noItemsAvailable = ko.computed(() => self.itemsToDisplay().length === 0, self)
   self.typeFilters = ko.observableArray()
   self.dataIsLoaded = ko.observable(false)
+  self.locationName = ko.observable()
 
   self.itemSelected = (item) => {
     self.itemsToDisplay()
@@ -46,6 +49,23 @@ const AccommodationListing = function () {
     self.displayFilter(!self.displayFilter())
   }
 
+  self.updateListing = function () {
+    self.dataIsLoaded(false)
+    getCoords(self.locationName(), (postcodeResult) => {
+      const newLocation = {
+        latitude: postcodeResult.latitude,
+        longitude: postcodeResult.longitude,
+        postcode: postcodeResult.postcode
+      }
+      storage.set(storage.keys.userLocationState, newLocation)
+      self.init(newLocation)
+    }, () => {
+      self.items([])
+      self.dataIsLoaded(true)
+      browser.loaded()
+    })
+  }
+
   self.init = (currentLocation) => {
     browser.loading()
     ajaxGet.data(`${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}`)
@@ -54,7 +74,7 @@ const AccommodationListing = function () {
           .forEach((e, i) => {
             e.mapIndex = i
           })
-
+        self.locationName(currentLocation.postcode)
         self.items(result.data.items.map((i) => new Accommodation(i, [self])))
 
         const types = Array.from(new Set(result.data.items
@@ -74,11 +94,30 @@ const AccommodationListing = function () {
       })
   }
 
-  locationSelector
-    .getCurrent()
-    .then((result) => {
-      self.init(result)
+  const userLocationState = storage.get(storage.keys.userLocationState)
+  if (userLocationState) {
+    self.init({
+      'id': 'my-location',
+      'findHelpId': 'my-location',
+      'name': 'my selected postocde',
+      'longitude': userLocationState.longitude,
+      'latitude': userLocationState.latitude,
+      'isPublic': true,
+      'isSelectableInBody': false,
+      'postcode': userLocationState.postcode
     })
+  } else {
+    locationSelector
+      .getCurrent()
+      .then((result) => {
+        storage.set(storage.keys.userLocationState, {
+          'postcode': result.postcode,
+          'longitude': result.longitude,
+          'latitude': result.latitude
+        })
+        self.init(result)
+      })
+  }
 }
 
 module.exports = AccommodationListing

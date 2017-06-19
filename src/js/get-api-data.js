@@ -2,6 +2,12 @@
 
 var Q = require('q')
 
+const statusKeys = {
+  ok: 'ok',
+  notFound: 'notFound',
+  error: 'error'
+}
+
 var getApiData = function (url) {
   var deferred = Q.defer()
   var req
@@ -26,20 +32,24 @@ var getApiData = function (url) {
     if (window.XDomainRequest) {
       var jsonXDomain = JSON.parse(req.responseText)
       deferred.resolve({
-        'status': 'ok',
+        'status': statusKeys.ok,
         'data': jsonXDomain
       })
     }
 
-    if (req.status === 200) {
+    if (req.status === 200 || req.status === 304) {
       var json = JSON.parse(req.responseText)
       deferred.resolve({
-        'status': 'ok',
+        'status': statusKeys.ok,
         'data': json
+      })
+    } else if (req.status === 404) { // todo: this never gets hit! VL
+      deferred.resolve({
+        'status': statusKeys.notFound
       })
     } else {
       deferred.resolve({
-        'status': 'error',
+        'status': statusKeys.error,
         'statusCode': req.status,
         'message': req.responseText
       })
@@ -50,8 +60,8 @@ var getApiData = function (url) {
     deferred.reject(new Error('Server timeout'))
   }
 
-  req.onerror = function () {
-    deferred.reject(new Error('Server responded with a status of ' + req.status))
+  req.onerror = function (e) {
+    deferred.reject(new Error('Server responded with a status of ' + this))
   }
 
   req.send()
@@ -59,6 +69,14 @@ var getApiData = function (url) {
   return deferred.promise
 }
 
+const status = (result) => {
+  return {
+    isOk: () => result.status === statusKeys.ok,
+    isNotFound: () => result.status === statusKeys.notFound
+  }
+}
+
 module.exports = {
-  data: getApiData
+  data: getApiData,
+  status: status
 }

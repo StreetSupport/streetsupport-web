@@ -7,6 +7,8 @@ const browser = require('../../../src/js/browser')
 const querystring = require('../../../src/js/get-url-parameter')
 const locationSelector = require('../../../src/js/location/locationSelector')
 
+import * as storage from '../../../src/js/storage'
+
 import { data } from './testdata'
 
 describe('Accommodation - Listing - Filter selected in querystring', function () {
@@ -41,6 +43,9 @@ describe('Accommodation - Listing - Filter selected in querystring', function ()
         }
       })
 
+    sinon.stub(storage, 'get')
+    sinon.stub(storage, 'set')
+
     sut = new Model()
   })
 
@@ -49,8 +54,10 @@ describe('Accommodation - Listing - Filter selected in querystring', function ()
     browser.loading.restore()
     browser.loaded.restore()
     browser.pushHistory.restore()
-    querystring.parameter.restore()
     locationSelector.getCurrent.restore()
+    querystring.parameter.restore()
+    storage.get.restore()
+    storage.set.restore()
   })
 
   it('- should set is as selected', () => {

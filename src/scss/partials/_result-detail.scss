@@ -30,6 +30,10 @@
     display: inline;
   }
 
+  &__telephone {
+    margin-bottom: 20px!important;
+  }
+
   &__times-list {
     @include cf();
     margin: 0;

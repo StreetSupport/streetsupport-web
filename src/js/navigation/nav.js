@@ -35,11 +35,7 @@ var init = function () {
     close()
   })
 
-  location
-    .getCurrent()
-    .then((result) => {
-      hideForCity(result.id)
-    })
+  hideForCity(location.getSelectedLocationId())
 
   stickyNavShrinker.init()
   mobileCitySelect.init()

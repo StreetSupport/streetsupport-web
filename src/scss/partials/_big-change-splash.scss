@@ -1,8 +1,12 @@
 $big-change-yellow: #FFF001;
-$big-change-height: 420px;
-$big-change-height-m: 650px;
-$padding-for-header: 64px;
+
+$big-change-height: 400px;
+$padding-for-header: 100px;
+$triangle-height: 337px;
+
 $padding-for-header-m: 220px;
+$big-change-height-m: 500px;
+$triangle-height-m: 299px;
 
 .big-change-banner {
   background: $big-change-yellow;
@@ -36,6 +40,7 @@ $padding-for-header-m: 220px;
   min-height: 100%;
   margin: 0;
   padding: 0 10vw;
+  color: $big-change-yellow;
 
   .no-flexboxlegacy & {
     padding-top: 50px;
@@ -45,6 +50,7 @@ $padding-for-header-m: 220px;
   }
 
   img {
+    margin-top: 20px;
   }
 
   &::before {
@@ -52,7 +58,7 @@ $padding-for-header-m: 220px;
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 356px 45px 0 0;
+    border-width: $triangle-height 45px 0 0;
     border-color: $big-change-yellow transparent transparent transparent;
     position: absolute;
     top: 64px;
@@ -63,7 +69,7 @@ $padding-for-header-m: 220px;
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 356px 45px 0 0;
+    border-width: $triangle-height 45px 0 0;
     border-color: transparent $big-change-yellow transparent transparent;
     position: absolute;
     top: 64px;
@@ -71,11 +77,11 @@ $padding-for-header-m: 220px;
   }
   @include mq($from: m) {
     &::before {
-      border-top-width: 448px;
+      border-top-width: $triangle-height-m;
       top: 202px;
     }
     &::after {
-      border-top-width: 448px;
+      border-top-width: $triangle-height-m;
       top: 202px;
     }
   }

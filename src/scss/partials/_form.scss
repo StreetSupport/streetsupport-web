@@ -80,7 +80,11 @@
 }
 
 .form__input--inline {
-  width: auto;
+  display: inline;
+}
+
+.form__input--short {
+  width: 100px;
 }
 
 .form__input--full {

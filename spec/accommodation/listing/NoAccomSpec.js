@@ -7,6 +7,8 @@ const browser = require('../../../src/js/browser')
 const querystring = require('../../../src/js/get-url-parameter')
 const locationSelector = require('../../../src/js/location/locationSelector')
 
+import * as storage from '../../../src/js/storage'
+
 describe('Accommodation - Listing - No Accom', function () {
   let sut = null
 
@@ -35,6 +37,9 @@ describe('Accommodation - Listing - No Accom', function () {
         }
       })
 
+    sinon.stub(storage, 'get')
+    sinon.stub(storage, 'set')
+
     sut = new Model()
   })
 
@@ -45,6 +50,8 @@ describe('Accommodation - Listing - No Accom', function () {
     browser.pushHistory.restore()
     querystring.parameter.restore()
     locationSelector.getCurrent.restore()
+    storage.get.restore()
+    storage.set.restore()
   })
 
   it('- should set noItemsAvailable to true', () => {
