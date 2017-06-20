@@ -42,12 +42,12 @@
   color: #fff;
   border-radius: 10px;
 
-  @include mq($from: m, $until: xl) {
-    height: 520px;
+  @include mq($from: s, $until: xl) {
+    height: 620px;
   }
 
   @include mq($from: xl) {
-    height: 440px;
+    height: 500px;
   }
 
   .h1,

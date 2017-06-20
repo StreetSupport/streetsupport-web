@@ -1,0 +1,17 @@
+<div class="block__section">
+  \{{#geoLocationUnavailable}}
+  <p>Unfortunately, we cannot determine your location. Please ensure location is enabled on your device.</p>
+  \{{/geoLocationUnavailable}}
+  \{{^geoLocationUnavailable}}
+  <p>Unfortunately there are no services listed near you yet. Please use the dropdown above to select a supported location.</p>
+  \{{/geoLocationUnavailable}}
+  \{{#nearestSupportedId}}
+  <div class="text-center">
+    <a href="/find-help/\{{categoryId}}/?location=\{{nearestSupportedId}}&range=\{{selectedRange}}" class="btn btn--brand-e">
+      <span class="btn__text">View your nearest supported city (\{{nearestSupportedName}})</span>
+    </a>
+  </div>
+  \{{/nearestSupportedId}}
+  <p>If you know of organisations near you that should be listed, please encourage them to add their services by <a href="/register">registering here</a>.
+  <p>If you would like to see Street Support in your city, you can <a href="/about/new-locations/">find out more about new locations here</a>.</p>
+</div>

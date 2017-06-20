@@ -15,7 +15,7 @@
 .category-view-options__items {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 15px 0 0 0;
 
   @include mq($from: m) {
     @include span(3 of 4);
@@ -25,16 +25,18 @@
 
 .category-view-options__item {
   margin: 0;
-  @include mq($from: m) {
-    @include span(1 of 3);
-    &:last-child {
-      @include last();
-    }
+  padding: 0;
+  @include span(1 of 3);
+  &:last-child {
+    @include last();
   }
 }
 
 .category-view-options__button {
   margin: 0;
+  .btn__text {
+    padding: 0;
+  }
 
   color: $brand-a!important;
 

@@ -8,6 +8,10 @@ var redirect = function (url) {
   window.location = url
 }
 
+const reload = () => {
+  window.location.reload()
+}
+
 var loaderAnim
 
 var getLoader = function () {
@@ -17,6 +21,10 @@ var getLoader = function () {
     })
   }
   return loaderAnim
+}
+
+const location = () => {
+  return window.location
 }
 
 let getBody = () => {
@@ -111,6 +119,8 @@ const initPrint = () => {
 
 module.exports = {
   redirect: redirect,
+  reload: reload,
+  location: location,
   loading: loading,
   loaded: loaded,
   trackEvent: trackEvent,

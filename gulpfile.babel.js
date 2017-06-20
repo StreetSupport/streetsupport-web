@@ -29,10 +29,12 @@ gulp.task('jsdevwatch', () => {
 // Build website, either with development or minified assets and run server with live reloading
 gulp.task('default', (callback) => {
   runSequence(
+    'getLongTermData',
     'jasmine',
     'standardlint',
     'clean',
     'cachebusting',
+    'generate-service-pages',
     'metalsmith',
     ['htmlmin', 'svgsprite', 'scss', 'webpack', 'img', 'copy'],
     ['browsersync', 'watch'],
@@ -43,10 +45,12 @@ gulp.task('default', (callback) => {
 // Build website, either with development or minified assets depending on flag
 gulp.task('deploy', (callback) => {
   runSequence(
+    'getLongTermData',
     'jasmine',
     'standardlint',
     'clean',
     'cachebusting',
+    'generate-service-pages',
     'metalsmith',
     ['htmlmin', 'svgsprite', 'scss', 'webpack', 'img', 'copy'],
     'criticalcss',
@@ -57,6 +61,7 @@ gulp.task('deploy', (callback) => {
 // Run tests and watch js/spec files
 gulp.task('jsdev', (callback) => {
   runSequence(
+    'getLongTermData',
     'jasmine',
     'standardlint',
     'specsstandardlint',

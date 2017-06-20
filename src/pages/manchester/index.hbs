@@ -1,6 +1,7 @@
 ---
-title: Street Support - Working together to end homelessness in Manchester
+title: Street Support Manchester - Working together to end homelessness in Manchester
 description: Street Support - Find help, and give help, to support people who are homeless in Manchester
+image: https://streetsupport.net/assets/img/og/street-support-manchester.png
 layout: default.hbs
 permalink: false
 jsBundle: home
@@ -45,16 +46,17 @@ nosubnav: true
         {{>cta brand="d" icon="findhelp" link="/find-help/" name="Find Help"}}
         {{>cta brand="e" icon="givehelp" link="/give-help/" name="Give Help"}}
       </div>
+      {{> manchester/stats }}
     </div>
   </div>
 </div>
 
-{{> manchester-home-promo }}
+{{> manchester/home-promo }}
 
 <div class="block block--highlight block--promo">
   <div class="container">
     <div class="block__content partners">
-      {{> manchester-supporters }}
+      {{> manchester/supporters }}
       <p>We are looking for businesses and organisations in Manchester to <a href="/give-help/partnership/">support us</a> so that we can continue to develop this resource.</p>
       <p>If you share our vision of a world without homelessness, please <a href="mailto:sponsorship@streetsupport.net">get in touch</a>.</p>
     </div>

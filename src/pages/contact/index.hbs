@@ -1,9 +1,10 @@
 ---
 title: Contact - Street Support
 description: Street support makes it easier to help homeless people. Here's how to get in touch.
+image: https://streetsupport.net/assets/img/og/street-support.png
 layout: default.hbs
 permalink: false
-jsBundle: generic
+jsBundle: contact
 section: contact
 page: contact
 nosubnav: true
@@ -27,15 +28,11 @@ nosubnav: true
 <div class="block">
   <div class="container block__inner">
     <div class="block__content">
-      <p><strong>Please note that we do not run any frontline services. Please check for suitable organisations in the <a href="/find-help/">Find Help</a> section if you are experiencing homelessness and need support.</strong></p>
+      <p class="text-center"><strong>Please note that we do not run any frontline services. Please check for suitable organisations in the <a href="/find-help/">Find Help</a> section if you are experiencing homelessness and need support.</strong></p>
 
-      <h2 class="h2">Charities and Voluntary Groups</h2>
-      <p>If you are a Manchester or Leeds based organisation, and would like your services to be listed, you can <a href="/register/">register</a> through the site. If you would like any information to be changed or removed, and you do not have a login, please let us know at <a href="mailto:admin@streetsupport.net">admin@streetsupport.net</a>.</p>
+      <div id="js-output" class="template"></div>
 
-      <h2 class="h2">Corporate Partners</h2>
-      <p>If you are a business that share our values and would like to support our mission, please contact <a href="mailto:sponsorship@streetsupport.net">sponsorship@streetsupport.net</a>.</p>
-
-      <h2 class="h2">General Questions</h2>
+      <h2 class="h2">General Enquiries</h2>
       <p>If you have any questions, ideas, or would like to know more about us, you can get in touch at <a href="mailto:info@streetsupport.net">info@streetsupport.net</a>.</p>
 
       <h2 class="h2">General Updates</h2>
@@ -47,3 +44,23 @@ nosubnav: true
     </div>
   </div>
 </div>
+
+
+<script id="js-tpl" type="text/template">
+  <div class="result-detail">
+    \{{#qAndAs}}
+    <div class="accordion js-accordion">
+      <h3 class="h3 accordion__header js-header">
+        \{{{question}}}
+      </h3>
+      <div class="accordion__item js-item">
+        <div class="accordion__inner">
+          <div class="result-detail__item">
+            \{{{answer}}}
+          </div>
+        </div>
+      </div>
+    </div>
+    \{{/qAndAs}}
+  </div>
+</script>

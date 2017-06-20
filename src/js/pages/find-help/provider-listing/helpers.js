@@ -1,6 +1,5 @@
-import 'babel-polyfill'
-
 const apiRoutes = require('../../../api')
+const browser = require('../../../browser')
 const querystring = require('../../../get-url-parameter')
 
 const htmlEncode = require('htmlencode')
@@ -8,7 +7,8 @@ const marked = require('marked')
 marked.setOptions({sanitize: true})
 
 export const buildFindHelpUrl = (locationResult) => {
-  const category = querystring.parameter('category')
+  const re = new RegExp(/find-help\/(.*)\//)
+  const category = browser.location().pathname.match(re)[1]
   const location = querystring.parameter('location')
   const range = querystring.parameter('range')
 
@@ -67,6 +67,7 @@ export const getProvidersForListing = (providers) => {
       info: marked(htmlEncode.htmlDecode(provider.info)),
       location: provider.location,
       days: groupOpeningTimes(provider.openingTimes),
+      isOpen247: provider.isOpen247,
       servicesAvailable: provider.subCategories
         .map((sc) => sc.name)
         .join(', ')

@@ -1,6 +1,7 @@
 ---
 title: Find Help - Street Support
-description: Street support makes it easier to help homeless people in Manchester. Find help relevant to your needs.
+description: Street support makes it easier to help homeless people. Find help relevant to your needs.
+image: https://streetsupport.net/assets/img/og/street-support.png
 layout: default.hbs
 permalink: false
 jsBundle: findhelp
@@ -38,7 +39,7 @@ page: findhelp
       <div class="block__content">
         <div class="title-with-button">
           <h2 class="h2 title-with-button__title">Recently homeless?</h2>
-          <a class="btn btn--brand-g title-with-button__btn" href="/\{{location.id}}/emergency-help/">
+          <a class="btn btn--brand-g title-with-button__btn" href="\{{ emergencyHelpUrl }}">
             <span class="btn__text">Get Emergency Advice</span>
           </a>
         </div>
@@ -46,7 +47,7 @@ page: findhelp
         <div class="block__cta--grid result-grid">
           \{{#categories}}
             <span class="cta">
-              <a class="btn btn--brand-d" href="\{{page}}/?category=\{{key}}&location=my-location">
+              <a class="btn btn--brand-d" id="\{{key}}" href="\{{page}}?location=my-location">
                 <span class="btn__icon">
                   <svg class="svg-\{{key}}-dims"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#\{{key}}"></use></svg>
                   <span class="btn__overlay"></span>
