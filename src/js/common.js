@@ -4,6 +4,7 @@ var analytics = require('./analytics')
 const headerCitySelector = require('./navigation/headerCitySelector')
 
 import Svg4everybody from 'svg4everybody'
+import 'babel-polyfill'
 
 let removeNoJS = () => {
   var html = document.querySelector('html')
