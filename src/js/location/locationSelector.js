@@ -6,7 +6,9 @@ const supportedCities = require('./supportedCities')
 const browser = require('../browser')
 const cookies = require('../cookies')
 const modal = require('./modal')
+
 import { getByCoords } from './postcodes'
+import * as storage from '../storage'
 
 const myLocationId = 'my-location'
 
@@ -141,6 +143,28 @@ const getCurrent = () => {
   return deferred.promise
 }
 
+const getPreviouslySetPostcode = () => {
+  const deferred = Q.defer()
+  const userLocationState = storage.get(storage.keys.userLocationState)
+  if (userLocationState) {
+    deferred.resolve({
+      'id': 'my-location',
+      'findHelpId': 'my-location',
+      'name': 'my selected postocde',
+      'longitude': userLocationState.longitude,
+      'latitude': userLocationState.latitude,
+      'isPublic': true,
+      'isSelectableInBody': false,
+      'postcode': userLocationState.postcode
+    })
+  } else {
+    const getLocation = _determineLocationRetrievalMethod()
+    getLocation.method(deferred, getLocation.id)
+  }
+
+  return deferred.promise
+}
+
 const setCurrent = (newCity) => {
   if (newCity.length > 0) {
     document.cookie = `${cookies.keys.location}=${newCity};expires=Fri, 31 Dec 9999 23:59:59 GMT;path=/`
@@ -185,6 +209,7 @@ const onChange = (onChangeLocationCallback, selectorId = '.js-location-select') 
 
 const exportedObj = {
   getSelectedLocationId: getSelectedLocationId,
+  getPreviouslySetPostcode: getPreviouslySetPostcode,
   getCurrent: getCurrent,
   setCurrent: setCurrent,
   getViewModel: getViewModel,

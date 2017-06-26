@@ -35,7 +35,7 @@ describe('Accommodation - Listing', function () {
     browserLoadedStub = sinon.stub(browser, 'loaded')
     browserPushHistoryStub = sinon.stub(browser, 'pushHistory')
     sinon.stub(querystring, 'parameter')
-    sinon.stub(locationSelector, 'getCurrent')
+    sinon.stub(locationSelector, 'getPreviouslySetPostcode')
       .returns({
         then: function (success, error) {
           success({
@@ -55,7 +55,7 @@ describe('Accommodation - Listing', function () {
     browser.loading.restore()
     browser.loaded.restore()
     browser.pushHistory.restore()
-    locationSelector.getCurrent.restore()
+    locationSelector.getPreviouslySetPostcode.restore()
     querystring.parameter.restore()
     storage.get.restore()
     storage.set.restore()

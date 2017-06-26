@@ -94,30 +94,16 @@ const AccommodationListing = function () {
       })
   }
 
-  const userLocationState = storage.get(storage.keys.userLocationState)
-  if (userLocationState) {
-    self.init({
-      'id': 'my-location',
-      'findHelpId': 'my-location',
-      'name': 'my selected postocde',
-      'longitude': userLocationState.longitude,
-      'latitude': userLocationState.latitude,
-      'isPublic': true,
-      'isSelectableInBody': false,
-      'postcode': userLocationState.postcode
-    })
-  } else {
-    locationSelector
-      .getCurrent()
-      .then((result) => {
-        storage.set(storage.keys.userLocationState, {
-          'postcode': result.postcode,
-          'longitude': result.longitude,
-          'latitude': result.latitude
-        })
-        self.init(result)
+  locationSelector
+    .getPreviouslySetPostcode()
+    .then((result) => {
+      storage.set(storage.keys.userLocationState, {
+        'postcode': result.postcode,
+        'longitude': result.longitude,
+        'latitude': result.latitude
       })
-  }
+      self.init(result)
+    })
 }
 
 module.exports = AccommodationListing
