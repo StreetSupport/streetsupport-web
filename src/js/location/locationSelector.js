@@ -7,7 +7,7 @@ const browser = require('../browser')
 const cookies = require('../cookies')
 const modal = require('./modal')
 
-import { getByCoords } from './postcodes'
+import * as postcodes from './postcodes'
 import * as storage from '../storage'
 
 const myLocationId = 'my-location'
@@ -64,7 +64,7 @@ const _useMyLocation = (deferred) => {
       if (cookies.get(cookies.keys.location) !== undefined && saved.length > 0) {
         cityId = supportedCities.get(saved).id
       }
-      getByCoords(userLocation.coords, (postcode) => {
+      postcodes.getByCoords(userLocation.coords, (postcode) => {
         deferred.resolve({
           id: cityId,
           findHelpId: myLocationId,
@@ -143,26 +143,39 @@ const getCurrent = () => {
   return deferred.promise
 }
 
+const buildLocationResult = (userLocationState) => {
+  return {
+    'id': 'my-location',
+    'findHelpId': 'my-location',
+    'name': 'my selected postocde',
+    'longitude': userLocationState.longitude,
+    'latitude': userLocationState.latitude,
+    'isPublic': true,
+    'isSelectableInBody': false,
+    'postcode': userLocationState.postcode
+  }
+}
+
 const getPreviouslySetPostcode = () => {
   const deferred = Q.defer()
   const userLocationState = storage.get(storage.keys.userLocationState)
   if (userLocationState) {
-    deferred.resolve({
-      'id': 'my-location',
-      'findHelpId': 'my-location',
-      'name': 'my selected postocde',
-      'longitude': userLocationState.longitude,
-      'latitude': userLocationState.latitude,
-      'isPublic': true,
-      'isSelectableInBody': false,
-      'postcode': userLocationState.postcode
-    })
+    deferred.resolve(buildLocationResult(userLocationState))
   } else {
     const getLocation = _determineLocationRetrievalMethod()
     getLocation.method(deferred, getLocation.id)
   }
 
   return deferred.promise
+}
+
+const setPostcode = (postcode, onSuccessCallback, onErrorCallback) => {
+  postcodes.getCoords(postcode, (coordsResult) => {
+    storage.set(storage.keys.userLocationState, coordsResult)
+    onSuccessCallback(buildLocationResult(coordsResult))
+  }, (error) => {
+    onErrorCallback(error)
+  })
 }
 
 const setCurrent = (newCity) => {
@@ -210,6 +223,7 @@ const onChange = (onChangeLocationCallback, selectorId = '.js-location-select') 
 const exportedObj = {
   getSelectedLocationId: getSelectedLocationId,
   getPreviouslySetPostcode: getPreviouslySetPostcode,
+  setPostcode: setPostcode,
   getCurrent: getCurrent,
   setCurrent: setCurrent,
   getViewModel: getViewModel,
