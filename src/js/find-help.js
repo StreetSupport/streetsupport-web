@@ -26,33 +26,10 @@ var FindHelp = function (location) {
     ? 10000
     : querystring.parameter('range')
 
-  self.initFindHelpLocationSelector = () => {
-    const dropdown = document.querySelector('.js-find-help-dropdown')
-    let options = supportedCities.locations
-      .filter((c) => c.isSelectableInBody)
-      .map((c) => {
-        return {
-          id: c.id,
-          name: c.name
-        }
-      })
-    if (getLocation.isAvailable()) {
-      options.unshift({
-        id: 'my-location',
-        name: 'my location'
-      })
-    }
-    options.forEach((c) => {
-      const attrs = {
-        value: c.id
-      }
-      if (c.id === location) {
-        attrs['selected'] = 'selected'
-      }
-      dropdown.appendChild(newElement('option', c.name, attrs))
-    })
-
+  self.initFindHelpLocationSelector = (onChangeCallback) => {
     const range = document.querySelector('.js-find-help-range')
+
+    // set range dropdown to selected
     Array.from(range.children)
       .forEach((c) => {
         if (parseInt(c.value) === parseInt(self.currentRange)) {
@@ -60,24 +37,79 @@ var FindHelp = function (location) {
         }
       })
 
-    const updateOnRangeAndLocation = (event) => {
-      event.preventDefault()
-      const location = document.querySelector('.js-find-help-dropdown').value
-      const range = document.querySelector('.js-find-help-range').value
-      let newQueryString = window.location.search
-        .replace(querystring.parameter('location'), location)
+    const dropdown = document.querySelector('.js-find-help-dropdown')
+    if (dropdown) {
+      let options = supportedCities.locations
+        .filter((c) => c.isSelectableInBody)
+        .map((c) => {
+          return {
+            id: c.id,
+            name: c.name
+          }
+        })
+      if (getLocation.isAvailable()) {
+        options.unshift({
+          id: 'my-location',
+          name: 'my location'
+        })
+      }
+      options.forEach((c) => {
+        const attrs = {
+          value: c.id
+        }
+        if (c.id === location) {
+          attrs['selected'] = 'selected'
+        }
+        dropdown.appendChild(newElement('option', c.name, attrs))
+      })
 
-      if (newQueryString.indexOf('range') >= 0) {
-        newQueryString = newQueryString.replace(querystring.parameter('range'), range)
-      } else {
-        newQueryString += '&range=' + range
+      const updateOnRangeAndLocation = (event) => {
+        event.preventDefault()
+        const location = document.querySelector('.js-find-help-dropdown').value
+        const range = document.querySelector('.js-find-help-range').value
+        let newQueryString = window.location.search
+          .replace(querystring.parameter('location'), location)
+
+        if (newQueryString.indexOf('range') >= 0) {
+          newQueryString = newQueryString.replace(querystring.parameter('range'), range)
+        } else {
+          newQueryString += '&range=' + range
+        }
+
+        window.location.href = window.location.pathname + newQueryString
       }
 
-      window.location.href = window.location.pathname + newQueryString
+      range.addEventListener('change', updateOnRangeAndLocation)
+      dropdown.addEventListener('change', updateOnRangeAndLocation)
     }
+  }
 
-    range.addEventListener('change', updateOnRangeAndLocation)
-    dropdown.addEventListener('change', updateOnRangeAndLocation)
+  self.initFindHelpPostcodesLocationSelector = (onChangeCallback) => {
+    const range = document.querySelector('.js-find-help-range')
+
+    // set range dropdown to selected
+    Array.from(range.children)
+      .forEach((c) => {
+        if (parseInt(c.value) === parseInt(self.currentRange)) {
+          c.setAttribute('selected', 'selected')
+        }
+      })
+
+    const updateSearchButton = document.querySelector('.js-update-search')
+    if (updateSearchButton) {
+      updateSearchButton.addEventListener('click', (e) => {
+        e.preventDefault()
+        const locationSearchPostcode = document.querySelector('.js-location-search-postcode')
+        const rangeVal = range.value
+        const postcodeValue = locationSearchPostcode.value
+
+        self.currentRange = rangeVal
+
+        onChangeCallback(rangeVal, postcodeValue)
+      }, () => {
+        console.log('error')
+      })
+    }
   }
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {

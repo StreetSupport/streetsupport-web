@@ -6,11 +6,10 @@ const htmlEncode = require('htmlencode')
 const marked = require('marked')
 marked.setOptions({sanitize: true})
 
-export const buildFindHelpUrl = (locationResult) => {
+export const buildFindHelpUrl = (locationResult, range = querystring.parameter('range')) => {
   const re = new RegExp(/find-help\/(.*)\//)
   const category = browser.location().pathname.match(re)[1]
   const location = querystring.parameter('location')
-  const range = querystring.parameter('range')
 
   let url = apiRoutes.cities + locationResult.findHelpId + '/services/' + category
   if (location === 'my-location') {
