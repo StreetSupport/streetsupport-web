@@ -30,12 +30,6 @@ const initClickEvents = () => {
       action: () => {
         browser.scrollTo('.requests-detail__heading--i-can-help')
       }
-    },
-    {
-      selector: 'form__submit',
-      action: () => {
-        console.log('submit form')
-      }
     }
   ]
   clickEvents
