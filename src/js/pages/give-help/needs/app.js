@@ -10,40 +10,13 @@ const templating = require('../../../template-render')
 
 import { formatNeeds } from '../../../models/give-help/requests/needs'
 import { buildList, initAutoComplete } from '../../../models/give-help/requests/listing'
+import { PostcodeProximity } from '../../../components/PostcodeProximity'
 
 const openIfCardRequested = () => {
   const cardId = getUrlParams.parameter('id').replace('/', '')
   if (cardId) {
     browser.redirect(`request?id=${cardId}`)
   }
-}
-
-const setRange = (newValue) => {
-  const range = document.querySelector('.js-find-help-range')
-  Array.from(range.children)
-    .forEach((c) => {
-      if (parseInt(c.value) === parseInt(newValue)) {
-        c.setAttribute('selected', 'selected')
-      }
-    })
-}
-
-const initSearchForm = (currRange) => {
-  setRange(currRange)
-  const updateSearchButton = document.querySelector('.js-update-search')
-  const locationSearchPostcode = document.querySelector('.js-location-search-postcode')
-  const range = document.querySelector('.js-find-help-range')
-  updateSearchButton.addEventListener('click', (e) => {
-    e.preventDefault()
-    browser.loading()
-    const rangeVal = range.value
-    const postcodeValue = locationSearchPostcode.value
-    locationSelector.setPostcode(postcodeValue, (newLocationResult) => {
-      init(newLocationResult, rangeVal)
-    })
-  }, () => {
-    console.log('error')
-  })
 }
 
 const renderNeeds = (needs, userLocation, currRange) => {
@@ -56,7 +29,9 @@ const renderNeeds = (needs, userLocation, currRange) => {
   }
 
   const defaultCallback = () => {
-    initSearchForm(currRange)
+    const postcodeProximityComponent = new PostcodeProximity(currRange, (newLocationResult, newRange) => { //eslint-disable-line
+      init(newLocationResult, newRange)
+    })
     browser.loaded()
   }
 
