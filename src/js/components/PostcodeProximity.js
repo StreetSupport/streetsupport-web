@@ -7,7 +7,6 @@ export class PostcodeProximity {
     this.range = document.querySelector('.js-find-help-range')
     this.updateSearchButton = document.querySelector('.js-update-search')
     this.postcode = document.querySelector('.js-location-search-postcode')
-
     this.setRange(range)
     this.updateSearchButton.addEventListener('click', (e) => {
       e.preventDefault()

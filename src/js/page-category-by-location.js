@@ -86,14 +86,9 @@ const getTemplate = (providers) => {
   : 'js-category-no-results-result-tpl'
 }
 
-const onLocationCriteriaChange = (range, postcode) => {
+const onLocationCriteriaChange = (result, range) => {
   browser.loading()
-  locationSelector.setPostcode(postcode, (result) => {
-    buildList(result, range)
-  }, (_) => {
-    browser.loaded()
-    window.alert('Sorry, we couldn`t find that postcode. Please try an alternative one.')
-  })
+  buildList(result, range)
 }
 
 const hasItemsCallback = (providers, locationResult) => {

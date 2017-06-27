@@ -96,14 +96,9 @@ const hasProvidersCallback = () => {
   defaultOnRenderListingCallback()
 }
 
-const onLocationCriteriaChange = (range, postcode) => {
+const onLocationCriteriaChange = (newLocationResult, newRange) => {
   browser.loading()
-  locationSelector.setPostcode(postcode, (result) => {
-    renderListing(buildFindHelpUrl(result, range), result)
-  }, (_) => {
-    browser.loaded()
-    window.alert('Sorry, we couldn`t find that postcode. Please try an alternative one.')
-  })
+  renderListing(buildFindHelpUrl(newLocationResult, newRange), newLocationResult)
 }
 
 const defaultOnRenderListingCallback = () => {

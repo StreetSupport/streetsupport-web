@@ -18,14 +18,9 @@ const browser = require('./browser')
 const locationSelector = require('./location/locationSelector')
 let findHelp = null
 
-const onLocationCriteriaChange = (range, postcode) => {
+const onLocationCriteriaChange = (result, range) => {
   browser.loading()
-  locationSelector.setPostcode(postcode, (result) => {
-    buildList(buildUrl(result, range), result)
-  }, (_) => {
-    browser.loaded()
-    window.alert('Sorry, we couldn`t find that postcode. Please try an alternative one.')
-  })
+  buildList(buildUrl(result, range), result)
 }
 
 function buildList (url, locationResult) {

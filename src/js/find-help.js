@@ -1,5 +1,6 @@
 const browser = require('./browser')
 const querystring = require('./get-url-parameter')
+import { PostcodeProximity } from './components/PostcodeProximity'
 
 const FindHelp = function (location) {
   const self = this
@@ -30,30 +31,14 @@ const FindHelp = function (location) {
     : querystring.parameter('range')
 
   self.initFindHelpPostcodesLocationSelector = (onChangeCallback) => {
-    const range = document.querySelector(self.ui.range)
-    // set range dropdown to selected
-    Array.from(range.children)
-      .forEach((c) => {
-        if (parseInt(c.value) === parseInt(self.currentRange)) {
-          c.setAttribute('selected', 'selected')
-        }
-      })
-
-    const updateSearchButton = document.querySelector(self.ui.searchBtn)
-    if (updateSearchButton) {
-      updateSearchButton.addEventListener('click', (e) => {
-        e.preventDefault()
-        const locationSearchPostcode = document.querySelector(self.ui.postcode)
-        const rangeVal = range.value
-        const postcodeValue = locationSearchPostcode.value
-
-        self.currentRange = rangeVal
-
-        onChangeCallback(rangeVal, postcodeValue)
-      }, () => {
-        console.log('error')
-      })
+    const decoratedCallback = (locationResult, range) => {
+      self.currentRange = range
+      const location = browser.location()
+      const newUrl = location.href.replace(/(range=)[^&]+/, '$1' + range)
+      browser.pushHistory({}, '', newUrl)
+      onChangeCallback(locationResult, range)
     }
+    const pcpComponent = new PostcodeProximity(self.currentRange, decoratedCallback) // eslint-disable-line
   }
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
