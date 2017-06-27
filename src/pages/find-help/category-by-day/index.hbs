@@ -42,7 +42,7 @@ page: categorybyday
       <div class="block__content">
         <div class="result-detail">
           <div class="text-center">\{{{categorySynopsis}}}</div>
-          \{{#organisations}}{{> location-description }}\{{/organisations}}
+          \{{#organisations}}{{> location-description-with-postcode }}\{{/organisations}}
           {{> no-services geoLocationUnavailable="geoLocationUnavailable" }}
           </div>
         </div>
@@ -81,7 +81,7 @@ page: categorybyday
     <div class="container block__inner">
       <div class="block__content">
         <div class="text-center">\{{{categorySynopsis}}}</div>
-        {{> location-description}}
+        {{> location-description-with-postcode}}
 
         {{> category-view-selector timetable="true" }}
 

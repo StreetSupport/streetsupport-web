@@ -3,19 +3,10 @@ const browser = require('../../../browser')
 const querystring = require('../../../get-url-parameter')
 const htmlEncode = require('htmlencode')
 
-export const buildFindHelpUrl = (locationResult) => {
+export const buildFindHelpUrl = (locationResult, range = querystring.parameter('range')) => {
   const re = new RegExp(/find-help\/(.*)\//)
   const category = browser.location().pathname.match(re)[1].split('/')[0]
-  const location = querystring.parameter('location')
-  const range = querystring.parameter('range')
-
-  let url = apiRoutes.cities + locationResult.findHelpId + '/services/' + category
-  if (location === 'my-location') {
-    url = apiRoutes.servicesByCategory + category + '/' + locationResult.latitude + '/' + locationResult.longitude
-  }
-  url += '?range=' + range
-
-  return url
+  return apiRoutes.servicesByCategory + category + '/' + locationResult.latitude + '/' + locationResult.longitude + '?range=' + range
 }
 
 export const buildInfoWindowMarkup = (p) => {

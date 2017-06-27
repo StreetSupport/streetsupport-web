@@ -19,8 +19,16 @@ import { buildFindHelpUrl, getProvidersForListing, getSubCategories } from './pa
 
 let findHelp = null
 
+const subCatFilter = {
+  selectors: {
+    item: '.js-filter-item',
+    selectedItem: '.js-filter-item.on',
+    asDropdown: '.list-to-dropdown__select'
+  }
+}
+
 const changeSubCatFilter = (e) => {
-  Array.from(document.querySelectorAll('.js-filter-item'))
+  Array.from(document.querySelectorAll(subCatFilter.selectors.item))
     .forEach((item) => {
       item.classList.remove('on')
     })
@@ -45,13 +53,47 @@ const changeSubCatFilter = (e) => {
   findHelp.setUrl('category-by-day', 'sub-category', id)
 }
 
-const dropdownChangeHandler = (e) => {
-  Array.from(document.querySelectorAll('.js-filter-item'))
+const initHistoryBackOnSubcats = () => {
+  browser.setOnHistoryPop(() => {
+    const subCat = querystring.parameter('sub-category')
+    changeSubCatFilter({target: document.querySelector(`[data-id="${subCat}"]`)})
+  })
+}
+
+const onSubCatDropdownChange = (e) => {
+  Array.from(document.querySelectorAll(subCatFilter.selectors.item))
     .forEach((item) => {
       if (item.innerText === e.target.value) {
         changeSubCatFilter({target: item})
       }
     })
+}
+
+const initSubCatAsDropdown = () => {
+  const dropdown = document.querySelector(subCatFilter.selectors.asDropdown)
+  const filterItems = document.querySelector(subCatFilter.selectors.selectedItem)
+  dropdown.value = filterItems.innerText
+  dropdown.addEventListener('change', onSubCatDropdownChange)
+}
+
+const initSubCatFilter = () => {
+  const reqSubCat = querystring.parameter('sub-category')
+  Array.from(document.querySelectorAll(subCatFilter.selectors.item))
+    .forEach((item) => {
+      item.addEventListener('click', changeSubCatFilter)
+      if (item.getAttribute('data-id') === reqSubCat) {
+        changeSubCatFilter({target: item})
+      }
+    })
+  initHistoryBackOnSubcats()
+  listToDropdown.init(initSubCatAsDropdown)
+}
+
+const hasProvidersCallback = () => {
+  accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'), true)
+  initSubCatFilter()
+
+  defaultOnRenderListingCallback()
 }
 
 const onLocationCriteriaChange = (range, postcode) => {
@@ -64,36 +106,12 @@ const onLocationCriteriaChange = (range, postcode) => {
   })
 }
 
-const hasProvidersCallback = () => {
-  accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'), true)
-
-  const reqSubCat = querystring.parameter('sub-category')
-  Array.from(document.querySelectorAll('.js-filter-item'))
-    .forEach((item) => {
-      item.addEventListener('click', changeSubCatFilter)
-      if (item.getAttribute('data-id') === reqSubCat) {
-        changeSubCatFilter({target: item})
-      }
-    })
-
-  listToDropdown.init(initDropdownChangeHandler)
-
-  defaultOnRenderListingCallback()
-}
-
 const defaultOnRenderListingCallback = () => {
   findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
   browser.initPrint()
   browser.loaded()
   socialShare.init()
   analytics.init(document.title)
-}
-
-const initDropdownChangeHandler = () => {
-  const dropdown = document.querySelector('.list-to-dropdown__select')
-  const filterItems = document.querySelector('.js-filter-item.on')
-  dropdown.value = filterItems.innerText
-  dropdown.addEventListener('change', dropdownChangeHandler)
 }
 
 const getTemplate = (providers) => {
