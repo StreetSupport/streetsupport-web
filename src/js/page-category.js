@@ -17,14 +17,18 @@ const locationSelector = require('./location/locationSelector')
 
 import { buildFindHelpUrl, getProvidersForListing, getSubCategories } from './pages/find-help/provider-listing/helpers'
 
-const onChangeLocation = (newLocation) => {
-  window.location.href = `/find-help/${findHelp.theCategory}?location=${newLocation}`
-}
-
 let findHelp = null
 
+const subCatFilter = {
+  selectors: {
+    item: '.js-filter-item',
+    selectedItem: '.js-filter-item.on',
+    asDropdown: '.list-to-dropdown__select'
+  }
+}
+
 const changeSubCatFilter = (e) => {
-  Array.from(document.querySelectorAll('.js-filter-item'))
+  Array.from(document.querySelectorAll(subCatFilter.selectors.item))
     .forEach((item) => {
       item.classList.remove('on')
     })
@@ -49,13 +53,60 @@ const changeSubCatFilter = (e) => {
   findHelp.setUrl('category-by-day', 'sub-category', id)
 }
 
-const dropdownChangeHandler = (e) => {
-  Array.from(document.querySelectorAll('.js-filter-item'))
+const initHistoryBackOnSubcats = () => {
+  browser.setOnHistoryPop(() => {
+    const subCat = querystring.parameter('sub-category')
+    changeSubCatFilter({target: document.querySelector(`[data-id="${subCat}"]`)})
+  })
+}
+
+const onSubCatDropdownChange = (e) => {
+  Array.from(document.querySelectorAll(subCatFilter.selectors.item))
     .forEach((item) => {
       if (item.innerText === e.target.value) {
         changeSubCatFilter({target: item})
       }
     })
+}
+
+const initSubCatAsDropdown = () => {
+  const dropdown = document.querySelector(subCatFilter.selectors.asDropdown)
+  const filterItems = document.querySelector(subCatFilter.selectors.selectedItem)
+  dropdown.value = filterItems.innerText
+  dropdown.addEventListener('change', onSubCatDropdownChange)
+}
+
+const initSubCatFilter = () => {
+  const reqSubCat = querystring.parameter('sub-category')
+  Array.from(document.querySelectorAll(subCatFilter.selectors.item))
+    .forEach((item) => {
+      item.addEventListener('click', changeSubCatFilter)
+      if (item.getAttribute('data-id') === reqSubCat) {
+        changeSubCatFilter({target: item})
+      }
+    })
+  initHistoryBackOnSubcats()
+  listToDropdown.init(initSubCatAsDropdown)
+}
+
+const hasProvidersCallback = () => {
+  accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'), true)
+  initSubCatFilter()
+
+  defaultOnRenderListingCallback()
+}
+
+const onLocationCriteriaChange = (newLocationResult, newRange) => {
+  browser.loading()
+  renderListing(buildFindHelpUrl(newLocationResult, newRange), newLocationResult)
+}
+
+const defaultOnRenderListingCallback = () => {
+  findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
+  browser.initPrint()
+  browser.loaded()
+  socialShare.init()
+  analytics.init(document.title)
 }
 
 const getTemplate = (providers) => {
@@ -64,99 +115,58 @@ const getTemplate = (providers) => {
   : 'js-category-no-results-result-tpl'
 }
 
-const hasProvidersCallback = () => {
-  accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'), true)
-
-  const filterItems = Array.from(document.querySelectorAll('.js-filter-item'))
-
-  filterItems
-    .forEach((item) => {
-      item.addEventListener('click', changeSubCatFilter)
-    })
-
-  const reqSubCat = querystring.parameter('sub-category')
-  filterItems
-    .forEach((item) => {
-      if (item.getAttribute('data-id') === reqSubCat) {
-        changeSubCatFilter({target: item})
-      }
-    })
-
-  locationSelector.handler(onChangeLocation)
-  listToDropdown.init(initDropdownChangeHandler)
-  findHelp.initFindHelpLocationSelector()
-
-  browser.initPrint()
-
-  browser.loaded()
-  socialShare.init()
-}
-
-const hasNoProvidersCallback = () => {
-  listToDropdown.init()
-  locationSelector.handler(onChangeLocation)
-  findHelp.initFindHelpLocationSelector()
-  browser.initPrint()
-  browser.loaded()
-  socialShare.init()
-}
-
-const getCallback = (providers) => {
+const getOnRenderCallback = (providers) => {
   return providers.length > 0
   ? () => hasProvidersCallback()
-  : () => hasNoProvidersCallback()
+  : () => defaultOnRenderListingCallback()
 }
 
-const initDropdownChangeHandler = () => {
-  const dropdown = document.querySelector('.list-to-dropdown__select')
-  const filterItems = document.querySelector('.js-filter-item.on')
-  dropdown.value = filterItems.innerText
-  dropdown.addEventListener('change', dropdownChangeHandler)
+const getViewModel = (providers, category, locationResult) => {
+  const formattedProviders = getProvidersForListing(providers)
+  return {
+    organisations: formattedProviders,
+    subCategories: getSubCategories(providers),
+    shouldShowFilter: `${formattedProviders.length > 1}`,
+    categoryId: category.id,
+    categoryName: category.name,
+    categorySynopsis: marked(category.synopsis),
+    location: locationResult.name,
+    postcode: locationResult.postcode,
+    nearestSupportedId: locationResult.nearestSupported !== undefined ? locationResult.nearestSupported.id : '',
+    nearestSupportedName: locationResult.nearestSupported !== undefined ? locationResult.nearestSupported.name : '',
+    selectedRange: querystring.parameter('range'),
+    geoLocationUnavailable: locationResult.geoLocationUnavailable !== undefined
+      ? locationResult.geoLocationUnavailable
+      : false
+  }
 }
 
-function buildList (url, locationResult) {
+function renderListing (url, locationResult) {
   getApiData.data(url)
   .then(function (result) {
     if (result.status === 'error') {
       window.location.replace('/find-help/')
     }
-    analytics.init(document.title)
 
     const template = getTemplate(result.data.providers)
-    const onRenderCallback = getCallback(result.data.providers)
-
-    const formattedProviders = getProvidersForListing(result.data.providers)
-    const viewModel = {
-      organisations: formattedProviders,
-      subCategories: getSubCategories(result.data.providers),
-      shouldShowFilter: '' + formattedProviders.length > 1,
-      categoryId: result.data.category.id,
-      categoryName: result.data.category.name,
-      categorySynopsis: marked(result.data.category.synopsis),
-      location: locationResult.name,
-      nearestSupportedId: locationResult.nearestSupported !== undefined ? locationResult.nearestSupported.id : '',
-      nearestSupportedName: locationResult.nearestSupported !== undefined ? locationResult.nearestSupported.name : '',
-      selectedRange: querystring.parameter('range'),
-      geoLocationUnavailable: locationResult.geoLocationUnavailable !== undefined
-        ? locationResult.geoLocationUnavailable
-        : false
-    }
+    const onRenderCallback = getOnRenderCallback(result.data.providers)
+    const viewModel = getViewModel(result.data.providers, result.data.category, locationResult)
 
     templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
   })
 }
 
-const init = () => {
-  browser.loading()
-  locationSelector
-    .getCurrent()
-    .then((locationResult) => {
-      findHelp = new FindHelp(locationResult.findHelpId)
-      findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
+const init = (locationResult) => {
+  findHelp = new FindHelp(locationResult.findHelpId)
+  findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
 
-      buildList(buildFindHelpUrl(locationResult), locationResult)
-    }, (_) => {
-    })
+  renderListing(buildFindHelpUrl(locationResult), locationResult)
 }
 
-init()
+browser.loading()
+
+locationSelector
+  .getPreviouslySetPostcode()
+  .then((result) => {
+    init(result)
+  })

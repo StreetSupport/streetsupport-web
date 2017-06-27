@@ -48,6 +48,7 @@ page: giveitems
 
 <script id="js-no-data-tpl" type="text/template">
   <div class="block__section">
+    {{> location-description-with-postcode noprint="true" }}
     \{{#geoLocationUnavailable}}
     <p>Unfortunately, we cannot determine your location. Please ensure location is enabled on your device.</p>
     \{{/geoLocationUnavailable}}
@@ -72,9 +73,9 @@ page: giveitems
     <div class="requests">
       <div class="requests-search__input" action="#">
         <div class="requests-search__container">
-          <h2 class="h2 requests-search__input__header">Showing <span class="">all listings</span> you could help with in \{{location}}.</h2>
-          <label for="search-for-requests" class="hide-screen">Search requests for help</label>
-          <input autofocus id="search-for-requests" class="search requests-search__autocomplete" placeholder="Search requests for help" />
+          {{> location-description-with-postcode noprint="true" }}
+          <label for="search-for-requests" class="hide-screen">Filter requests for help</label>
+          <input autofocus id="search-for-requests" class="search requests-search__autocomplete" placeholder="Filter requests for help by entering a keyword" />
         </div>
       </div>
       <div class="requests-search__sort">

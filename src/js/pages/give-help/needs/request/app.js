@@ -30,12 +30,6 @@ const initClickEvents = () => {
       action: () => {
         browser.scrollTo('.requests-detail__heading--i-can-help')
       }
-    },
-    {
-      selector: 'form__submit',
-      action: () => {
-        console.log('submit form')
-      }
     }
   ]
   clickEvents
@@ -61,7 +55,6 @@ const outcomes = [
       const data = formatNeeds([result.data])[0]
       templating.renderTemplate('js-card-detail-tpl', { card: data }, 'js-card-detail-output', () => {
         initClickEvents()
-        
         const contactFormModel = new ContactFormModel()
         contactFormModel.needId = data.id
         ko.applyBindings(contactFormModel, document.querySelector('.requests-detail__form'))

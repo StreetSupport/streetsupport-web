@@ -33,7 +33,7 @@ describe('Accommodation - Listing - Filter selected in querystring', function ()
     sinon.stub(querystring, 'parameter')
       .withArgs('filterId')
       .returns(selectedType)
-    sinon.stub(locationSelector, 'getCurrent')
+    sinon.stub(locationSelector, 'getPreviouslySetPostcode')
       .returns({
         then: function (success, error) {
           success({
@@ -54,7 +54,7 @@ describe('Accommodation - Listing - Filter selected in querystring', function ()
     browser.loading.restore()
     browser.loaded.restore()
     browser.pushHistory.restore()
-    locationSelector.getCurrent.restore()
+    locationSelector.getPreviouslySetPostcode.restore()
     querystring.parameter.restore()
     storage.get.restore()
     storage.set.restore()
