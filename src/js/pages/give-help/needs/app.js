@@ -11,10 +11,6 @@ const templating = require('../../../template-render')
 import { formatNeeds } from '../../../models/give-help/requests/needs'
 import { buildList, initAutoComplete } from '../../../models/give-help/requests/listing'
 
-const onChangeLocation = function () {
-  browser.redirect('/give-help/help/?my-location')
-}
-
 const openIfCardRequested = () => {
   const cardId = getUrlParams.parameter('id').replace('/', '')
   if (cardId) {
@@ -22,15 +18,45 @@ const openIfCardRequested = () => {
   }
 }
 
-const renderNeeds = (needs, userLocation) => {
+const setRange = (newValue) => {
+  const range = document.querySelector('.js-find-help-range')
+  Array.from(range.children)
+    .forEach((c) => {
+      if (parseInt(c.value) === parseInt(newValue)) {
+        c.setAttribute('selected', 'selected')
+      }
+    })
+}
+
+const initSearchForm = (currRange) => {
+  setRange(currRange)
+  const updateSearchButton = document.querySelector('.js-update-search')
+  const locationSearchPostcode = document.querySelector('.js-location-search-postcode')
+  const range = document.querySelector('.js-find-help-range')
+  updateSearchButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    browser.loading()
+    const rangeVal = range.value
+    const postcodeValue = locationSearchPostcode.value
+    locationSelector.setPostcode(postcodeValue, (newLocationResult) => {
+      init(newLocationResult, rangeVal)
+    })
+  }, () => {
+    console.log('error')
+  })
+}
+
+const renderNeeds = (needs, userLocation, currRange) => {
   const theData = {
     card: needs,
     location: userLocation.name,
+    postcode: userLocation.postcode,
+    categoryName: 'requests for help',
     geoLocationUnavailable: userLocation.geoLocationUnavailable
   }
 
   const defaultCallback = () => {
-    locationSelector.handler(onChangeLocation)
+    initSearchForm(currRange)
     browser.loaded()
   }
 
@@ -47,12 +73,12 @@ const renderNeeds = (needs, userLocation) => {
   }
 }
 
-const init = function (userLocation) {
-  const url = `${apiRoutes.needsHAL}?longitude=${userLocation.longitude}&latitude=${userLocation.latitude}&limit=100`
+const init = function (userLocation, range = 10000) {
+  const url = `${apiRoutes.needsHAL}?longitude=${userLocation.longitude}&latitude=${userLocation.latitude}&range=${range}&limit=100`
   getApiData.data(url)
     .then((result) => {
       const formatted = formatNeeds(result.data.items, userLocation)
-      renderNeeds(formatted, userLocation)
+      renderNeeds(formatted, userLocation, range)
     }, () => {
       browser.redirect('/500')
     })
@@ -60,7 +86,7 @@ const init = function (userLocation) {
 
 browser.loading()
 locationSelector
-  .getCurrent()
+  .getPreviouslySetPostcode()
   .then((result) => {
     init(result)
   }, (_) => {
