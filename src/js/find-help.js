@@ -1,13 +1,17 @@
-/* global history */
-var browser = require('./browser')
-let supportedCities = require('./location/supportedCities')
-let querystring = require('./get-url-parameter')
-let getLocation = require('./location/get-location')
+const browser = require('./browser')
+const querystring = require('./get-url-parameter')
+import { PostcodeProximity } from './components/PostcodeProximity'
 
-import { newElement } from './dom'
+const FindHelp = function (location) {
+  const self = this
 
-var FindHelp = function (location) {
-  var self = this
+  self.ui = {
+    range: '.js-find-help-range',
+    searchBtn: '.js-update-search',
+    postcode: '.js-location-search-postcode',
+    accordion: '.js-accordion'
+  }
+
   self.currentLocation = location
   const re = new RegExp(/find-help\/(.*)\//)
   self.theCategory = browser.location().pathname.match(re)[1].split('/')[0]
@@ -26,58 +30,15 @@ var FindHelp = function (location) {
     ? 10000
     : querystring.parameter('range')
 
-  self.initFindHelpLocationSelector = () => {
-    const dropdown = document.querySelector('.js-find-help-dropdown')
-    let options = supportedCities.locations
-      .filter((c) => c.isSelectableInBody)
-      .map((c) => {
-        return {
-          id: c.id,
-          name: c.name
-        }
-      })
-    if (getLocation.isAvailable()) {
-      options.unshift({
-        id: 'my-location',
-        name: 'my location'
-      })
+  self.initFindHelpPostcodesLocationSelector = (onChangeCallback) => {
+    const decoratedCallback = (locationResult, range) => {
+      self.currentRange = range
+      const location = browser.location()
+      const newUrl = location.href.replace(/(range=)[^&]+/, '$1' + range)
+      browser.pushHistory({}, '', newUrl)
+      onChangeCallback(locationResult, range)
     }
-    options.forEach((c) => {
-      const attrs = {
-        value: c.id
-      }
-      if (c.id === location) {
-        attrs['selected'] = 'selected'
-      }
-      dropdown.appendChild(newElement('option', c.name, attrs))
-    })
-
-    const range = document.querySelector('.js-find-help-range')
-    Array.from(range.children)
-      .forEach((c) => {
-        if (parseInt(c.value) === parseInt(self.currentRange)) {
-          c.setAttribute('selected', 'selected')
-        }
-      })
-
-    const updateOnRangeAndLocation = (event) => {
-      event.preventDefault()
-      const location = document.querySelector('.js-find-help-dropdown').value
-      const range = document.querySelector('.js-find-help-range').value
-      let newQueryString = window.location.search
-        .replace(querystring.parameter('location'), location)
-
-      if (newQueryString.indexOf('range') >= 0) {
-        newQueryString = newQueryString.replace(querystring.parameter('range'), range)
-      } else {
-        newQueryString += '&range=' + range
-      }
-
-      window.location.href = window.location.pathname + newQueryString
-    }
-
-    range.addEventListener('change', updateOnRangeAndLocation)
-    dropdown.addEventListener('change', updateOnRangeAndLocation)
+    const pcpComponent = new PostcodeProximity(self.currentRange, decoratedCallback) // eslint-disable-line
   }
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
@@ -86,7 +47,7 @@ var FindHelp = function (location) {
     if (subCategoryId.length > 0) {
       url += '&' + subCategoryKey + '=' + subCategoryId
     }
-    if (url !== window.location.search) history.pushState({}, '', url)
+    if (url !== window.location.search) browser.pushHistory({}, '', url)
   }
 
   self.scrollTo = (subCategoryId) => {
@@ -103,29 +64,6 @@ var FindHelp = function (location) {
         self.scrollTo(subCategoryId)
       }
     }
-  }
-
-  self.handleSubCategoryChange = function (subCategoryKey, accordion) {
-    window.onpopstate = function () {
-      var subCategory = querystring.parameter(subCategoryKey)
-      if (subCategory.length) {
-        var el = document.getElementById(subCategory)
-        var context = document.querySelector('.js-accordion')
-        var useAnalytics = true
-
-        accordion.reOpen(el, context, useAnalytics)
-      }
-    }
-  }
-
-  self.formatTags = function (subCategories) {
-    subCategories.forEach((subCat) => {
-      subCat.serviceProviders.forEach((provider) => {
-        if (provider.tags !== null) {
-          provider.tags = provider.tags.join(', ')
-        }
-      })
-    })
   }
 }
 

@@ -2,42 +2,38 @@
 import './common'
 
 // Page modules
-var querystring = require('./get-url-parameter')
-var accordion = require('./accordion')
-var FindHelp = require('./find-help')
-var marked = require('marked')
+const querystring = require('./get-url-parameter')
+const accordion = require('./accordion')
+const FindHelp = require('./find-help')
+const marked = require('marked')
 marked.setOptions({sanitize: true})
-var htmlencode = require('htmlencode')
+const htmlencode = require('htmlencode')
 
-var apiRoutes = require('./api')
-var getApiData = require('./get-api-data')
-var templating = require('./template-render')
-var analytics = require('./analytics')
-var socialShare = require('./social-share')
-var browser = require('./browser')
-let locationSelector = require('./location/locationSelector')
+const apiRoutes = require('./api')
+const getApiData = require('./get-api-data')
+const templating = require('./template-render')
+const analytics = require('./analytics')
+const socialShare = require('./social-share')
+const browser = require('./browser')
+const locationSelector = require('./location/locationSelector')
 let findHelp = null
-let currentLocation = null
 
-let onChangeLocation = (newLocation) => {
-  if (newLocation === 'elsewhere') {
-    newLocation = 'my-location'
-  }
-  window.location.href = `/find-help/${findHelp.theCategory}/timetable?location=${newLocation}`
+const onLocationCriteriaChange = (result, range) => {
+  browser.loading()
+  buildList(buildUrl(result, range), result)
 }
 
-function buildList (url) {
+function buildList (url, locationResult) {
   getApiData.data(url)
-  .then(function (result) {
+  .then((result) => {
     if (result.status === 'error') {
       window.location.replace('/find-help/')
     }
-    var data = result.data
+    const data = result.data
 
-    var template = ''
-    var onRenderCallback = function () {
-      locationSelector.handler(onChangeLocation)
-      findHelp.initFindHelpLocationSelector()
+    let template = ''
+    let onRenderCallback = function () {
+      findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
       browser.initPrint()
       browser.loaded()
       socialShare.init()
@@ -62,10 +58,9 @@ function buildList (url) {
       })
 
       onRenderCallback = function () {
-        locationSelector.handler(onChangeLocation)
         accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', 'day'))
         analytics.init(document.title)
-        findHelp.initFindHelpLocationSelector()
+        findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
 
         browser.initPrint()
 
@@ -76,16 +71,17 @@ function buildList (url) {
       template = 'js-category-no-results-result-tpl'
     }
 
-    let viewModel = {
+    const viewModel = {
       organisations: data,
       categoryId: data.categoryKey,
       categoryName: data.categoryName,
       categorySynopsis: marked(data.synopsis),
-      location: currentLocation.name,
-      nearestSupportedId: currentLocation.nearestSupported !== undefined ? currentLocation.nearestSupported.id : '',
-      nearestSupportedName: currentLocation.nearestSupported !== undefined ? currentLocation.nearestSupported.name : '',
+      location: locationResult.name,
+      postcode: locationResult.postcode,
+      nearestSupportedId: locationResult.nearestSupported !== undefined ? locationResult.nearestSupported.id : '',
+      nearestSupportedName: locationResult.nearestSupported !== undefined ? locationResult.nearestSupported.name : '',
       selectedRange: querystring.parameter('range'),
-      geoLocationUnavailable: currentLocation.geoLocationUnavailable
+      geoLocationUnavailable: locationResult.geoLocationUnavailable
     }
     templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
   })
@@ -110,25 +106,33 @@ function sortDaysFromToday (days) {
   return todayToTail.concat(past)
 }
 
-let init = () => {
+const buildUrl = (locationResult, range = querystring.parameter('range')) => {
+  return `${apiRoutes.categoryServiceProvidersByDay}${findHelp.theCategory}/long/${locationResult.longitude}/lat/${locationResult.latitude}?range=${range}`
+}
+
+const initAccordionHistoryBackHandler = function (subCategoryKey, accordion) {
+  window.onpopstate = function () {
+    var subCategory = querystring.parameter(subCategoryKey)
+    if (subCategory.length) {
+      var el = document.getElementById(subCategory)
+      var context = document.querySelector('.js-accordion')
+      var useAnalytics = true
+
+      accordion.reOpen(el, context, useAnalytics)
+    }
+  }
+}
+
+const init = () => {
   browser.loading()
   locationSelector
-    .getCurrent()
+    .getPreviouslySetPostcode()
     .then((result) => {
-      currentLocation = result
       findHelp = new FindHelp(result.findHelpId)
-      findHelp.handleSubCategoryChange('day', accordion)
-      let reqSubCat = querystring.parameter('sub-category')
-      findHelp.setUrl('category-by-day', 'sub-category', reqSubCat)
+      initAccordionHistoryBackHandler('day', accordion)
+      findHelp.setUrl('category-by-day', 'sub-category', querystring.parameter('sub-category'))
 
-      let location = querystring.parameter('location')
-
-      let url = apiRoutes.cities + result.id + '/services-by-day/' + findHelp.theCategory
-      if (location === 'my-location') {
-        url = apiRoutes.categoryServiceProvidersByDay + findHelp.theCategory + '/long/' + result.longitude + '/lat/' + result.latitude
-      }
-
-      buildList(url)
+      buildList(buildUrl(result), result)
     }, (_) => {
     })
 }

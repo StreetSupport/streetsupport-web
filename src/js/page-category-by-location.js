@@ -63,28 +63,21 @@ const displayMap = (providers, userLocation) => {
       })
     })
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      }
-
-      new google.maps.Marker({ // eslint-disable-line
-        position: pos,
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: 3,
-          fillColor: 'blue',
-          strokeColor: 'blue'
-        },
-        map: map
-      })
-    }, function () {
-    })
-  } else {
-    // Browser doesn't support Geolocation
+  const pos = {
+    lat: userLocation.latitude,
+    lng: userLocation.longitude
   }
+
+  new google.maps.Marker({ // eslint-disable-line
+    position: pos,
+    icon: {
+      path: google.maps.SymbolPath.CIRCLE,
+      scale: 3,
+      fillColor: 'blue',
+      strokeColor: 'blue'
+    },
+    map: map
+  })
 }
 
 const getTemplate = (providers) => {
@@ -93,24 +86,18 @@ const getTemplate = (providers) => {
   : 'js-category-no-results-result-tpl'
 }
 
-const onChangeLocation = (newLocation) => {
-  window.location.href = `/find-help/${findHelp.theCategory}?location=${newLocation}`
+const onLocationCriteriaChange = (result, range) => {
+  browser.loading()
+  buildList(result, range)
 }
 
 const hasItemsCallback = (providers, locationResult) => {
-  locationSelector.handler(onChangeLocation)
-  findHelp.initFindHelpLocationSelector()
   displayMap(providers, locationResult)
-
-  browser.initPrint()
-
-  browser.loaded()
-  socialShare.init()
+  defaultOnRenderCallback()
 }
 
-const hasNoItemsCallback = () => {
-  locationSelector.handler(onChangeLocation)
-  findHelp.initFindHelpLocationSelector()
+const defaultOnRenderCallback = () => {
+  findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
   browser.initPrint()
   browser.loaded()
   socialShare.init()
@@ -119,7 +106,7 @@ const hasNoItemsCallback = () => {
 const getOnRenderCallback = (providers, locationResult) => {
   return providers.length > 0
   ? () => hasItemsCallback(providers, locationResult)
-  : () => hasNoItemsCallback()
+  : () => defaultOnRenderCallback()
 }
 
 const renderResults = (locationResult, result) => {
@@ -133,6 +120,7 @@ const renderResults = (locationResult, result) => {
     categoryName: result.data.category.name,
     categorySynopsis: marked(result.data.category.synopsis),
     location: locationResult.name,
+    postcode: locationResult.postcode,
     nearestSupportedId: locationResult.nearestSupported !== undefined ? locationResult.nearestSupported.id : '',
     nearestSupportedName: locationResult.nearestSupported !== undefined ? locationResult.nearestSupported.name : '',
     selectedRange: querystring.parameter('range'),
@@ -141,8 +129,8 @@ const renderResults = (locationResult, result) => {
   templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
 }
 
-const buildList = (locationResult) => {
-  getApiData.data(buildFindHelpUrl(locationResult))
+const buildList = (locationResult, range) => {
+  getApiData.data(buildFindHelpUrl(locationResult, range))
   .then(function (result) {
     if (result.status === 'error') {
       window.location.replace('/find-help/')
@@ -154,7 +142,7 @@ const buildList = (locationResult) => {
 const init = () => {
   browser.loading()
   locationSelector
-    .getCurrent()
+    .getPreviouslySetPostcode()
     .then((locationResult) => {
       findHelp = new FindHelp(locationResult.findHelpId)
       findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))

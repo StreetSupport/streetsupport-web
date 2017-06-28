@@ -36,7 +36,7 @@ page: categorybylocation
     <div class="container">
       <div class="block__content">
         <div class="text-center">\{{{categorySynopsis}}}</div>
-        {{> location-description }}
+        {{> location-description-with-postcode }}
         {{> no-services geoLocationUnavailable="geoLocationUnavailable" }}
       </div>
     </div>
@@ -71,7 +71,7 @@ page: categorybylocation
       <div class="block__content">
         <div class="text-center">\{{{categorySynopsis}}}</div>
 
-        {{> location-description}}
+        {{> location-description-with-postcode }}
 
         {{> category-view-selector map="true" }}
 

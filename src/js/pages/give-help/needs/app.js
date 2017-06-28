@@ -10,10 +10,7 @@ const templating = require('../../../template-render')
 
 import { formatNeeds } from '../../../models/give-help/requests/needs'
 import { buildList, initAutoComplete } from '../../../models/give-help/requests/listing'
-
-const onChangeLocation = function () {
-  browser.redirect('/give-help/help/?my-location')
-}
+import { PostcodeProximity } from '../../../components/PostcodeProximity'
 
 const openIfCardRequested = () => {
   const cardId = getUrlParams.parameter('id').replace('/', '')
@@ -22,15 +19,19 @@ const openIfCardRequested = () => {
   }
 }
 
-const renderNeeds = (needs, userLocation) => {
+const renderNeeds = (needs, userLocation, currRange) => {
   const theData = {
     card: needs,
     location: userLocation.name,
+    postcode: userLocation.postcode,
+    categoryName: 'requests for help',
     geoLocationUnavailable: userLocation.geoLocationUnavailable
   }
 
   const defaultCallback = () => {
-    locationSelector.handler(onChangeLocation)
+    const postcodeProximityComponent = new PostcodeProximity(currRange, (newLocationResult, newRange) => { //eslint-disable-line
+      init(newLocationResult, newRange)
+    })
     browser.loaded()
   }
 
@@ -47,12 +48,12 @@ const renderNeeds = (needs, userLocation) => {
   }
 }
 
-const init = function (userLocation) {
-  const url = `${apiRoutes.needsHAL}?longitude=${userLocation.longitude}&latitude=${userLocation.latitude}&limit=100`
+const init = function (userLocation, range = 10000) {
+  const url = `${apiRoutes.needsHAL}?longitude=${userLocation.longitude}&latitude=${userLocation.latitude}&range=${range}&limit=100`
   getApiData.data(url)
     .then((result) => {
       const formatted = formatNeeds(result.data.items, userLocation)
-      renderNeeds(formatted, userLocation)
+      renderNeeds(formatted, userLocation, range)
     }, () => {
       browser.redirect('/500')
     })
@@ -60,7 +61,7 @@ const init = function (userLocation) {
 
 browser.loading()
 locationSelector
-  .getCurrent()
+  .getPreviouslySetPostcode()
   .then((result) => {
     init(result)
   }, (_) => {
