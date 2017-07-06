@@ -1,6 +1,7 @@
 # StreetSupport Website
 
 The website codebase for streetsupport.net.
+Kindly supported by ![Browser Stack](/src/img/browser-stack.png)
 
 ## Submitting Updates
 
