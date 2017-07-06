@@ -6,9 +6,13 @@ Kindly powered by ![browser stack logo](https://github.com/StreetSupport/streets
 
  That was a test for the live link
 
- Kindly powered by [a relative link](/assets/img/browser-stack.png)
+Kindly powered by [a relative link](/assets/img/browser-stack.png)
 
- This is a test for the relative link
+
+Kindly powered by ![Browser Stack](/assets/img/browser-stack.png)
+
+ That was a test for the relative link
+
 
 ## Submitting Updates
 
