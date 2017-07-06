@@ -1,7 +1,7 @@
 # StreetSupport Website
 
 The website codebase for streetsupport.net.
-Kindly powered by ![browser stack logo](https://github.com/StreetSupport/streetsupport-web/blob/develop/src/img/browser-stack.png
+Kindly supported by ![browser stack logo](https://github.com/StreetSupport/streetsupport-web/blob/develop/src/img/browser-stack.png
  "Browser Stack")
 
  That was a test for the live link
