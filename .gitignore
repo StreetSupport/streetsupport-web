@@ -37,3 +37,4 @@ src/pages/find-help/support/
 src/pages/find-help/employment/
 
 src/data/generated/
+package-lock.json
