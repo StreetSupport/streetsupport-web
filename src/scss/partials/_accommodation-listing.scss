@@ -41,7 +41,7 @@
     padding: 0;
     @include span(1 of 2);
 
-    &:last-of-type {
+    &:nth-of-type(2n) {
       @include last();
     }
   }

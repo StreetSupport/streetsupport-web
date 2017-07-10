@@ -20,7 +20,7 @@ const initMap = () => {
     center: centre
   })
 
-  const marker = new google.maps.Marker({
+  new google.maps.Marker({ // eslint-disable-line
     position: centre,
     map: map
   })
