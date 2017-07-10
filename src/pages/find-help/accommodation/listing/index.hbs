@@ -150,12 +150,15 @@ nosubnav: false
               <span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span>
             </a>
           </h1>
-          <h2 class="h3" data-bind="html: address"></h2>
-          <p data-bind="html: synopsis"></p>
-          <ul class="accommodation-list__listing-features">
-            <!-- ko if: referralIsRequired --><li class="accommodation-list__listing-features-item">A referral is required for this property</li><!-- /ko -->
-            <li class="accommodation-list__listing-features-item">Type: <span data-bind="text: accommodationType"></span></li>
-          </ul>
+          <div class="accommodation-listing__listing-item-body">
+            <h2 class="h3" data-bind="html: address"></h2>
+            <p data-bind="html: synopsis"></p>
+            <ul class="accommodation-list__listing-features">
+              <!-- ko if: referralIsRequired --><li class="accommodation-list__listing-features-item">A referral is required for this property</li><!-- /ko -->
+              <!-- ko ifnot: referralIsRequired --><li class="accommodation-list__listing-features-item">No referral required</li><!-- /ko -->
+              <li class="accommodation-list__listing-features-item">Type: <span data-bind="text: accommodationType"></span></li>
+            </ul>
+          </div>
           <a class="btn btn--brand-d accommodation-list__listing-view-more-btn" data-bind="attr: { href: detailsUrl }">
             <span class="btn__text">View Details</span>
           </a>
