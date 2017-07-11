@@ -13,7 +13,6 @@
     width: auto;
     padding: 20px;
     margin: 0;
-    background-color:$brand-j;
 
     a {
       color: $brand-k;
@@ -48,6 +47,19 @@
   .current-city__change-location {
     cursor: pointer;
     font-style: italic;
+  }
+
+  .current-city__change-location:after {
+    content: "";
+    display: inline-block;
+    float:right;
+    width: 0;
+  	height: 0;
+  	border-left: 5px solid transparent;
+  	border-right: 5px solid transparent;
+  	border-top: 10px solid black;
+    margin-top: 0.4em;
+    margin-right: 1.5em;
   }
 }
 
@@ -192,13 +204,4 @@
   100% {
     opacity: 1;
   }
-}
-
-
-.location-pin {
-  background: url('../img/location-pin.png') no-repeat 50% 50%;
-  width: 64px;
-  height: 64px;
-  border: none;
-  float: right;
 }

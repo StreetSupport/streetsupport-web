@@ -24,15 +24,20 @@
   margin-bottom: 10px;
 }
 
+.accommodation-listing__listing-item-body {
+  @include mq($from: s) {
+    @include span(4 of 6);
+  }
+}
+
 .accommodation-listing__listing-item--isActive {
   background: $brand-i;
 }
 
 .accommodation-list__listing-features {
   list-style: none;
-  margin: 0;
+  margin: 20px 0 0 0;
   padding: 0;
-  @include span(4 of 6);
 }
 
 .accommodation-list__listing-features-item {
@@ -41,16 +46,19 @@
     padding: 0;
     @include span(1 of 2);
 
-    &:last-of-type {
+    &:nth-of-type(2n) {
       @include last();
     }
   }
 }
 
 .accommodation-list__listing-view-more-btn {
+  width: 100%;
+  @include mq($from: s) {
     @include span(2 of 6);
     @include last();
     margin: -1em 0 0 0;
+  }
 }
 
 .accommodation-listing__filter {
