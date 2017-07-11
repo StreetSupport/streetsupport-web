@@ -1,20 +1,9 @@
 .category-view-options {
   @include cf();
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   @include printHide();
-}
-
-.category-view-options__title {
-  @include mq($from: m) {
-    @include span(1 of 4);
-
-    .category-view-options--two-options & {
-      @include span(1 of 3);
-    }
-
-    padding-top: 14px;
-  }
+border-bottom: 2px solid $brand-a;
 }
 
 .category-view-options__items {
@@ -23,12 +12,11 @@
   margin: 15px 0 0 0;
 
   @include mq($from: m) {
-    @include span(3 of 4);
+    @include span(3 of 6);
     @include last();
 
     .category-view-options--two-options & {
-      @include span(2 of 3);
-      @include last();
+      @include span(2 of 6);
     }
 
   }
@@ -39,10 +27,6 @@
   padding: 0;
   @include span(1 of 3);
 
-  .category-view-options--two-options & {
-    @include span(1 of 2);
-  }
-
   &:last-child {
     @include last();
   }
@@ -50,6 +34,9 @@
 
 .category-view-options__button {
   margin: 0;
+  width: 100%;
+  padding: 6px 0 3px 0;
+  border-radius: 10px 10px 0px 0px;
   .btn__text {
     padding: 0;
   }
@@ -57,6 +44,7 @@
   color: $brand-a!important;
 
   &.selected {
-    color: $brand-h!important;
+    color: white!important;
+    background-color: $brand-a;
   }
 }
