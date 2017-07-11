@@ -122,6 +122,18 @@
   padding: 0;
 }
 
+.accommodation-listing__filter-facet-options-title {
+  float: left;
+  clear: left;
+  width: 155px;
+}
+
+.accommodation-listing__filter-facet-options-radio {  
+  float: left;
+  margin-left: 20px;
+  width: 42px;
+}
+
 .accommodation-listing__search-form {
   display: inline;
 }

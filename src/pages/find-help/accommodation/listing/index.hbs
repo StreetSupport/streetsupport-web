@@ -38,17 +38,63 @@ nosubnav: false
 
       {{> accommodation-listing-header }}
 
-        <!-- ko ifnot: dataIsLoaded -->
-        <p class="text-center">Please wait whilst we load information.</p>
-        <!-- /ko -->
-      
-        <!-- ko if: dataIsLoaded -->
-          <!-- ko if: noItemsAvailable -->
-            <!-- ko template: { name: 'no-accommodation' } --><!-- /ko -->
-          <!-- /ko -->
-          <!-- ko ifnot: noItemsAvailable -->
-            <!-- ko template: { name: 'accommodation-listing' } --><!-- /ko -->
-          <!-- /ko -->
+      <!-- ko ifnot: dataIsLoaded -->
+      <p class="text-center">Please wait whilst we load information.</p>
+      <!-- /ko -->
+    
+      <!-- ko if: dataIsLoaded -->
+      {{> accommodation-view-options listing="true" }}
+
+        <div class="accommodation-listing">
+          <aside class="accommodation-listing__filter">
+            <h1 class="h2 accommodation-listing__filter-heading" data-bind="click: toggleFilterDisplay, css: {open: displayFilter}">Filter Results
+              <span class="accommodation-listing__filter-toggle accommodation-listing__filter-toggle--is-open">-</span>
+              <span class="accommodation-listing__filter-toggle accommodation-listing__filter-toggle--is-closed">+</span>
+            </h1>
+            <div class="accommodation-listing__filter-facets" data-bind="css: {open: displayFilter}">
+              <h2 class="h3">Type:</h2>
+              <ul class="accommodation-listing__filter-facet-options" data-bind="foreach: typeFilters">
+                <li><label>
+                  <input type="radio" name="typeFilter" data-bind="checked: $parent.selectedTypeFilterName, attr: { value: typeName }" />
+                  <span data-bind="text: typeName"></span>
+                </label></li>
+              </ul>
+              <h2 class="h3">Suitable For:</h2>
+              <ul class="accommodation-listing__filter-facet-options" data-bind="foreach: residentCriteriaFilters">
+                <li>
+                  <dl>
+                    <dt class="accommodation-listing__filter-facet-options-title" data-bind="text: labelText"></dt>
+                    <dd class="accommodation-listing__filter-facet-options-radio"><label><input type="radio" value="true" data-bind="attr: { name: dataFieldName }, checked: value, checkedValue: true" /> Yes</label></dd>
+                    <dd class="accommodation-listing__filter-facet-options-radio"><label><input type="radio" value="false" data-bind="attr: { name: dataFieldName }, checked: value, checkedValue: false" /> No</label></dd>
+                  </dl>
+                </li>
+              </ul>
+              <button class="btn btn--brand-e" data-bind="click: updateResults">
+                <span class="btn__text">update</span>
+              </button>
+              <button class="btn btn--brand-f" data-bind="click: resetFilter">
+                <span class="btn__text">reset</span>
+              </button>
+            </div>
+          </aside>
+          <section class="accommodation-listing__listing">
+            <h1 class="h3" class="text-center">
+              <span>Showing places to live, near: </span>
+              <form class="accommodation-listing__search-form">
+                <input type="textfield" data-bind="textInput: locationName" class="form__input form__input--inline form__input--short accommodation-listing__search-form__input" />
+                <button type="submit" class="btn btn--brand-e" data-bind="click: updateListing">
+                  <span class="btn__text">search</span>
+                </button>
+              </form>
+            </h1>
+            <!-- ko if: noItemsAvailable -->
+              <!-- ko template: { name: 'no-accommodation' } --><!-- /ko -->
+            <!-- /ko -->
+            <!-- ko ifnot: noItemsAvailable -->
+              <!-- ko template: { name: 'accommodation-listing' } --><!-- /ko -->
+            <!-- /ko -->
+          </section>
+          </div>
         <!-- /ko -->
       {{> social-share}}
     </div>
@@ -58,112 +104,29 @@ nosubnav: false
 {{> loading-spinner }}
 
 <script type="text/html" id="no-accommodation">
-  <p class="text-center">Sorry, there are no accommodation entries listed within 10k of your requested location. Please use the form below to search again.</p>
-  <form class="text-center">
-    <label for="postcode">Find somewhere to live, near:</label>
-    <input name="postcode" type="textfield" data-bind="textInput: locationName" class="form__input form__input--inline form__input--short accommodation-listing__search-form__input" />
-    <button type="submit" class="btn btn--brand-e" data-bind="click: updateListing">
-      <span class="btn__text">search</span>
-    </button>
-  </form>
+  <p>Sorry, there are no accommodation entries listed that meet your requirements. Please use review your selections, and try again.</p>
 </script>
 
 <script type="text/html" id="accommodation-listing">
-
-  {{> accommodation-view-options listing="true" }}
-
-  <div class="accommodation-listing">
-    <aside class="accommodation-listing__filter">
-      <h1 class="h2 accommodation-listing__filter-heading" data-bind="click: toggleFilterDisplay, css: {open: displayFilter}">Filter Accommodation
-        <span class="accommodation-listing__filter-toggle accommodation-listing__filter-toggle--is-open">-</span>
-        <span class="accommodation-listing__filter-toggle accommodation-listing__filter-toggle--is-closed">+</span>
+  <div data-bind="foreach: itemsToDisplay">
+    <article class="accommodation-listing__listing-item" data-bind="css: { 'accommodation-listing__listing-item--isActive': isActive }">
+      <h1 class="h2">
+        <a data-bind="attr: { href: detailsUrl }">
+          <span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span>
+        </a>
       </h1>
-      <div class="accommodation-listing__filter-facets" data-bind="css: {open: displayFilter}">
-        <h2 class="h3">Type:</h2>
-        <ul class="accommodation-listing__filter-facet-options" data-bind="foreach: typeFilters">
-          <li><label>
-            <input type="radio" name="typeFilter" data-bind="checked: $parent.selectedTypeFilterName, attr: { value: typeName }" />
-            <span data-bind="text: typeName"></span>
-          </label></li>
-        </ul>
-        <h2 class="h3">Accepts Pets:</h2>
-        <ul class="accommodation-listing__filter-facet-options">
-          <li><label>
-            <input type="radio" name="pets" checked />
-            <span>Don't Mind</span>
-          </label></li>
-          <li><label>
-            <input type="radio" name="pets" />
-            <span>Yes</span>
-          </label></li>
-          <li><label>
-            <input type="radio" name="pets" />
-            <span>No</span>
-          </label></li>
-        </ul>
-        <h2 class="h3">Accepts Housing Benefits:</h2>
-        <ul class="accommodation-listing__filter-facet-options">
-          <li><label>
-            <input type="radio" name="housingbenefit" checked />
-            <span>Don't Mind</span>
-          </label></li>
-          <li><label>
-            <input type="radio" name="housingbenefit" />
-            <span>Yes</span>
-          </label></li>
-          <li><label>
-            <input type="radio" name="housingbenefit" />
-            <span>No</span>
-          </label></li>
-        </ul>
-        <h2 class="h3">Accepts Couples:</h2>
-        <ul class="accommodation-listing__filter-facet-options">
-          <li><label>
-            <input type="radio" name="couples" checked />
-            <span>Don't Mind</span>
-          </label></li>
-          <li><label>
-            <input type="radio" name="couples" />
-            <span>Yes</span>
-          </label></li>
-          <li><label>
-            <input type="radio" name="couples" />
-            <span>No</span>
-          </label></li>
+      <div class="accommodation-listing__listing-item-body">
+        <h2 class="h3" data-bind="html: address"></h2>
+        <p data-bind="html: synopsis"></p>
+        <ul class="accommodation-list__listing-features">
+          <!-- ko if: referralIsRequired --><li class="accommodation-list__listing-features-item">A referral is required for this property</li><!-- /ko -->
+          <!-- ko ifnot: referralIsRequired --><li class="accommodation-list__listing-features-item">No referral required</li><!-- /ko -->
+          <li class="accommodation-list__listing-features-item">Type: <span data-bind="text: accommodationType"></span></li>
         </ul>
       </div>
-    </aside>
-    <section class="accommodation-listing__listing">
-      <h1 class="h3" class="text-center">
-        <span>Showing places to live, near: </span>
-        <form class="accommodation-listing__search-form">
-          <input type="textfield" data-bind="textInput: locationName" class="form__input form__input--inline form__input--short accommodation-listing__search-form__input" />
-          <button type="submit" class="btn btn--brand-e" data-bind="click: updateListing">
-            <span class="btn__text">search</span>
-          </button>
-        </form>
-      </h1>
-      <div data-bind="foreach: itemsToDisplay">
-        <article class="accommodation-listing__listing-item" data-bind="css: { 'accommodation-listing__listing-item--isActive': isActive }">
-          <h1 class="h2">
-            <a data-bind="attr: { href: detailsUrl }">
-              <span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span>
-            </a>
-          </h1>
-          <div class="accommodation-listing__listing-item-body">
-            <h2 class="h3" data-bind="html: address"></h2>
-            <p data-bind="html: synopsis"></p>
-            <ul class="accommodation-list__listing-features">
-              <!-- ko if: referralIsRequired --><li class="accommodation-list__listing-features-item">A referral is required for this property</li><!-- /ko -->
-              <!-- ko ifnot: referralIsRequired --><li class="accommodation-list__listing-features-item">No referral required</li><!-- /ko -->
-              <li class="accommodation-list__listing-features-item">Type: <span data-bind="text: accommodationType"></span></li>
-            </ul>
-          </div>
-          <a class="btn btn--brand-d accommodation-list__listing-view-more-btn" data-bind="attr: { href: detailsUrl }">
-            <span class="btn__text">View Details</span>
-          </a>
-        </article>
-      </div>
-    </section>
-    </div>
+      <a class="btn btn--brand-d accommodation-list__listing-view-more-btn" data-bind="attr: { href: detailsUrl }">
+        <span class="btn__text">View Details</span>
+      </a>
+    </article>
+  </div>
 </script>

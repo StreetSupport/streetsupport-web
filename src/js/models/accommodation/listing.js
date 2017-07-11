@@ -10,6 +10,13 @@ import * as storage from '../../storage'
 
 const ko = require('knockout')
 
+const SearchFilter = function (dataFieldName, labelText) {
+  const self = this
+  self.dataFieldName = ko.observable(dataFieldName)
+  self.labelText = ko.observable(labelText)
+  self.value = ko.observable()
+}
+
 const AccommodationListing = function () {
   const self = this
 
@@ -49,6 +56,38 @@ const AccommodationListing = function () {
     self.displayFilter(!self.displayFilter())
   }
 
+  self.residentCriteriaFilters = ko.observableArray([
+    new SearchFilter('acceptsMen', 'Men'),
+    new SearchFilter('acceptsWomen', 'Women'),
+    new SearchFilter('acceptsCouples', 'Couples'),
+    new SearchFilter('acceptsSingleSexCouples', 'Same-Sex Couples'),
+    new SearchFilter('acceptsFamilies', 'Families'),
+    new SearchFilter('acceptsYoungPeople', 'Young People'),
+    new SearchFilter('acceptsBenefitsClaimants', 'Benefits Claimants')
+  ])
+
+  self.resetFilter = function () {
+    self.residentCriteriaFilters()
+      .forEach((f) => {
+        f.value(undefined)
+      })
+  }
+
+  self.updateResults = function (e) {
+    locationSelector
+      .getPreviouslySetPostcode()
+      .then((result) => {
+        self.init(result)
+      })
+  }
+
+  const getFilterQuerystring = function () {
+    return self.residentCriteriaFilters()
+      .filter((f) => f.value() !== undefined)
+      .map((f) => `&${f.dataFieldName()}=${f.value()}`)
+      .join('')
+  }
+
   self.updateListing = function () {
     self.dataIsLoaded(false)
     getCoords(self.locationName(), (postcodeResult) => {
@@ -68,7 +107,8 @@ const AccommodationListing = function () {
 
   self.init = (currentLocation) => {
     browser.loading()
-    ajaxGet.data(`${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}`)
+    const endpoint = `${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}${getFilterQuerystring()}`
+    ajaxGet.data(endpoint)
       .then((result) => {
         result.data.items
           .forEach((e, i) => {
