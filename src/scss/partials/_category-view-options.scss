@@ -17,8 +17,8 @@ border-bottom: 2px solid $brand-a;
 
     .category-view-options--two-options & {
       @include span(2 of 6);
+      @include last;
     }
-
   }
 }
 
@@ -26,6 +26,10 @@ border-bottom: 2px solid $brand-a;
   margin: 0;
   padding: 0;
   @include span(1 of 3);
+
+  .category-view-options--two-options & {
+    @include span(1 of 2);
+  }
 
   &:last-child {
     @include last();
