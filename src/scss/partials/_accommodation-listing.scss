@@ -45,14 +45,12 @@
 }
 
 .accommodation-list__listing-features-item {
-  @include mq($from: m) {
-    margin: 0;
-    padding: 0;
-    @include span(1 of 2);
+  margin: 0;
+  padding: 0;
+  @include span(1 of 2);
 
-    &:nth-of-type(2n) {
-      @include last();
-    }
+  &:nth-of-type(2n) {
+    @include last();
   }
 }
 
