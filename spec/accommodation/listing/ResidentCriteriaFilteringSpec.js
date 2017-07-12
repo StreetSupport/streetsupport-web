@@ -3,13 +3,11 @@
 const ajaxGet = require('../../../src/js/get-api-data')
 const sinon = require('sinon')
 const Model = require('../../../src/js/models/accommodation/listing')
-const endpoints = require('../../../src/js/api')
 const browser = require('../../../src/js/browser')
 const locationSelector = require('../../../src/js/location/locationSelector')
 const querystring = require('../../../src/js/get-url-parameter')
 
 import * as storage from '../../../src/js/storage'
-
 import { data } from './testdata'
 
 describe('Accommodation - Listing - Resident Criteria Filtering', function () {
@@ -50,6 +48,11 @@ describe('Accommodation - Listing - Resident Criteria Filtering', function () {
         }
       })
     sinon.stub(storage, 'get')
+      .returns({
+        postcode: 'postcode',
+        latitude: 123.4,
+        longitude: 567.8
+      })
     sinon.stub(storage, 'set')
     sut = new Model()
   })
@@ -81,7 +84,7 @@ describe('Accommodation - Listing - Resident Criteria Filtering', function () {
 
     describe('- update', () => {
       beforeEach(() => {
-        sut.updateResults()
+        sut.updateListing()
       })
 
       it('- should update with new results', () => {

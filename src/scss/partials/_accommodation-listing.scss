@@ -5,7 +5,7 @@
 
 .accommodation-listing__filter {
   @include mq($from: m) {
-    @include span(2 of 6);
+    @include span(4 of 12);
     @include first();
   }
 }
@@ -13,9 +13,13 @@
 .accommodation-listing__listing {
   width: 100%;
   @include mq($from: m) {
-    @include span(4 of 6);
+    @include span(8 of 12 );
     @include last();
   }
+}
+
+.accommodation-listing__listing-location-description {
+  text-align: center;
 }
 
 .accommodation-listing__listing-item {
@@ -64,7 +68,7 @@
 .accommodation-listing__filter {
   background: $brand-q;
   border-radius: 0 0 5px 5px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .accommodation-listing__filter-heading {
@@ -103,7 +107,7 @@
   }
 }
 
-.accommodation-listing__filter-facets {
+.accommodation-listing__filter-container {
   padding: 10px;
   display: none;
   
@@ -116,28 +120,45 @@
   }
 }
 
-.accommodation-listing__filter-facet-options {
+.accommodation-listing__filter-facets {
+  @include cf();
+}
+
+.accommodation-listing__filter-facet-group {
   list-style: none;
   margin: 0 0 20px 0;
   padding: 0;
+  @include cf();
+}
+
+.accommodation-listing__filter-facet-options {
+  margin: 0;
 }
 
 .accommodation-listing__filter-facet-options-title {
-  float: left;
-  clear: left;
-  width: 155px;
+  @include span(2 of 4);
 }
 
 .accommodation-listing__filter-facet-options-radio {  
-  float: left;
-  margin-left: 20px;
-  width: 42px;
+  @include span(1 of 4);
+  margin-left: 0;
+  &:last-child { 
+    @include last();
+  }
 }
 
-.accommodation-listing__search-form {
-  display: inline;
+.accommodation-listing__postcode-filter {
+  margin-top: -11px;
+  @include span(2 of 4);
+  @include last;
 }
 
-.accommodation-listing__search-form__input {
-  margin: 0 10px;
+.accommodation-listing__filter-facet-options-radio-container {
+  width: 100%;
+  padding: 2px 0;
+  display: block;
+}
+
+.accommodation-listing__filter-btns {
+  text-align: center;
 }
