@@ -12,10 +12,8 @@ const Model = function () {
 
   const init = () => {
     browser.loading()
-    console.log('init')
     ajaxGet.data(`${endpoints.accommodation}/${querystring.parameter('id')}`)
       .then((result) => {
-        console.log(result)
         this.model = new AccommodationDetails(result.data)
         this.dataIsLoaded(true)
         browser.loaded()

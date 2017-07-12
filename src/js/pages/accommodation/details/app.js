@@ -14,7 +14,6 @@ const htmlEncode = require('htmlencode')
 
 const initMap = () => {
   const centre = { lat: address.latitude, lng: address.longitude }
-  console.log(centre)
   const map = new google.maps.Map(document.querySelector('.js-map'), {
     zoom: 15,
     center: centre
