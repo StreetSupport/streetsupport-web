@@ -90,6 +90,7 @@ const formatPricingAndReqs = (data) => {
 }
 
 const formatSupportProvided = (data) => {
+  if (!data) return
   const supportTypes = [
     { key: 'alcohol', name: 'Alcohol' },
     { key: 'domestic violence', name: 'Domestic Violence' },
