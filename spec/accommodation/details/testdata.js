@@ -9,7 +9,7 @@ export const data = {
     'name': 'added by temp accom admin',
     'description': '',
     'accommodationType': 'hosted',
-    'isOpenAccess': true,
+    'referralIsRequired': false,
     'supportOffered': [
       'alcohol',
       'domestic violence',

@@ -125,10 +125,6 @@ describe('Accommodation - Listing', function () {
     expect(sut.itemsToDisplay()[0].additionalInfo()).toEqual(data.items[0].additionalInfo)
   })
 
-  it('- should map is open access', () => {
-    expect(sut.itemsToDisplay()[0].isOpenAccess()).toEqual(data.items[0].isOpenAccess)
-  })
-
   it('- should map type', () => {
     expect(sut.itemsToDisplay()[0].accommodationType()).toEqual(data.items[0].accommodationType)
   })

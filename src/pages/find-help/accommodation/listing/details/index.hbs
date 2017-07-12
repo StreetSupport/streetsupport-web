@@ -2,7 +2,7 @@
 title: Accommodation Details - Street Support
 description: Accommodation Details
 image: https://streetsupport.net/assets/img/og/street-support.png
-layout: default.hbs
+layout: withGoogle.hbs
 permalink: false
 jsBundle: accomDetails
 section: findhelp
@@ -39,94 +39,97 @@ nosubnav: false
   <div class="block">
     <div class="container">
       <div class="block__content">
-        <section>
-        \{{#address}}
-        <p class="h3">\{{{ formattedAddress }}}</p>
-        \{{/address}}
-        \{{#generalInfo}}
-        <p>\{{{description}}}</p>
-        <dl>
-          <dt>Accommodation type:</dt>
-          <dd>\{{{accommodationType}}}</dd>
-          <dt>Supported offered:</dt>
-          <dd>\{{{formattedSupportOffered}}}</dd>
-        </dl>
-        \{{/generalInfo}}
-        </section>
+        <section class="accom-details__section accom-details__section--contact">
+        <h2 class="h2">Contact</h2>
 
-        <section>
+        <div class="js-map accom-details__map"></div>
+
         \{{#contactInformation}}
-        <h2 class="h2">Contact Information</h2>
-        <ul>
-          \{{#name}}<li>\{{{name}}}</li>\{{/name}}
-          \{{#email}}<li>\{{{email}}}</li>\{{/email}}
-          \{{#telephone}}<li>\{{{telephone}}}</li>\{{/telephone}}
-          \{{#additionalInfo}}<li>\{{{additionalInfo}}}</li>\{{/additionalInfo}}
-        </ul>
+          \{{#telephone}}<p>\{{{telephone}}}</p>\{{/telephone}}
+        \{{/contactInformation}}
+        
+        \{{#address}}
+        <p class="h3">\{{ formattedAddress }}</p>
+        \{{/address}}
+
+        \{{#contactInformation}}
+          <p>\{{#email}}<a href="mailto: \{{{email}}}">\{{{email}}}</a>\{{/email}}</p>
+          <p>\{{#additionalInfo}}\{{{additionalInfo}}}\{{/additionalInfo}}</p>
         \{{/contactInformation}}
         </section>
 
-        <section>
-        \{{#features}}
-        <h2 class="h2">Access Information</h2>
-        <dl>
-          <dt>Reference or referral required</dt>
-          <dd>\{{{referenceReferralIsRequiredFormatted}}}</dd>
-          <dt>Price</dt>
-          <dd>£\{{{price}}}</dd>
-          <dt>Housing benefit accepted</dt>
-          <dd>\{{{acceptsHousingBenefitFormatted}}}</dd>
-          <dt>Accepts those with no housing benefit, but engaging with services</dt>
-          <dd>\{{{acceptsNoHousingBenefitWithServiceProviderSupportFormatted}}}</dd>
-        </dl>
+        <section class="accom-details__section">
+        \{{#generalInfo}}
+          \{{{description}}}
+        \{{/generalInfo}}
+        </section>
 
-        <h2 class="h2">Resident Information</h2>
-        <dl>
-          <dt>Couples welcome</dt>
-          <dd>\{{{acceptsCouplesFormatted}}}</dd>
-          <dt>Pets welcome</dt>
-          <dd>\{{{acceptsPetsFormatted}}}</dd>
-          <dt>Children welcome</dt>
-          <dd>\{{{allowsChildrenFormatted}}}</dd>
-          <dt>Disabled access</dt>
-          <dd>\{{{hasDisabledAccessFormatted}}}</dd>
-          <dt>Suitable for women</dt>
-          <dd>\{{{isSuitableForWomenFormatted}}}</dd>
-          <dt>Suitable for under 25s</dt>
-          <dd>\{{{isSuitableForYoungPeopleFormatted}}}</dd>
-        </dl>
+        <section class="accom-details__section">
+          <h2 class="h2">Price and Requirements</h2>
+          \{{#pricingAndRequirements}}
+            \{{#referralIsRequired}}<p class="h3">A referral is required for this property</p>\{{/referralIsRequired}}
+            \{{{referralNotes}}}
+            <dl>
+              \{{#price}}<dt class="h3 accom-details__key">Price from:</dt>
+              <dd class="accom-details__value">£\{{{price}}} per week \{{#foodIsIncluded}} (includes meals)\{{/foodIsIncluded}}</dd>\{{/price}}
+            </dl>
+            \{{{featuresAvailableAtAdditionalCost}}}
+          \{{/pricingAndRequirements}}
+        </section>
 
-        <h2 class="h2">Services Provided</h2>
-        <dl>
-          <dt>Meals included</dt>
-          <dd>\{{{foodIsIncludedFormatted}}}</dd>
-          <dt>Meals available</dt>
-          <dd>\{{{availabilityOfMeals}}}</dd>
-          <dt>Residents kitchen</dt>
-          <dd>\{{{hasAccessToKitchenFormatted}}}</dd>
-          <dt>Flexible meal times</dt>
-          <dd>\{{{hasFlexibleMealTimesFormatted}}}</dd>
-          <dt>Lounge facilities</dt>
-          <dd>\{{{hasLoungeFormatted}}}</dd>
-          <dt>On-site manager</dt>
-          <dd>\{{{hasOnSiteManagerFormatted}}}</dd>
-          <dt>Shared rooms</dt>
-          <dd>\{{{hasSharedRoomsFormatted}}}</dd>
-          <dt>Single rooms</dt>
-          <dd>\{{{hasSingleRoomsFormatted}}}</dd>
-          <dt>Shower or bathroom facilities</dt>
-          <dd>\{{{hasShowerBathroomFacilitiesFormatted}}}</dd>
-          <dt>Allows visitors</dt>
-          <dd>\{{{allowsVisitorsFormatted}}}</dd>
-          <dt>Provides clean bedding</dt>
-          <dd>\{{{providesCleanBeddingFormatted}}}</dd>
-          <dt>Additional features included</dt>
-          <dd>\{{{additionalFeatures}}}</dd>
-          <dt>Additional features available</dt>
-          <dd>\{{{featuresAvailableAtAdditionalCost}}}</dd>
-        </dl>
+        <section class="accom-details__section">
+          <h2 class="h2">Meals Availability</h2>
+          \{{#pricingAndRequirements}}
+            \{{{availabilityOfMeals}}}
+          \{{/pricingAndRequirements}}
+        </section>
 
-        \{{/features}}
+        <section class="accom-details__section">
+          <h2 class="h2">Suitable For</h2>
+          \{{#residentCriteria}}
+          <ul class="accom-details__features">
+            \{{#acceptsMen}}<li>Men</li>\{{/acceptsMen}}
+            \{{#acceptsWomen}}<li>Women</li>\{{/acceptsWomen}}
+            \{{#acceptsCouples}}<li>Couples</li>\{{/acceptsCouples}}
+            \{{#acceptsSingleSexCouples}}<li>Same Sex Couples</li>\{{/acceptsSingleSexCouples}}
+            \{{#acceptsYoungPeople}}<li>Young People</li>\{{/acceptsYoungPeople}}
+            \{{#acceptsFamilies}}<li>Families</li>\{{/acceptsFamilies}}
+            \{{#acceptsBenefitsClaimants}}<li>Housing Benefits Claimants</li>\{{/acceptsBenefitsClaimants}}          
+          </ul>
+          \{{/residentCriteria}}
+        </section>
+
+        <section class="accom-details__section">
+          <h2 class="h2">Property Features</h2>
+          \{{#features}}
+          <ul class="accom-details__features">
+            \{{#acceptsPets}}<li>Allows Pets</li>\{{/acceptsPets}}
+            \{{#hasDisabledAccess}}<li>Disabled Access</li>\{{/hasDisabledAccess}}
+            \{{#hasSingleRooms}}<li>Single Rooms</li>\{{/hasSingleRooms}}
+            \{{#hasSharedRooms}}<li>Shared Rooms</li>\{{/hasSharedRooms}}
+            \{{#hasShowerBathroomFacilities}}<li>Shower and Bathroom Facilities</li>\{{/hasShowerBathroomFacilities}}
+            \{{#hasAccessToKitchen}}<li>Kitchen Facilities</li>\{{/hasAccessToKitchen}}
+            \{{#hasFlexibleMealTimes}}<li>Flexible Meal Times</li>\{{/hasFlexibleMealTimes}}
+            \{{#hasLounge}}<li>Communal/Social Area</li>\{{/hasLounge}}
+            \{{#hasLaundryFacilities}}<li>Laundry Facilities</li>\{{/hasLaundryFacilities}}
+            \{{#providesCleanBedding}}<li>Provides Clean Bedding</li>\{{/providesCleanBedding}}
+            \{{#allowsVisitors}}<li>Allows Visitors</li>\{{/allowsVisitors}}
+          </ul>
+          \{{{additionalFeatures}}}
+          \{{/features}}
+        </section>
+
+        <section class="accom-details__section">
+          <h2 class="h2">Support Provided</h2>
+          \{{#supportProvided}}
+          <ul>
+          \{{#supportOffered}}
+            <li>\{{ . }}</li>
+          \{{/supportOffered}}
+          </ul>
+          \{{#hasOnSiteManager}}<p>The property has an on-site manager.</p>\{{/hasOnSiteManager}}
+          \{{{supportInfo}}}
+          \{{/supportProvided}}
         </section>
       </div>
     </div>

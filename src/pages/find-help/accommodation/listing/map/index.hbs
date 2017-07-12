@@ -84,9 +84,10 @@ nosubnav: false
       <article class="listing-with-map__listing-item" data-bind="css: { 'listing-with-map__listing-item--isActive': isActive }">
         <h1 class="h2" data-bind="click: selectItem"><span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span></h1>
         <h2 class="h3" data-bind="click: selectItem, html: address"></h2>
-        <ul>
-          <li>Is Open Access: <span data-bind="text: isOpenAccess"></span></li>
-          <li data-bind="text: accommodationType"></li>
+        <ul class="accommodation-list__listing-features">
+          <!-- ko if: referralIsRequired --><li class="accommodation-list__listing-features-item">A referral is required for this property</li><!-- /ko -->
+          <!-- ko ifnot: referralIsRequired --><li class="accommodation-list__listing-features-item">No referral required</li><!-- /ko -->
+          <li class="accommodation-list__listing-features-item">Type: <span data-bind="text: accommodationType"></span></li>
         </ul>
         <a class="btn btn--brand-d" data-bind="attr: { href: detailsUrl }">
           <span class="btn__text">View Details</span>

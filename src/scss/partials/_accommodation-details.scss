@@ -1,0 +1,32 @@
+.accom-details__section {
+  margin-bottom: 20px;
+  @include mq($from: m) {
+    @include span(2 of 3);
+  }
+}
+
+.accom-details__section--contact {
+  @include mq($from: m) {
+    @include span(1 of 3);
+    @include last();
+  }
+}
+
+.accom-details__features {
+  list-style: none;
+  padding: 0;
+  columns: 3;
+}
+
+.accom-details__key {
+  float: left;
+  margin-right: 1em;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+.accom-details__map {
+  width: 100%;
+  height: 250px;
+  margin-bottom: 20px;
+}
