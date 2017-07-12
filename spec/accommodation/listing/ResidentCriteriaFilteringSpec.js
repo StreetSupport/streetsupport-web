@@ -1,6 +1,7 @@
 /* global describe, beforeEach, afterEach, it, expect */
 
 const ajaxGet = require('../../../src/js/get-api-data')
+const api = require('../../../src/js/api')
 const sinon = require('sinon')
 const Model = require('../../../src/js/models/accommodation/listing')
 const browser = require('../../../src/js/browser')
@@ -89,7 +90,7 @@ describe('Accommodation - Listing - Resident Criteria Filtering', function () {
 
       it('- should update with new results', () => {
         const calledAsExpected = ajaxGetStub
-          .withArgs('https://dev-api-streetsupport.azurewebsites.net/v1/accommodation/?latitude=123.4&longitude=567.8&acceptsMen=false&acceptsCouples=true')
+          .withArgs(api.accommodation + '?latitude=123.4&longitude=567.8&acceptsMen=false&acceptsCouples=true')
           .calledOnce
         expect(calledAsExpected).toBeTruthy()
       })
