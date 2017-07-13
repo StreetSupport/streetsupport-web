@@ -105,7 +105,7 @@ page: categorybyday
                       </div>
                       <div class="result-detail__times-item result-detail__times-item--timetabled">
                         <ul>
-                          <li>\{{#openingTime}} \{{{serviceInfo}}} \{{/openingTime}}</li>
+                          \{{#openingTime}} \{{#serviceInfo}}<li> \{{{serviceInfo}}} \{{/serviceInfo}}</li> \{{/openingTime}} \{{/openingTime}}
                           \{{#tags}}
                           <li>You must be: <span class="result-detail__tags-item">\{{tags}}</span></li>
                           \{{/tags}}
