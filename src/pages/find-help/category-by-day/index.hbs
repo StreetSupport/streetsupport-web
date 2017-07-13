@@ -94,35 +94,36 @@ page: categorybyday
               <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
               <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
             </button>
-            <div class="accordion__item js-item">
-              <div class="accordion__inner">
-                <div class="result-detail__times-list">
-                  \{{#serviceProviders}}
-                  <div class="result-detail__item">
-                    <div class="result-detail__times-title--timetabled h2">\{{#openingTime}}
-                      \{{startTime}} - \{{endTime}}
-                      \{{/openingTime}}
-                    </div>
-                    <div class="result-detail__times-item result-detail__times-item--timetabled">
-                      <ul>
-                        <li>\{{#openingTime}} \{{{serviceInfo}}} \{{/openingTime}}</li>
-                        \{{#tags}}
-                        <li>Suitable for: <span class="result-detail__tags-item">\{{tags}}</span></li>
-                        \{{/tags}}
-                        <li>
-                          <a href="/find-help/organisation/?organisation=\{{key}}">\{{{name}}}</a>
-                          \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
-                          \{{#address.street}}
-                            \{{#address.street}} \{{{address.street}}}, \{{/address.street}}
-                            \{{#address.street1}} \{{address.street1}}, \{{/address.street1}}
-                            \{{#address.street2}} \{{address.street2}}, \{{/address.street2}}
-                            \{{#address.street3}} \{{address.street3}}, \{{/address.street3}}
-                            \{{#address.city}} \{{address.city}}. \{{/address.city}}
-                            \{{address.postcode}} - <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">View on Map</a>
-                          \{{/address.street}}
-                        </li>
-                        \{{#address.telephone}}<li>Telephone: \{{address.telephone}} </li> \{{/address.telephone}}
-                      </ul>
+              <div class="accordion__item js-item">
+                <div class="accordion__inner">
+                  <div class="result-detail__times-list">
+                    \{{#serviceProviders}}
+                    <div class="result-detail__item">
+                      <div class="result-detail__times-title--timetabled h2">\{{#openingTime}}
+                        \{{startTime}} - \{{endTime}}
+                        \{{/openingTime}}
+                      </div>
+                      <div class="result-detail__times-item result-detail__times-item--timetabled">
+                        <ul>
+                          \{{#openingTime}} \{{#serviceInfo}} <li> \{{{serviceInfo}}}</li> \{{/serviceInfo}} \{{/openingTime}}
+                          \{{#tags}}
+                          <li>You must be: <span class="result-detail__tags-item">\{{tags}}</span></li>
+                          \{{/tags}}
+                          <li>
+                            <a href="/find-help/organisation/?organisation=\{{key}}">\{{{name}}}</a>
+                            \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
+                            \{{#address.street}}
+                              \{{#address.street}} \{{{address.street}}}, \{{/address.street}}
+                              \{{#address.street1}} \{{address.street1}}, \{{/address.street1}}
+                              \{{#address.street2}} \{{address.street2}}, \{{/address.street2}}
+                              \{{#address.street3}} \{{address.street3}}, \{{/address.street3}}
+                              \{{#address.city}} \{{address.city}}. \{{/address.city}}
+                              \{{address.postcode}} - <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">View on Map</a>
+                            \{{/address.street}}
+                          </li>
+                          \{{#address.telephone}}<li>Telephone: \{{address.telephone}} </li> \{{/address.telephone}}
+                        </ul>
+                      </div>
                     </div>
                   </div>
                   \{{/serviceProviders}}
