@@ -14,7 +14,6 @@ const htmlEncode = require('htmlencode')
 
 const initMap = () => {
   const centre = { lat: address.latitude, lng: address.longitude }
-  console.log(centre)
   const map = new google.maps.Map(document.querySelector('.js-map'), {
     zoom: 15,
     center: centre
@@ -62,7 +61,7 @@ const formatAddress = (addressObj) => {
 }
 
 const formatFeatures = (features) => {
-  [
+  const keys = [
     'acceptsPets',
     'hasDisabledAccess',
     'hasSingleRooms',
@@ -74,18 +73,28 @@ const formatFeatures = (features) => {
     'hasLaundryFacilities',
     'providesCleanBedding',
     'allowsVisitors']
+  keys
     .forEach((f) => {
       features[f] = features[f] === 1
     })
   features.additionalFeatures = clean(features.additionalFeatures)
+  features.hasIndividualFeatures = keys.filter((k) => features[k] === true).length > 0
+  features.hasContent = features.hasIndividualFeatures || features.additionalFeatures.length > 0
+
   return features
 }
 
 const formatPricingAndReqs = (data) => {
+  if (!data) return
+
+  const textContentFields = ['featuresAvailableAtAdditionalCost', 'referralNotes', 'availabilityOfMeals']
+  
   data.foodIsIncluded = data.foodIsIncluded === 1
   data.referralNotes = clean(data.referralNotes)
   data.featuresAvailableAtAdditionalCost = clean(data.featuresAvailableAtAdditionalCost)
   data.availabilityOfMeals = clean(data.availabilityOfMeals)
+  data.hasContent = data.foodIsIncluded || textContentFields.filter((f) => data[f].length > 0).length > 0
+
   return data
 }
 
@@ -101,6 +110,15 @@ const formatSupportProvided = (data) => {
   data.supportOffered = data.supportOffered
     .map((s) => supportTypes.find(kv => kv.key === s).name)
   data.supportInfo = clean(data.supportInfo)
+  data.hasContent = data.supportOffered.length > 0 || data.supportInfo.length > 0 || data.hasOnSiteManager
+  return data
+}
+
+const formatResidentCriteria = (data) => {
+  if (!data) return
+
+  data.hasContent = Object.keys(data).filter((k) => data[k] === true).length > 0
+
   return data
 }
 
@@ -117,6 +135,7 @@ getApiData
     result.data.features = formatFeatures(result.data.features)
     result.data.pricingAndRequirements = formatPricingAndReqs(result.data.pricingAndRequirements)
     result.data.supportProvided = formatSupportProvided(result.data.supportProvided)
+    result.data.residentCriteria = formatResidentCriteria(result.data.residentCriteria)
 
     address = result.data.address
 

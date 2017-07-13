@@ -52,6 +52,7 @@ module.exports = {
     bestpracticeawardsapply: path.join(__dirname, 'src/js/pages/best-practice/awards/page-apply'),
     bestpracticeenquiries: path.join(__dirname, 'src/js/pages/best-practice/page-enquiries'),
     contact: path.join(__dirname, 'src/js/pages/contact/app'),
+    accomAdvice: path.join(__dirname, 'src/js/pages/accommodation/advice/app'),
     accomListing: path.join(__dirname, 'src/js/pages/accommodation/listing/app'),
     accomMap: path.join(__dirname, 'src/js/pages/accommodation/map/app'),
     accomDetails: path.join(__dirname, 'src/js/pages/accommodation/details/app')

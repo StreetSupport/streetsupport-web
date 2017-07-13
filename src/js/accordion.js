@@ -1,13 +1,16 @@
 /* global ga */
 
-var accordion = '.js-accordion'
-var header = '.js-header'
 var activeClass = 'is-active'
 var myListener = {
   accordionOpened: function () { }
 }
 
-var init = function (showFirst, indexToOpen, listener, showAll) {
+const defaultSelectors = {
+  accordion: '.js-accordion',
+  header: '.js-header'
+}
+
+var init = function (showFirst, indexToOpen, listener, showAll, selectors = defaultSelectors) {
   // If not supported, exit out
   if (!document.querySelector || !document.querySelectorAll || !document.body.classList) {
     return
@@ -17,8 +20,8 @@ var init = function (showFirst, indexToOpen, listener, showAll) {
   }
 
   var i
-  var el = document.querySelectorAll(accordion)
-  var headers = document.querySelectorAll(header)
+  var el = document.querySelectorAll(selectors.accordion)
+  var headers = document.querySelectorAll(selectors.header)
   var itemCount = headers.length
 
   // Add active class to first elements or if there is only one panel

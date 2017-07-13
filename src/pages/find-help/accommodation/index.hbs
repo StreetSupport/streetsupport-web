@@ -13,8 +13,8 @@ page: accommodation
   <div class="container">
     <ol class="breadcrumbs__list">
       <li class="breadcrumbs__item"><a href="/">Home</a></li>
-        <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
-        <li class="breadcrumbs__item">Accommodation</li>
+      <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
+      <li class="breadcrumbs__item">Accommodation</li>
     </ol>
   </div>
 </div>
@@ -22,25 +22,23 @@ page: accommodation
 <div class="block block--header">
   <div class="container">
     <h1 class="h1 block__header">Accommodation</h1>
-    <h2 class="h2 block__sub-header">Acommodation options and advice</h2>
+    <h2 class="h2 block__sub-header">What you need to know when looking for accommodation</h2>
   </div>
 </div>
 
 <div class="block">
   <div class="container">
-    <div class="block__content">
+    <div class="block__content text-center">
       <p>Your accommodation options depend on your legal situation, location and your needs.</p>
-
-      <h2 class="h3"><a href="/find-help/accommodation/advice/">Read our advice guide</a></h2>
-      <p>What to do if you are experiencing homelessness or at risk.</p>
-
-      <h2 class="h3"><a href="/find-help/accommodation/listing/">Browse accommodation</a></h2>
-      <p>Accommodation options in your local area.</p>
-
-      <h2 class="h3"><a href="/find-help/support/?sub-category=housing">Find support services</a></h2>
-      <p>Local services that can support you to find accommodation.</p>
-
-      {{> social-share}}
+      <p>In most cases, your first port of call is to visit your council housing advice service. Drop in centres and other services can also support you to find accommodation - <a href="/find-help/support/?sub-category=housing">view our list of local housing advice services</a></p>
+      <div class="block__cta block__cta--3 accommodation-splash">
+        {{>cta brand="e" link="/find-help/accommodation/advice/" icon="accom-advice" name="Read our <span class=\"line-break\"></span> advice guide"}}
+        {{>cta brand="e" link="/find-help/support/?sub-category=housing" icon="accom-find" name="Find <span class=\"line-break\"></span> support services"}}
+        {{>cta brand="e" link="/find-help/accommodation/listing/" icon="accom-listing" name="Browse <span class=\"line-break\"></span> all accommodation"}}
+      </div>
     </div>
+
+    {{> social-share}}
+
   </div>
 </div>
