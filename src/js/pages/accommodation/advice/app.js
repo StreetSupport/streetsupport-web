@@ -1,5 +1,6 @@
 // Common modules
 import '../../../common'
+
 const browser = require('../../../browser')
 
 const accordion = require('../../../accordion')
@@ -22,16 +23,16 @@ const openPanel = function (panelId) {
   const el = document.getElementById(panelId)
   const context = document.querySelectorAll('.js-accom-types-accordion')
   const useAnalytics = true
-
   accordion.reOpen(el, context, useAnalytics)
   browser.scrollTo(`#${panelId}`)
 }
 
 const accomTypeLinks = document.querySelectorAll('.accom-type-link')
-accomTypeLinks
+Array.from(accomTypeLinks)
   .forEach((l) => {
-    l.addEventListener('click', function () {
-      const linkId = l.getAttribute('data-id')
+    l.addEventListener('click', function (e) {
+      e.preventDefault()
+      const linkId = l.getAttribute('href').substr(1)
       openPanel(linkId)
     })
   })
