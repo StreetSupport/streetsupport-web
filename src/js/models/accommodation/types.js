@@ -23,7 +23,7 @@ export const Accommodation = function (data, listeners) {
   self.accommodationType = ko.observable(data.accommodationType)
   self.synopsis = ko.observable(data.synopsis)
   self.referralIsRequired = ko.observable(data.referralIsRequired)
-  self.detailsUrl = ko.observable(`details?id=${data.id}`)
+  self.detailsUrl = ko.observable(`/find-help/accommodation/listing/details?id=${data.id}`)
   self.isActive = ko.observable()
 
   self.selectItem = () => {

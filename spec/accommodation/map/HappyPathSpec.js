@@ -138,7 +138,7 @@ describe('Accommodation - Listing', function () {
   })
 
   it('- should set details url', () => {
-    expect(sut.itemsToDisplay()[0].detailsUrl()).toEqual(`details?id=${data.items[0].id}`)
+    expect(sut.itemsToDisplay()[0].detailsUrl()).toEqual(`/find-help/accommodation/listing/details?id=${data.items[0].id}`)
   })
 
   it('- should initialise map with current location', () => {
