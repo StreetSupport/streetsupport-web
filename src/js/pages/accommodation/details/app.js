@@ -88,7 +88,7 @@ const formatPricingAndReqs = (data) => {
   if (!data) return
 
   const textContentFields = ['featuresAvailableAtAdditionalCost', 'referralNotes', 'availabilityOfMeals']
-  
+
   data.foodIsIncluded = data.foodIsIncluded === 1
   data.referralNotes = clean(data.referralNotes)
   data.featuresAvailableAtAdditionalCost = clean(data.featuresAvailableAtAdditionalCost)

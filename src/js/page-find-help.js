@@ -20,6 +20,8 @@ let getData = () => {
     .forEach((category) => {
       if (category.key === 'meals' || category.key === 'dropin') {
         category.page = `${category.key}/timetable`
+      } if (category.key === 'accom') {
+        category.page = 'accommodation'
       } else {
         category.page = `${category.key}`
       }
