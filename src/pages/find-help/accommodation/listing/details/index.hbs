@@ -64,9 +64,10 @@ nosubnav: false
         \{{/generalInfo}}
         </section>
 
+        \{{#pricingAndRequirements}}
+        \{{#hasContent}}
         <section class="accom-details__section">
           <h2 class="h2">Price and Requirements</h2>
-          \{{#pricingAndRequirements}}
             \{{#referralIsRequired}}<p class="h3">A referral is required for this property</p>\{{/referralIsRequired}}
             \{{{referralNotes}}}
             <dl>
@@ -74,19 +75,24 @@ nosubnav: false
               <dd class="accom-details__value">£\{{{price}}} per week \{{#foodIsIncluded}} (includes meals)\{{/foodIsIncluded}}</dd>\{{/price}}
             </dl>
             \{{{featuresAvailableAtAdditionalCost}}}
-          \{{/pricingAndRequirements}}
         </section>
+        \{{/hasContent}}
+        \{{/pricingAndRequirements}}
 
-        <section class="accom-details__section">
-          <h2 class="h2">Meals Availability</h2>
-          \{{#pricingAndRequirements}}
-            \{{{availabilityOfMeals}}}
-          \{{/pricingAndRequirements}}
-        </section>
 
+        \{{#pricingAndRequirements}}
+          \{{#availabilityOfMeals}}
+          <section class="accom-details__section">
+            <h2 class="h2">Meals Availability</h2>
+              \{{{availabilityOfMeals}}}
+          </section>
+          \{{/availabilityOfMeals}}
+        \{{/pricingAndRequirements}}
+
+        \{{#residentCriteria}}
+        {{#if hasContent}}
         <section class="accom-details__section">
           <h2 class="h2">Suitable For</h2>
-          \{{#residentCriteria}}
           <ul class="accom-details__features">
             \{{#acceptsMen}}<li>Men</li>\{{/acceptsMen}}
             \{{#acceptsWomen}}<li>Women</li>\{{/acceptsWomen}}
@@ -96,32 +102,39 @@ nosubnav: false
             \{{#acceptsFamilies}}<li>Families</li>\{{/acceptsFamilies}}
             \{{#acceptsBenefitsClaimants}}<li>Housing Benefits Claimants</li>\{{/acceptsBenefitsClaimants}}          
           </ul>
-          \{{/residentCriteria}}
         </section>
+        {{/if}}
+        \{{/residentCriteria}}
 
-        <section class="accom-details__section">
-          <h2 class="h2">Property Features</h2>
-          \{{#features}}
-          <ul class="accom-details__features">
-            \{{#acceptsPets}}<li>Allows Pets</li>\{{/acceptsPets}}
-            \{{#hasDisabledAccess}}<li>Disabled Access</li>\{{/hasDisabledAccess}}
-            \{{#hasSingleRooms}}<li>Single Rooms</li>\{{/hasSingleRooms}}
-            \{{#hasSharedRooms}}<li>Shared Rooms</li>\{{/hasSharedRooms}}
-            \{{#hasShowerBathroomFacilities}}<li>Shower and Bathroom Facilities</li>\{{/hasShowerBathroomFacilities}}
-            \{{#hasAccessToKitchen}}<li>Kitchen Facilities</li>\{{/hasAccessToKitchen}}
-            \{{#hasFlexibleMealTimes}}<li>Flexible Meal Times</li>\{{/hasFlexibleMealTimes}}
-            \{{#hasLounge}}<li>Communal/Social Area</li>\{{/hasLounge}}
-            \{{#hasLaundryFacilities}}<li>Laundry Facilities</li>\{{/hasLaundryFacilities}}
-            \{{#providesCleanBedding}}<li>Provides Clean Bedding</li>\{{/providesCleanBedding}}
-            \{{#allowsVisitors}}<li>Allows Visitors</li>\{{/allowsVisitors}}
-          </ul>
-          \{{{additionalFeatures}}}
-          \{{/features}}
-        </section>
+        \{{#features}}
+          \{{#hasContent}}
+            <section class="accom-details__section">
+              <h2 class="h2">Property Features</h2>
+              {{#if hasIndividualFeatures}}
+              <ul class="accom-details__features">
+                \{{#acceptsPets}}<li>Allows Pets</li>\{{/acceptsPets}}
+                \{{#hasDisabledAccess}}<li>Disabled Access</li>\{{/hasDisabledAccess}}
+                \{{#hasSingleRooms}}<li>Single Rooms</li>\{{/hasSingleRooms}}
+                \{{#hasSharedRooms}}<li>Shared Rooms</li>\{{/hasSharedRooms}}
+                \{{#hasShowerBathroomFacilities}}<li>Shower and Bathroom Facilities</li>\{{/hasShowerBathroomFacilities}}
+                \{{#hasAccessToKitchen}}<li>Kitchen Facilities</li>\{{/hasAccessToKitchen}}
+                \{{#hasFlexibleMealTimes}}<li>Flexible Meal Times</li>\{{/hasFlexibleMealTimes}}
+                \{{#hasLounge}}<li>Communal/Social Area</li>\{{/hasLounge}}
+                \{{#hasLaundryFacilities}}<li>Laundry Facilities</li>\{{/hasLaundryFacilities}}
+                \{{#providesCleanBedding}}<li>Provides Clean Bedding</li>\{{/providesCleanBedding}}
+                \{{#allowsVisitors}}<li>Allows Visitors</li>\{{/allowsVisitors}}
+              </ul>
+              {{/if}}
+              
+              \{{{additionalFeatures}}}
+            </section>
+          \{{/hasContent}}
+        \{{/features}}
 
+        \{{#supportProvided}}
+        \{{#hasContent}}
         <section class="accom-details__section">
           <h2 class="h2">Support Provided</h2>
-          \{{#supportProvided}}
           <ul>
           \{{#supportOffered}}
             <li>\{{ . }}</li>
@@ -129,8 +142,9 @@ nosubnav: false
           </ul>
           \{{#hasOnSiteManager}}<p>The property has an on-site manager.</p>\{{/hasOnSiteManager}}
           \{{{supportInfo}}}
-          \{{/supportProvided}}
         </section>
+        \{{/hasContent}}
+        \{{/supportProvided}}
       </div>
     </div>
   </div>
