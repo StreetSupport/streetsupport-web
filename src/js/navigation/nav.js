@@ -39,7 +39,7 @@ var init = function () {
 
   stickyNavShrinker.init()
   mobileCitySelect.init()
-  document.querySelector('.js-location-pin')
+  document.querySelector('.js-change-location')
     .addEventListener('click', (e) => {
       modal.init(location)
     })
