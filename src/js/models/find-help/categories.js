@@ -1,19 +1,22 @@
 import { categories } from '../../../data/generated/service-categories'
 
-export const getData = (currentLocation) => {
-  categories
-    .forEach((category) => {
-      if (category.key === 'meals' || category.key === 'dropin') {
-        category.page = `${category.key}/timetable`
-      } else if (category.key === 'accom') {
-        category.page = 'accommodation'
-      } else {
-        category.page = `${category.key}`
-      }
-    })
+const getPageUrl = (key) => {
+  if (key === 'meals' || key === 'dropin') {
+    return `${key}/timetable`
+  } else if (key === 'accom') {
+    return 'accommodation'
+  } else {
+    return `${key}`
+  }
+}
 
-  // Append object name for Hogan
-  var theData = {
+export const getData = (currentLocation, cities) => {
+  console.log(cities)
+
+  categories
+    .forEach((category) => { category.page = getPageUrl(categories.key) })
+
+  const result = {
     categories: categories,
     location: currentLocation,
     emergencyHelpUrl: currentLocation.id === 'elsewhere'
@@ -21,5 +24,10 @@ export const getData = (currentLocation) => {
       : `/${currentLocation.id}/emergency-help/`
   }
 
-  return theData
+  const city = cities.find((c) => c.id === currentLocation.id)
+  if (city) {
+    result.location.swepIsAvailable = city.swepIsAvailable
+  }
+
+  return result
 }
