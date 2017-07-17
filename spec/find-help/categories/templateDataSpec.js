@@ -77,12 +77,11 @@ describe('Find Help categories', () => {
   })
 
   describe('- swep notification', () => {
-    it('- should set to find-help/emergency-help', () => {
+    it('- should set as requested city\'s swep status', () => {
       const locationInfo = {
         id: 'leeds'
       }
       const result = getData(locationInfo, cityData)
-
       expect(result.location.swepIsAvailable).toEqual(cityData[0].swepIsAvailable)
     }, cityData)
   })
