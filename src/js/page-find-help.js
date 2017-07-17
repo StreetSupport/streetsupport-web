@@ -13,8 +13,16 @@ const apiRoutes = require('./api')
 import { suffixer } from './location/suffixer'
 import { getData } from './models/find-help/categories'
 
+const render = (location, cities) => {
+  const callback = function () {
+    suffixer(location)
+    browser.loaded()
+    socialShare.init()
+  }
+  templating.renderTemplate('js-category-list-tpl', getData(location, cities.data), 'js-category-list-output', callback)
+}
+
 browser.loading()
-// Get API data using promise
 
 locationSelector
   .getCurrent()
@@ -22,12 +30,7 @@ locationSelector
     getApiData
       .data(apiRoutes.cities)
       .then((cities) => {
-        const callback = function () {
-          suffixer(location)
-          browser.loaded()
-          socialShare.init()
-        }
-        templating.renderTemplate('js-category-list-tpl', getData(location, cities.data), 'js-category-list-output', callback)
+        render(location, cities)
       })
   }, (_) => {
     browser.redirect('/500')

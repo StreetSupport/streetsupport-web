@@ -1,20 +1,17 @@
 import { categories } from '../../../data/generated/service-categories'
 
 const getPageUrl = (key) => {
-  if (key === 'meals' || key === 'dropin') {
-    return `${key}/timetable`
-  } else if (key === 'accom') {
-    return 'accommodation'
-  } else {
-    return `${key}`
+  switch (key) {
+    case 'meals': return `meals/timetable`
+    case 'dropin': return `dropin/timetable`
+    case 'accom': return `accommodation`
+    default: return key
   }
 }
 
 export const getData = (currentLocation, cities) => {
-  console.log(cities)
-
   categories
-    .forEach((category) => { category.page = getPageUrl(categories.key) })
+    .forEach((category) => { category.page = getPageUrl(category.key) })
 
   const result = {
     categories: categories,
