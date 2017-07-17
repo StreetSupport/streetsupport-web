@@ -28,7 +28,14 @@ const subCatFilter = {
 }
 
 const changeSubCatFilter = (e) => {
-  Array.from(document.querySelectorAll(subCatFilter.selectors.item))
+  const reqId = e.target.getAttribute('data-id')
+  const subCatBtns = Array.from(document.querySelectorAll(subCatFilter.selectors.item))
+
+  const matchingBtn = subCatBtns.find((b) => b.getAttribute('data-id') === reqId)
+
+  if (matchingBtn.classList.contains('on')) return
+
+  subCatBtns
     .forEach((item) => {
       item.classList.remove('on')
     })
@@ -41,16 +48,15 @@ const changeSubCatFilter = (e) => {
       item.classList.remove('hide')
     })
 
-  const id = e.target.getAttribute('data-id')
-  if (id.length > 0) {
+  if (reqId.length > 0) {
     providerItems
       .forEach((item) => {
-        if (item.getAttribute('data-subcats').indexOf(id) < 0) {
+        if (item.getAttribute('data-subcats').indexOf(reqId) < 0) {
           item.classList.add('hide')
         }
       })
   }
-  findHelp.setUrl('category-by-day', 'sub-category', id)
+  findHelp.setUrl('category-by-day', 'sub-category', reqId)
 }
 
 const initHistoryBackOnSubcats = () => {
