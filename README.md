@@ -50,6 +50,17 @@ Run these tasks in your command line Terminal:
 * The `--production` flag builds minified assets with no sourcemaps,
 * The `--debug` flag shows the files being created in each task (if the task has a pipe).
 
+### Environments
+
+There are three API environments: CI, UAT and LIVE. You can alter the API your local instance is running from by editing [/blob/develop/src/js/env.js](/blob/develop/src/js/env.js):
+
+* 0: locally running API instance
+* 1: CI
+* 2: UAT
+* 3: LIVE
+
+Day-to-day development should point at CI.
+
 ## Development
 
 ### Workflow
