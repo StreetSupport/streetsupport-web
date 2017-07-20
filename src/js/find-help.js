@@ -42,12 +42,13 @@ const FindHelp = function (location) {
   }
 
   self.setUrl = function (pageName, subCategoryKey, subCategoryId) {
-    let url = '?location=' + self.currentLocation +
+    let newUrl = '?location=' + self.currentLocation +
               '&range=' + self.currentRange
     if (subCategoryId.length > 0) {
-      url += '&' + subCategoryKey + '=' + subCategoryId
+      newUrl += '&' + subCategoryKey + '=' + subCategoryId
     }
-    if (url !== window.location.search) browser.pushHistory({}, '', url)
+    const currUrl = window.location.search
+    if (newUrl !== currUrl) browser.pushHistory({}, '', newUrl)
   }
 
   self.scrollTo = (subCategoryId) => {

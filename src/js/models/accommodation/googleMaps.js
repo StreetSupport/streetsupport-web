@@ -1,9 +1,9 @@
 /* global google */
 
-const buildMap = function (userLocation) {
+const buildMap = function (userLocation, zoomLevel = 10) {
   const centre = { lat: userLocation.latitude, lng: userLocation.longitude }
   return new google.maps.Map(document.querySelector('.js-map'), {
-    zoom: 13,
+    zoom: zoomLevel,
     center: centre,
     draggable: false
   })

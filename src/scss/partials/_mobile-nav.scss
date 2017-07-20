@@ -13,6 +13,7 @@
     width: auto;
     padding: 20px;
     margin: 0;
+    background-color:$brand-j;
 
     a {
       color: $brand-k;
@@ -38,8 +39,9 @@
     display: block;
     clear: both;
     background: $brand-j;
-    padding: 10px;
+    padding: 15px;
     box-shadow: 0 2px 5px 0 rgba(50,50,50,.7);
+    cursor: pointer;
 
     @include printHide();
   }
@@ -51,15 +53,14 @@
 
   .current-city__change-location:after {
     content: "";
-    display: inline-block;
-    float:right;
+    float: right;
     width: 0;
   	height: 0;
   	border-left: 5px solid transparent;
   	border-right: 5px solid transparent;
   	border-top: 10px solid black;
     margin-top: 0.4em;
-    margin-right: 1.5em;
+    margin-right: 1.3em;
   }
 }
 
