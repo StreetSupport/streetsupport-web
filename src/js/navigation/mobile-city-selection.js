@@ -12,7 +12,7 @@ const handleClick = (e) => {
 }
 
 const init = () => {
-  let cityNavItems = document.querySelectorAll('.js-city-nav-item')
+  let cityNavItems = document.querySelectorAll('.js-city-nav-item > a')
   for (let i = 0; i < cityNavItems.length; i++) {
     cityNavItems[i].addEventListener('click', handleClick)
   }
