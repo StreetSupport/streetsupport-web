@@ -2,7 +2,9 @@
   text-align: center;
 
   &__list {
-    list-style: none; margin: 50px 0 30px 0; padding: 0;
+    list-style: none;
+    margin: 50px 0 30px 0;
+    padding: 0;
     @include cf();
 
     @include mq($from: m) {
@@ -10,58 +12,78 @@
     }
   }
 
-  &__list-item {
-    display: inline;
-  }
-
   &__logo {
     display: inline-block;
+    height: 120px;
+    width: 120px;
+    position: relative;
+    overflow: hidden;
     margin: 0 10px;
-    padding-top: 10px;
-    line-height: 7;
+    // padding-top: 10px;
+    // line-height: 7;
 
-    &:last-child { margin-right: 0 }
-
-    & a {
-      height: 38px;
+    a {
       display: block;
-      background: no-repeat;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      svg {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+      }
+    }
+
+    &:last-child {
+      margin-right: 0;
     }
 
     &--coalition-of-relief {
+      width: 57px
       a {
         background-image: url(/assets/img/coalition-of-relief.png);
-        width: 57px;
       }
     }
-    &--booth-centre {
-      margin-top: 30px;
-      margin-bottom: 30px;
 
-      @include mq($from: s) {
-        margin-top: 0;
-        margin-bottom: 0;
-      }
+    &--booth-centre {
+      width: 114px;
 
       a {
         background-image: url(/assets/img/booth-centre.png);
-        width: 114px;
       }
     }
+
     &--mustard-tree {
+      width: 172px;
+
       a {
         background-image: url(/assets/img/mustard-tree.png);
-        width: 172px;
       }
     }
+
     &--bruntwood {
+      width: 132px;
+
       a {
         background-image: url(/assets/img/bruntwood.png);
-        background-position: 0 9px;
-        width: 132px;
       }
     }
+
     &--holy-name-manchester {
+      width: 195px;
+
       a {
         svg {
           height: 38px;
@@ -69,7 +91,10 @@
         }
       }
     }
+
     &--shelter {
+      width: 90px;
+
       a {
         svg {
           height: 38px;
@@ -77,33 +102,16 @@
         }
       }
     }
-    &--cityco {
-      position: relative;
-      width: 120px;
-      
-      margin-top: 30px;
-      margin-bottom: 30px;
 
-      @include mq($from: s) {
-        margin-top: 0;
-        margin-bottom: 0;
-      }
+    &--cityco {
+      width: 120px;
       
       a {
         background-image: url(/assets/img/cityco.png);
-        width: 120px;
-        height: 120px;
-        position: absolute;
-        top: -65px;
       }
     }
+
     &--leedsbid {
-      position: relative;
-      width: 120px;
-      height: 100px;
-      padding: 0;
-      margin: 0;
-      a {
         svg {
           position: absolute;
           left: 0;
@@ -111,14 +119,29 @@
           height: 100px;
           width: 120px;
         }
-      }
     }
+
     &--partner-us {
+      width: 38px;
+
       a {
         background-image: url(/assets/img/partner-with-us.png);
-        width: 38px;
+      }
+    }
+
+    &--big-lottery-fund{
+      a {
+        svg {
+          height: 96px;
+          width: 120px;
+        }
+      }
+    }
+
+    &--human-appeal {
+      a {
+        background-image: url(/assets/img/human-appeal-180x180.png);
       }
     }
   }
-
 }
