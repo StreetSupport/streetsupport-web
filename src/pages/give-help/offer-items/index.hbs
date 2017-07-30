@@ -1,0 +1,166 @@
+---
+title: Offer Items - Street Support
+description: Street support makes it easier to help homeless people. Here's how to get in touch.
+image: https://streetsupport.net/assets/img/og/street-support.png
+layout: withGoogle.hbs
+permalink: false
+jsBundle: offeritems
+section: givehelp
+page: offeritems
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item"><a href="/give-help/">Give Help</a></li>
+      <li class="breadcrumbs__item">Offer Items</li>
+    </ol>
+  </div>
+</div>
+{{> no-js}}
+
+<div class="block block--subpage-header">
+  <div class="container">
+    <h1 class="h1 block__header">Offer Items</h1>
+    <h2 class="h2 block__sub-header">Offer your spare items to local organisations</h2>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container">
+    <div class="js-org-needs block__content" data-bind="with: map">
+      <p>Organisations and charities are always in need of items to help with a wide variety of tasks and services. This can range from hot drink supplies, to IT equipment. If you have any items that you think may be useful, please select a suitable organisation and consult their donation information.</p>
+
+      <!-- ko if: showFilter -->
+      <div class="subcat-filter">
+        <p class="subcat-filter__label">Filter by items taken:</p>
+        <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: needCategories">
+          <li class="subcat-filter__item js-filter-item" data-bind="attr: { 'data-id': id, class: cssClass }, text: name, click: $parent.filter"></li>
+        </ul>
+      </div>
+      <!-- /ko -->
+      <div class="js-map services-map"></div>
+      <p>If you can not find a suitable organisation, please fill in the form below, and when an organisation has interest in your offer, they can get in touch.</p>
+    </div>
+  </div>
+</div>
+<h3 class="h2 requests-detail__heading requests-detail__heading--i-want-to-volunteer">I Have Items to Offer!</h3>
+<div class="block block--requests-detail" data-bind="with: form">
+  <div class="container">
+    <div class="block__content">
+      <!-- ko ifnot: isSubmitted -->
+    	<form id="js-form" class="form form--volunteer" data-bind="submit: submitForm">
+	    	<fieldset class="form__fieldset">
+	    		<legend class="h2 form__fieldset-title">About You</legend>
+	    		<ul class="form__field-list">
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="firstname">First Name *</label>
+	    				<input class="form__input" type="text" data-bind="textInput: firstName" placeholder="First Name (required)" />
+	    			</li>
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="lastname">Last Name *</label>
+	    				<input class="form__input" type="text" data-bind="textInput: lastName" placeholder="Last Name (required)" />
+	    			</li>
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="email">Email *</label>
+	    				<input class="form__input" type="email" data-bind="textInput: email" placeholder="Email Address (required)" />
+	    			</li>
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="telephone">Telephone</label>
+	    				<input class="form__input" type="text" data-bind="textInput: telephone" placeholder="Telephone Number" />
+	    			</li>
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="city">City</label>
+              <select class="form__input" data-bind="
+                  options: cities,
+                  optionsText: 'name',
+                  optionsValue: 'id',
+                  value: city">
+              </select>
+	    			</li>
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="postcode">Postcode *</label>
+	    				<input class="form__input" type="text" data-bind="textInput: postcode" placeholder="Postcode (required)" />
+	    			</li>
+	    		</ul>
+	    	</fieldset>
+	    	<fieldset class="form__fieldset">
+	    		<legend class="h2 form__fieldset-title">Offer Type</legend>
+          <p>Please tick all the categories that relate to your offer.</p>
+	    		<ul class="form__field-list">
+            <div data-bind="foreach: categories">
+              <li class="form__field-item">
+                <label class="form__label--checkbox" data-bind="attr: { for: key }">
+                  <input type="checkbox" data-bind="attr: { value: value, name: key, id: key }, checked: isChecked" class="form__input--checkbox" />
+                  <span data-bind="text: value"></span>
+                </label>
+              </li>
+            </div>
+              <li class="form__field-item">
+                <label class="form__label--checkbox" for="other">
+                  <input type="checkbox" name="other" id="other" data-bind="checked: otherCategoryChecked" class="form__input--checkbox" />
+                  Other; please describe below
+                </label>
+                <input type="text" class="form__input" data-bind="textInput: otherCategory" placeholder="Other category" />
+              </li>
+	    		</ul>
+	    	</fieldset>
+	    	<fieldset class="form__fieldset">
+	    		<legend class="h2 form__fieldset-title">Description</legend>
+	    		<ul class="form__field-list">
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen form__label hide-screen" for="description">What are you able to offer?</label>
+	    				<input class="form__input" type="text" data-bind="textInput: description" placeholder="What are you able to offer?" />
+	    			</li>
+	    		</ul>
+	    	</fieldset>
+	    	<fieldset class="form__fieldset">
+	    		<legend class="h2 form__fieldset-title">Additional Information</legend>
+	    		<ul class="form__field-list">
+	    			<li class="form__field-item--full">
+	    				<label class="form__label hide-screen form__label hide-screen" for="additionalInfo">eg: quantity available, size of item, are you able to drop the items off?</label>
+	    				<textarea class="form__input form__input--multiline" data-bind="textInput: additionalInfo" placeholder="eg: quantity available, size of item, are you able to drop the items off?"></textarea>
+	    			</li>
+	    		</ul>
+	    	</fieldset>
+        <fieldset class="form__fieldset">
+          <ul class="form__field-list">
+            <li class="form__field-item form__field-item--full">
+              <label class="form__label--checkbox" for="isOptedIn">
+                <input type="checkbox" id="isOptedIn" data-bind="attr: { value: isOptedIn }, checked: isOptedIn" class="form__input--checkbox" />
+                Opt-In if you want to get occasional updates about Street Support to your inbox
+                </label>
+            </li>
+          </ul>
+        </fieldset>
+	    	<button type="submit" class="btn btn--brand-d form__submit"><span class="btn__text">Submit</span></button>
+    	</form>
+      <!-- /ko -->
+
+      <!-- ko if: isSubmitted -->
+      <!-- ko ifnot: isSuccess -->
+      <div id="js-fail">
+        <h2 class="h2">Technical Error</h2>
+        <p>There has been a technical error. Please <a href="/contact/">contact Street Support</a>.</p>
+      </div>
+      <!-- /ko -->
+      <!-- ko if: isSuccess -->
+      <div id="js-success">
+        <h2 class="h2">Thank you for submitting your details!</h2>
+        <p>Your offer will be matched with any organisations who would welcome your offer. If no-one needs it at the moment, the offer will be retained for future matching.</p>
+        <div class="block__cta block__cta--3" data-bind="visible: isManchester">
+          <p class="text-left">For now, why not look at other ways you can help Manchester end homelessness:</p>
+          {{>cta brand="e" link="http://campaign.justgiving.com/charity/forevermanchester/bigchangemcr" icon="big-change" name="Donate to Big Change" label=""}}
+          {{>cta brand="e" link="https://charter.streetsupport.net/pledge-your-support/" icon="pledge" name="Pledge to the Charter" label=""}}
+          {{>cta brand="e" link="https://charter.streetsupport.net/join-action-group/" icon="join" name="Join an Action Group" label=""}}
+        </div>
+      </div>
+      <!-- /ko -->
+      <!-- /ko -->
+      {{> social-share}}
+    </div>
+  </div>
+</div>
+
+<div id="spin"></div>
