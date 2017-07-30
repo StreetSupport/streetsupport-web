@@ -6,6 +6,7 @@ require('knockout.validation') // No variable here is deliberate!
 
 const apiRoutes = require('../api')
 const getApi = require('../get-api-data')
+const listToDropdown = require('../list-to-dropdown')
 
 var OfferItemModel = function (currentLocation) {
   var self = this
@@ -33,66 +34,98 @@ var OfferItemModel = function (currentLocation) {
     })
   }
 
+  const createInfoWindow = function (provider, buildMarkup) {
+    const infoWindow = new google.maps.InfoWindow({
+      content: buildMarkup(provider)
+    })
+
+    self.infoWindows.push(infoWindow)
+    return infoWindow
+  }
+
+  const createMarker = function (provider, infoWindow) {
+    const marker = new google.maps.Marker({
+      position: { lat: provider.addresses[0].latitude, lng: provider.addresses[0].longitude },
+      map: self.map,
+      title: `${htmlEncode.htmlDecode(provider.name)}`
+    })
+    marker.categories = provider.needCategories
+
+    marker.addListener('click', () => {
+      self.infoWindows
+        .forEach((w) => w.close())
+      infoWindow.open(self.map, marker)
+    })
+
+    self.markers.push(marker)
+  }
+
+  const createCurrPosMarker = function () {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      }
+
+      new google.maps.Marker({ // eslint-disable-line
+        position: pos,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 3,
+          fillColor: 'blue',
+          strokeColor: 'blue'
+        },
+        map: self.map
+      })
+    }, function () {
+    })
+  }
+
   self.displayMap = (providers, userLocation) => {
     self.map = self.buildMap(userLocation)
 
     providers
+      .filter((p) => p.addresses.length > 0)
       .forEach((p) => {
-        if (p.addresses.length === 0) return
-
-        const infoWindow = new google.maps.InfoWindow({
-          content: self.buildInfoWindowMarkup(p)
-        })
-
-        self.infoWindows.push(infoWindow)
-
-        const marker = new google.maps.Marker({
-          position: { lat: p.addresses[0].latitude, lng: p.addresses[0].longitude },
-          map: self.map,
-          title: `${htmlEncode.htmlDecode(p.name)}`
-        })
-        marker.categories = p.needCategories
-
-        marker.addListener('click', () => {
-          self.infoWindows
-            .forEach((w) => w.close())
-          infoWindow.open(self.map, marker)
-        })
-
-        self.markers.push(marker)
+        const infoWindow = createInfoWindow(p, self.buildInfoWindowMarkup)
+        createMarker(p, infoWindow)
       })
 
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        }
-
-        new google.maps.Marker({ // eslint-disable-line
-          position: pos,
-          icon: {
-            path: google.maps.SymbolPath.CIRCLE,
-            scale: 3,
-            fillColor: 'blue',
-            strokeColor: 'blue'
-          },
-          map: self.map
-        })
-      }, function () {
-      })
-    } else {
-      // Browser doesn't support Geolocation
+      createCurrPosMarker()
     }
   }
 
-  self.buildCatsFilter = (providers, needCategories) => {
+  const subCatFilter = {
+    selectors: {
+      item: '.subcat-filter__item',
+      selectedItem: '.subcat-filter__item.on',
+      asDropdown: '.list-to-dropdown__select'
+    }
+  }
+
+  const initSubCatAsDropdown = function () {
+    const dropdown = document.querySelector(subCatFilter.selectors.asDropdown)
+    const filterItems = document.querySelector(subCatFilter.selectors.selectedItem)
+
+    dropdown.value = filterItems.innerText
+    dropdown.addEventListener('change', (e) => {
+      const value = e.target.value
+      const c = self.needCategories().find((nc) => nc.name() === value)
+      self.filter(c)
+    })
+  }
+
+  const getUniqueNeedCategories = function (providers) {
     const availableCats = providers
       .map((p) => p.needCategories)
       .reduce((acc, cats) => {
         return [...acc, ...cats]
       }, [])
-    const uniqueAvailableCats = [...new Set(availableCats)]
+    return [...new Set(availableCats)]
+  }
+
+  const createCats = function (needCategories, uniqueAvailableCats) {
     const cats = needCategories
       .filter((nc) => uniqueAvailableCats.includes(nc.key))
       .map((c) => {
@@ -102,13 +135,21 @@ var OfferItemModel = function (currentLocation) {
           cssClass: ko.observable('subcat-filter__item')
         }
       })
+
     cats.unshift({
       id: ko.observable('all'),
       name: ko.observable('All'),
       cssClass: ko.observable('subcat-filter__item on')
     })
+    return cats
+  }
+
+  self.buildCatsFilter = (providers, needCategories) => {
+    const uniqueAvailableCats = getUniqueNeedCategories(providers)
+    const cats = createCats(needCategories, uniqueAvailableCats)
     self.showFilter(cats.length > 1)
     self.needCategories(cats)
+    listToDropdown.init(initSubCatAsDropdown)
   }
 
   self.filter = (c) => {
