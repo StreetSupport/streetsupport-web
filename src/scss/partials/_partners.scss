@@ -41,7 +41,7 @@
       svg {
         position: absolute;
         top: 50%;
-        transform: translateY(-50%);
+        // transform: translateY(-50%);
         left: 0;
       }
     }
@@ -88,6 +88,7 @@
         svg {
           height: 38px;
           width: 195px;
+          margin-top: -19px;
         }
       }
     }
@@ -99,6 +100,7 @@
         svg {
           height: 38px;
           width: 90px;
+          margin-top: -19px;
         }
       }
     }
@@ -134,6 +136,7 @@
         svg {
           height: 96px;
           width: 120px;
+          margin-top: -48px;
         }
       }
     }
