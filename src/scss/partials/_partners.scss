@@ -19,8 +19,6 @@
     position: relative;
     overflow: hidden;
     margin: 0 10px;
-    // padding-top: 10px;
-    // line-height: 7;
 
     a {
       display: block;
@@ -41,7 +39,6 @@
       svg {
         position: absolute;
         top: 50%;
-        transform: translateY(-50%);
         left: 0;
       }
     }
@@ -51,7 +48,8 @@
     }
 
     &--coalition-of-relief {
-      width: 57px
+      width: 57px;
+      
       a {
         background-image: url(/assets/img/coalition-of-relief.png);
       }
@@ -88,6 +86,7 @@
         svg {
           height: 38px;
           width: 195px;
+          margin-top: -19px;
         }
       }
     }
@@ -99,6 +98,7 @@
         svg {
           height: 38px;
           width: 90px;
+          margin-top: -19px;
         }
       }
     }
@@ -134,6 +134,7 @@
         svg {
           height: 96px;
           width: 120px;
+          margin-top: -48px;
         }
       }
     }
