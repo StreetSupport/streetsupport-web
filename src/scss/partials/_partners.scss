@@ -49,7 +49,7 @@
 
     &--coalition-of-relief {
       width: 57px;
-      
+
       a {
         background-image: url(/assets/img/coalition-of-relief.png);
       }
@@ -105,7 +105,7 @@
 
     &--cityco {
       width: 120px;
-      
+
       a {
         background-image: url(/assets/img/cityco.png);
       }
@@ -156,4 +156,44 @@
       }
     }
   }
+}
+
+// I took the same styling as from the team member classes and applied them to the new classes. Left as below for the minute but will then neaten them up.
+
+.partner {
+  @include cf();
+  padding-bottom: 60px;
+}
+
+  .partner--human-appeal,
+  .partner--greater-mayors-fund,
+  .partner--big-lottery-fund,
+  .partner--bruntwood,
+  .partner--cityco,
+  .partner--one-agency,
+  .partner--dentsu {
+    &::before, &::after {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 20px auto;
+      background-position: center center;
+      border: 2px solid yellow;
+    }
+
+  @include mq($from: m) {
+    &::before {
+      display: none;
+    }
+    &::after {
+      display: block;
+      float: left;
+      margin: 0 20px 0 20px;
+    }
+  }
+}
+
+.partner h2 {
+  display: inline;
 }
