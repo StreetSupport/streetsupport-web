@@ -58,7 +58,7 @@
   margin-right: 10px;
 
   @include mq($from: m) {
-    margin-left: -30%;
+    left: 20%;
     bottom: 20px;
     width: 60%;
     position: absolute;
