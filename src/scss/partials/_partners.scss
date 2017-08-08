@@ -47,6 +47,16 @@
       margin-right: 0;
     }
 
+    &--partners-page {
+      display: block;
+      background-color: red;
+      margin: 0 auto 20px auto;
+      @include mq ($from: m) {
+        float: left;
+        margin: 0 20px;
+      }
+    }
+
     &--coalition-of-relief {
       width: 57px;
 
@@ -147,42 +157,13 @@
   }
 }
 
-// I took the same styling as from the team member classes and applied them to the new classes. Left as below for the minute but will then neaten them up.
-
 .partner {
   @include cf();
-  padding-bottom: 60px;
+  padding-bottom: 20px;
 }
 
-  .partner--human-appeal,
-  .partner--greater-mayors-fund,
-  .partner--big-lottery-fund,
-  .partner--bruntwood,
-  .partner--cityco,
-  .partner--one-agency,
-  .partner--dentsu {
-    &::before, &::after {
-      content: '';
-      display: block;
-      width: 100px;
-      height: 100px;
-      margin: 0 auto 20px auto;
-      background-position: center center;
-      border: 2px solid yellow;
-    }
-
-  @include mq($from: m) {
-    &::before {
-      display: none;
-    }
-    &::after {
-      display: block;
-      float: left;
-      margin: 0 20px 0 20px;
-    }
+.partner__description {
+  @include mq($from:m) {
+    margin-left: 160px;
   }
-}
-
-.partner h2 {
-  display: inline;
 }
