@@ -17,9 +17,18 @@
     background-image: url('../img/leeds-buildings.png');
     background-repeat: no-repeat;
     background-position: 33% bottom;
+  }
+}
 
-    @include mq($from: m) {
-    }
+%bournemouth-header {
+  background-image: url('../img/header-background-bournemouth.png');
+
+  &:before {
+    height: 420px;
+    background-image: url('../img/bournemouth-buildings.png');
+    background-repeat: no-repeat;
+    background-position: 0 bottom;
+    left: 0;
   }
 }
 
@@ -61,5 +70,12 @@
 .leeds .city-header,
 .manchester .city-header--leeds {
   @extend %leeds-header;
+  color: $brand-k;
+}
+
+
+.bournemouth .city-header,
+.manchester .city-header--bournemouth {
+  @extend %bournemouth-header;
   color: $brand-k;
 }
