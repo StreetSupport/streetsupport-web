@@ -121,6 +121,17 @@
         }
     }
 
+    &--bournemouth-uni {
+      width: 250px;
+        svg {
+          position: absolute;
+          left: 0;
+          top: 0!important;
+          height: 120px;
+          width: 240px;
+        }
+    }
+
     &--partner-us {
       width: 38px;
 
