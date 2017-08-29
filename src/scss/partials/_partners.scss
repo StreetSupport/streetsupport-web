@@ -49,7 +49,6 @@
 
     &--partners-page {
       display: block;
-      background-color: red;
       margin: 0 auto 20px auto;
       @include mq ($from: m) {
         float: left;
@@ -168,13 +167,7 @@
   }
 }
 
-.partner {
+.partner, .partner__about {
   @include cf();
-  padding-bottom: 20px;
-}
-
-.partner__description {
-  @include mq($from:m) {
-    margin-left: 160px;
-  }
+  padding-bottom: 50px;
 }
