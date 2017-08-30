@@ -92,6 +92,14 @@
       }
     }
 
+    &--gm-mayors-fund {
+      width: 140px;
+
+      a {
+        background-image: url(/assets/img/gm-mayors-fund.png);
+      }
+    }
+
     &--shelter {
       width: 90px;
 
@@ -112,6 +120,22 @@
       }
     }
 
+    &--one-agency {
+      width: 110px;
+
+      a {
+        background-image: url(/assets/img/one-agency.png);
+      }
+    }
+
+    &--dentsu-aegis {
+      width: 250px;
+
+      a {
+        background-image: url(/assets/img/dentsu-aegis.png);
+      }
+    }
+
     &--leedsbid {
         svg {
           position: absolute;
@@ -128,8 +152,6 @@
         background-image: url(/assets/img/bournemouth-university_250px.png);
       }
     }
-
-
 
     &--partner-us {
       width: 38px;
