@@ -75,7 +75,10 @@ const AccommodationListing = function () {
             e.mapIndex = i
           })
 
-        self.items(result.data.items.map((i) => new Accommodation(i, [self.map, self])))
+        let itemsWithCoordinatesSet = result.data.items
+          .filter((i) => i.latitude !== 0 && i.longitude !== 0)
+          
+        self.items(itemsWithCoordinatesSet.map((i) => new Accommodation(i, [self.map, self])))
 
         const types = Array.from(new Set(result.data.items
           .map((i) => i.accommodationType)))
@@ -87,7 +90,7 @@ const AccommodationListing = function () {
         self.dataIsLoaded(true)
         browser.loaded()
 
-        self.map.init(result.data.items, currentLocation, self, buildInfoWindowMarkup)
+        self.map.init(itemsWithCoordinatesSet, currentLocation, self, buildInfoWindowMarkup)
 
         const filterInQs = querystring.parameter('filterId')
         if (filterInQs !== undefined) {
