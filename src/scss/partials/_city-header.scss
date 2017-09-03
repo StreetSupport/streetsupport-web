@@ -1,5 +1,5 @@
 %manchester-header {
-  background-image: url('../img/header-background-manchester.png');
+  background-image: url('../img/header-background-leeds.png');
 
   &:before {
     height: 370px;
@@ -26,6 +26,18 @@
   &:before {
     height: 420px;
     background-image: url('../img/bournemouth-buildings.png');
+    background-repeat: no-repeat;
+    background-position: 0 bottom;
+    left: 0;
+  }
+}
+
+%portsmouth-header {
+  background-image: url('../img/header-background-bournemouth.png');
+
+  &:before {
+    height: 420px;
+    background-image: url('../img/portsmouth-buildings.png');
     background-repeat: no-repeat;
     background-position: 0 bottom;
     left: 0;
@@ -77,5 +89,11 @@
 .bournemouth .city-header,
 .manchester .city-header--bournemouth {
   @extend %bournemouth-header;
+  color: $brand-k;
+}
+
+.portsmouth .city-header,
+.manchester .city-header--portsmouth {
+  @extend %portsmouth-header;
   color: $brand-k;
 }
