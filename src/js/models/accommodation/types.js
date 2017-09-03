@@ -1,6 +1,17 @@
 const ko = require('knockout')
 
-class Address {
+export class Coordinates {
+  constructor (data) {
+    this.latitude = data.latitude
+    this.longitude = data.longitude
+  }
+
+  areInitialised () {
+    return this.latitude !== 0 && this.longitude !== 0
+  }
+}
+
+export class Address {
   constructor (data) {
     this.street1 = data.street1
     this.street2 = data.street2

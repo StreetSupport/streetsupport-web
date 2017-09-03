@@ -2,6 +2,7 @@
 
 // Common modules
 import '../../../common'
+import { Address, Coordinates } from '../../../models/accommodation/types'
 
 const browser = require('../../../browser')
 const endpoints = require('../../../api')
@@ -9,11 +10,11 @@ const getApiData = require('../../../get-api-data')
 const querystring = require('../../../get-url-parameter')
 const templating = require('../../../template-render')
 const marked = require('marked')
-marked.setOptions({sanitize: true})
+marked.setOptions({ sanitize: true })
 const htmlEncode = require('htmlencode')
 
 const initMap = () => {
-  const centre = { lat: address.latitude, lng: address.longitude }
+  const centre = { lat: mapCoordinates.latitude, lng: mapCoordinates.longitude }
   const map = new google.maps.Map(document.querySelector('.js-map'), {
     zoom: 15,
     center: centre
@@ -48,16 +49,6 @@ const formatContactInformation = (data) => {
       data[f] = clean(data[f])
     })
   return data
-}
-
-const formatAddress = (addressObj) => {
-  const addressParts = ['street1', 'street2', 'street3', 'city']
-  const formattedAddress = addressParts
-    .filter((p) => addressObj[p])
-    .map((p) => addressObj[p].trim())
-    .filter((p) => p.length > 0)
-    .join(', ')
-  return `${formattedAddress}. ${addressObj.postcode}`
 }
 
 const formatFeatures = (features) => {
@@ -124,22 +115,36 @@ const formatResidentCriteria = (data) => {
 
 browser.loading()
 
-let address = {}
+let mapCoordinates = {}
+let viewModel = {}
 
-getApiData
-  .data(`${endpoints.accommodation}/${querystring.parameter('id')}`)
-  .then((result) => {
-    result.data.address.formattedAddress = formatAddress(result.data.address)
-    result.data.contactInformation = formatContactInformation(result.data.contactInformation)
-    result.data.generalInfo = formatGeneralInfo(result.data.generalInfo)
-    result.data.features = formatFeatures(result.data.features)
-    result.data.pricingAndRequirements = formatPricingAndReqs(result.data.pricingAndRequirements)
-    result.data.supportProvided = formatSupportProvided(result.data.supportProvided)
-    result.data.residentCriteria = formatResidentCriteria(result.data.residentCriteria)
+export const renderView = () => {
+  getApiData
+    .data(`${endpoints.accommodation}/${querystring.parameter('id')}`)
+    .then((result) => {
+      let address = new Address(result.data.address)
+      let coordinates = new Coordinates(result.data.address)
 
-    address = result.data.address
+      viewModel = result.data
 
-    templating.renderTemplate('js-template', result.data, 'js-template-placeholder', onRenderCallback)
-  }, (e) => {
-    browser.redirect('/500')
-  })
+      viewModel.address.formattedAddress = address.formattedForDisplay()
+      viewModel.contactInformation = formatContactInformation(result.data.contactInformation)
+      viewModel.generalInfo = formatGeneralInfo(result.data.generalInfo)
+      viewModel.features = formatFeatures(result.data.features)
+      viewModel.pricingAndRequirements = formatPricingAndReqs(result.data.pricingAndRequirements)
+      viewModel.supportProvided = formatSupportProvided(result.data.supportProvided)
+      viewModel.residentCriteria = formatResidentCriteria(result.data.residentCriteria)
+      viewModel.showMap = coordinates.areInitialised()
+
+      mapCoordinates.latitude = result.data.address.latitude
+      mapCoordinates.longitude = result.data.address.longitude
+
+      templating.renderTemplate('js-template', viewModel, 'js-template-placeholder', onRenderCallback)
+    }, (e) => {
+      browser.redirect('/500')
+    })
+}
+
+renderView()
+
+

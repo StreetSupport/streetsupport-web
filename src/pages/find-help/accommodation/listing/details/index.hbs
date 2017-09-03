@@ -42,7 +42,9 @@ nosubnav: false
         <section class="accom-details__section accom-details__section--contact">
         <h2 class="h2">Contact</h2>
 
-        <div class="js-map accom-details__map"></div>
+        \{{#showMap}}
+          <div class="js-map accom-details__map"></div>
+        \{{/showMap}}
 
         \{{#contactInformation}}
           \{{#telephone}}<p>\{{{telephone}}}</p>\{{/telephone}}
