@@ -112,7 +112,7 @@ nosubnav: false
           \{{#hasContent}}
             <section class="accom-details__section">
               <h2 class="h2">Property Features</h2>
-              {{#if hasIndividualFeatures}}
+              \{{#hasIndividualFeatures}}
               <ul class="accom-details__features">
                 \{{#acceptsPets}}<li>Allows Pets</li>\{{/acceptsPets}}
                 \{{#hasDisabledAccess}}<li>Disabled Access</li>\{{/hasDisabledAccess}}
@@ -126,7 +126,7 @@ nosubnav: false
                 \{{#providesCleanBedding}}<li>Provides Clean Bedding</li>\{{/providesCleanBedding}}
                 \{{#allowsVisitors}}<li>Allows Visitors</li>\{{/allowsVisitors}}
               </ul>
-              {{/if}}
+              \{{/hasIndividualFeatures}}
               
               \{{{additionalFeatures}}}
             </section>
