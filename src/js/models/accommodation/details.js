@@ -1,35 +1,20 @@
-/* global google */
 
 // Common modules
-import '../../../common'
-import { Address, Coordinates } from '../../../models/accommodation/types'
+import { Address, Coordinates } from './types'
 
-const endpoints = require('../../../api')
-const getApiData = require('../../../get-api-data')
-const querystring = require('../../../get-url-parameter')
-const templating = require('../../../template-render')
+const endpoints = require('../../api')
+const getApiData = require('../../get-api-data')
+const querystring = require('../../get-url-parameter')
 const marked = require('marked')
 marked.setOptions({ sanitize: true })
 const htmlEncode = require('htmlencode')
-const browser = require('../../../browser')
+const browser = require('../../browser')
 
-function AccommodationDetails () {
+const AccommodationDetails = function (renderCallback) {
   const self = this
-  let mapCoordinates = {}
-  let viewModel = {}
+  self.renderCallback = renderCallback
 
-  self.initMap = () => {
-    const centre = { lat: mapCoordinates.latitude, lng: mapCoordinates.longitude }
-    const map = new google.maps.Map(document.querySelector('.js-map'), {
-      zoom: 15,
-      center: centre
-    })
-
-    new google.maps.Marker({ // eslint-disable-line
-      position: centre,
-      map: map
-    })
-  }
+  self.viewModel = {}
 
   self.clean = (str) => {
     return marked(htmlEncode.htmlDecode(str))
@@ -113,33 +98,30 @@ function AccommodationDetails () {
     return data
   }
 
-  self.onRenderCallback = () => {
-    browser.loaded()
-    self.initMap()
-  }
-
-  self.render = () => {
+  self.build = () => {
     getApiData
       .data(`${endpoints.accommodation}/${querystring.parameter('id')}`)
       .then((result) => {
         let address = new Address(result.data.address)
         let coordinates = new Coordinates(result.data.address)
 
-        viewModel = result.data
+        self.viewModel = result.data
 
-        viewModel.address.formattedAddress = address.formattedForDisplay()
-        viewModel.contactInformation = self.formatContactInformation(result.data.contactInformation)
-        viewModel.generalInfo = self.formatGeneralInfo(result.data.generalInfo)
-        viewModel.features = self.formatFeatures(result.data.features)
-        viewModel.pricingAndRequirements = self.formatPricingAndReqs(result.data.pricingAndRequirements)
-        viewModel.supportProvided = self.formatSupportProvided(result.data.supportProvided)
-        viewModel.residentCriteria = self.formatResidentCriteria(result.data.residentCriteria)
-        viewModel.showMap = coordinates.areInitialised()
+        self.viewModel.address.formattedAddress = address.formattedForDisplay()
+        self.viewModel.contactInformation = self.formatContactInformation(result.data.contactInformation)
+        self.viewModel.generalInfo = self.formatGeneralInfo(result.data.generalInfo)
+        self.viewModel.features = self.formatFeatures(result.data.features)
+        self.viewModel.pricingAndRequirements = self.formatPricingAndReqs(result.data.pricingAndRequirements)
+        self.viewModel.supportProvided = self.formatSupportProvided(result.data.supportProvided)
+        self.viewModel.residentCriteria = self.formatResidentCriteria(result.data.residentCriteria)
+        self.viewModel.showMap = coordinates.areInitialised()
 
-        mapCoordinates.latitude = result.data.address.latitude
-        mapCoordinates.longitude = result.data.address.longitude
+        self.viewModel.mapCoordinates = {
+          lat: result.data.address.latitude,
+          lng: result.data.address.longitude
+        }
 
-        templating.renderTemplate('js-template', viewModel, 'js-template-placeholder', self.onRenderCallback)
+        self.renderCallback(self.viewModel)
       }, (e) => {
         browser.redirect('/500')
       })
