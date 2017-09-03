@@ -131,7 +131,6 @@ function AccommodationDetails () {
         viewModel.contactInformation = self.formatContactInformation(result.data.contactInformation)
         viewModel.generalInfo = self.formatGeneralInfo(result.data.generalInfo)
         viewModel.features = self.formatFeatures(result.data.features)
-        console.log(viewModel.features)
         viewModel.pricingAndRequirements = self.formatPricingAndReqs(result.data.pricingAndRequirements)
         viewModel.supportProvided = self.formatSupportProvided(result.data.supportProvided)
         viewModel.residentCriteria = self.formatResidentCriteria(result.data.residentCriteria)

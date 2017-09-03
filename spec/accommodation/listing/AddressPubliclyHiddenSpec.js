@@ -58,32 +58,6 @@ describe('Accommodation - Listing Address Publicly Hidden', function () {
     storage.set.restore()
   })
 
-  it('- should notify user is loading', () => {
-    expect(browserLoadingStub.calledOnce).toBeTruthy()
-  })
-
-  it('- should get data from api', () => {
-    const calledAsExpected = ajaxGetStub
-      .withArgs(`${endpoints.accommodation}?latitude=123.4&longitude=567.8`)
-      .calledAfter(browserLoadingStub)
-    expect(calledAsExpected).toBeTruthy()
-  })
-
-  it('- should set location name to nearest postcode', () => {
-    expect(sut.locationName()).toEqual('postcode')
-  })
-
-  it('- should store user location state', () => {
-    const storageToBeCalledAsExpected = storageSetStub
-      .withArgs(storage.keys.userLocationState, {
-        'postcode': 'postcode',
-        'latitude': 123.4,
-        'longitude': 567.8
-      })
-      .calledOnce
-    expect(storageToBeCalledAsExpected).toBeTruthy()
-  })
-
   it('- should produce an empty address line', () => {
     expect(sut.items()[0].address()).toEqual('')
   })
