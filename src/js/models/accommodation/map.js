@@ -70,14 +70,13 @@ const AccommodationListing = function () {
     browser.loading()
     ajaxGet.data(`${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}`)
       .then((result) => {
-        result.data.items
-          .forEach((e, i) => {
-            e.mapIndex = i
-          })
-
         let itemsWithCoordinatesSet = result.data.items
-          .filter((i) => i.latitude !== 0 && i.longitude !== 0)
-          
+        .filter((i) => i.latitude !== 0 && i.longitude !== 0)
+
+        itemsWithCoordinatesSet.forEach((e, i) => {
+          e.mapIndex = i
+        })
+
         self.items(itemsWithCoordinatesSet.map((i) => new Accommodation(i, [self.map, self])))
 
         const types = Array.from(new Set(result.data.items

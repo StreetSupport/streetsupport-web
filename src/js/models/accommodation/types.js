@@ -1,16 +1,34 @@
 const ko = require('knockout')
 
+class Address {
+  constructor (data) {
+    this.street1 = data.street1
+    this.street2 = data.street2
+    this.street3 = data.street3
+    this.city = data.city
+    this.postcode = data.postcode
+  }
+
+  formattedForDisplay () {
+    if (this.isEmpty()) return ''
+    let addressParts = [this.street1, this.street2, this.street3, this.city]
+    const result = addressParts
+      .filter((p) => p && p !== undefined && p.length > 0)
+      .join(', ')
+    return `${result}. ${this.postcode}`
+  }
+
+  isEmpty () {
+    return Object.keys(this)
+    .map(propertyKey => this[propertyKey])
+    .every((propertyValue) => propertyValue === '' || propertyValue === null)
+  }
+}
+
 export const Accommodation = function (data, listeners) {
   const self = this
 
-  const mapAddress = (data) => {
-    const parts = ['street1', 'street2', 'street3', 'city']
-    const result = parts
-      .map((p) => data[p])
-      .filter((p) => p && p !== undefined && p.length > 0)
-      .join(', ')
-    return `${result}. ${data.postcode}`
-  }
+  let address = new Address(data)
 
   self.mapIndex = ko.observable(data.mapIndex)
   self.mapIndexToDisplay = ko.observable(data.mapIndex + 1)
@@ -18,7 +36,7 @@ export const Accommodation = function (data, listeners) {
   self.name = ko.observable(data.name)
   self.latitude = ko.observable(data.latitude)
   self.longitude = ko.observable(data.longitude)
-  self.address = ko.observable(mapAddress(data))
+  self.address = ko.observable(address.formattedForDisplay())
   self.additionalInfo = ko.observable(data.additionalInfo)
   self.accommodationType = ko.observable(data.accommodationType)
   self.synopsis = ko.observable(data.synopsis)
