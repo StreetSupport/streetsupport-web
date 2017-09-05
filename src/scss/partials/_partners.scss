@@ -47,9 +47,18 @@
       margin-right: 0;
     }
 
+    &--partners-page {
+      display: block;
+      margin: 0 auto 20px auto;
+      @include mq ($from: m) {
+        float: left;
+        margin: 0 20px;
+      }
+    }
+
     &--coalition-of-relief {
       width: 57px;
-      
+
       a {
         background-image: url(/assets/img/coalition-of-relief.png);
       }
@@ -60,14 +69,6 @@
 
       a {
         background-image: url(/assets/img/booth-centre.png);
-      }
-    }
-
-    &--mustard-tree {
-      width: 172px;
-
-      a {
-        background-image: url(/assets/img/mustard-tree.png);
       }
     }
 
@@ -91,6 +92,14 @@
       }
     }
 
+    &--gm-mayors-fund {
+      width: 140px;
+
+      a {
+        background-image: url(/assets/img/gm-mayors-fund.png);
+      }
+    }
+
     &--shelter {
       width: 90px;
 
@@ -105,9 +114,25 @@
 
     &--cityco {
       width: 120px;
-      
+
       a {
         background-image: url(/assets/img/cityco.png);
+      }
+    }
+
+    &--one-agency {
+      width: 110px;
+
+      a {
+        background-image: url(/assets/img/one-agency.png);
+      }
+    }
+
+    &--dentsu-aegis {
+      width: 250px;
+
+      a {
+        background-image: url(/assets/img/dentsu-aegis.png);
       }
     }
 
@@ -123,13 +148,9 @@
 
     &--bournemouth-uni {
       width: 250px;
-        svg {
-          position: absolute;
-          left: 0;
-          top: 0!important;
-          height: 120px;
-          width: 240px;
-        }
+      a {
+        background-image: url(/assets/img/bournemouth-university_250px.png);
+      }
     }
 
     &--partner-us {
@@ -156,4 +177,9 @@
       }
     }
   }
+}
+
+.partner {
+  @include cf();
+  padding-bottom: 50px;
 }

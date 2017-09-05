@@ -87,7 +87,7 @@ function createDropdown (j, $list) {
     }
 
     var $parent = $list.parentNode
-    
+
     $parent.insertBefore($select, $list)
 
     var $listItems = $list.children
