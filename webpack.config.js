@@ -26,6 +26,7 @@ else {
 module.exports = {
   entry: {
     home: path.join(__dirname, '/src/js/page-home'),
+    supporters: path.join(__dirname, '/src/js/page-supporters'),
     generic: path.join(__dirname, '/src/js/page-generic'),
     findhelp: path.join(__dirname, '/src/js/page-find-help'),
     giveHelp: path.join(__dirname, '/src/js/page-give-help'),
