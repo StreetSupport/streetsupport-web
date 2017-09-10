@@ -64,6 +64,10 @@
     width: 135px;
     height: 40px;
   }
+  svg {
+    width: 135px;
+    height: 40px;
+  }
   @include mq($from: m) {
     float: left;
     margin-right: 25px;
