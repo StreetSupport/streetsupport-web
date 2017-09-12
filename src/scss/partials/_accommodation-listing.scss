@@ -46,12 +46,26 @@
 
 .accommodation-list__listing-features-item {
   margin: 0;
-  padding: 0;
+  padding: 0 $site-gutter-half;
   @include span(1 of 2);
 
   &:nth-of-type(2n) {
     @include last();
   }
+}
+
+.accommodation-list__listing-features-item--no-referral,
+.accommodation-list__listing-features-item--referral-required {
+  border-radius: $border-radius-small;
+}
+
+.accommodation-list__listing-features-item--no-referral {
+  background: $brand-c;
+  color: $brand-q;
+}
+
+.accommodation-list__listing-features-item--referral-required {
+  background: $brand-j;
 }
 
 .accommodation-list__listing-view-more-btn {
@@ -89,7 +103,7 @@
 .accommodation-listing__filter-toggle {
   display: block;
   float: right;
-    
+
   .accommodation-listing__filter-heading > &--is-open {
     display: none;
   }
@@ -108,7 +122,7 @@
 .accommodation-listing__filter-container {
   padding: 10px;
   display: none;
-  
+
   @include mq($from: m) {
     display: block;
   }
@@ -137,10 +151,10 @@
   @include span(2 of 4);
 }
 
-.accommodation-listing__filter-facet-options-radio {  
+.accommodation-listing__filter-facet-options-radio {
   @include span(1 of 4);
   margin-left: 0;
-  &:last-child { 
+  &:last-child {
     @include last();
   }
 }

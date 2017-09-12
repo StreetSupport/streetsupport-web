@@ -37,9 +37,13 @@ $base-font-size: 16px; // Recommended to not change this
 
 $site-container: rem(1000px);
 $site-gutter: rem(16px);
+$site-gutter-half: rem(8px);
 $grid-gutter: .25; // Quarter of column width
 $grid-column: 8;
 $grid-debug: hide; // Change this to show or hide
+
+$border-radius: 10px;
+$border-radius-small: 5px;
 
 // Colours
 $brand-a: #38ae8e;
