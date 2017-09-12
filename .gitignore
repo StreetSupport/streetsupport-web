@@ -22,6 +22,7 @@ backstop_data
 *.orig
 *sublime*
 test/visual/results
+.idea
 
 src/pages/find-help/accom/
 src/pages/find-help/communications/
