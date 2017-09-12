@@ -35,7 +35,7 @@ nosubnav: false
       <h2 class="h2 block__sub-header">\{{{synopsis}}}</h2>
       \{{/generalInfo}}
     </div>
-  </div> 
+  </div>
   <div class="block">
     <div class="container">
       <div class="block__content">
@@ -49,7 +49,7 @@ nosubnav: false
         \{{#contactInformation}}
           \{{#telephone}}<p>\{{{telephone}}}</p>\{{/telephone}}
         \{{/contactInformation}}
-        
+
         \{{#address}}
         <p class="h3">\{{ formattedAddress }}</p>
         \{{/address}}
@@ -70,7 +70,13 @@ nosubnav: false
         \{{#hasContent}}
         <section class="accom-details__section">
           <h2 class="h2">Price and Requirements</h2>
-            \{{#referralIsRequired}}<p class="h3">A referral is required for this property</p>\{{/referralIsRequired}}
+            <!-- ko if: referralIsRequired -->
+              <p class="h3">A referral is required for this property</p>
+            <!-- /ko -->
+            <!-- ko ifnot: referralIsRequired -->
+              <p class="h3">No referral required for this property</p>
+            <!-- /ko -->
+
             \{{{referralNotes}}}
             <dl>
               \{{#price}}<dt class="h3 accom-details__key">Price from:</dt>
@@ -80,7 +86,6 @@ nosubnav: false
         </section>
         \{{/hasContent}}
         \{{/pricingAndRequirements}}
-
 
         \{{#pricingAndRequirements}}
           \{{#availabilityOfMeals}}
@@ -102,7 +107,7 @@ nosubnav: false
             \{{#acceptsSingleSexCouples}}<li>Same Sex Couples</li>\{{/acceptsSingleSexCouples}}
             \{{#acceptsYoungPeople}}<li>Young People</li>\{{/acceptsYoungPeople}}
             \{{#acceptsFamilies}}<li>Families</li>\{{/acceptsFamilies}}
-            \{{#acceptsBenefitsClaimants}}<li>Housing Benefits Claimants</li>\{{/acceptsBenefitsClaimants}}          
+            \{{#acceptsBenefitsClaimants}}<li>Housing Benefits Claimants</li>\{{/acceptsBenefitsClaimants}}
           </ul>
         </section>
         {{/if}}
@@ -127,7 +132,7 @@ nosubnav: false
                 \{{#allowsVisitors}}<li>Allows Visitors</li>\{{/allowsVisitors}}
               </ul>
               \{{/hasIndividualFeatures}}
-              
+
               \{{{additionalFeatures}}}
             </section>
           \{{/hasContent}}
