@@ -36,8 +36,17 @@ $mq-static-breakpoint: l;
 $base-font-size: 16px; // Recommended to not change this
 
 $site-container: rem(1000px);
-$site-gutter: rem(16px);
-$site-gutter-half: rem(8px);
+
+// Not for use outside this partial
+$site-gutter-px: 16;
+$site-gutter-half-px: $site-gutter-px / 2;
+$site-gutter-quarter-px: $site-gutter-px / 4;
+// End Not for use outside this partial
+
+$site-gutter: rem($site-gutter-px);
+$site-gutter-half: rem($site-gutter-half-px);
+$site-gutter-quarter: rem($site-gutter-quarter-px);
+
 $grid-gutter: .25; // Quarter of column width
 $grid-column: 8;
 $grid-debug: hide; // Change this to show or hide

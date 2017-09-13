@@ -67,15 +67,9 @@ nosubnav: false
         </section>
 
         \{{#pricingAndRequirements}}
-        \{{#hasContent}}
         <section class="accom-details__section">
           <h2 class="h2">Price and Requirements</h2>
-            <!-- ko if: referralIsRequired -->
-              <p class="h3">A referral is required for this property</p>
-            <!-- /ko -->
-            <!-- ko ifnot: referralIsRequired -->
-              <p class="h3">No referral required for this property</p>
-            <!-- /ko -->
+            \{{{referralRequirementText}}}
 
             \{{{referralNotes}}}
             <dl>
@@ -84,7 +78,6 @@ nosubnav: false
             </dl>
             \{{{featuresAvailableAtAdditionalCost}}}
         </section>
-        \{{/hasContent}}
         \{{/pricingAndRequirements}}
 
         \{{#pricingAndRequirements}}
