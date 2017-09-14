@@ -136,6 +136,14 @@
       }
     }
 
+    &--browserstack {
+      width: 250px;
+
+      a {
+        background-image: url(/assets/img/browser-stack.png);
+      }
+    }
+
     &--leedsbid {
         svg {
           position: absolute;
