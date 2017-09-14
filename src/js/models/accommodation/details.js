@@ -63,9 +63,14 @@ const AccommodationDetails = function (renderCallback) {
   self.formatPricingAndReqs = (data) => {
     if (!data) return
 
-    const textContentFields = ['featuresAvailableAtAdditionalCost', 'referralNotes', 'availabilityOfMeals']
+    const textContentFields = ['featuresAvailableAtAdditionalCost', 'referralNotes', 'availabilityOfMeals', 'referralRequirementText']
 
     data.foodIsIncluded = data.foodIsIncluded === 1
+    data.referralRequirementText = (
+      data.referralIsRequired
+        ? '<p class="h3 accom-details__referral referral--required"><span>A referral is required for this property</span></p>'
+        : '<p class="h3 accom-details__referral referral--not-required"><span>No referral required for this property</span></p>'
+    )
     data.referralNotes = self.clean(data.referralNotes)
     data.featuresAvailableAtAdditionalCost = self.clean(data.featuresAvailableAtAdditionalCost)
     data.availabilityOfMeals = self.clean(data.availabilityOfMeals)
