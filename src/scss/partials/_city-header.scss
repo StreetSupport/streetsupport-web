@@ -44,6 +44,18 @@
   }
 }
 
+%bradford-header {
+  background-image: url('../img/header-background-leeds.png');
+
+  &:before {
+    height: 420px;
+    background-image: url('../img/bradford-buildings.png');
+    background-repeat: no-repeat;
+    background-position: 0 bottom;
+    left: 0;
+  }
+}
+
 .city-header {
   background-position: left bottom;
   background-size: 940px;
@@ -96,4 +108,14 @@
 .manchester .city-header--portsmouth {
   @extend %portsmouth-header;
   color: $brand-k;
+}
+
+.bradford .city-header,
+.manchester .city-header--bradford {
+  @extend %bradford-header;
+  color: $brand-k;
+
+  @include mq($from: m) {
+    color: white;
+  }
 }
