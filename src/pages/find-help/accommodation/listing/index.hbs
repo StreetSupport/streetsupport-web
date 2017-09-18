@@ -28,7 +28,7 @@ nosubnav: false
         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#accom"></use>
       </svg>
       Accommodation
-    </h1>
+    </h2>
   </div>
 </div>
 
@@ -41,7 +41,7 @@ nosubnav: false
       <!-- ko ifnot: dataIsLoaded -->
       <p class="text-center">Please wait whilst we load information.</p>
       <!-- /ko -->
-    
+
       <!-- ko if: dataIsLoaded -->
       {{> accommodation-view-options listing="true" }}
 
@@ -115,8 +115,8 @@ nosubnav: false
         <h2 class="h3" data-bind="html: address"></h2>
         <p data-bind="html: synopsis"></p>
         <ul class="accommodation-list__listing-features">
-          <!-- ko if: referralIsRequired --><li class="accommodation-list__listing-features-item">A referral is required for this property</li><!-- /ko -->
-          <!-- ko ifnot: referralIsRequired --><li class="accommodation-list__listing-features-item">No referral required</li><!-- /ko -->
+          <!-- ko if: referralIsRequired --><li class="accommodation-list__listing-features-item accommodation-list__listing-features-item--referral-required">A referral is required for this property</li><!-- /ko -->
+          <!-- ko ifnot: referralIsRequired --><li class="accommodation-list__listing-features-item accommodation-list__listing-features-item--no-referral">No referral required</li><!-- /ko -->
           <li class="accommodation-list__listing-features-item">Type: <span data-bind="text: accommodationType"></span></li>
         </ul>
       </div>

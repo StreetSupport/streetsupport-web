@@ -30,3 +30,23 @@
   height: 250px;
   margin-bottom: 20px;
 }
+
+.accom-details__referral {
+  span {
+    padding: $site-gutter-quarter $site-gutter-half;
+    border-radius: $border-radius-small;
+  }
+}
+
+.referral--not-required {
+  span {
+    background: $brand-c;
+    color: $brand-q;
+  }
+}
+
+.referral--required {
+  span {
+    background: $brand-j;
+  }
+}
