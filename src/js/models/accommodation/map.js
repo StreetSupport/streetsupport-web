@@ -54,21 +54,28 @@ const AccommodationListing = function () {
       .filter((tf) => tf.typeName() !== selectedFilter.typeName())
       .forEach((tf) => tf.deselect())
     self.selectedTypeFilterName(selectedFilter.typeName())
-    self.map.update(self.itemsToDisplay()
-      .map((i) => {
-        return {
-          name: i.name(),
-          mapIndex: i.mapIndex(),
-          latitude: i.latitude(),
-          longitude: i.longitude()
-        }
-      }))
-    browser.pushHistory({}, `${selectedFilter.typeName()} Accommodation - Street Support`, `?filterId=${selectedFilter.typeName()}`)
+    self.init()
+  }
+
+  const getFilterQuerystring = function () {
+    // let queryString = self.residentCriteriaFilters()
+    //   .filter((f) => f.value() !== undefined)
+    //   .map((f) => `&${f.dataFieldName()}=${f.value()}`)
+    //   .join('')
+
+    let queryString = ''
+
+    if (self.selectedTypeFilterName() !== undefined) {
+      queryString += `&accomType=${self.selectedTypeFilterName()}`
+    }
+
+    return queryString
   }
 
   self.init = (currentLocation) => {
     browser.loading()
-    ajaxGet.data(`${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}`)
+    const endpoint = `${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}${getFilterQuerystring()}`
+    ajaxGet.data(endpoint)
       .then((result) => {
         let itemsWithCoordinatesSet = result.data.items
         .filter((i) => i.latitude !== 0 && i.longitude !== 0)
