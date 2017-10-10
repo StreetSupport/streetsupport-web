@@ -61,12 +61,13 @@ const AccommodationListing = function () {
     self.selectedTypeFilterName(selectedFilter.typeName())
   }
 
+  //TODO: Fix accommodation dropdown not clearing
   self.resetFilter = function () {
     self.residentCriteriaFilters()
       .forEach((f) => {
         f.value(undefined)
       })
-    self.selectedTypeFilterName = ''
+    self.selectedTypeFilterName('')
   }
 
   const getFilterQuerystring = function () {

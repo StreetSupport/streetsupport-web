@@ -49,6 +49,7 @@ const AccommodationListing = function () {
     typeFilter.select()
   }
 
+  //TODO: Fix this, needs a location passing to init
   self.typeFilterSelected = (selectedFilter) => {
     self.typeFilters()
       .filter((tf) => tf.typeName() !== selectedFilter.typeName())
@@ -57,6 +58,7 @@ const AccommodationListing = function () {
     self.init()
   }
 
+  //TODO: We should get the other filters on the map page
   const getFilterQuerystring = function () {
     // let queryString = self.residentCriteriaFilters()
     //   .filter((f) => f.value() !== undefined)
