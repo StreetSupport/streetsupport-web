@@ -1,10 +1,11 @@
 const ajaxGet = require('../../get-api-data')
 const endpoints = require('../../api')
 const browser = require('../../browser')
+const querystring = require('../../get-url-parameter')
 const locationSelector = require('../../location/locationSelector')
 
-import { Accommodation } from './types'
-import { getCoords } from '../../location/postcodes'
+import {Accommodation, TypeFilter} from './types'
+import {getCoords} from '../../location/postcodes'
 import * as storage from '../../storage'
 
 const ko = require('knockout')
@@ -20,8 +21,10 @@ const AccommodationListing = function () {
   const self = this
   self.dataIsLoaded = ko.observable(false)
   self.items = ko.observableArray()
+  self.selectedTypeFilterName = ko.observable()
   self.noItemsAvailable = ko.computed(() => self.items().length === 0, self)
-  self.typeFilteded = ko.observable(false)
+  self.typeFilters = ko.observableArray()
+  self.typeFiltered = ko.observable(false)
   self.locationName = ko.observable()
 
   self.itemSelected = (item) => {
@@ -31,6 +34,7 @@ const AccommodationListing = function () {
   }
 
   self.displayFilter = ko.observable(false)
+
   self.toggleFilterDisplay = () => {
     self.displayFilter(!self.displayFilter())
   }
@@ -45,18 +49,37 @@ const AccommodationListing = function () {
     new SearchFilter('acceptsBenefitsClaimants', 'Benefits Claimants')
   ])
 
+  self.typeFilterDropdownSelected = () => {
+    const typeFilter = self.typeFilters().find((tf) => tf.typeName() === self.selectedTypeFilterName())
+    typeFilter.select()
+  }
+
+  self.typeFilterSelected = (selectedFilter) => {
+    self.typeFilters()
+      .filter((tf) => tf.typeName() !== selectedFilter.typeName())
+      .forEach((tf) => tf.deselect())
+    self.selectedTypeFilterName(selectedFilter.typeName())
+  }
+
   self.resetFilter = function () {
     self.residentCriteriaFilters()
       .forEach((f) => {
         f.value(undefined)
       })
+    self.selectedTypeFilterName = ''
   }
 
   const getFilterQuerystring = function () {
-    return self.residentCriteriaFilters()
+    let queryString = self.residentCriteriaFilters()
       .filter((f) => f.value() !== undefined)
       .map((f) => `&${f.dataFieldName()}=${f.value()}`)
       .join('')
+
+    if (self.selectedTypeFilterName() !== undefined) {
+      queryString += `&accomType=${self.selectedTypeFilterName()}`
+    }
+
+    return queryString
   }
 
   self.updateListing = function () {
@@ -88,7 +111,21 @@ const AccommodationListing = function () {
         self.locationName(currentLocation.postcode)
         self.items(result.data.items.map((i) => new Accommodation(i, [self])))
 
+        const types = Array.from(new Set(result.data.items
+          .map((i) => i.accommodationType)))
+          .filter((i) => i !== null && i.length > 0)
+          .map((i) => new TypeFilter(i, [self]))
+        const all = new TypeFilter('all', [self], true)
+        self.typeFilters([all, ...types])
+
         self.dataIsLoaded(true)
+
+        const filterInQs = querystring.parameter('accomType')
+        if (filterInQs !== undefined) {
+          self.selectedTypeFilterName(filterInQs)
+          self.typeFilterDropdownSelected()
+        }
+
         browser.loaded()
       })
   }

@@ -41,7 +41,7 @@ nosubnav: false
       <!-- ko ifnot: dataIsLoaded -->
       <p class="text-center">Please wait whilst we load information.</p>
       <!-- /ko -->
-    
+
       <!-- ko if: dataIsLoaded -->
       {{> accommodation-view-options listing="true" }}
 
@@ -61,6 +61,16 @@ nosubnav: false
                   </li>
                 </ul>
 
+                <h2 class="h3">Accommodation Type:</h2>
+                <div class="accommodation-listing__filter-facet-group">
+                  <select class="form__input accommodation-listing__filter-facet-group" data-bind="
+                    options: typeFilters,
+                    optionsText: 'typeName',
+                    optionsValue: 'typeName',
+                    value: selectedTypeFilterName,
+                    event: { change: typeFilterDropdownSelected }">
+                  </select>
+                </div>
                 <h2 class="h3">Suitable For:</h2>
                 <ul class="accommodation-listing__filter-facet-group" data-bind="foreach: residentCriteriaFilters">
                   <li>
