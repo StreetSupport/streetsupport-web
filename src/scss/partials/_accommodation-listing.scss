@@ -24,11 +24,24 @@
 
 .accommodation-listing__listing-item {
   @include cf();
-  padding: 10px 0;
+  padding: 10px 0 20px 0;
   margin-bottom: 10px;
+  border-bottom: 1px solid black;
+
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
+.accommodation-listing__listing-heading {
+  margin-bottom: 0px;
+}  
+
 .accommodation-listing__listing-item-body {
+  margin-top: 20px;
+}
+
+.accommodation-listing__listing-item-details {
   @include mq($from: s) {
     @include span(4 of 6);
   }
@@ -54,12 +67,18 @@
   }
 }
 
+.accommodation-listing__referral-notice {
+  background: $brand-q;
+  color: black;
+  padding: 5px 10px;
+}
+
 .accommodation-list__listing-view-more-btn {
   width: 100%;
   @include mq($from: s) {
     @include span(2 of 6);
     @include last();
-    margin: -1em 0 0 0;
+    margin: 0em 0 0 0;
   }
 }
 
@@ -89,7 +108,7 @@
 .accommodation-listing__filter-toggle {
   display: block;
   float: right;
-    
+
   .accommodation-listing__filter-heading > &--is-open {
     display: none;
   }
@@ -108,7 +127,7 @@
 .accommodation-listing__filter-container {
   padding: 10px;
   display: none;
-  
+
   @include mq($from: m) {
     display: block;
   }
@@ -137,10 +156,10 @@
   @include span(2 of 4);
 }
 
-.accommodation-listing__filter-facet-options-radio {  
+.accommodation-listing__filter-facet-options-radio {
   @include span(1 of 4);
   margin-left: 0;
-  &:last-child { 
+  &:last-child {
     @include last();
   }
 }

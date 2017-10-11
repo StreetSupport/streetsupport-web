@@ -13,8 +13,6 @@ import { data } from './testdataNoCoordinates'
 describe('Accommodation - Listing - No Coordinates In Results', function () {
   let sut = null
 
-  const selectedType = 'hosted'
-
   beforeEach(() => {
     sinon.stub(ajaxGet, 'data')
       .returns({
