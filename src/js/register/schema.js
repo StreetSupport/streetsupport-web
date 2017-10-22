@@ -25,8 +25,7 @@ module.exports = {
     'telephone': {
       'title': 'Telephone Number',
       'description': 'Telephone number',
-      'type': 'string',
-      'required': true
+      'type': 'string'
     },
     'email': {
       'title': 'Contact Email Address',
