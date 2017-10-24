@@ -70,7 +70,7 @@ cd ../../
 # Set appInsightsKey
 cd src/data
 
-sed -i.bak "s/\"appInsightsKey\": \".*\"/\"appInsightsKey\": \"$APP_INSIGHTS_KEY\"/" site.json
+sed -i.bak "s/\"appInsightsKey\": \".*\"/\"appInsightsKey\": '\"$APP_INSIGHTS_KEY\"'/" site.json
 
 cd ../../
 
