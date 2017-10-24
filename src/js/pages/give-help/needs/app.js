@@ -12,7 +12,7 @@ import { formatNeeds } from '../../../models/give-help/requests/needs'
 import { buildList, initAutoComplete } from '../../../models/give-help/requests/listing'
 import { PostcodeProximity } from '../../../components/PostcodeProximity'
 
-const openIfCardRequested = () => {
+const redirectForLegacyNeedDetails = () => {
   const cardId = getUrlParams.parameter('id').replace('/', '')
   if (cardId) {
     browser.redirect(`request?id=${cardId}`)
@@ -40,7 +40,7 @@ const renderNeeds = (needs, userLocation, currRange) => {
   } else {
     templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', () => {
       buildList()
-      openIfCardRequested()
+      redirectForLegacyNeedDetails()
       listToSelect.init()
       initAutoComplete(needs)
       defaultCallback()
