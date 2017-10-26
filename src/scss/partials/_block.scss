@@ -48,6 +48,11 @@
       text-decoration: none;
     }
 
+    .give-help__contribute a {
+      color: $brand-d;
+      font-weight: bold;
+    }
+
     .h1,
     .h2 {
       color: $brand-h;
