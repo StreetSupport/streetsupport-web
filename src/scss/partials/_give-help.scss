@@ -16,6 +16,11 @@
     }
   }
 
+  &__contribute-link {
+      color: $brand-d !important;
+      font-weight: bold;
+  }
+
   &__section {
     .cta {
       width: 100%;
