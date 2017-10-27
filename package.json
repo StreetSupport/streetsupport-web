@@ -57,7 +57,6 @@
     "postcss-pxtorem": "3.3.1",
     "postcss-reporter": "3.0.0",
     "postcss-scss": "0.4.0",
-    "require-dir": "0.3.1",
     "run-sequence": "1.2.2",
     "sass-mq": "3.3.2",
     "sinon": "1.17.6",
