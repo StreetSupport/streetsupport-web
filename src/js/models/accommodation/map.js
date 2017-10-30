@@ -49,6 +49,16 @@ const AccommodationListing = function () {
     typeFilter.select()
   }
 
+  self.residentCriteriaFilters = ko.observableArray([
+    new SearchFilter('acceptsMen', 'Men'),
+    new SearchFilter('acceptsWomen', 'Women'),
+    new SearchFilter('acceptsCouples', 'Couples'),
+    new SearchFilter('acceptsSingleSexCouples', 'Same-Sex Couples'),
+    new SearchFilter('acceptsFamilies', 'Families'),
+    new SearchFilter('acceptsYoungPeople', 'Young People'),
+    new SearchFilter('acceptsBenefitsClaimants', 'Benefits Claimants')
+  ])
+
   //TODO: Fix this, needs a location passing to init
   self.typeFilterSelected = (selectedFilter) => {
     self.typeFilters()
@@ -60,12 +70,12 @@ const AccommodationListing = function () {
 
   //TODO: We should get the other filters on the map page
   const getFilterQuerystring = function () {
-    // let queryString = self.residentCriteriaFilters()
-    //   .filter((f) => f.value() !== undefined)
-    //   .map((f) => `&${f.dataFieldName()}=${f.value()}`)
-    //   .join('')
+    let queryString = self.residentCriteriaFilters()
+      .filter((f) => f.value() !== undefined)
+      .map((f) => `&${f.dataFieldName()}=${f.value()}`)
+      .join('')
 
-    let queryString = ''
+    // let queryString = ''
 
     if (self.selectedTypeFilterName() !== undefined) {
       queryString += `&accomType=${self.selectedTypeFilterName()}`
