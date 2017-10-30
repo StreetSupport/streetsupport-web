@@ -29,11 +29,16 @@ nosubnav: false
   <div class="block block--subpage-header">
     <div class="container">
       \{{#generalInfo}}
-      <h1 class="h1  block__header">
-      \{{{name}}}
-      </h1>
-      <h2 class="h2 block__sub-header">\{{{synopsis}}}</h2>
+        <h1 class="h1  block__header">
+        \{{{name}}}
+        </h1>
+        <h2 class="h2 block__sub-header">\{{{synopsis}}}</h2>
       \{{/generalInfo}}
+      \{{#pricingAndRequirements}}
+        \{{#referralIsRequired}}
+          <p class="accom-details__referral-notice">A referral is required for this property</p>
+        \{{/referralIsRequired}}
+      \{{/pricingAndRequirements}}
     </div>
   </div>
   <div class="block">
@@ -69,8 +74,9 @@ nosubnav: false
         \{{#pricingAndRequirements}}
         <section class="accom-details__section">
           <h2 class="h2">Price and Requirements</h2>
-            \{{{referralRequirementText}}}
-
+            \{{^referralIsRequired}}
+              <p>No referral required</p>
+            \{{/referralIsRequired}}
             \{{{referralNotes}}}
             <dl>
               \{{#price}}<dt class="h3 accom-details__key">Price from:</dt>

@@ -12,6 +12,13 @@
   }
 }
 
+.accom-details__referral-notice {
+  background: $brand-q;
+  color: black;
+  padding: 5px 10px;
+  text-align: center;
+}
+
 .accom-details__features {
   list-style: none;
   padding: 0;
@@ -29,24 +36,4 @@
   width: 100%;
   height: 250px;
   margin-bottom: 20px;
-}
-
-.accom-details__referral {
-  span {
-    padding: $site-gutter-quarter $site-gutter-half;
-    border-radius: $border-radius-small;
-  }
-}
-
-.referral--not-required {
-  span {
-    background: $brand-c;
-    color: $brand-q;
-  }
-}
-
-.referral--required {
-  span {
-    background: $brand-j;
-  }
 }
