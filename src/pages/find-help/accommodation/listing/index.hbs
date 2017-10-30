@@ -106,23 +106,25 @@ nosubnav: false
 <script type="text/html" id="accommodation-listing">
   <div data-bind="foreach: items">
     <article class="accommodation-listing__listing-item" data-bind="css: { 'accommodation-listing__listing-item--isActive': isActive }">
-      <h1 class="h2">
+      <h1 class="h2 accommodation-listing__listing-heading">
         <a data-bind="attr: { href: detailsUrl }">
-          <span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span>
+          <span data-bind="html: name"></span>
         </a>
       </h1>
+      <h2 class="h3" data-bind="html: address"></h2>
+      <!-- ko if: referralIsRequired --><p class="accommodation-listing__referral-notice">A referral is required for this property</p><!-- /ko -->
       <div class="accommodation-listing__listing-item-body">
-        <h2 class="h3" data-bind="html: address"></h2>
-        <p data-bind="html: synopsis"></p>
-        <ul class="accommodation-list__listing-features">
-          <!-- ko if: referralIsRequired --><li class="accommodation-list__listing-features-item accommodation-list__listing-features-item--referral-required">A referral is required for this property</li><!-- /ko -->
-          <!-- ko ifnot: referralIsRequired --><li class="accommodation-list__listing-features-item accommodation-list__listing-features-item--no-referral">No referral required</li><!-- /ko -->
-          <li class="accommodation-list__listing-features-item">Type: <span data-bind="text: accommodationType"></span></li>
-        </ul>
+        <div class="accommodation-listing__listing-item-details">
+          <p data-bind="html: synopsis"></p>
+          <ul class="accommodation-list__listing-features">
+            <li class="accommodation-list__listing-features-item">Type: <span data-bind="text: accommodationType"></span></li>
+            <!-- ko ifnot: referralIsRequired --><li class="accommodation-list__listing-features-item">No referral required</li><!-- /ko -->
+          </ul>
+        </div>
+        <a class="btn btn--brand-d accommodation-list__listing-view-more-btn" data-bind="attr: { href: detailsUrl }">
+          <span class="btn__text">View Details</span>
+        </a>
       </div>
-      <a class="btn btn--brand-d accommodation-list__listing-view-more-btn" data-bind="attr: { href: detailsUrl }">
-        <span class="btn__text">View Details</span>
-      </a>
     </article>
   </div>
 </script>
