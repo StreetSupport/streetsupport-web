@@ -88,6 +88,52 @@
     }
   }
 
+  &__contact-list {
+    @include cf();
+    margin: 0;
+    padding: 0 0 15px 0;
+
+    .accordion--organisation & {
+      padding-bottom: 0;
+    }
+  }
+
+  &__contact-title {
+    margin: 0;
+    padding: 0 0 5px 0;
+    font-weight: $font-headline-weight;
+
+    @include mq($from: s) {
+      width: 120px;
+      margin: 0 40px 0 0;
+      padding: 0 0 5px 0;
+      float: left;
+      clear: both;
+      &--timetabled {
+        width: auto;
+      }
+    }
+  }
+
+  &__contact-items {
+    margin: 0 0 0 20px;
+    padding: 0px 0px 5px 0px;
+    float: right;
+
+    @include mq($from: m) {
+      float: left;
+    }
+  }
+
+  &__contact-item {
+    margin-left: 0;
+    margin-bottom: 20px;
+    @include mq($from: s) {
+      margin-left: 140px;
+      margin-bottom: 10px;
+    }
+  }
+
   &__provider-tag-list {
     margin: 20px 0;
     padding: 0;
