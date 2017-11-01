@@ -31,6 +31,11 @@ var svgConfig = {
       example: examplePage
     }
   },
+  shape: {
+    dimension: {
+      precision: 4
+    }
+  },
   log: 'info',
   svg: {
     xmlDeclaration: false,

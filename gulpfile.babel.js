@@ -5,9 +5,10 @@ import config from './foley.json'
 import gulp from 'gulp'
 
 // Load modules to run tasks from files
-import requireDir from 'require-dir'
 import runSequence from 'run-sequence'
-const tasks = requireDir(__dirname + '/tasks') // eslint-disable-line
+
+// Load gulp tasks from 'tasks' directory
+const tasks = require('./tasks');
 
 // Watch task
 gulp.task('watch', () => {
