@@ -3,7 +3,6 @@
 const ajaxGet = require('../../../src/js/get-api-data')
 const sinon = require('sinon')
 const Model = require('../../../src/js/models/accommodation/details')
-const endpoints = require('../../../src/js/api')
 const browser = require('../../../src/js/browser')
 const locationSelector = require('../../../src/js/location/locationSelector')
 const querystring = require('../../../src/js/get-url-parameter')
@@ -14,13 +13,9 @@ import { data } from './testdataNoLocationCoordinates'
 
 describe('Accommodation - Listing', function () {
   let sut = null
-  let ajaxGetStub = null
-  let browserLoadingStub = null
-  let browserLoadedStub = null
-  let storageSetStub = null
 
   beforeEach(() => {
-    ajaxGetStub = sinon.stub(ajaxGet, 'data')
+    sinon.stub(ajaxGet, 'data')
       .returns({
         then: function (success, error) {
           success({
@@ -30,8 +25,8 @@ describe('Accommodation - Listing', function () {
           })
         }
       })
-    browserLoadingStub = sinon.stub(browser, 'loading')
-    browserLoadedStub = sinon.stub(browser, 'loaded')
+    sinon.stub(browser, 'loading')
+    sinon.stub(browser, 'loaded')
     sinon.stub(querystring, 'parameter')
     sinon.stub(locationSelector, 'getPreviouslySetPostcode')
       .returns({
@@ -44,8 +39,8 @@ describe('Accommodation - Listing', function () {
         }
       })
     sinon.stub(storage, 'get')
-    storageSetStub = sinon.stub(storage, 'set')
-    let fakeMapCallback = function(centre){}
+    sinon.stub(storage, 'set')
+    let fakeMapCallback = function (centre) { }
     sut = new Model(fakeMapCallback)
     sut.build()
   })

@@ -1,5 +1,6 @@
 {
   "url": "/",
   "twitterHandle": "streetsupportuk",
-  "googleMapsApiKey": "AIzaSyDDRleVy8KJBzTPu-KZ1aMCoU7gC-u2mfk"
+  "googleMapsApiKey": "AIzaSyDDRleVy8KJBzTPu-KZ1aMCoU7gC-u2mfk",
+  "appInsightsKey": "xxx"
 }
