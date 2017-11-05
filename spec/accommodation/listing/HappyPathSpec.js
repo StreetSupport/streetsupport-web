@@ -10,7 +10,7 @@ const querystring = require('../../../src/js/get-url-parameter')
 
 import * as storage from '../../../src/js/storage'
 
-import { data } from './testdata'
+import { data, dataPage2 } from './testdata'
 
 describe('Accommodation - Listing', function () {
   let sut = null
@@ -21,6 +21,8 @@ describe('Accommodation - Listing', function () {
 
   beforeEach(() => {
     ajaxGetStub = sinon.stub(ajaxGet, 'data')
+    ajaxGetStub
+      .withArgs(`${endpoints.accommodation}?latitude=123.4&longitude=567.8`)
       .returns({
         then: function (success, error) {
           success({
@@ -161,6 +163,44 @@ describe('Accommodation - Listing', function () {
         .forEach((e) => {
           expect(e.isActive()).toBeFalsy()
         })
+    })
+  })
+
+  describe('- more items available', () => {
+    it('- should set nextPageEndpoint to true', () => {
+      expect(sut.nextPageEndpoint()).toBeTruthy()
+    })
+
+    describe('- load more', () => {
+      beforeEach(() => {
+        ajaxGetStub
+          .withArgs(endpoints.getFullUrl(data.links.next))
+          .returns({
+            then: function (success, error) {
+              success({
+                'status': 'ok',
+                'statusCode': 200,
+                'data': dataPage2
+              })
+            }
+          })
+
+        browserLoadingStub.reset()
+        browserLoadedStub.reset()
+        sut.loadNext()
+      })
+
+      it('- should notify user is loading', () => {
+        expect(browserLoadingStub.calledOnce).toBeTruthy()
+      })
+
+      it('- should append new items to current list', () => {
+        expect(sut.items().length).toEqual(data.items.length + dataPage2.items.length)
+      })
+
+      it('- should set data is loaded to true', () => {
+        expect(sut.dataIsLoaded()).toBeTruthy()
+      })
     })
   })
 })
