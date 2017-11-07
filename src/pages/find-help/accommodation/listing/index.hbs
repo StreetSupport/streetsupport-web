@@ -127,4 +127,9 @@ nosubnav: false
       </div>
     </article>
   </div>
+  <!-- ko if: nextPageEndpoint -->
+  <button class="btn btn--brand-e" data-bind="click: loadNext">
+    <span class="btn__text">Load More</span>
+  </button>    
+  <!-- /ko -->
 </script>

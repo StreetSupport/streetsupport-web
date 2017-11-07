@@ -14,6 +14,7 @@ var p = function (url) {
 }
 
 module.exports = {
+  getFullUrl: p,
   serviceProviders: p('/v2/service-providers/'),
   allServiceProviders: p('/v1/all-service-providers/'),
   serviceCategories: p('/v2/service-categories/'),
