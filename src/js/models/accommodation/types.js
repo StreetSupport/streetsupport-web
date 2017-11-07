@@ -75,6 +75,13 @@ export const TypeFilter = function (name, listeners, isSelected = false) {
   }
 }
 
+export const SearchFilter = function (dataFieldName, labelText) {
+  const self = this
+  self.dataFieldName = ko.observable(dataFieldName)
+  self.labelText = ko.observable(labelText)
+  self.value = ko.observable()
+}
+
 export const AccommodationDetails = function (data) {
   this.name = ko.observable(data.generalInfo.name)
 }

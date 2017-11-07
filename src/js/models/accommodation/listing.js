@@ -4,18 +4,11 @@ const browser = require('../../browser')
 const querystring = require('../../get-url-parameter')
 const locationSelector = require('../../location/locationSelector')
 
-import {Accommodation, TypeFilter} from './types'
+import {Accommodation, TypeFilter, SearchFilter} from './types'
 import {getCoords} from '../../location/postcodes'
 import * as storage from '../../storage'
 
 const ko = require('knockout')
-
-const SearchFilter = function (dataFieldName, labelText) {
-  const self = this
-  self.dataFieldName = ko.observable(dataFieldName)
-  self.labelText = ko.observable(labelText)
-  self.value = ko.observable()
-}
 
 const AccommodationListing = function () {
   const self = this

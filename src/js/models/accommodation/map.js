@@ -4,7 +4,7 @@ const browser = require('../../browser')
 const querystring = require('../../get-url-parameter')
 const locationSelector = require('../../location/locationSelector')
 
-import { Accommodation, TypeFilter } from './types'
+import { Accommodation, TypeFilter, SearchFilter } from './types'
 
 const MapBuilder = require('./MapBuilder')
 
