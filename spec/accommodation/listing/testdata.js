@@ -1,6 +1,6 @@
 export const data = {
   'links': {
-    'next': null,
+    'next': '/v1/accommodation?index=4',
     'prev': null,
     'self': '/v1/accommodation?index=0'
   },
@@ -70,5 +70,32 @@ export const data = {
       'referralIsRequired': false
     }
   ],
-  'total': 4
+  'total': 5
+}
+
+export const dataPage2 = {
+  'links': {
+    'next': null,
+    'prev': null,
+    'self': '/v1/accommodation?index=4'
+  },
+  'items': [
+    {
+      'id': '58f744dad021fb3db0e7f186',
+      'name': 'added by temp accom admin',
+      'additionalInfo': 'additional info',
+      'email': 'test@test.com',
+      'telephone': null,
+      'street1': 'street line 1',
+      'street2': 'street line 2',
+      'street3': null,
+      'city': 'manchester',
+      'postcode': 'm15 4qx',
+      'latitude': 53.4755361548836,
+      'longitude': -2.25848699844466,
+      'accommodationType': 'hosted',
+      'referralIsRequired': true
+    }
+  ],
+  'total': 5
 }

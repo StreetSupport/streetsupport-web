@@ -26,6 +26,10 @@ const AccommodationListing = function () {
   self.typeFilters = ko.observableArray()
   self.typeFiltered = ko.observable(false)
   self.locationName = ko.observable()
+  self.loadNext = function () {
+    self.loadItems(endpoints.getFullUrl(self.nextPageEndpoint()))
+  }
+  self.nextPageEndpoint = ko.observable()
 
   self.itemSelected = (item) => {
     self.items()
@@ -100,35 +104,27 @@ const AccommodationListing = function () {
     })
   }
 
-  self.init = (currentLocation) => {
+  self.loadItems = function (endpoint) {
     browser.loading()
-    const endpoint = `${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}${getFilterQuerystring()}`
     ajaxGet.data(endpoint)
-      .then((result) => {
-        result.data.items
-          .forEach((e, i) => {
-            e.mapIndex = i
-          })
-        self.locationName(currentLocation.postcode)
-        self.items(result.data.items.map((i) => new Accommodation(i, [self])))
+    .then((result) => {
+      result.data.items
+        .forEach((e, i) => {
+          e.mapIndex = i
+        })
+      const previous = self.items()
+      const next = result.data.items.map((i) => new Accommodation(i, [self]))
+      self.items([...previous, ...next])
+      self.nextPageEndpoint(result.data.links.next)
+      self.dataIsLoaded(true)
+      browser.loaded()
+    })
+  }
 
-        const types = Array.from(new Set(result.data.items
-          .map((i) => i.accommodationType)))
-          .filter((i) => i !== null && i.length > 0)
-          .map((i) => new TypeFilter(i, [self]))
-        const all = new TypeFilter('all', [self], true)
-        self.typeFilters([all, ...types])
-
-        self.dataIsLoaded(true)
-
-        const filterInQs = querystring.parameter('accomType')
-        if (filterInQs !== undefined) {
-          self.selectedTypeFilterName(filterInQs)
-          self.typeFilterDropdownSelected()
-        }
-
-        browser.loaded()
-      })
+  self.init = (currentLocation) => {
+    const endpoint = `${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}${getFilterQuerystring()}`
+    self.locationName(currentLocation.postcode)
+    self.loadItems(endpoint)
   }
 
   locationSelector
