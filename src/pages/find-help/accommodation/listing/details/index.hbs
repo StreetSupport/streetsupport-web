@@ -146,7 +146,9 @@ nosubnav: false
             <li>\{{ . }}</li>
           \{{/supportOffered}}
           </ul>
-          \{{#hasOnSiteManager}}<p>The property has an on-site manager.</p>\{{/hasOnSiteManager}}
+          {{#if hasOnSiteManager}}
+            <p>The property has an on-site manager.</p>
+          {{/if}}
           \{{{supportInfo}}}
         </section>
         \{{/hasContent}}
