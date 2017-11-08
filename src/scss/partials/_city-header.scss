@@ -56,6 +56,18 @@
   }
 }
 
+%liverpool-header {
+  background-image: url('../img/header-background-leeds.png');
+
+  &:before {
+    height: 420px;
+    background-image: url('../img/liverpool-buildings.png');
+    background-repeat: no-repeat;
+    background-position: 0 bottom;
+    left: 0;
+  }
+}
+
 .city-header {
   background-position: left bottom;
   background-size: 940px;
@@ -114,6 +126,13 @@
 .manchester .city-header--bradford {
   @extend %bradford-header;
   color: $brand-k;
+}
+
+  .liverpool .city-header,
+  .manchester .city-header--liverpool {
+    @extend %liverpool-header;
+    color: $brand-k;
+
 
   @include mq($from: m) {
     color: white;
