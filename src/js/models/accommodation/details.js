@@ -104,7 +104,6 @@ const AccommodationDetails = function (renderCallback) {
       .then((result) => {
         let address = new Address(result.data.address)
         let coordinates = new Coordinates(result.data.address)
-
         self.viewModel = result.data
 
         self.viewModel.address.formattedAddress = address.formattedForDisplay()
