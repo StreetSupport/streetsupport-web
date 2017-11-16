@@ -64,6 +64,9 @@ nosubnav: true
         \{{#isbournemouth}}
           {{> bournemouth/stats }}
         \{{/isbournemouth}}
+        \{{#isliverpool}}
+          {{> liverpool/stats }}
+        \{{/isliverpool}}
    </div>
  </div>
 </div>
@@ -80,6 +83,9 @@ nosubnav: true
 \{{#isbournemouth}}
   {{> bournemouth/home-promo }}
 \{{/isbournemouth}}
+\{{#isliverpool}}
+  {{> liverpool/home-promo }}
+\{{/isliverpool}}
 
 <div class="block">
   <div class="container">
@@ -113,6 +119,9 @@ nosubnav: true
       \{{#isbournemouth}}
         {{> bournemouth/supporters }}
       \{{/isbournemouth}}
+      \{{#isliverpool}}
+        {{> liverpool/supporters }}
+      \{{/isliverpool}}
       \{{#iselsewhere}}
         {{> no-location/supporters }}
       \{{/iselsewhere}}
