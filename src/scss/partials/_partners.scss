@@ -141,8 +141,8 @@
           position: absolute;
           left: 0;
           top: 0!important;
-          height: 100px;
-          width: 120px;
+          height: 200px;
+          width: 300px;
         }
     }
 
@@ -150,6 +150,17 @@
       width: 250px;
       a {
         background-image: url(/assets/img/bournemouth-university_250px.png);
+      }
+    }
+
+    &--liverpoolbid  {
+      width: 294px;
+
+      a {
+        svg {
+          height: 142px;
+          margin-top: -77px;
+        }
       }
     }
 
