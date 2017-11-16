@@ -87,6 +87,7 @@ const AccommodationDetails = function (renderCallback) {
       .map((s) => supportTypes.find(kv => kv.key === s).name)
     data.supportInfo = self.clean(data.supportInfo)
     data.hasContent = data.supportOffered.length > 0 || data.supportInfo.length > 0 || data.hasOnSiteManager
+    data.hasOnSiteManager = data.hasOnSiteManager === 1
     return data
   }
 
