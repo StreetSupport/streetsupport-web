@@ -64,6 +64,9 @@ nosubnav: true
         \{{#isbournemouth}}
           {{> bournemouth/stats }}
         \{{/isbournemouth}}
+        \{{#isliverpool}}
+          {{> liverpool/stats }}
+        \{{/isliverpool}}
    </div>
  </div>
 </div>
@@ -80,12 +83,15 @@ nosubnav: true
 \{{#isbournemouth}}
   {{> bournemouth/home-promo }}
 \{{/isbournemouth}}
+\{{#isliverpool}}
+  {{> liverpool/home-promo }}
+\{{/isliverpool}}
 
 <div class="block">
   <div class="container">
     <div class="block__content text-center">
       {{> divider}}
-      <p>Street Support Network is currently available in Greater Manchester, Leeds, Bradford, Bournemouth and Portsmouth. And we would love to share these tools with more locations. If you think Street Support might be useful in your area, please <a href="/contact">get in touch</a>.</p>
+      <p>Street Support Network is currently available in Greater Manchester, Bournemouth, Bradford, Leeds, Liverpool and Portsmouth. And we would love to share these tools with more locations. If you think Street Support might be useful in your area, please <a href="/contact">get in touch</a>.</p>
       <div class="location-selector">
         <label for="location" class="location-selector__label">Select a Location: </label>
         <select class="js-homepage-promo-location-selector js-location-select location-selector__select form__input" name="location" id="location">
@@ -113,6 +119,9 @@ nosubnav: true
       \{{#isbournemouth}}
         {{> bournemouth/supporters }}
       \{{/isbournemouth}}
+      \{{#isliverpool}}
+        {{> liverpool/supporters }}
+      \{{/isliverpool}}
       \{{#iselsewhere}}
         {{> no-location/supporters }}
       \{{/iselsewhere}}

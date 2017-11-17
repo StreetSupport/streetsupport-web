@@ -23,6 +23,10 @@ const AccommodationListing = function () {
   self.noItemsAvailable = ko.computed(() => self.items().length === 0, self)
   self.typeFilteded = ko.observable(false)
   self.locationName = ko.observable()
+  self.loadNext = function () {
+    self.loadItems(endpoints.getFullUrl(self.nextPageEndpoint()))
+  }
+  self.nextPageEndpoint = ko.observable()
 
   self.itemSelected = (item) => {
     self.items()
@@ -76,21 +80,27 @@ const AccommodationListing = function () {
     })
   }
 
-  self.init = (currentLocation) => {
+  self.loadItems = function (endpoint) {
     browser.loading()
-    const endpoint = `${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}${getFilterQuerystring()}`
     ajaxGet.data(endpoint)
-      .then((result) => {
-        result.data.items
-          .forEach((e, i) => {
-            e.mapIndex = i
-          })
-        self.locationName(currentLocation.postcode)
-        self.items(result.data.items.map((i) => new Accommodation(i, [self])))
+    .then((result) => {
+      result.data.items
+        .forEach((e, i) => {
+          e.mapIndex = i
+        })
+      const previous = self.items()
+      const next = result.data.items.map((i) => new Accommodation(i, [self]))
+      self.items([...previous, ...next])
+      self.nextPageEndpoint(result.data.links.next)
+      self.dataIsLoaded(true)
+      browser.loaded()
+    })
+  }
 
-        self.dataIsLoaded(true)
-        browser.loaded()
-      })
+  self.init = (currentLocation) => {
+    const endpoint = `${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}${getFilterQuerystring()}`
+    self.locationName(currentLocation.postcode)
+    self.loadItems(endpoint)
   }
 
   locationSelector
