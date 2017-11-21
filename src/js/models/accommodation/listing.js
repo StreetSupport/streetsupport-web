@@ -98,6 +98,7 @@ const AccommodationListing = function () {
   }
 
   self.init = (currentLocation) => {
+    self.items([])
     const endpoint = `${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}${getFilterQuerystring()}`
     self.locationName(currentLocation.postcode)
     self.loadItems(endpoint)

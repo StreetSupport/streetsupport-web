@@ -94,6 +94,10 @@ describe('Accommodation - Listing - Resident Criteria Filtering', function () {
           .calledOnce
         expect(calledAsExpected).toBeTruthy()
       })
+
+      it('- should replace old results', () => {
+        expect(sut.items().length).toEqual(data.items.length)
+      })
     })
 
     describe('- reset', () => {
