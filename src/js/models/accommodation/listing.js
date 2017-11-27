@@ -1,27 +1,23 @@
 const ajaxGet = require('../../get-api-data')
 const endpoints = require('../../api')
 const browser = require('../../browser')
+const querystring = require('../../get-url-parameter')
 const locationSelector = require('../../location/locationSelector')
 
-import { Accommodation } from './types'
-import { getCoords } from '../../location/postcodes'
+import {Accommodation, TypeFilter, SearchFilter} from './types'
+import {getCoords} from '../../location/postcodes'
 import * as storage from '../../storage'
 
 const ko = require('knockout')
-
-const SearchFilter = function (dataFieldName, labelText) {
-  const self = this
-  self.dataFieldName = ko.observable(dataFieldName)
-  self.labelText = ko.observable(labelText)
-  self.value = ko.observable()
-}
 
 const AccommodationListing = function () {
   const self = this
   self.dataIsLoaded = ko.observable(false)
   self.items = ko.observableArray()
+  self.selectedTypeFilterName = ko.observable()
   self.noItemsAvailable = ko.computed(() => self.items().length === 0, self)
-  self.typeFilteded = ko.observable(false)
+  self.typeFilters = ko.observableArray()
+  self.typeFiltered = ko.observable(false)
   self.locationName = ko.observable()
   self.loadNext = function () {
     self.loadItems(endpoints.getFullUrl(self.nextPageEndpoint()))
@@ -35,6 +31,7 @@ const AccommodationListing = function () {
   }
 
   self.displayFilter = ko.observable(false)
+
   self.toggleFilterDisplay = () => {
     self.displayFilter(!self.displayFilter())
   }
@@ -49,18 +46,38 @@ const AccommodationListing = function () {
     new SearchFilter('acceptsBenefitsClaimants', 'Benefits Claimants')
   ])
 
+  self.typeFilterDropdownSelected = () => {
+    const typeFilter = self.typeFilters().find((tf) => tf.typeName() === self.selectedTypeFilterName())
+    typeFilter.select()
+  }
+
+  self.typeFilterSelected = (selectedFilter) => {
+    self.typeFilters()
+      .filter((tf) => tf.typeName() !== selectedFilter.typeName())
+      .forEach((tf) => tf.deselect())
+    self.selectedTypeFilterName(selectedFilter.typeName())
+  }
+
+  //TODO: Fix accommodation dropdown not clearing
   self.resetFilter = function () {
     self.residentCriteriaFilters()
       .forEach((f) => {
         f.value(undefined)
       })
+    self.selectedTypeFilterName('')
   }
 
   const getFilterQuerystring = function () {
-    return self.residentCriteriaFilters()
+    let queryString = self.residentCriteriaFilters()
       .filter((f) => f.value() !== undefined)
       .map((f) => `&${f.dataFieldName()}=${f.value()}`)
       .join('')
+
+    if (self.selectedTypeFilterName() !== undefined) {
+      queryString += `&accomType=${self.selectedTypeFilterName()}`
+    }
+
+    return queryString
   }
 
   self.updateListing = function () {
