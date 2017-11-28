@@ -49,7 +49,7 @@ const renderNeeds = (needs, userLocation, currRange) => {
 }
 
 const init = function (userLocation, range = 10000) {
-  const url = `${apiRoutes.needsHAL}?longitude=${userLocation.longitude}&latitude=${userLocation.latitude}&range=${range}&limit=100`
+  const url = `${apiRoutes.needsHAL}?longitude=${userLocation.longitude}&latitude=${userLocation.latitude}&range=${range}&pageSize=100`
   getApiData.data(url)
     .then((result) => {
       const formatted = formatNeeds(result.data.items, userLocation)
