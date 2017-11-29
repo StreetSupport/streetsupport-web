@@ -63,7 +63,7 @@ const AccommodationListing = function () {
 
   const getTypeKeyValuePairs = function () {
     const selectedType = self.selectedType()
-    return selectedType.length
+    return selectedType && selectedType.length
       ? [({ key: 'accomType', value: selectedType })]
       : []
   }
