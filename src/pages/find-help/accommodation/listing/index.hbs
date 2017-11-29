@@ -61,6 +61,20 @@ nosubnav: false
                   </li>
                 </ul>
 
+                <h2 class="h3">Accommodation Type:</h2>
+                <ul class="accommodation-listing__filter-facet-group">
+                  <li>
+                    <label class="accommodation-listing__filter-facet-options-title">Type:</label>
+                    <select class="form__input form__input--inline form__input--short accommodation-listing__type-dropdown" data-bind="
+                        options: accomTypes,
+                        optionsText: 'name',
+                        optionsValue: 'key',
+                        optionsCaption: '-- select --',
+                        value: selectedType">
+                    </select>
+                  </li>
+                </ul>
+
                 <h2 class="h3">Suitable For:</h2>
                 <ul class="accommodation-listing__filter-facet-group" data-bind="foreach: residentCriteriaFilters">
                   <li>
