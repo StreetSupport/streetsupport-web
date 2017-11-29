@@ -2,7 +2,7 @@
   @include cf();
   padding-bottom: 20px;
 }
-  
+
 .team__member-title {
   &::before, &::after {
     content: '';
@@ -11,8 +11,6 @@
     height: 150px;
     margin: 0 auto 20px auto;
     background-position: center center;
-    border-radius: 150px;
-    border: 2px solid $brand-k;
   }
 
   &::after {
@@ -46,5 +44,17 @@
 .team__member-title--vince {
   &::before, &::after {
     background-image: url('/assets/img/vince-lee.jpg')
+  }
+}
+
+.team__member-title--graham {
+  &::before, &::after {
+    background-image: url('/assets/img/graham-wood.jpg')
+  }
+}
+
+.team__member-title--olie {
+  &::before, &::after {
+    background-image: url('/assets/img/olie-martin.jpg')
   }
 }
