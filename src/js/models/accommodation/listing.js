@@ -6,6 +6,7 @@ const locationSelector = require('../../location/locationSelector')
 import { Accommodation } from './types'
 import { getCoords } from '../../location/postcodes'
 import * as storage from '../../storage'
+import { categories } from '../../../data/generated/accom-categories'
 
 const ko = require('knockout')
 
@@ -21,7 +22,8 @@ const AccommodationListing = function () {
   self.dataIsLoaded = ko.observable(false)
   self.items = ko.observableArray()
   self.noItemsAvailable = ko.computed(() => self.items().length === 0, self)
-  self.typeFilteded = ko.observable(false)
+  self.accomTypes = ko.observableArray(categories)
+  self.selectedType = ko.observable('')
   self.locationName = ko.observable()
   self.loadNext = function () {
     self.loadItems(endpoints.getFullUrl(self.nextPageEndpoint()))

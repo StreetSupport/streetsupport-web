@@ -8,6 +8,7 @@ const browser = require('../../../src/js/browser')
 const locationSelector = require('../../../src/js/location/locationSelector')
 const querystring = require('../../../src/js/get-url-parameter')
 
+import { categories } from '../../../src/data/generated/accom-categories'
 import * as storage from '../../../src/js/storage'
 
 import { data, dataPage2 } from './testdata'
@@ -73,6 +74,14 @@ describe('Accommodation - Listing', function () {
 
   it('- should set location name to nearest postcode', () => {
     expect(sut.locationName()).toEqual('postcode')
+  })
+  
+  it('- should set accommodation categories', () => {
+    expect(sut.accomTypes().length).toEqual(categories.length)
+  })
+  
+  it('- should set selected accommodation filter as empty', () => {
+    expect(sut.selectedType()).toEqual('')
   })
 
   it('- should store user location state', () => {
