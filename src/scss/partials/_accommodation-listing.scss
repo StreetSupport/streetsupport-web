@@ -170,6 +170,12 @@
   @include last;
 }
 
+.accommodation-listing__type-dropdown {
+  margin-top: -11px;
+  @include span(2 of 4);
+  @include last;
+}
+
 .accommodation-listing__filter-facet-options-radio-container {
   width: 100%;
   padding: 2px 0;
