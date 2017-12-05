@@ -15,14 +15,11 @@
     margin-bottom: 6px;
   }
 
-  &__text {
+  &__text,
+  &__caption {
     margin-right: 10px;
   }
-
-  &__link {
-    margin-right: 5px;
-  }
-
+  
   &__icon {
     vertical-align: middle;
   }

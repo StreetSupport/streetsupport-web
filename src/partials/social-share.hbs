@@ -1,9 +1,14 @@
 <div class="social-share">
   <span class="social-share__text">Share this page: </span>
-  <a href="javascript:window.open('https://www.facebook.com/sharer.php', 'blank', 'width=500,height=300');" class="social-share__link social-share__link--facebook">
-    {{>icon name="facebook-brand-colour" class="social-share__icon"}} <span class="hide-screen">Facebook</span>
+  <!-- TODO: Add current location to the Twitter Intent link -->
+  <a href="javascript:window.open('https://www.twitter.com/intent/tweet?u=', 'blank', 'width=500,height=300')" class="social-share__link social-share__link--facebook">
+    {{>icon name="twitter-brand-colour" class="social-share__icon"}}
+    <span class="social-share__caption">Tweet</span>
+    <span class="hide-screen">Tweet</span>
   </a>
-  <a href="javascript:window.open('https://www.twitter.com/intent/tweet?url=http%3A%2F%2Fredbullracing.redbull.com%2Farticle%2Fjuniors-rise', 'blank', 'width=500,height=300')" class="social-share__link social-share__link--facebook">
-    {{>icon name="twitter-brand-colour" class="social-share__icon"}} <span class="hide-screen">Twitter</span>
+  <a href="javascript:window.open('https://www.facebook.com/sharer.php', 'blank', 'width=500,height=300');" class="social-share__link social-share__link--facebook">
+    {{>icon name="facebook-brand-colour" class="social-share__icon"}}
+    <span class="social-share__caption">Share</span>
+    <span class="hide-screen">Share on Facebook</span>
   </a>
 </div>
