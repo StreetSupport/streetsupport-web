@@ -1,5 +1,5 @@
-<div class="social-share">
-  <span class="social-share__text">Share this page: </span>
+<div class="social-share{{#if class}} {{{ class }}}{{/if}}">
+  <span class="social-share__text">{{#if text}}{{{ text }}}{{else}}Share this page: {{/if}}</span>
   <!-- TODO: Add current location to the Twitter Intent link -->
   <a href="javascript:window.open('https://www.twitter.com/intent/tweet?u=', 'blank', 'width=500,height=300')" class="social-share__link social-share__link--facebook">
     {{>icon name="twitter-brand-colour" class="social-share__icon"}}
