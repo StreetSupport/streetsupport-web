@@ -1,0 +1,19 @@
+.job-summary {
+  margin-bottom: 40px;
+  @include cf();
+}
+
+.job-summary__title { 
+  @include mq($from: m) {
+    @include span(2 of 4);
+    text-align: right;
+    &:after {
+      content: ':'
+    }
+  }
+}
+
+.job-summary__description { 
+  margin-left: 0;
+  font-weight: bold;
+}

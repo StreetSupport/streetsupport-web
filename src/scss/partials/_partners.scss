@@ -136,6 +136,14 @@
       }
     }
 
+    &--city-council {
+      width: 175px;
+
+      a {
+        background-image: url(/assets/img/manchester-city-council.png);        
+      }
+    }
+
     &--leedsbid {
         svg {
           position: absolute;
