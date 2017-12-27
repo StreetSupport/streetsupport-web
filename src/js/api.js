@@ -1,5 +1,5 @@
 var local = 'http://localhost:55881'
-var dev = 'https://dev-api-streetsupport.azurewebsites.net'
+var dev = 'https://ssn-api-dev.azurewebsites.net'
 var staging = 'https://staging-api-streetsupport.azurewebsites.net'
 var live = 'https://live-api-streetsupport.azurewebsites.net'
 
