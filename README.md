@@ -1,24 +1,23 @@
 # StreetSupport Website
 
 The website codebase for streetsupport.net.
-Kindly supported by ![Browser Stack](/src/img/browser-stack.png)
 
 ## Submitting Updates
 
-Please fork and work in the `develop` branch. Once the update is completed, submit a pull request into `develop`. Travis CI automatically builds on each commit to `develop`, `uat` and `prod`. The `prod` branch automatically builds to: [http://streetsupport.net](http://streetsupport.net).
+Please fork and work in the `develop` branch. Once the update is completed, submit a pull request into `develop`. Travis CI automatically builds on each commit to `develop`, `uat` and `prod`.
 
 ## Build Status
 
-* develop - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=develop)](https://travis-ci.org/StreetSupport/streetsupport-web)
-* staging - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=uat)](https://travis-ci.org/StreetSupport/streetsupport-web)
-* release - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=release)](https://travis-ci.org/StreetSupport/streetsupport-web)
+* develop: https://ssn-web-dev.azurewebsites.net/ - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=develop)](https://travis-ci.org/StreetSupport/streetsupport-web)
+* uat: https://ssn-web-uat.azurewebsites.net/ - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=uat)](https://travis-ci.org/StreetSupport/streetsupport-web)
+* release: https://streetsupport.net - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=release)](https://travis-ci.org/StreetSupport/streetsupport-web)
 
 ## Install
 
 * Install Node 6 LTS,
 * Run in Terminal: `npm i gulp-cli -g` (Gulp does not need to be installed globally),
 * In your command line terminal, navigate to the street support project folder,
-* Run: `npm i`.
+* Run: `npm i`. (currently, [snyk](https://snyk.io/) throws an error here, but you can ignore it)
 
 See [https://github.com/fephil/garrus](https://github.com/fephil/garrus) for more information about the Frontend workflow.
 
@@ -100,3 +99,7 @@ A number of happy paths are covered by automated browsers tests at: [https://git
 
 CSS styling is written in SCSS, based on [Susy](http://susy.oddbird.net/), in the [BEM](http://getbem.com/introduction/) style, and is auto-prefixed. Build with a mobile-first approach, using [sass-mq](https://github.com/sass-mq/sass-mq) for media queries.
 Each component's styles should reside in its own file. Avoid nesting of elements and modifiers (although there are many cases of nesting at the moment!).
+
+## Supported by
+
+![Browser Stack](/src/img/browser-stack.png)

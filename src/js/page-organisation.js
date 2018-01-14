@@ -48,6 +48,9 @@ const formatData = function (data) {
 
     data.providedServices
       .forEach(function (service) {
+        if (service.locationDescription !== null) {
+          service.locationDescription = marked(htmlEncode.htmlDecode(service.locationDescription))
+        }
         if (service.tags !== null) {
           service.tags = service.tags.join(', ')
         }
