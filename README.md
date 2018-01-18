@@ -51,9 +51,10 @@ Run these tasks in your command line Terminal:
 
 ### Environments
 
-There are three API environments: CI, UAT and LIVE. You can alter the API your local instance is running from by editing [/blob/develop/src/js/env.js](/blob/develop/src/js/env.js):
+There are four possible environments: local, CI (Continuous Integration), UAT (User Acceptance Testing) and LIVE.
+You can alter the API your local instance is running from by changing the `NODE_ENV` variable to one of four numbers:
 
-* 0: locally running API instance
+* 0: local
 * 1: CI
 * 2: UAT
 * 3: LIVE
