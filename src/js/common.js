@@ -5,6 +5,7 @@ const headerCitySelector = require('./navigation/headerCitySelector')
 
 import Svg4everybody from 'svg4everybody'
 import 'babel-polyfill'
+import on from 'delegated-events'
 
 let removeNoJS = () => {
   var html = document.querySelector('html')
@@ -60,11 +61,19 @@ let fastClickCheck = () => {
   }
 }
 
+let twitterShareWindow = function () {
+  on('click', '.js-twitterShareWindow', (e) => {
+    let targetUrl = 'https://www.twitter.com/intent/tweet?u=' + window.location
+    window.open(targetUrl, 'blank', 'width=500,height=300')
+  })
+}
+
 removeNoJS()
 nav.init()
 analytics.init()
 print.init()
 fastClickCheck()
 Svg4everybody()
+twitterShareWindow()
 
 headerCitySelector.init()
