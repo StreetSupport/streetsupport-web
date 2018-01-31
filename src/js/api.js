@@ -3,17 +3,11 @@ var dev = 'https://ssn-api-dev.azurewebsites.net'
 var staging = 'https://ssn-api-uat.azurewebsites.net'
 var live = 'https://ssn-api-prod.azurewebsites.net'
 
-// Default the env to '1' for CI.
-// This can be overwritten by running gulp with NODE_ENV=X gulp.
-var env = process.env.NODE_ENV || 1
+var env = require('./env')
 
 var envs = [local, dev, staging, live]
 
 var domainRoot = envs[env]
-
-if (!domainRoot) {
-  throw new Error(`Environment ${env} not found`)
-}
 
 var p = function (url) {
   return domainRoot + url
