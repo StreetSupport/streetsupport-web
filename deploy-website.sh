@@ -4,26 +4,26 @@
 set -e
 
 # Set a default API environment for other branches/pull requests
-NODE_ENV=1
+APIENVIRONMENT=1
 
 # Define variables depending on the branch
 if [[ $TRAVIS_BRANCH == 'release' ]]
   then
     AZURE_WEBSITE=$PROD_AZURE_WEBSITE
     APP_INSIGHTS_KEY=$PROD_APP_INSIGHTS_KEY
-    NODE_ENV=3
+    APIENVIRONMENT=3
 fi
 if [[ $TRAVIS_BRANCH == 'uat' ]]
   then
     AZURE_WEBSITE=$UAT_AZURE_WEBSITE
     APP_INSIGHTS_KEY=$UAT_APP_INSIGHTS_KEY
-    NODE_ENV=2
+    APIENVIRONMENT=2
 fi
 if [[ $TRAVIS_BRANCH == 'develop' ]]
   then
     AZURE_WEBSITE=$DEV_AZURE_WEBSITE
     APP_INSIGHTS_KEY=''
-    NODE_ENV=1
+    APIENVIRONMENT=1
 fi
 
 # block robots if not live
@@ -46,6 +46,17 @@ THE_COMMIT=`git rev-parse HEAD`
 # Set git details
 git config --global user.email "enquiry@streetsupport.net"
 git config --global user.name "Travis CI"
+
+# Set environment
+cd src/js
+rm env.js
+cat > env.js << EOF
+module.exports = $APIENVIRONMENT
+EOF
+
+echo "env.js file rewritten to:"
+cat env.js
+cd ../../
 
 # Create version.txt
 cd src/files
