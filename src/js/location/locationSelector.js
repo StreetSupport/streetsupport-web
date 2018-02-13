@@ -129,7 +129,7 @@ const _determineLocationRetrievalMethod = () => {
 }
 
 const getSelectedLocationId = () => {
-  const saved = cookies.get(cookies.keys.location)
+  const saved = cookies.get(cookies.keys.location) || 'elsewhere'
   if (cookies.get(cookies.keys.location) !== undefined && saved.length > 0) {
     return supportedCities.get(saved).id
   }
