@@ -7,6 +7,7 @@ const socialShare = require('./social-share')
 const endpoints = require('./api')
 const api = require('./get-api-data')
 const supportedCities = require('./location/supportedCities')
+const WPAPI = require('wpapi')
 
 import { suffixer } from './location/suffixer'
 
@@ -45,6 +46,15 @@ const init = (currentLocation) => {
       const callback = () => {}
       templating.renderTemplate('js-swep-tpl', city, 'js-swep-output', callback)
     }, (_) => {})
+
+  // todo: TESTING THE WP API. THIS WILL BE REMOVED
+  let apiPromise = WPAPI.discover('https://news.streetsupport.net')
+  apiPromise.then(function( site ) {
+    // If default routes were detected, they are now available
+    site.posts().then(function( posts ) {
+      console.log( posts );
+    });
+  })
 }
 
 location
