@@ -1,4 +1,5 @@
 const ko = require('knockout')
+const htmlEncode = require('htmlencode')
 
 export class Coordinates {
   constructor (data) {
@@ -50,7 +51,7 @@ export const Accommodation = function (data, listeners) {
   self.address = ko.observable(address.formattedForDisplay())
   self.additionalInfo = ko.observable(data.additionalInfo)
   self.accommodationType = ko.observable(data.accommodationType)
-  self.synopsis = ko.observable(data.synopsis)
+  self.synopsis = ko.observable(htmlEncode.htmlDecode(htmlEncode.htmlDecode(data.synopsis)))
   self.referralIsRequired = ko.observable(data.referralIsRequired)
   self.detailsUrl = ko.observable(`/find-help/accommodation/listing/details?id=${data.id}`)
   self.isActive = ko.observable()
