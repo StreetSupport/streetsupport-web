@@ -1,11 +1,11 @@
-var nav = require('./navigation/nav.js')
-var print = require('./navigation/print.js')
-var analytics = require('./analytics')
+const nav = require('./navigation/nav.js')
+const print = require('./navigation/print.js')
+const analytics = require('./analytics')
 const headerCitySelector = require('./navigation/headerCitySelector')
+const delegate = require('delegate')
 
 import Svg4everybody from 'svg4everybody'
 import 'babel-polyfill'
-import on from 'delegated-events'
 
 let removeNoJS = () => {
   var html = document.querySelector('html')
@@ -62,7 +62,7 @@ let fastClickCheck = () => {
 }
 
 let twitterShareWindow = function () {
-  on('click', '.js-twitterShareWindow', (e) => {
+  delegate('.js-twitterShareWindow', 'click', () => {
     let targetUrl = 'https://www.twitter.com/intent/tweet?u=' + window.location
     window.open(targetUrl, 'blank', 'width=500,height=300')
   })

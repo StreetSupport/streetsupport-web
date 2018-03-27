@@ -71,7 +71,7 @@
     "awesomplete": "1.1.1",
     "classlist.js": "1.1.20150312",
     "cookie-cutter": "^0.2.0",
-    "delegated-events": "^1.0.5",
+    "delegate": "^3.2.0",
     "fastclick": "1.0.6",
     "geolib": "2.0.22",
     "hogan.js": "3.0.2",
