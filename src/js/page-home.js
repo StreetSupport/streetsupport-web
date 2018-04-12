@@ -1,4 +1,5 @@
 import './common'
+import {WordPress} from "./wordpress"
 
 let location = require('./location/locationSelector')
 const templating = require('./template-render')
@@ -7,7 +8,7 @@ const socialShare = require('./social-share')
 const endpoints = require('./api')
 const api = require('./get-api-data')
 const supportedCities = require('./location/supportedCities')
-const WPAPI = require('wpapi')
+const wp = new WordPress()
 
 import { suffixer } from './location/suffixer'
 
@@ -39,6 +40,14 @@ const init = (currentLocation) => {
     }, (_) => {
     })
 
+  wp
+    .getPostsByTag(currentLocation.id, 10, 0)
+    .then((posts) => {
+      const callback = () => {}
+      console.log(posts)
+      templating.renderTemplate('js-news-tpl', posts, 'js-news-output', callback)
+  })
+
   api
     .data(endpoints.cities)
     .then((result) => {
@@ -47,14 +56,6 @@ const init = (currentLocation) => {
       templating.renderTemplate('js-swep-tpl', city, 'js-swep-output', callback)
     }, (_) => {})
 
-  // todo: TESTING THE WP API. THIS WILL BE REMOVED
-  let apiPromise = WPAPI.discover('https://news.streetsupport.net')
-  apiPromise.then(function( site ) {
-    // If default routes were detected, they are now available
-    site.posts().then(function( posts ) {
-      console.log( posts );
-    });
-  })
 }
 
 location
