@@ -68,6 +68,18 @@
   }
 }
 
+%southampton-header {
+  background-image: url('../img/header-background-leeds.png');
+
+  &:before {
+    height: 420px;
+    background-image: url('../img/southampton-buildings.png');
+    background-repeat: no-repeat;
+    background-position: 0 bottom;
+    left: 0;
+  }
+}
+
 .city-header {
   background-position: left bottom;
   background-size: 940px;
@@ -125,6 +137,12 @@
 .bradford .city-header,
 .manchester .city-header--bradford {
   @extend %bradford-header;
+  color: $brand-k;
+}
+
+.southampton .city-header,
+.manchester .city-header--southampton {
+  @extend %southampton-header;
   color: $brand-k;
 }
 
