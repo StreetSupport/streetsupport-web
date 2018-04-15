@@ -1,0 +1,42 @@
+---
+title: Severe Weather Emergency Accommodation in Southampton - Street Support
+description: Severe Weather Emergency Accommodation provision in Southampton.
+image: https://streetsupport.net/assets/img/og/street-support.png
+layout: default.hbs
+permalink: false
+jsBundle: swep
+section: findhelp
+page: swep
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item"><a href="/southampton/">Southampton</a></li>
+      <li class="breadcrumbs__item">Severe Weather Emergency Accommodation</li>
+    </ol>
+  </div>
+</div>
+
+<div class="block block--city-header city-header city-header--southampton">
+  <div class="container container--city-header">
+    <h1 class="h1 block__header">Severe Weather Emergency Accommodation</h1>
+    <div id="js-swep-output" class="template--maybe-empty"></div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <p></p>
+    </div>
+
+    {{> social-share}}
+
+  </div>
+</div>
+
+<script id="js-swep-tpl" type="text/template">
+{{> swep-notification }}
+</script>
