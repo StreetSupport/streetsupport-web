@@ -1,6 +1,6 @@
 .team__member {
   @include cf();
-  padding-bottom: 20px;
+  padding-bottom: 30px;
 }
 
 .team__member-title {
@@ -56,5 +56,17 @@
 .team__member-title--olie {
   &::before, &::after {
     background-image: url('/assets/img/olie-martin.jpg')
+  }
+}
+
+.team__member-title--mark {
+  &::before, &::after {
+    background-image: url('/assets/img/mark.jpg')
+  }
+}
+
+.team__member-title--dee {
+  &::before, &::after {
+    background-image: url('/assets/img/dee.jpg')
   }
 }
