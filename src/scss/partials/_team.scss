@@ -70,3 +70,27 @@
     background-image: url('/assets/img/dee.jpg')
   }
 }
+
+.team__member-title--catherine {
+  &::before, &::after {
+    background-image: url('/assets/img/catherine.jpg')
+  }
+}
+
+.team__member-title--jez {
+  &::before, &::after {
+    background-image: url('/assets/img/jez.jpg')
+  }
+}
+
+.team__member-title--gill {
+  &::before, &::after {
+    background-image: url('/assets/img/gill.jpg')
+  }
+}
+
+.team__member-title--charles {
+  &::before, &::after {
+    background-image: url('/assets/img/charles.jpg')
+  }
+}
