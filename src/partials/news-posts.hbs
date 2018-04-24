@@ -1,0 +1,13 @@
+<div class="block block--news">
+  <section class="news-posts">
+    \{{#posts}}
+    <article class="news-posts__post">
+      <h2 class="post__title">\{{{title.rendered}}}</h2>
+      <time class="post__date">\{{date}}</time>
+      <div class="post__excerpt">
+        \{{{excerpt.rendered}}}
+      </div>
+    </article>
+    \{{/posts}}
+  </section>
+</div>

@@ -1,5 +1,4 @@
 import './common'
-import {WordPress} from "./wordpress"
 
 let location = require('./location/locationSelector')
 const templating = require('./template-render')
@@ -8,7 +7,7 @@ const socialShare = require('./social-share')
 const endpoints = require('./api')
 const api = require('./get-api-data')
 const supportedCities = require('./location/supportedCities')
-const wp = new WordPress()
+const wp = require('./wordpress')
 
 import { suffixer } from './location/suffixer'
 
@@ -44,8 +43,11 @@ const init = (currentLocation) => {
     .getPostsByTag(currentLocation.id, 10, 0)
     .then((posts) => {
       const callback = () => {}
-      console.log(posts)
-      templating.renderTemplate('js-news-tpl', posts, 'js-news-output', callback)
+      const data = {
+        posts: posts
+      }
+      console.log(data)
+      templating.renderTemplate('js-news-tpl', data, 'js-news-output', callback)
   })
 
   api
