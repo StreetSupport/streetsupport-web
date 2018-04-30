@@ -1,12 +1,17 @@
+import moment from 'moment'
+
 const WPAPI = require('wpapi')
 const apiRootJSON = require('../data/wp-endpoints.json')
 const api = new WPAPI({
   endpoint: 'https://news.streetsupport.net/wp-json',
   // endpoint: apiRootJSON.url,
   routes: apiRootJSON.routes
-});
+})
+const _ = require('lodash')
 
 // TODO: Put URL into config
+
+// TODO: Enable Caching
 
 function getPostsByTag(tag, limit, offset) {
   if (api === null) {
@@ -36,7 +41,7 @@ function getPostsByTag(tag, limit, offset) {
           if (error) {
             reject(error)
           }
-          resolve(posts)
+          resolve(processPosts(posts))
         })
       })
   })
@@ -70,8 +75,42 @@ function getPostsByCategory(category, limit, offset) {
             reject(error)
             // return
           }
-          resolve(posts)
+          resolve(processPosts(posts))
         })
+      })
+  })
+}
+
+function processPosts(posts) {
+  return _.map(posts, (postItem) => {
+    postItem.featured_media_object = getPostFeaturedMedia(postItem.featured_media)
+    postItem.date_gmt_object = moment(postItem.date_gmt_object)
+
+    // TODO: Resolve Tags
+    // TODO: Resolve Categories
+    // TODO: Resolve Author
+
+    return postItem
+  })
+}
+
+function getPostFeaturedMedia(mediaId) {
+  if (api === null) {
+    return []
+  }
+
+  if (typeof mediaId !== 'number') {
+    console.error('WordPress Media Error - ID must be a number');
+    return []
+  }
+
+  return new Promise((resolve, reject) =>{
+    api.media().id(mediaId)
+      .get((error, mediaItem) => {
+        if (error) {
+          reject(error)
+        }
+        resolve(mediaItem)
       })
   })
 }
