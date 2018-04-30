@@ -1,0 +1,20 @@
+.news-posts {
+
+  &__post {}
+
+  .post {
+
+    &__image {
+
+      &--empty {}
+    }
+
+    &__title {}
+
+    &__date {}
+
+    &__excerpt {}
+
+    &__cta {}
+  }
+}

@@ -1,11 +1,19 @@
 <div class="block block--news">
-  <section class="news-posts">
+  <section class="news-posts js-newsCarousel">
     \{{#posts}}
     <article class="news-posts__post">
+      <figure class="post__image{{# unless featured_media_object }} post__image--empty{{/unless}}">
+        \{{#featured_media_object}}
+          <img src="\{{featured_media_object.source_url}}}" alt="\{{featured_media_object.alt_text}}">
+        \{{/featured_media_object}}
+      </figure>
       <h2 class="post__title">\{{{title.rendered}}}</h2>
-      <time class="post__date">\{{date}}</time>
+      <time class="post__date" datetime="\{{date_gmt_object.local().toISOString(true)}}"> Posted on \{{date_gmt_object.local().format('D MMM YYYY')}}</time>
       <div class="post__excerpt">
         \{{{excerpt.rendered}}}
+      </div>
+      <div class="post__cta">
+        <a href="\{{link}}" class="btn btn--secondary">Read Story</a>
       </div>
     </article>
     \{{/posts}}
