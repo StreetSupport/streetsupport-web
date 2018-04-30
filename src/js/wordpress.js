@@ -1,15 +1,14 @@
+// TODO: Write Tests
+
 import moment from 'moment'
 
 const WPAPI = require('wpapi')
 const apiRootJSON = require('../data/wp-endpoints.json')
 const api = new WPAPI({
   endpoint: 'https://news.streetsupport.net/wp-json',
-  // endpoint: apiRootJSON.url,
   routes: apiRootJSON.routes
 })
 const _ = require('lodash')
-
-// TODO: Put URL into config
 
 // TODO: Enable Caching
 
@@ -83,12 +82,21 @@ function getPostsByCategory(category, limit, offset) {
 
 function processPosts(posts) {
   return _.map(posts, (postItem) => {
-    postItem.featured_media_object = getPostFeaturedMedia(postItem.featured_media)
-    postItem.date_gmt_object = moment(postItem.date_gmt_object)
+    postItem.date_gmt_object = moment(postItem.date_gmt)
+    postItem.date_local_formatted = postItem.date_gmt_object.local().format('D MMM YYYY')
+    postItem.date_local_iso = postItem.date_gmt_object.local().toISOString(true)
+    getPostAuthor(postItem.author).then((author) => {
+      return postItem.author_object = author
+    })
+
+    getPostFeaturedMedia(postItem.featured_media).then((media) => {
+      return postItem.featured_media_object = media
+    })
 
     // TODO: Resolve Tags
     // TODO: Resolve Categories
-    // TODO: Resolve Author
+
+    console.log(postItem)
 
     return postItem
   })
@@ -104,7 +112,7 @@ function getPostFeaturedMedia(mediaId) {
     return []
   }
 
-  return new Promise((resolve, reject) =>{
+  return new Promise((resolve, reject) => {
     api.media().id(mediaId)
       .get((error, mediaItem) => {
         if (error) {
@@ -114,6 +122,35 @@ function getPostFeaturedMedia(mediaId) {
       })
   })
 }
+
+function getPostAuthor(authorId) {
+  if (api === null) {
+    return []
+  }
+
+  if (typeof authorId !== 'number') {
+    console.error('WordPress Author Error - ID must be a number');
+    return []
+  }
+
+  return new Promise((resolve, reject) => {
+    api.users().id(authorId)
+      .get((error, mediaItem) => {
+        if (error) {
+          reject(error)
+        }
+        resolve(mediaItem)
+      })
+  })
+}
+
+// function getPostTags(tagIds) {
+//   if (api === null) {
+//     return []
+//   }
+//
+//   return new Promise
+// }
 
 module.exports = {
   getPostsByTag: getPostsByTag,
