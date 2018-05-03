@@ -26,18 +26,23 @@ if [[ $TRAVIS_BRANCH == 'develop' ]]
     APIENVIRONMENT=1
 fi
 
-# block robots if not live
+# if not live
 if [[ $TRAVIS_BRANCH == 'develop' ]] || [[ $TRAVIS_BRANCH == 'uat' ]]
   then
     cd src/files
 
+    # block robots
     echo "User-agent: *" > robots.txt
     echo "Disallow /" >> robots.txt
 
     echo "robots.txt rewritten to:"
     cat robots.txt
 
+    # delete google site verification
+    rm googledcd9eb47a9ac8a14.html
+
     cd ../../
+
 fi
 
 # Get the commit details
