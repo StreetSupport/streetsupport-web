@@ -1,21 +1,35 @@
 <div class="block block--news">
+  <header class="news-header">
+    <h2 class="news-header__title">Latest News{{#if city}} for {{city}}{{/if}}</h2>
+  </header>
   <section class="news-posts js-newsCarousel">
     \{{#posts}}
       <article class="news-posts__post">
         <figure class="post__image\{{^featured_media_object}} post__image--empty\{{/featured_media_object}}">
-          \{{#featured_media_object}}
+          {{#if featured_media_object}}
             <img src="\{{featured_media_object.source_url}}}" alt="\{{featured_media_object.alt_text}}">
-          \{{/featured_media_object}}
+          {{else}}
+            <svg class="svg-logo-dims">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#logo"></use>
+            </svg>
+          {{/if}}
         </figure>
         <h2 class="post__title">\{{{title.rendered}}}</h2>
-        <time class="post__date" datetime="\{{date_local_iso}}"> Posted on \{{date_local_formatted}}</time>
         <div class="post__excerpt">
-          \{{{excerpt.rendered}}}
+          \{{{short_excerpt}}}
         </div>
+        <time class="post__date" datetime="\{{date_local_iso}}">\{{date_local_formatted}}</time>
         <div class="post__cta">
-          <a href="\{{link}}" class="btn btn--secondary">Read Story</a>
+          <a href="\{{link}}" class="">Read more</a>
         </div>
       </article>
     \{{/posts}}
   </section>
+  <footer class="news-footer">
+    <a href="https://news.streetsupport.net/tag/{{city}}" class="btn btn--brand-e">
+      <span class="btn__text">
+        View All
+      </span>
+    </a>
+  </footer>
 </div>

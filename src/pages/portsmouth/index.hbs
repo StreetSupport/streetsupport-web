@@ -10,6 +10,10 @@ page: portsmouth
 nosubnav: true
 ---
 
+<script id="js-news-tpl" type="text/template">
+    {{> news-posts city="Portsmouth" }}
+</script>
+
 <div class="block block--city-header city-header city-header--portsmouth">
   <div class="container container--city-header">
     <h1 class="h1 block__header">Street Support Portsmouth</h1>
@@ -44,6 +48,8 @@ nosubnav: true
    </div>
  </div>
 </div>
+
+<div id="js-news-output"></div>
 
 {{> portsmouth/home-promo }}
 

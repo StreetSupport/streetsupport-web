@@ -40,7 +40,7 @@ const init = (currentLocation) => {
     })
 
   wp
-    .getPostsByTag(currentLocation.id, 10, 0)
+    .getPostsByTag(currentLocation.id, 3, 0)
     .then((posts) => {
       const callback = () => {}
       const data = {

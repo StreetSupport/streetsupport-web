@@ -9,8 +9,10 @@ const api = new WPAPI({
   routes: apiRootJSON.routes
 })
 const _ = require('lodash')
+const striptags = require('striptags')
 
 // TODO: Enable Caching
+// TODO: Investigate requesting other image sizes
 
 function getPostsByTag(tag, limit, offset) {
   if (api === null) {
@@ -85,6 +87,11 @@ function processPosts(posts) {
     postItem.date_gmt_object = moment(postItem.date_gmt)
     postItem.date_local_formatted = postItem.date_gmt_object.local().format('D MMM YYYY')
     postItem.date_local_iso = postItem.date_gmt_object.local().toISOString(true)
+
+    // TODO Experiment with built in trunc function
+    postItem.short_excerpt = _.truncate(striptags(postItem.excerpt.rendered), {
+      'length': 100
+    })
     getPostAuthor(postItem.author).then((author) => {
       return postItem.author_object = author
     })
