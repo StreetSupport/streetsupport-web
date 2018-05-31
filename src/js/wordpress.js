@@ -14,13 +14,14 @@ const striptags = require('striptags')
 // TODO: Enable Caching
 // TODO: Investigate requesting other image sizes
 
-function getPostsByLocation(location, limit, offset) {
+function getPostsByLocation (location, limit, offset, resolveEmbedded) {
+  console.log(resolveEmbedded)
   if (api === null) {
     console.log('No API')
     return []
   }
   return new Promise((resolve, reject) => {
-    api.taxonomies().taxonomy('locations')
+    api.locations().slug(location)
       .get((error, locations) => {
         if (error) {
           console.error('WordPress Taxonomy Query Error')
@@ -29,14 +30,16 @@ function getPostsByLocation(location, limit, offset) {
         }
 
         const currentLocation = locations[0]
-        let query = api.posts().param('locations', currentLocation.id).embed()
-        if (limit !== null) {
+        let query = api.posts().param('locations', currentLocation.id)
+        if (typeof (resolveEmbedded) !== "undefined" && resolveEmbedded === true) {
+          query = query.embed()
+        }
+        if (typeof (limit) !== "undefined") {
           query = query.perPage(limit)
         }
-        if (offset !== null) {
+        if (typeof (offset) !== "undefined") {
           query = query.offset(offset)
         }
-
         query.get((error, posts) => {
           if (error) {
             reject(error)
@@ -47,7 +50,7 @@ function getPostsByLocation(location, limit, offset) {
   })
 }
 
-function getPostsByTag(tag, limit, offset) {
+function getPostsByTag (tag, limit, offset, resolveEmbedded) {
   if (api === null) {
     console.log('No API')
     return []
@@ -63,14 +66,16 @@ function getPostsByTag(tag, limit, offset) {
 
         // .slug() queries will always return as an array
         const currentTag = tags[0]
-        let query = api.posts().tags(currentTag.id).embed()
-        if (limit !== null) {
+        let query = api.posts().tags(currentTag.id)
+        if (typeof (resolveEmbedded) !== "undefined" && resolveEmbedded === true) {
+          query = query.embed()
+        }
+        if (typeof (limit) !== "undefined") {
           query = query.perPage(limit)
         }
-        if (offset !== null) {
+        if (typeof (offset) !== "undefined") {
           query = query.offset(offset)
         }
-
         query.get((error, posts) => {
           if (error) {
             reject(error)
@@ -81,7 +86,7 @@ function getPostsByTag(tag, limit, offset) {
   })
 }
 
-function getPostsByCategory(category, limit, offset) {
+function getPostsByCategory (category, limit, offset, resolveEmbedded) {
   if (api === null) {
     return []
   }
@@ -96,14 +101,16 @@ function getPostsByCategory(category, limit, offset) {
         }
         // .slug() queries will always return as an array
         const currentCategory = categories[0]
-        let query = this.api.posts().categories(currentCategory.id).embed()
-        if (limit !== null) {
+        let query = this.api.posts().categories(currentCategory.id)
+        if (typeof (resolveEmbedded) !== "undefined" && resolveEmbedded === true) {
+          query = query.embed()
+        }
+        if (typeof (limit) !== "undefined") {
           query = query.perPage(limit)
         }
-        if (offset !== null) {
+        if (typeof (offset) !== "undefined") {
           query = query.offset(offset)
         }
-
         query.get((error, posts) => {
           if (error) {
             reject(error)
@@ -115,7 +122,7 @@ function getPostsByCategory(category, limit, offset) {
   })
 }
 
-function processPosts(posts) {
+function processPosts (posts) {
   return _.map(posts, (postItem) => {
     postItem.date_gmt_object = moment(postItem.date_gmt)
     postItem.date_local_formatted = postItem.date_gmt_object.local().format('D MMM YYYY')
@@ -126,16 +133,16 @@ function processPosts(posts) {
       'length': 100
     })
 
-    if (typeof(postItem._embedded) !== 'undefined') {
-      postItem.author_object = typeof(postItem._embedded['author']) !== 'undefined'
+    if (typeof (postItem._embedded) !== 'undefined') {
+      postItem.author_object = typeof (postItem._embedded['author']) !== 'undefined'
         ? postItem._embedded['author'][0]
         : null
 
-      postItem.featured_media_object = typeof(postItem._embedded['wp:featuredmedia']) !== 'undefined'
+      postItem.featured_media_object = typeof (postItem._embedded['wp:featuredmedia']) !== 'undefined'
         ? postItem._embedded['wp:featuredmedia'][0]
         : null
 
-      if (typeof(postItem._embedded['wp:term']) !== 'undefined') {
+      if (typeof (postItem._embedded['wp:term']) !== 'undefined') {
         postItem.tags = postItem._embedded['wp:term'][1]
         postItem.categories = postItem._embedded['wp:term'][0]
         postItem.locations = postItem._embedded['wp:term'][2]
@@ -143,34 +150,12 @@ function processPosts(posts) {
     }
 
     console.log(postItem)
-
     return postItem
   })
 }
 
-function getPostFeaturedMedia(mediaId) {
-  if (api === null) {
-    return []
-  }
-
-  if (typeof mediaId !== 'number') {
-    console.error('WordPress Media Error - ID must be a number');
-    return []
-  }
-
-  return new Promise((resolve, reject) => {
-    api.media().id(mediaId)
-      .get((error, mediaItem) => {
-        if (error) {
-          reject(error)
-        }
-        resolve(mediaItem)
-      })
-  })
-}
-
 module.exports = {
+  getPostsByLocation: getPostsByLocation,
   getPostsByTag: getPostsByTag,
-  getPostsByCategory: getPostsByCategory,
-  getPostsByLocation: getPostsByLocation
+  getPostsByCategory: getPostsByCategory
 }
