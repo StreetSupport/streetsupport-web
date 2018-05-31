@@ -15,7 +15,6 @@ const striptags = require('striptags')
 // TODO: Investigate requesting other image sizes
 
 function getPostsByLocation (location, limit, offset, resolveEmbedded) {
-  console.log(resolveEmbedded)
   if (api === null) {
     console.log('No API')
     return []
@@ -31,20 +30,23 @@ function getPostsByLocation (location, limit, offset, resolveEmbedded) {
 
         const currentLocation = locations[0]
         let query = api.posts().param('locations', currentLocation.id)
-        if (typeof (resolveEmbedded) !== "undefined" && resolveEmbedded === true) {
+        if (typeof (resolveEmbedded) !== 'undefined' && resolveEmbedded === true) {
           query = query.embed()
         }
-        if (typeof (limit) !== "undefined") {
+        if (typeof (limit) !== 'undefined') {
           query = query.perPage(limit)
         }
-        if (typeof (offset) !== "undefined") {
+        if (typeof (offset) !== 'undefined') {
           query = query.offset(offset)
         }
         query.get((error, posts) => {
           if (error) {
             reject(error)
           }
-          resolve(processPosts(posts))
+          resolve({
+            posts: processPosts(posts),
+            taxonomy: currentLocation
+          })
         })
       })
   })
@@ -67,20 +69,23 @@ function getPostsByTag (tag, limit, offset, resolveEmbedded) {
         // .slug() queries will always return as an array
         const currentTag = tags[0]
         let query = api.posts().tags(currentTag.id)
-        if (typeof (resolveEmbedded) !== "undefined" && resolveEmbedded === true) {
+        if (typeof (resolveEmbedded) !== 'undefined' && resolveEmbedded === true) {
           query = query.embed()
         }
-        if (typeof (limit) !== "undefined") {
+        if (typeof (limit) !== 'undefined') {
           query = query.perPage(limit)
         }
-        if (typeof (offset) !== "undefined") {
+        if (typeof (offset) !== 'undefined') {
           query = query.offset(offset)
         }
         query.get((error, posts) => {
           if (error) {
             reject(error)
           }
-          resolve(processPosts(posts))
+          resolve({
+            posts: processPosts(posts),
+            taxonomy: currentTag
+          })
         })
       })
   })
@@ -102,13 +107,13 @@ function getPostsByCategory (category, limit, offset, resolveEmbedded) {
         // .slug() queries will always return as an array
         const currentCategory = categories[0]
         let query = this.api.posts().categories(currentCategory.id)
-        if (typeof (resolveEmbedded) !== "undefined" && resolveEmbedded === true) {
+        if (typeof (resolveEmbedded) !== 'undefined' && resolveEmbedded === true) {
           query = query.embed()
         }
-        if (typeof (limit) !== "undefined") {
+        if (typeof (limit) !== 'undefined') {
           query = query.perPage(limit)
         }
-        if (typeof (offset) !== "undefined") {
+        if (typeof (offset) !== 'undefined') {
           query = query.offset(offset)
         }
         query.get((error, posts) => {
@@ -116,7 +121,10 @@ function getPostsByCategory (category, limit, offset, resolveEmbedded) {
             reject(error)
             // return
           }
-          resolve(processPosts(posts))
+          resolve({
+            posts: processPosts(posts),
+            taxonomy: currentCategory
+          })
         })
       })
   })
@@ -125,7 +133,7 @@ function getPostsByCategory (category, limit, offset, resolveEmbedded) {
 function processPosts (posts) {
   return _.map(posts, (postItem) => {
     postItem.date_gmt_object = moment(postItem.date_gmt)
-    postItem.date_local_formatted = postItem.date_gmt_object.local().format('D MMM YYYY')
+    postItem.date_local_formatted = postItem.date_gmt_object.local().format('DD/MM/YYYY')
     postItem.date_local_iso = postItem.date_gmt_object.local().toISOString(true)
 
     // TODO Experiment with built in trunc function
@@ -138,6 +146,7 @@ function processPosts (posts) {
         ? postItem._embedded['author'][0]
         : null
 
+      // TODO: Investigate Image Sizes in WP Admin
       postItem.featured_media_object = typeof (postItem._embedded['wp:featuredmedia']) !== 'undefined'
         ? postItem._embedded['wp:featuredmedia'][0]
         : null
@@ -149,7 +158,6 @@ function processPosts (posts) {
       }
     }
 
-    console.log(postItem)
     return postItem
   })
 }

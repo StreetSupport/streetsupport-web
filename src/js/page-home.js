@@ -15,7 +15,7 @@ const init = (currentLocation) => {
   api
     .data(endpoints.statistics + currentLocation.id + '/latest')
     .then((stats) => {
-      let theData = {
+      const theData = {
         locations: location.getViewModel(currentLocation),
         statistics: stats.data
       }
@@ -24,7 +24,7 @@ const init = (currentLocation) => {
           theData[`is${c.id}`] = currentLocation.id === c.id
         })
 
-      var callback = function () {
+      const callback = function () {
         location.handler(() => {
           window.location.reload()
         }, '.js-homepage-promo-location-selector')
@@ -40,15 +40,12 @@ const init = (currentLocation) => {
     })
 
   wp
-    .getPostsByTag(currentLocation.id, 3, 0)
+    .getPostsByLocation(currentLocation.id, 3, 0, true)
     .then((posts) => {
       const callback = () => {}
-      const data = {
-        posts: posts
-      }
-      console.log(data)
-      templating.renderTemplate('js-news-tpl', data, 'js-news-output', callback)
-  })
+      console.log(posts)
+      templating.renderTemplate('js-news-tpl', posts, 'js-news-output', callback)
+    })
 
   api
     .data(endpoints.cities)
@@ -57,7 +54,6 @@ const init = (currentLocation) => {
       const callback = () => {}
       templating.renderTemplate('js-swep-tpl', city, 'js-swep-output', callback)
     }, (_) => {})
-
 }
 
 location
