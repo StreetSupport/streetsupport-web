@@ -14,6 +14,39 @@ const striptags = require('striptags')
 // TODO: Enable Caching
 // TODO: Investigate requesting other image sizes
 
+function getPostsByLocation(location, limit, offset) {
+  if (api === null) {
+    console.log('No API')
+    return []
+  }
+  return new Promise((resolve, reject) => {
+    api.taxonomies().taxonomy('locations')
+      .get((error, locations) => {
+        if (error) {
+          console.error('WordPress Taxonomy Query Error')
+          console.error(error)
+          return []
+        }
+
+        const currentLocation = locations[0]
+        let query = api.posts().param('locations', currentLocation.id).embed()
+        if (limit !== null) {
+          query = query.perPage(limit)
+        }
+        if (offset !== null) {
+          query = query.offset(offset)
+        }
+
+        query.get((error, posts) => {
+          if (error) {
+            reject(error)
+          }
+          resolve(processPosts(posts))
+        })
+      })
+  })
+}
+
 function getPostsByTag(tag, limit, offset) {
   if (api === null) {
     console.log('No API')
@@ -30,7 +63,7 @@ function getPostsByTag(tag, limit, offset) {
 
         // .slug() queries will always return as an array
         const currentTag = tags[0]
-        let query = api.posts().tags(currentTag.id)
+        let query = api.posts().tags(currentTag.id).embed()
         if (limit !== null) {
           query = query.perPage(limit)
         }
@@ -63,7 +96,7 @@ function getPostsByCategory(category, limit, offset) {
         }
         // .slug() queries will always return as an array
         const currentCategory = categories[0]
-        let query = this.api.posts().categories(currentCategory.id)
+        let query = this.api.posts().categories(currentCategory.id).embed()
         if (limit !== null) {
           query = query.perPage(limit)
         }
@@ -92,16 +125,22 @@ function processPosts(posts) {
     postItem.short_excerpt = _.truncate(striptags(postItem.excerpt.rendered), {
       'length': 100
     })
-    getPostAuthor(postItem.author).then((author) => {
-      return postItem.author_object = author
-    })
 
-    getPostFeaturedMedia(postItem.featured_media).then((media) => {
-      return postItem.featured_media_object = media
-    })
+    if (typeof(postItem._embedded) !== 'undefined') {
+      postItem.author_object = typeof(postItem._embedded['author']) !== 'undefined'
+        ? postItem._embedded['author'][0]
+        : null
 
-    // TODO: Resolve Tags
-    // TODO: Resolve Categories
+      postItem.featured_media_object = typeof(postItem._embedded['wp:featuredmedia']) !== 'undefined'
+        ? postItem._embedded['wp:featuredmedia'][0]
+        : null
+
+      if (typeof(postItem._embedded['wp:term']) !== 'undefined') {
+        postItem.tags = postItem._embedded['wp:term'][1]
+        postItem.categories = postItem._embedded['wp:term'][0]
+        postItem.locations = postItem._embedded['wp:term'][2]
+      }
+    }
 
     console.log(postItem)
 
@@ -130,36 +169,8 @@ function getPostFeaturedMedia(mediaId) {
   })
 }
 
-function getPostAuthor(authorId) {
-  if (api === null) {
-    return []
-  }
-
-  if (typeof authorId !== 'number') {
-    console.error('WordPress Author Error - ID must be a number');
-    return []
-  }
-
-  return new Promise((resolve, reject) => {
-    api.users().id(authorId)
-      .get((error, mediaItem) => {
-        if (error) {
-          reject(error)
-        }
-        resolve(mediaItem)
-      })
-  })
-}
-
-// function getPostTags(tagIds) {
-//   if (api === null) {
-//     return []
-//   }
-//
-//   return new Promise
-// }
-
 module.exports = {
   getPostsByTag: getPostsByTag,
-  getPostsByCategory: getPostsByCategory
+  getPostsByCategory: getPostsByCategory,
+  getPostsByLocation: getPostsByLocation
 }
