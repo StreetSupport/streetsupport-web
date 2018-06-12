@@ -10,7 +10,6 @@ const getApiData = require('./get-api-data')
 const querystring = require('./get-url-parameter')
 const templating = require('./template-render')
 const analytics = require('./analytics')
-const socialShare = require('./social-share')
 const browser = require('./browser')
 const listToDropdown = require('./list-to-dropdown')
 const locationSelector = require('./location/locationSelector')
@@ -111,7 +110,7 @@ const defaultOnRenderListingCallback = () => {
   findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
   browser.initPrint()
   browser.loaded()
-  socialShare.init()
+  .init()
   analytics.init(document.title)
 }
 

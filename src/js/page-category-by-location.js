@@ -12,7 +12,6 @@ const getApiData = require('./get-api-data')
 const querystring = require('./get-url-parameter')
 const templating = require('./template-render')
 const analytics = require('./analytics')
-const socialShare = require('./social-share')
 const browser = require('./browser')
 const locationSelector = require('./location/locationSelector')
 let findHelp = null
@@ -100,7 +99,6 @@ const defaultOnRenderCallback = () => {
   findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
   browser.initPrint()
   browser.loaded()
-  socialShare.init()
 }
 
 const getOnRenderCallback = (providers, locationResult) => {

@@ -5,7 +5,6 @@ var accordion = require('./accordion')
 var htmlEncode = require('htmlencode')
 var marked = require('marked')
 marked.setOptions({sanitize: true})
-var socialShare = require('./social-share')
 var apiRoutes = require('./api')
 var getApiData = require('./get-api-data')
 var analytics = require('./analytics')
@@ -122,7 +121,6 @@ getApiData.data(organisationUrl).then(function (result) {
     browser.loaded()
     accordion.init()
     analytics.init(theTitle)
-    socialShare.init()
   }
 
   templating.renderTemplate('js-organisation-tpl', theData, 'js-organisation-output', callback)
