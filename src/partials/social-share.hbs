@@ -1,5 +1,13 @@
-<div class="social-share">
-  <span class="social-share__text">Share this page: </span>
-  <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="streetsupportuk" data-dnt="true">Tweet</a>
-  <div class="fb-share-button" data-href="" data-layout="button" data-mobile-iframe="true"></div>
+<div class="social-share{{#if class}} {{{ class }}}{{/if}}">
+  <span class="social-share__text">{{#if text}}{{{ text }}}{{else}}Share this page: {{/if}}</span>
+  <a href="#" class="social-share__link social-share__link--twitter js-twitterShareWindow">
+    {{>icon name="twitter-brand-colour" class="social-share__icon"}}
+    <span class="social-share__caption">Tweet</span>
+    <span class="hide-screen">Tweet</span>
+  </a>
+  <a href="javascript:window.open('https://www.facebook.com/sharer.php', 'blank', 'width=500,height=300');" class="social-share__link social-share__link--facebook">
+    {{>icon name="facebook-brand-colour" class="social-share__icon"}}
+    <span class="social-share__caption">Share</span>
+    <span class="hide-screen">Share on Facebook</span>
+  </a>
 </div>

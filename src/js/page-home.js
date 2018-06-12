@@ -3,7 +3,6 @@ import './common'
 let location = require('./location/locationSelector')
 const templating = require('./template-render')
 const browser = require('./browser')
-const socialShare = require('./social-share')
 const endpoints = require('./api')
 const api = require('./get-api-data')
 const supportedCities = require('./location/supportedCities')
@@ -31,7 +30,6 @@ const init = (currentLocation) => {
         suffixer(currentLocation)
 
         browser.loaded()
-        socialShare.init()
       }
 
       templating.renderTemplate('js-content-tpl', theData, 'js-template-output', callback)

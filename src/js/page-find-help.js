@@ -2,7 +2,6 @@
 import './common'
 
 // Page modules
-const socialShare = require('./social-share')
 const templating = require('./template-render')
 const browser = require('./browser')
 const locationSelector = require('./location/locationSelector')
@@ -17,7 +16,6 @@ const render = (location, cities) => {
   const callback = function () {
     suffixer(location)
     browser.loaded()
-    socialShare.init()
   }
   templating.renderTemplate('js-category-list-tpl', getData(location, cities.data), 'js-category-list-output', callback)
 }
