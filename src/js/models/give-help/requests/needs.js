@@ -5,6 +5,7 @@ const getLocation = require('../../../location/get-location')
 
 const formatDate = (n) => {
   n.formattedCreationDate = moment(n.creationDate).fromNow()
+  n.formattedNeededDate = moment(n.neededDate).fromNow()
 }
 
 const setPostcodeAsLocation = (n) => {
@@ -26,6 +27,7 @@ export const formatNeeds = (needs, position) => {
     : setDistanceAsLocation
   needs
     .forEach((n) => {
+      n.neededDate = n.neededDate || n.creationDate
       formatDate(n)
       locationFormatter(n, position)
       n.detailsUrl = `request/?id=${n.id}`
