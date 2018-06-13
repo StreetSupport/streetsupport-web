@@ -12,7 +12,7 @@ const setPostcodeAsLocation = (n) => {
   n.locationDescription = n.postcode
 }
 
-const setDistanceAsLocation = (n, {latitude, longitude}) => {
+const setDistanceAsLocation = (n, { latitude, longitude }) => {
   const distanceInMetres = geolib.getDistance(
     { latitude: latitude, longitude: longitude },
     { latitude: n.latitude, longitude: n.longitude }
