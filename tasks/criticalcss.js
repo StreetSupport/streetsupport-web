@@ -23,5 +23,6 @@ gulp.task('criticalcss', () => {
     inline: true,
     dimensions: dimensions
   }))
+  .on('error', function(err) { console.log(err.message); })
   .pipe(gulp.dest(config.paths.build))
 })

@@ -53,8 +53,9 @@ gulp.task('deploy', (callback) => {
     'cachebusting',
     'generate-service-pages',
     'metalsmith',
-    ['htmlmin', 'svgsprite', 'scss', 'webpack', 'img', 'copy'],
-    'criticalcss',
+    ['htmlmin', 'svgsprite', 'scss', 'webpack', 'img'],
+    'criticalcss', 
+    'copy',
     callback
   )
 })
