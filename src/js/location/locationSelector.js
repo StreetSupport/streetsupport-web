@@ -65,6 +65,11 @@ const _useMyLocation = (deferred) => {
         cityId = supportedCities.get(saved).id
       }
       postcodes.getByCoords(userLocation.coords, (postcode) => {
+        storage.set(storage.keys.userLocationState, {
+          'postcode': postcode,
+          'longitude': userLocation.coords.longitude,
+          'latitude': userLocation.coords.latitude
+        })
         deferred.resolve({
           id: cityId,
           findHelpId: myLocationId,
@@ -180,6 +185,12 @@ const setPostcode = (postcode, onSuccessCallback, onErrorCallback) => {
 
 const setCurrent = (newCity) => {
   if (newCity.length > 0) {
+    const selectedCity = supportedCities.locations.find(c => c.id === newCity)
+    storage.set(storage.keys.userLocationState, {
+      'postcode': selectedCity.postcode,
+      'longitude': selectedCity.longitude,
+      'latitude': selectedCity.latitude
+    })
     document.cookie = `${cookies.keys.location}=${newCity};expires=Fri, 31 Dec 9999 23:59:59 GMT;path=/`
   }
 }
