@@ -38,7 +38,7 @@ const init = (currentLocation) => {
     })
 
   wp
-    .getPostsByLocation(currentLocation.id, 3, 0, true)
+    .getPostsByLocation(currentLocation.id, 4, 0, true)
     .then((posts) => {
       const callback = () => {}
       console.log(posts)

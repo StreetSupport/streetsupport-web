@@ -147,9 +147,18 @@ function processPosts (posts) {
         : null
 
       // TODO: Investigate Image Sizes in WP Admin
-      postItem.featured_media_object = typeof (postItem._embedded['wp:featuredmedia']) !== 'undefined'
-        ? postItem._embedded['wp:featuredmedia'][0]
-        : null
+      if (typeof (postItem._embedded['wp:featuredmedia']) !== 'undefined') {
+        postItem.featured_media_object = postItem._embedded['wp:featuredmedia'][0]
+
+        postItem.featured_media_object.srcset = ''
+        if (Object.getOwnPropertyNames(postItem.featured_media_object.media_details.sizes).length !== 0) {
+          var srcset = [];
+          _.each(postItem.featured_media_object.media_details.sizes, function (sizeItem) {
+            srcset.push(`${sizeItem.source_url} ${sizeItem.width}w`)
+          })
+          postItem.featured_media_object.srcset = srcset.join(', ')
+        }
+      }
 
       if (typeof (postItem._embedded['wp:term']) !== 'undefined') {
         postItem.tags = postItem._embedded['wp:term'][1]
