@@ -70,7 +70,7 @@
   }
   position: fixed;
   top: 0;
-  right: 0;
+  right: -$nav-width;
   height: 100%;
   width: $nav-width;
   z-index: $zIndex-mobileNav;
@@ -78,12 +78,12 @@
   -webkit-overflow-scrolling: touch;
 
   transition: transform 250ms cubic-bezier(.16, .68, .43, .99);
-  transform: translate3d($nav-width, 0, 0);
+  transform: translate3d(0, 0, 0);
 
   background-color: $brand-c;
 
   &.is-active {
-    transform: translate3d(0px, 0, 0);
+    transform: translate3d(-$nav-width, 0, 0);
   }
 
   .nav__push {

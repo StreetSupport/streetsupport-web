@@ -25,11 +25,7 @@ nosubnav: true
   <div class="container">
     <div class="block__content">
       <p>Street Support Network connects people experiencing homelessness, organisations, voluntary groups, businesses and kind-hearted folk to work together to end homelessness. You can find support services for people experiencing homelessness, and DO something to help - offering your time, money or resources to local organisations.</p>
-      <div class="social-share social-share--home">
-        <span class="social-share__text">Share Street Support with your friends to show your commitment to making a big change: </span>
-        <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="streetsupportuk" data-dnt="true">Tweet</a>
-        <div class="fb-share-button" data-href="" data-layout="button" data-mobile-iframe="true"></div>
-      </div>
+      {{> social-share class="social-share--home" text="Share Street Support with your friends to show your commitment to making a big change: " }}
     </div>
   </div>
 </div>
@@ -67,6 +63,9 @@ nosubnav: true
         \{{#isliverpool}}
           {{> liverpool/stats }}
         \{{/isliverpool}}
+        \{{#issouthampton}}
+          {{> southampton/stats }}
+        \{{/issouthampton}}
    </div>
  </div>
 </div>
@@ -86,12 +85,15 @@ nosubnav: true
 \{{#isliverpool}}
   {{> liverpool/home-promo }}
 \{{/isliverpool}}
+\{{#issouthampton}}
+  {{> southampton/home-promo }}
+\{{/issouthampton}}
 
 <div class="block">
   <div class="container">
     <div class="block__content text-center">
       {{> divider}}
-      <p>Street Support Network is currently available in Greater Manchester, Bournemouth, Bradford, Leeds, Liverpool and Portsmouth. And we would love to share these tools with more locations. If you think Street Support might be useful in your area, please <a href="/contact">get in touch</a>.</p>
+      <p>Street Support Network is currently available in Greater Manchester, Leeds, Bradford, Liverpool, Bournemouth, Portsmouth and Southampton. We would love the network to link out to more locations, so if you think Street Support might be useful in your area, please <a href="/contact">get in touch</a>.</p>
       <div class="location-selector">
         <label for="location" class="location-selector__label">Select a Location: </label>
         <select class="js-homepage-promo-location-selector js-location-select location-selector__select form__input" name="location" id="location">
@@ -122,6 +124,9 @@ nosubnav: true
       \{{#isliverpool}}
         {{> liverpool/supporters }}
       \{{/isliverpool}}
+      \{{#issouthampton}}
+        {{> southampton/supporters }}
+      \{{/issouthampton}}
       \{{#iselsewhere}}
         {{> no-location/supporters }}
       \{{/iselsewhere}}

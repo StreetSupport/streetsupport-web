@@ -17,7 +17,7 @@ const buildUrl = () => {
   return `${apiRoutes.needsHAL}${cardId}`
 }
 
-const initClickEvents = () => {
+const initClickEvents = (data) => {
   const clickEvents = [
     {
       selector: 'js-card-back',
@@ -28,7 +28,11 @@ const initClickEvents = () => {
     {
       selector: 'js-i-can-help-button',
       action: () => {
-        browser.scrollTo('.requests-detail__heading--i-can-help')
+        if (data.type === 'money') {
+          browser.redirect(data.donationUrl)
+        } else {
+          browser.scrollTo('.requests-detail__heading--i-can-help')
+        }
       }
     }
   ]
@@ -54,7 +58,7 @@ const outcomes = [
       result.data.showContactForm = result.data.type !== 'money'
       const data = formatNeeds([result.data])[0]
       templating.renderTemplate('js-card-detail-tpl', { card: data }, 'js-card-detail-output', () => {
-        initClickEvents()
+        initClickEvents(data)
         const contactFormModel = new ContactFormModel()
         contactFormModel.needId = data.id
         ko.applyBindings(contactFormModel, document.querySelector('.requests-detail__form'))
@@ -80,7 +84,7 @@ const init = function () {
       const resStatus = getApiData.status(result)
       outcomes
         .filter((o) => o.predicate(resStatus))[0]
-          .action(result)
+        .action(result)
     }, (e) => {
       notFound()
     })

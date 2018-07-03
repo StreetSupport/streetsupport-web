@@ -13,7 +13,6 @@ const apiRoutes = require('./api')
 const getApiData = require('./get-api-data')
 const templating = require('./template-render')
 const analytics = require('./analytics')
-const socialShare = require('./social-share')
 const browser = require('./browser')
 const locationSelector = require('./location/locationSelector')
 let findHelp = null
@@ -36,7 +35,6 @@ function buildList (url, locationResult) {
       findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
       browser.initPrint()
       browser.loaded()
-      socialShare.init()
     }
 
     if (data.daysServices.length) {
@@ -65,7 +63,6 @@ function buildList (url, locationResult) {
         browser.initPrint()
 
         browser.loaded()
-        socialShare.init()
       }
     } else {
       template = 'js-category-no-results-result-tpl'
