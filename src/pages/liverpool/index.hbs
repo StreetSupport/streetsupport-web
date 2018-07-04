@@ -10,6 +10,10 @@ page: liverpool
 nosubnav: true
 ---
 
+<script id="js-news-tpl" type="text/template">
+    {{> news-posts city="Liverpool" }}
+</script>
+
 <div class="block block--city-header city-header city-header--liverpool">
   <div class="container container--city-header">
     <h1 class="h1 block__header">Street Support Liverpool</h1>
@@ -39,6 +43,8 @@ nosubnav: true
    </div>
  </div>
 </div>
+
+<div id="js-news-output"></div>
 
 {{> liverpool/home-promo }}
 
