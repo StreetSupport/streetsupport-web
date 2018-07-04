@@ -41,7 +41,6 @@ const init = (currentLocation) => {
     .getPostsByLocation(currentLocation.id, 4, 0, true)
     .then((posts) => {
       const callback = () => {}
-      console.log(posts)
       templating.renderTemplate('js-news-tpl', posts, 'js-news-output', callback)
     })
 
