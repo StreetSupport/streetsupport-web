@@ -21,7 +21,7 @@
 @mixin printHide {
   @media print {
     & {
-      display: none
+      display: none;
     }
   }
 }

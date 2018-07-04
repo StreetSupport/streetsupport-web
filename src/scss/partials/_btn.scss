@@ -120,6 +120,12 @@
     }
   }
 
+  &--short {
+    .btn__text {
+      padding: 5px 30px;
+    }
+  }
+
   &--print {
     @include mq($from: m) {
       margin-left: 40px;

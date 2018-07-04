@@ -60,6 +60,7 @@
     "run-sequence": "1.2.2",
     "sass-mq": "3.3.2",
     "sinon": "1.17.6",
+    "striptags": "^3.1.1",
     "stylelint": "7.7.0",
     "stylelint-config-standard": "15.0.1",
     "susy": "2.2.12",
@@ -77,6 +78,7 @@
     "hogan.js": "3.0.2",
     "holderjs": "2.9.4",
     "htmlencode": "0.0.4",
+    "json-loader": "^0.5.7",
     "knockout": "3.5.0-rc",
     "knockout.validation": "2.0.3",
     "list.fuzzysearch.js": "github:javve/list.fuzzysearch.js#v0.1.0",
@@ -86,7 +88,8 @@
     "q": "1.4.1",
     "snyk": "^1.47.0",
     "spin.js": "2.3.2",
-    "svg4everybody": "2.1.4"
+    "svg4everybody": "2.1.4",
+    "wpapi": "^1.1.2"
   },
   "babel": {
     "presets": [
