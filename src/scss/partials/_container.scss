@@ -1,10 +1,13 @@
 .container {
   @include container();
+
   padding: 0 $site-gutter;
 
   &--city-header {
     margin-left: inherit;
     margin-right: inherit;
+    padding-bottom: $site-gutter;
+
     @include mq($from: m) {
       min-width: 500px;
     }
