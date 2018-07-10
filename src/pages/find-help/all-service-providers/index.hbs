@@ -99,11 +99,13 @@ page: allorganisations
           </article>
         </a>
       </div>
+      <div class="card-pagination">
       <!-- ko if: hasMorePages -->
       <button class="btn btn--brand-e" data-bind="click: loadMore">
         <span class="btn__text">Load more</span>
       </button>
       <!-- /ko -->
+      </div>
       <!-- /ko -->
       <!-- ko ifnot: hasOrgs -->
       <p>Sorry, there are no organisations listed near your postcode, please try again.</p>
