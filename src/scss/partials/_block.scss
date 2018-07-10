@@ -191,6 +191,11 @@
     background: black;
     padding: 15px 0 10px 0!important;
   }
+
+  &--cards {
+    background: $brand-q;
+    border-top: 1px solid $brand-k;
+  }
 }
 
 .block--header {

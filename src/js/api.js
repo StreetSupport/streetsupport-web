@@ -17,6 +17,7 @@ module.exports = {
   getFullUrl: p,
   serviceProviders: p('/v2/service-providers/'),
   allServiceProviders: p('/v1/all-service-providers/'),
+  serviceProviderLocations: p('/v1/service-provider-locations/'),
   serviceCategories: p('/v2/service-categories/'),
   categoryServiceProviders: p('/v2/categorised-service-providers/show/'),
   categoryServiceProvidersByDay: p('/v2/timetabled-service-providers/show/'),

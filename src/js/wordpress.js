@@ -152,7 +152,7 @@ function processPosts (posts) {
 
         postItem.featured_media_object.srcset = ''
         if (Object.getOwnPropertyNames(postItem.featured_media_object.media_details.sizes).length !== 0) {
-          var srcset = [];
+          var srcset = []
           _.each(postItem.featured_media_object.media_details.sizes, function (sizeItem) {
             srcset.push(`${sizeItem.source_url} ${sizeItem.width}w`)
           })

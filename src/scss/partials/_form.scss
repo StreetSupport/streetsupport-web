@@ -10,6 +10,41 @@
   @include post(1 of 6);
 }
 
+.multi-form-header {
+  text-align: left;
+  padding-top: 30px;
+
+  @include mq($from: m) {
+  padding-top: 0px;
+  @include span(4 of 6);
+  }
+}
+
+.form--highlighted {
+  background: white;
+  border: 1px solid $brand-k;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);
+  padding: 10px;
+}
+
+.form--text-search {
+  @include mq($from: m) {
+    .form__field-item { 
+      width: 100%;
+    }
+  }
+}
+
+.form--proximity-search {
+  padding-top: 15px;
+  margin: 15px 0 30px 0;
+  @include mq($from: m) {
+    @include span(2 of 6);
+    @include last();
+  }
+}
+
 .form__fieldset {
   border: none;
   margin: 20px 0 0 0;
@@ -31,10 +66,29 @@
 
   padding: 5px 0;
   position: relative;
+}
 
-  @include mq($from: m) {
-    @include span(4 of $grid-column);
-  }
+.form__field-item--proximity-search-range,
+.form__field-item--proximity-search-of,
+.form__field-item--proximity-search-postcode {
+  float: left;
+}
+
+.form__field-item--proximity-search-range {
+  width: 40%;
+}
+
+.form__field-item--proximity-search-of {
+  display: block;
+  width: 20%;
+  text-align: center;
+  padding: 15px;
+}
+
+.form__field-item--proximity-search-postcode {
+  width: 40%;
+  float: right;
+  clear: right;
 }
 
 .form__field-item--full {

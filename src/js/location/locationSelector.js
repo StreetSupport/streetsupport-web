@@ -152,7 +152,7 @@ const buildLocationResult = (userLocationState) => {
   return {
     'id': 'my-location',
     'findHelpId': 'my-location',
-    'name': 'my selected postocde',
+    'name': 'my selected postcode',
     'longitude': userLocationState.longitude,
     'latitude': userLocationState.latitude,
     'isPublic': true,
@@ -175,6 +175,7 @@ const getPreviouslySetPostcode = () => {
 }
 
 const setPostcode = (postcode, onSuccessCallback, onErrorCallback) => {
+  console.log(`setting postcode ${postcode}`)
   postcodes.getCoords(postcode, (coordsResult) => {
     storage.set(storage.keys.userLocationState, coordsResult)
     onSuccessCallback(buildLocationResult(coordsResult))
