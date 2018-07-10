@@ -36,6 +36,7 @@ module.exports = {
     organisation: path.join(__dirname, '/src/js/page-organisation'),
     allserviceproviders: path.join(__dirname, '/src/js/page-all-service-providers'),
     "all-organisations-v2": path.join(__dirname, '/src/js/pages/all-organisations/app'),
+    "all-organisations-v2-map": path.join(__dirname, '/src/js/pages/all-organisations/map/app'),
     giverequests: path.join(__dirname, '/src/js/pages/give-help/needs/app'),
     requestDetails: path.join(__dirname, '/src/js/pages/give-help/needs/request/app'),
     sponsor: path.join(__dirname, '/src/js/page-sponsor'),
