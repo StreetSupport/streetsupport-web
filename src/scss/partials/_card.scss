@@ -57,6 +57,12 @@ $spacing: 20px;
 
 .card--brand-h {
   box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);
+
+  @include mq($from: m) {
+    @include span(1 of 4);
+    &:nth-of-type(4n) { @include last() }
+  }
+
   .card__title {
     border-top-right-radius: $radius;
     border-top-left-radius: $radius;
