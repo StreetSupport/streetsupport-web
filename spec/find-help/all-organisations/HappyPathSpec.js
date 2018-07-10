@@ -80,10 +80,6 @@ describe('all organisations', () => {
     expect(sut.orgsToDisplay().length).toEqual(8)
     expect(sut.orgsToDisplay()[0].key).toEqual('streets-ahead')
   })
-  
-  it('- should hide prev page button', () => {
-    expect(sut.hasPrevPages()).toBeFalsy()
-  })
 
   it('- should group results by service provider', () => {
     const org = sut.organisations()
@@ -132,7 +128,7 @@ describe('all organisations', () => {
     })
 
     it('- should display next eight orgs', () => {
-      expect(sut.orgsToDisplay()[0].key).toEqual('nacro-housing-services')
+      expect(sut.orgsToDisplay()[sut.pageSize].key).toEqual('nacro-housing-services')
     })
   
     it('- should show prev page button', () => {

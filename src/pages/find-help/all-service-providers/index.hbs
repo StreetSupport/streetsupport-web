@@ -97,14 +97,9 @@ page: allorganisations
           </article>
         </a>
       </div>
-      <!-- ko if: hasPrevPages -->
-      <button class="btn btn--brand-e" data-bind="click: prevPage">
-        <span class="btn__text">Prev page</span>
-      </button>
-      <!-- /ko -->
       <!-- ko if: hasMorePages -->
-      <button class="btn btn--brand-e" data-bind="click: nextPage">
-        <span class="btn__text">Next page</span>
+      <button class="btn btn--brand-e" data-bind="click: loadMore">
+        <span class="btn__text">Load more</span>
       </button>
       <!-- /ko -->
       <!-- /ko -->

@@ -10,8 +10,8 @@ const getDistanceApart = require('../../location/getDistanceApart')
 function OrgListing () {
   const self = this
 
-  self.pageIndex = ko.observable(0)
   self.pageSize = 8
+  self.pageIndex = ko.observable(self.pageSize)
 
   self.postcode = ko.observable()
   self.range = ko.observable(10000)
@@ -36,7 +36,7 @@ function OrgListing () {
   self.isSortedNearest = ko.computed(() => self.currentSort() === 'nearest', self)
 
   const paginate = function () {
-    self.orgsToDisplay(self.organisations.slice(self.pageIndex(), self.pageIndex() + self.pageSize))
+    self.orgsToDisplay(self.organisations.slice(0, self.pageIndex()))
   }
 
   self.prevPage = function () {
@@ -51,7 +51,7 @@ function OrgListing () {
 
   self.loadMore = function () {
     self.pageIndex(self.pageIndex() + self.pageSize)
-    self.orgsToDisplay(self.organisations.slice(0, self.pageIndex()))
+    paginate()
   }
 
   const sortAlphabetical = function (a, b) {
