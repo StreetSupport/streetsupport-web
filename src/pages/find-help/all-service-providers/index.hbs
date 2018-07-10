@@ -2,9 +2,9 @@
 title: All Service Providers - Street Support
 description: Street support makes it easier to help homeless people. Find help relevant to your needs.
 image: https://streetsupport.net/assets/img/og/street-support.png
-layout: withGoogle.hbs
+layout: default.hbs
 permalink: false
-jsBundle: allserviceproviders
+jsBundle: all-organisations-v2
 section: findhelp
 page: allorganisations
 ---
@@ -21,8 +21,8 @@ page: allorganisations
 
 <div class="block block--subpage-header">
   <div class="container">
-    <h1 class="h1 block__header">Full Listing</h1>
-    <p class="h2 block__sub-header">Charities, voluntary groups and government services.</p>
+      <h1 class="h1 block__header">Organisations</h1>
+      <p>Charities, voluntary groups and government services.</p>
   </div>
 </div>
 
@@ -31,38 +31,88 @@ page: allorganisations
 <div class="block">
   <div class="container">
     <div class="block__content">
-      <div id="js-category-result-output" class="template"></div>
-      {{> social-share}}
+      <form class="form">
+        <fieldset class="form__fieldset">
+          <legend class="hide-screen">Search for organisations:</legend>
+          <ol class="form__field-list">
+            <li class="form__field-item">
+              <label class="form__label" for="search">Search for organisation by name:</label>
+              <input class="form__input" id="search" type="text" data-bind="textInput: searchQuery"></input>
+            </li>
+          </ol>
+          <button class="btn btn--cosy btn--brand-e" type="submit" data-bind="click: search">
+            <span class="btn__text">Search</span>
+          </button>
+        </fieldset>
+      </form>
+      <form class="form form--highlighted form--proximity-search">
+        <p>To find help in your area, enter your postcode below.</p>
+        <fieldset class="form__fieldset">
+          <legend>Showing organisations within:</legend>
+          <ol class="form__field-list">
+            <li class="form__field-item form__field-item--proximity-search-range">
+              <label class="form__label hide-screen" for="range">Range</label>
+              <select class="form__input" data-bind="
+                  options: ranges,
+                  optionsText: 'name',
+                  optionsValue: 'key',
+                  optionsCaption: '-- select --',
+                  value: range">
+              </select>
+            </li>
+            <li class="form__field-item form__field-item--proximity-search-of"><span>of</span></li>
+            <li class="form__field-item form__field-item--proximity-search-postcode">
+              <label class="form__label hide-screen" for="postcode">Your postcode</label>
+              <input class="form__input" id="postcode" type="text" data-bind="textInput: postcode" placeholder="eg. M1 2HX"></input>
+            </li>
+          </ol>
+          <button class="btn btn--cosy btn--full btn--brand-e" type="submit" data-bind="click: getByPostcode">
+            <span class="btn__text">Find help</span>
+          </button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="block block--cards">
+  <div class="container">
+    <div class="block__content">
+      <!-- ko if: hasOrgs -->
+      <div class="card-sort">
+        <span class="card-sort__title">Sort by:</span>
+        <a class="card-sort__item" href="#a-z" data-bind="click: sortAToZ, css: { 'card-sort__item--selected': isSortedAToZ() }">A-Z</a> 
+        <a class="card-sort__item" href="#nearest" data-bind="click: sortNearest, css: { 'card-sort__item--selected': isSortedNearest() }">Nearest</a>
+      </div>
+      <div data-bind="foreach: orgsToDisplay">
+        <a data-bind="attr: { href: href } ">
+          <article class="card card--brand-h">
+            <div class="card__title">
+              <h1 class="h2" data-bind="text: name"></h1>
+            </div>
+            <div class="card__details">
+              <p class="card__details__description" data-bind="text: distanceDescription"></p>
+              <a class="card__details__link" data-bind="attr: { href: href } ">More Information</a>
+            </div>
+          </article>
+        </a>
+      </div>
+      <!-- ko if: hasPrevPages -->
+      <button class="btn btn--brand-e" data-bind="click: prevPage">
+        <span class="btn__text">Prev page</span>
+      </button>
+      <!-- /ko -->
+      <!-- ko if: hasMorePages -->
+      <button class="btn btn--brand-e" data-bind="click: nextPage">
+        <span class="btn__text">Next page</span>
+      </button>
+      <!-- /ko -->
+      <!-- /ko -->
+      <!-- ko ifnot: hasOrgs -->
+      <p>Sorry, there are no organisations listed near your postcode, please try again.</p>
+      <!-- /ko -->
     </div>
   </div>
 </div>
 
 <div id="spin"></div>
-<script id="js-category-no-result-tpl" type="text/template">
-  <div class="result-list">
-    <p>Sorry,there are no organisations for \{{location}} currently registered. If you would like to add an organisation, please use our <a href="/register">registration form.</a></p>
-  </div>
-</script>
-
-<script id="js-category-result-tpl" type="text/template">
-  <div class="location-selector">
-    <p>Showing all organisations in \{{location}}.</p>
-  </div>
-
-  <div class="js-map services-map"></div>
-
-  <div class="result-list">
-    \{{#organisations}}
-        <ul class="result-list__list">
-          <li class="result-list__item">
-            <h2 class="h2 result-list__header"><a href="/find-help/organisation/?organisation=\{{key}}">\{{{name}}}</a></h2>
-            <h3 class="h3">\{{{shortDescription}}}</h3>
-            <p>\{{{description}}}</p>
-            <a class="btn btn--brand-d result-list__btn" href="/find-help/organisation/?organisation=\{{key}}">
-              <span class="btn__text">More information about \{{{name}}}</span>
-            </a>
-          </li>
-        </ul>
-    \{{/organisations}}
-  </div>
-</script>

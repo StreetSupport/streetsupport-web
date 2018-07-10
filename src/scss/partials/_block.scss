@@ -191,6 +191,10 @@
     background: black;
     padding: 15px 0 10px 0!important;
   }
+
+  &--cards {
+    background: $brand-q;
+  }
 }
 
 .block--header {

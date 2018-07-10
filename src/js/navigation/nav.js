@@ -11,7 +11,7 @@ const activeClass = 'is-active'
 const el = document.querySelectorAll('.js-nav-container, .js-nav-push, .js-nav-overlay, html, body')
 
 const hideForCity = (cityId) => {
-  if(cityId) { 
+  if (cityId) {
     var citySpecificElements = document.querySelectorAll('[data-city]')
     for (let i = 0; i < citySpecificElements.length; i++) {
       let citiesRequired = citySpecificElements[i].getAttribute('data-city')

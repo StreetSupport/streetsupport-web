@@ -33,6 +33,7 @@
 @import "partials/big-change-splash";
 @import "partials/block-ssn"; // Specific SSN block variants
 @import 'partials/card';
+@import 'partials/card-sort';
 @import 'partials/form';
 @import 'partials/filter';
 @import 'partials/lists';
@@ -74,6 +75,7 @@
 @import 'partials/listing-with-map';
 @import 'partials/jobs';
 @import 'partials/news';
+@import 'partials/paginated';
 
 // Utilities
 @import 'partials/utilities';

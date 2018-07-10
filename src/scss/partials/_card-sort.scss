@@ -1,0 +1,16 @@
+.card-sort {
+  @include cf();
+  margin: 30px 0px 20px;
+}
+
+.card-sort__title {
+  margin-right: 15px;
+}
+
+.card-sort__item {
+  margin-right: 15px;
+  text-decoration: underline!important;
+  &--selected {
+    text-decoration: none!important;
+  }
+}
