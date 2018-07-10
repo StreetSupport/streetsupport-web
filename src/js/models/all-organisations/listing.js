@@ -26,8 +26,10 @@ function OrgListing () {
   self.distanceDescription = ko.observable()
   self.organisations = ko.observableArray()
   self.orgsToDisplay = ko.observableArray()
-  
+
   self.currentSort = ko.observable()
+
+  self.postcodeRetrievalIssue = ko.observable(false)
 
   self.hasOrgs = ko.computed(() => self.organisations().length > 0, self)
   self.hasPrevPages = ko.computed(() => self.pageIndex() > 0, self)
@@ -87,11 +89,16 @@ function OrgListing () {
     location.setPostcode(
       self.postcode(),
       (newLocation) => {
-        loadOrgsForLocation(newLocation)
+        if (newLocation !== undefined) {
+          self.postcodeRetrievalIssue(false)
+          loadOrgsForLocation(newLocation)
+        } else {
+          self.postcodeRetrievalIssue(true)
+        }
       },
       (error) => {
-        console.log(error)
-        browser.redirect('/500')
+        console.log({error})
+        self.postcodeRetrievalIssue(true)
       })
   }
 

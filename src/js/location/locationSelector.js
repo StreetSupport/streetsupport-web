@@ -175,7 +175,6 @@ const getPreviouslySetPostcode = () => {
 }
 
 const setPostcode = (postcode, onSuccessCallback, onErrorCallback) => {
-  console.log(`setting postcode ${postcode}`)
   postcodes.getCoords(postcode, (coordsResult) => {
     storage.set(storage.keys.userLocationState, coordsResult)
     onSuccessCallback(buildLocationResult(coordsResult))
