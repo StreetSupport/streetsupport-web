@@ -4,47 +4,9 @@
       <header class="multi-form-header">
         <h1 class="h1">Organisations</h1>
         <p>Charities, voluntary groups and government services.</p>
-        <form class="form form--text-search">
-          <fieldset class="form__fieldset">
-            <legend class="hide-screen">Search for organisations:</legend>
-            <ol class="form__field-list">
-              <li class="form__field-item">
-                <label class="form__label" for="search">Search for organisation by name:</label>
-                <input class="form__input" id="search" type="text" data-bind="textInput: searchQuery"></input>
-              </li>
-            </ol>
-            <button class="btn btn--cosy btn--brand-e" type="submit" data-bind="click: search">
-              <span class="btn__text">Search</span>
-            </button>
-          </fieldset>
-        </form>
+        {{> all-organisations/search }}
       </header>
-      <form class="form form--highlighted form--proximity-search">
-        <p>To find help in your area, enter your postcode below.</p>
-        <fieldset class="form__fieldset">
-          <legend>Showing organisations within:</legend>
-          <ol class="form__field-list">
-            <li class="form__field-item form__field-item--proximity-search-range">
-              <label class="form__label hide-screen" for="range">Range</label>
-              <select class="form__input" data-bind="
-                  options: ranges,
-                  optionsText: 'name',
-                  optionsValue: 'key',
-                  optionsCaption: '-- select --',
-                  value: range">
-              </select>
-            </li>
-            <li class="form__field-item form__field-item--proximity-search-of"><span>of</span></li>
-            <li class="form__field-item form__field-item--proximity-search-postcode">
-              <label class="form__label hide-screen" for="postcode">Your postcode</label>
-              <input class="form__input" id="postcode" type="text" data-bind="textInput: postcode" placeholder="eg. M1 2HX"></input>
-            </li>
-          </ol>
-          <button class="btn btn--cosy btn--full btn--brand-e" type="submit" data-bind="click: getByPostcode">
-            <span class="btn__text">Find help</span>
-          </button>
-        </fieldset>
-      </form>
+      {{> all-organisations/proximity }}
     </div>
   </div>
 </div>

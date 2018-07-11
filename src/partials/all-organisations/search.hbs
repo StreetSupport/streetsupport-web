@@ -1,0 +1,14 @@
+<form class="form form--text-search">
+  <fieldset class="form__fieldset">
+    <legend class="hide-screen">Search for organisations:</legend>
+    <ol class="form__field-list">
+      <li class="form__field-item">
+        <label class="form__label" for="search">Search for organisation by name:</label>
+        <input class="form__input" id="search" type="text" data-bind="textInput: searchQuery"></input>
+      </li>
+    </ol>
+    <button class="btn btn--cosy btn--brand-e" type="submit" data-bind="click: search">
+      <span class="btn__text">Search</span>
+    </button>
+  </fieldset>
+</form>

@@ -26,7 +26,7 @@ page: allorganisations
 
 {{> no-js}}
 
-{{> all-organisations/header-form }}
+{{> all-organisations/header-form showSearch="true" }}
 {{> all-organisations/view-tabs listSelected="true" }}
 
 <div class="block block--cards">
@@ -34,11 +34,7 @@ page: allorganisations
     <div class="block__content">
       <!-- ko if: hasOrgs -->
       <!-- ko ifnot: postcodeRetrievalIssue -->
-      <div class="card-sort">
-        <span class="card-sort__title">Sort by:</span>
-        <a class="card-sort__item" href="#a-z" data-bind="click: sortAToZ, css: { 'card-sort__item--selected': isSortedAToZ() }">A-Z</a> 
-        <a class="card-sort__item" href="#nearest" data-bind="click: sortNearest, css: { 'card-sort__item--selected': isSortedNearest() }">Nearest</a>
-      </div>
+      {{> all-organisations/sort }}
       <div data-bind="foreach: orgsToDisplay">
         <a data-bind="attr: { href: href } ">
           <article class="card card--brand-h">

@@ -4,7 +4,7 @@ description: Street support makes it easier to help homeless people. Donate via 
 image: https://streetsupport.net/assets/img/og/street-support.png
 layout: default.hbs
 permalink: false
-jsBundle: donate
+jsBundle: donate-v2
 section: givehelp
 page: donate
 ---
@@ -19,72 +19,63 @@ page: donate
   </div>
 </div>
 
-{{>no-js}}
-
-<div class="block block--subpage-header">
-  <div class="container">
-    <h1 class="h1 block__header has-icon--left">
-      <svg class="block__header__icon block__header__icon--big-change"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#big-change--small"></use></svg>
-      Donate
-    </h1>
-    <h2 class="h2 block__sub-header">Donate to support local people who are homeless</h2>
+  <div class="block block--subpage-header">
+    <div class="container">
   </div>
 </div>
+
+{{> no-js}}
 
 <div class="block">
   <div class="container">
-    <div class="block__content donation">
-      <div id="js-result-output" class="template"></div>
-      {{>loading-spinner}}
+    <div class="block__content">
+      <header class="multi-form-header">
+        <h1 class="h1">Make a Monetary Donation</h1>
+        <h2 class="h2">Donate to support local people experiencing homelessness</h2>
+        <p>The following organisations near you rely on your donations to continue their work helping people build new lives in a place they can call home.</p>
+      </header>
+      {{> all-organisations/proximity }}
     </div>
   </div>
 </div>
 
-<script id="js-result-tpl" type="text/template">
-
-  \{{#ismanchester}}
-    {{> manchester/big-change-promo }}
-  \{{/ismanchester}}
-
-  <div class="block__section">
-    <p>The following organisations rely on donations to continue their work, so they can help people build new lives off the streets.</p>
-    <div class="donation__container">
-      \{{#organisations}}
-      <article class="donation__item">
-        <header class="donation__header">
-          <h1 class="h3 donation__heading">\{{providerName}}</h1>
-        </header>
-        <div class="donation__item-inner">
-          <p>\{{description}}</p>
-          <a href="\{{url}}" class="donation__btn btn btn--brand-d" target="_blank" rel="noopener noreferrer">
-            <span class="btn__text">Donate</span>
-          </a>
-          <p class="text-center">
-            <a href="/find-help/organisation/?organisation=\{{providerId}}">Learn more about \{{providerName}}</a>
-          </p>
-        </div>
-      </article>
-      \{{/organisations}}
+<div class="block block--cards">
+  <div class="container">
+    <div class="block__content">
+      <!-- ko if: hasOrgs -->
+      <!-- ko ifnot: postcodeRetrievalIssue -->
+      {{> all-organisations/sort }}
+      <div data-bind="foreach: orgsToDisplay">
+        <article class="card card--tall card--brand-h">
+          <div class="card__title">
+            <h1 class="h2" data-bind="text: name"></h1>
+            <p data-bind="html: donationDescription"></p>
+          </div>
+          <div class="card__details">
+            <p class="card__details__description" data-bind="text: distanceDescription"></p>
+            <a class="btn btn--brand-e" data-bind="attr: { href: donationUrl } ">
+              <span class="btn__text">Donate</span>
+            </a>
+          </div>
+        </article>
+      </div>
+      <div class="card-pagination">
+      <!-- ko if: hasMorePages -->
+      <button class="btn btn--brand-e" data-bind="click: loadMore">
+        <span class="btn__text">Load more</span>
+      </button>
+      <!-- /ko -->
+      </div>
+      <!-- /ko -->
+      <!-- /ko -->
+      <!-- ko ifnot: hasOrgs -->
+      <p>Sorry, there are no organisations listed near your postcode, please try again.</p>
+      <!-- /ko -->
+      <!-- ko if: postcodeRetrievalIssue -->
+      <p>Sorry, there was a problem with your postcode, please try an alternative postcode nearby.</p>
+      <!-- /ko -->
     </div>
   </div>
-</script>
+</div>
 
-
-<script id="js-no-result-tpl" type="text/template">
-  \{{#ismanchester}}
-    {{> manchester/big-change-promo }}
-  \{{/ismanchester}}
-
-  \{{#iselsewhere}}
-  <div class="block__section">
-    <p>To see how you can donate to your local organisations, please select a supported location:</p>
-    
-    <div class="donate-location__container">
-      <select class="form__input donate-location__dropdown js-donate-location-dropdown">
-    </select>
-    </div>
-
-    <p>If you know of an organisation that is not listed, or would like to bring Street Support to your area, <a href="/contact/">please get in touch to let us know</a>.</p>
-  </div>
-  \{{/iselsewhere}}
-</script>
+<div id="spin"></div>
