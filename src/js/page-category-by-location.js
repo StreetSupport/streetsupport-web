@@ -8,6 +8,7 @@ const htmlEncode = require('htmlencode')
 const marked = require('marked')
 marked.setOptions({sanitize: true})
 
+const categories = require('../data/generated/service-categories')
 const getApiData = require('./get-api-data')
 const querystring = require('./get-url-parameter')
 const templating = require('./template-render')
@@ -142,9 +143,24 @@ const init = () => {
   locationSelector
     .getPreviouslySetPostcode()
     .then((locationResult) => {
-      findHelp = new FindHelp(locationResult.findHelpId)
-      findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
-      buildList(locationResult)
+      if (locationResult) {
+        findHelp = new FindHelp(locationResult.findHelpId)
+        findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
+        buildList(locationResult)
+      } else {
+        findHelp = new FindHelp('elsewhere')
+        const re = new RegExp(/find-help\/(.*)\//)
+        const categoryId = browser.location().pathname.match(re)[1].split('/')[0]
+        const category = categories.categories.find((c) => c.key === categoryId)
+
+        const viewModel = {
+          categoryId: category.key,
+          categoryName: category.name,
+          categorySynopsis: marked(category.synopsis),
+          geoLocationUnavailable: false
+        }
+        templating.renderTemplate('js-category-no-results-result-tpl', viewModel, 'js-category-result-output', defaultOnRenderCallback)
+      }
     }, (_) => {
     })
 }
