@@ -136,8 +136,11 @@ const init = () => {
         buildList(buildUrl(result), result)
       } else {
         findHelp = new FindHelp('elsewhere')
-        const category = categories.categories.find((c) => c.key === findHelp.theCategory)
-        console.log(category, findHelp.theCategory)
+        const re = new RegExp(/find-help\/(.*)\//)
+        const categoryId = browser.location().pathname.match(re)[1].split('/')[0]
+        const category = categories.categories.find((c) => c.key === categoryId)
+
+        console.log(categoryId, cae)
 
         const viewModel = {
           categoryId: category.key,
