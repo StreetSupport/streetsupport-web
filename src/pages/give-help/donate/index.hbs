@@ -33,6 +33,9 @@ page: donate
         <h1 class="h1">Make a Monetary Donation</h1>
         <h2 class="h2">Donate to support local people experiencing homelessness</h2>
         <p>The following organisations near you rely on your donations to continue their work helping people build new lives in a place they can call home.</p>
+        <!-- ko ifnot: postcode -->
+        <p>Please enter a postcode to find organisations near you.</p>
+        <!-- /ko -->
       </header>
       {{> all-organisations/proximity }}
     </div>
@@ -69,7 +72,12 @@ page: donate
       <!-- /ko -->
       <!-- /ko -->
       <!-- ko ifnot: hasOrgs -->
+      <!-- ko if: postcode -->
       <p>Sorry, there are no organisations listed near your postcode, please try again.</p>
+      <!-- /ko -->
+      <!-- ko ifnot: postcode -->
+      <p>Please enter your postcode to find organisations near you.</p>
+      <!-- /ko -->
       <p>If you know of local organisations that could be included, please use our <a href="/register">registration form</a>.</p>
       <!-- /ko -->
       <!-- ko if: postcodeRetrievalIssue -->

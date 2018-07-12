@@ -58,7 +58,9 @@ page: allorganisations
       <!-- /ko -->
       <!-- /ko -->
       <!-- ko ifnot: hasOrgs -->
+      <!-- ko if: postcode -->
       <p>Sorry, there are no organisations listed near your postcode, please try again.</p>
+      <!-- /ko -->
       <p>If you know of local organisations that could be included, please use our <a href="/register">registration form</a>.</p>
       <!-- /ko -->
       <!-- ko if: postcodeRetrievalIssue -->
