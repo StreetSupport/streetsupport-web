@@ -26,11 +26,8 @@ page: findhelp
 
   <div class="block block--city-header city-header">
     <div class="container container--city-header">
-      <h1 class="h1 block__header">Find Help <span class="js-city-label"></span></h1>
+      <h1 class="h1 block__header">Find Help</h1>
       <h2 class="h2 block__sub-header">Find local services to meet specific needs</h2>
-      \{{#location}}
-      {{> swep-notification }}
-      \{{/location}}
     </div>
   </div>
 
@@ -39,7 +36,7 @@ page: findhelp
       <div class="block__content">
         <div class="title-with-button">
           <h2 class="h2 title-with-button__title">Recently homeless?</h2>
-          <a class="btn btn--brand-g title-with-button__btn" href="\{{ emergencyHelpUrl }}">
+          <a class="btn btn--brand-g title-with-button__btn" href="/find-help/emergency-help">
             <span class="btn__text">Get Emergency Advice</span>
           </a>
         </div>
@@ -47,7 +44,7 @@ page: findhelp
         <div class="block__cta--grid result-grid">
           \{{#categories}}
             <span class="cta">
-              <a class="btn btn--brand-d" id="\{{key}}" href="\{{page}}?location=my-location">
+              <a class="btn btn--brand-d" id="\{{key}}" href="\{{page}}">
                 <span class="btn__icon">
                   <svg class="svg-\{{key}}-dims"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#\{{key}}"></use></svg>
                   <span class="btn__overlay"></span>
