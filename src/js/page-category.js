@@ -13,6 +13,7 @@ const analytics = require('./analytics')
 const browser = require('./browser')
 const listToDropdown = require('./list-to-dropdown')
 const locationSelector = require('./location/locationSelector')
+const categories = require('../data/generated/service-categories')
 
 import { buildFindHelpUrl, getProvidersForListing, getSubCategories } from './pages/find-help/provider-listing/helpers'
 
@@ -110,7 +111,6 @@ const defaultOnRenderListingCallback = () => {
   findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
   browser.initPrint()
   browser.loaded()
-  .init()
   analytics.init(document.title)
 }
 
@@ -162,10 +162,30 @@ function renderListing (url, locationResult) {
 }
 
 const init = (locationResult) => {
-  findHelp = new FindHelp(locationResult.findHelpId)
-  findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
+  console.log(locationResult)
+  if (locationResult) {
+    findHelp = new FindHelp(locationResult.findHelpId)
+    findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
 
-  renderListing(buildFindHelpUrl(locationResult), locationResult)
+    renderListing(buildFindHelpUrl(locationResult), locationResult)
+  } else {
+    console.log('fresh visit')
+    const re = new RegExp(/find-help\/(.*)\//)
+    const categoryId = browser.location().pathname.match(re)[1]
+    const category = categories.categories.find((c) => c.key === categoryId)
+
+    console.log(categoryId, category)
+
+    const viewModel = {
+      categoryId: category.key,
+      categoryName: category.name,
+      categorySynopsis: marked(category.synopsis),
+      geoLocationUnavailable: false
+    }
+    console.log(viewModel)
+    findHelp = new FindHelp('elsewhere')
+    templating.renderTemplate('js-category-no-results-result-tpl', viewModel, 'js-category-result-output', defaultOnRenderListingCallback)
+  }
 }
 
 browser.loading()

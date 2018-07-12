@@ -61,22 +61,14 @@ const _useSaved = (deferred) => {
   } else if (saved !== undefined && saved.length > 0 && saved !== myLocationId) {
     deferred.resolve(supportedCities.get(saved))
   } else {
-    alert('uh oh')
+    console.log('not previously saved, resolving')
+    deferred.resolve(null)
   }
 }
 
 const _determineLocationRetrievalMethod = () => {
   let method = _useSaved
   let id = ''
-
-  const locationInPath = browser.location().pathname.split('/')[1]
-  const cities = supportedCities.locations.map((l) => l.id)
-  if (locationInPath !== 'undefined' && locationInPath.length > 0 && cities.indexOf(locationInPath) > -1) {
-    method = _useRequested
-    id = locationInPath
-
-    setCurrent(id)
-  }
 
   return {
     method: method,
