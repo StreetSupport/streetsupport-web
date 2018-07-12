@@ -162,19 +162,15 @@ function renderListing (url, locationResult) {
 }
 
 const init = (locationResult) => {
-  console.log(locationResult)
   if (locationResult) {
     findHelp = new FindHelp(locationResult.findHelpId)
     findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
 
     renderListing(buildFindHelpUrl(locationResult), locationResult)
   } else {
-    console.log('fresh visit')
     const re = new RegExp(/find-help\/(.*)\//)
     const categoryId = browser.location().pathname.match(re)[1]
     const category = categories.categories.find((c) => c.key === categoryId)
-
-    console.log(categoryId, category)
 
     const viewModel = {
       categoryId: category.key,
@@ -182,7 +178,6 @@ const init = (locationResult) => {
       categorySynopsis: marked(category.synopsis),
       geoLocationUnavailable: false
     }
-    console.log(viewModel)
     findHelp = new FindHelp('elsewhere')
     templating.renderTemplate('js-category-no-results-result-tpl', viewModel, 'js-category-result-output', defaultOnRenderListingCallback)
   }
