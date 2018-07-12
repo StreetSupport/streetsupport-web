@@ -1,6 +1,5 @@
 const Q = require('q')
 const deviceGeo = require('./get-location')
-const querystring = require('../get-url-parameter')
 const supportedCities = require('./supportedCities')
 const browser = require('../browser')
 const cookies = require('../cookies')
@@ -86,10 +85,11 @@ const _determineLocationRetrievalMethod = () => {
 }
 
 const getSelectedLocationId = () => {
-  const saved = cookies.get(cookies.keys.location) || 'elsewhere'
-  if (cookies.get(cookies.keys.location) !== undefined && saved.length > 0) {
+  const saved = cookies.get(cookies.keys.location)
+  if (saved !== undefined && saved.length > 0) {
     return supportedCities.get(saved).id
   }
+  return 'elsewhere'
 }
 
 const getCurrent = () => {
