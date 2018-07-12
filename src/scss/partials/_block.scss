@@ -198,22 +198,11 @@
   }
 }
 
-.block--header {
-  background-image: url('../img/header-background.png');
-  background-repeat: repeat;
-  color: #fff;
-  padding-top: 160px;
-  padding-bottom: 50px;
-
-  @include mq($from: m) {
-    padding-top: 280px;
-    padding-bottom: 80px;
-  }
-}
-
+.block--home-header,
 .block--city-header {
   background-image: url('../img/header-background.png');
-  background-repeat: repeat;
+  background-repeat: repeat-x;
+  background-position: bottom;
   color: #fff;
   padding-top: 100px;
   padding-bottom: 50px;
@@ -222,6 +211,37 @@
     padding-top: 280px;
     padding-bottom: 80px;
   }
+}
+
+.block--home-header {
+  padding-top: 140px;
+  .block__header,
+  .block__sub-header {
+    margin-bottom: 30px;
+    color: $brand-m;
+    text-align: left!important;
+  }
+
+  .ctas {
+    @include mq($until: m) {
+      .btn { width: 100%; }
+    }
+    @include mq($from: m) {
+      .btn__text {
+        padding: 15px 60px;
+      }
+      .btn:first-of-type { margin-right: 20px; }
+    }
+  }
+
+  @include mq($from: m) {
+    padding-top: 220px;
+    padding-bottom: 30px;
+
+    .container { padding-right: 33% }
+
+  }
+
 }
 
 // Components
@@ -424,5 +444,29 @@
     border-top: 1px solid $brand-k;
     border-right: 1px solid $brand-k;
     border-left: 1px solid $brand-k;
+  }
+}
+
+.home__copy {
+  @include mq($from: m) {
+    @include span(1 of 2);
+    .location-selector {
+      text-align: left;
+    }
+  }
+}
+
+.home__hub-map {
+  border: 1px solid $brand-k;
+  margin: 20px 0;
+  @include mq($from: m) {
+    margin: 0;
+    @include span(1 of 2);
+    @include last();
+  }
+
+  .js-map {
+    height: 500px;
+    width: 100%;
   }
 }
