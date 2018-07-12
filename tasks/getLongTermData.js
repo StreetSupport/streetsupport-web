@@ -33,6 +33,7 @@ gulp.task('main-categories', (callback) => {
     .map(function (c) {
       return {
         key: c.key,
+        synopsis: c.synopsis,
         sortOrder: c.sortOrder,
         name: c.name
       }
@@ -62,24 +63,6 @@ gulp.task('accom-categories', (callback) => {
       return 0
     })
   return newFile('accom-categories.js', `export const categories = ${JSON.stringify(cats)}`)
-    .pipe(gulp.dest(`${config.paths.generatedData}`))
-})
-
-gulp.task('main-categories', (callback) => {
-  const cats = JSON.parse(fs.readFileSync(`${config.paths.generatedData}full-categories.js`))
-    .map(function (c) {
-      return {
-        key: c.key,
-        sortOrder: c.sortOrder,
-        name: c.name
-      }
-    })
-    .sort((a, b) => {
-      if (a.sortOrder > b.sortOrder) return -1
-      if (a.sortOrder < b.sortOrder) return 1
-      return 0
-    })
-  return newFile('service-categories.js', `export const categories = ${JSON.stringify(cats)}`)
     .pipe(gulp.dest(`${config.paths.generatedData}`))
 })
 
