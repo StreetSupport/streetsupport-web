@@ -1,7 +1,6 @@
 const Q = require('q')
 const deviceGeo = require('./get-location')
 const supportedCities = require('./supportedCities')
-const browser = require('../browser')
 const cookies = require('../cookies')
 
 import * as postcodes from './postcodes'
