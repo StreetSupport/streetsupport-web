@@ -22,18 +22,14 @@ page: categorybyday
       <ol class="breadcrumbs__list">
         <li class="breadcrumbs__item"><a href="/">Home</a></li>
         <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
-        \{{#organisations}}
-        <li class="breadcrumbs__item">\{{{categoryName}}}</li>
-        \{{/organisations}}
+        <li class="breadcrumbs__item">\{{categoryName}}</li>
       </ol>
     </div>
   </div>
 
   <div class="block block--subpage-header">
     <div class="container">
-      \{{#organisations}}
       <h2 class="h1 block__header">\{{categoryName}}</h2>
-      \{{/organisations}}
     </div>
   </div>
 
@@ -42,8 +38,8 @@ page: categorybyday
       <div class="block__content">
         <div class="result-detail">
           <div class="text-center">\{{{categorySynopsis}}}</div>
-          \{{#organisations}}{{> location-description-with-postcode }}\{{/organisations}} {{> no-services geoLocationUnavailable="geoLocationUnavailable"
-          }}
+          {{> location-description-with-postcode }}
+          {{> no-services geoLocationUnavailable="geoLocationUnavailable" }}
         </div>
       </div>
     </div>
