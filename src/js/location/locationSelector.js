@@ -55,15 +55,6 @@ const _useMyLocation = (deferred) => {
     })
 }
 
-const _useRequested = (deferred, locationInQueryString) => {
-  const requestedCity = supportedCities.get(locationInQueryString)
-  if (requestedCity !== undefined) {
-    deferred.resolve(requestedCity)
-  } else {
-    alert('uh oh')
-  }
-}
-
 const _useSaved = (deferred) => {
   const saved = cookies.get(cookies.keys.location)
   if (saved === 'elsewhere' && deviceGeo.isAvailable()) {
@@ -79,21 +70,13 @@ const _determineLocationRetrievalMethod = () => {
   let method = _useSaved
   let id = ''
 
-  const locationInQueryString = querystring.parameter('location')
-  if (locationInQueryString === myLocationId && deviceGeo.isAvailable()) {
-    method = _useMyLocation
-  } else if (locationInQueryString !== 'undefined' && locationInQueryString.length > 0 && locationInQueryString !== myLocationId) {
+  const locationInPath = browser.location().pathname.split('/')[1]
+  const cities = supportedCities.locations.map((l) => l.id)
+  if (locationInPath !== 'undefined' && locationInPath.length > 0 && cities.indexOf(locationInPath) > -1) {
     method = _useRequested
-    id = locationInQueryString
-  } else {
-    const locationInPath = browser.location().pathname.split('/')[1]
-    const cities = supportedCities.locations.map((l) => l.id)
-    if (locationInPath !== 'undefined' && locationInPath.length > 0 && cities.indexOf(locationInPath) > -1) {
-      method = _useRequested
-      id = locationInPath
+    id = locationInPath
 
-      setCurrent(id)
-    }
+    setCurrent(id)
   }
 
   return {
