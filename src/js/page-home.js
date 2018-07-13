@@ -18,6 +18,7 @@ const buildMap = () => {
 window.initMap = () => { }
 
 const redirectToHubPage = function(locationId) {
+  location.setCurrent(locationId)
   browser.redirect(`/${locationId}`)
 }
 
