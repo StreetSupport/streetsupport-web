@@ -30,6 +30,7 @@ const displayMap = function (hubs) {
         const marker = new google.maps.Marker({
           position: { lat: l.latitude, lng: l.longitude },
           map: map,
+          id: l.id,
           title: l.name,
           animation: google.maps.Animation.DROP,
           icon: {
@@ -39,8 +40,8 @@ const displayMap = function (hubs) {
           }
         })
 
-        marker.addListener('click', (...args) => {
-          redirectToHubPage(args[0].Ha.target.title.toLowerCase())
+        google.maps.event.addListener(marker, 'click', function() {
+          redirectToHubPage(this.id)
         })
       })
   }, 1000)
