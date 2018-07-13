@@ -127,7 +127,6 @@ const init = () => {
   locationSelector
     .getPreviouslySetPostcode()
     .then((result) => {
-      console.log(result)
       if (result) {
         findHelp = new FindHelp(result.findHelpId)
         initAccordionHistoryBackHandler('day', accordion)
@@ -136,11 +135,8 @@ const init = () => {
         buildList(buildUrl(result), result)
       } else {
         findHelp = new FindHelp('elsewhere')
-        const re = new RegExp(/find-help\/(.*)\//)
-        const categoryId = browser.location().pathname.match(re)[1].split('/')[0]
+        const categoryId = findHelp.theCategory
         const category = categories.categories.find((c) => c.key === categoryId)
-
-        console.log(categoryId, cae)
 
         const viewModel = {
           categoryId: category.key,

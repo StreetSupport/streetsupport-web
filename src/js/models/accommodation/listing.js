@@ -116,19 +116,18 @@ const AccommodationListing = function () {
 
   self.init = (currentLocation) => {
     self.items([])
-    const endpoint = `${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}${getQuerystring()}`
-    self.locationName(currentLocation.postcode)
-    self.loadItems(endpoint)
+    if (currentLocation) {
+      const endpoint = `${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}${getQuerystring()}`
+      self.locationName(currentLocation.postcode)
+      self.loadItems(endpoint)
+    } else {
+      self.dataIsLoaded(true)
+    }
   }
 
   locationSelector
     .getPreviouslySetPostcode()
     .then((result) => {
-      storage.set(storage.keys.userLocationState, {
-        'postcode': result.postcode,
-        'longitude': result.longitude,
-        'latitude': result.latitude
-      })
       self.init(result)
     })
 }

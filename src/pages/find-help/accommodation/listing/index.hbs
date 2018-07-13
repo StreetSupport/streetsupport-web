@@ -114,7 +114,12 @@ nosubnav: false
 {{> loading-spinner }}
 
 <script type="text/html" id="no-accommodation">
+  <!-- ko if: locationName -->
   <p>Sorry, there are no accommodation entries listed that meet your requirements. Please use review your selections, and try again.</p>
+  <!-- /ko -->
+  <!-- ko ifnot: locationName -->
+  <p>Please enter a postcode to find accommodation near you.</p>
+  <!-- /ko -->
   <p>If you know of local organisations that could be included, please use our <a href="/register">registration form</a>.</p>
 </script>
 
