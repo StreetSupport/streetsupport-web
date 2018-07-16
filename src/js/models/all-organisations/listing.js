@@ -122,6 +122,8 @@ function OrgListing (orgsFilter = null) {
             href: `/find-help/organisation?organisation=${next.serviceProviderKey}`,
             donationUrl: next.donationUrl,
             donationDescription: next.donationDescription,
+            itemDonationDescription: next.itemDonationDescription,
+            needCategories: next.needCategories,
             locations: [
               next
             ]
