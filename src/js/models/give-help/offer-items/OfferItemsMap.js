@@ -4,9 +4,9 @@ const htmlEncode = require('htmlencode')
 const ko = require('knockout')
 require('knockout.validation') // No variable here is deliberate!
 
-const apiRoutes = require('../api')
-const getApi = require('../get-api-data')
-const listToDropdown = require('../list-to-dropdown')
+const apiRoutes = require('../../../api')
+const getApi = require('../../../get-api-data')
+const listToDropdown = require('../../../list-to-dropdown')
 
 var OfferItemModel = function () {
   var self = this
@@ -18,7 +18,7 @@ var OfferItemModel = function () {
 
   self.needCategories = ko.computed(() => {
     const getUniqueNeedCategories = function (providers) {
-    const availableCats = providers
+      const availableCats = providers
         .map((p) => p.needCategories)
         .reduce((acc, cats) => {
           return [...acc, ...cats]
@@ -41,11 +41,11 @@ var OfferItemModel = function () {
       name: ko.observable('All'),
       cssClass: ko.observable('subcat-filter__item on')
     })
-    
+
     return cats
   }, self)
   self.showFilter = ko.computed(() => self.needCategories().length > 1, self)
- 
+
   self.providers.subscribe((newValue) => {
     const subCatFilter = {
       selectors: {
@@ -54,11 +54,11 @@ var OfferItemModel = function () {
         asDropdown: '.list-to-dropdown__select'
       }
     }
-  
+
     const initSubCatAsDropdown = function () {
       const dropdown = document.querySelector(subCatFilter.selectors.asDropdown)
       const filterItems = document.querySelector(subCatFilter.selectors.selectedItem)
-  
+
       dropdown.value = filterItems.innerText
       dropdown.addEventListener('change', (e) => {
         const value = e.target.value
@@ -81,7 +81,7 @@ var OfferItemModel = function () {
   }
 
   self.buildMap = (userLocation) => {
-    const centre = {lat: userLocation.latitude, lng: userLocation.longitude}
+    const centre = { lat: userLocation.latitude, lng: userLocation.longitude }
     return new google.maps.Map(document.querySelector('.js-map'), {
       zoom: 11,
       center: centre
@@ -107,13 +107,13 @@ var OfferItemModel = function () {
           title: `${htmlEncode.htmlDecode(provider.name)}`
         })
         marker.categories = provider.needCategories
-    
+
         marker.addListener('click', () => {
           self.infoWindows
             .forEach((w) => w.close())
           infoWindow.open(self.map, marker)
         })
-    
+
         self.markers.push(marker)
       })
   }

@@ -7,7 +7,6 @@ const templating = require('./template-render')
 const browser = require('./browser')
 const supportedCities = require('./location/supportedCities')
 
-
 const buildMap = () => {
   return new google.maps.Map(document.querySelector('.js-map'), {
     zoom: 6,
@@ -17,7 +16,7 @@ const buildMap = () => {
 
 window.initMap = () => { }
 
-const redirectToHubPage = function(locationId) {
+const redirectToHubPage = function (locationId) {
   location.setCurrent(locationId)
   browser.redirect(`/${locationId}`)
 }
@@ -41,7 +40,7 @@ const displayMap = function (hubs) {
           }
         })
 
-        google.maps.event.addListener(marker, 'click', function() {
+        google.maps.event.addListener(marker, 'click', function () {
           redirectToHubPage(this.id)
         })
       })

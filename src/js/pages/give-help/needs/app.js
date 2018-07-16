@@ -20,7 +20,7 @@ const redirectForLegacyNeedDetails = () => {
 }
 
 const defaultCallback = (currRange) => {
-  const postcodeProximityComponent = new PostcodeProximity(currRange, (newLocationResult, newRange) => { //eslint-disable-line
+  new PostcodeProximity(currRange, (newLocationResult, newRange) => { //eslint-disable-line
     browser.loading()
     init(newLocationResult, newRange)
   })
@@ -51,14 +51,14 @@ const renderNeeds = (needs, userLocation, currRange) => {
 
 const init = function (userLocation, range = 10000) {
   if (userLocation) {
-  const url = `${apiRoutes.needsHAL}?longitude=${userLocation.longitude}&latitude=${userLocation.latitude}&range=${range}&pageSize=100`
-  getApiData.data(url)
-    .then((result) => {
+    const url = `${apiRoutes.needsHAL}?longitude=${userLocation.longitude}&latitude=${userLocation.latitude}&range=${range}&pageSize=100`
+    getApiData.data(url)
+      .then((result) => {
         const formatted = formatNeeds(result.data.items, userLocation)
         renderNeeds(formatted, userLocation, range)
-    }, () => {
-      browser.redirect('/500')
-    })
+      }, () => {
+        browser.redirect('/500')
+      })
   } else {
     const theData = {
       card: [],

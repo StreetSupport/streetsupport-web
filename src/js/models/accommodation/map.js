@@ -1,5 +1,4 @@
 const locationSelector = require('../../location/locationSelector')
-
 const MapBuilder = require('./MapBuilder')
 
 const ko = require('knockout')
@@ -35,7 +34,6 @@ const AccommodationListing = function () {
         self.map.init(self.items(), currentLocation, self, buildInfoWindowMarkup)
       })
   }
-
 }
 
 module.exports = AccommodationListing

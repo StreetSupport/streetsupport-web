@@ -16,11 +16,9 @@ const analytics = require('./analytics')
 const browser = require('./browser')
 const locationSelector = require('./location/locationSelector')
 const categories = require('../data/generated/service-categories')
+
 let findHelp = null
 let onRenderCallback = function () {
-  console.log('on render callback')
-  // findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
-  // browser.initPrint()
   browser.loaded()
 }
 
@@ -29,7 +27,7 @@ const onLocationCriteriaChange = (result, range) => {
   buildList(buildUrl(result, range), result)
 }
 
-function buildList(url, locationResult) {
+function buildList (url, locationResult) {
   getApiData.data(url)
     .then((result) => {
       if (result.status === 'error') {
@@ -86,7 +84,7 @@ function buildList(url, locationResult) {
     })
 }
 
-function sortByOpeningTimes(days) {
+function sortByOpeningTimes (days) {
   days.forEach(function (day) {
     day.serviceProviders = day.serviceProviders.sort((a, b) => {
       if (a.openingTime.startTime < b.openingTime.startTime) return -1
@@ -97,7 +95,7 @@ function sortByOpeningTimes(days) {
   return days
 }
 
-function sortDaysFromToday(days) {
+function sortDaysFromToday (days) {
   // api days: monday == 0!
   var today = new Date().getDay() - 1
   var past = days.slice(0, today)
@@ -131,7 +129,7 @@ const init = () => {
         findHelp = new FindHelp(result.findHelpId)
         initAccordionHistoryBackHandler('day', accordion)
         findHelp.setUrl('category-by-day', 'sub-category', querystring.parameter('sub-category'))
-  
+
         buildList(buildUrl(result), result)
       } else {
         findHelp = new FindHelp('elsewhere')

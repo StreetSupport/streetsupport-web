@@ -1,11 +1,11 @@
 var ko = require('knockout')
 require('knockout.validation') // No variable here is deliberate!
 
-var apiRoutes = require('../api')
-var getApi = require('../get-api-data')
-var postApi = require('../post-api-data')
-var browser = require('../browser')
-var supportedCities = require('../location/supportedCities')
+var apiRoutes = require('../../../api')
+var getApi = require('../../../get-api-data')
+var postApi = require('../../../post-api-data')
+var browser = require('../../../browser')
+var supportedCities = require('../../../location/supportedCities')
 
 var OfferItemModel = function (currCityId) {
   var self = this
