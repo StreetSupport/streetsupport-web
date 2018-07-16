@@ -3,23 +3,25 @@ const gMaps = require('./googleMaps')
 const MapBuilder = function () {
   const self = this
 
-  const updateMarkers = (items) => {
+  
+  self.updateMarkers = (items) => {
     items
-      .forEach((p) => {
-        const infoWindow = gMaps.buildInfoWindow(p, self.buildInfoWindowMarkup(p))
+      .forEach((p, i) => {
+        const infoWindow = gMaps.buildInfoWindow(self.buildInfoWindowMarkup(p))
 
         self.infoWindows.push(infoWindow)
 
         const marker = gMaps.buildMarker(p, self.map)
 
         marker.customFields = {
-          mapIndex: p.mapIndex
+          mapIndex: i
         }
 
         marker.addListener('click', function () {
           self.infoWindows
             .forEach((w) => w.close())
           infoWindow.open(self.map, marker)
+          console.log(this.customFields)
           self.container.markerClicked(this.customFields.mapIndex)
         })
 
@@ -51,10 +53,11 @@ const MapBuilder = function () {
 
     self.markers = []
 
-    updateMarkers(items)
+    self.updateMarkers(items)
   }
 
   self.init = function (items, userLocation, container, buildInfoWindowMarkup) {
+    console.log({items})
     self.map = gMaps.buildMap(userLocation)
 
     self.container = container
@@ -66,7 +69,7 @@ const MapBuilder = function () {
     self.infoWindows = []
     self.markers = []
 
-    updateMarkers(items)
+    self.updateMarkers(items)
   }
 }
 

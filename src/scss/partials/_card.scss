@@ -15,6 +15,7 @@ $spacing: 20px;
 
 .card__title {
   margin-top: 0;
+  text-align: left;
 }
 
 .card--donate {
@@ -92,8 +93,6 @@ $spacing: 20px;
 .card--tall {
   .card__title {
     height: 220px;
-    overflow-y: scroll;
-
     *:last-child { padding-bottom: 10px }
   }
   .btn { 

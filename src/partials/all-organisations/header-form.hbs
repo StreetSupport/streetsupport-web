@@ -4,7 +4,10 @@
       <header class="multi-form-header">
         <h1 class="h1">Organisations</h1>
         <h2 class="h2">Charities, voluntary groups and government services.</h2>
+
+        {{#if showSearch}}
         {{> all-organisations/search }}
+        {{/if}}
       </header>
       {{> all-organisations/proximity }}
     </div>

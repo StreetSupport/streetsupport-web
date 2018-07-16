@@ -46,56 +46,7 @@ nosubnav: false
       {{> accommodation-view-options listing="true" }}
 
         <div class="accommodation-listing">
-          <aside class="accommodation-listing__filter">
-            <h1 class="h2 accommodation-listing__filter-heading" data-bind="click: toggleFilterDisplay, css: {open: displayFilter}">Filter Results
-              <span class="accommodation-listing__filter-toggle accommodation-listing__filter-toggle--is-open">-</span>
-              <span class="accommodation-listing__filter-toggle accommodation-listing__filter-toggle--is-closed">+</span>
-            </h1>
-            <div class="accommodation-listing__filter-container" data-bind="css: {open: displayFilter}">
-              <div class="accommodation-listing__filter-facets">
-                <h2 class="h3">Location:</h2>
-                <ul class="accommodation-listing__filter-facet-group">
-                  <li>
-                    <label class="accommodation-listing__filter-facet-options-title">Near postcode:</label>
-                    <input type="text" data-bind="textInput: locationName" class="form__input form__input--inline form__input--short accommodation-listing__postcode-filter" />
-                  </li>
-                </ul>
-
-                <h2 class="h3">Accommodation Type:</h2>
-                <ul class="accommodation-listing__filter-facet-group">
-                  <li>
-                    <label class="accommodation-listing__filter-facet-options-title">Type:</label>
-                    <select class="form__input form__input--inline form__input--short accommodation-listing__type-dropdown" data-bind="
-                        options: accomTypes,
-                        optionsText: 'name',
-                        optionsValue: 'key',
-                        optionsCaption: '-- select --',
-                        value: selectedType">
-                    </select>
-                  </li>
-                </ul>
-
-                <h2 class="h3">Suitable For:</h2>
-                <ul class="accommodation-listing__filter-facet-group" data-bind="foreach: residentCriteriaFilters">
-                  <li>
-                    <dl class="accommodation-listing__filter-facet-options">
-                      <dt class="accommodation-listing__filter-facet-options-title" data-bind="text: labelText"></dt>
-                      <dd class="accommodation-listing__filter-facet-options-radio"><label class="accommodation-listing__filter-facet-options-radio-container"><input type="radio" value="true" data-bind="attr: { name: dataFieldName }, checked: value, checkedValue: true" /> Yes</label></dd>
-                      <dd class="accommodation-listing__filter-facet-options-radio"><label class="accommodation-listing__filter-facet-options-radio-container"><input type="radio" value="false" data-bind="attr: { name: dataFieldName }, checked: value, checkedValue: false" /> No</label></dd>
-                    </dl>
-                  </li>
-                </ul>
-              </div>
-              <div class="accommodation-listing__filter-btns">
-                <button class="btn btn--brand-e" data-bind="click: updateListing">
-                  <span class="btn__text">update</span>
-                </button>
-                <button class="btn btn--brand-f" data-bind="click: resetFilter">
-                  <span class="btn__text">reset</span>
-                </button>
-              </div>
-            </div>
-          </aside>
+          {{> accommodation-filter-menu }}
           <section class="accommodation-listing__listing">
             <!-- ko if: noItemsAvailable -->
               <!-- ko template: { name: 'no-accommodation' } --><!-- /ko -->
