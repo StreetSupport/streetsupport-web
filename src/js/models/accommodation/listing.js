@@ -17,7 +17,7 @@ const SearchFilter = function (dataFieldName, labelText) {
   self.value = ko.observable()
 }
 
-const AccommodationListing = function (addtionalQueryString = "") {
+const AccommodationListing = function (addtionalQueryString = '') {
   const self = this
   self.addtionalQueryString = addtionalQueryString
   self.dataIsLoaded = ko.observable(false)

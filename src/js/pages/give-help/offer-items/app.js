@@ -1,10 +1,5 @@
-/*
-  global google
-*/
-
-// Common modules
 import '../../../common'
-const htmlEncode = require('htmlencode')
+
 const marked = require('marked')
 marked.setOptions({sanitize: true})
 
@@ -12,8 +7,8 @@ const ko = require('knockout')
 
 const locationSelector = require('../../../location/locationSelector')
 const OrgRetrieval = require('../../../models/all-organisations/listing')
-const OfferItemsMap = require('../../../models/OfferItemsMap')
-const OfferItemsForm = require('../../../models/OfferItemsModel')
+const OfferItemsMap = require('../../../models/give-help/offer-items/OfferItemsMap')
+const OfferItemsForm = require('../../../models/give-help/offer-items/OfferItemsModel')
 
 const orgRetrieval = new OrgRetrieval()
 const offerItemsMap = new OfferItemsMap()

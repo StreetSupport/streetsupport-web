@@ -1,9 +1,8 @@
-const gMaps = require('./googleMaps')
+const gMaps = require('../../location/googleMaps')
 
 const MapBuilder = function () {
   const self = this
 
-  
   self.updateMarkers = (items) => {
     items
       .forEach((p, i) => {
@@ -11,7 +10,7 @@ const MapBuilder = function () {
 
         self.infoWindows.push(infoWindow)
 
-        const marker = gMaps.buildMarker(p, self.map)
+        const marker = gMaps.buildMarker(p, self.map, `http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=${p.mapIndex() + 1}|FE6256|000000`)
 
         marker.customFields = {
           mapIndex: i
@@ -21,7 +20,6 @@ const MapBuilder = function () {
           self.infoWindows
             .forEach((w) => w.close())
           infoWindow.open(self.map, marker)
-          console.log(this.customFields)
           self.container.markerClicked(this.customFields.mapIndex)
         })
 
@@ -57,7 +55,6 @@ const MapBuilder = function () {
   }
 
   self.init = function (items, userLocation, container, buildInfoWindowMarkup) {
-    console.log({items})
     self.map = gMaps.buildMap(userLocation)
 
     self.container = container
