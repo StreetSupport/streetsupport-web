@@ -118,11 +118,7 @@ const AccommodationListing = function (addtionalQueryString = '') {
   self.init = (currentLocation) => {
     self.items([])
     if (currentLocation) {
-<<<<<<< HEAD
       const endpoint = `${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}${getQuerystring()}${self.addtionalQueryString}`
-=======
-      const endpoint = `${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}${getQuerystring()}`
->>>>>>> fresh visit to accom listing and timetabled services
       self.locationName(currentLocation.postcode)
       self.loadItems(endpoint)
     } else {
