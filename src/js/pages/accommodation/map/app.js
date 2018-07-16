@@ -2,7 +2,18 @@
 import '../../../common'
 
 // Page modules
-var ko = require('knockout')
-var Model = require('../../../models/accommodation/map')
+const ko = require('knockout')
+const Listing = require('../../../models/accommodation/listing')
+const Map = require('../../../models/accommodation/map')
 
-ko.applyBindings(new Model())
+const listing =  new Listing("&hasLocation=true")
+const map = new Map()
+
+listing.items.subscribe((newItems) => {
+  map.init(newItems)
+})
+
+ko.applyBindings({
+  listing,
+  map
+})

@@ -28,27 +28,57 @@ nosubnav: false
         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#accom"></use>
       </svg>
       Accommodation
-    </h1>
+    </h2>
   </div>
 </div>
 
 <div class="block">
   <div class="container">
     <div class="block__content">
-        {{> accommodation-listing-header }}
 
+      {{> accommodation-listing-header }}
+
+      <div data-bind="with: listing">
         <!-- ko ifnot: dataIsLoaded -->
         <p class="text-center">Please wait whilst we load information.</p>
         <!-- /ko -->
-      
+
         <!-- ko if: dataIsLoaded -->
-          <!-- ko if: noItemsAvailable -->
-            <!-- ko template: { name: 'no-accommodation' } --><!-- /ko -->
-          <!-- /ko -->
-          <!-- ko ifnot: noItemsAvailable -->
-            <!-- ko template: { name: 'accommodation-listing' } --><!-- /ko -->
-          <!-- /ko -->
+        {{> accommodation-view-options map="true" }}
         <!-- /ko -->
+      </div>
+      <div class="accommodation-listing">
+        <div data-bind="with: listing">
+            {{> accommodation-filter-menu }}
+        </div>
+            <section class="accommodation-listing__listing">
+              <div data-bind="with: listing">
+              <!-- ko if: noItemsAvailable -->
+                <!-- ko template: { name: 'no-accommodation' } --><!-- /ko -->
+              <!-- /ko -->
+              </div>
+        <div data-bind="with: map">
+          <!-- ko if: hasItems -->
+          <aside class="listing-with-map__map js-map"></aside>
+          <section class="listing-with-map__listing" data-bind="foreach: items">
+            <article class="listing-with-map__listing-item" data-bind="css: { 'listing-with-map__listing-item--isActive': isActive }">
+              <h1 class="h2" data-bind="click: selectItem"><span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span></h1>
+              <h2 class="h3" data-bind="click: selectItem, html: address"></h2>
+              <ul class="accommodation-list__listing-features">
+                <!-- ko if: referralIsRequired --><li class="accommodation-list__listing-features-item">A referral is required for this property</li><!-- /ko -->
+                <!-- ko ifnot: referralIsRequired --><li class="accommodation-list__listing-features-item">No referral required</li><!-- /ko -->
+                <li class="accommodation-list__listing-features-item">Type: <span data-bind="text: accommodationType"></span></li>
+              </ul>
+              <a class="btn btn--brand-d" data-bind="attr: { href: detailsUrl }">
+                <span class="btn__text">View Details</span>
+              </a>
+            </article>
+          </section>
+          <!-- /ko -->
+        </div>
+            </section>
+          </div>
+        </div>
       {{> social-share}}
     </div>
   </div>
@@ -57,42 +87,11 @@ nosubnav: false
 {{> loading-spinner }}
 
 <script type="text/html" id="no-accommodation">
-  <p class="text-center">Sorry, there are no accommodation entries listed near your location. Please select a supported location above.</p>
-</script>
-
-<script type="text/html" id="accommodation-listing">
-
-  {{> accommodation-view-options map="true" }}
-
-  <div class="listing-with-map">
-    <div class="subcat-filter subcat-filter--listing-with-map">
-      <p class="subcat-filter__label">Filter by accommodation type:</p>
-      <select class="form__input listing-with-map__filter-dropdown" data-bind="
-          options: typeFilters,
-          optionsText: 'typeName',
-          optionsValue: 'typeName',
-          value: selectedTypeFilterName,
-          event: { change: typeFilterDropdownSelected }">
-      </select>
-      <ul class="list-to-dropdown subcat-filter__items listing-with-map__filter-buttons" data-bind="foreach: typeFilters">
-        {{!--<li class="subcat-filter__item js-filter-item on" data-id="">All</li>--}}
-        <li class="subcat-filter__item js-filter-item" data-bind="click:select, text: typeName, css: { on: isSelected }"></li>
-      </ul>
-    </div>
-    <aside class="listing-with-map__map js-map"></aside>
-    <section class="listing-with-map__listing" data-bind="foreach: itemsToDisplay">
-      <article class="listing-with-map__listing-item" data-bind="css: { 'listing-with-map__listing-item--isActive': isActive }">
-        <h1 class="h2" data-bind="click: selectItem"><span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span></h1>
-        <h2 class="h3" data-bind="click: selectItem, html: address"></h2>
-        <ul class="accommodation-list__listing-features">
-          <!-- ko if: referralIsRequired --><li class="accommodation-list__listing-features-item">A referral is required for this property</li><!-- /ko -->
-          <!-- ko ifnot: referralIsRequired --><li class="accommodation-list__listing-features-item">No referral required</li><!-- /ko -->
-          <li class="accommodation-list__listing-features-item">Type: <span data-bind="text: accommodationType"></span></li>
-        </ul>
-        <a class="btn btn--brand-d" data-bind="attr: { href: detailsUrl }">
-          <span class="btn__text">View Details</span>
-        </a>
-      </article>
-    </section>
-    </div>
+  <!-- ko if: locationName -->
+  <p>Sorry, there are no accommodation entries listed that meet your requirements. Please review your selections, and try again.</p>
+  <!-- /ko -->
+  <!-- ko ifnot: locationName -->
+  <p>Please enter a postcode to find accommodation near you.</p>
+  <!-- /ko -->
+  <p>If you know of local organisations that could be included, please use our <a href="/register">registration form</a>.</p>
 </script>
