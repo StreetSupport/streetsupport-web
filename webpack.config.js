@@ -43,7 +43,7 @@ module.exports = {
     requestDetails: path.join(__dirname, '/src/js/pages/give-help/needs/request/app'),
     sponsor: path.join(__dirname, '/src/js/page-sponsor'),
     volunteer: path.join(__dirname, '/src/js/page-volunteer'),
-    offeritems: path.join(__dirname, '/src/js/page-offer-items'),
+    offeritems: path.join(__dirname, '/src/js/pages/give-help/offer-items/app'),
     joinstreetsupport: path.join(__dirname, '/src/js/page-join-street-support'),
     register: path.join(__dirname, '/src/js/page-register'),
     bigchange: path.join(__dirname, 'src/js/pages/manchester/page-big-change'),
