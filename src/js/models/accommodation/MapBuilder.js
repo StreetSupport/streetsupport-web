@@ -22,6 +22,7 @@ const MapBuilder = function () {
           self.infoWindows
             .forEach((w) => w.close())
           infoWindow.open(self.map, marker)
+          console.log(this.customFields)
           self.container.markerClicked(this.customFields.mapIndex)
         })
 
@@ -57,6 +58,7 @@ const MapBuilder = function () {
   }
 
   self.init = function (items, userLocation, container, buildInfoWindowMarkup) {
+    console.log({items})
     self.map = gMaps.buildMap(userLocation)
 
     self.container = container
