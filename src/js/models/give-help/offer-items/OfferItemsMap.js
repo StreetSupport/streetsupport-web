@@ -1,5 +1,3 @@
-/* global google */
-
 const htmlEncode = require('htmlencode')
 const ko = require('knockout')
 require('knockout.validation') // No variable here is deliberate!
@@ -7,6 +5,7 @@ require('knockout.validation') // No variable here is deliberate!
 const apiRoutes = require('../../../api')
 const getApi = require('../../../get-api-data')
 const listToDropdown = require('../../../list-to-dropdown')
+const googleMaps = require('../../../location/googleMaps')
 
 var OfferItemModel = function () {
   var self = this
@@ -44,9 +43,10 @@ var OfferItemModel = function () {
 
     return cats
   }, self)
+
   self.showFilter = ko.computed(() => self.needCategories().length > 1, self)
 
-  self.providers.subscribe((newValue) => {
+  self.providers.subscribe(() => {
     const subCatFilter = {
       selectors: {
         item: '.subcat-filter__item',
@@ -70,42 +70,24 @@ var OfferItemModel = function () {
     listToDropdown.init(initSubCatAsDropdown)
   })
 
-  self.buildInfoWindowMarkup = (p) => {
+  const buildInfoWindowMarkup = function (provider) {
     return `<div class="map-info-window">
-        <h1 class="h2"><a href="/find-help/organisation/?organisation=${p.key}">${htmlEncode.htmlDecode(p.name)}</a></h1>
-        <p>${htmlEncode.htmlDecode(p.itemDonationDescription)}</p>
-        <a href="/find-help/organisation/?organisation=${p.key}" class="btn btn--brand-e">
-          <span class="btn__text">More about ${htmlEncode.htmlDecode(p.name)}</span>
+        <h1 class="h2"><a href="/find-help/organisation/?organisation=${provider.key}">${htmlEncode.htmlDecode(provider.name)}</a></h1>
+        <p>${htmlEncode.htmlDecode(provider.itemDonationDescription)}</p>
+        <a href="/find-help/organisation/?organisation=${provider.key}" class="btn btn--brand-e">
+          <span class="btn__text">More about ${htmlEncode.htmlDecode(provider.name)}</span>
         </a>
       </div>`
-  }
-
-  self.buildMap = (userLocation) => {
-    const centre = { lat: userLocation.latitude, lng: userLocation.longitude }
-    return new google.maps.Map(document.querySelector('.js-map'), {
-      zoom: 11,
-      center: centre
-    })
-  }
-
-  const createInfoWindow = function (provider, buildMarkup) {
-    const infoWindow = new google.maps.InfoWindow({
-      content: buildMarkup(provider)
-    })
-
-    self.infoWindows.push(infoWindow)
-    return infoWindow
   }
 
   const createMarker = function (provider, infoWindow) {
     provider.locations
       .forEach((l) => {
-        console.log(provider, l)
-        const marker = new google.maps.Marker({
-          position: { lat: l.latitude, lng: l.longitude },
-          map: self.map,
-          title: `${htmlEncode.htmlDecode(provider.name)}`
-        })
+        const marker = googleMaps.buildMarker(l, self.map,
+          {
+            title: `${htmlEncode.htmlDecode(provider.name)}`
+          }
+        )
         marker.categories = provider.needCategories
 
         marker.addListener('click', () => {
@@ -118,38 +100,14 @@ var OfferItemModel = function () {
       })
   }
 
-  const createCurrPosMarker = function () {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      }
-
-      new google.maps.Marker({ // eslint-disable-line
-        position: pos,
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: 3,
-          fillColor: 'blue',
-          strokeColor: 'blue'
-        },
-        map: self.map
-      })
-    }, function () {
-    })
-  }
-
   self.displayMap = (userLocation) => {
-    self.map = self.buildMap(userLocation)
+    self.map = googleMaps.buildMap(userLocation, 11)
     self.providers()
       .forEach((p) => {
-        const infoWindow = createInfoWindow(p, self.buildInfoWindowMarkup)
+        const infoWindow = googleMaps.buildInfoWindow(buildInfoWindowMarkup(p))
+        self.infoWindows.push(infoWindow)
         createMarker(p, infoWindow)
       })
-
-    if (navigator.geolocation) {
-      createCurrPosMarker()
-    }
   }
 
   self.filter = (c) => {

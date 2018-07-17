@@ -10,7 +10,9 @@ const MapBuilder = function () {
 
         self.infoWindows.push(infoWindow)
 
-        const marker = gMaps.buildMarker(p, self.map, `http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=${p.mapIndex() + 1}|FE6256|000000`)
+        const marker = gMaps.buildMarker({ latitude: p.latitude(), longitude: p.longitude() }, self.map, {
+          icon: `http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=${p.mapIndex() + 1}|FE6256|000000`
+        })
 
         marker.customFields = {
           mapIndex: i
