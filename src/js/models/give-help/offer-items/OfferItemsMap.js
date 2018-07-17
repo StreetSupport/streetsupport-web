@@ -108,6 +108,7 @@ var OfferItemModel = function () {
         self.infoWindows.push(infoWindow)
         createMarker(p, infoWindow)
       })
+    googleMaps.addCircleMarker(userLocation, self.map)
   }
 
   self.filter = (c) => {

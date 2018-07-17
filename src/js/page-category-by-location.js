@@ -1,41 +1,32 @@
-/* global google */
-
 import './common'
 
 const FindHelp = require('./find-help')
 
 const htmlEncode = require('htmlencode')
 const marked = require('marked')
-marked.setOptions({sanitize: true})
+marked.setOptions({ sanitize: true })
 
-const categories = require('../data/generated/service-categories')
-const getApiData = require('./get-api-data')
-const querystring = require('./get-url-parameter')
-const templating = require('./template-render')
 const analytics = require('./analytics')
 const browser = require('./browser')
+const categories = require('../data/generated/service-categories')
+const getApiData = require('./get-api-data')
+const googleMaps = require('./location/googleMaps')
 const locationSelector = require('./location/locationSelector')
+const proximityRanges = require('./location/proximityRanges')
+const querystring = require('./get-url-parameter')
+const templating = require('./template-render')
 let findHelp = null
 
 import { buildFindHelpUrl, buildInfoWindowMarkup } from './pages/find-help/by-location/helpers'
 
 const buildMap = (userLocation) => {
-  const range = querystring.parameter('range')
-  const zoomLevels = {
-    '1000': 14,
-    '2000': 14,
-    '5000': 13,
-    '10000': 11,
-    '20000': 10
-  }
-  const centre = {lat: userLocation.latitude, lng: userLocation.longitude}
-  return new google.maps.Map(document.querySelector('.js-map'), {
-    zoom: zoomLevels[range],
-    center: centre
-  })
+  const zoom = proximityRanges.getByRange(querystring.parameter('range'))
+  const center = { lat: userLocation.latitude, lng: userLocation.longitude }
+
+  return googleMaps.buildMap(userLocation, { zoom, center })
 }
 
-window.initMap = () => {}
+window.initMap = () => { }
 
 const displayMap = (providers, userLocation) => {
   const map = buildMap(userLocation)
@@ -44,17 +35,10 @@ const displayMap = (providers, userLocation) => {
 
   providers
     .forEach((p) => {
-      const infoWindow = new google.maps.InfoWindow({
-        content: buildInfoWindowMarkup(p)
-      })
-
+      const infoWindow = googleMaps.buildInfoWindow(buildInfoWindowMarkup(p))
       infoWindows.push(infoWindow)
 
-      const marker = new google.maps.Marker({
-        position: { lat: p.location.latitude, lng: p.location.longitude },
-        map: map,
-        title: `${htmlEncode.htmlDecode(p.serviceProviderName)}`
-      })
+      const marker = googleMaps.buildMarker(p.location, map, { title: `${htmlEncode.htmlDecode(p.serviceProviderName)}` })
 
       marker.addListener('click', () => {
         infoWindows
@@ -63,27 +47,13 @@ const displayMap = (providers, userLocation) => {
       })
     })
 
-  const pos = {
-    lat: userLocation.latitude,
-    lng: userLocation.longitude
-  }
-
-  new google.maps.Marker({ // eslint-disable-line
-    position: pos,
-    icon: {
-      path: google.maps.SymbolPath.CIRCLE,
-      scale: 3,
-      fillColor: 'blue',
-      strokeColor: 'blue'
-    },
-    map: map
-  })
+  googleMaps.addCircleMarker(userLocation, map)
 }
 
 const getTemplate = (providers) => {
   return providers.length > 0
-  ? 'js-category-result-tpl'
-  : 'js-category-no-results-result-tpl'
+    ? 'js-category-result-tpl'
+    : 'js-category-no-results-result-tpl'
 }
 
 const onLocationCriteriaChange = (result, range) => {
@@ -104,8 +74,8 @@ const defaultOnRenderCallback = () => {
 
 const getOnRenderCallback = (providers, locationResult) => {
   return providers.length > 0
-  ? () => hasItemsCallback(providers, locationResult)
-  : () => defaultOnRenderCallback()
+    ? () => hasItemsCallback(providers, locationResult)
+    : () => defaultOnRenderCallback()
 }
 
 const renderResults = (locationResult, result) => {
@@ -130,12 +100,12 @@ const renderResults = (locationResult, result) => {
 
 const buildList = (locationResult, range) => {
   getApiData.data(buildFindHelpUrl(locationResult, range))
-  .then(function (result) {
-    if (result.status === 'error') {
-      window.location.replace('/find-help/')
-    }
-    renderResults(locationResult, result)
-  })
+    .then(function (result) {
+      if (result.status === 'error') {
+        window.location.replace('/find-help/')
+      }
+      renderResults(locationResult, result)
+    })
 }
 
 const init = () => {

@@ -26,6 +26,23 @@ const buildInfoWindow = function (markup) {
   })
 }
 
+const addCircleMarker = function (location, map) {
+  const position = {
+    lat: location.latitude,
+    lng: location.longitude
+  }
+  new google.maps.Marker({ // eslint-disable-line
+    position,
+    icon: {
+      path: google.maps.SymbolPath.CIRCLE,
+      scale: 3,
+      fillColor: 'blue',
+      strokeColor: 'green'
+    },
+    map
+  })
+}
+
 module.exports = {
-  buildMap, buildMarker, buildInfoWindow
+  buildMap, buildMarker, buildInfoWindow, addCircleMarker
 }
