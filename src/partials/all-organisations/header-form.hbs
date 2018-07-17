@@ -4,6 +4,7 @@
       <header class="multi-form-header">
         <h1 class="h1">Organisations</h1>
         <p>Charities, voluntary groups and government services.</p>
+        {{#if showSearch }}
         <form class="form form--text-search">
           <fieldset class="form__fieldset">
             <legend class="hide-screen">Search for organisations:</legend>
@@ -18,6 +19,7 @@
             </button>
           </fieldset>
         </form>
+        {{/if }}
       </header>
       <form class="form form--highlighted form--proximity-search">
         <p>To find help in your area, enter your postcode below.</p>
