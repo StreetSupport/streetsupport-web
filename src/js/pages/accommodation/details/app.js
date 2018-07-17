@@ -1,5 +1,3 @@
-/* global google */
-
 import '../../../common'
 
 const ViewModel = require('./../../../models/accommodation/details')

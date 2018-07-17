@@ -1,6 +1,7 @@
 const Q = require('q')
 const deviceGeo = require('./get-location')
 const supportedCities = require('./supportedCities')
+const browser = require('../browser')
 const cookies = require('../cookies')
 
 import * as postcodes from './postcodes'
@@ -80,10 +81,15 @@ const getSelectedLocationId = () => {
   return 'elsewhere'
 }
 
-const getCurrent = () => {
+const getCurrentHub = () => {
   const deferred = Q.defer()
-  const getLocation = _determineLocationRetrievalMethod()
-  getLocation.method(deferred, getLocation.id)
+  const saved = browser.location().pathname.split('/')[1]
+  if (getSelectedLocationId() !== saved) {
+    setCurrent(saved)
+    browser.reload()
+  }
+  deferred.resolve(supportedCities.get(saved))
+
   return deferred.promise
 }
 
@@ -152,7 +158,7 @@ const exportedObj = {
   getSelectedLocationId: getSelectedLocationId,
   getPreviouslySetPostcode: getPreviouslySetPostcode,
   setPostcode: setPostcode,
-  getCurrent: getCurrent,
+  getCurrentHub: getCurrentHub,
   setCurrent: setCurrent,
   handler: onChange
 }

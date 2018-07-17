@@ -49,7 +49,7 @@ const init = (currentLocation) => {
 }
 
 location
-  .getCurrent()
+  .getCurrentHub()
   .then((result) => {
     init(result)
   })
