@@ -7,9 +7,10 @@ const endpoints = require('../../api')
 const location = require('../../location/locationSelector')
 const getDistanceApart = require('../../location/getDistanceApart')
 
-function OrgListing () {
+function OrgListing (orgsFilter = null) {
   const self = this
 
+  self.orgsFilter = orgsFilter
   self.pageSize = 8
   self.pageIndex = ko.observable(self.pageSize)
 
@@ -23,7 +24,6 @@ function OrgListing () {
     { name: '20k', key: 20000 }
   ])
   self.searchQuery = ko.observable()
-  self.distanceDescription = ko.observable()
   self.organisations = ko.observableArray()
   self.orgsToDisplay = ko.observableArray()
 
@@ -38,7 +38,7 @@ function OrgListing () {
   self.isSortedNearest = ko.computed(() => self.currentSort() === 'nearest', self)
 
   const paginate = function () {
-    self.orgsToDisplay(self.organisations.slice(0, self.pageIndex()))
+    self.orgsToDisplay(self.organisations().slice(0, self.pageIndex()))
   }
 
   self.prevPage = function () {
@@ -120,6 +120,8 @@ function OrgListing () {
             key: next.serviceProviderKey,
             name: htmlDecode(next.serviceProviderName),
             href: `/find-help/organisation?organisation=${next.serviceProviderKey}`,
+            donationUrl: next.donationUrl,
+            donationDescription: next.donationDescription,
             locations: [
               next
             ]
@@ -140,7 +142,10 @@ function OrgListing () {
           o.distanceInMetres = nearestOrgLocation.distanceInMetres
           o.distanceDescription = nearestOrgLocation.distanceDescription
         })
-        self.organisations(orgs)
+        console.log(self.orgsFilter)
+        self.organisations(self.orgsFilter
+          ? orgs.filter(self.orgsFilter)
+          : orgs)
         self.sortNearest()
         paginate()
         browser.loaded()

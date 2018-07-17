@@ -88,3 +88,16 @@ $spacing: 20px;
     text-decoration: underline;
   }
 }
+
+.card--tall {
+  .card__title {
+    height: 220px;
+    overflow-y: scroll;
+
+    *:last-child { padding-bottom: 10px }
+  }
+  .btn { 
+    width: 100%;
+    margin: 0;
+  }
+}
