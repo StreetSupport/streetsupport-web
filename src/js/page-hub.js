@@ -1,11 +1,11 @@
 import './common'
 
-let location = require('./location/locationSelector')
-const templating = require('./template-render')
+const api = require('./get-api-data')
 const browser = require('./browser')
 const endpoints = require('./api')
-const api = require('./get-api-data')
+const location = require('./location/locationSelector')
 const supportedCities = require('./location/supportedCities')
+const templating = require('./template-render')
 const wp = require('./wordpress')
 
 import { suffixer } from './location/suffixer'

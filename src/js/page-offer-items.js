@@ -8,7 +8,7 @@ var Form = require('./models/give-help/offer-items/OfferItemsModel')
 var OfferItemsMap = require('./models/give-help/offer-items/OfferItemsMap')
 
 location
-  .getCurrent()
+  .getPreviouslySetPostcode()
   .then((currentLocation) => {
     const vm = {
       form: new Form(currentLocation.id),
