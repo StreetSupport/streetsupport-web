@@ -66,12 +66,9 @@ const _useSaved = (deferred) => {
 }
 
 const _determineLocationRetrievalMethod = () => {
-  let method = _useSaved
-  let id = ''
-
   return {
-    method: method,
-    id: id
+    method: _useSaved,
+    id: ''
   }
 }
 
