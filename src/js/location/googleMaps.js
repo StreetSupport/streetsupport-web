@@ -1,20 +1,23 @@
 /* global google */
 
-const buildMap = function (userLocation, zoomLevel = 10, domSelector = '.js-map') {
+const buildMap = function (userLocation, customOptions = {}, domSelector = '.js-map') {
   const centre = { lat: userLocation.latitude, lng: userLocation.longitude }
-  return new google.maps.Map(document.querySelector(domSelector), {
-    zoom: zoomLevel,
+  const defaultOptions = {
+    zoom: 10,
     center: centre,
-    draggable: false
-  })
+    draggable: true
+  }
+  const updatedOptions = Object.assign(defaultOptions, customOptions)
+  return new google.maps.Map(document.querySelector(domSelector), updatedOptions)
 }
 
-const buildMarker = function (p, map, icon = '/assets/img/map-pin.png') {
-  return new google.maps.Marker({
-    position: { lat: p.latitude(), lng: p.longitude() },
-    icon,
+const buildMarker = function (location, map, customOptions) {
+  const defaultOptions = {
+    position: { lat: location.latitude, lng: location.longitude },
+    icon: '/assets/img/map-pin.png',
     map: map
-  })
+  }
+  return new google.maps.Marker(Object.assign(defaultOptions, customOptions))
 }
 
 const buildInfoWindow = function (markup) {
