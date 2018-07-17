@@ -191,6 +191,11 @@
     background: black;
     padding: 15px 0 10px 0!important;
   }
+
+  &--cards {
+    background: $brand-q;
+    border-top: 1px solid $brand-k;
+  }
 }
 
 .block--header {
@@ -364,4 +369,60 @@
 .block-icon-container {
   text-align: center;
   margin-top: -90px;
+}
+
+.block-tabs {
+  text-align: center;
+  @include cf();
+  margin-bottom: -1px;
+  display: block;
+}
+
+.block-tabs__container {
+  padding: 0 10px;
+  @include mq($from: m) {
+    padding: 0px;
+    width: 300px;
+    margin: 0 auto;
+  }
+}
+
+.block-tabs__tab {
+  @include span(1 of 2);
+
+  background: red;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  padding: 10px 30px;
+  margin-top: 4px;
+  display: block;
+
+  &:last-of-type { 
+    @include last();
+  }
+
+  &--selected {
+    background: blue;
+    padding: 12px 30px;
+    margin-top: 0px;
+  }
+
+  .block-tabs--cards & {
+    background: $brand-k;
+    color: $brand-q;
+    border-top: 1px solid $brand-k;
+    border-right: 1px solid $brand-k;
+    border-left: 1px solid $brand-k;
+  }
+
+  .block-tabs--cards &--selected {
+    background: $brand-q;
+    color: $brand-k;
+    border-top: 1px solid $brand-k;
+    border-right: 1px solid $brand-k;
+    border-left: 1px solid $brand-k;
+  }
 }

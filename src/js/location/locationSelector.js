@@ -152,7 +152,7 @@ const buildLocationResult = (userLocationState) => {
   return {
     'id': 'my-location',
     'findHelpId': 'my-location',
-    'name': 'my selected postocde',
+    'name': 'my selected postcode',
     'longitude': userLocationState.longitude,
     'latitude': userLocationState.latitude,
     'isPublic': true,

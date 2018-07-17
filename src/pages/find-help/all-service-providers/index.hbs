@@ -2,9 +2,9 @@
 title: All Service Providers - Street Support
 description: Street support makes it easier to help homeless people. Find help relevant to your needs.
 image: https://streetsupport.net/assets/img/og/street-support.png
-layout: withGoogle.hbs
+layout: default.hbs
 permalink: false
-jsBundle: allserviceproviders
+jsBundle: all-organisations-v2
 section: findhelp
 page: allorganisations
 ---
@@ -19,50 +19,56 @@ page: allorganisations
   </div>
 </div>
 
-<div class="block block--subpage-header">
-  <div class="container">
-    <h1 class="h1 block__header">Full Listing</h1>
-    <p class="h2 block__sub-header">Charities, voluntary groups and government services.</p>
+  <div class="block block--subpage-header">
+    <div class="container">
   </div>
 </div>
 
 {{> no-js}}
 
-<div class="block">
+{{> all-organisations/header-form showSearch="true" }}
+{{> all-organisations/view-tabs listSelected="true" }}
+
+<div class="block block--cards">
   <div class="container">
     <div class="block__content">
-      <div id="js-category-result-output" class="template"></div>
-      {{> social-share}}
+      <!-- ko if: hasOrgs -->
+      <!-- ko ifnot: postcodeRetrievalIssue -->
+      <div class="card-sort">
+        <span class="card-sort__title">Sort by:</span>
+        <a class="card-sort__item" href="#a-z" data-bind="click: sortAToZ, css: { 'card-sort__item--selected': isSortedAToZ() }">A-Z</a> 
+        <a class="card-sort__item" href="#nearest" data-bind="click: sortNearest, css: { 'card-sort__item--selected': isSortedNearest() }">Nearest</a>
+      </div>
+      <div data-bind="foreach: orgsToDisplay">
+        <a data-bind="attr: { href: href } ">
+          <article class="card card--brand-h">
+            <div class="card__title">
+              <h1 class="h2" data-bind="text: name"></h1>
+            </div>
+            <div class="card__details">
+              <p class="card__details__description" data-bind="text: distanceDescription"></p>
+              <a class="card__details__link" data-bind="attr: { href: href } ">More Information</a>
+            </div>
+          </article>
+        </a>
+      </div>
+      <div class="card-pagination">
+      <!-- ko if: hasMorePages -->
+      <button class="btn btn--brand-e" data-bind="click: loadMore">
+        <span class="btn__text">Load more</span>
+      </button>
+      <!-- /ko -->
+      </div>
+      <!-- /ko -->
+      <!-- /ko -->
+      <!-- ko ifnot: hasOrgs -->
+      <p>Sorry, there are no organisations listed near your postcode, please try again.</p>
+      <!-- /ko -->
+      <!-- ko if: postcodeRetrievalIssue -->
+      <p>Sorry, there was a problem with your postcode, please try an alternative postcode nearby.</p>
+      <!-- /ko -->
     </div>
   </div>
 </div>
 
 <div id="spin"></div>
-<script id="js-category-no-result-tpl" type="text/template">
-  <div class="result-list">
-    <p>Sorry,there are no organisations for \{{location}} currently registered. If you would like to add an organisation, please use our <a href="/register">registration form.</a></p>
-  </div>
-</script>
-
-<script id="js-category-result-tpl" type="text/template">
-  <div class="location-selector">
-    <p>Showing all organisations in \{{location}}.</p>
-  </div>
-
-  <div class="js-map services-map"></div>
-
-  <div class="result-list">
-    \{{#organisations}}
-        <ul class="result-list__list">
-          <li class="result-list__item">
-            <h2 class="h2 result-list__header"><a href="/find-help/organisation/?organisation=\{{key}}">\{{{name}}}</a></h2>
-            <h3 class="h3">\{{{shortDescription}}}</h3>
-            <p>\{{{description}}}</p>
-            <a class="btn btn--brand-d result-list__btn" href="/find-help/organisation/?organisation=\{{key}}">
-              <span class="btn__text">More information about \{{{name}}}</span>
-            </a>
-          </li>
-        </ul>
-    \{{/organisations}}
-  </div>
-</script>

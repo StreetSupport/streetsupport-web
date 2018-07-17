@@ -75,11 +75,11 @@ describe('Accommodation - Listing', function () {
   it('- should set location name to nearest postcode', () => {
     expect(sut.locationName()).toEqual('postcode')
   })
-  
+
   it('- should set accommodation categories', () => {
     expect(sut.accomTypes().length).toEqual(categories.length)
   })
-  
+
   it('- should set selected accommodation filter as empty', () => {
     expect(sut.selectedType()).toEqual('')
   })
