@@ -1,16 +1,14 @@
-/*
-  global google
-*/
-
 // Common modules
 import '../../../common'
 const htmlEncode = require('htmlencode')
 const marked = require('marked')
-marked.setOptions({sanitize: true})
+marked.setOptions({ sanitize: true })
 
 const ko = require('knockout')
 
 const locationSelector = require('../../../location/locationSelector')
+const googleMaps = require('../../../location/googleMaps')
+const proximityRanges = require('../../../location/proximityRanges')
 
 const OrgRetrieval = require('../../../models/all-organisations/listing')
 const model = new OrgRetrieval()
@@ -25,35 +23,20 @@ const buildInfoWindowMarkup = (p) => {
     </div>`
 }
 
-const buildMap = (userLocation) => {
-  const centre = {lat: userLocation.latitude, lng: userLocation.longitude}
-  return new google.maps.Map(document.querySelector('.js-map'), {
-    zoom: 11,
-    center: centre
-  })
-}
-
-window.initMap = () => {}
+window.initMap = () => { }
 
 const displayMap = function (providers, userLocation) {
-  const map = buildMap(userLocation)
+  const map = googleMaps.buildMap(userLocation, { zoom: proximityRanges.getByRange(model.range()) })
   const infoWindows = []
 
   providers
     .forEach((p) => {
-      const infoWindow = new google.maps.InfoWindow({
-        content: buildInfoWindowMarkup(p)
-      })
-
+      const infoWindow = googleMaps.buildInfoWindow(buildInfoWindowMarkup(p))
       infoWindows.push(infoWindow)
 
       p.locations
         .forEach((l) => {
-          const marker = new google.maps.Marker({
-            position: { lat: l.latitude, lng: l.longitude },
-            map: map,
-            title: `${htmlEncode.htmlDecode(p.name)}`
-          })
+          const marker = googleMaps.buildMarker(l, map, { title: `${htmlEncode.htmlDecode(p.name)}` })
 
           marker.addListener('click', () => {
             infoWindows
@@ -63,21 +46,7 @@ const displayMap = function (providers, userLocation) {
         })
     })
 
-  const pos = {
-    lat: userLocation.latitude,
-    lng: userLocation.longitude
-  }
-
-  new google.maps.Marker({ // eslint-disable-line
-    position: pos,
-    icon: {
-      path: google.maps.SymbolPath.CIRCLE,
-      scale: 3,
-      fillColor: 'blue',
-      strokeColor: 'blue'
-    },
-    map: map
-  })
+  googleMaps.addCircleMarker(userLocation, map)
 }
 
 model.organisations.subscribe((newValue) => {

@@ -2,17 +2,11 @@
 
 import './common'
 
-let location = require('./location/locationSelector')
-const templating = require('./template-render')
 const browser = require('./browser')
+const location = require('./location/locationSelector')
+const googleMaps = require('./location/googleMaps')
 const supportedCities = require('./location/supportedCities')
-
-const buildMap = () => {
-  return new google.maps.Map(document.querySelector('.js-map'), {
-    zoom: 6,
-    center: { lat: 52.776100, lng: -1.777515 }
-  })
-}
+const templating = require('./template-render')
 
 window.initMap = () => { }
 
@@ -23,13 +17,11 @@ const redirectToHubPage = function (locationId) {
 
 const displayMap = function (hubs) {
   setTimeout(() => {
-    const map = buildMap()
+    const map = googleMaps.buildMap({ latitude: 52.776100, longitude: -1.777515 }, { zoom: 6 })
 
     hubs
       .forEach((l) => {
-        const marker = new google.maps.Marker({
-          position: { lat: l.latitude, lng: l.longitude },
-          map: map,
+        const marker = googleMaps.buildMarker(l, map, {
           id: l.id,
           title: l.name,
           animation: google.maps.Animation.DROP,

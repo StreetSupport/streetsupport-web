@@ -34,7 +34,6 @@ module.exports = {
     categorybyday: path.join(__dirname, '/src/js/page-category-by-day'),
     categorybylocation: path.join(__dirname, '/src/js/page-category-by-location'),
     organisation: path.join(__dirname, '/src/js/page-organisation'),
-    allserviceproviders: path.join(__dirname, '/src/js/page-all-service-providers'),
     "donate-v2": path.join(__dirname, '/src/js/pages/donate/app'),
     "all-organisations-v2": path.join(__dirname, '/src/js/pages/all-organisations/app'),
     "all-organisations-v2-map": path.join(__dirname, '/src/js/pages/all-organisations/map/app'),

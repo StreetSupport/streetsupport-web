@@ -5,6 +5,7 @@ const ajax = require('../../get-api-data')
 const browser = require('../../browser')
 const endpoints = require('../../api')
 const location = require('../../location/locationSelector')
+const proximityRanges = require('../../location/proximityRanges')
 const getDistanceApart = require('../../location/getDistanceApart')
 
 function OrgListing (orgsFilter = null) {
@@ -16,13 +17,7 @@ function OrgListing (orgsFilter = null) {
 
   self.postcode = ko.observable()
   self.range = ko.observable(10000)
-  self.ranges = ko.observableArray([
-    { name: '1k', key: 1000 },
-    { name: '2k', key: 2000 },
-    { name: '5k', key: 5000 },
-    { name: '10k', key: 10000 },
-    { name: '20k', key: 20000 }
-  ])
+  self.ranges = ko.observableArray(proximityRanges.ranges)
   self.searchQuery = ko.observable()
   self.organisations = ko.observableArray()
   self.orgsToDisplay = ko.observableArray()
