@@ -69,6 +69,7 @@ $spacing: 20px;
     background: $brand-h;
     height: 140px;
     padding: 15px 10px;
+    text-align: left;
     * {
       color: white;
     }
@@ -92,8 +93,7 @@ $spacing: 20px;
 .card--tall {
   .card__title {
     height: 220px;
-    overflow-y: scroll;
-
+    overflow: hidden;
     *:last-child { padding-bottom: 10px }
   }
   .btn { 
