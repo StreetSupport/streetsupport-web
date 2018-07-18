@@ -21,9 +21,24 @@ $header-height: 64px;
   .header__btn {
     float: right;
     width: 80px;
+    height: $header-height;
     padding: 20px;
     margin: 0;
     background-color:$brand-e;
+    line-height: 1.1em;
+
+    .is-active & {
+      display: none;
+    }
+
+    &--close {
+      padding: 15px 10px 14px 10px;
+      display: none;
+      z-index: 1000;
+      .is-active & {
+        display: block;
+      }
+    }
 
     a {
       color: $brand-k;
@@ -79,7 +94,7 @@ $header-height: 64px;
     display: none;
   }
   position: fixed;
-  top: 0;
+  top: $header-height;
   right: -$nav-width * 2;
   height: 100%;
   width: $nav-width * 2;
@@ -106,20 +121,6 @@ $header-height: 64px;
     }
   }
 
-  .nav__btn {
-    float: right;
-    width: 80px;
-    padding: 15px 10px 14px 10px;
-    margin: 0;
-    color: $brand-m;
-    background: $brand-e;
-    line-height: 1.1em;
-
-    @include mq($from: m) {
-      display: none;
-    }
-  }
-
   .nav__list {
     list-style-type: none;
     background: none;
@@ -131,7 +132,7 @@ $header-height: 64px;
       padding: 0;
       position: absolute;
       display: none;
-      top: $header-height;
+      top: 0;
       right: -50%;
       width: 100%;
     }
@@ -170,14 +171,6 @@ $header-height: 64px;
       .nav__list {
         display: block;
       }          
-    }
-
-    &--hidden {
-      a {
-        height: $header-height;
-        background: none;
-        border-bottom: none;
-      }
     }
   
     &--mobile-only {

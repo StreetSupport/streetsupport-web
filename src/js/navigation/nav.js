@@ -6,7 +6,7 @@ const overlayElement = '.js-nav-overlay'
 const activeClass = 'is-active'
 const subNavActiveClass = 'sub-nav-is-active'
 const el = document.querySelectorAll('.js-nav-container, .js-nav-push, .js-nav-overlay, html, body')
-const linksWithSubNav = document.querySelectorAll('.nav__item-link--has-sub-nav')
+const linksWithSubNav = document.querySelectorAll('.nav--mobile .nav__item-link--has-sub-nav')
 const subNavBackButtons = document.querySelectorAll('.sub-list-back-btn')
 
 const hideForCity = (cityId) => {
