@@ -43,6 +43,7 @@ $normalPadding: 25px;
 
 .header--desktop {
   display: none;
+  border-bottom: 2px solid $brand-d;
 
   @include mq($from: m) {
     display: block;
@@ -124,8 +125,6 @@ $normalPadding: 25px;
   @include mq($from: m) {
     display: block;
     text-align: center;
-    box-shadow: 0 2px 5px 0 rgba(50,50,50,.7);
-    border-top: 2px solid $brand-i;
 
     .nav__list {
       background: $brand-j;
