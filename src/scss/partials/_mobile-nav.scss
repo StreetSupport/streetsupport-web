@@ -6,6 +6,12 @@
     float: left;
     padding: 10px 0 0 10px;
     margin: 0;
+
+    .text {
+      line-height: 1.1em;
+      vertical-align: top;
+      padding-top: 3px;
+    }
   }
 
   .header__btn {
