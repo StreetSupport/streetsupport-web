@@ -1,4 +1,3 @@
-const stickyNavShrinker = require('./sticky-nav-shrink')
 const location = require('../location/locationSelector')
 
 const openElement = '.js-nav-open'
@@ -33,8 +32,6 @@ var init = function () {
   })
 
   hideForCity(location.getSelectedLocationId())
-
-  stickyNavShrinker.init()
 }
 
 var open = function () {

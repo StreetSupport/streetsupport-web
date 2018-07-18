@@ -1,13 +1,5 @@
 $smallPadding: 10px;
-$normalPadding: 35px;
-
-.sticky {
-  position: fixed;
-  left: 0;
-  right: 0;
-  z-index: $zIndex-fixedHeader;
-  @include printHide();
-}
+$normalPadding: 25px;
 
 .header {
   background: $brand-a;
@@ -21,7 +13,7 @@ $normalPadding: 35px;
 
   @include mq($from: m) {
     display: inline-block;
-    padding: $normalPadding $normalPadding $normalPadding 0;
+    padding: $normalPadding $smallPadding $normalPadding 0;
     float: left;
     margin: 0;
   }
@@ -41,8 +33,7 @@ $normalPadding: 35px;
 
   .text {
     display: inline-block;
-    line-height: 43px;
-    vertical-align: top;
+    line-height: 1.1em;
 
     @include mq($from: m) {
       font-size: 22px;
@@ -64,14 +55,36 @@ $normalPadding: 35px;
 
     .header__nav {
       float: right;
-      margin-top: $normalPadding;
 
       .nav__item {
         float: left;
-        a {
-          display: inline-block;
+        margin-bottom: 0;
+
+        .nav__item-link {
+          display: block;
           color: white;
-          padding: 12px 20px;
+          padding: 38px 20px;
+
+          &:hover {
+            background: $brand-c;
+            text-decoration: none;
+          }
+
+          &--has-sub-nav {
+            padding-right: 45px;
+            position: relative;
+            &::after {
+              content: '';
+              width: 0; 
+              height: 0; 
+              border-left: 5px solid transparent;
+              border-right: 5px solid transparent;
+              border-top: 5px solid white;
+              margin-left: 1em;
+              top: 3em;
+              position: absolute;
+            }
+          }
         }
       }
     }
@@ -114,7 +127,7 @@ $normalPadding: 35px;
       }
     }
 
-    .nav__list--sub-sub-list {
+    .nav__list--sub-list {
       display: none;
       position: absolute;
       z-index: $zIndex-SubNav;
@@ -157,23 +170,7 @@ $normalPadding: 35px;
   }
 }
 
-@include mq($from: m) {
-  .header--small {
-    .header__title {
-      padding: $smallPadding $normalPadding $smallPadding 0;
-    }
-    .header__nav {
-      margin-top: $smallPadding!important;
-    }
-    .global-city-selector {
-      margin-top: $smallPadding;
-    }
-  }
-}
-
-
-
-.header__nav .nav__list--sub-sub-list {
+.header__nav .nav__list--sub-list {
   display: none;
 }
 
@@ -184,7 +181,7 @@ $normalPadding: 35px;
     .section--#{$section} .city-nav .nav__item--#{$section} {
       background-color: $brand-i;
 
-      .nav__list--sub-sub-list {
+      .nav__list--sub-list {
         display: block;
       }
     }
@@ -210,7 +207,7 @@ $normalPadding: 35px;
         text-decoration: none!important;
       }
     }
-    .city-nav .nav__list--sub-sub-list .nav__item.nav__item--#{$page} > a {
+    .city-nav .nav__list--sub-list .nav__item.nav__item--#{$page} > a {
       @include mq($from: m) {
         background-color: white;
       }
