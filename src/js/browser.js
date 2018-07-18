@@ -69,7 +69,6 @@ var scrollTo = function (selector) {
 
   const getDesktopHeaderHeight = () => {
     const desktopHeader = document.querySelector('.sticky')
-    // const navSubList = document.querySelector('.nav__list--sub-list')
     return desktopHeader.offsetHeight + 44 // navSubList.offsetHeight - doesn't return greater than 0!
   }
 

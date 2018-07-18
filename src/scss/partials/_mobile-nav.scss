@@ -80,9 +80,9 @@ $header-height: 64px;
   }
   position: fixed;
   top: 0;
-  right: -$nav-width;
+  right: -$nav-width * 2;
   height: 100%;
-  width: $nav-width;
+  width: $nav-width * 2;
   z-index: $zIndex-mobileNav;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
@@ -91,7 +91,11 @@ $header-height: 64px;
   transform: translate3d(0, 0, 0);
 
   &.is-active {
-    transform: translate3d(-$nav-width, 0, 0);
+    transform: translate3d(-$nav-width / 2, 0, 0);
+  }
+
+  &.sub-nav-is-active {
+    transform: translate3d(-($nav-width), 0, 0)!important;
   }
 
   .nav__push {
@@ -105,11 +109,11 @@ $header-height: 64px;
   .nav__btn {
     float: right;
     width: 80px;
-    padding: 15px 10px;
+    padding: 15px 10px 14px 10px;
     margin: 0;
     color: $brand-m;
+    background: $brand-e;
     line-height: 1.1em;
-    background: $brand-i;
 
     @include mq($from: m) {
       display: none;
@@ -119,34 +123,52 @@ $header-height: 64px;
   .nav__list {
     list-style-type: none;
     background: none;
+    width: 200%;
 
     &--sub-list {
       list-style: none;
       margin: 0;
       padding: 0;
-      position: relative;
+      position: absolute;
       display: none;
-    }
-
-    &--sub-sub-list {
-      padding-left: 10px;
+      right: -50%;
+      width: 100%;
     }
   }
 
   .nav__item {
-    color: $brand-m;
-    background: $brand-i;
     margin: 0;
     padding: 0px;
+    width: 100%;
     font-weight: $font-headline-weight;
-    border-bottom: 1px solid $brand-m;
     float: none;
 
-    &--hidden {
+    a {
+      width: 25%;
+      color: $brand-m;
+      background: $brand-e;
+      border-bottom: 1px solid $brand-m;
+    }
+
+    &:hover {
       background: none;
-      border-bottom: none;
+      .nav__list {
+        display: none;  
+      }          
+    }
+    
+    &.sub-nav-is-active {
+      background: none;
+      .nav__list {
+        display: block;
+      }          
+    }
+
+    &--hidden {
       a {
         height: $header-height;
+        background: none;
+        border-bottom: none;
       }
     }
 
@@ -180,11 +202,18 @@ $header-height: 64px;
     }
   }
 
+  .nav__list--sub-list .nav__item a {
+    width: 50%;
+  }
+
   .nav__item-link {
     &--has-sub-nav {
       &::after {
-        top: 1.2em;
-        border-top: 5px solid $brand-k;
+        top: 1em;
+        right: 10px;
+        border-bottom: 5px solid transparent;
+        border-top: 5px solid transparent;
+        border-left: 5px solid $brand-k;
       }
     }
   }
