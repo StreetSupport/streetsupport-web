@@ -185,10 +185,21 @@ $normalPadding: 25px;
         background: $brand-c;
       }
     }
+    .header__nav .nav__list--sub-list .nav__item--#{$page} > a {
+      @include mq($from: m) {
+        background: $brand-r;
+      }
+    }
 
     .city-nav .nav__item--#{$page} {
       @include mq($from: m) {
-        background-color: $brand-d!important;
+        background-color: $brand-d;
+      }
+    }
+
+    .city-nav .nav__list--sub-list .nav__item--#{$page} {
+      @include mq($from: m) {
+        background-color: $brand-e;
       }
     }
 
