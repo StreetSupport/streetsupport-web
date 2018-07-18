@@ -3,6 +3,7 @@ $header-height: 64px;
 .header--mobile {
   display: block;
   border-bottom: 2px solid $brand-e;
+  height: 66px;
 
   .header__title {
     display: block;
@@ -104,7 +105,7 @@ $header-height: 64px;
   .nav__btn {
     float: right;
     width: 80px;
-    padding: 14px 10px;
+    padding: 15px 10px;
     margin: 0;
     color: $brand-m;
     line-height: 1.1em;
@@ -117,11 +118,14 @@ $header-height: 64px;
 
   .nav__list {
     list-style-type: none;
+    background: none;
 
     &--sub-list {
       list-style: none;
       margin: 0;
       padding: 0;
+      position: relative;
+      display: none;
     }
 
     &--sub-sub-list {
@@ -136,6 +140,7 @@ $header-height: 64px;
     padding: 0px;
     font-weight: $font-headline-weight;
     border-bottom: 1px solid $brand-m;
+    float: none;
 
     &--hidden {
       background: none;
@@ -172,6 +177,15 @@ $header-height: 64px;
       text-decoration: none;
       display: block;
       padding: 10px;
+    }
+  }
+
+  .nav__item-link {
+    &--has-sub-nav {
+      &::after {
+        top: 1.2em;
+        border-top: 5px solid $brand-k;
+      }
     }
   }
 

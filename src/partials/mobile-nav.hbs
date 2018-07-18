@@ -2,15 +2,9 @@
   <button class="btn btn--plain nav__btn js-nav-close" type="button"><span>Close menu</span></button>
   <ul class="nav__list">
     <li class="nav__item nav__item--hidden"><a href="/"><span class="hide-screen">Home</span></a></li>
-    <li class="nav__item"><a href="/find-help">Find help</a></li>
-
-    {{!-- <li class="nav__item nav__item--manchester nav__item--city-specific js-city-nav-item" data-city="manchester">
-      <a href="/manchester">Manchester</a>
-      <ul class="nav__list nav__list--sub-list">
-        {{> manchester/nav }}
-      </ul>
-    </li>
-    <li class="nav__item nav__item--leeds nav__item--city-specific js-city-nav-item" data-city="leeds">
+    {{> header-nav }} 
+    {{> manchester/nav }}
+    {{!-- <li class="nav__item nav__item--leeds nav__item--city-specific js-city-nav-item" data-city="leeds">
       <a href="/leeds">Leeds</a>
       <ul class="nav__list nav__list--sub-list">
         {{> leeds/nav }}
