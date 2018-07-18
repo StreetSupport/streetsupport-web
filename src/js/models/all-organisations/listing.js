@@ -142,7 +142,6 @@ function OrgListing (orgsFilter = null) {
           o.distanceInMetres = nearestOrgLocation.distanceInMetres
           o.distanceDescription = nearestOrgLocation.distanceDescription
         })
-        console.log(self.orgsFilter)
         self.organisations(self.orgsFilter
           ? orgs.filter(self.orgsFilter)
           : orgs)
