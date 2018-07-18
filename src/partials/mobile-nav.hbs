@@ -1,8 +1,10 @@
 <nav class="nav__container js-nav-container nav--mobile">
-  <button class="btn btn--plain nav__btn js-nav-close" type="button">{{>icon name="close" class="icon"}}<span class="hide-screen">Close</span></button>
+  <button class="btn btn--plain nav__btn js-nav-close" type="button"><span>Close menu</span></button>
   <ul class="nav__list">
-    <li class="nav__item"><a href="/">Home</a></li>
-    <li class="nav__item nav__item--manchester nav__item--city-specific js-city-nav-item" data-city="manchester">
+    <li class="nav__item nav__item--hidden"><a href="/"><span class="hide-screen">Home</span></a></li>
+    <li class="nav__item"><a href="/find-help">Find help</a></li>
+
+    {{!-- <li class="nav__item nav__item--manchester nav__item--city-specific js-city-nav-item" data-city="manchester">
       <a href="/manchester">Manchester</a>
       <ul class="nav__list nav__list--sub-list">
         {{> manchester/nav }}
@@ -44,6 +46,6 @@
         {{> southampton/nav }}
       </ul>
     </li>
-    {{> header-nav }}
+    {{> header-nav }} --}}
   </ul>
 </nav>
