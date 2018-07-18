@@ -188,6 +188,10 @@ $header-height: 64px;
       padding: 10px;
       background: $brand-e;
       text-align: right;
+      
+      &:hover {
+        background: $brand-e!important;
+      }
 
       .sub-list-back-btn {
         display: block;
@@ -208,11 +212,12 @@ $header-height: 64px;
           border-right: 5px solid $brand-k;
         }
       }
+
       .sub-list-text {
         right: 50%;
         position: absolute;
         padding-right: 10px;
-        top: 0.7em;
+        top: 0.6em;
       }
     }
   }
