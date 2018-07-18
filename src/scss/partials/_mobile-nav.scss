@@ -144,6 +144,13 @@ $header-height: 64px;
     font-weight: $font-headline-weight;
     float: none;
 
+    &[data-city] {
+      display: none;
+      &.is-active {
+        display: block;
+      }
+    }
+
     a {
       width: 25%;
       color: $brand-m;
@@ -217,7 +224,7 @@ $header-height: 64px;
         right: 50%;
         position: absolute;
         padding-right: 10px;
-        top: 0.6em;
+        top: 0.7em;
       }
     }
   }

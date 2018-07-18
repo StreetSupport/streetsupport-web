@@ -64,6 +64,13 @@ $normalPadding: 25px;
     background: $brand-d;
   }
 
+  &--city {
+    display: none;
+    &.is-active {
+      display: block;
+    }
+  }
+
   &--sub-list {
     display: none;
     position: absolute;
