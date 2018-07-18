@@ -130,21 +130,22 @@ $header-height: 64px;
   }
 
   .nav__item {
-    color: #fff;
+    color: $brand-m;
+    background: $brand-i;
     margin: 0;
     padding: 0px;
     font-weight: $font-headline-weight;
+    border-bottom: 1px solid $brand-m;
 
     &--hidden {
+      background: none;
+      border-bottom: none;
       a {
         height: $header-height;
       }
     }
 
     &--city-specific {
-      border-top: 1px solid $brand-b;
-      border-bottom: 1px solid $brand-b;
-
       ul {
         display: none;
       }
@@ -155,8 +156,6 @@ $header-height: 64px;
     }
 
     &--city-specific.is-active {
-      border: none;
-      background: $brand-j;
       color: $brand-k;
 
       ul {
