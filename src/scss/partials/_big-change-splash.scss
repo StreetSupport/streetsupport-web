@@ -1,11 +1,11 @@
 $big-change-yellow: #FFF001;
 
-$big-change-height: 400px;
-$padding-for-header: 100px;
+$big-change-height: 336px;
+$padding-for-header: 0px;
 $triangle-height: 336px;
 
-$padding-for-header-m: 220px;
-$big-change-height-m: 500px;
+$padding-for-header-m: 0px;
+$big-change-height-m: 298px;
 $triangle-height-m: 298px;
 
 .big-change-banner {
@@ -61,7 +61,7 @@ $triangle-height-m: 298px;
     border-width: $triangle-height 45px 0 0;
     border-color: $big-change-yellow transparent transparent transparent;
     position: absolute;
-    top: 64px;
+    top: 0;
     left: 0;
   }
   &::after {
@@ -72,17 +72,15 @@ $triangle-height-m: 298px;
     border-width: $triangle-height 45px 0 0;
     border-color: transparent $big-change-yellow transparent transparent;
     position: absolute;
-    top: 64px;
+    top: 0;
     right: 0;
   }
   @include mq($from: m) {
     &::before {
       border-top-width: $triangle-height-m;
-      top: 202px;
     }
     &::after {
       border-top-width: $triangle-height-m;
-      top: 202px;
     }
   }
 }
