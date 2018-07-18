@@ -65,6 +65,7 @@ $normalPadding: 25px;
   }
 
   &--sub-list {
+    display: none;
     position: absolute;
     z-index: 100;
     padding: 10px 0;
@@ -145,9 +146,7 @@ $normalPadding: 25px;
 
     .city-nav & {
       &::after {
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-top: 5px solid $brand-k;
+        border-top: 5px solid $brand-k; 
         top: 1.7em;
       }
     }
@@ -164,33 +163,18 @@ $normalPadding: 25px;
   }
 }
 
-.global-city-selector {
-
-  @include mq($from: m) {
-    float: right;
-    margin-top: 34px;
-  }
-
-  label {
-    color: white;
-  }
-
-  select {
-    width: 100%;
-    appearance: none;
-    background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc);
-    background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
-    background-size: 5px 5px, 5px 5px, 1px 1.5em;
-    background-repeat: no-repeat;
-
+// Active Section
+@each $section in $nav-sections {
+  .section--#{$section} .nav__item--#{$section} {
     @include mq($from: m) {
-      width: 220px;
+      background: $brand-c;
     }
   }
-}
-
-.nav__list--sub-list {
-  display: none;
+  .section--#{$section} .nav__list--city .nav__item--#{$section} {
+    @include mq($from: m) {
+      background: $brand-d;
+    }
+  }
 }
 
 // Active page
@@ -202,11 +186,14 @@ $normalPadding: 25px;
       }
     }
 
-    .city-nav .nav__item--#{$page},
-    .nav--mobile .nav__item--#{$page} > a {
+    .city-nav .nav__item--#{$page} {
       @include mq($from: m) {
         background-color: $brand-d!important;
       }
+    }
+
+    .nav--mobile .nav__item--#{$page} {
+
     }
   }
 }
