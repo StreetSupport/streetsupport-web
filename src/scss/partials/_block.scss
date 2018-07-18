@@ -153,10 +153,6 @@
 
     @include mq($from: m) {
       top: $header-top + $header-height + $header-height;
-
-      .section--nosubnav & {
-        top: $header-top + $header-height;
-      }
     }
   }
 
