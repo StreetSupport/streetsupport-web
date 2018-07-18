@@ -43,7 +43,7 @@ $normalPadding: 25px;
 
 .header--desktop {
   display: none;
-  border-bottom: 2px solid $brand-d;
+  border-bottom: 2px solid $brand-e;
 
   @include mq($from: m) {
     display: block;
@@ -59,6 +59,10 @@ $normalPadding: 25px;
   margin: 0;
   padding: 0;
   background: $brand-c;
+
+  .city-nav & {
+    background: $brand-d;
+  }
 
   &--sub-list {
     position: absolute;
@@ -84,11 +88,20 @@ $normalPadding: 25px;
     }
   }
 
+  .city-nav & {
+    a { 
+      color: $brand-k
+    }
+    &:hover {
+      background: $brand-d;
+    }
+  }
+
   .nav__list--sub-list & {
     float: none;
     a {
       display: block;
-      padding: 5px 25px 5px 10px;
+      padding: 5px 25px 5px 10px;;
     }
   }
 }
@@ -100,6 +113,19 @@ $normalPadding: 25px;
 
   &:hover {
     text-decoration: none;
+  }
+
+  .city-nav & {
+    color: $brand-k;
+    padding: 18px 10px;
+
+    &:hover {
+      background: $brand-d;
+    }
+  }
+
+  .city-nav &--has-sub-nav {
+    padding-right: 35px;
   }
 
   &--has-sub-nav {
@@ -116,60 +142,25 @@ $normalPadding: 25px;
       top: 3em;
       position: absolute;
     }
+
+    .city-nav & {
+      &::after {
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid $brand-k;
+        top: 1.7em;
+      }
+    }
   }
 }
 
 .city-nav {
   display: none;
+  margin-top: -2px;
+  background: $brand-e;
 
   @include mq($from: m) {
     display: block;
-    text-align: center;
-
-    .nav__list {
-      background: $brand-j;
-
-      &--city {
-        display: none;
-        &.is-active {
-          display: block;
-        }
-      }
-    }
-
-    .nav__item {
-      display: inline-block;
-      margin: 0;
-      a {
-        display: inline-block;
-        color: $brand-k;
-        padding: 10px 30px;
-        margin: 0;
-
-        &:hover {
-          background: $brand-i;
-          text-decoration: none;
-        }
-      }
-    }
-
-    .nav__list--sub-list {
-      display: none;
-      position: absolute;
-      z-index: $zIndex-SubNav;
-      left: 0;
-      right: 0;
-      background: $brand-i;
-      box-shadow: 0 2px 2px 0 rgba(50,50,50,.3);
-    }
-
-    .nav__item--sub-item {
-      &:hover {
-        a {
-          background: white;
-        }
-      }
-    }
   }
 }
 
@@ -198,22 +189,8 @@ $normalPadding: 25px;
   }
 }
 
-.header__nav .nav__list--sub-list {
+.nav__list--sub-list {
   display: none;
-}
-
-
-// Active Subnav
-@include mq($from: m) {
-  @each $section in $nav-sections {
-    .section--#{$section} .city-nav .nav__item--#{$section} {
-      background-color: $brand-i;
-
-      .nav__list--sub-list {
-        display: block;
-      }
-    }
-  }
 }
 
 // Active page
@@ -221,23 +198,14 @@ $normalPadding: 25px;
   .page--#{$page} {
     .header__nav .nav__item--#{$page} > a {
       @include mq($from: m) {
-        text-decoration: underline!important;
-        background-color: none!important;
+        background: $brand-c;
       }
     }
 
-    .city-nav .nav__item--#{$page} > a,
+    .city-nav .nav__item--#{$page},
     .nav--mobile .nav__item--#{$page} > a {
-      text-decoration: underline!important;
-
       @include mq($from: m) {
-        background-color: $brand-i;
-        text-decoration: none!important;
-      }
-    }
-    .city-nav .nav__list--sub-list .nav__item.nav__item--#{$page} > a {
-      @include mq($from: m) {
-        background-color: white;
+        background-color: $brand-d!important;
       }
     }
   }

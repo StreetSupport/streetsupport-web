@@ -145,8 +145,6 @@
     padding-top: 6px !important;
     padding-bottom: 6px !important;
     background-color: rgba(black, 0.5);
-    position: absolute;
-    z-index: $zIndex-breadcrumb;
     width: 100%;
 
     @media print {
