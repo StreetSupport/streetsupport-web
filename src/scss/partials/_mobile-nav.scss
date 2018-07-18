@@ -131,6 +131,7 @@ $header-height: 64px;
       padding: 0;
       position: absolute;
       display: none;
+      top: $header-height;
       right: -50%;
       width: 100%;
     }
@@ -171,27 +172,9 @@ $header-height: 64px;
         border-bottom: none;
       }
     }
-
-    &--city-specific {
-      ul {
-        display: none;
-      }
-
-      ul a {
-        color: $brand-k;
-      }
-    }
-
-    &--city-specific.is-active {
-      color: $brand-k;
-
-      ul {
-        display: block;
-      }
-
-      .nav__list--sub-list a {
-        padding: 10px;
-      }
+  
+    &--mobile-only {
+      display: block;
     }
 
     a {
@@ -200,10 +183,43 @@ $header-height: 64px;
       display: block;
       padding: 10px;
     }
+
+    &--sub-list-title {
+      padding: 10px;
+      background: $brand-e;
+      text-align: right;
+
+      .sub-list-back-btn {
+        display: block;
+        background: none;
+        border: none;
+        padding-left: 20px;
+        &::before {
+          content: '';
+          width: 0; 
+          height: 0; 
+          margin-left: 1em;
+          margin-right: 1em;
+          top: 1.1em;
+          left: 0;
+          position: absolute;
+          border-bottom: 5px solid transparent;
+          border-top: 5px solid transparent;
+          border-right: 5px solid $brand-k;
+        }
+      }
+      .sub-list-text {
+        right: 50%;
+        position: absolute;
+        padding-right: 10px;
+        top: 0.7em;
+      }
+    }
   }
 
   .nav__list--sub-list .nav__item a {
     width: 50%;
+    background: $brand-d;
   }
 
   .nav__item-link {

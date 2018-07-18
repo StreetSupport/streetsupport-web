@@ -3,11 +3,11 @@ const location = require('../location/locationSelector')
 const openElement = '.js-nav-open'
 const closeElement = '.js-nav-close'
 const overlayElement = '.js-nav-overlay'
-const navItemLinksWithSubNav = '.nav__item-link--has-sub-nav'
 const activeClass = 'is-active'
 const subNavActiveClass = 'sub-nav-is-active'
 const el = document.querySelectorAll('.js-nav-container, .js-nav-push, .js-nav-overlay, html, body')
-const linksWithSubNav = document.querySelectorAll(navItemLinksWithSubNav)
+const linksWithSubNav = document.querySelectorAll('.nav__item-link--has-sub-nav')
+const subNavBackButtons = document.querySelectorAll('.sub-list-back-btn')
 
 const hideForCity = (cityId) => {
   if (cityId) {
@@ -30,15 +30,11 @@ var init = function () {
     linksWithSubNav[i].addEventListener('click', openSubNav)
   }
 
-  hideForCity(location.getSelectedLocationId())
-}
-
-var open = function () {
-  var i
-
-  for (i = 0; i < el.length; ++i) {
-    el[i].classList.add(activeClass)
+  for (let i = 0; i < subNavBackButtons.length; ++i) {
+    subNavBackButtons[i].addEventListener('click', closeSubNav)
   }
+
+  hideForCity(location.getSelectedLocationId())
 }
 
 const openSubNav = function(e) {
@@ -49,8 +45,21 @@ const openSubNav = function(e) {
   }
 }
 
+const closeSubNav = function(e) {
+  e.preventDefault()
+  e.target.parentNode.parentNode.parentNode.classList.remove(subNavActiveClass)
+  for (let i = 0; i < el.length; ++i) {
+    el[i].classList.remove(subNavActiveClass)
+  }
+}
+
+var open = function () {
+  for (let i = 0; i < el.length; ++i) {
+    el[i].classList.add(activeClass)
+  }
+}
+
 var close = function (e) {
-  console.log(e.target)
   for (let i = 0; i < el.length; ++i) {
     el[i].classList.remove(activeClass)
     el[i].classList.remove(subNavActiveClass)
