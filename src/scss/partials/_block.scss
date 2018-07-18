@@ -206,7 +206,7 @@
   padding-bottom: 50px;
 
   @include mq($from: m) {
-    padding-top: 280px;
+    padding-top: 60px;
     padding-bottom: 80px;
   }
   
@@ -217,7 +217,6 @@
 }
 
 .block--home-header {
-  padding-top: 140px;
   .block__header,
   .block__sub-header {
     margin-bottom: 30px;
@@ -237,7 +236,6 @@
   }
 
   @include mq($from: m) {
-    padding-top: 220px;
     padding-bottom: 30px;
 
     .container { padding-right: 33% }
@@ -285,7 +283,6 @@
   }
 
   @include mq($from: m) {
-    padding-top: 250px;
     padding-bottom: 0px;
   }
 
