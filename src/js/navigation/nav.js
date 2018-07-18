@@ -10,15 +10,20 @@ const linksWithSubNav = document.querySelectorAll('.nav--mobile .nav__item-link-
 const subNavBackButtons = document.querySelectorAll('.sub-list-back-btn')
 
 const hideForCity = (cityId) => {
+  let activeElementCount = 0;
   if (cityId) {
-    var citySpecificElements = document.querySelectorAll('[data-city]')
+    const citySpecificElements = document.querySelectorAll('[data-city]')
     for (let i = 0; i < citySpecificElements.length; i++) {
-      let citiesRequired = citySpecificElements[i].getAttribute('data-city')
+      const citiesRequired = citySpecificElements[i].getAttribute('data-city')
       if (citiesRequired.indexOf(cityId) > -1) {
         citySpecificElements[i].classList.add('is-active') // desktop
+        activeElementCount++;
       }
     }
   }
+  if (activeElementCount === 0) {
+    document.querySelector('.city-nav').classList.add('hide-screen')
+  } 
 }
 
 var init = function () {
