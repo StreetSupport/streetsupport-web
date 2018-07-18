@@ -1,5 +1,8 @@
+$header-height: 64px;
+
 .header--mobile {
   display: block;
+  border-bottom: 2px solid $brand-e;
 
   .header__title {
     display: block;
@@ -16,10 +19,10 @@
 
   .header__btn {
     float: right;
-    width: auto;
+    width: 80px;
     padding: 20px;
     margin: 0;
-    background-color:$brand-j;
+    background-color:$brand-e;
 
     a {
       color: $brand-k;
@@ -86,8 +89,6 @@
   transition: transform 250ms cubic-bezier(.16, .68, .43, .99);
   transform: translate3d(0, 0, 0);
 
-  background-color: $brand-c;
-
   &.is-active {
     transform: translate3d(-$nav-width, 0, 0);
   }
@@ -102,18 +103,15 @@
 
   .nav__btn {
     float: right;
-    width: auto;
-    padding: 10px;
+    width: 80px;
+    padding: 14px 10px;
     margin: 0;
-    color: #fff;
+    color: $brand-m;
+    line-height: 1.1em;
+    background: $brand-i;
 
     @include mq($from: m) {
       display: none;
-    }
-
-    .icon {
-      height: 12px;
-      width: 12px;
     }
   }
 
@@ -136,6 +134,12 @@
     margin: 0;
     padding: 0px;
     font-weight: $font-headline-weight;
+
+    &--hidden {
+      a {
+        height: $header-height;
+      }
+    }
 
     &--city-specific {
       border-top: 1px solid $brand-b;
@@ -181,7 +185,7 @@
 
 .nav__overlay {
   position: fixed;
-  top: 0;
+  top: $header-height;
   right: 0;
   bottom: 0;
   left: 0;
