@@ -134,6 +134,28 @@ describe('all organisations', () => {
     it('- should show prev page button', () => {
       expect(sut.hasPrevPages()).toBeTruthy()
     })
+  
+    it('- should show next page button', () => {
+      expect(sut.hasMorePages()).toBeTruthy()
+    })
+
+    fdescribe('- penultimate page', () => {
+      beforeEach(() => {
+        sut.nextPage()
+        sut.nextPage()
+        sut.nextPage()
+        sut.nextPage()
+        console.log(
+          sut.organisations().length,
+          sut.pageSize,
+          sut.pageIndex()
+        )
+      })
+  
+      it('- should show next page button', () => {
+        expect(sut.hasMorePages()).toBeTruthy()
+      })
+    })
 
     describe('- no more items', () => {
       beforeEach(() => {
