@@ -28,7 +28,7 @@ function OrgListing (orgsFilter = null) {
 
   self.hasOrgs = ko.computed(() => self.organisations().length > 0, self)
   self.hasPrevPages = ko.computed(() => self.pageIndex() > 0, self)
-  self.hasMorePages = ko.computed(() => self.pageIndex() + self.pageSize < self.organisations().length, self)
+  self.hasMorePages = ko.computed(() => self.pageIndex() < self.organisations().length, self)
   self.isSortedAToZ = ko.computed(() => self.currentSort() === 'atoz', self)
   self.isSortedNearest = ko.computed(() => self.currentSort() === 'nearest', self)
 
