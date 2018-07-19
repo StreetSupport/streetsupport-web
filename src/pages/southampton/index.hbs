@@ -6,8 +6,17 @@ layout: default.hbs
 permalink: false
 jsBundle: hub
 section: home
-page: Southampton
+page: southampton
 ---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item">Southampton</li>
+    </ol>
+  </div>
+</div>
 
 <script id="js-news-tpl" type="text/template">
     {{> news-posts city="Southampton" }}
