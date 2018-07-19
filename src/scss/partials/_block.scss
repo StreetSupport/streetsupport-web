@@ -199,7 +199,7 @@
   background-repeat: repeat-x;
   background-position: bottom;
   padding-top: 100px;
-  padding-bottom: 50px;
+  padding-bottom: 100px;
 
   @include mq($from: m) {
     padding-top: 60px;
@@ -210,6 +210,11 @@
   .block__sub-header {
     color: $brand-m;
   }
+}
+
+
+.block--city-header {
+  padding-top: 0;
 }
 
 .block--home-header {
@@ -271,7 +276,7 @@
 }
 
 .block--subpage-header {
-  padding-top: 90px;
+  padding-top: 0px;
   padding-bottom: 0px;
 
   @media print {
