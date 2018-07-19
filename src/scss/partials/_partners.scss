@@ -164,6 +164,20 @@
       }
     }
 
+    &--national-lottery {
+      width: 160px;
+      a {
+        background-image: url(/assets/img/national-lottery.png);
+      }
+    }
+
+    &--dorset-pcc {
+      width: 250px;
+      a {
+        background-image: url(/assets/img/dorset-pcc.png);
+      }
+    }
+
     &--liverpoolbid {
       width: 294px;
 
