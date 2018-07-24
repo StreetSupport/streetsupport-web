@@ -56,13 +56,15 @@ $spacing: 20px;
   }
 }
 
-.card--brand-h {
-  box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);
-
+.card--grid-1-of-4 {
   @include mq($from: m) {
     @include span(1 of 4);
     &:nth-of-type(4n) { @include last() }
   }
+}
+
+.card--brand-h {
+  box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);
 
   .card__title {
     border-top-right-radius: $radius;
@@ -93,4 +95,42 @@ $spacing: 20px;
     width: 100%;
     margin: 0;
   }
+}
+
+.card--gmaps {
+  position: absolute;
+  bottom: 0px;
+  margin-bottom: 0px;
+  left: -110px;
+  width: 100%;
+  .card__title {
+    height: auto;
+    * {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+
+.card__gmaps-container {
+  width: 220px;
+  height: 0;
+  position: absolute;
+  margin-top: -33px;
+}
+
+.card__gmaps-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Center the tip horizontally. */
+  transform: translate(-50%, 0);
+  /* The tip is a https://css-tricks.com/snippets/css/css-triangle/ */
+  width: 0;
+  height: 0;
+  /* The tip is 8px high, and 12px wide. */
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: /* TIP_HEIGHT= */ 16px solid white;
 }
