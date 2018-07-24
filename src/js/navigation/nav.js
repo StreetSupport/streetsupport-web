@@ -10,20 +10,20 @@ const linksWithSubNav = document.querySelectorAll('.nav--mobile .nav__item-link-
 const subNavBackButtons = document.querySelectorAll('.sub-list-back-btn')
 
 const hideForCity = (cityId) => {
-  let activeElementCount = 0;
+  let activeElementCount = 0
   if (cityId) {
     const citySpecificElements = document.querySelectorAll('[data-city]')
     for (let i = 0; i < citySpecificElements.length; i++) {
       const citiesRequired = citySpecificElements[i].getAttribute('data-city')
       if (citiesRequired.indexOf(cityId) > -1) {
         citySpecificElements[i].classList.add('is-active') // desktop
-        activeElementCount++;
+        activeElementCount++
       }
     }
   }
   if (activeElementCount === 0) {
-    document.querySelector('.city-nav').classList.add('hide-screen')
-  } 
+    document.querySelector('.hubs-nav').classList.add('hide-screen')
+  }
 }
 
 var init = function () {
@@ -42,7 +42,7 @@ var init = function () {
   hideForCity(location.getSelectedLocationId())
 }
 
-const openSubNav = function(e) {
+const openSubNav = function (e) {
   e.preventDefault()
   e.target.parentNode.classList.add(subNavActiveClass)
   for (let i = 0; i < el.length; ++i) {
@@ -50,7 +50,7 @@ const openSubNav = function(e) {
   }
 }
 
-const closeSubNav = function(e) {
+const closeSubNav = function (e) {
   e.preventDefault()
   e.target.parentNode.parentNode.parentNode.classList.remove(subNavActiveClass)
   for (let i = 0; i < el.length; ++i) {

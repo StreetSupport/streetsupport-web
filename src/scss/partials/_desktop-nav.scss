@@ -239,13 +239,13 @@ $columned-dropdown-column-count: 3;
       }
     }
 
-    .city-nav .nav__item--#{$page} {
+    .hubs-nav .nav__item--#{$page} {
       @include mq($from: m) {
         background: $brand-s;
       }
     }
 
-    .city-nav .nav__list--sub-list .nav__item--#{$page} {
+    .hubs-nav .nav__list--sub-list .nav__item--#{$page} {
       @include mq($from: m) {
         background: $brand-e;
       }
