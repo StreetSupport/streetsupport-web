@@ -60,11 +60,11 @@ $normalPadding: 25px;
   padding: 0;
   background: $brand-c;
 
-  .city-nav & {
+  .hubs-nav & {
     background: $brand-d;
   }
 
-  &--city {
+  &--hub {
     display: none;
     &.is-active {
       display: block;
@@ -96,7 +96,7 @@ $normalPadding: 25px;
     }
   }
 
-  .city-nav & {
+  .hubs-nav & {
     a { 
       color: $brand-k
     }
@@ -127,7 +127,7 @@ $normalPadding: 25px;
     text-decoration: none;
   }
 
-  .city-nav & {
+  .hubs-nav & {
     color: $brand-k;
     padding: 18px 10px;
 
@@ -136,7 +136,7 @@ $normalPadding: 25px;
     }
   }
 
-  .city-nav &--has-sub-nav {
+  .hubs-nav &--has-sub-nav {
     padding-right: 35px;
   }
 
@@ -155,7 +155,7 @@ $normalPadding: 25px;
       position: absolute;
     }
 
-    .city-nav & {
+    .hubs-nav & {
       &::after {
         border-top: 5px solid $brand-k; 
         top: 1.7em;
@@ -164,7 +164,7 @@ $normalPadding: 25px;
   }
 }
 
-.city-nav {
+.hubs-nav {
   display: none;
   margin-top: -2px;
   background: $brand-e;
@@ -181,7 +181,7 @@ $normalPadding: 25px;
       background: $brand-c;
     }
   }
-  .section--#{$section} .nav__list--city .nav__item--#{$section} {
+  .section--#{$section} .nav__list--hub .nav__item--#{$section} {
     @include mq($from: m) {
       background: $brand-d;
     }
