@@ -19,6 +19,8 @@ $header-height: 64px;
   }
 
   .header__btn {
+    font-weight: $font-headline-weight;
+    font-family: $font-headline;
     float: right;
     width: 80px;
     height: $header-height;
@@ -123,9 +125,9 @@ $header-height: 64px;
 
   .nav__list {
     list-style-type: none;
-    background: none;
+    background: $brand-e;
     width: 200%;
-    height: 120%;
+    height: 140%;
 
     &--sub-list {
       list-style: none;
@@ -141,9 +143,10 @@ $header-height: 64px;
 
   .nav__item {
     margin: 0;
-    padding: 0px;
+    padding: 0 0 0 10px;
     width: 100%;
     font-weight: $font-headline-weight;
+    font-family: $font-headline;
     float: none;
 
     &[data-city] {
@@ -151,13 +154,6 @@ $header-height: 64px;
       &.is-active {
         display: block;
       }
-    }
-
-    a {
-      width: 25%;
-      color: $brand-m;
-      background: $brand-e;
-      border-bottom: 1px solid $brand-m;
     }
 
     &:hover {
@@ -178,15 +174,8 @@ $header-height: 64px;
       display: block;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-      display: block;
-      padding: 10px;
-    }
-
     &--sub-list-title {
-      padding: 10px;
+      padding: 18px 10px 18px 0;
       background: $brand-e;
       text-align: right;
       
@@ -203,9 +192,8 @@ $header-height: 64px;
           content: '';
           width: 0; 
           height: 0; 
-          margin-left: 1em;
-          margin-right: 1em;
-          top: 1.1em;
+          margin-left: 10px;
+          top: 1.6em;
           left: 0;
           position: absolute;
           border-bottom: 5px solid transparent;
@@ -218,31 +206,67 @@ $header-height: 64px;
         right: 50%;
         position: absolute;
         padding-right: 10px;
-        top: 0.7em;
+        top: 1.2em;
       }
     }
-  }
 
-  .nav__list--sub-list .nav__item a {
-    width: 50%;
-    background: $brand-d;
+    a {
+      border-bottom: 1px solid $brand-m;
+      color: $brand-m;
+      display: block;
+      padding: 18px 10px 18px 0;
+      text-decoration: none;
+      width: 25%;
+      &:hover { 
+        background: none;
+      }
+    }
+
+    &:last-child > a {
+      border: none;
+    }
+
+    .nav__list--sub-list .nav__item--sub-list-title {
+      background: $brand-e!important;
+    }
+
+    .nav__list--sub-list .nav__item {
+      background: $brand-s;
+    }
+
+    .nav__list--sub-list .nav__item a {
+      width: 50%;
+    }
   }
 
   .nav__item-link {
     &--has-sub-nav {
       &::after {
-        top: 1em;
-        right: 10px;
+        top: 1.6em;
+        right: 15px;
         border-bottom: 5px solid transparent;
         border-top: 5px solid transparent;
         border-left: 5px solid $brand-k;
       }
+    }
+    &--hub-heading {
+      border-bottom: 1px solid $brand-m!important;
     }
   }
 
   @media print {
     & {
       display: none;
+    }
+  }
+}
+
+.hub-nav-container {
+  margin: 0;
+  dd {
+    margin: 0;
+    ul {
+      padding: 0;
     }
   }
 }
@@ -278,5 +302,25 @@ $header-height: 64px;
 
   100% {
     opacity: 1;
+  }
+}
+
+// Active Section
+@each $section in $nav-sections {
+  .section--#{$section} .nav__item--#{$section} {
+    background: $brand-s;
+  }
+}
+
+
+// Active page
+@each $page in $nav-pages {
+  .page--#{$page} {
+    .nav--mobile .nav__item--#{$page} {
+      background: $brand-s;
+    }
+    .nav--mobile .nav__list--sub-list .nav__item--#{$page} {
+      background: $brand-e;
+    }
   }
 }

@@ -143,7 +143,6 @@ const init = () => {
           geoLocationUnavailable: false
         }
 
-        console.log(viewModel)
         templating.renderTemplate('js-category-no-results-result-tpl', viewModel, 'js-category-result-output', onRenderCallback)
       }
     }, (_) => {

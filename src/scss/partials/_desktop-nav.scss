@@ -63,7 +63,7 @@ $columned-dropdown-column-count: 3;
   background: $brand-c;
 
   .hubs-nav & {
-    background: $brand-d;
+    background: $brand-s;
   }
 
   &--hub {
@@ -112,7 +112,7 @@ $columned-dropdown-column-count: 3;
       color: $brand-k
     }
     &:hover {
-      background: $brand-d;
+      background: $brand-s;
     }
   }
 
@@ -163,7 +163,7 @@ $columned-dropdown-column-count: 3;
     padding: 18px 10px;
 
     &:hover {
-      background: $brand-d;
+      background: $brand-s;
     }
   }
 
@@ -197,11 +197,17 @@ $columned-dropdown-column-count: 3;
 
 .hubs-nav {
   display: none;
-  margin-top: -2px;
+  margin-top: -7px;
   background: $brand-e;
 
   @include mq($from: m) {
     display: block;
+  }
+}
+
+.hub-nav-container {
+  ul {
+    list-style: none;
   }
 }
 
@@ -214,7 +220,7 @@ $columned-dropdown-column-count: 3;
   }
   .section--#{$section} .nav__list--hub .nav__item--#{$section} {
     @include mq($from: m) {
-      background: $brand-d;
+      background: $brand-s;
     }
   }
 }
@@ -235,7 +241,7 @@ $columned-dropdown-column-count: 3;
 
     .city-nav .nav__item--#{$page} {
       @include mq($from: m) {
-        background: $brand-d;
+        background: $brand-s;
       }
     }
 
