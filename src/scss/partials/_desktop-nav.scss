@@ -1,5 +1,7 @@
 $smallPadding: 10px;
 $normalPadding: 25px;
+$columned-dropdown-item-width: 150px;
+$columned-dropdown-column-count: 3;
 
 .header {
   background: $brand-a;
@@ -71,6 +73,11 @@ $normalPadding: 25px;
     }
   }
 
+  &--header-hubs {
+    width: $columned-dropdown-item-width * $columned-dropdown-column-count;
+    margin-left: -$columned-dropdown-item-width;
+  }
+
   &--sub-list {
     display: none;
     position: absolute;
@@ -86,6 +93,10 @@ $normalPadding: 25px;
     color: white;
     &:hover {
       text-decoration: none;
+    }
+
+    .nav__list--sub-list &:hover {
+      background: $brand-r;
     }
   }
 
@@ -109,8 +120,28 @@ $normalPadding: 25px;
     float: none;
     a {
       display: block;
-      padding: 5px 25px 5px 10px;;
+      padding: 5px 30px 5px 10px;
+
+      &:hover {
+        background: $brand-r;
+      }
+
+      .hubs-nav &:hover {
+        background: $brand-e;
+      }
     }
+  }
+
+  .nav__list--header-hubs & {
+    width: $columned-dropdown-item-width;
+    float: left;
+    &:nth-of-type(#{$columned-dropdown-column-count}n) {
+      clear: right;
+    }
+  }
+
+  &--hubs {
+    position: relative;
   }
   
   &--mobile-only {
@@ -204,18 +235,14 @@ $normalPadding: 25px;
 
     .city-nav .nav__item--#{$page} {
       @include mq($from: m) {
-        background-color: $brand-d;
+        background: $brand-d;
       }
     }
 
     .city-nav .nav__list--sub-list .nav__item--#{$page} {
       @include mq($from: m) {
-        background-color: $brand-e;
+        background: $brand-e;
       }
-    }
-
-    .nav--mobile .nav__item--#{$page} {
-
     }
   }
 }
