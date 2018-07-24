@@ -22,7 +22,6 @@ const MapBuilder = function () {
           self.infoWindows
             .forEach((w) => w.close())
           infoWindow.open(self.map, marker)
-          console.log(this.customFields)
           self.container.markerClicked(this.customFields.mapIndex)
         })
 

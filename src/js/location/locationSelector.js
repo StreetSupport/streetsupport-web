@@ -61,7 +61,6 @@ const _useSaved = (deferred) => {
   } else if (saved !== undefined && saved.length > 0 && saved !== myLocationId) {
     deferred.resolve(supportedCities.get(saved))
   } else {
-    console.log('not previously saved, resolving')
     deferred.resolve(null)
   }
 }
