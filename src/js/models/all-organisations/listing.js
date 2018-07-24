@@ -114,6 +114,7 @@ function OrgListing (orgsFilter = null) {
           acc.push({
             key: next.serviceProviderKey,
             name: htmlDecode(next.serviceProviderName),
+            synopsis: htmlDecode(next.serviceProviderSynopsis),
             href: `/find-help/organisation?organisation=${next.serviceProviderKey}`,
             donationUrl: next.donationUrl,
             donationDescription: next.donationDescription,

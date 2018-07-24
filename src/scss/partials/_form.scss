@@ -184,6 +184,11 @@
   right: 0;
   @extend .small;
 
+  &--inline {
+    position: relative;
+    display: inline-block;
+  }
+
   .form__label--checkbox + input + & {
     top: 25px;
   }

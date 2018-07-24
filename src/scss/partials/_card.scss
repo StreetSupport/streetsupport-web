@@ -68,11 +68,12 @@ $spacing: 20px;
     border-top-right-radius: $radius;
     border-top-left-radius: $radius;
     background: $brand-h;
-    height: 140px;
+    height: 220px;
     padding: 15px 10px;
     * {
       color: white;
     }
+    *:last-child { padding-bottom: 10px }
   }
   .card__details {
     background: white;
@@ -87,13 +88,6 @@ $spacing: 20px;
   }
   .card__details__link {
     text-decoration: underline;
-  }
-}
-
-.card--tall {
-  .card__title {
-    height: 220px;
-    *:last-child { padding-bottom: 10px }
   }
   .btn { 
     width: 100%;

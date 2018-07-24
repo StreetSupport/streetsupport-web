@@ -19,6 +19,9 @@
         <input class="form__input" id="postcode" type="text" data-bind="textInput: postcode" placeholder="eg. M1 2HX"></input>
       </li>
     </ol>
+    <!-- ko ifnot: postcode -->
+    <p class="form__error form__error--inline">Please enter a postcode.</p>
+    <!-- /ko -->
     <button class="btn btn--cosy btn--always-full btn--brand-e" type="submit" data-bind="click: getByPostcode">
       <span class="btn__text">Find help</span>
     </button>

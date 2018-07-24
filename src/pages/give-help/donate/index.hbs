@@ -44,7 +44,7 @@ page: donate
       <!-- ko ifnot: postcodeRetrievalIssue -->
       {{> all-organisations/sort }}
       <div data-bind="foreach: orgsToDisplay">
-        <article class="card card--tall card--brand-h">
+        <article class="card card--brand-h">
           <div class="card__title">
             <h1 class="h2" data-bind="text: name"></h1>
             <p data-bind="html: donationDescription"></p>
