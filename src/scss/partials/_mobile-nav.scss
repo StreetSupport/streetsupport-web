@@ -194,7 +194,7 @@ $header-height: 64px;
           height: 0; 
           margin-left: 10px;
           top: 1.6em;
-          left: 0;
+          left: 12px;
           position: absolute;
           border-bottom: 5px solid transparent;
           border-top: 5px solid transparent;
@@ -232,6 +232,7 @@ $header-height: 64px;
 
     .nav__list--sub-list .nav__item {
       background: $brand-s;
+      padding-left: 18px;
     }
 
     .nav__list--sub-list .nav__item a {
