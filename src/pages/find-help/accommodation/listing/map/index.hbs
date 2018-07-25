@@ -20,30 +20,16 @@ page: accomListing
   </div>
 </div>
 
-<div class="block block--subpage-header">
-  <div class="container">
-    <h2 class="h1  block__header block__header--find-help has-icon--left">
-      <svg class="block__header__icon--find-help svg-accom-dims">
-        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#accom"></use>
-      </svg>
-      Accommodation
-    </h2>
-  </div>
-</div>
+{{> accommodation/header }}
+{{> accommodation/view-tabs mapSelected="true" }}
 
-<div class="block">
+<div class="block block--cards">
   <div class="container">
     <div class="block__content">
-
-      {{> accommodation-listing-header }}
 
       <div data-bind="with: listing">
         <!-- ko ifnot: dataIsLoaded -->
         <p class="text-center">Please wait whilst we load information.</p>
-        <!-- /ko -->
-
-        <!-- ko if: dataIsLoaded -->
-        {{> accommodation-view-options map="true" }}
         <!-- /ko -->
       </div>
       <div class="accommodation-listing">
