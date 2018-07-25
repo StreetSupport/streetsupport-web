@@ -3,6 +3,11 @@
 $radius: 7px;
 $spacing: 20px;
 
+.cards__list {
+  @include cf();
+  margin-bottom: 10px;
+}
+
 .card {
   border-radius: $radius;
   margin-bottom: $spacing;
@@ -53,6 +58,13 @@ $spacing: 20px;
       right: 0;
       width: 66.66%;
     }
+  }
+}
+
+.card--grid-1-of-3 {
+  @include mq($from: m) {
+    @include span(1 of 3);
+    &:nth-of-type(3n) { @include last() }
   }
 }
 

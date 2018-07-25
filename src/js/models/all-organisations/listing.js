@@ -8,11 +8,11 @@ const location = require('../../location/locationSelector')
 const proximityRanges = require('../../location/proximityRanges')
 const getDistanceApart = require('../../location/getDistanceApart')
 
-function OrgListing (orgsFilter = null) {
+function OrgListing (orgsFilter = null, pageSize = 8) {
   const self = this
 
   self.orgsFilter = orgsFilter
-  self.pageSize = 8
+  self.pageSize = pageSize
   self.pageIndex = ko.observable(self.pageSize)
 
   self.postcode = ko.observable()
