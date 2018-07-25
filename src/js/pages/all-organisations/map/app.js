@@ -21,6 +21,7 @@ window.initMap = function () {
     return `<div class="card card--brand-h card--gmaps">
               <div class="card__title">
                 <h1 class="h2">${htmlEncode.htmlDecode(p.name)}</h1>
+                <p>${htmlEncode.htmlDecode(p.synopsis)}</p>
               </div>
               <div class="card__details">
                 <a href="/find-help/organisation/?organisation=${p.key}">View details</a>
