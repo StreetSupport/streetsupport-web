@@ -55,15 +55,17 @@ page: offeritems
       </div>
       <div class="js-org-needs block__content" data-bind="with: offerItemsMap">
         <!-- ko if: showFilter -->
-        <div class="subcat-filter">
+        <div class="subcat-filter form--highlighted">
           <p class="subcat-filter__label">Filter by items taken:</p>
           <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: needCategories">
             <li class="subcat-filter__item js-filter-item" data-bind="attr: { 'data-id': id, class: cssClass }, text: name, click: $parent.filter"></li>
           </ul>
         </div>
         <!-- /ko -->
-        <div class="js-map services-map"></div>
-        <p>If you can not find a suitable organisation, please fill in the form below, and when an organisation has interest in your offer, they can get in touch.</p>
+        <div class="services-map services-map--with-filter">
+          <div class="js-map"></div>
+          <p>If you can not find a suitable organisation, please fill in the form below, and when an organisation has interest in your offer, they can get in touch.</p>
+        </div>        
       </div>
     </div>
   </div>

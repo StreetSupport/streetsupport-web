@@ -187,6 +187,7 @@
   &--cards {
     background: $brand-q;
     border-top: 1px solid $brand-k;
+    @include cf();
   }
 }
 
@@ -472,9 +473,10 @@
     @include span(1 of 2);
     @include last();
   }
+}
 
-  .js-map {
-    height: 500px;
-    width: 100%;
-  }
+.js-map {
+  height: 500px;
+  width: 100%;
+  margin-bottom: 20px;
 }

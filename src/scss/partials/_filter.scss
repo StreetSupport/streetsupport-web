@@ -1,9 +1,11 @@
 .subcat-filter {
-  text-align: center;
   @include printHide();
 
-  &--listing-with-map {
-    margin-bottom: 30px;
+  margin-bottom: 20px!important;
+
+  @include mq($from: m) {
+    @include span(4 of 12);
+    @include last();
   }
 
   .list-to-dropdown__select {
@@ -23,21 +25,20 @@
 
 .subcat-filter__items {
   display: inline;
-  padding: 16px 0 20px 0;
+  padding: 0;
   list-style: none;
 }
 
 .subcat-filter__item {
-  display: inline-block;
-  padding: 10px 15px;
-  border-radius: 15px;
-  background: $brand-i;
+  display: block;
+  width: 100%;
+  text-decoration: underline;
+
   &:hover {
-    cursor: pointer
+    text-decoration: none;
+    cursor: pointer;
   }
   &.on {
-    font-weight: bold;
-    background: $brand-j;
-    color: white;
+    text-decoration: none;
   }
 }

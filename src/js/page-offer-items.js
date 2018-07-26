@@ -7,6 +7,8 @@ var ko = require('knockout')
 var Form = require('./models/give-help/offer-items/OfferItemsModel')
 var OfferItemsMap = require('./models/give-help/offer-items/OfferItemsMap')
 
+window.initMap = () => { }
+
 location
   .getPreviouslySetPostcode()
   .then((currentLocation) => {

@@ -11,7 +11,6 @@ var OfferItemModel = function () {
   var self = this
   self.allNeedCategories = ko.observableArray()
   self.providers = ko.observableArray()
-  self.infoWindows = []
   self.markers = []
   self.map = null
 
@@ -71,16 +70,20 @@ var OfferItemModel = function () {
   })
 
   const buildInfoWindowMarkup = function (provider) {
-    return `<div class="map-info-window">
-        <h1 class="h2"><a href="/find-help/organisation/?organisation=${provider.key}">${htmlEncode.htmlDecode(provider.name)}</a></h1>
-        <p>${htmlEncode.htmlDecode(provider.itemDonationDescription)}</p>
-        <a href="/find-help/organisation/?organisation=${provider.key}" class="btn btn--brand-e">
-          <span class="btn__text">More about ${htmlEncode.htmlDecode(provider.name)}</span>
-        </a>
-      </div>`
+    return `<div class="card card--brand-h card--gmaps">
+              <div class="card__title">
+                <h1 class="h2"><a href="/find-help/organisation/?organisation=${provider.key}">${htmlEncode.htmlDecode(provider.name)}</a></h1>
+                <p>${htmlEncode.htmlDecode(provider.itemDonationDescription)}</p>
+              </div>
+              <div class="card__details">
+                <a href="/find-help/organisation/?organisation=${provider.key}">More information</a>
+              </div>
+            </div>`
   }
 
-  const createMarker = function (provider, infoWindow) {
+  const createMarker = function (provider) {
+    let popup = null
+
     provider.locations
       .forEach((l) => {
         const marker = googleMaps.buildMarker(l, self.map,
@@ -90,10 +93,15 @@ var OfferItemModel = function () {
         )
         marker.categories = provider.needCategories
 
-        marker.addListener('click', () => {
-          self.infoWindows
-            .forEach((w) => w.close())
-          infoWindow.open(self.map, marker)
+        marker.addListener('click', function () {
+          document.querySelectorAll('.card__gmaps-container')
+            .forEach((p) => p.parentNode.removeChild(p))
+            const position = new google.maps.LatLng(this.position.lat(), this.position.lng())
+            popup = new googleMaps.Popup(
+            position,
+            buildInfoWindowMarkup(provider))
+          popup.setMap(self.map)
+          self.map.setCenter(position)
         })
 
         self.markers.push(marker)
@@ -101,12 +109,11 @@ var OfferItemModel = function () {
   }
 
   self.displayMap = (userLocation) => {
+
     self.map = googleMaps.buildMap(userLocation, 11)
     self.providers()
       .forEach((p) => {
-        const infoWindow = googleMaps.buildInfoWindow(buildInfoWindowMarkup(p))
-        self.infoWindows.push(infoWindow)
-        createMarker(p, infoWindow)
+        createMarker(p)
       })
     googleMaps.addCircleMarker(userLocation, self.map)
   }
