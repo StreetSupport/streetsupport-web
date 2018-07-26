@@ -36,7 +36,7 @@ page: accomListing
         <div data-bind="with: listing">
             {{> accommodation-filter-menu }}
         </div>
-            <section class="accommodation-listing__listing">
+            <section class="accommodation-listing__listing accommodation-listing__listing--map">
               <div data-bind="with: listing">
               <!-- ko if: noItemsAvailable -->
                 <!-- ko template: { name: 'no-accommodation' } --><!-- /ko -->
@@ -46,7 +46,7 @@ page: accomListing
           <!-- ko if: hasItems -->
           <aside class="listing-with-map__map js-map"></aside>
           <section class="listing-with-map__listing" data-bind="foreach: items">
-            <article class="listing-with-map__listing-item" data-bind="css: { 'listing-with-map__listing-item--isActive': isActive }">
+            {{!-- <article class="listing-with-map__listing-item" data-bind="css: { 'listing-with-map__listing-item--isActive': isActive }">
               <h1 class="h2" data-bind="click: selectItem"><span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span></h1>
               <h2 class="h3" data-bind="click: selectItem, html: address"></h2>
               <ul class="accommodation-list__listing-features">
@@ -57,6 +57,28 @@ page: accomListing
               <a class="btn btn--brand-d" data-bind="attr: { href: detailsUrl }">
                 <span class="btn__text">View Details</span>
               </a>
+            </article> --}}
+
+            
+            <article class="card card--brand-h card--big listing-with-map__listing-item" data-bind="css: { 'listing-with-map__listing-item--isActive': isActive }">
+              <div class="card__title">
+                <h1 class="h2">
+                  <a data-bind="attr: { href: detailsUrl }">
+                    <span data-bind="html: name"></span>
+                  </a>
+                </h1>
+                <p data-bind="html: synopsis"></p>
+              </div>
+              <div class="card__details">
+                <!-- ko if: referralIsRequired --><p class="accommodation-listing__referral-notice">A referral is required for this property</p><!-- /ko -->
+                <dl class="card__details-dictionary">
+                  <dt class="card__details-dictionary-title">Type:</dt>
+                  <dd class="card__details-dictionary-desc" data-bind="text: accommodationType"></dd>
+                  <dt class="card__details-dictionary-title">Address:</dt>
+                  <dd class="card__details-dictionary-desc" data-bind="html: address"></dd>
+                </dl>
+                <a data-bind="attr: { href: detailsUrl }">More information</a>
+              </div>
             </article>
           </section>
           <!-- /ko -->

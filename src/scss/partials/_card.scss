@@ -21,6 +21,10 @@ $spacing: 20px;
 .card__title {
   margin-top: 0;
   text-align: left;
+
+  a { 
+    text-decoration: none;
+  }
 }
 
 .card--donate {

@@ -37,7 +37,8 @@
 }
 
 .form--proximity-search {
-  padding: 30px 30px 10px 30px;
+  background: white;
+  padding: 20px 20px 5px 20px;
   margin: 15px 0 30px 0;
   @include mq($from: m) {
     @include span(2 of 6);

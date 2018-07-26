@@ -1,8 +1,8 @@
-<aside class="accommodation-listing__filter">
-  <h1 class="h2 accommodation-listing__filter-heading" data-bind="click: toggleFilterDisplay, css: {open: displayFilter}">Filter Results
-    <span class="accommodation-listing__filter-toggle accommodation-listing__filter-toggle--is-open">-</span>
-    <span class="accommodation-listing__filter-toggle accommodation-listing__filter-toggle--is-closed">+</span>
-  </h1>
+<aside class="accommodation-listing__filter form form--highlighted form--proximity-search">
+  <h1 class="h2">Filter Results</h1>
+  <button class="btn btn--full btn--brand-e accommodation-listing__filter-toggle" data-bind="click: toggleFilterDisplay">
+    <span class="btn__text">Expand to filter results</span>
+  </button>
   <div class="accommodation-listing__filter-container" data-bind="css: {open: displayFilter}">
     <div class="accommodation-listing__filter-facets">
       <h2 class="h3">Location:</h2>
@@ -40,10 +40,10 @@
     </div>
     <div class="accommodation-listing__filter-btns">
       <button class="btn btn--brand-e" data-bind="click: updateListing">
-        <span class="btn__text">update</span>
+        <span class="btn__text">Update results</span>
       </button>
       <button class="btn btn--brand-f" data-bind="click: resetFilter">
-        <span class="btn__text">reset</span>
+        <span class="btn__text">Reset</span>
       </button>
     </div>
   </div>

@@ -83,6 +83,7 @@ const AccommodationListing = function (addtionalQueryString = '') {
 
   self.updateListing = function () {
     self.dataIsLoaded(false)
+    self.toggleFilterDisplay()
     getCoords(self.locationName(), (postcodeResult) => {
       const newLocation = {
         latitude: postcodeResult.latitude,

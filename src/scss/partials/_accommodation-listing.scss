@@ -13,8 +13,14 @@
 .accommodation-listing__listing {
   width: 100%;
   @include mq($from: m) {
-    @include span(8 of 12);
+    @include span(7 of 12);
     @include first();
+  }
+
+  &--map {
+    @include mq($from: m) {
+      @include span(8 of 12);
+    }
   }
 }
 
@@ -58,9 +64,7 @@
 }
 
 .accommodation-listing__filter {
-  background: $brand-q;
-  border-radius: 0 0 5px 5px;
-  margin-bottom: 20px;
+  margin-top: 0px;
 }
 
 .accommodation-listing__filter-heading {
@@ -81,26 +85,12 @@
 }
 
 .accommodation-listing__filter-toggle {
-  display: block;
-  float: right;
-
-  .accommodation-listing__filter-heading > &--is-open {
-    display: none;
-  }
-  .accommodation-listing__filter-heading.open > &--is-open {
-    display: block;
-  }
-  .accommodation-listing__filter-heading.open > &--is-closed {
-    display: none;
-  }
-
   @include mq($from: m) {
     display: none!important;
   }
 }
 
 .accommodation-listing__filter-container {
-  padding: 10px;
   display: none;
 
   @include mq($from: m) {
