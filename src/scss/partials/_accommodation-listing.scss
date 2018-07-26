@@ -16,12 +16,6 @@
     @include span(7 of 12);
     @include first();
   }
-
-  &--map {
-    @include mq($from: m) {
-      @include span(8 of 12);
-    }
-  }
 }
 
 .accommodation-listing__listing-location-description {

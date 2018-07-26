@@ -36,7 +36,7 @@ page: find-help-accom
         <div data-bind="with: listing">
             {{> accommodation-filter-menu }}
         </div>
-            <section class="accommodation-listing__listing accommodation-listing__listing--map">
+            <section class="accommodation-listing__listing">
               <div data-bind="with: listing">
               <!-- ko if: noItemsAvailable -->
                 <!-- ko template: { name: 'no-accommodation' } --><!-- /ko -->
@@ -46,20 +46,6 @@ page: find-help-accom
           <!-- ko if: hasItems -->
           <aside class="listing-with-map__map js-map"></aside>
           <section class="listing-with-map__listing" data-bind="foreach: items">
-            {{!-- <article class="listing-with-map__listing-item" data-bind="css: { 'listing-with-map__listing-item--isActive': isActive }">
-              <h1 class="h2" data-bind="click: selectItem"><span data-bind="html: mapIndexToDisplay"></span> - <span data-bind="html: name"></span></h1>
-              <h2 class="h3" data-bind="click: selectItem, html: address"></h2>
-              <ul class="accommodation-list__listing-features">
-                <!-- ko if: referralIsRequired --><li class="accommodation-list__listing-features-item">A referral is required for this property</li><!-- /ko -->
-                <!-- ko ifnot: referralIsRequired --><li class="accommodation-list__listing-features-item">No referral required</li><!-- /ko -->
-                <li class="accommodation-list__listing-features-item">Type: <span data-bind="text: accommodationType"></span></li>
-              </ul>
-              <a class="btn btn--brand-d" data-bind="attr: { href: detailsUrl }">
-                <span class="btn__text">View Details</span>
-              </a>
-            </article> --}}
-
-            
             <article class="card card--brand-h card--big listing-with-map__listing-item" data-bind="css: { 'listing-with-map__listing-item--isActive': isActive }">
               <div class="card__title">
                 <h1 class="h2">
@@ -70,7 +56,9 @@ page: find-help-accom
                 <p data-bind="html: synopsis"></p>
               </div>
               <div class="card__details">
-                <!-- ko if: referralIsRequired --><p class="accommodation-listing__referral-notice">A referral is required for this property</p><!-- /ko -->
+                <!-- ko if: referralIsRequired -->
+                <p class="accommodation-listing__referral-notice">A referral is required for this property</p>
+                <!-- /ko -->
                 <dl class="card__details-dictionary">
                   <dt class="card__details-dictionary-title">Type:</dt>
                   <dd class="card__details-dictionary-desc" data-bind="text: accommodationType"></dd>
