@@ -203,7 +203,7 @@ $columned-dropdown-column-count: 3;
 
 .hubs-nav {
   display: none;
-  margin-top: -7px;
+  margin-top: -2px;
   background: $brand-e;
 
   @include mq($from: m) {
@@ -214,6 +214,10 @@ $columned-dropdown-column-count: 3;
 .hub-nav-container {
   ul {
     list-style: none;
+  }
+
+  @include mq($from: m) {
+    margin-top: -7px;
   }
 }
 
