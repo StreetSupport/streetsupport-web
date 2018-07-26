@@ -43,7 +43,7 @@ $site-gutter-px: 16;
 
 $site-gutter: rem($site-gutter-px);
 
-$grid-gutter: .25; // Quarter of column width
+$grid-gutter: 0.0625; // Sixteenth of column width
 $grid-column: 8;
 $grid-debug: hide; // Change this to show or hide
 
