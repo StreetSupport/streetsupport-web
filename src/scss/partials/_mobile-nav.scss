@@ -313,9 +313,8 @@ $header-height: 64px;
   }
 }
 
-
 // Active page
-@each $page in $nav-pages {
+@each $page in join($nav-pages, $generated-nav-pages) {
   .page--#{$page} {
     .nav--mobile .nav__item--#{$page} {
       background: $brand-s;

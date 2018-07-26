@@ -1,9 +1,12 @@
 import del from 'del'
 import fs from 'fs'
 import gulp from 'gulp'
+import request from 'request'
 import runSequence from 'run-sequence'
 
 import config from '../foley.json'
+import endpoints from '../src/js/api'
+import { newFile } from './fileHelpers'
 
 const findHelpSrc = `${config.paths.pages}find-help/`
 const categoryPageSrc = `${findHelpSrc}category/index.hbs`
@@ -11,7 +14,20 @@ const timetabledPageSrc = `${findHelpSrc}category-by-day/index.hbs`
 const locationPageSrc = `${findHelpSrc}category-by-location/index.hbs`
 const generatedPagesSrc = `${config.paths.pages}_generated/`
 
-import { categories } from '../src/data/generated/service-categories'
+let categories = []
+
+gulp.task('getServiceCategories', (callback) => {
+  request(endpoints.serviceCategories, function (err, res, body) {
+    categories = JSON.parse(body)
+      .map((c) => {
+        return {
+          key: c.key,
+          name: c.name
+        }
+      })
+    callback()
+  })
+})
 
 const getNewContent = function (src, cat) {
   const result = src
@@ -107,14 +123,13 @@ gulp.task('generate-nav-links', () => {
 })
 
 gulp.task('generate-nav-variables', () => {
-  const srcFile = `${config.paths.scss}/modules/_generated-variables.scss`
-  const srcContent = fs.readFileSync(srcFile, 'utf-8')
+  const srcFile = `${config.paths.scss}/modules/`
   const output = categories
     .map((c) => `find-help-${c.key}`)
     .join(' ')
-  const result = srcContent
-    .replace('$nav-pages:', `$nav-pages: ${output}`)
-  fs.writeFileSync(srcFile, result)
+  
+  return newFile('_generated-variables.scss', `$generated-nav-pages: ${output}`)
+    .pipe(gulp.dest(srcFile))
 })
 
 gulp.task('copy-to-find-help', () => {
@@ -125,6 +140,7 @@ gulp.task('copy-to-find-help', () => {
 gulp.task('generate-service-pages', (callback) => {
   runSequence(
     'reset',
+    'getServiceCategories',
     'make-generated-files-directory',
     'generate-provider-directories',
     ['generate-provider-listing-pages', 'generate-timetabled-pages', 'generate-map-pages'],
