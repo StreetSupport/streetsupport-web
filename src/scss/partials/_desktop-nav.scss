@@ -1,6 +1,6 @@
 $smallPadding: 10px;
 $normalPadding: 25px;
-$columned-dropdown-item-width: 150px;
+$columned-dropdown-item-width: 180px;
 $columned-dropdown-column-count: 3;
 
 .header {
@@ -73,7 +73,7 @@ $columned-dropdown-column-count: 3;
     }
   }
 
-  &--header-hubs {
+  &--columned {
     @include mq($from: m) {
       width: $columned-dropdown-item-width * $columned-dropdown-column-count;
       margin-left: -$columned-dropdown-item-width;
@@ -134,7 +134,7 @@ $columned-dropdown-column-count: 3;
     }
   }
 
-  .nav__list--header-hubs & {
+  .nav__list--columned & {
     @include mq($from: m) {
       width: $columned-dropdown-item-width;
       float: left;
