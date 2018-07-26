@@ -61,6 +61,31 @@ $spacing: 20px;
   }
 }
 
+.card__details-dictionary {
+  @include cf();
+  margin: 20px 0 0 0;
+}
+
+.card__details-dictionary-title {
+  font-family: $font-headline;
+  font-weight: $font-headline-weight;
+  float: left;
+  clear: left;
+  margin-right: 1em;
+  width: 60px
+}
+
+.card__details-dictionary-desc {
+  display: block;
+  margin-bottom: 0;
+  margin-left: 76px;
+  &::after {
+    content: ' ';
+    height: 1em;
+    display: inline-table;
+  }
+}
+
 .card--grid-1-of-3 {
   @include mq($from: m) {
     @include span(1 of 3);
@@ -106,6 +131,13 @@ $spacing: 20px;
   .btn { 
     width: 100%;
     margin: 0;
+  }
+}
+
+.card--big {
+  width: 100%;
+  .card__title {
+    height: auto;
   }
 }
 

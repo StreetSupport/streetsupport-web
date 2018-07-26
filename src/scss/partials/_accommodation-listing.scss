@@ -6,45 +6,20 @@
 .accommodation-listing__filter {
   @include mq($from: m) {
     @include span(4 of 12);
-    @include first();
+    @include last();
   }
 }
 
 .accommodation-listing__listing {
   width: 100%;
   @include mq($from: m) {
-    @include span(8 of 12 );
-    @include last();
+    @include span(8 of 12);
+    @include first();
   }
 }
 
 .accommodation-listing__listing-location-description {
   text-align: center;
-}
-
-.accommodation-listing__listing-item {
-  @include cf();
-  padding: 10px 0 20px 0;
-  margin-bottom: 10px;
-  border-bottom: 1px solid black;
-
-  &:last-child {
-    border-bottom: none;
-  }
-}
-
-.accommodation-listing__listing-heading {
-  margin-bottom: 0px;
-}  
-
-.accommodation-listing__listing-item-body {
-  margin-top: 20px;
-}
-
-.accommodation-listing__listing-item-details {
-  @include mq($from: s) {
-    @include span(4 of 6);
-  }
 }
 
 .accommodation-listing__listing-item--isActive {

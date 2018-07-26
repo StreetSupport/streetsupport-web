@@ -39,10 +39,15 @@ page: accomListing
           <!-- /ko -->
           <!-- ko ifnot: noItemsAvailable -->
             <!-- ko template: { name: 'accommodation-listing' } --><!-- /ko -->
+            <!-- ko if: nextPageEndpoint -->
+            <button class="btn btn--brand-e btn--centred" data-bind="click: loadNext">
+              <span class="btn__text">Load More</span>
+            </button>    
+            <!-- /ko -->
           <!-- /ko -->
         </section>
-        </div>
-        <!-- /ko -->
+      </div>
+      <!-- /ko -->
       {{> social-share}}
     </div>
   </div>
@@ -62,31 +67,25 @@ page: accomListing
 
 <script type="text/html" id="accommodation-listing">
   <div data-bind="foreach: items">
-    <article class="accommodation-listing__listing-item" data-bind="css: { 'accommodation-listing__listing-item--isActive': isActive }">
-      <h1 class="h2 accommodation-listing__listing-heading">
-        <a data-bind="attr: { href: detailsUrl }">
-          <span data-bind="html: name"></span>
-        </a>
-      </h1>
-      <h2 class="h3" data-bind="html: address"></h2>
-      <!-- ko if: referralIsRequired --><p class="accommodation-listing__referral-notice">A referral is required for this property</p><!-- /ko -->
-      <div class="accommodation-listing__listing-item-body">
-        <div class="accommodation-listing__listing-item-details">
-          <p data-bind="html: synopsis"></p>
-          <ul class="accommodation-list__listing-features">
-            <li class="accommodation-list__listing-features-item">Type: <span data-bind="text: accommodationType"></span></li>
-            <!-- ko ifnot: referralIsRequired --><li class="accommodation-list__listing-features-item">No referral required</li><!-- /ko -->
-          </ul>
-        </div>
-        <a class="btn btn--brand-d accommodation-list__listing-view-more-btn" data-bind="attr: { href: detailsUrl }">
-          <span class="btn__text">View Details</span>
-        </a>
+    <article class="card card--brand-h card--big">
+      <div class="card__title">
+        <h1 class="h2">
+          <a data-bind="attr: { href: detailsUrl }">
+            <span data-bind="html: name"></span>
+          </a>
+        </h1>
+        <p data-bind="html: synopsis"></p>
+      </div>
+      <div class="card__details">
+        <!-- ko if: referralIsRequired --><p class="accommodation-listing__referral-notice">A referral is required for this property</p><!-- /ko -->
+        <dl class="card__details-dictionary">
+          <dt class="card__details-dictionary-title">Type:</dt>
+          <dd class="card__details-dictionary-desc" data-bind="text: accommodationType"></dd>
+          <dt class="card__details-dictionary-title">Address:</dt>
+          <dd class="card__details-dictionary-desc" data-bind="html: address"></dd>
+        </dl>
+        <a data-bind="attr: { href: detailsUrl }">More information</a>
       </div>
     </article>
   </div>
-  <!-- ko if: nextPageEndpoint -->
-  <button class="btn btn--brand-e" data-bind="click: loadNext">
-    <span class="btn__text">Load More</span>
-  </button>    
-  <!-- /ko -->
 </script>
