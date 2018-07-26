@@ -16,6 +16,15 @@ $spacing: 20px;
 
 .card__details {
   padding: $spacing;
+  position: relative;
+
+  p:last-of-type {
+    padding-bottom: 16px;
+  }
+
+  &--fat-bottom {
+    height: 250px;
+  }
 }
 
 .card__title {
@@ -131,10 +140,6 @@ $spacing: 20px;
   }
   .card__details__link {
     text-decoration: underline;
-  }
-  .btn { 
-    width: 100%;
-    margin: 0;
   }
 }
 

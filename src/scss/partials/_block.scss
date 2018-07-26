@@ -403,6 +403,12 @@
     width: 300px;
     margin: 0 auto;
   }
+
+  &--four {
+    @include mq($from: m) {
+      width: 640px;
+    }
+  }
 }
 
 .block-tabs__tab {
@@ -418,14 +424,18 @@
   margin-top: 4px;
   display: block;
 
-  &:last-of-type { 
-    @include last();
-  }
-
   &--selected {
     background: blue;
     padding: 12px 30px;
     margin-top: 0px;
+  }
+
+  .block-tabs__container--four & {
+    @include span(1 of 4);
+  }
+
+  &:last-of-type { 
+    @include last();
   }
 
   .block-tabs--cards & {

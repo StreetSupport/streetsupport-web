@@ -1,7 +1,6 @@
 // Give requests page specific styles
 
 .requests {
-  background: $brand-i;
   color: $brand-k;
   padding: 30px 20px 20px 20px;
   @include cf();
@@ -53,16 +52,7 @@
   width: 100%;
 }
 
-.requests-search__input__submit {
-  width: 100%;
-
-  @include mq($from: l) {
-    width: 33.33%;
-  }
-}
-
 .requests-search__filter {
-
   .list-to-dropdown__select {
     background: #FFF;
     border: 1px solid #939598;

@@ -144,4 +144,13 @@
     margin: 0 auto;
     display: block;
   }
+
+  .card__details--fat-bottom & {
+    position: absolute;
+    bottom: 20px;
+  }
+
+  .card--brand-h & {
+    margin: 0;
+  }
 }

@@ -17,21 +17,56 @@ page: giveitems
     </ol>
   </div>
 </div>
-{{> no-js}}
 
-<div id="js-card-search" class="requests-search is-active">
-  <div class="block block--subpage-header">
-    <div class="container block__inner">
-      <h1 class="h1 block__header requests__title">
-        <svg class="requests__title__icon">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#give"></use>
-        </svg>
-        Help
-      </h1>
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <header class="multi-form-header">
+        <h1 class="h1">Give Help</h1>
+        <p>You can help make big changes to homelessness by giving items, your time or money to local organisations so they can continue their good work. If you can't spot anything suitable at the moment, use our <a href="/give-help/volunteer/">volunteer form</a>, or <a href="/give-help/offer-items/">offer items</a> that you are willing to donate. Interested organisations will then get in touch with you directly.</p>
+      </header>
+
+      <form class="form form--highlighted form--proximity-search">
+        <p>To find requests for help near you, enter your postcode below.</p>
+        <fieldset class="form__fieldset">
+          <legend>Showing requests within:</legend>
+          <ol class="form__field-list">
+            <li class="form__field-item form__field-item--proximity-search-range">
+              <label class="form__label hide-screen" for="range">Range</label>
+              <select class="location-selector__select form__input form__input--inline form__input--short js-find-help-range">
+                <option value="1000">1km</option>
+                <option value="2000">2km</option>
+                <option value="5000">5km</option>
+                <option value="10000">10km</option>
+                <option value="20000">20km</option>
+              </select>
+            </li>
+            <li class="form__field-item form__field-item--proximity-search-of"><span>of</span></li>
+            <li class="form__field-item form__field-item--proximity-search-postcode">
+              <label class="form__label hide-screen" for="postcode">Your postcode</label>
+              <input class="form__input js-location-search-postcode" id="postcode" type="text" placeholder="eg. M1 2HX"></input>
+            </li>
+          </ol>
+          <a class="btn btn--cosy btn--always-full btn--brand-e js-update-search" type="submit">
+            <span class="btn__text">Search</span>
+          </a>
+        </fieldset>
+      </form>
     </div>
   </div>
+</div>
 
-  <div class="block">
+<nav class="block-tabs block-tabs--cards">
+  <div class="block-tabs__container block-tabs__container--four">
+    <a class="block-tabs__tab block-tabs__tab--selected js-filter-item js-filter-item-all" data-filter="all" href="#">All</a>
+    <a class="block-tabs__tab js-filter-item" data-filter="items" href="#">Items</a>
+    <a class="block-tabs__tab js-filter-item" data-filter="time" href="#">Time</a>
+    <a class="block-tabs__tab js-filter-item" data-filter="money" href="#">Money</a>
+  </div>
+</nav>
+
+<div id="js-card-search" class="requests-search is-active">
+  <div class="block block--cards">
     <div class="container">
       <div class="block__content">
         <div id="js-card-list-output">
@@ -48,7 +83,6 @@ page: giveitems
 
 <script id="js-no-data-tpl" type="text/template">
   <div class="block__section">
-    {{> location-description-with-postcode noprint="true" }}
     \{{#geoLocationUnavailable}}
     <p>Unfortunately, we cannot determine your location. Please ensure location is enabled on your device.</p>
     \{{/geoLocationUnavailable}}
@@ -65,69 +99,42 @@ page: giveitems
 </script>
 
 <script id="js-card-list-tpl" type="text/template">
+<div class="card-sort">
+  <span class="card-sort__title">Sort by:</span>
+  <a class="card-sort__item js-sort-criteria card-sort__item--selected" href="#" data-sort="date-desc">Date Added</a> 
+  <a class="card-sort__item js-sort-criteria" href="#" data-sort="organisation-asc">Organisation</a> 
+  <a class="card-sort__item js-sort-criteria" href="#" data-sort="distance-asc">Distance</a> 
+</div>
   <section class="block__section">
-    <p>You can help make big changes to homelessness by giving items, your time or money to local organisations so they can continue their good work. If you can't spot anything suitable at the moment, use our <a href="/give-help/volunteer/">volunteer form</a>, or <a href="/give-help/offer-items/">offer items</a> that you are willing to donate. Interested organisations will then get in touch with you directly.</p>
-  </section>
-  <section class="block__section">
-    <ul class="requests-search__filter__list">
-      <li class="requests-search__filter__item js-filter-item js-filter-item-all is-active" data-filter="all">All</li>
-      <li class="requests-search__filter__item js-filter-item" data-filter="items">Items</li>
-      <li class="requests-search__filter__item js-filter-item" data-filter="time">Time</li>
-      <li class="requests-search__filter__item js-filter-item" data-filter="money">Money</li>
-    </ul>
     <div class="requests">
       <div class="requests-search__input" action="#">
         <div class="requests-search__container">
-          {{> location-description-with-postcode noprint="true" }}
           <label for="search-for-requests" class="hide-screen">Filter requests for help</label>
           <input autofocus id="search-for-requests" class="search requests-search__autocomplete" placeholder="Filter requests for help by entering a keyword" />
         </div>
       </div>
-      <div class="requests-search__sort">
-        <h3 class="h3 requests-search__sort__title">Sort by:</h3>
-        <ul class="requests-search__sort__list">
-            <li class="requests-search__sort__item">
-              <button class="requests-search__sort__criteria js-sort-criteria is-active" data-sort="date-desc">Date Added</button>
-            </li>
-            <li class="requests-search__sort__item">
-              <button class="requests-search__sort__criteria js-sort-criteria" data-sort="organisation-asc">Organisation</button>
-            </li>
-            <li class="requests-search__sort__item">
-              <button class="requests-search__sort__criteria js-sort-criteria" data-sort="distance-asc">Distance</button>
-            </li>
-        </li>
-      </ul>
-    </div>
-
   </section>
   <ul id="js-card-list" class="requests-listing list">
     \{{#card}}
-    <li class="requests-listing__item cta--shadow" data-id="\{{id}}">
-      <a class="requests-listing__link" href="\{{detailsUrl}}">
-        <article>
-          <p class="h3 requests-listing__type">
-           <svg class="svg-logo-dims requests-listing__icon">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#\{{{type}}}-alt"></use>
-          </svg>
-          <span class="type">\{{type}}</span>
-        </p>
-        \{{#donationAmountInPounds}}<p class="requests-listing__amount">£\{{{donationAmountInPounds}}}</p>\{{/donationAmountInPounds}}
-        <div class="requests-listing__info">
-          <h3 class="requests-listing__description description">\{{{description}}}</h3>
-          <p class="requests-listing__date formattedNeededDate">Posted: <time datetime={{{formattedNeededDate}}}>\{{{formattedNeededDate}}}</time></p>
-          <p class="hide-screen creationDate">\{{creationDate}}</p>
-          <p class="hide-screen neededDate">\{{neededDate}}</p>
-          <p class="hide-screen distanceAwayInMetres">\{{distanceAwayInMetres}}</p>
-          <p class="hide-screen keywords">\{{keywords}}</p>
-        </div>
-        <div class="requests-listing__secondary-info">
-          <p class="requests-listing__provider serviceProviderName">\{{{serviceProviderName}}}</p>
-          <p class="requests-listing__location-description locationDescription">\{{{locationDescription}}}</p>
-          <button class="btn btn--brand-e">
-            <span class="btn__text">I Can Help!</span>
-          </button>
-        </article>
-      </a>
+    <li class="card card--brand-h card--grid-1-of-3" data-id="\{{id}}">
+      <div class="card__title">
+        <a href="\{{detailsUrl}}">
+          <h1 class="h2">\{{{description}}}</h1>
+        </a>
+        <p class="hide-screen creationDate">\{{creationDate}}</p>
+        <p class="hide-screen neededDate">\{{neededDate}}</p>
+        <p class="hide-screen distanceAwayInMetres">\{{distanceAwayInMetres}}</p>
+        <p class="hide-screen keywords">\{{keywords}}</p>
+        <p class="hide-screen type">\{{type}}</p>
+      </div>
+      <div class="card__details card__details--fat-bottom">
+        <p class="h3 serviceProviderName">\{{{serviceProviderName}}}</p>
+        <p class="locationDescription ">\{{{locationDescription}}}</p>
+        <p class="formattedNeededDate">Posted: <time datetime={{{formattedNeededDate}}}>\{{{formattedNeededDate}}}</time></p>
+        <a href="\{{detailsUrl}}" class="btn btn--brand-e">
+          <span class="btn__text">I Can Help!</span>
+        </a>
+      </div>
     </li>
     \{{/card}}
   </ul>
