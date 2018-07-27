@@ -238,7 +238,12 @@
   @include mq($from: m) {
     padding-bottom: 30px;
 
-    .container { padding-right: 33% }
+    .container { 
+      & > * {
+        @include span(2 of 3); 
+        @include first();
+      }
+    }
 
   }
 
