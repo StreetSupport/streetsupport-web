@@ -182,6 +182,11 @@ $spacing: 20px;
   margin-bottom: 0px;
   left: -110px;
   width: 100%;
+
+  @include mq($from: m) {
+    left: -150px;
+  }
+
   .card__title {
     height: auto;
     * {
@@ -196,6 +201,10 @@ $spacing: 20px;
   height: 0;
   position: absolute;
   margin-top: -33px;
+
+  @include mq($from: m) {
+    width: 300px;
+  }
 }
 
 .card__gmaps-container::after {

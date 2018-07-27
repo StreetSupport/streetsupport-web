@@ -22,11 +22,6 @@ let onRenderCallback = function () {
   browser.loaded()
 }
 
-const onLocationCriteriaChange = (result, range) => {
-  browser.loading()
-  buildList(buildUrl(result, range), result)
-}
-
 function buildList (url, locationResult) {
   getApiData.data(url)
     .then((result) => {
@@ -58,9 +53,6 @@ function buildList (url, locationResult) {
         onRenderCallback = function () {
           accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', 'day'))
           analytics.init(document.title)
-          findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
-
-          browser.initPrint()
 
           browser.loaded()
         }

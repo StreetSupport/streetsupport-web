@@ -1,3 +1,5 @@
+/* global google */
+
 import './common'
 
 const FindHelp = require('./find-help')
@@ -31,19 +33,21 @@ window.initMap = () => { }
 const displayMap = (providers, userLocation) => {
   const map = buildMap(userLocation)
 
-  const infoWindows = []
+  let popup = null
 
   providers
     .forEach((p) => {
-      const infoWindow = googleMaps.buildInfoWindow(buildInfoWindowMarkup(p))
-      infoWindows.push(infoWindow)
-
       const marker = googleMaps.buildMarker(p.location, map, { title: `${htmlEncode.htmlDecode(p.serviceProviderName)}` })
 
-      marker.addListener('click', () => {
-        infoWindows
-          .forEach((w) => w.close())
-        infoWindow.open(map, marker)
+      marker.addListener('click', function () {
+        document.querySelectorAll('.card__gmaps-container')
+          .forEach((p) => p.parentNode.removeChild(p))
+          const position = new google.maps.LatLng(this.position.lat(), this.position.lng())
+          popup = new googleMaps.Popup(
+          position,
+          buildInfoWindowMarkup(p))
+        popup.setMap(map)
+        map.setCenter(position)
       })
     })
 
@@ -68,7 +72,6 @@ const hasItemsCallback = (providers, locationResult) => {
 
 const defaultOnRenderCallback = () => {
   findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
-  browser.initPrint()
   browser.loaded()
 }
 
