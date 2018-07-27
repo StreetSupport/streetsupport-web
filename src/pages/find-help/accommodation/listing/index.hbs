@@ -33,7 +33,7 @@ page: find-help-accom
       <!-- ko if: dataIsLoaded -->
       <div class="accommodation-listing">
         {{> accommodation-filter-menu }}
-        <section class="accommodation-listing__listing">
+        <section class="cards__list cards__list--single-col">
           <!-- ko if: noItemsAvailable -->
             <!-- ko template: { name: 'no-accommodation' } --><!-- /ko -->
           <!-- /ko -->

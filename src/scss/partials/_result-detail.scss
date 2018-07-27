@@ -37,11 +37,7 @@
   &__times-list {
     @include cf();
     margin: 0;
-    padding: 0 0 15px 0;
-
-    .accordion--organisation & {
-      padding-bottom: 0;
-    }
+    padding: 0;
   }
 
   &__times-title {
@@ -49,7 +45,6 @@
     padding: 0 0 5px 0;
     min-width: 85px;
     float: left;
-    clear: both;
     font-weight: $font-headline-weight;
 
     .accordion--day & {

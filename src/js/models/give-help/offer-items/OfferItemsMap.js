@@ -119,6 +119,8 @@ var OfferItemModel = function () {
   }
 
   self.filter = (c) => {
+    document.querySelectorAll('.card__gmaps-container')
+      .forEach((p) => p.parentNode.removeChild(p))
     self.needCategories()
       .forEach((c) => {
         c.cssClass('subcat-filter__item')

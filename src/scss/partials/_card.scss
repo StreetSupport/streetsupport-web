@@ -6,6 +6,13 @@ $spacing: 20px;
 .cards__list {
   @include cf();
   margin-bottom: 10px;
+
+  &--single-col {
+    @include mq($from: m) {
+      @include span(7 of 12);
+      @include first();
+    }
+  }
 }
 
 .card {
@@ -24,6 +31,16 @@ $spacing: 20px;
 
   &--fat-bottom {
     height: 250px;
+  }
+}
+
+.card__details-entry {
+  border-bottom: 1px solid $brand-r;
+  margin-bottom: 20px;
+
+  &:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0px;
   }
 }
 
@@ -83,20 +100,28 @@ $spacing: 20px;
 .card__details-dictionary-title {
   font-family: $font-headline;
   font-weight: $font-headline-weight;
-  float: left;
-  clear: left;
-  margin-right: 1em;
-  width: 60px
+
+  @include mq($from: m) {
+    float: left;
+    clear: left;
+    margin-right: 1em;
+    width: 150px
+  }
 }
 
 .card__details-dictionary-desc {
   display: block;
-  margin-bottom: 0;
-  margin-left: 76px;
-  &::after {
-    content: ' ';
-    height: 1em;
-    display: inline-table;
+  margin-bottom: 10px;
+  margin-left: 0;
+  padding-left: 0;
+  @include mq($from: m) {
+    margin-bottom: 0;
+    margin-left: 166px;
+    &::after {
+      content: ' ';
+      height: 1em;
+      display: inline-table;
+    }
   }
 }
 

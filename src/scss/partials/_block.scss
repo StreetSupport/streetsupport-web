@@ -405,6 +405,12 @@
     margin: 0 auto;
   }
 
+  &--three {
+    @include mq($from: m) {
+      width: 480px;
+    }
+  }
+
   &--four {
     @include mq($from: m) {
       width: 640px;
@@ -416,19 +422,24 @@
   @include span(1 of 2);
 
   background: red;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border-top: 1px solid black;
-  border-right: 1px solid black;
-  border-left: 1px solid black;
-  padding: 10px 30px;
-  margin-top: 4px;
   display: block;
+  margin-top: 4px;
+  padding: 10px;
+  text-align: center;
 
   &--selected {
     background: blue;
     padding: 12px 30px;
     margin-top: 0px;
+  }
+
+  .block-tabs__container--three & {
+    @include span(1 of 3);
   }
 
   .block-tabs__container--four & {

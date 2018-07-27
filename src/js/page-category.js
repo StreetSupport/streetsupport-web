@@ -1,6 +1,5 @@
 import './common'
 
-const accordion = require('./accordion')
 const FindHelp = require('./find-help')
 
 const marked = require('marked')
@@ -96,7 +95,6 @@ const initSubCatFilter = () => {
 }
 
 const hasProvidersCallback = () => {
-  accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'), true)
   initSubCatFilter()
 
   defaultOnRenderListingCallback()
@@ -109,7 +107,6 @@ const onLocationCriteriaChange = (newLocationResult, newRange) => {
 
 const defaultOnRenderListingCallback = () => {
   findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
-  browser.initPrint()
   browser.loaded()
   analytics.init(document.title)
 }
