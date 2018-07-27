@@ -111,15 +111,18 @@ gulp.task('generate-map-pages', () => {
 })
 
 gulp.task('generate-nav-links', () => {
+  const srcFile = `${config.paths.partials}/nav/`
   const output = categories
     .map((c) => {
       return c.key === 'accom'
-      ? `<li class="nav__item nav__item--find-help-${c.key}"><a href="/find-help/accommodation/">${c.name}</a></li>`
-      : `<li class="nav__item nav__item--find-help-${c.key}"><a href="/find-help/${c.key}/">${c.name}</a></li>`
+        ? `<li class="nav__item nav__item--find-help-${c.key}"><a href="/find-help/accommodation/">${c.name}</a></li>`
+        : `<li class="nav__item nav__item--find-help-${c.key}"><a href="/find-help/${c.key}/">${c.name}</a></li>`
 
     })
     .join('')
-  fs.writeFileSync(`${config.paths.partials}/nav/service-cats.hbs`, output)
+
+  return newFile('service-cats.hbs', output)
+    .pipe(gulp.dest(srcFile))
 })
 
 gulp.task('generate-nav-variables', () => {
@@ -127,14 +130,14 @@ gulp.task('generate-nav-variables', () => {
   const output = categories
     .map((c) => `find-help-${c.key}`)
     .join(' ')
-  
+
   return newFile('_generated-variables.scss', `$generated-nav-pages: ${output}`)
     .pipe(gulp.dest(srcFile))
 })
 
 gulp.task('copy-to-find-help', () => {
   return gulp.src(generatedPagesSrc + '**/*', {})
-  .pipe(gulp.dest(findHelpSrc))
+    .pipe(gulp.dest(findHelpSrc))
 })
 
 gulp.task('generate-service-pages', (callback) => {
