@@ -12,6 +12,23 @@
     <meta property="og:description" content="{{description}}" />
     <meta property="og:image" content="{{description}}" />
 
+    <style>
+      .header--desktop,
+      .hubs-nav {
+        display: none;
+      }
+      @media (min-width:46.875em) {
+        nav--mobile {
+          display: none;
+        }
+        
+        .header--desktop,
+        .hubs-nav {
+          display: block;
+        }
+      }
+    </style>
+
     <link rel="stylesheet" href="{{site.url}}assets/css/site.css?v={{site.cssVersion}}" />
 
     <!-- Google Tag Manager -->
