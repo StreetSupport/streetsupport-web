@@ -1,3 +1,5 @@
+/* global google */
+
 const htmlEncode = require('htmlencode')
 const ko = require('knockout')
 require('knockout.validation') // No variable here is deliberate!
@@ -96,8 +98,8 @@ var OfferItemModel = function () {
         marker.addListener('click', function () {
           document.querySelectorAll('.card__gmaps-container')
             .forEach((p) => p.parentNode.removeChild(p))
-            const position = new google.maps.LatLng(this.position.lat(), this.position.lng())
-            popup = new googleMaps.Popup(
+          const position = new google.maps.LatLng(this.position.lat(), this.position.lng())
+          popup = new googleMaps.Popup(
             position,
             buildInfoWindowMarkup(provider))
           popup.setMap(self.map)
@@ -109,7 +111,6 @@ var OfferItemModel = function () {
   }
 
   self.displayMap = (userLocation) => {
-
     self.map = googleMaps.buildMap(userLocation, 11)
     self.providers()
       .forEach((p) => {

@@ -95,10 +95,10 @@ const initSubCatFilter = () => {
   listToDropdown.init(initSubCatAsDropdown)
 }
 
-const hasProvidersCallback = () => {
+const hasProvidersCallback = (locationResult) => {
   initSubCatFilter()
 
-  defaultOnRenderListingCallback()
+  defaultOnRenderListingCallback(locationResult)
 }
 
 const onLocationCriteriaChange = (newLocationResult, newRange) => {
@@ -106,9 +106,13 @@ const onLocationCriteriaChange = (newLocationResult, newRange) => {
   renderListing(buildFindHelpUrl(newLocationResult, newRange), newLocationResult)
 }
 
-const defaultOnRenderListingCallback = () => {
-  findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
+const defaultOnRenderListingCallback = (locationResult) => {
   browser.loaded()
+
+  findHelp = new FindHelp('my-location')
+  findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
+  findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
+
   analytics.init(document.title)
 }
 
@@ -118,10 +122,10 @@ const getTemplate = (providers) => {
   : 'js-category-no-results-result-tpl'
 }
 
-const getOnRenderCallback = (providers) => {
+const getOnRenderCallback = (providers, locationResult) => {
   return providers.length > 0
-  ? () => hasProvidersCallback()
-  : () => defaultOnRenderListingCallback()
+  ? () => hasProvidersCallback(locationResult)
+  : () => defaultOnRenderListingCallback(locationResult)
 }
 
 const getViewModel = (providers, category, locationResult) => {
@@ -152,7 +156,7 @@ function renderListing (url, locationResult) {
     }
 
     const template = getTemplate(result.data.providers)
-    const onRenderCallback = getOnRenderCallback(result.data.providers)
+    const onRenderCallback = getOnRenderCallback(result.data.providers, locationResult)
     const viewModel = getViewModel(result.data.providers, result.data.category, locationResult)
 
     templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
@@ -161,9 +165,6 @@ function renderListing (url, locationResult) {
 
 const init = (locationResult) => {
   if (locationResult) {
-    findHelp = new FindHelp(locationResult.findHelpId)
-    findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
-
     renderListing(buildFindHelpUrl(locationResult), locationResult)
   } else {
     const re = new RegExp(/find-help\/(.*)\//)
@@ -176,7 +177,6 @@ const init = (locationResult) => {
       categorySynopsis: marked(category.synopsis),
       geoLocationUnavailable: false
     }
-    findHelp = new FindHelp('elsewhere')
     templating.renderTemplate('js-category-no-results-result-tpl', viewModel, 'js-category-result-output', defaultOnRenderListingCallback)
   }
 }

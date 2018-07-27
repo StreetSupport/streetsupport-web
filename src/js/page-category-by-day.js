@@ -18,7 +18,17 @@ const locationSelector = require('./location/locationSelector')
 const categories = require('../data/generated/service-categories')
 
 let findHelp = null
+
+const onLocationCriteriaChange = (result, range) => {
+  browser.loading()
+  buildList(buildUrl(result, range), result)
+}
+
 let onRenderCallback = function () {
+  findHelp = new FindHelp('my-location')
+  findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
+  findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
+
   browser.loaded()
 }
 
@@ -51,6 +61,10 @@ function buildList (url, locationResult) {
         })
 
         onRenderCallback = function () {
+          findHelp = new FindHelp('my-location')
+          findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
+          findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
+          
           accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', 'day'))
           analytics.init(document.title)
 
@@ -117,14 +131,11 @@ const init = () => {
   locationSelector
     .getPreviouslySetPostcode()
     .then((result) => {
+      findHelp = new FindHelp('my-location')
       if (result) {
-        findHelp = new FindHelp(result.findHelpId)
         initAccordionHistoryBackHandler('day', accordion)
-        findHelp.setUrl('category-by-day', 'sub-category', querystring.parameter('sub-category'))
-
         buildList(buildUrl(result), result)
       } else {
-        findHelp = new FindHelp('elsewhere')
         const categoryId = findHelp.theCategory
         const category = categories.categories.find((c) => c.key === categoryId)
 
