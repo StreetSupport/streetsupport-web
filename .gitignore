@@ -38,3 +38,5 @@ src/pages/find-help/support/
 src/pages/find-help/employment/
 
 src/data/generated/
+src/partials/nav/service-cats.hbs
+src/scss/modules/_generated-variables.scss
