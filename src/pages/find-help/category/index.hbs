@@ -69,15 +69,15 @@ page:
 
       <div class="cards__list cards__list--single-col">
         \{{#organisations}}
-        <div class="card card--brand-h card--big">
+        <div class="card card--brand-h card--big js-header" data-subcats="\{{#subCategories}} \{{id}} \{{/subCategories}}">
           <div class="card__title">
             <a data-bind="attr: { href: href } ">
-              <h1 class="h2" data-subcats="\{{#subCategories}} \{{id}} \{{/subCategories}}">\{{{providerName}}}</h1>
+              <h1 class="h2">\{{{providerName}}}</h1>
             </a>
           </div>
           <div class="card__details">
             \{{#services}}
-            <div class="card__details-entry">
+            <div class="card__details-entry js-item" data-subcats="\{{subCategoryIds}}">
               \{{#info}}\{{{info}}}\{{/info}}
               <dl class="card__details-dictionary">
                 <dt class="card__details-dictionary-title">Services available:</dt>
