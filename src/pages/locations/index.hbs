@@ -1,0 +1,65 @@
+---
+title: Street Support Network Locations - Working together to end homelessness
+description: Street Support Network - Find help, and give help, to support people who are homeless in across the UK
+image: https://streetsupport.net/assets/img/og/street-support.png
+layout: withGoogle.hbs
+permalink: false
+jsBundle: home
+section: locations
+page: locations
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item">
+        <a href="/">Home</a>
+      </li>
+      <li class="breadcrumbs__item">Locations</li>
+    </ol>
+  </div>
+</div>
+
+<div class="block block--header">
+  <div class="container">
+    <h1 class="h1 block__header">Connecting People to End Homelessness</h1>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <div class="home__copy">
+        <h2 class="h2">Where we are</h2>
+        <p>Street Support Network is currently available across Greater Manchester, Leeds, Bradford, Liverpool, Bournemouth, Portsmouth and Southampton.</p>
+
+        <p class="h3">Want to see what services are available in our featured hubs? Select one from the list below:</p>
+        <div id="js-template-output"></div>
+      </div>
+      <div class="home__hub-map">
+        <div class="js-map"></div>
+      </div>
+      <div class="home__copy">
+        <h2 class="h2">We would love the network to link out to more locations</h2> 
+        <p>If you think Street Support might be useful in your area, please <a href="/about/contact">get in touch</a>.</p>
+          <a href="/about/contact" class="btn btn--brand-e">
+            <span class="btn__text">get in touch with us</span>
+          </a>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+{{> loading-spinner}}
+
+<script id="js-content-tpl" type="text/template">
+<div class="location-selector">
+  <label for="location" class="location-selector__label hide-screen">Select a Location: </label>
+  <select class="js-homepage-promo-location-selector js-location-select location-selector__select form__input" name="location" id="location">
+    \{{#locations}}
+    <option \{{#isSelected}}selected\{{/isSelected}} value="\{{id}}">\{{name}}</option>
+    \{{/locations}}
+  </select>
+</div>
+</script>
