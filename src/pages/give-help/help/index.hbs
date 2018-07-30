@@ -20,38 +20,7 @@ page: giveitems
 
 <div class="block">
   <div class="container">
-    <div class="block__content">
-      <header class="multi-form-header">
-        <h1 class="h1">Give Help</h1>
-        <p>You can help make big changes to homelessness by giving items, your time or money to local organisations so they can continue their good work. If you can't spot anything suitable at the moment, use our <a href="/give-help/volunteer/">volunteer form</a>, or <a href="/give-help/offer-items/">offer items</a> that you are willing to donate. Interested organisations will then get in touch with you directly.</p>
-      </header>
-
-      <form class="form form--highlighted form--proximity-search">
-        <p>To find requests for help near you, enter your postcode below.</p>
-        <fieldset class="form__fieldset">
-          <legend>Showing requests within:</legend>
-          <ol class="form__field-list">
-            <li class="form__field-item form__field-item--proximity-search-range">
-              <label class="form__label hide-screen" for="range">Range</label>
-              <select class="location-selector__select form__input form__input--inline form__input--short js-find-help-range">
-                <option value="1000">1km</option>
-                <option value="2000">2km</option>
-                <option value="5000">5km</option>
-                <option value="10000">10km</option>
-                <option value="20000">20km</option>
-              </select>
-            </li>
-            <li class="form__field-item form__field-item--proximity-search-of"><span>of</span></li>
-            <li class="form__field-item form__field-item--proximity-search-postcode">
-              <label class="form__label hide-screen" for="postcode">Your postcode</label>
-              <input class="form__input js-location-search-postcode" id="postcode" type="text" placeholder="eg. M1 2HX"></input>
-            </li>
-          </ol>
-          <a class="btn btn--cosy btn--always-full btn--brand-e js-update-search" type="submit">
-            <span class="btn__text">Search</span>
-          </a>
-        </fieldset>
-      </form>
+    <div class="block__content" id="js-header-output">
     </div>
   </div>
 </div>
@@ -80,6 +49,15 @@ page: giveitems
 <div class="requests-detail js-card-detail is-hidden">
   <div id="js-card-detail-output"></div>
 </div>
+
+<script id="js-header-tpl" type="text/template">
+<header class="multi-form-header">
+  <h1 class="h1">Give Help</h1>
+  <p>You can help make big changes to homelessness by giving items, your time or money to local organisations so they can continue their good work. If you can't spot anything suitable at the moment, use our <a href="/give-help/volunteer/">volunteer form</a>, or <a href="/give-help/offer-items/">offer items</a> that you are willing to donate. Interested organisations will then get in touch with you directly.</p>
+</header>
+
+{{> proximity-search/hogan }}
+</script>
 
 <script id="js-no-data-tpl" type="text/template">
   <div class="block__section">

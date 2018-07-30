@@ -28,6 +28,7 @@ const defaultCallback = (currRange) => {
 }
 
 const renderNeeds = (needs, userLocation, currRange) => {
+  console.log(userLocation.postcode)
   const theData = {
     card: needs,
     location: userLocation.name,
@@ -51,6 +52,11 @@ const renderNeeds = (needs, userLocation, currRange) => {
 
 const init = function (userLocation, range = 10000) {
   if (userLocation) {
+    const headerData = {
+      postcode: userLocation.postcode,
+      range: range
+    }
+    templating.renderTemplate('js-header-tpl', headerData, 'js-header-output', () => { })
     const url = `${apiRoutes.needsHAL}?longitude=${userLocation.longitude}&latitude=${userLocation.latitude}&range=${range}&pageSize=100`
     getApiData.data(url)
       .then((result) => {
@@ -66,6 +72,7 @@ const init = function (userLocation, range = 10000) {
       categoryName: 'requests for help',
       geoLocationUnavailable: false
     }
+    templating.renderTemplate('js-header-tpl', {}, 'js-header-output', () => { })
     templating.renderTemplate('js-no-data-tpl', theData, 'js-card-list-output', () => defaultCallback(10000))
   }
 }
