@@ -19,6 +19,11 @@ let categories = []
 gulp.task('getServiceCategories', (callback) => {
   request(endpoints.serviceCategories, function (err, res, body) {
     categories = JSON.parse(body)
+      .sort((a, b) => {
+        if (a.sortOrder < b.sortOrder) return 1
+        if (a.sortOrder > b.sortOrder) return -1
+        return 0
+      })
       .map((c) => {
         return {
           key: c.key,
@@ -114,10 +119,16 @@ gulp.task('generate-nav-links', () => {
   const srcFile = `${config.paths.partials}/nav/`
   const output = categories
     .map((c) => {
-      return c.key === 'accom'
-        ? `<li class="nav__item nav__item--find-help-${c.key}"><a href="/find-help/accommodation/">${c.name}</a></li>`
-        : `<li class="nav__item nav__item--find-help-${c.key}"><a href="/find-help/${c.key}/">${c.name}</a></li>`
-
+      switch(c.key) {
+        case 'accom':
+          return `<li class="nav__item nav__item--find-help-${c.key}"><a href="/find-help/accommodation/">${c.name}</a></li>`
+        case 'meals':
+        case 'dropin':
+        case 'foodbank':
+          return `<li class="nav__item nav__item--find-help-${c.key}"><a href="/find-help/${c.key}/timetable/">${c.name}</a></li>`
+        default:
+          return `<li class="nav__item nav__item--find-help-${c.key}"><a href="/find-help/${c.key}/">${c.name}</a></li>`
+      }
     })
     .join('')
 
