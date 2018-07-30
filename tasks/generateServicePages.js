@@ -8,6 +8,8 @@ import config from '../foley.json'
 import endpoints from '../src/js/api'
 import { newFile } from './fileHelpers'
 
+import { cities } from '../src/data/generated/supported-cities'
+
 const findHelpSrc = `${config.paths.pages}find-help/`
 const categoryPageSrc = `${findHelpSrc}category/index.hbs`
 const timetabledPageSrc = `${findHelpSrc}category-by-day/index.hbs`
@@ -138,11 +140,15 @@ gulp.task('generate-nav-links', () => {
 
 gulp.task('generate-nav-variables', () => {
   const srcFile = `${config.paths.scss}/modules/`
-  const output = categories
+  const catOutput = categories
     .map((c) => `find-help-${c.key}`)
     .join(' ')
 
-  return newFile('_generated-variables.scss', `$generated-nav-pages: ${output}`)
+  const cityOutput = cities
+    .map((c) => `${c.id}-emergency-help`)
+    .join(' ')
+
+  return newFile('_generated-variables.scss', `$generated-nav-pages: ${catOutput} ${cityOutput}`)
     .pipe(gulp.dest(srcFile))
 })
 
