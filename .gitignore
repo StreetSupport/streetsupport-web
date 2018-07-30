@@ -38,5 +38,10 @@ src/pages/find-help/support/
 src/pages/find-help/employment/
 
 src/data/generated/
+<<<<<<< HEAD
 src/partials/nav/service-cats.hbs
 src/scss/modules/_generated-variables.scss
+=======
+src/scss/modules/_generated-variables.scss
+src/partials/nav/service-cats.hbs
+>>>>>>> ignore generated nav pages
