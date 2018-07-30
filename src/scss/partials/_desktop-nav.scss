@@ -104,7 +104,7 @@ $columned-dropdown-column-count: 3;
 
   &:hover {
     background: $brand-c;
-    .nav__list {
+    & > .nav__list {
       display: block;            
     }
   }
@@ -143,15 +143,16 @@ $columned-dropdown-column-count: 3;
       }
     }
   }
-
-  &--hubs {
-    @include mq($from: m) {
-      position: relative;
-    }
-  }
   
   &--mobile-only {
     display: none;
+  }
+
+  &--hub-nav {
+    width: 100%;
+    &:hover { 
+      background: none!important;
+    }
   }
 }
 
@@ -214,10 +215,6 @@ $columned-dropdown-column-count: 3;
 .hub-nav-container {
   ul {
     list-style: none;
-  }
-
-  @include mq($from: m) {
-    margin-top: -7px;
   }
 }
 
