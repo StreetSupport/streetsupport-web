@@ -55,34 +55,4 @@ describe('Find Help categories', () => {
       ).toEqual(0)
     })
   })
-
-  describe('- emergency help url for specific area', () => {
-    it('- should set to {area-id}/emergency-help', () => {
-      const result = getData({
-        id: 'an-area-id'
-      }, cityData)
-
-      expect(result.emergencyHelpUrl).toEqual('/an-area-id/emergency-help/')
-    }, cityData)
-  })
-
-  describe('- emergency help url for other area', () => {
-    it('- should set to find-help/emergency-help', () => {
-      const result = getData({
-        id: 'elsewhere'
-      }, cityData)
-
-      expect(result.emergencyHelpUrl).toEqual('/find-help/emergency-help/')
-    }, cityData)
-  })
-
-  describe('- swep notification', () => {
-    it('- should set as requested city\'s swep status', () => {
-      const locationInfo = {
-        id: 'leeds'
-      }
-      const result = getData(locationInfo, cityData)
-      expect(result.location.swepIsAvailable).toEqual(cityData[0].swepIsAvailable)
-    }, cityData)
-  })
 })

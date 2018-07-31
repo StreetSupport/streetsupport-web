@@ -1,7 +1,8 @@
-var nav = require('./navigation/nav.js')
-var print = require('./navigation/print.js')
-var analytics = require('./analytics')
+const nav = require('./navigation/nav.js')
+const print = require('./navigation/print.js')
+const analytics = require('./analytics')
 const headerCitySelector = require('./navigation/headerCitySelector')
+const delegate = require('delegate')
 
 import Svg4everybody from 'svg4everybody'
 import 'babel-polyfill'
@@ -32,7 +33,7 @@ import 'classlist.js'
       var currTime = new Date().getTime()
       var timeToCall = Math.max(0, 16 - (currTime - lastTime))
       var id = window.setTimeout(function () { callback(currTime + timeToCall) },
-      timeToCall)
+        timeToCall)
       lastTime = currTime + timeToCall
       return id
     }
@@ -60,11 +61,22 @@ let fastClickCheck = () => {
   }
 }
 
+let twitterShareWindow = function () {
+  delegate('.js-twitterShareWindow', 'click', () => {
+    let targetUrl = 'https://www.twitter.com/intent/tweet?url=' + window.location.href.replace('#', '') +
+      '&text=' + document.title +
+      '&via=streetsupportuk'
+
+    window.open(targetUrl, 'blank', 'width=500,height=300')
+  })
+}
+
 removeNoJS()
 nav.init()
 analytics.init()
 print.init()
 fastClickCheck()
 Svg4everybody()
+twitterShareWindow()
 
 headerCitySelector.init()

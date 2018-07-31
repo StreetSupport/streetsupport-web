@@ -1,8 +1,17 @@
-// Common modules
 import '../../common'
 
-// Page modules
-var ko = require('knockout')
-var Model = require('../../models/BestPracticeEnquiries')
+const ko = require('knockout')
+
+const browser = require('../../browser')
+const location = require('../../location/locationSelector')
+const Model = require('../../models/BestPracticeEnquiries')
+
+location.getCurrentHub()
+  .then((result) => {
+    if (result.id !== 'manchester') {
+      location.setCurrent('manchester')
+      browser.reload()
+    }
+  })
 
 ko.applyBindings(new Model())

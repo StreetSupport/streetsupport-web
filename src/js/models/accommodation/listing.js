@@ -17,8 +17,9 @@ const SearchFilter = function (dataFieldName, labelText) {
   self.value = ko.observable()
 }
 
-const AccommodationListing = function () {
+const AccommodationListing = function (addtionalQueryString = '') {
   const self = this
+  self.addtionalQueryString = addtionalQueryString
   self.dataIsLoaded = ko.observable(false)
   self.items = ko.observableArray()
   self.noItemsAvailable = ko.computed(() => self.items().length === 0, self)
@@ -82,6 +83,7 @@ const AccommodationListing = function () {
 
   self.updateListing = function () {
     self.dataIsLoaded(false)
+    self.toggleFilterDisplay()
     getCoords(self.locationName(), (postcodeResult) => {
       const newLocation = {
         latitude: postcodeResult.latitude,
@@ -106,8 +108,8 @@ const AccommodationListing = function () {
           e.mapIndex = i
         })
       const previous = self.items()
-      const next = result.data.items.map((i) => new Accommodation(i, [self]))
-      self.items([...previous, ...next])
+      const next = result.data.items.map((e, i) => new Accommodation(e, i, [self]))
+      self.items(previous.concat(next))
       self.nextPageEndpoint(result.data.links.next)
       self.dataIsLoaded(true)
       browser.loaded()
@@ -116,19 +118,18 @@ const AccommodationListing = function () {
 
   self.init = (currentLocation) => {
     self.items([])
-    const endpoint = `${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}${getQuerystring()}`
-    self.locationName(currentLocation.postcode)
-    self.loadItems(endpoint)
+    if (currentLocation) {
+      const endpoint = `${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}${getQuerystring()}${self.addtionalQueryString}`
+      self.locationName(currentLocation.postcode)
+      self.loadItems(endpoint)
+    } else {
+      self.dataIsLoaded(true)
+    }
   }
 
   locationSelector
     .getPreviouslySetPostcode()
     .then((result) => {
-      storage.set(storage.keys.userLocationState, {
-        'postcode': result.postcode,
-        'longitude': result.longitude,
-        'latitude': result.latitude
-      })
       self.init(result)
     })
 }

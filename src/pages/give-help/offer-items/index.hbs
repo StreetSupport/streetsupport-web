@@ -1,6 +1,6 @@
 ---
 title: Offer Items - Street Support
-description: Street support makes it easier to help homeless people. Here's how to get in touch.
+description: Donate Items to organisations near you
 image: https://streetsupport.net/assets/img/og/street-support.png
 layout: withGoogle.hbs
 permalink: false
@@ -13,40 +13,66 @@ page: offeritems
   <div class="container">
     <ol class="breadcrumbs__list">
       <li class="breadcrumbs__item"><a href="/">Home</a></li>
-      <li class="breadcrumbs__item"><a href="/give-help/">Give Help</a></li>
+      <li class="breadcrumbs__item"><a href="/find-help/">Give Help</a></li>
       <li class="breadcrumbs__item">Offer Items</li>
     </ol>
   </div>
 </div>
-{{> no-js}}
 
-<div class="block block--subpage-header">
-  <div class="container">
-    <h1 class="h1 block__header">Offer Items</h1>
-    <h2 class="h2 block__sub-header">Offer your spare items to local organisations</h2>
+  <div class="block block--subpage-header">
+    <div class="container">
   </div>
 </div>
 
-<div class="block">
-  <div class="container">
-    <div class="js-org-needs block__content" data-bind="with: map">
-      <p>Organisations and charities are always in need of items to help with a wide variety of tasks and services. This can range from hot drink supplies, to IT equipment. If you have any items that you think may be useful, please select a suitable organisation and consult their donation information.</p>
-
-      <!-- ko if: showFilter -->
-      <div class="subcat-filter">
-        <p class="subcat-filter__label">Filter by items taken:</p>
-        <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: needCategories">
-          <li class="subcat-filter__item js-filter-item" data-bind="attr: { 'data-id': id, class: cssClass }, text: name, click: $parent.filter"></li>
-        </ul>
+{{> no-js}}
+  <div class="block">
+    <div class="container">
+      <div class="block__content" data-bind="with: orgRetrieval">
+        <header class="multi-form-header">
+          <h1 class="h1">Offer Items</h1>
+          <p>Organisations and charities are always in need of items to help with a wide variety of tasks and services. This can range from hot drink supplies to IT equipment. If you have any items that you think may be useful, please select a suitable organisation and consult their donation information.</p>
+          <!-- ko ifnot: postcode -->
+          <p>Please enter a postcode to find organisations near you.</p>
+          <!-- /ko -->
+        </header>
+        {{> all-organisations/proximity }}
       </div>
-      <!-- /ko -->
-      <div class="js-map services-map"></div>
-      <p>If you can not find a suitable organisation, please fill in the form below, and when an organisation has interest in your offer, they can get in touch.</p>
+    </div>
+  </div>
+
+  <div class="block block--cards">
+    <div class="container">
+      <div class="block__content" data-bind="with: orgRetrieval">
+        <!-- ko ifnot: hasOrgs -->
+        <!-- ko if: postcode -->
+        <p>Sorry, there are no organisations listed near your postcode, please try again.</p>
+        <!-- /ko -->
+        <p>If you know of local organisations that could be included, please use our <a href="/register">registration form</a>.</p>
+        <!-- /ko -->
+        <!-- ko if: postcodeRetrievalIssue -->
+        <p>Sorry, there was a problem with your postcode, please try an alternative postcode nearby.</p>
+        <!-- /ko -->
+      </div>
+      <div class="js-org-needs block__content" data-bind="with: offerItemsMap">
+        <!-- ko if: showFilter -->
+        <div class="subcat-filter form--highlighted">
+          <p class="subcat-filter__label">Filter by items taken:</p>
+          <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: needCategories">
+            <li class="subcat-filter__item js-filter-item" data-bind="attr: { 'data-id': id, class: cssClass }, text: name, click: $parent.filter"></li>
+          </ul>
+        </div>
+        <!-- /ko -->
+        <div class="services-map services-map--with-filter">
+          <div class="js-map"></div>
+          <p>If you can not find a suitable organisation, please fill in the form below, and when an organisation has interest in your offer, they can get in touch.</p>
+        </div>        
+      </div>
     </div>
   </div>
 </div>
+  
 <h3 class="h2 requests-detail__heading requests-detail__heading--i-want-to-volunteer">I Have Items to Offer!</h3>
-<div class="block block--requests-detail" data-bind="with: form">
+<div class="block block--requests-detail" data-bind="with: offerItemsForm">
   <div class="container">
     <div class="block__content">
       <!-- ko ifnot: isSubmitted -->
@@ -142,7 +168,7 @@ page: offeritems
       <!-- ko ifnot: isSuccess -->
       <div id="js-fail">
         <h2 class="h2">Technical Error</h2>
-        <p>There has been a technical error. Please <a href="/contact/">contact Street Support</a>.</p>
+        <p>There has been a technical error. Please <a href="/about/contact/">contact Street Support</a>.</p>
       </div>
       <!-- /ko -->
       <!-- ko if: isSuccess -->

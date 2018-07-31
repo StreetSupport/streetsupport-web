@@ -3,7 +3,7 @@ require('knockout.validation') // No variable here is deliberate!
 
 const api = require('../post-api-data')
 const browser = require('../browser')
-var endpoints = require('../api')
+const endpoints = require('../api')
 
 function BestPracticeApply () {
   const self = this

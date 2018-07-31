@@ -12,15 +12,31 @@
     <meta property="og:description" content="{{description}}" />
     <meta property="og:image" content="{{image}}" />
 
+    <style>
+      .header--desktop,
+      .hubs-nav {
+        display: none;
+      }
+      @media (min-width:46.875em) {
+        nav--mobile {
+          display: none;
+        }
+        
+        .header--desktop,
+        .hubs-nav {
+          display: block;
+        }
+      }
+    </style>
+
     <link rel="stylesheet" href="{{site.url}}assets/css/site.css?v={{cachebusting.date}}" />
     <link rel="shortcut icon" href="{{site.url}}favicon.ico" type="image/x-icon" />
 
     {{> head/google-tag-manager }}
     {{> head/web-fonts }}
-    {{> head/azure-app-insights }}
     
   </head>
-  <body class="page--{{page}} section--{{section}} {{#if nosubnav}}section--nosubnav{{/if}}">
+  <body class="page--{{page}} section--{{section}}">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PVPXCXT"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

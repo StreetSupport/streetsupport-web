@@ -43,7 +43,7 @@ $site-gutter-px: 16;
 
 $site-gutter: rem($site-gutter-px);
 
-$grid-gutter: .25; // Quarter of column width
+$grid-gutter: 0.0625; // Sixteenth of column width
 $grid-column: 8;
 $grid-debug: hide; // Change this to show or hide
 
@@ -67,6 +67,8 @@ $brand-m: #101011;
 $brand-n: #9886bf;
 $brand-p: #086149;
 $brand-q: #f3f3f3;
+$brand-r: #0A8564;
+$brand-s: #E1B500;
 
 // Fonts
 @font-face {
@@ -107,11 +109,11 @@ $header-margin: 44px;
 $header-subnav-height: 85px;
 $header-subnav-margin: 85px;
 
-$nav-width: 220px;
+$nav-width: 100%;
 
-// Used to automatically generate active CSS classes
-$nav-sections: home findhelp givehelp locations charter bigchange organisations impact about contact toolkit;
-$nav-pages: home findhelp emergencyhelp swep allorganisations givehelp giveitems volunteer offeritems donate partnership manchester leeds charter readthecharter pledgeyoursupport joinactiongroup aboutthecharter bigchangeabout bigchangepartners toolkit best-practice awards benefits training get-in-touch apply impact about contact jobs;
+// Used to automatically generate active CSS classes - also see _generated-variables.scss, created by gulp task
+$nav-sections: home findhelp givehelp hubs charter bigchange organisations impact about contact toolkit;
+$nav-pages: home findhelp emergencyhelp swep allorganisations givehelp giveitems volunteer offeritems donate partnership bradford bournemouth leeds liverpool manchester portsmouth southampton charter readthecharter pledgeyoursupport joinactiongroup aboutthecharter bigchange bigchangeabout bigchangepartners toolkit best-practice awards benefits training get-in-touch apply impact about contact jobs team trustees locations; 
 
 // z-indices
 $zIndex-modal: 2000;

@@ -3,7 +3,7 @@
 var getApi = require('../../src/js/get-api-data')
 var postToApi = require('../../src/js/post-api-data')
 var sinon = require('sinon')
-var Model = require('../../src/js/models/OfferItemsModel')
+var Model = require('../../src/js/models/give-help/offer-items/OfferItemsModel')
 var endpoints = require('../../src/js/api')
 var browser = require('../../src/js/browser')
 

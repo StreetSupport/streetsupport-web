@@ -8,18 +8,10 @@ import source from 'vinyl-source-stream'
 import streamify from 'gulp-streamify'
 import replace from 'gulp-replace'
 import runSequence from 'run-sequence'
-import util from 'gulp-util'
 
 const endpoints = require('../src/js/api')
 
-function newFile (name, contents) {
-  var readableStream = require('stream').Readable({ objectMode: true })
-  readableStream._read = function () {
-    this.push(new util.File({ cwd: '', base: '', path: name, contents: new Buffer(contents) }))
-    this.push(null)
-  }
-  return readableStream
-}
+import { newFile } from './fileHelpers'
 
 /* calls API and generates static data */
 gulp.task('full-categories', (callback) => {
@@ -33,6 +25,7 @@ gulp.task('main-categories', (callback) => {
     .map(function (c) {
       return {
         key: c.key,
+        synopsis: c.synopsis,
         sortOrder: c.sortOrder,
         name: c.name
       }
@@ -62,24 +55,6 @@ gulp.task('accom-categories', (callback) => {
       return 0
     })
   return newFile('accom-categories.js', `export const categories = ${JSON.stringify(cats)}`)
-    .pipe(gulp.dest(`${config.paths.generatedData}`))
-})
-
-gulp.task('main-categories', (callback) => {
-  const cats = JSON.parse(fs.readFileSync(`${config.paths.generatedData}full-categories.js`))
-    .map(function (c) {
-      return {
-        key: c.key,
-        sortOrder: c.sortOrder,
-        name: c.name
-      }
-    })
-    .sort((a, b) => {
-      if (a.sortOrder > b.sortOrder) return -1
-      if (a.sortOrder < b.sortOrder) return 1
-      return 0
-    })
-  return newFile('service-categories.js', `export const categories = ${JSON.stringify(cats)}`)
     .pipe(gulp.dest(`${config.paths.generatedData}`))
 })
 

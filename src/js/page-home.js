@@ -1,54 +1,59 @@
+/* global google */
+
 import './common'
 
-let location = require('./location/locationSelector')
-const templating = require('./template-render')
 const browser = require('./browser')
-const socialShare = require('./social-share')
-const endpoints = require('./api')
-const api = require('./get-api-data')
+const location = require('./location/locationSelector')
+const googleMaps = require('./location/googleMaps')
 const supportedCities = require('./location/supportedCities')
+const templating = require('./template-render')
 
-import { suffixer } from './location/suffixer'
+window.initMap = () => { }
 
-const init = (currentLocation) => {
-  api
-    .data(endpoints.statistics + currentLocation.id + '/latest')
-    .then((stats) => {
-      let theData = {
-        locations: location.getViewModel(currentLocation),
-        statistics: stats.data
-      }
-      supportedCities.locations
-        .forEach((c) => {
-          theData[`is${c.id}`] = currentLocation.id === c.id
-        })
-
-      var callback = function () {
-        location.handler(() => {
-          window.location.reload()
-        }, '.js-homepage-promo-location-selector')
-
-        suffixer(currentLocation)
-
-        browser.loaded()
-        socialShare.init()
-      }
-
-      templating.renderTemplate('js-content-tpl', theData, 'js-template-output', callback)
-    }, (_) => {
-    })
-
-  api
-    .data(endpoints.cities)
-    .then((result) => {
-      const city = result.data.find((c) => c.id === currentLocation.id)
-      const callback = () => {}
-      templating.renderTemplate('js-swep-tpl', city, 'js-swep-output', callback)
-    }, (_) => {})
+const redirectToHubPage = function (locationId) {
+  location.setCurrent(locationId)
+  browser.redirect(`/${locationId}`)
 }
 
-location
-  .getCurrent()
-  .then((result) => {
-    init(result)
-  })
+const displayMap = function (hubs) {
+  setTimeout(() => {
+    const map = googleMaps.buildMap({ latitude: 52.776100, longitude: -1.777515 }, { zoom: 6 })
+
+    hubs
+      .forEach((l) => {
+        const marker = googleMaps.buildMarker(l, map, {
+          id: l.id,
+          title: l.name,
+          animation: google.maps.Animation.DROP,
+          icon: {
+            url: '/assets/img/map-pin.png',
+            size: new google.maps.Size(34, 34),
+            anchor: new google.maps.Point(15, 24)
+          }
+        })
+
+        google.maps.event.addListener(marker, 'click', function () {
+          redirectToHubPage(this.id)
+        })
+      })
+  }, 1000)
+}
+
+const init = () => {
+  const theData = {
+    locations: [{ id: '', name: '- Select a location -' }, ...supportedCities.locations]
+  }
+  const callback = function () {
+    location.handler((result) => {
+      if (result.length) {
+        redirectToHubPage(result)
+      }
+    }, '.js-homepage-promo-location-selector')
+
+    displayMap(supportedCities.locations)
+  }
+
+  templating.renderTemplate('js-content-tpl', theData, 'js-template-output', callback)
+}
+
+init()

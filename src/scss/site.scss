@@ -1,6 +1,7 @@
 // Non outputted Sass
 
 @import 'modules/functions';
+@import 'modules/generated-variables';
 @import 'modules/variables';
 @import 'modules/mixins';
 
@@ -33,6 +34,7 @@
 @import "partials/big-change-splash";
 @import "partials/block-ssn"; // Specific SSN block variants
 @import 'partials/card';
+@import 'partials/card-sort';
 @import 'partials/form';
 @import 'partials/filter';
 @import 'partials/lists';
@@ -56,7 +58,6 @@
 @import 'partials/requests';
 @import 'partials/requests-detail';
 @import 'partials/alpaca-form';
-@import 'partials/modal';
 @import 'partials/city-header';
 @import 'partials/title-with-button';
 @import 'partials/full-width-overlay';
@@ -73,6 +74,8 @@
 @import 'partials/accommodation';
 @import 'partials/listing-with-map';
 @import 'partials/jobs';
+@import 'partials/news';
+@import 'partials/paginated';
 
 // Utilities
 @import 'partials/utilities';

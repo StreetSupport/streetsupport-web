@@ -9,21 +9,12 @@ const getPageUrl = (key) => {
   }
 }
 
-export const getData = (currentLocation, cities) => {
+export const getData = () => {
   categories
     .forEach((category) => { category.page = getPageUrl(category.key) })
 
   const result = {
-    categories: categories,
-    location: currentLocation,
-    emergencyHelpUrl: currentLocation.id === 'elsewhere'
-      ? '/find-help/emergency-help/'
-      : `/${currentLocation.id}/emergency-help/`
-  }
-
-  const city = cities.find((c) => c.id === currentLocation.id)
-  if (city) {
-    result.location.swepIsAvailable = city.swepIsAvailable
+    categories: categories
   }
 
   return result

@@ -1,44 +1,13 @@
 const Q = require('q')
-const geolib = require('geolib')
 const deviceGeo = require('./get-location')
-const querystring = require('../get-url-parameter')
 const supportedCities = require('./supportedCities')
 const browser = require('../browser')
 const cookies = require('../cookies')
-const modal = require('./modal')
 
 import * as postcodes from './postcodes'
 import * as storage from '../storage'
 
 const myLocationId = 'my-location'
-
-const getNearest = (position) => {
-  const currLatitude = position.coords.latitude
-  const currLongitude = position.coords.longitude
-
-  supportedCities.locations
-    .filter((c) => c.isPublic)
-    .forEach((c) => {
-      const distanceInMetres = geolib.getDistance(
-        { latitude: currLatitude, longitude: currLongitude },
-        { latitude: c.latitude, longitude: c.longitude }
-      )
-      c.distance = distanceInMetres
-    })
-  const sorted = supportedCities.locations
-    .sort((a, b) => {
-      if (a.distance < b.distance) return -1
-      if (a.distance > b.distance) return 1
-      return 0
-    })
-
-  return sorted[0]
-}
-
-const _userSelect = (deferred) => {
-  modal.init(exportedObj)
-  deferred.resolve()
-}
 
 const _useMyLocation = (deferred) => {
   const defaultResolution = () => {
@@ -65,6 +34,11 @@ const _useMyLocation = (deferred) => {
         cityId = supportedCities.get(saved).id
       }
       postcodes.getByCoords(userLocation.coords, (postcode) => {
+        storage.set(storage.keys.userLocationState, {
+          'postcode': postcode,
+          'longitude': userLocation.coords.longitude,
+          'latitude': userLocation.coords.latitude
+        })
         deferred.resolve({
           id: cityId,
           findHelpId: myLocationId,
@@ -72,22 +46,12 @@ const _useMyLocation = (deferred) => {
           latitude: userLocation.coords.latitude,
           longitude: userLocation.coords.longitude,
           name: 'my location',
-          postcode: postcode,
-          nearestSupported: getNearest(userLocation)
+          postcode: postcode
         })
       }, defaultResolution)
     }, () => {
       defaultResolution()
     })
-}
-
-const _useRequested = (deferred, locationInQueryString) => {
-  const requestedCity = supportedCities.get(locationInQueryString)
-  if (requestedCity !== undefined) {
-    deferred.resolve(requestedCity)
-  } else {
-    _userSelect(deferred)
-  }
 }
 
 const _useSaved = (deferred) => {
@@ -97,49 +61,34 @@ const _useSaved = (deferred) => {
   } else if (saved !== undefined && saved.length > 0 && saved !== myLocationId) {
     deferred.resolve(supportedCities.get(saved))
   } else {
-    _userSelect(deferred)
+    deferred.resolve(null)
   }
 }
 
 const _determineLocationRetrievalMethod = () => {
-  let method = _useSaved
-  let id = ''
-
-  const locationInQueryString = querystring.parameter('location')
-  if (locationInQueryString === myLocationId && deviceGeo.isAvailable()) {
-    method = _useMyLocation
-  } else if (locationInQueryString !== 'undefined' && locationInQueryString.length > 0 && locationInQueryString !== myLocationId) {
-    method = _useRequested
-    id = locationInQueryString
-  } else {
-    const locationInPath = browser.location().pathname.split('/')[1]
-    const cities = supportedCities.locations.map((l) => l.id)
-    if (locationInPath !== 'undefined' && locationInPath.length > 0 && cities.indexOf(locationInPath) > -1) {
-      method = _useRequested
-      id = locationInPath
-
-      setCurrent(id)
-    }
-  }
-
   return {
-    method: method,
-    id: id
+    method: _useSaved,
+    id: ''
   }
 }
 
 const getSelectedLocationId = () => {
-  const saved = cookies.get(cookies.keys.location) || 'elsewhere'
-  if (cookies.get(cookies.keys.location) !== undefined && saved.length > 0) {
+  const saved = cookies.get(cookies.keys.location)
+  if (saved !== undefined && saved.length > 0) {
     return supportedCities.get(saved).id
   }
-  modal.init(exportedObj)
+  return 'elsewhere'
 }
 
-const getCurrent = () => {
+const getCurrentHub = () => {
   const deferred = Q.defer()
-  const getLocation = _determineLocationRetrievalMethod()
-  getLocation.method(deferred, getLocation.id)
+  const saved = browser.location().pathname.split('/')[1]
+  if (getSelectedLocationId() !== saved) {
+    setCurrent(saved)
+    browser.reload()
+  }
+  deferred.resolve(supportedCities.get(saved))
+
   return deferred.promise
 }
 
@@ -147,7 +96,7 @@ const buildLocationResult = (userLocationState) => {
   return {
     'id': 'my-location',
     'findHelpId': 'my-location',
-    'name': 'my selected postocde',
+    'name': 'my selected postcode',
     'longitude': userLocationState.longitude,
     'latitude': userLocationState.latitude,
     'isPublic': true,
@@ -180,30 +129,14 @@ const setPostcode = (postcode, onSuccessCallback, onErrorCallback) => {
 
 const setCurrent = (newCity) => {
   if (newCity.length > 0) {
+    const selectedCity = supportedCities.locations.find(c => c.id === newCity)
+    storage.set(storage.keys.userLocationState, {
+      'postcode': selectedCity.postcode,
+      'longitude': selectedCity.longitude,
+      'latitude': selectedCity.latitude
+    })
     document.cookie = `${cookies.keys.location}=${newCity};expires=Fri, 31 Dec 9999 23:59:59 GMT;path=/`
   }
-}
-
-const getViewModel = (current) => {
-  const cities = supportedCities.locations.map((l) => {
-    const newLocation = l
-    newLocation.isSelected = l.id === current.id
-    return newLocation
-  })
-  return cities
-}
-
-const getViewModelAll = (current) => {
-  const cities = supportedCities.locations.map((l) => {
-    l.isSelected = l.id === current.id
-    return l
-  })
-  cities.push({
-    id: '',
-    isSelected: querystring.parameter('location') === '',
-    name: 'All'
-  })
-  return cities
 }
 
 /**
@@ -224,10 +157,8 @@ const exportedObj = {
   getSelectedLocationId: getSelectedLocationId,
   getPreviouslySetPostcode: getPreviouslySetPostcode,
   setPostcode: setPostcode,
-  getCurrent: getCurrent,
+  getCurrentHub: getCurrentHub,
   setCurrent: setCurrent,
-  getViewModel: getViewModel,
-  getViewModelAll: getViewModelAll,
   handler: onChange
 }
 

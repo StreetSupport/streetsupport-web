@@ -1,6 +1,5 @@
 import './common'
 
-const accordion = require('./accordion')
 const FindHelp = require('./find-help')
 
 const marked = require('marked')
@@ -10,10 +9,10 @@ const getApiData = require('./get-api-data')
 const querystring = require('./get-url-parameter')
 const templating = require('./template-render')
 const analytics = require('./analytics')
-const socialShare = require('./social-share')
 const browser = require('./browser')
 const listToDropdown = require('./list-to-dropdown')
 const locationSelector = require('./location/locationSelector')
+const categories = require('../data/generated/service-categories')
 
 import { buildFindHelpUrl, getProvidersForListing, getSubCategories } from './pages/find-help/provider-listing/helpers'
 
@@ -51,6 +50,7 @@ const changeSubCatFilter = (e) => {
   if (reqId.length > 0) {
     providerItems
       .forEach((item) => {
+        console.log(item.getAttribute('data-subcats'))
         if (item.getAttribute('data-subcats').indexOf(reqId) < 0) {
           item.classList.add('hide')
         }
@@ -95,11 +95,10 @@ const initSubCatFilter = () => {
   listToDropdown.init(initSubCatAsDropdown)
 }
 
-const hasProvidersCallback = () => {
-  accordion.init(true, 0, findHelp.buildListener('category', 'service-provider'), true)
+const hasProvidersCallback = (locationResult) => {
   initSubCatFilter()
 
-  defaultOnRenderListingCallback()
+  defaultOnRenderListingCallback(locationResult)
 }
 
 const onLocationCriteriaChange = (newLocationResult, newRange) => {
@@ -107,11 +106,13 @@ const onLocationCriteriaChange = (newLocationResult, newRange) => {
   renderListing(buildFindHelpUrl(newLocationResult, newRange), newLocationResult)
 }
 
-const defaultOnRenderListingCallback = () => {
-  findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
-  browser.initPrint()
+const defaultOnRenderListingCallback = (locationResult) => {
   browser.loaded()
-  socialShare.init()
+
+  findHelp = new FindHelp('my-location')
+  findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
+  findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
+
   analytics.init(document.title)
 }
 
@@ -121,10 +122,10 @@ const getTemplate = (providers) => {
   : 'js-category-no-results-result-tpl'
 }
 
-const getOnRenderCallback = (providers) => {
+const getOnRenderCallback = (providers, locationResult) => {
   return providers.length > 0
-  ? () => hasProvidersCallback()
-  : () => defaultOnRenderListingCallback()
+  ? () => hasProvidersCallback(locationResult)
+  : () => defaultOnRenderListingCallback(locationResult)
 }
 
 const getViewModel = (providers, category, locationResult) => {
@@ -155,7 +156,7 @@ function renderListing (url, locationResult) {
     }
 
     const template = getTemplate(result.data.providers)
-    const onRenderCallback = getOnRenderCallback(result.data.providers)
+    const onRenderCallback = getOnRenderCallback(result.data.providers, locationResult)
     const viewModel = getViewModel(result.data.providers, result.data.category, locationResult)
 
     templating.renderTemplate(template, viewModel, 'js-category-result-output', onRenderCallback)
@@ -163,10 +164,21 @@ function renderListing (url, locationResult) {
 }
 
 const init = (locationResult) => {
-  findHelp = new FindHelp(locationResult.findHelpId)
-  findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
+  if (locationResult) {
+    renderListing(buildFindHelpUrl(locationResult), locationResult)
+  } else {
+    const re = new RegExp(/find-help\/(.*)\//)
+    const categoryId = browser.location().pathname.match(re)[1]
+    const category = categories.categories.find((c) => c.key === categoryId)
 
-  renderListing(buildFindHelpUrl(locationResult), locationResult)
+    const viewModel = {
+      categoryId: category.key,
+      categoryName: category.name,
+      categorySynopsis: marked(category.synopsis),
+      geoLocationUnavailable: false
+    }
+    templating.renderTemplate('js-category-no-results-result-tpl', viewModel, 'js-category-result-output', defaultOnRenderListingCallback)
+  }
 }
 
 browser.loading()

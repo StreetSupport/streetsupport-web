@@ -2,10 +2,11 @@
   text-align: center;
 
   &__list {
-    list-style: none;
-    margin: 50px 0 30px 0;
-    padding: 0;
     @include cf();
+
+    list-style: none;
+    margin: 50px 0 30px;
+    padding: 0;
 
     @include mq($from: m) {
       margin-top: 20px;
@@ -49,7 +50,8 @@
 
     &--partners-page {
       display: block;
-      margin: 0 auto 20px auto;
+      margin: 0 auto 20px;
+
       @include mq ($from: m) {
         float: left;
         margin: 0 20px;
@@ -140,19 +142,19 @@
       width: 175px;
 
       a {
-        background-image: url(/assets/img/manchester-city-council.png);        
+        background-image: url(/assets/img/manchester-city-council.png);
       }
     }
 
     &--leedsbid {
       width: 220px;
-        svg {
-          position: absolute;
-          left: 0;
-          top: 0!important;
-          height: 140px;
-          width: 200px;
-        }
+      svg {
+        position: absolute;
+        left: 0;
+        top: 0 !important;
+        height: 140px;
+        width: 200px;
+      }
     }
 
     &--bournemouth-uni {
@@ -162,7 +164,21 @@
       }
     }
 
-    &--liverpoolbid  {
+    &--national-lottery {
+      width: 160px;
+      a {
+        background-image: url(/assets/img/national-lottery.png);
+      }
+    }
+
+    &--dorset-pcc {
+      width: 250px;
+      a {
+        background-image: url(/assets/img/dorset-pcc.png);
+      }
+    }
+
+    &--liverpoolbid {
       width: 294px;
 
       a {
@@ -181,7 +197,7 @@
       }
     }
 
-    &--big-lottery-fund{
+    &--big-lottery-fund {
       a {
         svg {
           height: 96px;
@@ -196,10 +212,64 @@
         background-image: url(/assets/img/human-appeal-logo.svg);
       }
     }
+
+    &--go-southampton {
+      a {
+        background-image: url(/assets/img/go-southampton.png);
+      }
+    }
+
+    &--rotary-southampton {
+      width: 200px;
+
+      a {
+        background-image: url(/assets/img/rotary-southampton.png);
+      }
+    }
+
+    &--southampton-voluntary-services {
+      width: 180px;
+
+      a {
+        background-image: url(/assets/img/southampton-voluntary-services.png);
+      }
+    }
+
+    &--society-of-st-james {
+      width: 200px;
+
+      a {
+        background-image: url(/assets/img/society-of-james.png);
+      }
+    }
+
+    &--southampton-city-council {
+      width: 200px;
+      a {
+        background-image: url(/assets/img/southampton-city-council.png);
+      }
+    }
+
+    &--city-life-church {
+      width: 160px;
+
+      a {
+        background-image: url(/assets/img/citylife-church.png);
+      }
+    }
+
+    &--oasis-uk {
+      width: 140px;
+
+      a {
+        background-image: url(/assets/img/oasis.png);
+      }
+    }
   }
 }
 
 .partner {
   @include cf();
+
   padding-bottom: 50px;
 }

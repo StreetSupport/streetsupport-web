@@ -38,6 +38,10 @@
       border-bottom: 0;
       border-right: 1px solid $brand-m;
     }
+
+    a { 
+      text-decoration: none;
+    }
   }
 
   &__title {

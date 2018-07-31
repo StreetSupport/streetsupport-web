@@ -19,7 +19,16 @@ const redirectForLegacyNeedDetails = () => {
   }
 }
 
+const defaultCallback = (currRange) => {
+  new PostcodeProximity(currRange, (newLocationResult, newRange) => { //eslint-disable-line
+    browser.loading()
+    init(newLocationResult, newRange)
+  })
+  browser.loaded()
+}
+
 const renderNeeds = (needs, userLocation, currRange) => {
+  console.log(userLocation.postcode)
   const theData = {
     card: needs,
     location: userLocation.name,
@@ -28,35 +37,44 @@ const renderNeeds = (needs, userLocation, currRange) => {
     geoLocationUnavailable: userLocation.geoLocationUnavailable
   }
 
-  const defaultCallback = () => {
-    const postcodeProximityComponent = new PostcodeProximity(currRange, (newLocationResult, newRange) => { //eslint-disable-line
-      init(newLocationResult, newRange)
-    })
-    browser.loaded()
-  }
-
   if (needs.length === 0) {
-    templating.renderTemplate('js-no-data-tpl', theData, 'js-card-list-output', defaultCallback)
+    templating.renderTemplate('js-no-data-tpl', theData, 'js-card-list-output', () => defaultCallback(currRange))
   } else {
     templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', () => {
       buildList()
       redirectForLegacyNeedDetails()
       listToSelect.init()
       initAutoComplete(needs)
-      defaultCallback()
+      defaultCallback(currRange)
     })
   }
 }
 
 const init = function (userLocation, range = 10000) {
-  const url = `${apiRoutes.needsHAL}?longitude=${userLocation.longitude}&latitude=${userLocation.latitude}&range=${range}&pageSize=100`
-  getApiData.data(url)
-    .then((result) => {
-      const formatted = formatNeeds(result.data.items, userLocation)
-      renderNeeds(formatted, userLocation, range)
-    }, () => {
-      browser.redirect('/500')
-    })
+  if (userLocation) {
+    const headerData = {
+      postcode: userLocation.postcode,
+      range: range
+    }
+    templating.renderTemplate('js-header-tpl', headerData, 'js-header-output', () => { })
+    const url = `${apiRoutes.needsHAL}?longitude=${userLocation.longitude}&latitude=${userLocation.latitude}&range=${range}&pageSize=100`
+    getApiData.data(url)
+      .then((result) => {
+        const formatted = formatNeeds(result.data.items, userLocation)
+        renderNeeds(formatted, userLocation, range)
+      }, () => {
+        browser.redirect('/500')
+      })
+  } else {
+    const theData = {
+      card: [],
+      location: 'elsewhere',
+      categoryName: 'requests for help',
+      geoLocationUnavailable: false
+    }
+    templating.renderTemplate('js-header-tpl', {}, 'js-header-output', () => { })
+    templating.renderTemplate('js-no-data-tpl', theData, 'js-card-list-output', () => defaultCallback(10000))
+  }
 }
 
 browser.loading()

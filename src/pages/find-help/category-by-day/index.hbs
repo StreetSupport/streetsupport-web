@@ -1,12 +1,12 @@
 ---
-title: overridden by build task!
-description: overridden by build task!
+title:
+description:
 image: https://streetsupport.net/assets/img/og/street-support.png
 layout: default.hbs
 permalink: false
 jsBundle: categorybyday
 section: findhelp
-page: categorybyday
+page:
 ---
 
 {{> no-js}}
@@ -17,71 +17,48 @@ page: categorybyday
 
 <script id="js-category-no-results-result-tpl" type="text/template">
 
-  <div class="block block--breadcrumbs">
-    <div class="container">
-      <ol class="breadcrumbs__list">
-        <li class="breadcrumbs__item"><a href="/">Home</a></li>
-        <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
-        \{{#organisations}}
-        <li class="breadcrumbs__item">\{{{categoryName}}}</li>
-        \{{/organisations}}
-      </ol>
+{{> find-help/breadcrumb }}
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      {{> find-help/header }}
+      {{> proximity-search/hogan }}
     </div>
   </div>
+</div>
 
-  <div class="block block--subpage-header">
-    <div class="container">
-      \{{#organisations}}
-      <h2 class="h1 block__header">\{{categoryName}}</h2>
-      \{{/organisations}}
-    </div>
-  </div>
+{{> find-help/view-type-tabs timetableIsSelected="true" }}
 
-  <div class="block">
-    <div class="container block__inner">
-      <div class="block__content">
-        <div class="result-detail">
-          <div class="text-center">\{{{categorySynopsis}}}</div>
-          \{{#organisations}}{{> location-description-with-postcode }}\{{/organisations}} {{> no-services geoLocationUnavailable="geoLocationUnavailable"
-          }}
-        </div>
+<div class="block block--cards">
+  <div class="container block__inner">
+    <div class="block__content">
+      <div class="result-detail">
+        {{> no-services geoLocationUnavailable="geoLocationUnavailable" }}
       </div>
     </div>
   </div>
-  </div>
+</div>
 </script>
 
 <script id="js-category-result-tpl" type="text/template">
 
-  <div class="block block--breadcrumbs">
-    <div class="container">
-      <ol class="breadcrumbs__list">
-        <li class="breadcrumbs__item"><a href="/">Home</a></li>
-        <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
-        \{{#organisations}}
-        <li class="breadcrumbs__item">\{{{categoryName}}}</li>
-        \{{/organisations}}
-      </ol>
-    </div>
-  </div>
-
-  <div class="block block--subpage-header">
-    <div class="container">
-      \{{#organisations}}
-      <h2 class="h1  block__header block__header--find-help has-icon--left">
-        <svg class="block__header__icon--find-help svg-\{{categoryId}}-dims">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#\{{categoryId}}"></use>
-        </svg>
-        \{{categoryName}}</h2>
-      \{{/organisations}}
-    </div>
-  </div>
+ {{> find-help/breadcrumb }}
 
   <div class="block">
+    <div class="container">
+      <div class="block__content">
+        {{> find-help/header }}
+        {{> proximity-search/hogan }}
+      </div>
+    </div>
+  </div>
+
+  {{> find-help/view-type-tabs timetableIsSelected="true" }}
+
+  <div class="block block--cards">
     <div class="container block__inner">
       <div class="block__content">
-        <div class="text-center">\{{{categorySynopsis}}}</div>
-        {{> location-description-with-postcode}} {{> category-view-selector timetable="true" }} 
         \{{#organisations}}
         <div class="result-detail">
           <div class="accordion accordion--day js-accordion">
@@ -129,10 +106,9 @@ page: categorybyday
     </div>
 
     <p class="text-center">Please note, the information here is provided and maintained by the organisations. If you see anything that is incorrect
-      or incomplete, please <a href="/contact/">get in touch</a>.</p>
+      or incomplete, please <a href="/about/contact/">get in touch</a>.</p>
 
     {{> social-share}}
 
-  </div>
   </div>
 </script>

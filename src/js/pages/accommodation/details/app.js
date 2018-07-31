@@ -1,21 +1,13 @@
-/* global google */
-
 import '../../../common'
 
 const ViewModel = require('./../../../models/accommodation/details')
 const templating = require('./../../../template-render')
 const browser = require('./../../../browser')
+const googleMaps = require('./../../../location/googleMaps')
 
 const initMap = (centre) => {
-  const map = new google.maps.Map(document.querySelector('.js-map'), {
-    zoom: 15,
-    center: centre
-  })
-
-  new google.maps.Marker({ // eslint-disable-line
-    position: centre,
-    map: map
-  })
+  const map = googleMaps.buildMap(centre, { zoom: 15 })
+  googleMaps.buildMarker(centre, map)
 }
 
 const onRenderCallback = (viewModel) => {

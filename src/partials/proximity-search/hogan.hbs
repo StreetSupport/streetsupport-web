@@ -1,0 +1,26 @@
+<form class="form form--highlighted form--proximity-search">
+  <p>To find requests for help near you, enter your postcode below.</p>
+  <fieldset class="form__fieldset">
+    <legend>Showing requests within:</legend>
+    <ol class="form__field-list">
+      <li class="form__field-item form__field-item--proximity-search-range">
+        <label class="form__label hide-screen" for="range">Range</label>
+        <select class="location-selector__select form__input form__input--inline form__input--short js-find-help-range">
+          <option value="1000">1km</option>
+          <option value="2000">2km</option>
+          <option value="5000">5km</option>
+          <option value="10000">10km</option>
+          <option value="20000">20km</option>
+        </select>
+      </li>
+      <li class="form__field-item form__field-item--proximity-search-of"><span>of</span></li>
+      <li class="form__field-item form__field-item--proximity-search-postcode">
+        <label class="form__label hide-screen" for="postcode">Your postcode</label>
+        <input class="form__input js-location-search-postcode" id="postcode" type="text" placeholder="eg. M1 2HX" value="\{{postcode}}"></input>
+      </li>
+    </ol>
+    <a class="btn btn--cosy btn--always-full btn--brand-e js-update-search" type="submit">
+      <span class="btn__text">Search</span>
+    </a>
+  </fieldset>
+</form>

@@ -26,25 +26,25 @@ else {
 module.exports = {
   entry: {
     home: path.join(__dirname, '/src/js/page-home'),
+    hub: path.join(__dirname, '/src/js/page-hub'),
     supporters: path.join(__dirname, '/src/js/page-supporters'),
     generic: path.join(__dirname, '/src/js/page-generic'),
     findhelp: path.join(__dirname, '/src/js/page-find-help'),
-    giveHelp: path.join(__dirname, '/src/js/page-give-help'),
     category: path.join(__dirname, '/src/js/page-category'),
     categorybyday: path.join(__dirname, '/src/js/page-category-by-day'),
     categorybylocation: path.join(__dirname, '/src/js/page-category-by-location'),
     organisation: path.join(__dirname, '/src/js/page-organisation'),
-    allserviceproviders: path.join(__dirname, '/src/js/page-all-service-providers'),
+    "donate-v2": path.join(__dirname, '/src/js/pages/donate/app'),
+    "all-organisations-v2": path.join(__dirname, '/src/js/pages/all-organisations/app'),
+    "all-organisations-v2-map": path.join(__dirname, '/src/js/pages/all-organisations/map/app'),
     giverequests: path.join(__dirname, '/src/js/pages/give-help/needs/app'),
     requestDetails: path.join(__dirname, '/src/js/pages/give-help/needs/request/app'),
     sponsor: path.join(__dirname, '/src/js/page-sponsor'),
     volunteer: path.join(__dirname, '/src/js/page-volunteer'),
-    offeritems: path.join(__dirname, '/src/js/page-offer-items'),
+    offeritems: path.join(__dirname, '/src/js/pages/give-help/offer-items/app'),
     joinstreetsupport: path.join(__dirname, '/src/js/page-join-street-support'),
     register: path.join(__dirname, '/src/js/page-register'),
-    donate: path.join(__dirname, '/src/js/page-donate'),
-    bigchange: path.join(__dirname, 'src/js/pages/manchester/page-big-change'),
-    leedsbigchange: path.join(__dirname, 'src/js/pages/leeds/page-big-change'),
+    manchester: path.join(__dirname, 'src/js/pages/manchester/page-manchester'),
     emergencyhelp: path.join(__dirname, 'src/js/page-emergency-help'),
     swep: path.join(__dirname, 'src/js/page-swep'),
     emergencyHelpRedirect: path.join(__dirname, 'src/js/page-emergency-help-redirect'),
@@ -75,6 +75,10 @@ module.exports = {
         query: {
           presets: ['es2015']
         }
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
   },

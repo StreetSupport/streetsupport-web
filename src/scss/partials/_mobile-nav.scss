@@ -1,19 +1,46 @@
+$header-height: 65px;
+
 .header--mobile {
   display: block;
+  border-bottom: 2px solid $brand-e;
+  height: 66px;
 
   .header__title {
     display: block;
     float: left;
     padding: 10px 0 0 10px;
     margin: 0;
+
+    .text {
+      line-height: 1.1em;
+      vertical-align: top;
+      padding-top: 3px;
+    }
   }
 
   .header__btn {
+    font-weight: $font-headline-weight;
+    font-family: $font-headline;
     float: right;
-    width: auto;
+    width: 80px;
+    height: $header-height;
     padding: 20px;
     margin: 0;
-    background-color:$brand-j;
+    background-color:$brand-e;
+    line-height: 1.1em;
+
+    .is-active & {
+      display: none;
+    }
+
+    &--close {
+      padding: 15px 10px 14px 10px;
+      display: none;
+      z-index: 1000;
+      .is-active & {
+        display: block;
+      }
+    }
 
     a {
       color: $brand-k;
@@ -69,10 +96,10 @@
     display: none;
   }
   position: fixed;
-  top: 0;
-  right: -$nav-width;
+  top: $header-height;
+  right: -$nav-width * 2;
   height: 100%;
-  width: $nav-width;
+  width: $nav-width * 2;
   z-index: $zIndex-mobileNav;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
@@ -80,10 +107,12 @@
   transition: transform 250ms cubic-bezier(.16, .68, .43, .99);
   transform: translate3d(0, 0, 0);
 
-  background-color: $brand-c;
-
   &.is-active {
-    transform: translate3d(-$nav-width, 0, 0);
+    transform: translate3d(-$nav-width / 2, 0, 0);
+  }
+
+  &.sub-nav-is-active {
+    transform: translate3d(-($nav-width), 0, 0)!important;
   }
 
   .nav__push {
@@ -94,75 +123,138 @@
     }
   }
 
-  .nav__btn {
-    float: right;
-    width: auto;
-    padding: 10px;
-    margin: 0;
-    color: #fff;
-
-    @include mq($from: m) {
-      display: none;
-    }
-
-    .icon {
-      height: 12px;
-      width: 12px;
-    }
-  }
-
   .nav__list {
     list-style-type: none;
+    background: $brand-e;
+    width: 200%;
+    height: 140%;
 
     &--sub-list {
       list-style: none;
       margin: 0;
       padding: 0;
-    }
-
-    &--sub-sub-list {
-      padding-left: 10px;
+      position: absolute;
+      display: none;
+      top: 0;
+      right: -50%;
+      width: 100%;
     }
   }
 
   .nav__item {
-    color: #fff;
     margin: 0;
-    padding: 0px;
+    padding: 0 0 0 10px;
+    width: 100%;
     font-weight: $font-headline-weight;
+    font-family: $font-headline;
+    float: none;
 
-    &--city-specific {
-      border-top: 1px solid $brand-b;
-      border-bottom: 1px solid $brand-b;
-
-      ul {
-        display: none;
-      }
-
-      ul a {
-        color: $brand-k;
+    &[data-city] {
+      display: none;
+      &.is-active {
+        display: block;
       }
     }
 
-    &--city-specific.is-active {
-      border: none;
-      background: $brand-j;
-      color: $brand-k;
-
-      ul {
+    &:hover {
+      background: none;
+      .nav__list {
+        display: none;  
+      }          
+    }
+    
+    &.sub-nav-is-active {
+      background: none;
+      .nav__list {
         display: block;
+      }          
+    }
+  
+    &--mobile-only {
+      display: block;
+    }
+
+    &--hub-nav {
+      padding-left: 0;
+    }
+
+    &--sub-list-title {
+      padding: 18px 10px 18px 0;
+      background: $brand-e;
+      text-align: right;
+      
+      &:hover {
+        background: $brand-e!important;
       }
 
-      .nav__list--sub-list a {
-        padding: 10px;
+      .sub-list-back-btn {
+        display: block;
+        background: none;
+        border: none;
+        padding-left: 20px;
+        &::before {
+          content: '';
+          width: 0; 
+          height: 0; 
+          margin-left: 10px;
+          top: 1.6em;
+          left: 0px;
+          position: absolute;
+          border-bottom: 5px solid transparent;
+          border-top: 5px solid transparent;
+          border-right: 5px solid $brand-k;
+        }
+      }
+
+      .sub-list-text {
+        right: 50%;
+        position: absolute;
+        padding-right: 10px;
+        top: 1.2em;
       }
     }
 
     a {
-      color: inherit;
-      text-decoration: none;
+      border-bottom: 1px solid $brand-m;
+      color: $brand-m;
       display: block;
-      padding: 10px;
+      padding: 18px 10px 18px 0;
+      text-decoration: none;
+      width: 25%;
+      &:hover { 
+        background: none;
+      }
+    }
+
+    &:last-child > a {
+      border: none;
+    }
+
+    .nav__list--sub-list .nav__item--sub-list-title {
+      background: $brand-e!important;
+    }
+
+    .nav__list--sub-list .nav__item {
+      background: $brand-s;
+    }
+
+    .nav__list--sub-list .nav__item a {
+      width: 50%;
+    }
+  }
+
+  .nav__item-link {
+    &--has-sub-nav {
+      &::after {
+        top: 1.6em;
+        right: 15px;
+        border-bottom: 5px solid transparent;
+        border-top: 5px solid transparent;
+        border-left: 5px solid $brand-k;
+      }
+    }
+    &--hub-heading {
+      border-bottom: 1px solid $brand-m!important;
     }
   }
 
@@ -173,9 +265,19 @@
   }
 }
 
+.hub-nav-container {
+  margin: 0;
+  dd {
+    margin: 0;
+    ul {
+      padding: 0;
+    }
+  }
+}
+
 .nav__overlay {
   position: fixed;
-  top: 0;
+  top: $header-height;
   right: 0;
   bottom: 0;
   left: 0;
@@ -204,5 +306,24 @@
 
   100% {
     opacity: 1;
+  }
+}
+
+// Active Section
+@each $section in $nav-sections {
+  .section--#{$section} .nav__item--#{$section} {
+    background: $brand-s;
+  }
+}
+
+// Active page
+@each $page in join($nav-pages, $generated-nav-pages) {
+  .page--#{$page} {
+    .nav--mobile .nav__item--#{$page} {
+      background: $brand-s;
+    }
+    .nav--mobile .nav__list--sub-list .nav__item--#{$page} {
+      background: $brand-e;
+    }
   }
 }

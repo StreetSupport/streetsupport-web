@@ -75,24 +75,13 @@ describe('Accommodation - Listing', function () {
   it('- should set location name to nearest postcode', () => {
     expect(sut.locationName()).toEqual('postcode')
   })
-  
+
   it('- should set accommodation categories', () => {
     expect(sut.accomTypes().length).toEqual(categories.length)
   })
-  
+
   it('- should set selected accommodation filter as empty', () => {
     expect(sut.selectedType()).toEqual('')
-  })
-
-  it('- should store user location state', () => {
-    const storageToBeCalledAsExpected = storageSetStub
-      .withArgs(storage.keys.userLocationState, {
-        'postcode': 'postcode',
-        'latitude': 123.4,
-        'longitude': 567.8
-      })
-      .calledOnce
-    expect(storageToBeCalledAsExpected).toBeTruthy()
   })
 
   it('- should map items to collection', () => {

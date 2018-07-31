@@ -73,6 +73,7 @@ describe('Accommodation - Listing - Type Filtering', function () {
 
     describe('- update', () => {
       beforeEach(() => {
+        sut.toggleFilterDisplay()
         sut.updateListing()
       })
 
@@ -86,6 +87,10 @@ describe('Accommodation - Listing - Type Filtering', function () {
       it('- should replace old results', () => {
         expect(sut.items().length).toEqual(data.items.length)
       })
+
+      it('- should hide filter menu', () => {
+        expect(sut.displayFilter()).toBeFalsy()
+      })
     })
 
     describe('- reset', () => {
@@ -96,20 +101,20 @@ describe('Accommodation - Listing - Type Filtering', function () {
       it('- should reset accom type to empty', () => {
         expect(sut.selectedType()).toEqual('')
       })
-      
+
       describe('- update', () => {
         beforeEach(() => {
           ajaxGetStub.reset()
           sut.updateListing()
         })
-  
+
         it('- should update cleared filter', () => {
           const calledAsExpected = ajaxGetStub
             .withArgs(api.accommodation + `?latitude=123.4&longitude=567.8`)
             .calledOnce
           expect(calledAsExpected).toBeTruthy()
         })
-  
+
         it('- should replace old results', () => {
           expect(sut.items().length).toEqual(data.items.length)
         })
