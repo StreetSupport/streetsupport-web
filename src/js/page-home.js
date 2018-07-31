@@ -41,7 +41,7 @@ const displayMap = function (hubs) {
 
 const init = () => {
   const theData = {
-    locations: [{ id: '', name: '- Select a hub -' }, ...supportedCities.locations]
+    locations: [{ id: '', name: '- Select a location -' }, ...supportedCities.locations]
   }
   const callback = function () {
     location.handler((result) => {
