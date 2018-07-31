@@ -5,6 +5,18 @@ $header-height: 65px;
   border-bottom: 2px solid $brand-e;
   height: 66px;
 
+  .sub-nav-is-active & {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    + * {
+      margin-top: 66px;
+    }
+  }
+
   .header__title {
     display: block;
     float: left;
