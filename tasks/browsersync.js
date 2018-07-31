@@ -10,8 +10,8 @@ gulp.task('browsersync', () => {
   browserSync.init({
     notify: false,
     server: {
-      baseDir: config.paths.build//,
-      // https: true
-    }
+      baseDir: config.paths.build
+    },
+    xip: true
   })
 })
