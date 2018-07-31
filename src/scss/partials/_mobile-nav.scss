@@ -103,9 +103,9 @@ $header-height: 65px;
   width: $nav-width * 2;
   z-index: $zIndex-mobileNav;
   overflow-y: scroll;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-
-  transition: transform 250ms cubic-bezier(.16, .68, .43, .99);
+  transition: transform 250ms cubic-bezier(0.16, 0.68, 0.43, 0.99);
   transform: translate3d(0, 0, 0);
 
   &.is-active {
@@ -113,11 +113,11 @@ $header-height: 65px;
   }
 
   &.sub-nav-is-active {
-    transform: translate3d(-($nav-width), 0, 0)!important;
+    transform: translate3d(-($nav-width), 0, 0) !important;
   }
 
   .nav__push {
-    transition: transform 250ms cubic-bezier(.16, .68, .43, .99);
+    transition: transform 250ms cubic-bezier(0.16, 0.68, 0.43, 0.99);
 
     &.is-active {
       transform: translate3d(-$nav-width, 0, 0);
@@ -222,7 +222,7 @@ $header-height: 65px;
       padding: 18px 10px 18px 0;
       text-decoration: none;
       width: 25%;
-      &:hover { 
+      &:hover {
         background: none;
       }
     }
