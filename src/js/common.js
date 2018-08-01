@@ -1,7 +1,6 @@
 const nav = require('./navigation/nav.js')
 const print = require('./navigation/print.js')
 const analytics = require('./analytics')
-const headerCitySelector = require('./navigation/headerCitySelector')
 const delegate = require('delegate')
 
 import Svg4everybody from 'svg4everybody'
@@ -78,5 +77,3 @@ print.init()
 fastClickCheck()
 Svg4everybody()
 twitterShareWindow()
-
-headerCitySelector.init()
