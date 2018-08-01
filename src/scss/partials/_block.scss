@@ -42,7 +42,7 @@
     }
 
     a {
-      color: $brand-c;
+      color: $brand-r;
       text-decoration: underline;
     }
 
@@ -114,18 +114,6 @@
         }
       }
     }
-
-    &--city-header {
-      @include mq($from: m) {
-        .cta {
-          @include span(1 of 2);
-        }
-
-        .cta:last-of-type {
-          @include last();
-        }
-      }
-    }
   }
 
   &__primary {
@@ -139,6 +127,28 @@
   }
 
   // Variants
+  &--news {
+    padding: 30px 10px;
+  }
+
+  &--big-change-mcr {
+    background: $big-change-a;
+    padding: 0!important;
+  }
+
+  &--standards-toolkit {
+    background: rgba(10, 133, 100, 0.15);
+    display: flex;
+    align-items: stretch;
+    padding: 0!important;
+    @include mq($from: m) {
+      .block__standards-toolkit-pad {
+        width: 50%;
+        background: url('/assets/img/toolkit-pad.png') right -40px no-repeat;
+      }
+    }
+  }
+
   &--breadcrumbs {
     padding-top: 6px !important;
     padding-bottom: 6px !important;
@@ -197,25 +207,16 @@
   background-image: url('../img/header-background.png');
   background-repeat: repeat-x;
   background-position: bottom;
-  padding-top: 100px;
+  padding-top: 60px;
   padding-bottom: 100px;
 
-  @include mq($from: m) {
-    padding-top: 60px;
-    padding-bottom: 80px;
-  }
-  
   .block__header,
   .block__sub-header {
     color: $brand-m;
   }
 }
 
-
-.block--city-header {
-  padding-top: 0;
-}
-
+.block--city-header,
 .block--home-header {
   .block__header,
   .block__sub-header {
@@ -224,17 +225,26 @@
   }
 
   .ctas {
-    @include mq($until: m) {
-      .btn { width: 100%; }
-    }
+    .btn { 
+      @include span(1 of 2);
+      &:last-of-type {
+        @include last();
+      }
+     }
     @include mq($from: m) {
       .btn__text {
         padding: 15px 60px;
       }
-      .btn:first-of-type { margin-right: 20px; }
     }
   }
+}
 
+
+.block--header {
+  padding: 80px 0!important;
+}
+
+.block--home-header {
   @include mq($from: m) {
     padding-bottom: 30px;
 
@@ -244,9 +254,18 @@
         @include first();
       }
     }
-
   }
+}
+.block--city-header {
+  @include mq($from: m) {
 
+    .container { 
+      & > * {
+        @include span(1 of 2); 
+        @include first();
+      }
+    }
+  }
 }
 
 // Components
@@ -370,10 +389,6 @@
   }
 }
 
-.block--city-header .block__sub-header {
-  color: white!important;
-}
-
 .template--maybe-empty .block--home-promo {
   padding-bottom: 0px!important;
 }
@@ -474,9 +489,74 @@
 
 .home__copy {
   @include mq($from: m) {
-    @include span(1 of 2);
+    @include span(6 of 12);
     .location-selector {
       text-align: left;
+    }
+
+    &:last-child {
+      @include last();
+    }
+
+    &--left-col {
+      @include first();
+      float: left!important;
+    }
+  }
+
+  &--standards-toolkit {
+    padding: 40px 1rem;
+    max-width: 500px;  // half of $site-container in _variables.scss
+    @include mq($from: m) {
+      padding: 40px 30px 40px 40px;
+    }
+  }
+
+  &--big-change-mcr-logo {
+    background: $big-change-b;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+
+    @include mq($from: m) {
+      position: relative;
+      &:before {
+        background: url('/assets/img/big-change-mcr-triangle.png') top left no-repeat;
+        width: 50px;
+        height: 100%;
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+      &:after {
+        background: url('/assets/img/big-change-mcr-triangle.png') top left no-repeat;
+        width: 50px;
+        height: 100%;
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -1px;
+        transform: rotate(180deg);  
+      }
+    }
+  }
+
+  &--big-change-mcr-text {
+    padding: 40px 20px;
+    background: $big-change-a;
+
+    @include mq($from: m) {
+      padding: 40px 0px;
+    }
+  }
+
+  &--padding {
+    @include mq($from: m) {
+      @include span(5 of 12);
     }
   }
 }
@@ -494,5 +574,4 @@
 .js-map {
   height: 500px;
   width: 100%;
-  margin-bottom: 20px;
 }

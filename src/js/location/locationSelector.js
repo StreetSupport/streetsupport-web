@@ -81,15 +81,13 @@ const getSelectedLocationId = () => {
 }
 
 const getCurrentHub = () => {
-  const deferred = Q.defer()
   const saved = browser.location().pathname.split('/')[1]
   if (getSelectedLocationId() !== saved) {
     setCurrent(saved)
     browser.reload()
   }
-  deferred.resolve(supportedCities.get(saved))
 
-  return deferred.promise
+  return supportedCities.get(saved)
 }
 
 const buildLocationResult = (userLocationState) => {

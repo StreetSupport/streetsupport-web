@@ -2,14 +2,21 @@ const locationSelector = require('../../location/locationSelector')
 const MapBuilder = require('./MapBuilder')
 
 const ko = require('knockout')
+const htmlEncode = require('htmlencode')
 
 const AccommodationListing = function () {
   const self = this
 
   const buildInfoWindowMarkup = (p) => {
-    return `<div class="map-info-window">
-        <h1 class="h2">${p.name()}</h1>
-      </div>`
+    return `<div class="card card--brand-h card--gmaps">
+              <div class="card__title">
+                <h1 class="h2">${htmlEncode.htmlDecode(p.name())}</h1>
+                <p>${htmlEncode.htmlDecode(p.synopsis())}
+              </div>
+              <div class="card__details">
+                <a href="${p.detailsUrl()}">View details</a>
+              </div>
+            </div>`
   }
 
   self.map = new MapBuilder()

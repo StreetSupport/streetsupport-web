@@ -37,7 +37,7 @@ const init = (currentLocation) => {
     })
 
   wp
-    .getPostsByLocation(currentLocation.id, 4, 0, true)
+    .getPostsByLocation(currentLocation.id, 3, 0, true)
     .then((posts) => {
       const callback = () => {}
       templating.renderTemplate('js-news-tpl', posts, 'js-news-output', callback)
@@ -48,8 +48,5 @@ const init = (currentLocation) => {
   templating.renderTemplate('js-swep-tpl', city, 'js-swep-output', callback)
 }
 
-location
-  .getCurrentHub()
-  .then((result) => {
-    init(result)
-  })
+const currentLocation = location.getCurrentHub()
+init(currentLocation)

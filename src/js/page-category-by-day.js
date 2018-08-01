@@ -64,7 +64,7 @@ function buildList (url, locationResult) {
           findHelp = new FindHelp('my-location')
           findHelp.initFindHelpPostcodesLocationSelector(onLocationCriteriaChange)
           findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
-          
+
           accordion.init(true, dayIndexToOpen, findHelp.buildListener('category-by-day', 'day'))
           analytics.init(document.title)
 

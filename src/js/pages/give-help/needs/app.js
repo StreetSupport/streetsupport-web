@@ -28,7 +28,6 @@ const defaultCallback = (currRange) => {
 }
 
 const renderNeeds = (needs, userLocation, currRange) => {
-  console.log(userLocation.postcode)
   const theData = {
     card: needs,
     location: userLocation.name,

@@ -16,6 +16,10 @@ $triangle-height-m: 298px;
   @include mq($from: m) {
     height: $big-change-height-m;
   }
+
+  &--mcr-home-page {
+    background: $big-change-a;
+  }
 }
 
 .big-change-banner__container {
@@ -50,7 +54,7 @@ $triangle-height-m: 298px;
   }
 
   img {
-    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   &::before {
@@ -63,7 +67,17 @@ $triangle-height-m: 298px;
     position: absolute;
     top: 0;
     left: 0;
+
+    .big-change-banner--mcr-home-page & {
+      display: none;
+
+      @include mq($from: m) {
+        display: block;
+        border-color: $big-change-a transparent transparent transparent;
+      }
+    }
   }
+
   &::after {
     content: ' ';
     width: 0;
@@ -74,6 +88,14 @@ $triangle-height-m: 298px;
     position: absolute;
     top: 0;
     right: 0;
+
+    .big-change-banner--mcr-home-page & {
+      display: none;
+      @include mq($from: m) {
+        display: block;
+        border-color: transparent $big-change-a transparent transparent;
+      }
+    }
   }
   @include mq($from: m) {
     &::before {
@@ -85,15 +107,18 @@ $triangle-height-m: 298px;
   }
 }
 
-.big-change-banner__heading-part {
-  color: white;
+.big-change-banner__heading-text {
+  color: $big-change-yellow;
   text-transform: uppercase;
   display: block;
-  margin-bottom: 0;
+  font-size: 30px;
+  line-height: 1.1em;  
+  letter-spacing: 0.1em;
 }
 
-.big-change-banner__heading-part--highlight {
-  color: $big-change-yellow;
+.big-change-banner__heading-text--minor {
+  color: white;
+  font-size: 18px;
 }
 
 .big-change-social {
