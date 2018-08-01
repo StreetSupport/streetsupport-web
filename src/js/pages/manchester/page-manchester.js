@@ -106,9 +106,24 @@ const initMap = function (currentLocation) {
     })
 }
 
+const initToolkit = function () {
+  templating.renderTemplate('js-toolkit-tpl', {}, 'js-toolkit-output')
+}
+
+const initCharter = function () {
+  templating.renderTemplate('js-charter-tpl', {}, 'js-charter-output')
+}
+
+const initBigChange = function () {
+  templating.renderTemplate('js-big-change-tpl', {}, 'js-big-change-output')
+}
+
+const re = new RegExp(/\/(.*)\//)
+const reqLocation = browser.location().pathname.match(re)[1].split('/')[0]
+
 const currentLocation = location.getCurrentHub()
-if (currentLocation.id !== 'manchester') {
-  location.setCurrent('manchester')
+if (currentLocation.id !== reqLocation) {
+  location.setCurrent(reqLocation)
   browser.reload()
 }
 
@@ -117,3 +132,12 @@ initNews(currentLocation.id)
 initFindHelp()
 initStatistics(currentLocation.id)
 initMap(currentLocation)
+if (currentLocation.toolkitIsEnabled) {
+  initToolkit()
+}
+if (currentLocation.charterIsEnabled) {
+initCharter()
+}
+if (currentLocation.bigChangeIsEnabled) {
+initBigChange()
+}

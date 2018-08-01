@@ -40,3 +40,10 @@ src/pages/find-help/employment/
 src/data/generated/
 src/partials/nav/service-cats.hbs
 src/scss/modules/_generated-variables.scss
+src/pages/southampton/index.hbs
+src/pages/liverpool/index.hbs
+src/pages/leeds/index.hbs
+src/pages/bradford/index.hbs
+src/pages/bournemouth/index.hbs
+src/pages/portsmouth/index.hbs
+src/pages/manchester/index.hbs

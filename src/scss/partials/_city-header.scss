@@ -1,82 +1,47 @@
 %manchester-header {
-  @include mq($from: m) {
-    &:before {
-      height: 250px;
-      background-image: url('../img/manc-buildings.png');
-      background-position: 66% bottom;
-      background-repeat: no-repeat;
-    }
+  &:before {
+    background-image: url('../img/manc-buildings.png');
   }
 }
 
 %leeds-header {
-  background-image: url('../img/header-background-leeds.png');
-
   &:before {
-    height: 324px;
     background-image: url('../img/leeds-buildings.png');
-    background-repeat: no-repeat;
-    background-position: 33% bottom;
   }
 }
 
 %bournemouth-header {
-  background-image: url('../img/header-background-bournemouth.png');
-
+  // background-image: url('../img/header-background-bournemouth.png');
   &:before {
-    height: 370px;
     background-image: url('../img/bournemouth-buildings.png');
-    background-repeat: no-repeat;
-    background-position: 0 bottom;
-    left: 0;
   }
 }
 
 %portsmouth-header {
-  background-image: url('../img/header-background-bournemouth.png');
+  // background-image: url('../img/header-background-bournemouth.png');
 
   &:before {
-    height: 370px;
     background-image: url('../img/portsmouth-buildings.png');
-    background-repeat: no-repeat;
-    background-position: 0 bottom;
-    left: 0;
   }
 }
 
 %bradford-header {
-  background-image: url('../img/header-background-leeds.png');
-
   &:before {
-    height: 370px;
     background-image: url('../img/bradford-buildings.png');
-    background-repeat: no-repeat;
-    background-position: 0 bottom;
-    left: 0;
   }
 }
 
 %liverpool-header {
-  background-image: url('../img/header-background-leeds.png');
-
   &:before {
-    height: 370px;
     background-image: url('../img/liverpool-buildings.png');
-    background-repeat: no-repeat;
-    background-position: 0 bottom;
-    left: 0;
   }
 }
 
 %southampton-header {
-  background-image: url('../img/header-background-leeds.png');
+  // background-image: url('../img/header-background-bournemouth.png');
 
   &:before {
-    height: 370px;
     background-image: url('../img/southampton-buildings.png');
-    background-repeat: no-repeat;
-    background-position: 0 bottom;
-    left: 0;
   }
 }
 
@@ -91,16 +56,16 @@
 
   @include mq($from: m) {
     &:before {
-      position: absolute;
-      display: inline-block;
-      content: '';
-      left: 50%;
-      bottom: -4px;
-      width: 100%;
+      background-position: 66% bottom;
+      background-repeat: no-repeat;
       background-size: 600px;
-      @include mq($from: m) {
-        width: 600px;
-      }
+      bottom: 2px;
+      content: '';
+      display: inline-block;
+      height: 250px;
+      left: 50%;
+      position: absolute;
+      width: 600px;
     }
   }
 
@@ -109,45 +74,37 @@
   }
 }
 
-.manchester .city-header,
-.leeds .city-header--manchester {
+.manchester .city-header {
   @extend %manchester-header;
   color: $brand-k;
 }
 
-.leeds .city-header,
-.manchester .city-header--leeds {
+.leeds .city-header {
   @extend %leeds-header;
   color: $brand-k;
 }
 
-
-.bournemouth .city-header,
-.manchester .city-header--bournemouth {
+.bournemouth .city-header{
   @extend %bournemouth-header;
   color: $brand-k;
 }
 
-.portsmouth .city-header,
-.manchester .city-header--portsmouth {
+.portsmouth .city-header{
   @extend %portsmouth-header;
   color: $brand-k;
 }
 
-.bradford .city-header,
-.manchester .city-header--bradford {
+.bradford .city-header{
   @extend %bradford-header;
   color: $brand-k;
 }
 
-.southampton .city-header,
-.manchester .city-header--southampton {
+.southampton .city-header{
   @extend %southampton-header;
   color: $brand-k;
 }
 
-  .liverpool .city-header,
-  .manchester .city-header--liverpool {
+  .liverpool .city-header {
     @extend %liverpool-header;
     color: $brand-k;
 

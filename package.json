@@ -49,6 +49,7 @@
     "jasmine": "2.5.2",
     "metalsmith": "2.3.0",
     "metalsmith-drafts": "0.0.1",
+    "metalsmith-ignore": "^0.1.2",
     "metalsmith-in-place": "1.4.4",
     "metalsmith-layouts": "1.7.0",
     "metalsmith-mapsite": "1.0.4",
