@@ -10,7 +10,7 @@
 
   // Components
   &__header {
-    text-align: center;
+    text-align: left;
     margin: 0;
 
     &--story {
@@ -19,7 +19,7 @@
   }
 
   &__sub-header {
-    text-align: center;
+    text-align: left;
     margin: 0;
     color: $brand-d;
   }
@@ -566,6 +566,11 @@
   &--padding {
     @include mq($from: m) {
       @include span(5 of 12);
+
+      .home__copy--padding + & {
+        @include push(1 of 12);
+        float: left;
+      }
     }
   }
 }
