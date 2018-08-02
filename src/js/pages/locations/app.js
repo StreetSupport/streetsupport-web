@@ -61,6 +61,7 @@ const initFindHelp = function (currentLocation) {
   }
 
   ui.postcode.setAttribute('placeholder', `your postcode: eg ${currentLocation.postcode}`)
+  ui.postcode.value = currentLocation.postcode
 
   ui.form.addEventListener('submit', function (e) {
     e.preventDefault()
