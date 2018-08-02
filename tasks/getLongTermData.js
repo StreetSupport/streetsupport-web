@@ -68,7 +68,7 @@ gulp.task('supported-cities', (callback) => {
         return 0
       })
     )))
-    .pipe(replace('[', 'export const cities = ['))
+    .pipe(replace('[{', 'export const cities = [{'))
     .pipe(gulp.dest('./'))
 })
 

@@ -72,12 +72,27 @@ const initFindHelp = function (currentLocation) {
   })
 }
 
-const initStatistics = function (currentLocationId) {
+const initStatistics = function (currentLocation) {
+  const stats = [
+    { field: 'totalServiceProviders', link: '/find-help/all-service-providers/', label: 'Organisations' },
+    { field: 'totalPledges', link: 'https://charter.streetsupport.net/progress/', label: 'Pledges' },
+    { field: 'totalVolunteers', link: '/give-help/volunteer/', label: 'Volunteers' },
+    { field: 'totalNeeds', link: '/give-help/help/', label: 'Needs' }
+  ]
+  const requiredStats = currentLocation.homePageStats || ['totalServiceProviders', 'totalNeeds', 'totalVolunteers']
   api
-    .data(endpoints.statistics + currentLocationId + '/latest')
-    .then((stats) => {
+    .data(endpoints.statistics + currentLocation.id + '/latest')
+    .then((result) => {
       const theData = {
-        statistics: stats.data
+        statistics: requiredStats
+          .map((rs) => {
+            const reqStat = stats.find((s) => s.field === rs)
+            return {
+              total: result.data[rs],
+              link: reqStat.link,
+              label: reqStat.label 
+            }
+          })
       }
 
       templating.renderTemplate('js-statistics-tpl', theData, 'js-statistics-output')
@@ -136,7 +151,7 @@ if (currentLocation.id !== reqLocation) {
 initLocations(currentLocation.id)
 initNews(currentLocation.id)
 initFindHelp(currentLocation)
-initStatistics(currentLocation.id)
+initStatistics(currentLocation)
 initMap(currentLocation)
 
 const availableFeatures = [
