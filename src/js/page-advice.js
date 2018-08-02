@@ -7,9 +7,6 @@ const apiRoutes = require('./api')
 const templating = require('./template-render')
 
 const locationid = locationSelector.getSelectedLocationId()
-if (window.location.href.indexOf(locationid) === -1) {
-  browser.redirect('/' + locationid + '/advice/')
-}
 
 getApiData
   .data(apiRoutes.cities)
@@ -21,11 +18,11 @@ getApiData
         browser.scrollTo(browser.location().hash)
       }
     }
-    
+
     if (city.swepIsAvailable) {
       templating.renderTemplate('js-swep-tpl', city, 'js-swep-output', callback)
     }
-  }, (_) => {})
+  }, (_) => { })
 
 
 const links = document.querySelectorAll('a[href^="#"]')

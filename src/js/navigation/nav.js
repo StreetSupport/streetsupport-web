@@ -1,5 +1,3 @@
-const location = require('../location/locationSelector')
-
 const openElement = '.js-nav-open'
 const closeElement = '.js-nav-close'
 const overlayElement = '.js-nav-overlay'
@@ -8,23 +6,10 @@ const subNavActiveClass = 'sub-nav-is-active'
 const el = document.querySelectorAll('.js-nav-container, .js-nav-push, .js-nav-overlay, html, body')
 const linksWithSubNav = document.querySelectorAll('.nav--mobile .nav__item-link--has-sub-nav')
 const subNavBackButtons = document.querySelectorAll('.sub-list-back-btn')
+const locationNavLinks = document.querySelectorAll('.nav__item--locations .nav__list .nav__item')
 
-const hideForCity = (cityId) => {
-  let activeElementCount = 0
-  if (cityId) {
-    const citySpecificElements = document.querySelectorAll('[data-city]')
-    for (let i = 0; i < citySpecificElements.length; i++) {
-      const citiesRequired = citySpecificElements[i].getAttribute('data-city')
-      if (citiesRequired.indexOf(cityId) > -1) {
-        citySpecificElements[i].classList.add('is-active') // desktop
-        activeElementCount++
-      }
-    }
-  }
-  if (activeElementCount === 0) {
-    document.querySelector('.hubs-nav').classList.add('hide-screen')
-  }
-}
+const browser = require('../browser')
+const locationSelector = require('../location/locationSelector')
 
 var init = function () {
   document.querySelector(openElement).addEventListener('click', open)
@@ -39,7 +24,9 @@ var init = function () {
     subNavBackButtons[i].addEventListener('click', closeSubNav)
   }
 
-  hideForCity(location.getSelectedLocationId())
+  for (let i = 0; i < locationNavLinks.length; ++i) {
+    locationNavLinks[i].addEventListener('click', setLocationId)
+  }
 }
 
 const openSubNav = function (e) {
@@ -56,6 +43,14 @@ const closeSubNav = function (e) {
   for (let i = 0; i < el.length; ++i) {
     el[i].classList.remove(subNavActiveClass)
   }
+}
+
+const setLocationId = function (e) {
+  e.preventDefault()
+  console.log(e.target.parentNode.dataset.location)
+  const locationId = e.target.parentNode.dataset.location
+  locationSelector.setCurrent(locationId)
+  browser.redirect(`/${locationId}/`)
 }
 
 var open = function () {

@@ -26,7 +26,6 @@ gulp.task('l-clean', () => {
   return del(generatedHomePages)
 })
 
-
 gulp.task('l-generate-home-pages', (callback) => {
   const srcContent = fs.readFileSync(homePageSrc, 'utf-8')
   cities
@@ -35,11 +34,19 @@ gulp.task('l-generate-home-pages', (callback) => {
         .replace(new RegExp('locationId', 'g'), c.id)
         .replace(new RegExp('locationName', 'g'), c.name)
       const dest = `${pagesRoot}${c.id}/index.hbs`   
-      console.log(`writing new location home page to ${dest}`)     
-
       fs.writeFileSync(dest, newContent)
     })
   callback()
+})
+
+gulp.task('l-generate-nav-variables', () => {
+  const srcFile = `${config.paths.scss}/modules/`
+  const cityOutput = cities
+    .map((c) => `${c.id}`)
+    .join(' ')
+
+  return newFile('_generated-location-nav-variables.scss', `$generated-locations-for-nav: ${cityOutput}`)
+    .pipe(gulp.dest(srcFile))
 })
 
 
@@ -48,6 +55,7 @@ gulp.task('generate-location-home-pages', (callback) => {
     'l-clean',
     'l-getCities',
     'l-generate-home-pages',
+    'l-generate-nav-variables',
     callback
   )
 })

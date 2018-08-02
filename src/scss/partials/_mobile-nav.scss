@@ -164,9 +164,6 @@ $header-height: 65px;
 
     &[data-city] {
       display: none;
-      &.is-active {
-        display: block;
-      }
     }
 
     &:hover {

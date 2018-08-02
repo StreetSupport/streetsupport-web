@@ -1,5 +1,3 @@
-/* global google */
-
 import '../../common'
 
 const browser = require('../../browser')

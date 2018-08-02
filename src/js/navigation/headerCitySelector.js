@@ -14,7 +14,10 @@ const init = () => {
   model.selectedCity = selectedCityId
 
   let body = document.querySelector('body')
-  body.classList.add(selectedCityId)
+
+  if (!Array.from(body.classList).includes(`location--${selectedCityId}`)) {
+    body.classList.add(`location--${selectedCityId}`)
+  }
 }
 
 module.exports = {

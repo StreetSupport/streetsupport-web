@@ -75,37 +75,37 @@
   }
 }
 
-.manchester .location-header {
+.location--manchester .location-header {
   @extend %manchester-header;
   color: $brand-k;
 }
 
-.leeds .location-header {
+.location--leeds .location-header {
   @extend %leeds-header;
   color: $brand-k;
 }
 
-.bournemouth .location-header{
+.location--bournemouth .location-header{
   @extend %bournemouth-header;
   color: $brand-k;
 }
 
-.portsmouth .location-header{
+.location--portsmouth .location-header{
   @extend %portsmouth-header;
   color: $brand-k;
 }
 
-.bradford .location-header{
+.location--bradford .location-header{
   @extend %bradford-header;
   color: $brand-k;
 }
 
-.southampton .location-header{
+.location--southampton .location-header{
   @extend %southampton-header;
   color: $brand-k;
 }
 
-.liverpool .location-header {
+.location--liverpool .location-header {
   @extend %liverpool-header;
   color: $brand-k;
 }

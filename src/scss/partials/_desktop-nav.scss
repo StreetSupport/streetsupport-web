@@ -68,9 +68,6 @@ $columned-dropdown-column-count: 3;
 
   &--hub {
     display: none;
-    &.is-active {
-      display: block;
-    }
   }
 
   &--columned {
@@ -256,6 +253,15 @@ $columned-dropdown-column-count: 3;
       @include mq($from: m) {
         background: $brand-e;
       }
+    }
+  }
+}
+
+// Active location nav
+@each $location in $generated-locations-for-nav {
+  .location--#{$location} {
+    [data-city="#{$location}"] {
+      display: block!important;
     }
   }
 }

@@ -47,3 +47,4 @@ src/pages/bradford/index.hbs
 src/pages/bournemouth/index.hbs
 src/pages/portsmouth/index.hbs
 src/pages/manchester/index.hbs
+src/scss/modules/_generated-location-nav-variables.scss
