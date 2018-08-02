@@ -55,7 +55,8 @@ module.exports = {
     accomAdvice: path.join(__dirname, 'src/js/pages/accommodation/advice/app'),
     accomListing: path.join(__dirname, 'src/js/pages/accommodation/listing/app'),
     accomMap: path.join(__dirname, 'src/js/pages/accommodation/map/app'),
-    accomDetails: path.join(__dirname, 'src/js/pages/accommodation/details/app')
+    accomDetails: path.join(__dirname, 'src/js/pages/accommodation/details/app'),
+    'general-advice': path.join(__dirname, 'src/js/pages/advice/app')
   },
   output: {
     path: path.join(__dirname, '/_dist/assets/js/'),

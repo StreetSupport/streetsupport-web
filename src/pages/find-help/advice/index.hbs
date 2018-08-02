@@ -4,7 +4,7 @@ description: Emergency help for those facing homelessness or have just become ho
 image: https://streetsupport.net/assets/img/og/street-support.png
 layout: default.hbs
 permalink: false
-jsBundle: generic
+jsBundle: general-advice
 section: findhelp
 page: emergencyhelp
 ---
@@ -23,6 +23,26 @@ page: emergencyhelp
   <div class="container">
     <h1 class="h1 block__header">Advice</h1>
     <h2 class="h2 block__sub-header">What to do if you are facing homelessness</h2>
+  </div>
+</div>
+
+<div class="block block--highlight">
+  <div class="container">
+    <div class="block__content">
+      <div class="home__copy home__copy--padding">
+        <h2 class="h2">Get advice for where you are</h2>
+        <p>This page contains general advice for people facing homelessnessness.</p>
+        <p>To see what help is available in your area, please select a supported location below.</p>
+        <div id="js-location-selector-output"></div>
+      </div>
+      <div class="home__copy home__copy--padding">
+        <h2 class="h2">We would love the network to link out to more locations</h2> 
+        <p>If you think Street Support might be useful in your area, please <a href="/about/contact">get in touch</a>.</p>
+          <a href="/about/contact" class="btn btn--brand-e">
+            <span class="btn__text">get in touch with us</span>
+          </a>
+        </div>
+    </div>
   </div>
 </div>
 
@@ -65,3 +85,7 @@ page: emergencyhelp
     </div>
   </div>
 </div>
+
+<script id="js-location-selector-tpl" type="text/template">
+{{> locations/selector-hogan }}
+</script>
