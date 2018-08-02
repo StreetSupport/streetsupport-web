@@ -34,9 +34,10 @@ gulp.task('l-generate-home-pages', (callback) => {
       const newContent = srcContent
         .replace(new RegExp('locationId', 'g'), c.id)
         .replace(new RegExp('locationName', 'g'), c.name)
-      const dest = `${pagesRoot}${c.id}`        
-      newFile('index.hbs', newContent)
-        .pipe(gulp.dest(dest))
+      const dest = `${pagesRoot}${c.id}/index.hbs`   
+      console.log(`writing new location home page to ${dest}`)     
+
+      fs.writeFileSync(dest, newContent)
     })
   callback()
 })
