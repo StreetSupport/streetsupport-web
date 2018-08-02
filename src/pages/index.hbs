@@ -32,7 +32,7 @@ page: home
         <p>Street Support Network is currently available across Greater Manchester, Leeds, Bradford, Liverpool, Bournemouth, Portsmouth and Southampton.</p>
 
         <p class="h3">Want to see what services are available in our featured locations? Select one from the list below:</p>
-        <div id="js-template-output"></div>
+        <div id="js-location-selector-output"></div>
       </div>
       <div class="home__hub-map">
         <div class="js-map"></div>
@@ -47,6 +47,8 @@ page: home
     </div>
   </div>
 </div>
+
+<div id="js-statistics-output"></div>
 
 <div class="block block--highlight block--promo">
   <div class="container">
@@ -64,7 +66,7 @@ page: home
 
 {{> loading-spinner}}
 
-<script id="js-content-tpl" type="text/template">
+<script id="js-location-selector-tpl" type="text/template">
 <div class="location-selector">
   <label for="location" class="location-selector__label hide-screen">Select a Location: </label>
   <select class="js-homepage-promo-location-selector js-location-select location-selector__select form__input" name="location" id="location">
@@ -73,4 +75,8 @@ page: home
     \{{/locations}}
   </select>
 </div>
+</script>
+
+<script id="js-statistics-tpl" type="text/template">
+{{> impact-statistics }}
 </script>

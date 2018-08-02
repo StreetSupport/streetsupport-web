@@ -164,22 +164,5 @@ page: locationId
 </script>
 
 <script id="js-statistics-tpl" type="text/template">
-  <div class="block block--highlight">
-    <div class="container">
-      <div class="block__content">
-        <div class="highlight">
-          <ul class="highlight__list">
-            \{{#statistics}}
-            <li class="highlight__item">
-              <a href="\{{ link }}">
-                <span class="highlight__title">\{{ total }}</span>
-                <span class="h3 highlight__description">\{{ label }}</span>
-              </a>
-            </li>
-            \{{/statistics}}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+  {{> impact-statistics }}
 </script>
