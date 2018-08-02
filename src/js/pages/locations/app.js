@@ -90,7 +90,7 @@ const initStatistics = function (currentLocation) {
             return {
               total: result.data[rs],
               link: reqStat.link,
-              label: reqStat.label 
+              label: reqStat.label
             }
           })
       }
