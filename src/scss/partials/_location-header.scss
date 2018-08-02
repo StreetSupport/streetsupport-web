@@ -55,6 +55,7 @@
   justify-content: center;
 
   @include mq($from: m) {
+    overflow-x: hidden;
     &:before {
       background-position: 66% bottom;
       background-repeat: no-repeat;
@@ -104,12 +105,7 @@
   color: $brand-k;
 }
 
-  .liverpool .location-header {
-    @extend %liverpool-header;
-    color: $brand-k;
-
-
-  @include mq($from: m) {
-    color: white;
-  }
+.liverpool .location-header {
+  @extend %liverpool-header;
+  color: $brand-k;
 }
