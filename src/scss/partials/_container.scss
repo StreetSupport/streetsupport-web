@@ -24,7 +24,9 @@
   }
 
   &--footer {
-    display: flex;
-    align-items: flex-end;
+    @include mq($from: m) {
+      display: flex;
+      align-items: flex-end;
+    }
   }
 }
