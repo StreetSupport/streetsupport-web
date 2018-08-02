@@ -45,7 +45,7 @@
   }
 }
 
-.city-header {
+.location-header {
   background-position: right bottom;
   background-size: 940px;
   position: relative;
@@ -74,37 +74,37 @@
   }
 }
 
-.manchester .city-header {
+.manchester .location-header {
   @extend %manchester-header;
   color: $brand-k;
 }
 
-.leeds .city-header {
+.leeds .location-header {
   @extend %leeds-header;
   color: $brand-k;
 }
 
-.bournemouth .city-header{
+.bournemouth .location-header{
   @extend %bournemouth-header;
   color: $brand-k;
 }
 
-.portsmouth .city-header{
+.portsmouth .location-header{
   @extend %portsmouth-header;
   color: $brand-k;
 }
 
-.bradford .city-header{
+.bradford .location-header{
   @extend %bradford-header;
   color: $brand-k;
 }
 
-.southampton .city-header{
+.southampton .location-header{
   @extend %southampton-header;
   color: $brand-k;
 }
 
-  .liverpool .city-header {
+  .liverpool .location-header {
     @extend %liverpool-header;
     color: $brand-k;
 

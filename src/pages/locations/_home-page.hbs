@@ -1,12 +1,12 @@
 ---
 title: Street Support cityName - Working together to end homelessness in cityName
 description: Street Support - Find help, and give help, to support people who are homeless in cityName
-image: https://streetsupport.net/assets/img/og/street-support-cityId.png
+image: https://streetsupport.net/assets/img/og/street-support-locationId.png
 layout: withGoogle.hbs
 permalink: false
 jsBundle: location-home-page
 section: home
-page: cityId
+page: locationId
 ---
 
 <div class="block block--breadcrumbs">
@@ -18,7 +18,7 @@ page: cityId
   </div>
 </div>
 
-<div class="block block--city-header city-header city-header--cityId">
+<div class="block block--city-header city-header city-header--locationId">
   <div class="container">
     <h1 class="h1 block__header">Street Support cityName</h1>
     <h2 class="h2 block__sub-header">Connecting people and organisations locally.</h2>
@@ -82,7 +82,7 @@ page: cityId
 <div class="block block--highlight block--promo">
   <div class="container">
     <div class="block__content partners">
-      {{> cityId/supporters }}
+      {{> locationId/supporters }}
       <p>We are looking for businesses and organisations to <a href="/give-help/partnership/">support us</a> so that we can continue to develop this resource.</p>
       <p>If you share our vision of a society without homelessness, please <a href="mailto:sponsorship@streetsupport.net">get in touch</a>.</p>
     </div>
@@ -104,7 +104,7 @@ page: cityId
       <div class="home__copy home__copy--padding home__copy--big-change-mcr-text">
         <h1>Big Change in cityName</h1>
         <p>Big Change pays for practical items individuals need to build independent lives away from the streets. If everyone who lives, works or visits cityName donates, together we can make a Big Change!</p>
-        <a class="btn btn--big-change" href="/cityId/bigchangemcr/">
+        <a class="btn btn--big-change" href="/locationId/bigchangemcr/">
           <span class="btn__text">Check out Big Change</span>
         </a>
       </div>
@@ -127,7 +127,7 @@ page: cityId
 </script>
 
 <script id="js-news-tpl" type="text/template">
-    {{>news-posts city="cityName"}}
+    {{>news-posts }}
 </script>
 
 <script id="js-charter-tpl" type="text/template">

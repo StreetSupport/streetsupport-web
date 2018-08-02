@@ -32,8 +32,8 @@ gulp.task('l-generate-home-pages', (callback) => {
   cities
     .forEach((c) => {
       const newContent = srcContent
-        .replace(new RegExp('cityId', 'g'), c.id)
-        .replace(new RegExp('cityName', 'g'), c.name)
+        .replace(new RegExp('locationId', 'g'), c.id)
+        .replace(new RegExp('locationName', 'g'), c.name)
       const dest = `${pagesRoot}${c.id}`        
       newFile('index.hbs', newContent)
         .pipe(gulp.dest(dest))
