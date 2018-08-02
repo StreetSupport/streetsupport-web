@@ -1,10 +1,8 @@
 .news-posts {
 
-  @media screen and (min-width: map-get($mq-breakpoints, 'm')) {
+  @include mq($from: m) {
     display: flex;
     flex-flow: row wrap;
-    margin: 0 -0.5em;
-    padding: 10px;
   }
 
   &__post {
@@ -20,7 +18,7 @@
     @include mq($from: m) {
       @include span(1 of 3);
       border-bottom: none;
-
+      position: relative;
       &:last-child {
         @include last();
       }
@@ -47,7 +45,7 @@
         padding: 10px;
       }
 
-      @media screen and (min-width: map-get($mq-breakpoints, 'm')) {
+      @include mq($from: m) {
         position: relative;
         float: none;
         width: auto;
@@ -81,23 +79,17 @@
 
       line-height: 2;
 
-      @media screen and (min-width: map-get($mq-breakpoints, 'm')) {
+      @include mq($from: m) {
         position: absolute;
         bottom: 0;
-      }
-    }
-
-    &__date {
-
-      @media screen and (min-width: map-get($mq-breakpoints, 'm')) {
-        left: 0.5em;
       }
     }
 
     &__excerpt {
       display: none;
 
-      @media screen and (min-width: map-get($mq-breakpoints, 'm')) {
+      @include mq($from: m) {
+        padding-bottom: 20px;
         display: block;
       }
     }
@@ -110,7 +102,7 @@
         font-weight: $font-headline-weight;
       }
 
-      @media screen and (min-width: map-get($mq-breakpoints, 'm')) {
+      @include mq($from: m) {
         right: 0.5em;
       }
     }
@@ -119,11 +111,5 @@
 
 .news-footer {
   text-align: center;
-  .btn {
-    margin: 20px auto;
-
-    &__text {
-      display: inline-block;
-    }
-  }
+  padding: 20px 0;
 }
