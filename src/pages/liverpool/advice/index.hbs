@@ -19,14 +19,7 @@ page: liverpool-advice
   </div>
 </div>
 
-<div class="block block--location-header location-header">
-  <div class="container container--location-header location-header--liverpool">
-    <h1 class="h1 block__header">Advice</h1>
-    <div class="block__cta block__cta--location-header">
-      <div id="js-swep-output" class="template--maybe-empty"></div>
-    </div>
-  </div>
-</div>
+{{> find-help/advice-header theLocationId="liverpool" }}
 
 <div class="block">
   <div class="container">
@@ -73,7 +66,3 @@ page: liverpool-advice
     </div>
   </div>
 </div>
-
-<script id="js-swep-tpl" type="text/template">
-{{> swep-notification }}
-</script>

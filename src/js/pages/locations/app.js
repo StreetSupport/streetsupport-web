@@ -139,6 +139,17 @@ const initBigChange = function () {
   templating.renderTemplate('js-big-change-tpl', {}, 'js-big-change-output')
 }
 
+const initSwep = function (currentLocationId) {
+  api
+  .data(endpoints.cities)
+  .then((result) => {
+    const city = result.data.find((c) => c.id === currentLocationId)
+    if (city.swepIsAvailable) {
+      templating.renderTemplate('js-swep-tpl', city, 'js-swep-output')
+    }
+  }, (_) => {})
+}
+
 const re = new RegExp(/\/(.*)\//)
 const reqLocation = browser.location().pathname.match(re)[1].split('/')[0]
 
@@ -153,6 +164,7 @@ initNews(currentLocation.id)
 initFindHelp(currentLocation)
 initStatistics(currentLocation)
 initMap(currentLocation)
+initSwep(currentLocation.id)
 
 const availableFeatures = [
   { isEnabledFlag: 'toolkitIsEnabled', init: initToolkit },

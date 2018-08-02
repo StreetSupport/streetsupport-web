@@ -33,6 +33,8 @@ page: locationId
   </div>
 </div>
 
+<div id="js-swep-output"></div>
+
 <div class="block">
   <div class="container">
     <div class="home__copy home__copy--padding">
@@ -89,8 +91,11 @@ page: locationId
   </div>
 </div>
 
-
 {{> loading-spinner}}
+
+<script id="js-swep-tpl" type="text/template">
+{{> find-help/swep-notification theLocationId="locationId" }}
+</script>
 
 <script id="js-big-change-tpl" type="text/template">
   <div class="block block--big-change-mcr">

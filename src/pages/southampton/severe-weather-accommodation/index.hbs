@@ -20,12 +20,8 @@ page: southampton-advice
   </div>
 </div>
 
-<div class="block block--location-header location-header location-header--southampton">
-  <div class="container container--location-header">
-    <h1 class="h1 block__header">Severe Weather Emergency Accommodation</h1>
-    <div id="js-swep-output" class="template--maybe-empty"></div>
-  </div>
-</div>
+{{> find-help/advice-header heading="Severe Weather Emergency Accommodation" theLocationId="southampton" }}
+
 
 <div class="block">
   <div class="container">
@@ -37,7 +33,3 @@ page: southampton-advice
 
   </div>
 </div>
-
-<script id="js-swep-tpl" type="text/template">
-{{> swep-notification }}
-</script>

@@ -21,7 +21,10 @@ getApiData
         browser.scrollTo(browser.location().hash)
       }
     }
-    templating.renderTemplate('js-swep-tpl', city, 'js-swep-output', callback)
+    
+    if (city.swepIsAvailable) {
+      templating.renderTemplate('js-swep-tpl', city, 'js-swep-output', callback)
+    }
   }, (_) => {})
 
 

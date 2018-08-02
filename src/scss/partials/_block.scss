@@ -199,6 +199,15 @@
     border-top: 1px solid $brand-k;
     @include cf();
   }
+
+  &--swep-availability-notification {
+    background: $brand-g;
+    padding: 20px 0px!important;
+    color: white;
+    a {
+       color: $brand-e;
+    }
+  }
 }
 
 .block--header,

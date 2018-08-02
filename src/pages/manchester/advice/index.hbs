@@ -19,14 +19,7 @@ page: manchester-advice
   </div>
 </div>
 
-<div class="block block--location-header location-header">
-  <div class="container container--location-header">
-    <h1 class="h1 block__header">Advice for Manchester</h1>
-    <div class="block__cta block__cta--location-header">
-      <div id="js-swep-output" class="template--maybe-empty"></div>
-    </div>
-  </div>
-</div>
+{{> find-help/advice-header theLocationId="manchester" }}
 
 <div class="block">
   <div class="container">
@@ -102,13 +95,7 @@ page: manchester-advice
       <p>There are many other services available to rough sleepers - you can check through the other categories in our <a href="/find-help/">'Find Help'</a> section to see if there is someone that can help with what you need. If you can't find what you need, please <a href="/about/contact/">get in touch</a> and we will try to put you in contact with someone that can help you.</p>
       <p>Make sure to <a href="http://england.shelter.org.uk/get_advice/homelessness/homeless_and_on_the_streets/10_ways_to_keep_safe_on_the_streets">stay safe on the streets</a>, stay warm and make sure you <a href="/find-help/meals/timetable/">eat and drink</a>.</p>
 
-
       {{> social-share}}
     </div>
   </div>
 </div>
-
-
-<script id="js-swep-tpl" type="text/template">
-{{> swep-notification }}
-</script>
