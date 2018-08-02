@@ -44,18 +44,23 @@ const initLocations = function (currentLocationId) {
 }
 
 const initNews = function (currentLocationId) {
+  const reqPosts = 3
   wp
-    .getPostsByLocation(currentLocationId, 3, 0, true)
-    .then((posts) => {
-      templating.renderTemplate('js-news-tpl', posts, 'js-news-output')
+    .getPostsByLocation(currentLocationId, reqPosts, 0, true)
+    .then((result) => {
+      if (result.posts.length === reqPosts) {
+        templating.renderTemplate('js-news-tpl', result, 'js-news-output')
+      }
     })
 }
 
-const initFindHelp = function () {
+const initFindHelp = function (currentLocation) {
   const ui = {
     form: document.querySelector('.js-find-help-form'),
     postcode: document.querySelector('.js-find-help-postcode')
   }
+
+  ui.postcode.setAttribute('placeholder', `your postcode: eg ${currentLocation.postcode}`)
 
   ui.form.addEventListener('submit', function (e) {
     e.preventDefault()
@@ -129,19 +134,19 @@ if (currentLocation.id !== reqLocation) {
 
 initLocations(currentLocation.id)
 initNews(currentLocation.id)
-initFindHelp()
+initFindHelp(currentLocation)
 initStatistics(currentLocation.id)
 initMap(currentLocation)
 
-const features = [
-  { flag: 'toolkitIsEnabled', init: initToolkit },
-  { flag: 'charterIsEnabled', init: initCharter },
-  { flag: 'bigChangeIsEnabled', init: initBigChange }
+const availableFeatures = [
+  { isEnabledFlag: 'toolkitIsEnabled', init: initToolkit },
+  { isEnabledFlag: 'charterIsEnabled', init: initCharter },
+  { isEnabledFlag: 'bigChangeIsEnabled', init: initBigChange }
 ]
 
-features
+availableFeatures
   .forEach((f) => {
-    if (currentLocation[f.flag]) {
+    if (currentLocation[f.isEnabledFlag]) {
       f.init()
     }
   })

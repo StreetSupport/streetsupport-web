@@ -9,7 +9,7 @@ import endpoints from '../src/js/api'
 import { newFile } from './fileHelpers'
 
 const pagesRoot = `${config.paths.pages}`
-const homePageSrc = `${pagesRoot}locations/_city-splash-page.hbs`
+const homePageSrc = `${pagesRoot}locations/_home-page.hbs`
 
 let cities = []
 
