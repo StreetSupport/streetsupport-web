@@ -50,8 +50,8 @@ gulp.task('accom-categories', (callback) => {
       }
     })
     .sort((a, b) => {
-      if (a.name > b.name) return -1
-      if (a.name < b.name) return 1
+      if (a.name < b.name) return -1
+      if (a.name > b.name) return 1
       return 0
     })
   return newFile('accom-categories.js', `export const categories = ${JSON.stringify(cats)}`)
@@ -61,7 +61,13 @@ gulp.task('accom-categories', (callback) => {
 gulp.task('supported-cities', (callback) => {
   return request(endpoints.cities)
     .pipe(source(`${config.paths.generatedData}supported-cities.js`))
-    .pipe(streamify(jeditor((cities) => cities)))
+    .pipe(streamify(jeditor((cities) => cities
+      .sort((a, b) => {
+        if (a.name < b.name) return -1
+        if (a.name > b.name) return 1
+        return 0
+      })
+    )))
     .pipe(replace('[', 'export const cities = ['))
     .pipe(gulp.dest('./'))
 })

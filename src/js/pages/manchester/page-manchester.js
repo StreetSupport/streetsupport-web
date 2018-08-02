@@ -132,12 +132,16 @@ initNews(currentLocation.id)
 initFindHelp()
 initStatistics(currentLocation.id)
 initMap(currentLocation)
-if (currentLocation.toolkitIsEnabled) {
-  initToolkit()
-}
-if (currentLocation.charterIsEnabled) {
-initCharter()
-}
-if (currentLocation.bigChangeIsEnabled) {
-initBigChange()
-}
+
+const features = [
+  { flag: 'toolkitIsEnabled', init: initToolkit },
+  { flag: 'charterIsEnabled', init: initCharter },
+  { flag: 'bigChangeIsEnabled', init: initBigChange }
+]
+
+features
+  .forEach((f) => {
+    if (currentLocation[f.flag]) {
+      f.init()
+    }
+  })

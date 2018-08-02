@@ -36,7 +36,7 @@ gulp.task('default', (callback) => {
     'clean',
     'cachebusting',
     'generate-service-pages',
-    // 'generate-location-home-pages',
+    'generate-location-home-pages',
     'metalsmith',
     ['htmlmin', 'svgsprite', 'scss', 'webpack', 'img', 'copy'],
     ['browsersync', 'watch'],

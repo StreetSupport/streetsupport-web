@@ -9,14 +9,13 @@ import endpoints from '../src/js/api'
 import { newFile } from './fileHelpers'
 
 const pagesRoot = `${config.paths.pages}`
-const homePageSrc = `${pagesRoot}locations/_city-splash-page.src`
+const homePageSrc = `${pagesRoot}locations/_city-splash-page.hbs`
 
 let cities = []
 
 gulp.task('l-getCities', (callback) => {
   request(endpoints.cities, function (err, res, body) {
     cities = JSON.parse(body)
-    console.log(cities)
     callback()
   })
 })
@@ -24,8 +23,7 @@ gulp.task('l-getCities', (callback) => {
 gulp.task('l-clean', () => {
   const generatedHomePages = cities
     .map((c) => `${pagesRoot}${c.id}/index.hbs`)
-    console.log(generatedHomePages)
-  // return del(generatedHomePages)
+  return del(generatedHomePages)
 })
 
 
@@ -46,8 +44,8 @@ gulp.task('l-generate-home-pages', (callback) => {
 
 gulp.task('generate-location-home-pages', (callback) => {
   runSequence(
-    'l-getCities',
     'l-clean',
+    'l-getCities',
     'l-generate-home-pages',
     callback
   )
