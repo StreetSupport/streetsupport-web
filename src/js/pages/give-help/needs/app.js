@@ -28,7 +28,7 @@ const defaultCallback = (currRange) => {
   browser.loaded()
 }
 
-const renderNeeds = (needs, userLocation, currRange) => {
+const renderNeeds = (needs, userLocation, currRange, links) => {
   const theData = {
     card: needs,
     location: userLocation.name,
@@ -47,13 +47,14 @@ const renderNeeds = (needs, userLocation, currRange) => {
       initAutoComplete(needs)
       defaultCallback(currRange)
     })
-    templating.renderTemplate(
-      'js-show-more-tpl',
-      null,
-      'js-show-more-btn-output',
-      () => defaultCallback(currRange))
   }
 }
+
+const renderShowMore = (isMore) => {console.log(isMore); templating.renderTemplate(
+  'js-show-more-tpl',
+  { isMore: isMore },
+  'js-show-more-btn-output',
+  () => {})}
 
 const initClickEvents = (data) => {
   const clickEvents = [
@@ -90,9 +91,7 @@ const initClickEvents = (data) => {
             listToSelect.init()
             initAutoComplete(needs)
 
-            if (links.next !== null) {
-              templating.renderTemplate('js-show-more-tpl', null, 'js-show-more-btn-output', () => {})
-            }
+            renderShowMore(links.next !== null)
 
             const newData = Object.assign(Object.assign({}, data), {links: links})
             initClickEvents(newData)
@@ -121,6 +120,7 @@ const init = function (userLocation, range = 10000, pageSize = 21) {
       .then((result) => {
         const formatted = formatNeeds(result.data.items, userLocation)
         renderNeeds(formatted, userLocation, range)
+        renderShowMore(result.data.links.next !== null)
         initClickEvents({links: result.data.links, userLocation: userLocation, currRange: range})
       }, () => {
         browser.redirect('/500')
