@@ -145,22 +145,3 @@ locationSelector
   }, (_) => {
 
   })
-
-  /*
-  <!--
-  {{> get-help-card
-        id=id
-        detailsUrl=detailsUrl
-        type=type
-        donationAmountInPounds=donationAmountInPounds
-        description=description
-        formattedNeededDate=formattedNeededDate
-        creationDate=creationDate
-        neededDate=neededDate
-        distanceAwayInMetres=distanceAwayInMetres
-        keywords=keywords
-        serviceProviderName=serviceProviderName
-        locationDescription=locationDescription
-        }}
--->
-  */
