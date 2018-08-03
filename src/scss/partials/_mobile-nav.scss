@@ -104,7 +104,6 @@ $header-height: 65px;
 }
 
 .nav--mobile {
-  position: fixed;
   top: $header-height;
   right: -$nav-width * 2;
   height: 100%;
@@ -115,13 +114,13 @@ $header-height: 65px;
   -webkit-overflow-scrolling: touch;
   transition: transform 250ms cubic-bezier(0.16, 0.68, 0.43, 0.99);
   transform: translate3d(0, 0, 0);
-  
+
   @include mq($from: m) {
     display: none;
-    position: relative;
   }
 
   &.is-active {
+    position: fixed;
     transform: translate3d(-$nav-width / 2, 0, 0);
   }
 
