@@ -104,7 +104,6 @@ $header-height: 65px;
 }
 
 .nav--mobile {
-  top: $header-height;
   right: -$nav-width * 2;
   height: 100%;
   width: $nav-width * 2;
@@ -120,6 +119,7 @@ $header-height: 65px;
   }
 
   &.is-active {
+    top: $header-height;
     position: fixed;
     transform: translate3d(-$nav-width / 2, 0, 0);
   }
