@@ -11,6 +11,7 @@ const templating = require('../../../template-render')
 import { formatNeeds } from '../../../models/give-help/requests/needs'
 import { buildList, initAutoComplete } from '../../../models/give-help/requests/listing'
 import { PostcodeProximity } from '../../../components/PostcodeProximity'
+import Hogan from 'hogan.js'
 
 const redirectForLegacyNeedDetails = () => {
   const cardId = getUrlParams.parameter('id').replace('/', '')
@@ -46,21 +47,81 @@ const renderNeeds = (needs, userLocation, currRange) => {
       initAutoComplete(needs)
       defaultCallback(currRange)
     })
+    templating.renderTemplate(
+      'js-show-more-tpl',
+      null,
+      'js-show-more-btn-output',
+      () => defaultCallback(currRange))
   }
 }
 
-const init = function (userLocation, range = 10000) {
+const initClickEvents = (data) => {
+  const clickEvents = [
+    {
+      selector: 'js-show-more-btn',
+      action: () => {
+        getApiData.data(apiRoutes.getFullUrl(data.links.next))
+          .then((result) => {
+            if (result.status === 'notFound') {
+              throw new Error({msg: 'page not found'})
+            }
+
+            // TODO: if (isError) {
+            //   removeError()
+            // }
+
+            const needs = formatNeeds(result.data.items, data.userLocation)
+            const theData = {
+              card: needs,
+              location: data.userLocation.name,
+              postcode: data.userLocation.postcode,
+              categoryName: 'requests for help',
+              geoLocationUnavailable: data.userLocation.geoLocationUnavailable
+            }
+            const links = result.data.links
+
+            var content = Hogan.compile(document.getElementById('js-cards-tpl').innerHTML)
+              .render(theData)
+            document.querySelector('#js-card-list').innerHTML +=
+              content
+
+            buildList()
+            redirectForLegacyNeedDetails()
+            listToSelect.init()
+            initAutoComplete(needs)
+
+            if (links.next !== null) {
+              templating.renderTemplate('js-show-more-tpl', null, 'js-show-more-btn-output', () => {})
+            }
+
+            const newData = Object.assign(Object.assign({}, data), {links: links})
+            initClickEvents(newData)
+          }).catch(() => {
+            // TODO: appendError()
+          })
+      }
+    }
+  ]
+  clickEvents
+    .forEach((e) => {
+      const elem = document.querySelector(`.${e.selector}`)
+      if (elem) elem.addEventListener('click', e.action)
+    })
+}
+
+const init = function (userLocation, range = 10000, pageSize = 21) {
   if (userLocation) {
     const headerData = {
       postcode: userLocation.postcode,
       range: range
     }
     templating.renderTemplate('js-header-tpl', headerData, 'js-header-output', () => { })
-    const url = `${apiRoutes.needsHAL}?longitude=${userLocation.longitude}&latitude=${userLocation.latitude}&range=${range}&pageSize=100`
+    const url = `${apiRoutes.needsHAL}?longitude=${userLocation.longitude}&latitude=${userLocation.latitude}&range=${range}&pageSize=${pageSize}`
     getApiData.data(url)
       .then((result) => {
         const formatted = formatNeeds(result.data.items, userLocation)
         renderNeeds(formatted, userLocation, range)
+        initClickEvents({links: result.data.links, userLocation: userLocation, currRange: range})
       }, () => {
         browser.redirect('/500')
       })
@@ -84,3 +145,22 @@ locationSelector
   }, (_) => {
 
   })
+
+  /*
+  <!--
+  {{> get-help-card
+        id=id
+        detailsUrl=detailsUrl
+        type=type
+        donationAmountInPounds=donationAmountInPounds
+        description=description
+        formattedNeededDate=formattedNeededDate
+        creationDate=creationDate
+        neededDate=neededDate
+        distanceAwayInMetres=distanceAwayInMetres
+        keywords=keywords
+        serviceProviderName=serviceProviderName
+        locationDescription=locationDescription
+        }}
+-->
+  */
