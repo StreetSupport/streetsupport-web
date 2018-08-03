@@ -5,6 +5,10 @@ $header-height: 65px;
   border-bottom: 2px solid $brand-e;
   height: 66px;
 
+  @include mq($from: m) {
+    display: none;
+  }
+
   .sub-nav-is-active & {
     position: fixed;
     width: 100%;
