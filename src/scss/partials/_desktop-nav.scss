@@ -72,8 +72,13 @@ $columned-dropdown-column-count: 3;
 
   &--columned {
     @include mq($from: m) {
+      column-count: $columned-dropdown-column-count;
       width: $columned-dropdown-item-width * $columned-dropdown-column-count;
       margin-left: -$columned-dropdown-item-width;
+    }
+
+    @include mq($from: m, $until: xl) {
+      right: 0!important;
     }
   }
 
@@ -134,10 +139,6 @@ $columned-dropdown-column-count: 3;
   .nav__list--columned & {
     @include mq($from: m) {
       width: $columned-dropdown-item-width;
-      float: left;
-      &:nth-of-type(#{$columned-dropdown-column-count}n) {
-        clear: right;
-      }
     }
   }
   
