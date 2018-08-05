@@ -78,10 +78,12 @@ page: contact
 
 <script id="js-tpl" type="text/template">
   <div class="result-detail">
-    \{{#qAndAs}}
     <div class="accordion js-accordion">
+    \{{#qAndAs}}
       <h3 class="h3 accordion__header js-header">
         \{{{question}}}
+        <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
+        <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
       </h3>
       <div class="accordion__item js-item">
         <div class="accordion__inner">
@@ -90,7 +92,7 @@ page: contact
           </div>
         </div>
       </div>
-    </div>
     \{{/qAndAs}}
+    </div>
   </div>
 </script>
