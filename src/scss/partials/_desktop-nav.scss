@@ -1,6 +1,6 @@
 $smallPadding: 10px;
 $normalPadding: 25px;
-$columned-dropdown-item-width: 180px;
+$columned-dropdown-item-width: 130px;
 $columned-dropdown-column-count: 3;
 
 .header {
@@ -73,12 +73,8 @@ $columned-dropdown-column-count: 3;
   &--columned {
     @include mq($from: m) {
       column-count: $columned-dropdown-column-count;
-      width: 574px; // hack!
+      width: 421px; // hack!
       margin-left: -$columned-dropdown-item-width;
-    }
-
-    @include mq($from: m, $until: xl) {
-      right: 0!important;
     }
   }
 
@@ -87,6 +83,13 @@ $columned-dropdown-column-count: 3;
     position: absolute;
     z-index: 100;
     padding: 10px 0;
+
+    @include mq($from: m, $until: xxl) {
+      width: $columned-dropdown-item-width;
+      &:last-child {
+        right: 0px;
+      }
+    }
   }
 }
 
@@ -122,6 +125,10 @@ $columned-dropdown-column-count: 3;
 
   .nav__list--sub-list & {
     float: none;
+    @include mq($from: m) {
+      width: $columned-dropdown-item-width;
+    }
+
     a {
       display: block;
       padding: 5px 30px 5px 10px;
