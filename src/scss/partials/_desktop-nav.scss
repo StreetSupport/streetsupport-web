@@ -73,7 +73,7 @@ $columned-dropdown-column-count: 3;
   &--columned {
     @include mq($from: m) {
       column-count: $columned-dropdown-column-count;
-      width: $columned-dropdown-item-width * $columned-dropdown-column-count;
+      width: 574px; // hack!
       margin-left: -$columned-dropdown-item-width;
     }
 

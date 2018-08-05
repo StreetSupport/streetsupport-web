@@ -1,47 +1,13 @@
-%manchester-header {
-  &:before {
-    background-image: url('../img/manc-buildings.png');
-  }
-}
-
-%leeds-header {
-  &:before {
-    background-image: url('../img/leeds-buildings.png');
-  }
-}
-
-%bournemouth-header {
-  // background-image: url('../img/header-background-bournemouth.png');
-  &:before {
-    background-image: url('../img/bournemouth-buildings.png');
-  }
-}
-
-%portsmouth-header {
-  // background-image: url('../img/header-background-bournemouth.png');
-
-  &:before {
-    background-image: url('../img/portsmouth-buildings.png');
-  }
-}
-
-%bradford-header {
-  &:before {
-    background-image: url('../img/bradford-buildings.png');
-  }
-}
-
-%liverpool-header {
-  &:before {
-    background-image: url('../img/liverpool-buildings.png');
-  }
-}
-
-%southampton-header {
-  // background-image: url('../img/header-background-bournemouth.png');
-
-  &:before {
-    background-image: url('../img/southampton-buildings.png');
+%get-in-sea {
+  @include mq($from: m) {
+    &:after {
+      content: '';
+      width: 100%;
+      height: 64px; 
+      background: url('../img/locations/sea-tile.png') repeat-x;
+      position: absolute;
+      bottom: 0;
+    }
   }
 }
 
@@ -76,36 +42,84 @@
 }
 
 .location--manchester .location-header {
-  @extend %manchester-header;
-  color: $brand-k;
+  @include mq($from: m) {
+    &:before {
+      background-image: url('../img/locations/manchester.png');
+      background-size: 650px;
+      width: 650px;
+      height: 270px;
+    }
+  }
 }
 
 .location--leeds .location-header {
-  @extend %leeds-header;
-  color: $brand-k;
+  @include mq($from: m) {
+    &:before {
+      background-image: url('../img/locations/leeds.png');
+      height: 278px;
+    }
+  }
 }
 
-.location--bournemouth .location-header{
-  @extend %bournemouth-header;
-  color: $brand-k;
+.location--bournemouth .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-image: url('../img/locations/bournemouth.png');
+      background-size: 842px;
+      width: 842px;
+      bottom: 30px;
+    }
+  }
+  @include mq($from: xxxl) {
+    &:before {
+      left: 55%;
+    }
+  }
+  @extend %get-in-sea;
 }
 
-.location--portsmouth .location-header{
-  @extend %portsmouth-header;
-  color: $brand-k;
+.location--portsmouth .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-image: url('../img/locations/portsmouth.png');
+      background-size: 650px;
+      width: 650px;
+      height: 270px;
+      bottom: 24px;
+    }
+  }
+  @extend %get-in-sea;
 }
 
-.location--bradford .location-header{
-  @extend %bradford-header;
-  color: $brand-k;
+.location--bradford .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-image: url('../img/locations/bradford.png');
+    }
+  }
 }
 
-.location--southampton .location-header{
-  @extend %southampton-header;
-  color: $brand-k;
+.location--southampton .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-image: url('../img/locations/southampton.png');
+      background-size: 1200px;
+      background-position: left bottom;
+      width: 100%;
+      left: 15%;
+      bottom: 26px;
+    }
+  }
+  @include mq($from: l) {
+    &:before {
+      left: 36%;
+    }
+  }
+  @extend %get-in-sea;
 }
 
 .location--liverpool .location-header {
-  @extend %liverpool-header;
-  color: $brand-k;
+  &:before {
+    background-image: url('../img/locations/liverpool.png');
+  }
 }

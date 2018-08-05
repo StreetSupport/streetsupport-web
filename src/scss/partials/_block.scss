@@ -224,6 +224,10 @@
     color: $brand-m;
   }
 }
+.location-header--southampton {
+  background-image: url('../img/header-background.png'), url('../img/locations/sea-tile.png');
+
+}
 
 .block--location-header,
 .block--home-header {
@@ -240,9 +244,9 @@
         @include last();
       }
      }
-    @include mq($from: m) {
+    @include mq($from: l) {
       .btn__text {
-        padding: 15px 60px;
+        padding: 15px;
       }
     }
   }
