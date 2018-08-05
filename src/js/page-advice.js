@@ -24,7 +24,6 @@ getApiData
     }
   }, (_) => { })
 
-
 const links = document.querySelectorAll('a[href^="#"]')
 links
   .forEach(l => {

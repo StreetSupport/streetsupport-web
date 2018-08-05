@@ -151,13 +151,7 @@ const initSwep = function (currentLocationId) {
   }, (_) => {})
 }
 
-const re = new RegExp(/\/(.*)\//)
-const reqLocation = browser.location().pathname.match(re)[1].split('/')[0]
-
 const currentLocation = location.getCurrentHub()
-// if (currentLocation.id !== reqLocation) {
-//   location.setCurrent(reqLocation)
-// }
 
 initLocations(currentLocation.id)
 initNews(currentLocation.id)
