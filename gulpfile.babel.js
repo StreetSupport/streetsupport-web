@@ -32,7 +32,7 @@ gulp.task('default', (callback) => {
   runSequence(
     'getLongTermData',
     'generate-service-pages',
-    'generate-location-home-pages',
+    'generate-location-files',
     'jasmine',
     'standardlint',
     'clean',
@@ -49,7 +49,7 @@ gulp.task('deploy', (callback) => {
   runSequence(
     'getLongTermData',
     'generate-service-pages',
-    'generate-location-home-pages',
+    'generate-location-files',
     'jasmine',
     'standardlint',
     'clean',

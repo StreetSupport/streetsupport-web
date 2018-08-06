@@ -49,13 +49,38 @@ gulp.task('l-generate-nav-variables', () => {
     .pipe(gulp.dest(srcFile))
 })
 
+gulp.task('l-generate-desktop-nav', () => {
+  const srcFile = `${config.paths.partials}/nav/`
+  const cityOutput = cities
+    .map((c) => `<ul class="nav__list nav__list--hub" data-city="${c.id}">
+    {{> ${c.id}/nav }}
+  </ul>`)
+    .join(' ')
 
-gulp.task('generate-location-home-pages', (callback) => {
+  return newFile('desktop-locations.hbs', cityOutput)
+    .pipe(gulp.dest(srcFile))
+})
+
+gulp.task('l-generate-mobile-nav', () => {
+  const srcFile = `${config.paths.partials}/nav/`
+  const cityOutput = cities
+    .map((c) => `{{> ${c.id}/nav }}`)
+    .join(`
+`)
+
+  return newFile('mobile-locations.hbs', cityOutput)
+    .pipe(gulp.dest(srcFile))
+})
+
+
+gulp.task('generate-location-files', (callback) => {
   runSequence(
     'l-clean',
     'l-getCities',
     'l-generate-home-pages',
     'l-generate-nav-variables',
+    'l-generate-desktop-nav',
+    'l-generate-mobile-nav',
     callback
   )
 })
