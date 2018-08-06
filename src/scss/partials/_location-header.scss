@@ -70,11 +70,6 @@
       bottom: 30px;
     }
   }
-  @include mq($from: xxxl) {
-    &:before {
-      left: 55%;
-    }
-  }
   @extend %get-in-sea;
 }
 
