@@ -245,7 +245,7 @@ $columned-dropdown-column-count: 3;
 }
 
 // Active page
-@each $page in join($nav-pages, $generated-nav-pages) {
+@each $page in join(join($nav-pages, $generated-nav-pages), $generated-locations-for-nav) {
   .page--#{$page} {
     .header__nav .nav__item--#{$page} > a {
       @include mq($from: m) {
