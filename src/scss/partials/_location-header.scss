@@ -35,6 +35,12 @@
       width: 600px;
     }
   }
+  @include mq($from: xxl) {
+    &:before {
+      left: auto;
+      right: 0;
+    }
+  }
 
   & .container {
     position: relative;
@@ -67,6 +73,13 @@
       bottom: 30px;
     }
   }
+  @include mq($from: l) {
+    &:before {
+      background-size: 842px;
+      width: 842px;
+      left: 50%;
+    }
+  }
   @extend %get-in-sea;
 }
 
@@ -76,7 +89,7 @@
       background-size: 600px;
       width: 600px;
       height: 270px;
-      bottom: 24px;
+      bottom: 10px;
     }
   }
   @extend %get-in-sea;
@@ -88,7 +101,6 @@
       background-size: 1200px;
       background-position: left bottom;
       width: 100%;
-      left: 15%;
       bottom: 26px;
     }
   }
@@ -98,13 +110,4 @@
     }
   }
   @extend %get-in-sea;
-}
-
-.location--wigan-and-leigh .location-header {
-  @include mq($from: xxl) {
-    &:before {
-      left: auto;
-      right: 0;
-    }
-  }
 }
