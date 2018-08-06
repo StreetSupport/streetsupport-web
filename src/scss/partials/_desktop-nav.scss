@@ -1,6 +1,6 @@
 $smallPadding: 10px;
 $normalPadding: 25px;
-$columned-dropdown-item-width: 130px;
+$columned-dropdown-item-width: 170px;
 $columned-dropdown-column-count: 3;
 
 .header {
@@ -70,14 +70,6 @@ $columned-dropdown-column-count: 3;
     display: none;
   }
 
-  &--columned {
-    @include mq($from: m) {
-      column-count: $columned-dropdown-column-count;
-      width: 421px; // hack!
-      margin-left: -$columned-dropdown-item-width;
-    }
-  }
-
   &--sub-list {
     display: none;
     position: absolute;
@@ -86,9 +78,24 @@ $columned-dropdown-column-count: 3;
 
     @include mq($from: m, $until: xxl) {
       width: $columned-dropdown-item-width;
-      &:last-child {
-        right: 0px;
-      }
+      // &:last-of-type {
+      //   right: 0px;
+      // }
+    }
+  }
+
+  &--columned {
+    @include mq($from: m) {
+      column-count: $columned-dropdown-column-count;
+      width: 541px!important; // hack!
+      margin-left: -$columned-dropdown-item-width;
+    }
+  }
+
+  .nav__item--about > &--sub-list,
+  .nav__item--locations > &--sub-list {
+    @include mq($from: m, $until: xxl) {
+      right: 0px
     }
   }
 }
