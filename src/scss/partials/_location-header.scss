@@ -44,7 +44,6 @@
 .location--manchester .location-header {
   @include mq($from: m) {
     &:before {
-      background-image: url('../img/locations/manchester.png');
       background-size: 650px;
       width: 650px;
       height: 270px;
@@ -55,7 +54,6 @@
 .location--leeds .location-header {
   @include mq($from: m) {
     &:before {
-      background-image: url('../img/locations/leeds.png');
       height: 278px;
     }
   }
@@ -64,7 +62,6 @@
 .location--bournemouth .location-header {
   @include mq($from: m) {
     &:before {
-      background-image: url('../img/locations/bournemouth.png');
       background-size: 842px;
       width: 842px;
       bottom: 30px;
@@ -76,7 +73,6 @@
 .location--portsmouth .location-header {
   @include mq($from: m) {
     &:before {
-      background-image: url('../img/locations/portsmouth.png');
       background-size: 600px;
       width: 600px;
       height: 270px;
@@ -86,18 +82,9 @@
   @extend %get-in-sea;
 }
 
-.location--bradford .location-header {
-  @include mq($from: m) {
-    &:before {
-      background-image: url('../img/locations/bradford.png');
-    }
-  }
-}
-
 .location--southampton .location-header {
   @include mq($from: m) {
     &:before {
-      background-image: url('../img/locations/southampton.png');
       background-size: 1200px;
       background-position: left bottom;
       width: 100%;
@@ -113,8 +100,11 @@
   @extend %get-in-sea;
 }
 
-.location--liverpool .location-header {
-  &:before {
-    background-image: url('../img/locations/liverpool.png');
+.location--wigan-and-leigh .location-header {
+  @include mq($from: xxl) {
+    &:before {
+      left: auto;
+      right: 0;
+    }
   }
 }

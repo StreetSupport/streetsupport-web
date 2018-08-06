@@ -54,6 +54,23 @@ gulp.task('l-generate-nav-variables', () => {
     .pipe(gulp.dest(srcFile))
 })
 
+gulp.task('l-generate-header-css', () => {
+  const srcFile = `${config.paths.scss}/partials/`
+  const cityOutput = cities
+    .map((c) => `
+    .location--${c.id} .location-header {
+      @include mq($from: m) {
+        &:before {
+          background-image: url('../img/locations/${c.id}.png');
+        }
+      }
+    }`)
+    .join('\r\n')
+
+  return newFile('_generated-location-header.scss', cityOutput)
+    .pipe(gulp.dest(srcFile))
+})
+
 gulp.task('l-generate-desktop-nav', () => {
   const srcFile = `${config.paths.partials}/nav/`
   const cityOutput = cities
@@ -94,6 +111,7 @@ gulp.task('generate-location-files', (callback) => {
     'l-clean',
     'l-getCities',
     'l-generate-home-pages',
+    'l-generate-header-css',
     'l-generate-nav-variables',
     'l-generate-desktop-nav',
     'l-generate-mobile-nav',
