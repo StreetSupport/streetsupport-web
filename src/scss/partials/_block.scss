@@ -515,6 +515,8 @@
       @include first();
       float: left!important;
     }
+
+    .h2 { width: 100% } // edge fix
   }
 
   &--standards-toolkit {
