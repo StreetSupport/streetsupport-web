@@ -82,8 +82,8 @@
   @include mq($from: m) {
     &:before {
       background-image: url('../img/locations/portsmouth.png');
-      background-size: 650px;
-      width: 650px;
+      background-size: 600px;
+      width: 600px;
       height: 270px;
       bottom: 24px;
     }
