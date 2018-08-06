@@ -77,6 +77,17 @@ gulp.task('l-generate-mobile-nav', () => {
     .pipe(gulp.dest(srcFile))
 })
 
+gulp.task('l-generate-header-nav', () => {
+  const srcFile = `${config.paths.partials}/nav/`
+  const cityOutput = cities
+    .map((c) => `<li class="nav__item nav__item--sub-item nav__item--${c.id}" data-location="${c.id}"><a href="/${c.id}">${c.name}</a></li>`)
+    .join(`
+`)
+
+  return newFile('header-locations.hbs', cityOutput)
+    .pipe(gulp.dest(srcFile))
+})
+
 
 gulp.task('generate-location-files', (callback) => {
   runSequence(
@@ -86,6 +97,7 @@ gulp.task('generate-location-files', (callback) => {
     'l-generate-nav-variables',
     'l-generate-desktop-nav',
     'l-generate-mobile-nav',
+    'l-generate-header-nav',
     callback
   )
 })
