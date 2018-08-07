@@ -12,31 +12,12 @@
     <meta property="og:description" content="{{description}}" />
     <meta property="og:image" content="{{image}}" />
 
-    <style>
-      .header--desktop,
-      .hubs-nav {
-        display: none;
-      }
-      
-      @media (min-width:46.875em) {
-        .header--mobile
-        .nav--mobile {
-          display: none;
-        }
-        
-        .header--desktop,
-        .hubs-nav {
-          display: block;
-        }
-      }
-    </style>
-
     <link rel="stylesheet" href="{{site.url}}assets/css/site.css?v={{cachebusting.date}}" />
     <link rel="shortcut icon" href="{{site.url}}favicon.ico" type="image/x-icon" />
 
     {{> head/google-tag-manager }}
     {{> head/web-fonts }}
-    
+
   </head>
   <body class="page--{{page}} section--{{section}} location--{{location}}">
     <!-- Google Tag Manager (noscript) -->
