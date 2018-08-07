@@ -6,7 +6,8 @@ layout: default.hbs
 permalink: false
 jsBundle: swep
 section: manchester
-page: manchester-emergency-help
+page: manchester-advice
+location: manchester
 ---
 
 <div class="block block--breadcrumbs">
@@ -14,18 +15,13 @@ page: manchester-emergency-help
     <ol class="breadcrumbs__list">
       <li class="breadcrumbs__item"><a href="/">Home</a></li>
       <li class="breadcrumbs__item"><a href="/manchester/">Manchester</a></li>
-      <li class="breadcrumbs__item"><a href="/manchester/emergency-help/">Emergency Advice</a></li>
+      <li class="breadcrumbs__item"><a href="/manchester/advice/">Advice</a></li>
       <li class="breadcrumbs__item">Severe Weather Emergency Accommodation</li>
     </ol>
   </div>
 </div>
 
-<div class="block block--city-header city-header city-header--manchester">
-  <div class="container container--city-header">
-    <h1 class="h1 block__header">Severe Weather Emergency Accommodation</h1>
-    <div id="js-swep-output" class="template--maybe-empty"></div>
-  </div>
-</div>
+{{> find-help/advice-header heading="Severe Weather Emergency Accommodation" theLocationId="manchester" }}
 
 <div class="block">
   <div class="container">
@@ -59,13 +55,6 @@ page: manchester-emergency-help
 
       <h2 class="h2">Bolton council</h2>
       <p>During the day, ring Bolton Town Hall on <a href="tel:01204 333333">01204 333333</a>. Out of hours you can refer via the duty social worker <a href="tel:01204 337777">01204 337777</a>.</p>
-
-      <h2 class="h2">Bury council</h2>
-      <p>The referral process is through the Housing Assessment Service</p>
-      <ul>
-        <li>During office hours: <a href="tel:0161 253 5537">0161 253 5537</a> or <a href="email:hat@bury.gov.uk">hat@bury.gov.uk</a></li>
-        <li>Out of hours: <a href="tel:0161 253 6606">0161 253 6606</a></li>
-      </ul>
 
       <h2 class="h2">Oldham council</h2>
       <p>Provision can be accessed during office hours Monday, Tuesday, Wednesday and Friday 9am – 5pm, Thursday 9am – 6pm</p>
@@ -109,7 +98,6 @@ page: manchester-emergency-help
   </div>
 </div>
 
-
 <div class="block">
   <div class="container">
     <div class="block__content">
@@ -125,7 +113,3 @@ page: manchester-emergency-help
     </div>
   </div>
 </div>
-
-<script id="js-swep-tpl" type="text/template">
-{{> swep-notification }}
-</script>

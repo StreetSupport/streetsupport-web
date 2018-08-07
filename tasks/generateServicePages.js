@@ -8,8 +8,6 @@ import config from '../foley.json'
 import endpoints from '../src/js/api'
 import { newFile } from './fileHelpers'
 
-import { cities } from '../src/data/generated/supported-cities'
-
 const findHelpSrc = `${config.paths.pages}find-help/`
 const categoryPageSrc = `${findHelpSrc}category/index.hbs`
 const timetabledPageSrc = `${findHelpSrc}category-by-day/index.hbs`
@@ -17,6 +15,7 @@ const locationPageSrc = `${findHelpSrc}category-by-location/index.hbs`
 const generatedPagesSrc = `${config.paths.pages}_generated/`
 
 let categories = []
+let cities = []
 
 gulp.task('getServiceCategories', (callback) => {
   request(endpoints.serviceCategories, function (err, res, body) {
@@ -32,6 +31,13 @@ gulp.task('getServiceCategories', (callback) => {
           name: c.name
         }
       })
+    callback()
+  })
+})
+
+gulp.task('getCities', (callback) => {
+  request(endpoints.cities, function (err, res, body) {
+    cities = JSON.parse(body)
     callback()
   })
 })
@@ -145,7 +151,7 @@ gulp.task('generate-nav-variables', () => {
     .join(' ')
 
   const cityOutput = cities
-    .map((c) => `${c.id}-emergency-help`)
+    .map((c) => `${c.id}-advice`)
     .join(' ')
 
   return newFile('_generated-variables.scss', `$generated-nav-pages: ${catOutput} ${cityOutput}`)
@@ -161,6 +167,7 @@ gulp.task('generate-service-pages', (callback) => {
   runSequence(
     'reset',
     'getServiceCategories',
+    'getCities',
     'make-generated-files-directory',
     'generate-provider-directories',
     ['generate-provider-listing-pages', 'generate-timetabled-pages', 'generate-map-pages'],

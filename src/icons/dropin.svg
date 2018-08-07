@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="289px" height="206.827px" viewBox="0 0 289 206.827" enable-background="new 0 0 289 206.827" xml:space="preserve">
+<g>
+	<defs>
+		<path id="SVGID_1_" d="M0,206V11.348C0,5.081,5.076,0,11.339,0h266.323C283.924,0,289,5.081,289,11.348V206H0z"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  overflow="visible"/>
+	</clipPath>
+	<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="144.5" y1="276" x2="144.5" y2="-5.978109e-09">
+		<stop  offset="0.3164" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#ADE1F9"/>
+	</linearGradient>
+	<path display="none" clip-path="url(#SVGID_2_)" fill="url(#SVGID_3_)" d="M277.661,276H11.339C5.076,276,0,270.924,0,264.661
+		V11.339C0,5.076,5.076,0,11.339,0h266.323C283.924,0,289,5.076,289,11.339v253.323C289,270.924,283.924,276,277.661,276z"/>
+	<g clip-path="url(#SVGID_2_)">
+		<polygon fill="#FFDCAD" points="205.351,103.318 145.681,43.647 130.763,58.565 115.845,58.565 115.845,73.483 86.01,103.318 
+			100.928,103.318 100.928,148.07 131.956,148.07 131.956,118.235 161.792,118.235 161.792,148.07 190.433,148.07 190.433,103.318 
+					"/>
+		<g>
+			<polygon fill="#830000" points="145.468,64.377 184.635,103.544 184.635,103.367 197.62,103.367 145.681,51.427 132.696,64.412 
+				119.711,64.412 119.711,77.397 93.741,103.367 106.478,103.367 			"/>
+		</g>
+		<g>
+			<polygon fill="#B01117" points="145.436,58.547 190.433,103.544 190.433,103.341 205.351,103.341 145.681,43.67 130.763,58.588 
+				115.845,58.588 115.845,73.505 86.01,103.341 100.643,103.341 			"/>
+		</g>
+		<rect x="131.956" y="118.235" fill="#B01117" width="29.835" height="29.835"/>
+		<rect x="109.551" y="118.434" fill="#F4F4F4" width="13.525" height="13.525"/>
+		<rect x="169.47" y="118.434" fill="#F4F4F4" width="13.525" height="13.525"/>
+		<rect x="109.551" y="118.434" fill="#F4F4F4" width="13.525" height="13.525"/>
+		<rect x="109.551" y="118.434" fill="#F4F4F4" width="13.525" height="13.525"/>
+		<rect x="109.551" y="118.434" fill="#F4F4F4" width="13.525" height="13.525"/>
+		<polygon fill="#FAAF40" points="145.681,43.647 145.558,43.769 145.558,118.235 161.792,118.235 161.792,148.07 190.433,148.07 
+			190.433,103.318 205.351,103.318 		"/>
+		<rect x="109.551" y="118.434" fill="#F4F4F4" width="13.525" height="13.525"/>
+		<rect x="169.47" y="118.434" fill="#8DD7F7" width="13.525" height="13.525"/>
+		<rect x="109.551" y="118.434" fill="#F4F4F4" width="13.525" height="13.525"/>
+		<rect x="109.551" y="118.434" fill="#F4F4F4" width="13.525" height="13.525"/>
+		<rect x="109.551" y="118.434" fill="#C6E9FA" width="13.525" height="13.525"/>
+		<rect x="145.558" y="118.235" fill="#830000" width="16.233" height="29.835"/>
+		<polygon fill="#420000" points="145.681,51.427 145.558,51.549 145.558,64.468 184.635,103.544 184.635,103.367 197.62,103.367 		
+			"/>
+		<polygon fill="#830000" points="145.681,43.67 145.558,43.792 145.558,58.67 190.433,103.544 190.433,103.341 205.351,103.341 		
+			"/>
+	</g>
+</g>
+</svg>

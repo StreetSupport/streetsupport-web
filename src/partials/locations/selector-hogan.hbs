@@ -1,0 +1,8 @@
+<div class="location-selector">
+  <label for="location" class="location-selector__label hide-screen">Select a Location: </label>
+  <select class="js-homepage-promo-location-selector js-location-select location-selector__select form__input" name="location" id="location">
+    \{{#locations}}
+    <option \{{#isSelected}}selected\{{/isSelected}} value="\{{id}}">\{{name}}</option>
+    \{{/locations}}
+  </select>
+</div>

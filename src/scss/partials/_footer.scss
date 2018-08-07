@@ -1,12 +1,14 @@
-// Footer - global page footer styles
-
 .footer {
   background: $brand-m;
-  background: linear-gradient(to bottom, $brand-l, $brand-m);
   color: #fff;
   padding-top: 30px;
   padding-bottom: 30px;
   text-align: center;
+
+  a {
+    color: yellow;
+    text-decoration: underline;
+  }
 
   @media print {
     & {
@@ -14,31 +16,63 @@
     }
   }
 
+  &__col {
+    text-align: left;
+    vertical-align: bottom;
+    @include mq($from: m) {
+      @include span(1 of 2);
+      &:last-of-type {
+        @include last();
+      }
+    }
+  }
+
   &__header {
+    font-size: 1.25em;
     margin-top: 0;
+    margin-bottom: 5px;
   }
 
   &__copy {
-    margin-bottom: 0;
+    font-size: 0.75em;
+    margin-bottom: 5px;
   }
 
   &__social-list {
-    margin: 0 0 0 10px;
+    margin: 10px 0 20px 0;
     padding: 0;
     list-style-type: none;
-    text-align: center;
+    text-align: left;
   }
 
   &__social-item {
-    margin: 0 4px;
-    padding: 0;
+    margin-right: 10px;
     display: inline-block;
   }
 
   &__icon {
-    height: 37px;
-    width: 34px;
+    height: 42px;
     vertical-align: middle;
+  }
+
+  &__logo-container svg, 
+  &__logo-container p {
+    display: inline-block;
+    font-size: 1.3em;
+    margin: 0;
+    padding: 0px;
+    margin-right: 5px;
+    line-height: 100%;
+  }
+
+  &__logo-container {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+  }
+
+  &__link {
+    margin-left: 1em;
   }
 
   @media print {
@@ -47,35 +81,34 @@
 }
 
 .app-store-links {
-  text-align: center;
-  padding-top: 30px;
+  text-align: left;
   @include mq($from: m) {
     width: 340px;
-    margin: 0 auto;
+    margin: 0;
   }
 }
 
 .app-store-links__itunes-appstore {
-  width: 135px;
+  width: 115px;
   height: 40px;
-  margin: 0 auto;
+  margin: 0;
+  margin-right: 20px;
+  margin-top: -4px;
+  margin-left: -8px;
+  float: left;
+  padding: 10px;
   a {
     display: block;
-    width: 135px;
+    width: 115px;
     height: 40px;
   }
   svg {
-    width: 135px;
+    width: 115px;
     height: 40px;
   }
-  @include mq($from: m) {
-    float: left;
-    margin-right: 25px;
-    padding: 10px 10px 10px 30px;
-  }  
 }
 
 .app-store-links__google-playstore {
   display: inline-block;
-  width: 155px;
+  width: 135px;
 }

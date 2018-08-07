@@ -130,11 +130,11 @@ describe('all organisations', () => {
     it('- should display next eight orgs', () => {
       expect(sut.orgsToDisplay()[sut.pageSize].key).toEqual('nacro-housing-services')
     })
-  
+
     it('- should show prev page button', () => {
       expect(sut.hasPrevPages()).toBeTruthy()
     })
-  
+
     it('- should show next page button', () => {
       expect(sut.hasMorePages()).toBeTruthy()
     })
@@ -146,7 +146,7 @@ describe('all organisations', () => {
         sut.nextPage()
         sut.nextPage()
       })
-  
+
       it('- should show next page button', () => {
         expect(sut.hasMorePages()).toBeTruthy()
       })
@@ -154,11 +154,11 @@ describe('all organisations', () => {
 
     describe('- no more items', () => {
       beforeEach(() => {
-        for(let i = 2; i < Math.ceil(sut.organisations().length / sut.pageSize); i++) {
+        for (let i = 2; i < Math.ceil(sut.organisations().length / sut.pageSize); i++) {
           sut.nextPage()
         }
       })
-  
+
       it('- should hide next page button', () => {
         expect(sut.hasMorePages()).toBeFalsy()
       })
@@ -207,7 +207,7 @@ describe('all organisations', () => {
         expect(sut.orgsToDisplay()[0].key).toEqual('coffee4craig')
       })
     })
-    
+
     describe('- middle of string', () => {
       beforeEach(() => {
         sut.searchQuery('ple fir')

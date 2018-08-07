@@ -50,7 +50,6 @@ const changeSubCatFilter = (e) => {
   if (reqId.length > 0) {
     providerItems
       .forEach((item) => {
-        console.log(item.getAttribute('data-subcats'))
         if (item.getAttribute('data-subcats').indexOf(reqId) < 0) {
           item.classList.add('hide')
         }

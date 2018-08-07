@@ -6,7 +6,8 @@ layout: default.hbs
 permalink: false
 jsBundle: swep
 section: bournemouth
-page: bournemouth-emergency-help
+page: bournemouth-advice
+location: bournemouth
 ---
 
 <div class="block block--breadcrumbs">
@@ -14,18 +15,13 @@ page: bournemouth-emergency-help
     <ol class="breadcrumbs__list">
       <li class="breadcrumbs__item"><a href="/">Home</a></li>
       <li class="breadcrumbs__item"><a href="/bournemouth/">Bournemouth</a></li>
-      <li class="breadcrumbs__item"><a href="/bournemouth/emergency-help/">Emergency Advice</a></li>
+      <li class="breadcrumbs__item"><a href="/bournemouth/advice/">Advice</a></li>
       <li class="breadcrumbs__item">Severe Weather Emergency Accommodation</li>
     </ol>
   </div>
 </div>
 
-<div class="block block--city-header city-header city-header--bournemouth">
-  <div class="container container--city-header">
-    <h1 class="h1 block__header">Severe Weather Emergency Accommodation</h1>
-    <div id="js-swep-output" class="template--maybe-empty"></div>
-  </div>
-</div>
+{{> find-help/advice-header heading="Severe Weather Emergency Accommodation" theLocationId="bournemouth" }}
 
 <div class="block">
   <div class="container">
@@ -43,7 +39,3 @@ page: bournemouth-emergency-help
     
   </div>
 </div>
-
-<script id="js-swep-tpl" type="text/template">
-{{> swep-notification }}
-</script>

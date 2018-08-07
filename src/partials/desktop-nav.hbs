@@ -5,7 +5,7 @@
     </h1>
     <nav class="header__nav">
       <ul class="nav__list">
-          {{> header-nav }}
+        {{> header-nav }}
       </ul>
     </nav>
   </div>
@@ -13,26 +13,6 @@
 
 <nav class="hubs-nav">
   <div class="container">
-    <ul class="nav__list nav__list--hub" data-city="bradford">
-      {{> bradford/nav }}
-    </ul>
-    <ul class="nav__list nav__list--hub" data-city="bournemouth">
-      {{> bournemouth/nav }}
-    </ul>
-    <ul class="nav__list nav__list--hub" data-city="leeds">
-      {{> leeds/nav }}
-    </ul>
-    <ul class="nav__list nav__list--hub" data-city="liverpool">
-      {{> liverpool/nav }}
-    </ul>
-    <ul class="nav__list nav__list--hub" data-city="manchester">
-      {{> manchester/nav }}
-    </ul>
-    <ul class="nav__list nav__list--hub" data-city="portsmouth">
-      {{> portsmouth/nav }}
-    </ul>
-    <ul class="nav__list nav__list--hub" data-city="southampton">
-      {{> southampton/nav }}
-    </ul>
+    {{> nav/desktop-locations }}
   </div>
 </nav>

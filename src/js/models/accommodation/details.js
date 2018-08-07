@@ -1,4 +1,3 @@
-
 // Common modules
 import { Address, Coordinates } from './types'
 

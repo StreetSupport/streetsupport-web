@@ -24,7 +24,7 @@ const viewModel = {
 }
 
 const onRenderCallback = function () {
-  accordion.init(false, 0, listener, false)
+  accordion.init(true, 0, listener, false)
 }
 
 templating.renderTemplate(template, viewModel, 'js-output', onRenderCallback)

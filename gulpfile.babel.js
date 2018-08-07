@@ -31,11 +31,12 @@ gulp.task('jsdevwatch', () => {
 gulp.task('default', (callback) => {
   runSequence(
     'getLongTermData',
+    'generate-service-pages',
+    'generate-location-files',
     'jasmine',
     'standardlint',
     'clean',
     'cachebusting',
-    'generate-service-pages',
     'metalsmith',
     ['htmlmin', 'svgsprite', 'scss', 'webpack', 'img', 'copy'],
     ['browsersync', 'watch'],
@@ -47,11 +48,12 @@ gulp.task('default', (callback) => {
 gulp.task('deploy', (callback) => {
   runSequence(
     'getLongTermData',
+    'generate-service-pages',
+    'generate-location-files',
     'jasmine',
     'standardlint',
     'clean',
     'cachebusting',
-    'generate-service-pages',
     'metalsmith',
     ['htmlmin', 'svgsprite', 'scss', 'webpack', 'img'],
     'criticalcss', 

@@ -1,14 +1,8 @@
-.block--news {
-  padding: 10px;
-  background: $brand-q;
-}
-
 .news-posts {
 
-  @media screen and (min-width: map-get($mq-breakpoints, 'm')) {
+  @include mq($from: m) {
     display: flex;
     flex-flow: row wrap;
-    margin: 0 -0.5em;
   }
 
   &__post {
@@ -21,19 +15,13 @@
       border-bottom: none;
     }
 
-    @media screen and (min-width: map-get($mq-breakpoints, 'm')) {
-      position: relative;
-      display: flex;
-      width: 50%;
-      padding: 0.5em 0.5em 2em;
-      flex-flow: column nowrap;
-      flex: 0 0 auto;
-      justify-content: flex-start;
+    @include mq($from: m) {
+      @include span(1 of 3);
       border-bottom: none;
-    }
-
-    @media screen and (min-width: map-get($mq-breakpoints, 'xxl')) {
-      width: 25%;
+      position: relative;
+      &:last-child {
+        @include last();
+      }
     }
   }
 
@@ -57,7 +45,7 @@
         padding: 10px;
       }
 
-      @media screen and (min-width: map-get($mq-breakpoints, 'm')) {
+      @include mq($from: m) {
         position: relative;
         float: none;
         width: auto;
@@ -79,10 +67,10 @@
     }
 
     &__title {
-      @extend .h3;
-
-      margin-bottom: 5px;
-      color: $brand-h;
+      margin: 0 0 20px 100px;
+      @include mq($from: m) {
+        margin: 0 0 20px 0;
+      }
     }
 
     &__date,
@@ -91,23 +79,17 @@
 
       line-height: 2;
 
-      @media screen and (min-width: map-get($mq-breakpoints, 'm')) {
+      @include mq($from: m) {
         position: absolute;
         bottom: 0;
-      }
-    }
-
-    &__date {
-
-      @media screen and (min-width: map-get($mq-breakpoints, 'm')) {
-        left: 0.5em;
       }
     }
 
     &__excerpt {
       display: none;
 
-      @media screen and (min-width: map-get($mq-breakpoints, 'm')) {
+      @include mq($from: m) {
+        padding-bottom: 20px;
         display: block;
       }
     }
@@ -120,7 +102,7 @@
         font-weight: $font-headline-weight;
       }
 
-      @media screen and (min-width: map-get($mq-breakpoints, 'm')) {
+      @include mq($from: m) {
         right: 0.5em;
       }
     }
@@ -129,11 +111,5 @@
 
 .news-footer {
   text-align: center;
-  .btn {
-    margin: 20px auto;
-
-    &__text {
-      display: inline-block;
-    }
-  }
+  padding: 20px 0;
 }

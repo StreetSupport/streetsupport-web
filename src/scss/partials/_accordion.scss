@@ -20,17 +20,18 @@
   }
 
   &__header {
-    background-color: $brand-h;
-    color: #fff;
-    margin: 0;
-    padding: 15px 40px 15px 40px;
-    border: 0;
-    border-bottom: 1px solid #fff;
     appearance: none;
-    width: 100%;
+    background-color: $brand-h;
+    border-bottom: 1px solid #fff;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    margin: 0;
     outline: none;
-    text-align: left;
+    padding: 15px 40px 15px 40px;
     position: relative;
+    text-align: left;
+    width: 100%;
 
     &.is-active {
       border-bottom: 0;
