@@ -6,7 +6,8 @@ layout: default.hbs
 permalink: false
 jsBundle: swep
 section: southampton
-page: southampton-emergency-help
+page: southampton-advice
+location: southampton
 ---
 
 <div class="block block--breadcrumbs">
@@ -14,30 +15,22 @@ page: southampton-emergency-help
     <ol class="breadcrumbs__list">
       <li class="breadcrumbs__item"><a href="/">Home</a></li>
       <li class="breadcrumbs__item"><a href="/southampton/">Southampton</a></li>
-      <li class="breadcrumbs__item"><a href="/southampton/emergency-help/">Emergency Advice</a></li>
+      <li class="breadcrumbs__item"><a href="/southampton/advice/">Advice</a></li>
       <li class="breadcrumbs__item">Severe Weather Emergency Accommodation</li>
     </ol>
   </div>
 </div>
 
-<div class="block block--city-header city-header city-header--southampton">
-  <div class="container container--city-header">
-    <h1 class="h1 block__header">Severe Weather Emergency Accommodation</h1>
-    <div id="js-swep-output" class="template--maybe-empty"></div>
-  </div>
-</div>
+{{> find-help/advice-header heading="Severe Weather Emergency Accommodation" theLocationId="southampton" }}
+
 
 <div class="block">
   <div class="container">
     <div class="block__content">
-      <p>During periods of severe weather, additional accommodation is provided. Please visit our <a href="/southampton/emergency-help/">emergency help page</a> for more information.</p>
+      <p>During periods of severe weather, additional accommodation is provided. Please visit our <a href="/southampton/advice/">emergency help page</a> for more information.</p>
     </div>
 
     {{> social-share}}
 
   </div>
 </div>
-
-<script id="js-swep-tpl" type="text/template">
-{{> swep-notification }}
-</script>

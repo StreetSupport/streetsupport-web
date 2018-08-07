@@ -2,16 +2,9 @@
   @include cf();
   margin: 0 0 20px 0;
 
-  @include span(6 of $grid-column);
-  @include push(1 of $grid-column);
-
-  @include mq($from: s) {
-    @include span(8 of $grid-column);
-    @include push(0 of $grid-column);
-  }
-
   &__list {
-    margin: 0;
+    max-width: 400px;
+    margin: 0 auto;
     padding: 0;
     list-style-type: none;
     text-align: center;
@@ -21,22 +14,28 @@
     margin: 0;
     padding: 20px 0;
     border-bottom: 1px solid $brand-m;
-
-    &:first-of-type {
-      padding-left: 0;
-    }
-
-    &:last-of-type {
-      border: 0;
-      padding-right: 0;
+  
+    &:last-child {
+      border: none;
     }
 
     @include mq($from: s) {
       display: inline-block;
       margin: 20px 0 0 0;
-      padding: 0 40px;
       border-bottom: 0;
       border-right: 1px solid $brand-m;
+      border-left: 1px transparent red;
+      
+      @include span(1 of 3);
+
+      &:first-child {
+        @include first();
+      }
+  
+      &:last-child {
+        border: none;
+        @include last();
+      }
     }
 
     a { 

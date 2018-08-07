@@ -12,7 +12,7 @@ page: home
 <div class="block block--home-header">
   <div class="container container--home-header">
     <h1 class="h1 block__header">Working Together to End Homelessness</h1>
-    <h2 class="h2 block__sub-header">You can find support services for people experiencing homelessness, and DO something to help: offering your time, money or resources to local organisations.</h2>
+    <h2 class="h2 block__sub-header">Find support services near you, and see how you can help.</h2>
     <div class="ctas">
       <a href="/find-help" class="btn btn--brand-d">
         <span class="btn__text">Find Help</span>
@@ -29,21 +29,36 @@ page: home
     <div class="block__content">
       <div class="home__copy">
         <h2 class="h2">Where we are</h2>
-        <p>Street Support Network is currently available across Greater Manchester, Leeds, Bradford, Liverpool, Bournemouth, Portsmouth and Southampton.</p>
+        <p>Street Support Network is currently active in several locations across the UK.</p>
 
-        <p class="h3">Want to see what services are available in our featured locations? Select one from the list below:</p>
-        <div id="js-template-output"></div>
+        <p class="h3">Want to see what is happening near you? Select one&hellip;</p>
+        <div id="js-location-selector-output"></div>
       </div>
       <div class="home__hub-map">
         <div class="js-map"></div>
       </div>
-      <div class="home__copy">
-        <h2 class="h2">We would love the network to link out to more locations</h2> 
+      <div class="home__copy home__copy--left-col">
+        <h2 class="h2">We would love to see the network grow</h2> 
         <p>If you think Street Support might be useful in your area, please <a href="/about/contact">get in touch</a>.</p>
           <a href="/about/contact" class="btn btn--brand-e">
-            <span class="btn__text">get in touch with us</span>
+            <span class="btn__text">Get in touch</span>
           </a>
         </div>
+    </div>
+  </div>
+</div>
+
+<div id="js-statistics-output"></div>
+
+<div class="block block--highlight block--promo">
+  <div class="container">
+    <div class="block__content partners">
+      <h2 class="h2">Supported by&hellip;</h2>
+      <ul class="partners__list">
+        <li class="partners__logo partners__logo--big-lottery-fund"><a href="/about/our-sponsors/#partner-big-lottery-fund">{{> icon name="big-lottery-fund"}}<span class="hide-screen">Big Lottery Fund</span></a></li>
+      </ul>
+      <p>We are looking for businesses and supporters to <a href="/give-help/partnership/">parter with us in this mission to End Homelessness</a>.</p>
+      <p>If you share our vision of a society without homelessness, please <a href="mailto:sponsorship@streetsupport.net">get in touch</a>.</p>
     </div>
   </div>
 </div>
@@ -51,13 +66,10 @@ page: home
 
 {{> loading-spinner}}
 
-<script id="js-content-tpl" type="text/template">
-<div class="location-selector">
-  <label for="location" class="location-selector__label hide-screen">Select a Location: </label>
-  <select class="js-homepage-promo-location-selector js-location-select location-selector__select form__input" name="location" id="location">
-    \{{#locations}}
-    <option \{{#isSelected}}selected\{{/isSelected}} value="\{{id}}">\{{name}}</option>
-    \{{/locations}}
-  </select>
-</div>
+<script id="js-location-selector-tpl" type="text/template">
+{{> locations/selector-hogan }}
+</script>
+
+<script id="js-statistics-tpl" type="text/template">
+{{> impact-statistics }}
 </script>

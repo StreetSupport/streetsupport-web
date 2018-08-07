@@ -6,7 +6,8 @@ layout: default.hbs
 permalink: false
 jsBundle: swep
 section: bradford
-page: bradford-emergency-help
+page: bradford-advice
+location: bradford
 ---
 
 <div class="block block--breadcrumbs">
@@ -14,18 +15,13 @@ page: bradford-emergency-help
     <ol class="breadcrumbs__list">
       <li class="breadcrumbs__item"><a href="/">Home</a></li>
       <li class="breadcrumbs__item"><a href="/bradford/">Bradford</a></li>
-      <li class="breadcrumbs__item"><a href="/bradford/emergency-help/">Emergency Advice</a></li>
+      <li class="breadcrumbs__item"><a href="/bradford/advice/">Advice</a></li>
       <li class="breadcrumbs__item">Severe Weather Emergency Accommodation</li>
     </ol>
   </div>
 </div>
 
-<div class="block block--city-header city-header city-header--bradford">
-  <div class="container container--city-header">
-    <h1 class="h1 block__header">Severe Weather Emergency Accommodation</h1>
-    <div id="js-swep-output" class="template--maybe-empty"></div>
-  </div>
-</div>
+{{> find-help/advice-header heading="Severe Weather Emergency Accommodation" theLocationId="bradford" }}
 
 <div class="block">
   <div class="container">
@@ -40,7 +36,3 @@ page: bradford-emergency-help
 
   </div>
 </div>
-
-<script id="js-swep-tpl" type="text/template">
-{{> swep-notification }}
-</script>

@@ -1,6 +1,6 @@
 $smallPadding: 10px;
 $normalPadding: 25px;
-$columned-dropdown-item-width: 180px;
+$columned-dropdown-item-width: 170px;
 $columned-dropdown-column-count: 3;
 
 .header {
@@ -68,16 +68,6 @@ $columned-dropdown-column-count: 3;
 
   &--hub {
     display: none;
-    &.is-active {
-      display: block;
-    }
-  }
-
-  &--columned {
-    @include mq($from: m) {
-      width: $columned-dropdown-item-width * $columned-dropdown-column-count;
-      margin-left: -$columned-dropdown-item-width;
-    }
   }
 
   &--sub-list {
@@ -85,6 +75,28 @@ $columned-dropdown-column-count: 3;
     position: absolute;
     z-index: 100;
     padding: 10px 0;
+
+    @include mq($from: m, $until: xxl) {
+      width: $columned-dropdown-item-width;
+      // &:last-of-type {
+      //   right: 0px;
+      // }
+    }
+  }
+
+  &--columned {
+    @include mq($from: m) {
+      column-count: $columned-dropdown-column-count;
+      width: 541px!important; // hack!
+      margin-left: -$columned-dropdown-item-width;
+    }
+  }
+
+  .nav__item--about > &--sub-list,
+  .nav__item--locations > &--sub-list {
+    @include mq($from: m, $until: xxl) {
+      right: 0px
+    }
   }
 }
 
@@ -120,6 +132,10 @@ $columned-dropdown-column-count: 3;
 
   .nav__list--sub-list & {
     float: none;
+    @include mq($from: m) {
+      width: $columned-dropdown-item-width;
+    }
+
     a {
       display: block;
       padding: 5px 30px 5px 10px;
@@ -137,10 +153,6 @@ $columned-dropdown-column-count: 3;
   .nav__list--columned & {
     @include mq($from: m) {
       width: $columned-dropdown-item-width;
-      float: left;
-      &:nth-of-type(#{$columned-dropdown-column-count}n) {
-        clear: right;
-      }
     }
   }
   
@@ -233,7 +245,7 @@ $columned-dropdown-column-count: 3;
 }
 
 // Active page
-@each $page in join($nav-pages, $generated-nav-pages) {
+@each $page in join(join($nav-pages, $generated-nav-pages), $generated-locations-for-nav) {
   .page--#{$page} {
     .header__nav .nav__item--#{$page} > a {
       @include mq($from: m) {
@@ -256,6 +268,15 @@ $columned-dropdown-column-count: 3;
       @include mq($from: m) {
         background: $brand-e;
       }
+    }
+  }
+}
+
+// Active location nav
+@each $location in $generated-locations-for-nav {
+  .location--#{$location} {
+    [data-city="#{$location}"] {
+      display: block!important;
     }
   }
 }

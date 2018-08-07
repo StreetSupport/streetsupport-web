@@ -1,0 +1,113 @@
+%get-in-sea {
+  @include mq($from: m) {
+    &:after {
+      content: '';
+      width: 100%;
+      height: 64px; 
+      background: url('../img/locations/sea-tile.png') repeat-x;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+}
+
+.location-header {
+  background-position: right bottom;
+  background-size: 940px;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include mq($from: m) {
+    overflow-x: hidden;
+    &:before {
+      background-position: 66% bottom;
+      background-repeat: no-repeat;
+      background-size: 600px;
+      bottom: 2px;
+      content: '';
+      display: inline-block;
+      height: 250px;
+      left: 50%;
+      position: absolute;
+      width: 600px;
+    }
+  }
+  @include mq($from: xxl) {
+    &:before {
+      left: auto;
+      right: 0;
+    }
+  }
+
+  & .container {
+    position: relative;
+  }
+}
+
+.location--manchester .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-size: 650px;
+      width: 650px;
+      height: 270px;
+    }
+  }
+}
+
+.location--leeds .location-header {
+  @include mq($from: m) {
+    &:before {
+      height: 278px;
+    }
+  }
+}
+
+.location--bournemouth .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-size: 842px;
+      width: 842px;
+      bottom: 20px;
+    }
+  }
+  @include mq($from: l) {
+    &:before {
+      background-size: 842px;
+      width: 842px;
+      left: 50%;
+    }
+  }
+  @extend %get-in-sea;
+}
+
+.location--portsmouth .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-size: 600px;
+      width: 600px;
+      height: 270px;
+      bottom: 10px;
+    }
+  }
+  @extend %get-in-sea;
+}
+
+.location--southampton .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-size: 1200px;
+      background-position: left bottom;
+      width: 100%;
+      bottom: 7px;
+    }
+  }
+  @include mq($from: l) {
+    &:before {
+      left: 36%;
+    }
+  }
+  @extend %get-in-sea;
+}

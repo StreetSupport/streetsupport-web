@@ -30,6 +30,7 @@
   },
   "metalsmith": {
     "plugins": {
+      "metalsmith-ignore": "**/_*.hbs",
       "metalsmith-metadata-directory": {
         "directory": "./src/data/**/*.json"
       },

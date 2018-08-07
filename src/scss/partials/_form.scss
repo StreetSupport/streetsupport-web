@@ -2,6 +2,10 @@
 
 .form {
   @include cf();
+
+  & + .form {
+    margin-top: 20px;
+  }
 }
 
 .form--partnership,
@@ -50,6 +54,18 @@
   border: none;
   margin: 20px 0 0 0;
   padding: 0;
+
+  &--inline-fill {
+    margin: 0;
+    @include mq($from: m) {
+      margin: 0 0 20px 0;
+    }
+    .form__fieldset-inline-fill-container { 
+      @include mq($from: m) {
+        display: flex;
+      }
+    }
+  }
 }
 
 .form__fieldset-title {
@@ -136,6 +152,15 @@
 
 .form__input--inline {
   display: inline;
+}
+
+.form__input--inline-fill {
+  width: 100%;
+  @include mq($from: m) {
+    flex-grow: 2;
+    width: auto;
+    margin-right: 0.5em;
+  }
 }
 
 .form__input--short {

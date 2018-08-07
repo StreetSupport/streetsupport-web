@@ -1,23 +1,22 @@
 <div class="block block--news">
-  <header class="news-header">
-    <h2 class="news-header__title">Latest News\{{#taxonomy}} for \{{name}}\{{/taxonomy}}</h2>
-  </header>
-  <section class="news-posts">
-    \{{#posts}}
+  <div class="container">
+    <header class="news-header">
+      <h1 class="h2">Latest News\{{#taxonomy}} for \{{name}}\{{/taxonomy}}</h1>
+    </header>
+    <section class="news-posts">
+      \{{#posts}}
       <article class="news-posts__post">
         <figure class="post__image\{{^featured_media_object}} post__image--empty\{{/featured_media_object}}">
           <a href="\{{link}}">
             \{{#featured_media_object}}
-              <img src="\{{media_details.sizes.medium.source_url}}" srcset="\{{ srcset }}" alt="\{{alt_text}}">
-            \{{/featured_media_object}}
-            \{{^featured_media_object}}
-              <svg class="svg-logo-dims">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#logo"></use>
-              </svg>
+            <img src="\{{media_details.sizes.medium.source_url}}" srcset="\{{ srcset }}" alt="\{{alt_text}}"> \{{/featured_media_object}} \{{^featured_media_object}}
+            <svg class="svg-logo-dims">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#logo"></use>
+            </svg>
             \{{/featured_media_object}}
           </a>
         </figure>
-        <h2 class="post__title">
+        <h2 class="h2 post__title">
           <a href="\{{link}}">
             \{{{title.rendered}}}
           </a>
@@ -30,13 +29,14 @@
           <a href="\{{link}}" class="post__cta__link">Read more</a>
         </div>
       </article>
-    \{{/posts}}
-  </section>
-  <footer class="news-footer">
-    <a href="\{{taxonomy.link}}" class="btn btn--short btn--brand-e">
-      <span class="btn__text">
-        View All
-      </span>
-    </a>
-  </footer>
+      \{{/posts}}
+    </section>
+    <footer class="news-footer">
+      <a href="\{{taxonomy.link}}" class="btn btn--brand-e">
+        <span class="btn__text">
+          View All
+        </span>
+      </a>
+    </footer>
+  </div>
 </div>

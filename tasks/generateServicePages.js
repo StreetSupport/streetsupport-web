@@ -151,7 +151,7 @@ gulp.task('generate-nav-variables', () => {
     .join(' ')
 
   const cityOutput = cities
-    .map((c) => `${c.id}-emergency-help`)
+    .map((c) => `${c.id}-advice`)
     .join(' ')
 
   return newFile('_generated-variables.scss', `$generated-nav-pages: ${catOutput} ${cityOutput}`)

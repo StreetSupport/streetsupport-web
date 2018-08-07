@@ -26,7 +26,6 @@ else {
 module.exports = {
   entry: {
     home: path.join(__dirname, '/src/js/page-home'),
-    hub: path.join(__dirname, '/src/js/page-hub'),
     supporters: path.join(__dirname, '/src/js/page-supporters'),
     generic: path.join(__dirname, '/src/js/page-generic'),
     findhelp: path.join(__dirname, '/src/js/page-find-help'),
@@ -34,9 +33,9 @@ module.exports = {
     categorybyday: path.join(__dirname, '/src/js/page-category-by-day'),
     categorybylocation: path.join(__dirname, '/src/js/page-category-by-location'),
     organisation: path.join(__dirname, '/src/js/page-organisation'),
-    "donate-v2": path.join(__dirname, '/src/js/pages/donate/app'),
-    "all-organisations-v2": path.join(__dirname, '/src/js/pages/all-organisations/app'),
-    "all-organisations-v2-map": path.join(__dirname, '/src/js/pages/all-organisations/map/app'),
+    'donate-v2': path.join(__dirname, '/src/js/pages/donate/app'),
+    'all-organisations-v2': path.join(__dirname, '/src/js/pages/all-organisations/app'),
+    'all-organisations-v2-map': path.join(__dirname, '/src/js/pages/all-organisations/map/app'),
     giverequests: path.join(__dirname, '/src/js/pages/give-help/needs/app'),
     requestDetails: path.join(__dirname, '/src/js/pages/give-help/needs/request/app'),
     sponsor: path.join(__dirname, '/src/js/page-sponsor'),
@@ -44,10 +43,10 @@ module.exports = {
     offeritems: path.join(__dirname, '/src/js/pages/give-help/offer-items/app'),
     joinstreetsupport: path.join(__dirname, '/src/js/page-join-street-support'),
     register: path.join(__dirname, '/src/js/page-register'),
-    manchester: path.join(__dirname, 'src/js/pages/manchester/page-manchester'),
-    emergencyhelp: path.join(__dirname, 'src/js/page-emergency-help'),
+    'location-home-page': path.join(__dirname, 'src/js/pages/locations/app'),
+    emergencyhelp: path.join(__dirname, 'src/js/page-advice'),
     swep: path.join(__dirname, 'src/js/page-swep'),
-    emergencyHelpRedirect: path.join(__dirname, 'src/js/page-emergency-help-redirect'),
+    emergencyHelpRedirect: path.join(__dirname, 'src/js/page-advice-redirect'),
     swepRedirect: path.join(__dirname, 'src/js/page-swep-redirect'),
     impact: path.join(__dirname, 'src/js/page-impact'),
     bestpracticeawardsapply: path.join(__dirname, 'src/js/pages/best-practice/awards/page-apply'),
@@ -56,7 +55,8 @@ module.exports = {
     accomAdvice: path.join(__dirname, 'src/js/pages/accommodation/advice/app'),
     accomListing: path.join(__dirname, 'src/js/pages/accommodation/listing/app'),
     accomMap: path.join(__dirname, 'src/js/pages/accommodation/map/app'),
-    accomDetails: path.join(__dirname, 'src/js/pages/accommodation/details/app')
+    accomDetails: path.join(__dirname, 'src/js/pages/accommodation/details/app'),
+    'general-advice': path.join(__dirname, 'src/js/pages/advice/app')
   },
   output: {
     path: path.join(__dirname, '/_dist/assets/js/'),

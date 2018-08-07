@@ -1,0 +1,169 @@
+---
+title: Street Support Bolton - Working together to end homelessness in Bolton
+description: Street Support - Find help, and give help, to support people who are homeless in Bolton
+image: https://streetsupport.net/assets/img/og/street-support-bolton.png
+layout: withGoogle.hbs
+permalink: false
+jsBundle: location-home-page
+section: home
+page: bolton
+location: bolton
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item">Bolton</li>
+    </ol>
+  </div>
+</div>
+
+<div class="block block--location-header location-header location-header--bolton">
+  <div class="container">
+    <h1 class="h1 block__header">Street Support Bolton</h1>
+    <h2 class="h2 block__sub-header">Connecting people and organisations locally, to end homelessness in Bolton.</h2>
+    <div class="ctas">
+      <a href="/find-help" class="btn btn--brand-d">
+        <span class="btn__text">Find Help</span>
+      </a>
+      <a href="/give-help" class="btn btn--brand-e">
+        <span class="btn__text">Give Help</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="js-swep-output"></div>
+
+<div class="block">
+  <div class="container">
+    <div class="home__copy home__copy--padding">
+      <h1 class="h2">You're in Bolton</h1>
+      <form class="form form--highlighted js-find-help-form">
+        <fieldset class="form__fieldset form__fieldset--inline-fill">
+          <legend class="form__fieldset-title">Find organisations near you:</legend>
+          <div class="form__fieldset-inline-fill-container">
+            <label class="hide-screen" for="postcode">Your Postcode</label>
+            <input name="postcode" class="form__input form__input--inline-fill js-find-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
+            <button class="btn btn--brand-e btn--inline-fill" type="submit">
+              <span class="btn__text">Find help</span>
+            </button>
+          </div>
+        </fieldset>
+      </form>
+      <form class="form js-change-location-form">
+        <fieldset class="form__fieldset form__fieldset--inline-fill">
+          <legend class="h2">Want to see what's available in our other featured locations?</legend>
+          <div class="form__fieldset-inline-fill-container">
+            <label class="hide-screen" for="location">Select Location</label>
+            <select name="location" class="form__input form__input--inline-fill js-change-location-select"  id="js-location-selector-output">
+            </select>
+            <button class="btn btn--brand-e btn--inline-fill" type="submit">
+              <span class="btn__text">Visit location page</span>
+            </button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <div class="home__copy">
+      <div class="js-map"></div>
+    </div>
+  </div>
+</div>
+
+<div id="js-statistics-output"></div>
+
+<div id="js-big-change-output"></div>
+
+<div id="js-charter-output"></div>
+
+<div id="js-toolkit-output"></div>
+
+<div id="js-news-output"></div>
+
+<div class="block block--highlight block--promo">
+  <div class="container">
+    <div class="block__content partners">
+      {{> bolton/supporters }}
+      <p>We are looking for businesses and organisations to <a href="/give-help/partnership/">support us</a> so that we can continue to develop this resource.</p>
+      <p>If you share our vision of a society without homelessness, please <a href="mailto:sponsorship@streetsupport.net">get in touch</a>.</p>
+    </div>
+  </div>
+</div>
+
+{{> loading-spinner}}
+
+<script id="js-swep-tpl" type="text/template">
+{{> find-help/swep-notification theLocationId="bolton" }}
+</script>
+
+<script id="js-big-change-tpl" type="text/template">
+  <div class="block block--big-change-mcr">
+    <div class="container container--big-change-mcr">
+      <div class="home__copy home__copy--big-change-mcr-logo">
+        <img src="/assets/img/mcr-homelessness-partnership.png" alt="Big Change Bolton #BigChangeMcr" />
+        <span class="big-change-banner__heading-text">Bolton</span>
+        <span class="big-change-banner__heading-text big-change-banner__heading-text--minor">ending</span>
+        <span class="big-change-banner__heading-text">homelessness</span>
+      </div>
+      <div class="home__copy home__copy--padding home__copy--big-change-mcr-text">
+        <h1>Big Change in Bolton</h1>
+        <p>Big Change pays for practical items individuals need to build independent lives away from the streets. If everyone who lives, works or visits Bolton donates, together we can make a Big Change!</p>
+        <a class="btn btn--big-change" href="/bolton/bigchangemcr/">
+          <span class="btn__text">Check out Big Change</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script id="js-toolkit-tpl" type="text/template">
+  <div class="block block--standards-toolkit">
+    <div class="block__standards-toolkit-pad"></div>
+    <div class="home__copy home__copy--standards-toolkit">
+      <h1>Standards Toolkit</h1>
+      <p>Are you a volunteer-led group that provides support for people on the streets? We have put together this best practice guide to help you protect the vulnerable adults that use these services, your volunteers and members of the public.</p>
+      <p>This toolkit makes it easier for you to develop and be recognised for the quality of your service. The information, training and support provided here supports you to ensure you have adequate standards and safeguarding in place.</p>
+      <a class="btn btn--brand-e" href="/manchester/standards-toolkit/">
+        <span class="btn__text">More information</span>
+      </a>
+    </div>
+  </div>
+</script>
+
+<script id="js-news-tpl" type="text/template">
+    {{>news-posts }}
+</script>
+
+<script id="js-charter-tpl" type="text/template">
+  <div class="block">
+    <div class="container">
+      <div class="home__copy home__copy--padding">
+        <h1>Bolton Homelessness Charter</h1>
+        <p>The Bolton Homelessness Charter is a symbol of our mission to end homelessness in our city by uniting people, organisations and businesses with one shared vision.</p>
+        <a class="btn btn--brand-e" href="https://charter.streetsupport.net">
+          <span class="btn__text">Let's end homelessness</span>
+        </a>
+      </div>
+      <div class="home__copy home__copy--mcr-charter">
+        <picture>
+        <source media="(max-width: 600px)" srcset="/assets/img/town-hall_400x267.jpg">
+        <source media="(min-width: 800px)" srcset="/assets/img/town-hall_600x400.jpg">
+        <source media="(min-width: 1000px)" srcset="/assets/img/town-hall_900x600.jpg">
+          <img src="/assets/img/town-hall_900x600.jpg" alt="The Bolton Homelessness Charter Launch">
+        </picture>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script id="js-location-selector-tpl" type="text/template">
+  \{{#locations}}
+  <option value="\{{id}}"\{{#isSelected}} selected="selected"\{{/isSelected}}>\{{name}}</option>
+  \{{/locations}}
+</script>
+
+<script id="js-statistics-tpl" type="text/template">
+  {{> impact-statistics }}
+</script>

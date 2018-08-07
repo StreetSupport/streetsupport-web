@@ -3,13 +3,30 @@
 
   padding: 0 $site-gutter;
 
-  &--city-header {
+  &--location-header {
     margin-left: inherit;
     margin-right: inherit;
     padding-bottom: $site-gutter;
 
     @include mq($from: m) {
-      min-width: 500px;
+      width: 100%;
+      min-height: 200px;
+    }
+  }
+
+  &--big-change-mcr {
+    padding: 0;
+
+    @include mq($from: m) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &--footer {
+    @include mq($from: m) {
+      display: flex;
+      align-items: flex-end;
     }
   }
 }
