@@ -35,12 +35,12 @@ page: locations
         <p>Street Support Network is currently active in several locations across the UK.</p>
 
         <p class="h3">Want to see what is happening near you? Select one&hellip;</p>
-        <div id="js-template-output"></div>
+        <div id="js-location-selector-output"></div>
       </div>
       <div class="home__hub-map">
         <div class="js-map"></div>
       </div>
-      <div class="home__copy">
+      <div class="home__copy home__copy--left-col">
         <h2 class="h2">We would love to see the network grow</h2> 
         <p>If you think Street Support might be useful in your area, please <a href="/about/contact">get in touch</a>.</p>
           <a href="/about/contact" class="btn btn--brand-e">
@@ -54,13 +54,6 @@ page: locations
 
 {{> loading-spinner}}
 
-<script id="js-content-tpl" type="text/template">
-<div class="location-selector">
-  <label for="location" class="location-selector__label hide-screen">Select a Location: </label>
-  <select class="js-homepage-promo-location-selector js-location-select location-selector__select form__input" name="location" id="location">
-    \{{#locations}}
-    <option \{{#isSelected}}selected\{{/isSelected}} value="\{{id}}">\{{name}}</option>
-    \{{/locations}}
-  </select>
-</div>
+<script id="js-location-selector-tpl" type="text/template">
+{{> locations/selector-hogan }}
 </script>
