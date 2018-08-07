@@ -46,10 +46,12 @@ const closeSubNav = function (e) {
 }
 
 const setLocationId = function (e) {
-  e.preventDefault()
   const locationId = e.target.parentNode.dataset.location
-  locationSelector.setCurrent(locationId)
-  browser.redirect(`/${locationId}/`)
+  if (locationId !== undefined) {
+    e.preventDefault()
+    locationSelector.setCurrent(locationId)
+    browser.redirect(`/${locationId}/`)
+  }
 }
 
 var open = function () {
