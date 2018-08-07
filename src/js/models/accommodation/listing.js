@@ -26,6 +26,8 @@ const AccommodationListing = function (addtionalQueryString = '') {
   self.accomTypes = ko.observableArray(categories)
   self.selectedType = ko.observable('')
   self.locationName = ko.observable()
+  // TODO: Hook up to request to send for filtering
+  // self.referralIsRequired = ko.observableArray(referralOpts)
 
   self.nextPageEndpoint = ko.observable()
 

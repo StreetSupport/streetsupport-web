@@ -26,7 +26,17 @@
           </select>
         </li>
       </ul>
-
+      <h2 class="h3">Referral Required:</h2>
+      <ul class="accommodation-listing__filter-facet-group">
+        <li>
+          <dl class="accommodation-listing__filter-facet-options">
+            <dt class="accommodation-listing__filter-facet-options-title"></dt>
+            <dd class="accommodation-listing__filter-face-options-radio"><label class="accommodation-listing__filter-facet-options-radio-container"><input type="radio" value="true" data-bind="attr: { name: referralIsRequired }, checked: value, checkedValue: true" /> Yes</label></dd>
+            <dd class="accommodation-listing__filter-face-options-radio"><label class="accommodation-listing__filter-facet-options-radio-container"><input type="radio" value="false" data-bind="attr: { name: referralIsRequired }, checked: value, checkedValue: false" /> No</label></dd>
+          </dl>
+        </li>
+      </ul>
+      <!-- TODO: Add Filter Here -->
       <h2 class="h3">Suitable For:</h2>
       <ul class="accommodation-listing__filter-facet-group" data-bind="foreach: residentCriteriaFilters">
         <li>
