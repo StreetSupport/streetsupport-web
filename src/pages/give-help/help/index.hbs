@@ -42,7 +42,6 @@ page: giveitems
           {{> loading-spinner}}
         </div>
       </div>
-      <div class="btn" id="js-show-more-btn-output"></div>
     </div>
   </div>
 </div>
@@ -95,21 +94,26 @@ page: giveitems
   </section>
   <ul id="js-card-list" class="requests-listing list">
     \{{#card}}
-      {{> give-help-card this}}
+    <li class="card card--brand-h card--grid-1-of-3" data-id="\{{id}}">
+      <div class="card__title">
+        <a href="\{{detailsUrl}}">
+          <h1 class="h2">\{{{description}}}</h1>
+        </a>
+        <p class="hide-screen creationDate">\{{creationDate}}</p>
+        <p class="hide-screen neededDate">\{{neededDate}}</p>
+        <p class="hide-screen distanceAwayInMetres">\{{distanceAwayInMetres}}</p>
+        <p class="hide-screen keywords">\{{keywords}}</p>
+        <p class="hide-screen type">\{{type}}</p>
+      </div>
+      <div class="card__details card__details--fat-bottom">
+        <p class="h3 serviceProviderName">\{{{serviceProviderName}}}</p>
+        <p class="locationDescription ">\{{{locationDescription}}}</p>
+        <p class="formattedNeededDate">Posted: <time datetime={{{formattedNeededDate}}}>\{{{formattedNeededDate}}}</time></p>
+        <a href="\{{detailsUrl}}" class="btn btn--brand-e">
+          <span class="btn__text">I Can Help!</span>
+        </a>
+      </div>
+    </li>
     \{{/card}}
   </ul>
-</script>
-
-<script id="js-show-more-tpl" type="text/template">
-  \{{#isMore}}
-    <a class="btn btn--brand-e js-show-more-btn">
-        <span class="btn__text">Show More</span>
-    </a>
-  \{{/isMore}}
-</script>
-
-<script id="js-cards-tpl" type="text/template">
-\{{#card}}
-  {{> give-help-card this}}
-\{{/card}}
 </script>
