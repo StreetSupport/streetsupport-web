@@ -47,7 +47,6 @@ const closeSubNav = function (e) {
 
 const setLocationId = function (e) {
   e.preventDefault()
-  console.log(e.target.parentNode.dataset.location)
   const locationId = e.target.parentNode.dataset.location
   locationSelector.setCurrent(locationId)
   browser.redirect(`/${locationId}/`)
