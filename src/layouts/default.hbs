@@ -1,16 +1,24 @@
-{{> head}}
-
-{{> desktop-nav }}
+{{> head }}
 
 <div class="nav__push js-nav-push">
   {{> mobile-header }}
+  <nav class="nav__container js-nav-container nav--mobile">
+    <ul class="nav__list">
+      <li class="nav__group-container">
+        {{> header-nav }}
+      </li>
+      <li class="nav__group-container">
+        <ul class="nav__group nav__group--locations">
+          {{> nav/mobile-locations }}
+        </ul>
+      </li>
+    </ul>
+  </nav>
 
-  {{{contents}}}
-
-  {{> footer}}
+  {{{ contents }}} 
+  {{> footer }}
 
   <div class="nav__overlay js-nav-overlay"></div>
 </div>
 
-{{> mobile-nav }}
-{{> foot}}
+{{> foot }}

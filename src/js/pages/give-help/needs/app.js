@@ -50,11 +50,13 @@ const renderNeeds = (needs, userLocation, currRange, links) => {
   }
 }
 
-const renderShowMore = (isMore) => {console.log(isMore); templating.renderTemplate(
-  'js-show-more-tpl',
-  { isMore: isMore },
-  'js-show-more-btn-output',
-  () => {})}
+const renderShowMore = (isMore) => {
+  templating.renderTemplate(
+    'js-show-more-tpl',
+    { isMore: isMore },
+    'js-show-more-btn-output',
+    () => { })
+}
 
 const initClickEvents = (data) => {
   const clickEvents = [
@@ -64,7 +66,7 @@ const initClickEvents = (data) => {
         getApiData.data(apiRoutes.getFullUrl(data.links.next))
           .then((result) => {
             if (result.status === 'notFound') {
-              throw new Error({msg: 'page not found'})
+              throw new Error({ msg: 'page not found' })
             }
 
             // TODO: if (isError) {
@@ -93,7 +95,7 @@ const initClickEvents = (data) => {
 
             renderShowMore(links.next !== null)
 
-            const newData = Object.assign(Object.assign({}, data), {links: links})
+            const newData = Object.assign(Object.assign({}, data), { links: links })
             initClickEvents(newData)
           }).catch(() => {
             // TODO: appendError()
@@ -121,7 +123,7 @@ const init = function (userLocation, range = 10000, pageSize = 21) {
         const formatted = formatNeeds(result.data.items, userLocation)
         renderNeeds(formatted, userLocation, range)
         renderShowMore(result.data.links.next !== null)
-        initClickEvents({links: result.data.links, userLocation: userLocation, currRange: range})
+        initClickEvents({ links: result.data.links, userLocation: userLocation, currRange: range })
       }, () => {
         browser.redirect('/500')
       })
