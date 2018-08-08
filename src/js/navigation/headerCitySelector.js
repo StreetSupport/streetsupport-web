@@ -15,8 +15,6 @@ const init = () => {
 
   let body = document.querySelector('body')
 
-  console.log(Array.from(body.classList).join(' '))
-
   if (Array.from(body.classList).includes(`location--`)) {
     body.classList.add(`location--${selectedCityId}`)
   }
