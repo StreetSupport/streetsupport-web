@@ -22,9 +22,12 @@ $columned-dropdown-column-count: 3;
   }
 
   @include mq($from: m) {
-    height: $desktop-header-and-border-height;
+    height: $desktop-header-height;
     
-    border-bottom: $locations-nav-height solid $brand-e;
+    body:not(.location--elsewhere) & {
+      height: $desktop-header-and-border-height;
+      border-bottom: $locations-nav-height solid $brand-e;
+    }
     & .container {
       height: $desktop-header-height;
     }
@@ -366,8 +369,12 @@ $columned-dropdown-column-count: 3;
         position: absolute;
         top: 0px;
         right: 0px;
-        margin-top: -$desktop-header-and-border-height - 5;
+        margin-top: -$desktop-header-height - 7;
         z-index: 1000;
+
+        body:not(.location--elsewhere) & {
+          margin-top: -$desktop-header-and-border-height - 5;
+        }
       }
 
       &--locations {
