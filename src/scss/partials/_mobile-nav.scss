@@ -368,7 +368,7 @@ $columned-dropdown-column-count: 3;
       &--header {
         position: absolute;
         top: 0px;
-        right: 0px;
+        right: 1rem;
         margin-top: -$desktop-header-height - 7;
         z-index: 1000;
 
@@ -380,7 +380,7 @@ $columned-dropdown-column-count: 3;
       &--locations {
         position: absolute;
         top: 0px;
-        left: 0px;
+        left: 1rem;
         margin-top: -75px;
         width: 100%;
         z-index: 900;
