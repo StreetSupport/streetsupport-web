@@ -48,6 +48,6 @@ src/pages/bournemouth/index.hbs
 src/pages/portsmouth/index.hbs
 src/pages/manchester/index.hbs
 src/scss/modules/_generated-location-nav-variables.scss
-src/partials/nav/mobile-locations.hbs
+src/partials/nav/locations.hbs
 src/scss/partials/_generated-location-header.scss
 src/partials/nav/header-locations.hbs

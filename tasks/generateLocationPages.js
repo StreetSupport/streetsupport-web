@@ -78,7 +78,7 @@ gulp.task('l-generate-mobile-nav', () => {
     .join(`
 `)
 
-  return newFile('mobile-locations.hbs', cityOutput)
+  return newFile('locations.hbs', cityOutput)
     .pipe(gulp.dest(srcFile))
 })
 

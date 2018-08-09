@@ -6,7 +6,7 @@ $desktop-header-and-border-height: $desktop-header-height + $locations-nav-heigh
 $columned-dropdown-item-width: 170px;
 $columned-dropdown-column-count: 3;
 
-.header--mobile {
+.header {
   background: $brand-a;
   background: linear-gradient(to bottom, $brand-a, #339378);
   display: block;
@@ -129,7 +129,7 @@ $columned-dropdown-column-count: 3;
   }
 }
 
-.nav--mobile {
+.nav {
   @media print {
     & {
       display: none;
