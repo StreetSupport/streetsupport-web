@@ -516,6 +516,11 @@ $columned-dropdown-column-count: 3;
         }
       }
 
+      .nav__list--columned & {
+        width: 170px;
+        display: inline-block;
+      }
+
       .nav__item--hub-nav &--has-sub-nav {
         padding-right: 35px;
       }
