@@ -12,20 +12,22 @@ const browser = require('../browser')
 const locationSelector = require('../location/locationSelector')
 
 var init = function () {
-  document.querySelector(openElement).addEventListener('click', open)
-  document.querySelector(closeElement).addEventListener('click', close)
-  document.querySelector(overlayElement).addEventListener('click', close)
+  if (window.getComputedStyle(document.querySelector('.header__btn')).display === 'block') { // we're in mobile!
+    document.querySelector(openElement).addEventListener('click', open)
+    document.querySelector(closeElement).addEventListener('click', close)
+    document.querySelector(overlayElement).addEventListener('click', close)
 
-  for (let i = 0; i < linksWithSubNav.length; ++i) {
-    linksWithSubNav[i].addEventListener('click', openSubNav)
-  }
+    for (let i = 0; i < linksWithSubNav.length; ++i) {
+      linksWithSubNav[i].addEventListener('click', openSubNav)
+    }
 
-  for (let i = 0; i < subNavBackButtons.length; ++i) {
-    subNavBackButtons[i].addEventListener('click', closeSubNav)
-  }
+    for (let i = 0; i < subNavBackButtons.length; ++i) {
+      subNavBackButtons[i].addEventListener('click', closeSubNav)
+    }
 
-  for (let i = 0; i < locationNavLinks.length; ++i) {
-    locationNavLinks[i].addEventListener('click', setLocationId)
+    for (let i = 0; i < locationNavLinks.length; ++i) {
+      locationNavLinks[i].addEventListener('click', setLocationId)
+    }
   }
 }
 

@@ -160,7 +160,7 @@
     }
 
     @include mq($from: m) {
-      top: $header-top + $header-height + $header-height;
+      margin-top: -5px;
     }
   }
 

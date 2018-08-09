@@ -127,15 +127,15 @@ gulp.task('generate-nav-links', () => {
   const srcFile = `${config.paths.partials}/nav/`
   const output = categories
     .map((c) => {
-      switch(c.key) {
+      switch (c.key) {
         case 'accom':
-          return `<li class="nav__item nav__item--find-help-${c.key}"><a href="/find-help/accommodation/">${c.name}</a></li>`
+          return `<li class="nav__item nav__item--sub-item nav__item--find-help-${c.key}"><a href="/find-help/accommodation/">${c.name}</a></li>`
         case 'meals':
         case 'dropin':
         case 'foodbank':
-          return `<li class="nav__item nav__item--find-help-${c.key}"><a href="/find-help/${c.key}/timetable/">${c.name}</a></li>`
+          return `<li class="nav__item nav__item--sub-item nav__item--find-help-${c.key}"><a href="/find-help/${c.key}/timetable/">${c.name}</a></li>`
         default:
-          return `<li class="nav__item nav__item--find-help-${c.key}"><a href="/find-help/${c.key}/">${c.name}</a></li>`
+          return `<li class="nav__item nav__item--sub-item nav__item--find-help-${c.key}"><a href="/find-help/${c.key}/">${c.name}</a></li>`
       }
     })
     .join('')

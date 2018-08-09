@@ -1,4 +1,4 @@
-// usage: gulp -new-location --locationId bury --locationName Bury
+// usage: gulp add-new-location --locationId bury --locationName Bury
 
 import { argv } from 'yargs'
 import config from '../foley.json'

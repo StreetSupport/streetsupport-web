@@ -49,7 +49,67 @@ const renderNeeds = (needs, userLocation, currRange) => {
   }
 }
 
-const init = function (userLocation, range = 10000) {
+const renderShowMore = (isMore) => {
+  templating.renderTemplate(
+    'js-show-more-tpl',
+    { isMore: isMore },
+    'js-show-more-btn-output',
+    () => { })
+}
+
+const initClickEvents = (data) => {
+  const clickEvents = [
+    {
+      selector: 'js-show-more-btn',
+      action: () => {
+        getApiData.data(apiRoutes.getFullUrl(data.links.next))
+          .then((result) => {
+            if (result.status === 'notFound') {
+              throw new Error({ msg: 'page not found' })
+            }
+
+            // TODO: if (isError) {
+            //   removeError()
+            // }
+
+            const needs = formatNeeds(result.data.items, data.userLocation)
+            const theData = {
+              card: needs,
+              location: data.userLocation.name,
+              postcode: data.userLocation.postcode,
+              categoryName: 'requests for help',
+              geoLocationUnavailable: data.userLocation.geoLocationUnavailable
+            }
+            const links = result.data.links
+
+            var content = Hogan.compile(document.getElementById('js-cards-tpl').innerHTML)
+              .render(theData)
+            document.querySelector('#js-card-list').innerHTML +=
+              content
+
+            buildList()
+            redirectForLegacyNeedDetails()
+            listToSelect.init()
+            initAutoComplete(needs)
+
+            renderShowMore(links.next !== null)
+
+            const newData = Object.assign(Object.assign({}, data), { links: links })
+            initClickEvents(newData)
+          }).catch(() => {
+            // TODO: appendError()
+          })
+      }
+    }
+  ]
+  clickEvents
+    .forEach((e) => {
+      const elem = document.querySelector(`.${e.selector}`)
+      if (elem) elem.addEventListener('click', e.action)
+    })
+}
+
+const init = function (userLocation, range = 10000, pageSize = 21) {
   if (userLocation) {
     const headerData = {
       postcode: userLocation.postcode,
@@ -61,6 +121,8 @@ const init = function (userLocation, range = 10000) {
       .then((result) => {
         const formatted = formatNeeds(result.data.items, userLocation)
         renderNeeds(formatted, userLocation, range)
+        renderShowMore(result.data.links.next !== null)
+        initClickEvents({ links: result.data.links, userLocation: userLocation, currRange: range })
       }, () => {
         browser.redirect('/500')
       })
