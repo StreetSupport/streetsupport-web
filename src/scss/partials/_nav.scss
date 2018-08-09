@@ -157,6 +157,8 @@ $columned-dropdown-column-count: 3;
 
     &.sub-nav-is-active {
       transform: translate3d(-($nav-width), 0, 0) !important;
+
+      & .nav__group > .nav__item > a { border: none; }
     }
 
     .nav__push {
