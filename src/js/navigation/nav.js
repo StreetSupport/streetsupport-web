@@ -4,7 +4,7 @@ const overlayElement = '.js-nav-overlay'
 const activeClass = 'is-active'
 const subNavActiveClass = 'sub-nav-is-active'
 const el = document.querySelectorAll('.js-nav-container, .js-nav-push, .js-nav-overlay, html, body')
-const linksWithSubNav = document.querySelectorAll('.nav--mobile .nav__item-link--has-sub-nav')
+const linksWithSubNav = document.querySelectorAll('.nav .nav__item-link--has-sub-nav')
 const subNavBackButtons = document.querySelectorAll('.sub-list-back-btn')
 const locationNavLinks = document.querySelectorAll('.nav__item--locations .nav__list .nav__item')
 
@@ -37,6 +37,7 @@ const openSubNav = function (e) {
   for (let i = 0; i < el.length; ++i) {
     el[i].classList.add(subNavActiveClass)
   }
+  document.querySelector('.js-nav-container').scrollTop = 0
 }
 
 const closeSubNav = function (e) {
