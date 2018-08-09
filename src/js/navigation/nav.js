@@ -37,6 +37,7 @@ const openSubNav = function (e) {
   for (let i = 0; i < el.length; ++i) {
     el[i].classList.add(subNavActiveClass)
   }
+  document.querySelector('.js-nav-container').scrollTop = 0
 }
 
 const closeSubNav = function (e) {
