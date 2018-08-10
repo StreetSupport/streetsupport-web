@@ -1,89 +1,64 @@
-/*
-  global google
-*/
+/* global google */
 
 // Common modules
 import '../../../common'
 const htmlEncode = require('htmlencode')
 const marked = require('marked')
-marked.setOptions({sanitize: true})
+marked.setOptions({ sanitize: true })
 
 const ko = require('knockout')
 
 const locationSelector = require('../../../location/locationSelector')
+const googleMaps = require('../../../location/googleMaps')
+const proximityRanges = require('../../../location/proximityRanges')
 
 const OrgRetrieval = require('../../../models/all-organisations/listing')
 const model = new OrgRetrieval()
 ko.applyBindings(model)
 
-const buildInfoWindowMarkup = (p) => {
-  return `<div class="map-info-window">
-      <h1 class="h2"><a href="/find-help/organisation/?organisation=${p.key}">${htmlEncode.htmlDecode(p.name)}</a></h1>
-      <a href="/find-help/organisation/?organisation=${p.key}" class="btn btn--brand-e">
-        <span class="btn__text">More about ${htmlEncode.htmlDecode(p.name)}</span>
-      </a>
-    </div>`
-}
-
-const buildMap = (userLocation) => {
-  const centre = {lat: userLocation.latitude, lng: userLocation.longitude}
-  return new google.maps.Map(document.querySelector('.js-map'), {
-    zoom: 11,
-    center: centre
-  })
-}
-
-window.initMap = () => {}
-
-const displayMap = function (providers, userLocation) {
-  const map = buildMap(userLocation)
-  const infoWindows = []
-
-  providers
-    .forEach((p) => {
-      const infoWindow = new google.maps.InfoWindow({
-        content: buildInfoWindowMarkup(p)
-      })
-
-      infoWindows.push(infoWindow)
-
-      p.locations
-        .forEach((l) => {
-          const marker = new google.maps.Marker({
-            position: { lat: l.latitude, lng: l.longitude },
-            map: map,
-            title: `${htmlEncode.htmlDecode(p.name)}`
-          })
-
-          marker.addListener('click', () => {
-            infoWindows
-              .forEach((w) => w.close())
-            infoWindow.open(map, marker)
-          })
-        })
-    })
-
-  const pos = {
-    lat: userLocation.latitude,
-    lng: userLocation.longitude
+window.initMap = function () {
+  const buildInfoWindowMarkup = (p) => {
+    return `<div class="card card--brand-h card--gmaps">
+              <div class="card__title">
+                <h1 class="h2">${htmlEncode.htmlDecode(p.name)}</h1>
+                <p>${htmlEncode.htmlDecode(p.synopsis)}</p>
+              </div>
+              <div class="card__details">
+                <a href="/find-help/organisation/?organisation=${p.key}">View details</a>
+              </div>
+            </div>`
   }
 
-  new google.maps.Marker({ // eslint-disable-line
-    position: pos,
-    icon: {
-      path: google.maps.SymbolPath.CIRCLE,
-      scale: 3,
-      fillColor: 'blue',
-      strokeColor: 'blue'
-    },
-    map: map
+  const displayMap = function (providers, userLocation) {
+    const map = googleMaps.buildMap(userLocation, { zoom: proximityRanges.getByRange(model.range()) })
+    let popup = null
+
+    providers
+      .forEach((p) => {
+        p.locations
+          .forEach((l) => {
+            const marker = googleMaps.buildMarker(l, map, { title: `${htmlEncode.htmlDecode(p.name)}` })
+            marker.addListener('click', function () {
+              document.querySelectorAll('.card__gmaps-container')
+                .forEach((p) => p.parentNode.removeChild(p))
+              const position = new google.maps.LatLng(this.position.lat(), this.position.lng())
+              popup = new googleMaps.Popup(
+                position,
+                buildInfoWindowMarkup(p))
+              popup.setMap(map)
+              map.setCenter(position)
+            })
+          })
+      })
+
+    googleMaps.addCircleMarker(userLocation, map)
+  }
+
+  model.organisations.subscribe((newValue) => {
+    locationSelector
+      .getPreviouslySetPostcode()
+      .then((result) => {
+        displayMap(newValue, result)
+      })
   })
 }
-
-model.organisations.subscribe((newValue) => {
-  locationSelector
-    .getPreviouslySetPostcode()
-    .then((result) => {
-      displayMap(newValue, result)
-    })
-})

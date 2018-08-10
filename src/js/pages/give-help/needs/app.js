@@ -19,6 +19,14 @@ const redirectForLegacyNeedDetails = () => {
   }
 }
 
+const defaultCallback = (currRange) => {
+  new PostcodeProximity(currRange, (newLocationResult, newRange) => { //eslint-disable-line
+    browser.loading()
+    init(newLocationResult, newRange)
+  })
+  browser.loaded()
+}
+
 const renderNeeds = (needs, userLocation, currRange) => {
   const theData = {
     card: needs,
@@ -28,35 +36,106 @@ const renderNeeds = (needs, userLocation, currRange) => {
     geoLocationUnavailable: userLocation.geoLocationUnavailable
   }
 
-  const defaultCallback = () => {
-    const postcodeProximityComponent = new PostcodeProximity(currRange, (newLocationResult, newRange) => { //eslint-disable-line
-      init(newLocationResult, newRange)
-    })
-    browser.loaded()
-  }
-
   if (needs.length === 0) {
-    templating.renderTemplate('js-no-data-tpl', theData, 'js-card-list-output', defaultCallback)
+    templating.renderTemplate('js-no-data-tpl', theData, 'js-card-list-output', () => defaultCallback(currRange))
   } else {
     templating.renderTemplate('js-card-list-tpl', theData, 'js-card-list-output', () => {
       buildList()
       redirectForLegacyNeedDetails()
       listToSelect.init()
       initAutoComplete(needs)
-      defaultCallback()
+      defaultCallback(currRange)
     })
   }
 }
 
-const init = function (userLocation, range = 10000) {
-  const url = `${apiRoutes.needsHAL}?longitude=${userLocation.longitude}&latitude=${userLocation.latitude}&range=${range}&pageSize=100`
-  getApiData.data(url)
-    .then((result) => {
-      const formatted = formatNeeds(result.data.items, userLocation)
-      renderNeeds(formatted, userLocation, range)
-    }, () => {
-      browser.redirect('/500')
+const renderShowMore = (isMore) => {
+  templating.renderTemplate(
+    'js-show-more-tpl',
+    { isMore: isMore },
+    'js-show-more-btn-output',
+    () => { })
+}
+
+const initClickEvents = (data) => {
+  const clickEvents = [
+    {
+      selector: 'js-show-more-btn',
+      action: () => {
+        getApiData.data(apiRoutes.getFullUrl(data.links.next))
+          .then((result) => {
+            if (result.status === 'notFound') {
+              throw new Error({ msg: 'page not found' })
+            }
+
+            // TODO: if (isError) {
+            //   removeError()
+            // }
+
+            const needs = formatNeeds(result.data.items, data.userLocation)
+            const theData = {
+              card: needs,
+              location: data.userLocation.name,
+              postcode: data.userLocation.postcode,
+              categoryName: 'requests for help',
+              geoLocationUnavailable: data.userLocation.geoLocationUnavailable
+            }
+            const links = result.data.links
+
+            var content = Hogan.compile(document.getElementById('js-cards-tpl').innerHTML)
+              .render(theData)
+            document.querySelector('#js-card-list').innerHTML +=
+              content
+
+            buildList()
+            redirectForLegacyNeedDetails()
+            listToSelect.init()
+            initAutoComplete(needs)
+
+            renderShowMore(links.next !== null)
+
+            const newData = Object.assign(Object.assign({}, data), { links: links })
+            initClickEvents(newData)
+          }).catch(() => {
+            // TODO: appendError()
+          })
+      }
+    }
+  ]
+  clickEvents
+    .forEach((e) => {
+      const elem = document.querySelector(`.${e.selector}`)
+      if (elem) elem.addEventListener('click', e.action)
     })
+}
+
+const init = function (userLocation, range = 10000, pageSize = 21) {
+  if (userLocation) {
+    const headerData = {
+      postcode: userLocation.postcode,
+      range: range
+    }
+    templating.renderTemplate('js-header-tpl', headerData, 'js-header-output', () => { })
+    const url = `${apiRoutes.needsHAL}?longitude=${userLocation.longitude}&latitude=${userLocation.latitude}&range=${range}&pageSize=51`
+    getApiData.data(url)
+      .then((result) => {
+        const formatted = formatNeeds(result.data.items, userLocation)
+        renderNeeds(formatted, userLocation, range)
+        renderShowMore(result.data.links.next !== null)
+        initClickEvents({ links: result.data.links, userLocation: userLocation, currRange: range })
+      }, () => {
+        browser.redirect('/500')
+      })
+  } else {
+    const theData = {
+      card: [],
+      location: 'elsewhere',
+      categoryName: 'requests for help',
+      geoLocationUnavailable: false
+    }
+    templating.renderTemplate('js-header-tpl', {}, 'js-header-output', () => { })
+    templating.renderTemplate('js-no-data-tpl', theData, 'js-card-list-output', () => defaultCallback(10000))
+  }
 }
 
 browser.loading()

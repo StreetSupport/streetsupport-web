@@ -5,8 +5,9 @@ image: https://streetsupport.net/assets/img/og/street-support-manchester.png
 layout: default.hbs
 permalink: false
 jsBundle: swep
-section: findhelp
-page: swep
+section: manchester
+page: manchester-advice
+location: manchester
 ---
 
 <div class="block block--breadcrumbs">
@@ -14,17 +15,13 @@ page: swep
     <ol class="breadcrumbs__list">
       <li class="breadcrumbs__item"><a href="/">Home</a></li>
       <li class="breadcrumbs__item"><a href="/manchester/">Manchester</a></li>
+      <li class="breadcrumbs__item"><a href="/manchester/advice/">Advice</a></li>
       <li class="breadcrumbs__item">Severe Weather Emergency Accommodation</li>
     </ol>
   </div>
 </div>
 
-<div class="block block--city-header city-header city-header--manchester">
-  <div class="container container--city-header">
-    <h1 class="h1 block__header">Severe Weather Emergency Accommodation</h1>
-    <div id="js-swep-output" class="template--maybe-empty"></div>
-  </div>
-</div>
+{{> find-help/advice-header heading="Severe Weather Emergency Accommodation" theLocationId="manchester" }}
 
 <div class="block">
   <div class="container">
@@ -108,7 +105,6 @@ page: swep
   </div>
 </div>
 
-
 <div class="block">
   <div class="container">
     <div class="block__content">
@@ -124,7 +120,3 @@ page: swep
     </div>
   </div>
 </div>
-
-<script id="js-swep-tpl" type="text/template">
-{{> swep-notification }}
-</script>

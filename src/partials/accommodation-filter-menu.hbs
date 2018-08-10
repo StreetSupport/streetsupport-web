@@ -1,0 +1,50 @@
+<aside class="accommodation-listing__filter form form--highlighted form--proximity-search">
+  <h1 class="h2">Filter Results</h1>
+  <button class="btn btn--full btn--brand-e accommodation-listing__filter-toggle" data-bind="click: toggleFilterDisplay">
+    <span class="btn__text">Expand to filter results</span>
+  </button>
+  <div class="accommodation-listing__filter-container" data-bind="css: {open: displayFilter}">
+    <div class="accommodation-listing__filter-facets">
+      <h2 class="h3">Location:</h2>
+      <ul class="accommodation-listing__filter-facet-group">
+        <li>
+          <label class="accommodation-listing__filter-facet-options-title">Near postcode:</label>
+          <input type="text" data-bind="textInput: locationName" class="form__input form__input--inline form__input--short accommodation-listing__postcode-filter" />
+        </li>
+      </ul>
+
+      <h2 class="h3">Accommodation Type:</h2>
+      <ul class="accommodation-listing__filter-facet-group">
+        <li>
+          <label class="accommodation-listing__filter-facet-options-title">Type:</label>
+          <select class="form__input form__input--inline form__input--short accommodation-listing__type-dropdown" data-bind="
+              options: accomTypes,
+              optionsText: 'name',
+              optionsValue: 'key',
+              optionsCaption: '-- select --',
+              value: selectedType">
+          </select>
+        </li>
+      </ul>
+
+      <h2 class="h3">Suitable For:</h2>
+      <ul class="accommodation-listing__filter-facet-group" data-bind="foreach: residentCriteriaFilters">
+        <li>
+          <dl class="accommodation-listing__filter-facet-options">
+            <dt class="accommodation-listing__filter-facet-options-title" data-bind="text: labelText"></dt>
+            <dd class="accommodation-listing__filter-facet-options-radio"><label class="accommodation-listing__filter-facet-options-radio-container"><input type="radio" value="true" data-bind="attr: { name: dataFieldName }, checked: value, checkedValue: true" /> Yes</label></dd>
+            <dd class="accommodation-listing__filter-facet-options-radio"><label class="accommodation-listing__filter-facet-options-radio-container"><input type="radio" value="false" data-bind="attr: { name: dataFieldName }, checked: value, checkedValue: false" /> No</label></dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+    <div class="accommodation-listing__filter-btns">
+      <button class="btn btn--brand-e" data-bind="click: updateListing">
+        <span class="btn__text">Update results</span>
+      </button>
+      <button class="btn btn--brand-f" data-bind="click: resetFilter">
+        <span class="btn__text">Reset</span>
+      </button>
+    </div>
+  </div>
+</aside>

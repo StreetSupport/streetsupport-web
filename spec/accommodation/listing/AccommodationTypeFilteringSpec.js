@@ -73,6 +73,7 @@ describe('Accommodation - Listing - Type Filtering', function () {
 
     describe('- update', () => {
       beforeEach(() => {
+        sut.toggleFilterDisplay()
         sut.updateListing()
       })
 
@@ -85,6 +86,10 @@ describe('Accommodation - Listing - Type Filtering', function () {
 
       it('- should replace old results', () => {
         expect(sut.items().length).toEqual(data.items.length)
+      })
+
+      it('- should hide filter menu', () => {
+        expect(sut.displayFilter()).toBeFalsy()
       })
     })
 

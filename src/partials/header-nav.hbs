@@ -1,12 +1,109 @@
-<li class="nav__item nav__item--about"><a href="/about/">About</a></li>
-<li class="nav__item nav__item--news">
-  <a href="http://news.streetsupport.net/">News</a>
-    <ul class="nav__list nav__list--sub-sub-list">
-        <li class="nav__item nav__item--sub-item"><a href="https://news.streetsupport.net/category/stories/">Stories</a></li>
-        <li class="nav__item nav__item--sub-item"><a href="https://news.streetsupport.net/category/articles/">Articles</a></li>
-        <li class="nav__item nav__item--sub-item"><a href="https://news.streetsupport.net/category/latest-news/">Latest News</a></li>
-    </ul>
-</li>
-<li class="nav__item nav__item--contact"><a href="/contact/">Contact Us</a></li>
-<li class="nav__item nav__item--impact"><a href="/impact/">Impact</a></li>
-<li class="nav__item nav__item--jobs"><a href="/jobs/">Jobs</a></li>
+<ul class="nav__group nav__group--header">
+    <li class="nav__item nav__item--findhelp">
+        <a href="/find-help/" class="nav__item-link nav__item-link--has-sub-nav">Find Help</a>
+        <ul class="nav__list nav__list--sub-list nav__list--columned">
+            <li class="nav__item nav__item--mobile-only nav__item--sub-list-title">
+                <button class="sub-list-back-btn">Back</button>
+                <span class="sub-list-text">Find Help</span>
+            </li>
+            <li class="nav__item nav__item__findhelp nav__item--mobile-only">
+                <a href="/find-help/">Find Help</a>
+            </li>
+            <li class="nav__item nav__item--sub-item nav__item--emergencyhelp">
+                <a href="/find-help/advice/">Advice</a>
+            </li>
+            <li class="nav__item nav__item--sub-item nav__item--allorganisations">
+                <a href="/find-help/all-service-providers/">Organisations</a>
+            </li>
+            {{> nav/service-cats }}
+        </ul>
+    </li>
+    <li class="nav__item nav__item--givehelp">
+        <a href="/give-help/" class="nav__item-link nav__item-link--has-sub-nav">Give Help</a>
+        <ul class="nav__list nav__list--sub-list">
+            <li class="nav__item nav__item--mobile-only nav__item--sub-list-title">
+                <button class="sub-list-back-btn">Back</button>
+                <span class="sub-list-text">Give Help</span>
+            </li>
+            <li class="nav__item nav__item__givehelp nav__item--mobile-only">
+                <a href="/give-help/">Give Help</a>
+            </li>
+            <li class="nav__item nav__item--sub-item nav__item--giveitems">
+                <a href="/give-help/help/">Help</a>
+            </li>
+            <li class="nav__item nav__item--sub-item nav__item--donate">
+                <a href="/give-help/donate/">Donate Money</a>
+            </li>
+            <li class="nav__item nav__item--sub-item nav__item--volunteer">
+                <a href="/give-help/volunteer/">Volunteer</a>
+            </li>
+            <li class="nav__item nav__item--sub-item nav__item--offeritems">
+                <a href="/give-help/offer-items/">Offer Items</a>
+            </li>
+            <li class="nav__item nav__item--sub-item nav__item--partnership">
+                <a href="/give-help/partnership/">Partnership</a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav__item nav__item--locations">
+        <a href="/locations/" class="nav__item-link nav__item-link--has-sub-nav">Locations</a>
+        <ul class="nav__list nav__list--sub-list nav__list--columned">
+            <li class="nav__item nav__item--mobile-only nav__item--sub-list-title">
+                <button class="sub-list-back-btn">Back</button>
+                <span class="sub-list-text">Locations</span>
+            </li>
+            <li class="nav__item nav__item--mobile-only">
+                <a href="/locations/">Locations</a>
+            </li>
+            {{> nav/header-locations }}
+        </ul>
+    </li>
+    <li class="nav__item nav__item--news">
+        <a href="http://news.streetsupport.net/" class="nav__item-link nav__item-link--has-sub-nav">News</a>
+        <ul class="nav__list nav__list--sub-list">
+            <li class="nav__item nav__item--mobile-only nav__item--sub-list-title">
+                <button class="sub-list-back-btn">Back</button>
+                <span class="sub-list-text">News</span>
+            </li>
+            <li class="nav__item nav__item--mobile-only">
+                <a href="http://news.streetsupport.net/">News</a>
+            </li>
+            <li class="nav__item nav__item--sub-item">
+                <a href="https://news.streetsupport.net/category/stories/">Stories</a>
+            </li>
+            <li class="nav__item nav__item--sub-item">
+                <a href="https://news.streetsupport.net/category/articles/">Articles</a>
+            </li>
+            <li class="nav__item nav__item--sub-item">
+                <a href="https://news.streetsupport.net/category/latest-news/">Latest News</a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav__item nav__item--about">
+        <a href="/about/" class="nav__item-link nav__item-link--has-sub-nav">About</a>
+        <ul class="nav__list nav__list--sub-list">
+            <li class="nav__item nav__item--mobile-only nav__item--sub-list-title">
+                <button class="sub-list-back-btn">Back</button>
+                <span class="sub-list-text">About</span>
+            </li>
+            <li class="nav__item nav__item--mobile-only">
+                <a href="/about/">About</a>
+            </li>
+            <li class="nav__item nav__item--sub-item nav__item--team">
+                <a href="/about/our-team">Our Team</a>
+            </li>
+            <li class="nav__item nav__item--sub-item nav__item--trustees">
+                <a href="/about/our-trustees">Our Trustees</a>
+            </li>
+            <li class="nav__item nav__item--sub-item nav__item--jobs">
+                <a href="/about/jobs">Jobs</a>
+            </li>
+            <li class="nav__item nav__item--sub-item nav__item--impact">
+                <a href="/about/impact">Impact</a>
+            </li>
+            <li class="nav__item nav__item--sub-item nav__item--contact">
+                <a href="/about/contact">Contact Us</a>
+            </li>
+        </ul>
+    </li>
+</ul>

@@ -84,17 +84,6 @@ describe('Accommodation - Listing', function () {
     expect(sut.selectedType()).toEqual('')
   })
 
-  it('- should store user location state', () => {
-    const storageToBeCalledAsExpected = storageSetStub
-      .withArgs(storage.keys.userLocationState, {
-        'postcode': 'postcode',
-        'latitude': 123.4,
-        'longitude': 567.8
-      })
-      .calledOnce
-    expect(storageToBeCalledAsExpected).toBeTruthy()
-  })
-
   it('- should map items to collection', () => {
     expect(sut.items().length).toEqual(4)
   })

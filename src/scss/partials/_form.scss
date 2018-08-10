@@ -2,6 +2,10 @@
 
 .form {
   @include cf();
+
+  & + .form {
+    margin-top: 20px;
+  }
 }
 
 .form--partnership,
@@ -25,7 +29,7 @@
   border: 1px solid $brand-k;
   border-radius: 5px;
   box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);
-  padding: 10px;
+  padding: 20px 20px 5px 20px;
 }
 
 .form--text-search {
@@ -37,7 +41,8 @@
 }
 
 .form--proximity-search {
-  padding-top: 15px;
+  background: white;
+  padding: 20px 20px 5px 20px;
   margin: 15px 0 30px 0;
   @include mq($from: m) {
     @include span(2 of 6);
@@ -49,6 +54,18 @@
   border: none;
   margin: 20px 0 0 0;
   padding: 0;
+
+  &--inline-fill {
+    margin: 0;
+    @include mq($from: m) {
+      margin: 0 0 20px 0;
+    }
+    .form__fieldset-inline-fill-container { 
+      @include mq($from: m) {
+        display: flex;
+      }
+    }
+  }
 }
 
 .form__fieldset-title {
@@ -105,7 +122,7 @@
   &--inline {
     float: left;
     margin-right: 10px;
-    padding-top: 9px;
+    padding: 9px;
   }
 
   &--checkbox {
@@ -135,6 +152,15 @@
 
 .form__input--inline {
   display: inline;
+}
+
+.form__input--inline-fill {
+  width: 100%;
+  @include mq($from: m) {
+    flex-grow: 2;
+    width: auto;
+    margin-right: 0.5em;
+  }
 }
 
 .form__input--short {
@@ -183,6 +209,11 @@
   top: 0;
   right: 0;
   @extend .small;
+
+  &--inline {
+    position: relative;
+    display: inline-block;
+  }
 
   .form__label--checkbox + input + & {
     top: 25px;

@@ -36,13 +36,13 @@ export class Address {
   }
 }
 
-export const Accommodation = function (data, listeners) {
+export const Accommodation = function (data, index, listeners) {
   const self = this
 
   let address = new Address(data)
 
-  self.mapIndex = ko.observable(data.mapIndex)
-  self.mapIndexToDisplay = ko.observable(data.mapIndex + 1)
+  self.mapIndex = ko.observable(index)
+  self.mapIndexToDisplay = ko.observable(index + 1)
   self.id = ko.observable(data.id)
   self.name = ko.observable(data.name)
   self.latitude = ko.observable(data.latitude)

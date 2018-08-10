@@ -1,13 +1,16 @@
 .accordion {
   margin: 0 auto 20px;
   max-width: 640px;
+  box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);
+
+  border-radius: 7px;
 
   &__incopy {
     @include cf();
 
     @include mq($from: l) {
       .accordion {
-        @include span(6 of $grid-column);
+        @include span(9 of $grid-column);
       }
     }
   }
@@ -17,17 +20,18 @@
   }
 
   &__header {
-    background-color: $brand-d;
-    color: #fff;
-    margin: 0;
-    padding: 15px 40px 15px 40px;
-    border: 0;
-    border-bottom: 1px solid #fff;
     appearance: none;
-    width: 100%;
+    background-color: $brand-h;
+    border-bottom: 1px solid #fff;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    margin: 0;
     outline: none;
-    text-align: left;
+    padding: 15px 40px 15px 40px;
     position: relative;
+    text-align: left;
+    width: 100%;
 
     &.is-active {
       border-bottom: 0;
@@ -74,7 +78,7 @@
   }
 
   &__item {
-    background-color: $brand-i;
+    background-color: white;
     margin: 0;
     padding: 0;
     max-height: 0;

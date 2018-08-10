@@ -66,7 +66,6 @@ let twitterShareWindow = function () {
     let targetUrl = 'https://www.twitter.com/intent/tweet?url=' + window.location.href.replace('#', '') +
       '&text=' + document.title +
       '&via=streetsupportuk'
-    console.log(targetUrl)
 
     window.open(targetUrl, 'blank', 'width=500,height=300')
   })

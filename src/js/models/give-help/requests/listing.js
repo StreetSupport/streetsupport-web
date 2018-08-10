@@ -1,7 +1,7 @@
 import List from 'list.js'
 const Awesomplete = require('awesomplete')
 
-const activeClass = 'is-active'
+const activeClass = 'block-tabs__tab--selected'
 
 const initList = () => {
    // List.js
@@ -80,8 +80,10 @@ let initFiltering = (theList) => {
 
 const initSorting = (theList) => {
   const sortCriteriaButtons = Array.from(document.querySelectorAll('.js-sort-criteria'))
+  const activeClass = 'card-sort__item--selected'
   sortCriteriaButtons.forEach((b) => {
     b.addEventListener('click', (event) => {
+      event.preventDefault()
       let sortFields = []
       sortFields['organisation'] = 'serviceProviderName'
       sortFields['date'] = 'neededDate'

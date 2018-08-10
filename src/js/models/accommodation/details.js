@@ -1,4 +1,3 @@
-
 // Common modules
 import { Address, Coordinates } from './types'
 
@@ -117,8 +116,8 @@ const AccommodationDetails = function (renderCallback) {
         self.viewModel.showMap = coordinates.areInitialised()
 
         self.viewModel.mapCoordinates = {
-          lat: result.data.address.latitude,
-          lng: result.data.address.longitude
+          latitude: result.data.address.latitude,
+          longitude: result.data.address.longitude
         }
 
         self.renderCallback(self.viewModel)

@@ -1,26 +1,68 @@
 <!doctype html>
 <html class="no-js" lang="en-GB">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>{{title}}</title>
-    <meta name="description" content="{{description}}" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="{{title}}" />
-    <meta property="og:description" content="{{description}}" />
-    <meta property="og:image" content="{{image}}" />
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="{{site.url}}assets/css/site.css?v={{cachebusting.date}}" />
-    <link rel="shortcut icon" href="{{site.url}}favicon.ico" type="image/x-icon" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="{{title}}" />
+  <meta property="og:description" content="{{description}}" />
+  <meta property="og:image" content="{{image}}" />
 
-    {{> head/google-tag-manager }}
-    {{> head/web-fonts }}
-    
-  </head>
-  <body class="page--{{page}} section--{{section}} {{#if nosubnav}}section--nosubnav{{/if}}">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PVPXCXT"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+  <link rel="stylesheet" href="{{site.url}}assets/css/site.css?v={{cachebusting.date}}" />
+  <link rel="shortcut icon" href="{{site.url}}favicon.ico" type="image/x-icon" /> {{> head/google-tag-manager }} {{> head/web-fonts }}
+  <style>
+    .nav__item--hub-nav {
+      display: none
+    }
+
+    .breadcrumbs__list {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+
+    .breadcrumbs__item {
+      margin: 0;
+      padding: 0 6px 0 0;
+      display: inline-block;
+      color: #fff;
+    }
+
+    .breadcrumbs__item a {
+      color: $brand-e;
+      text-decoration: none;
+    }
+
+    .breadcrumbs__item a :last-of-type:after {
+      content: none;
+    }
+
+    .breadcrumbs__item a :after {
+      content: '\3E';
+      margin-left: 10px;
+      color: $brand-e;
+    }
+    @media (min-width: 46.875em) {
+      .nav__group--locations {
+        position: absolute;
+        top: 0px;
+        left: 1rem;
+        margin-top: -75px;
+        width: 100%;
+        z-index: 900;
+      }
+    }
+  </style>
+</head>
+
+<body class="page--{{page}} section--{{section}} location--{{location}}">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PVPXCXT" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->

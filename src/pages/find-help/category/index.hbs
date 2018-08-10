@@ -6,152 +6,128 @@ layout: default.hbs
 permalink: false
 jsBundle: category
 section: findhelp
-page: category
+page:
 ---
 
 {{> no-js}}
 
 <div id="js-category-result-output" class="template"></div>
-
 <div id="spin"></div>
 
 <script id="js-category-no-results-result-tpl" type="text/template">
-  <div class="block block--breadcrumbs">
-    <div class="container">
-      <ol class="breadcrumbs__list">
-        <li class="breadcrumbs__item"><a href="/">Home</a></li>
-        <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
-        <li class="breadcrumbs__item">\{{{categoryName}}}</li>
-      </ol>
-    </div>
-  </div>
+{{> find-help/breadcrumb }}
 
-  <div class="block block--subpage-header">
-    <div class="container">
-      <h2 class="h1 block__header">\{{{categoryName}}}</h2>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="container">
-      <div class="block__content">
-        <div class="text-center">\{{{categorySynopsis}}}</div>
-        {{> location-description-with-postcode }}
-        {{> no-services }}
-      </div>
-    </div>
-  </div>
-</script>
-
-<script id="js-category-result-tpl" type="text/template">
-  <div class="block block--breadcrumbs">
-    <div class="container">
-      <ol class="breadcrumbs__list">
-        <li class="breadcrumbs__item"><a href="/">Home</a></li>
-        <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
-        <li class="breadcrumbs__item">\{{{categoryName}}}</li>
-      </ol>
-    </div>
-  </div>
-
-  <div class="block block--subpage-header">
-    <div class="container">
-      <h2 class="h1  block__header block__header--find-help has-icon--left">
-        <svg class="block__header__icon--find-help svg-\{{categoryId}}-dims">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#\{{categoryId}}"></use>
-        </svg>
-        \{{{categoryName}}}
-      </h1>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="container">
-      <div class="block__content">
-        <div class="text-center">\{{{categorySynopsis}}}</div>
-        {{> location-description-with-postcode }}
-
-        {{> category-view-selector provider="true" }}
-
-        \{{#shouldShowFilter}}
-        <div class="subcat-filter">
-          <p class="subcat-filter__label">Filter by service provided:</p>
-          <ul class="list-to-dropdown subcat-filter__items">
-            <li class="subcat-filter__item js-filter-item on" data-id="">All</li>
-            \{{#subCategories}}
-            <li class="subcat-filter__item js-filter-item" data-id="\{{id}}">\{{name}}</li>
-            \{{/subCategories}}
-          </ul>
-        </div>
-        \{{/shouldShowFilter}}
-
-        <div class="result-detail">
-          \{{#organisations}}
-          <div class="accordion js-accordion">
-            <h3 id="\{{{providerId}}}" class="h3 accordion__header js-header" data-subcats="\{{#subCategories}} \{{id}} \{{/subCategories}}">
-              \{{{providerName}}}
-            </h3>
-            <div class="accordion__item js-item" id="\{{providerId}}" data-subcats="\{{#subCategories}} \{{id}} \{{/subCategories}}">
-              <div class="accordion__inner">
-                \{{#services}}
-                <div class="result-detail__item">
-                  <div class="result-detail__content">
-                    \{{#info}}<p class="result-detail__description">\{{{info}}}</p>\{{/info}}
-                    <p>Services available: <span class="result-detail__tags-item">\{{servicesAvailable}}</span></p>
-                    \{{#tags}}<h2 class="h2 result-detail__sub-header">Additional Info</h2>
-                    <p>Suitable for: <span class="result-detail__tags-item">\{{tags}}</span></p>\{{/tags}}
-                  </div>
-                  <div class="result-detail__opening-times">
-                    \{{#isOpen247}}
-                    <h2 class="h2">Open 24 hours a day, 7 days a week</h2>
-                    \{{/isOpen247}}
-                    \{{^isOpen247}}
-                    <h2 class="h2">Opening Times</h2>
-                    <dl class="result-detail__times-list">
-                      \{{#days}}
-                      <dt class="result-detail__times-title">\{{day}}</dt>
-                      \{{#openingTimes}}
-                      <dd class="result-detail__times-item result-detail__times-item--provider-listing">\{{ . }}</dd>
-                      \{{/openingTimes}}
-                      \{{/days}}
-                    </dl>
-                    \{{/isOpen247}}
-                  </div>
-                  <div class="result-detail__location">
-                  \{{#location}}
-                  \{{#streetLine1}}
-                    <h2 class="h2 result-detail__sub-header">Location</h2>
-                    \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
-                    <ul class="result-detail__address-list">
-                      <li class="result-detail__address-item">\{{#streetLine1}} \{{{streetLine1}}}, \{{/streetLine1}} \{{#streetLine2}} \{{{streetLine2}}, \{{/streetLine2}} \{{#streetLine3}} \{{{streetLine3}}, \{{/streetLine3}}
-                        \{{#streetLine4}} \{{{streetLine4}}, \{{/streetLine4}}</li>
-                      <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
-                      <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">View on Map</a></li>
-                    </ul>
-                  \{{/streetLine1}}
-                  \{{/location}}
-                  \{{#telephone}}
-                    <h2 class="h2 result-detail__sub-header">Telephone</h2>
-                    \{{telephone}}
-                  \{{/telephone}}
-                  </div>
-                </div>
-                \{{/services}}
-                <a class="btn btn--brand-d result-detail__btn" href="/find-help/organisation/?organisation=\{{providerId}}">
-                  <span class="btn__text">More information about \{{{providerName}}}</span>
-                </a>
-              </div>
-            </div>
-          </div>
-          \{{/organisations}}
-        </div>
-
-      <p class="text-center">Please note, the information here is provided and maintained by the organisations. If you see anything that is incorrect or incomplete, please <a href="/contact/">get in touch</a>.</p>
-
-      {{> social-share}}
-
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      {{> find-help/header }}
+      {{> proximity-search/hogan }}
     </div>
   </div>
 </div>
+
+{{> find-help/view-type-tabs listingIsSelected="true" }}
+
+<div class="block block--cards">
+  <div class="container">
+    <div class="block__content">
+      {{> no-services }}
+      {{> social-share }}
+    </div>
+  </div>
+</div>
+</script>
+
+<script id="js-category-result-tpl" type="text/template">
+{{> find-help/breadcrumb }}
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      {{> find-help/header }}
+      {{> proximity-search/hogan }}
+    </div>
+  </div>
+</div>
+
+{{> find-help/view-type-tabs listingIsSelected="true" }}
+
+<div class="block block--cards">
+  <div class="container">
+    <div class="block__content">
+      \{{#shouldShowFilter}}
+      <div class="subcat-filter form--highlighted">
+        <p class="subcat-filter__label">Filter by service provided:</p>
+        <ul class="list-to-dropdown subcat-filter__items">
+          <li class="subcat-filter__item js-filter-item on" data-id="">All</li>
+          \{{#subCategories}}
+          <li class="subcat-filter__item js-filter-item" data-id="\{{id}}">\{{name}}</li>
+          \{{/subCategories}}
+        </ul>
+      </div>
+      \{{/shouldShowFilter}}
+
+      <div class="cards__list cards__list--single-col">
+        \{{#organisations}}
+        <div class="card card--brand-h card--big js-header" data-subcats="\{{#subCategories}} \{{id}} \{{/subCategories}}">
+          <div class="card__title">
+            <a data-bind="attr: { href: href } ">
+              <h1 class="h2">\{{{providerName}}}</h1>
+            </a>
+          </div>
+          <div class="card__details">
+            \{{#services}}
+            <div class="card__details-entry js-item" data-subcats="\{{subCategoryIds}}">
+              \{{#info}}\{{{info}}}\{{/info}}
+              <dl class="card__details-dictionary">
+                <dt class="card__details-dictionary-title">Services available:</dt>
+                <dd class="card__details-dictionary-desc">\{{servicesAvailable}}</dd>
+                \{{#tags}}
+                  <dt class="card__details-dictionary-title">Suitable for:</dt>
+                  <dd class="card__details-dictionary-desc">\{{tags}}</dd>
+                \{{/tags}}
+                
+                \{{#location}}
+                <dt class="card__details-dictionary-title">Address:</dt>
+                <dd class="card__details-dictionary-desc">
+                    \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
+                    \{{#streetLine1}} \{{{streetLine1}}}, \{{/streetLine1}} 
+                    \{{#streetLine2}} \{{{streetLine2}}, \{{/streetLine2}} 
+                    \{{#streetLine3}} \{{{streetLine3}}, \{{/streetLine3}}
+                    \{{#streetLine4}} \{{{streetLine4}}, \{{/streetLine4}}
+                    \{{#city}} \{{city}}. \{{/city}}
+                    \{{#postcode}} \{{postcode}}  - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">View on Map</a>\{{/postcode}}
+                </dd>
+                \{{/location}}
+                <dt class="card__details-dictionary-title">Opening times:</dt>
+                <dd class="card__details-dictionary-desc">
+                  \{{#isOpen247}}
+                  Open 24 hours a day, 7 days a week
+                  \{{/isOpen247}}
+                  \{{^isOpen247}}
+                  <dl class="result-detail__times-list">
+                    \{{#days}}
+                    <dt class="result-detail__times-title">\{{day}}</dt>
+                    \{{#openingTimes}}
+                    <dd class="result-detail__times-item">\{{ . }}</dd>
+                    \{{/openingTimes}}
+                    \{{/days}}
+                  </dl>
+                  \{{/isOpen247}}
+                </dd>
+                \{{#telephone}}
+                <dt class="card__details-dictionary-title">Telephone:</dt>
+                <dd class="card__details-dictionary-desc">\{{telephone}}</dd>
+                \{{/telephone}}
+              </dl>
+            </div>
+            \{{/services}}
+            <a class="card__details__link" href="/find-help/organisation/?organisation=\{{providerId}}">More Information</a>
+          </div>
+        </div>
+        \{{/organisations}}
+      </div>
+    </div>
+  </div>
 </div>
 </script>

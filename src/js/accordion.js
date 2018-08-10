@@ -35,7 +35,11 @@ var init = function (showFirst, indexToOpen, listener, showAll, selectors = defa
   // Add click listener to headers
   for (i = 0; i < headers.length; i++) {
     headers[i].addEventListener('click', function (e) {
-      open(this, el)
+      const isActive = Array.from(e.target.classList).includes(activeClass)
+      const action = isActive
+        ? close
+        : open
+      action(this, el)
     })
     if (showAll) {
       headers[i].nextElementSibling.classList.add(activeClass)

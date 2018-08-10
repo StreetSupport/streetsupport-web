@@ -24,13 +24,10 @@ page: findhelp
     </div>
   </div>
 
-  <div class="block block--city-header city-header">
-    <div class="container container--city-header">
-      <h1 class="h1 block__header">Find Help <span class="js-city-label"></span></h1>
-      <h2 class="h2 block__sub-header">Find local services to meet specific needs</h2>
-      \{{#location}}
-      {{> swep-notification }}
-      \{{/location}}
+  <div class="block block--header">
+    <div class="container">
+      <h1 class="h1 block__header">Find Help</h1>
+      <h2 class="h2 block__sub-header">Find local services to help you get what you need</h2>
     </div>
   </div>
 
@@ -39,15 +36,15 @@ page: findhelp
       <div class="block__content">
         <div class="title-with-button">
           <h2 class="h2 title-with-button__title">Recently homeless?</h2>
-          <a class="btn btn--brand-g title-with-button__btn" href="\{{ emergencyHelpUrl }}">
-            <span class="btn__text">Get Emergency Advice</span>
+          <a class="btn btn--brand-g title-with-button__btn" href="/find-help/advice">
+            <span class="btn__text">Get Advice</span>
           </a>
         </div>
 
         <div class="block__cta--grid result-grid">
           \{{#categories}}
             <span class="cta">
-              <a class="btn btn--brand-d" id="\{{key}}" href="\{{page}}?location=my-location">
+              <a class="btn btn--brand-d" id="\{{key}}" href="\{{page}}">
                 <span class="btn__icon">
                   <svg class="svg-\{{key}}-dims"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#\{{key}}"></use></svg>
                   <span class="btn__overlay"></span>
@@ -65,7 +62,7 @@ page: findhelp
           </a>
         </div>
 
-        <p class="text-center">If there are other local services that you know about, or you would like to help us bring Street Support to your area, please <a href="/contact/">get in touch</a>.</p>
+        <p class="text-center">If there are other local services that you know about, or you would like to help us bring Street Support to your area, please <a href="/about/contact/">get in touch</a>.</p>
 
         {{> social-share}}
 

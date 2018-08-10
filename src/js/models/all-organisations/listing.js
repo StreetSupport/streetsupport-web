@@ -5,25 +5,20 @@ const ajax = require('../../get-api-data')
 const browser = require('../../browser')
 const endpoints = require('../../api')
 const location = require('../../location/locationSelector')
+const proximityRanges = require('../../location/proximityRanges')
 const getDistanceApart = require('../../location/getDistanceApart')
 
-function OrgListing () {
+function OrgListing (orgsFilter = null, pageSize = 8) {
   const self = this
 
-  self.pageSize = 8
+  self.orgsFilter = orgsFilter
+  self.pageSize = pageSize
   self.pageIndex = ko.observable(self.pageSize)
 
   self.postcode = ko.observable()
   self.range = ko.observable(10000)
-  self.ranges = ko.observableArray([
-    { name: '1k', key: 1000 },
-    { name: '2k', key: 2000 },
-    { name: '5k', key: 5000 },
-    { name: '10k', key: 10000 },
-    { name: '20k', key: 20000 }
-  ])
+  self.ranges = ko.observableArray(proximityRanges.ranges)
   self.searchQuery = ko.observable()
-  self.distanceDescription = ko.observable()
   self.organisations = ko.observableArray()
   self.orgsToDisplay = ko.observableArray()
 
@@ -38,7 +33,7 @@ function OrgListing () {
   self.isSortedNearest = ko.computed(() => self.currentSort() === 'nearest', self)
 
   const paginate = function () {
-    self.orgsToDisplay(self.organisations.slice(0, self.pageIndex()))
+    self.orgsToDisplay(self.organisations().slice(0, self.pageIndex()))
   }
 
   self.prevPage = function () {
@@ -119,7 +114,12 @@ function OrgListing () {
           acc.push({
             key: next.serviceProviderKey,
             name: htmlDecode(next.serviceProviderName),
+            synopsis: htmlDecode(next.serviceProviderSynopsis),
             href: `/find-help/organisation?organisation=${next.serviceProviderKey}`,
+            donationUrl: next.donationUrl,
+            donationDescription: next.donationDescription,
+            itemDonationDescription: next.itemDonationDescription,
+            needCategories: next.needCategories,
             locations: [
               next
             ]
@@ -140,7 +140,9 @@ function OrgListing () {
           o.distanceInMetres = nearestOrgLocation.distanceInMetres
           o.distanceDescription = nearestOrgLocation.distanceDescription
         })
-        self.organisations(orgs)
+        self.organisations(self.orgsFilter
+          ? orgs.filter(self.orgsFilter)
+          : orgs)
         self.sortNearest()
         paginate()
         browser.loaded()

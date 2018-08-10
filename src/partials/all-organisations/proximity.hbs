@@ -1,0 +1,29 @@
+<form class="form form--highlighted form--proximity-search">
+  <p>To find organisations in your area, enter your postcode below.</p>
+  <fieldset class="form__fieldset">
+    <legend>Showing organisations within:</legend>
+    <ol class="form__field-list">
+      <li class="form__field-item form__field-item--proximity-search-range">
+        <label class="form__label hide-screen" for="range">Range</label>
+        <select class="form__input" data-bind="
+            options: ranges,
+            optionsText: 'name',
+            optionsValue: 'key',
+            optionsCaption: '-- select --',
+            value: range">
+        </select>
+      </li>
+      <li class="form__field-item form__field-item--proximity-search-of"><span>of</span></li>
+      <li class="form__field-item form__field-item--proximity-search-postcode">
+        <label class="form__label hide-screen" for="postcode">Your postcode</label>
+        <input class="form__input" id="postcode" type="text" data-bind="textInput: postcode" placeholder="eg. M1 2HX"></input>
+      </li>
+    </ol>
+    <!-- ko ifnot: postcode -->
+    <p class="form__error form__error--inline">Please enter a postcode.</p>
+    <!-- /ko -->
+    <button class="btn btn--cosy btn--always-full btn--brand-e" type="submit" data-bind="click: getByPostcode">
+      <span class="btn__text">Find help</span>
+    </button>
+  </fieldset>
+</form>

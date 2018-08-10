@@ -1,26 +1,40 @@
-const gMaps = require('./googleMaps')
+/* global google */
+
+const gMaps = require('../../location/googleMaps')
+
+let popup = null
 
 const MapBuilder = function () {
   const self = this
 
-  const updateMarkers = (items) => {
+  self.updateMarkers = (items) => {
     items
-      .forEach((p) => {
-        const infoWindow = gMaps.buildInfoWindow(p, self.buildInfoWindowMarkup(p))
+      .forEach((p, i) => {
+        const infoWindow = gMaps.buildInfoWindow(self.buildInfoWindowMarkup(p))
 
         self.infoWindows.push(infoWindow)
 
-        const marker = gMaps.buildMarker(p, self.map)
+        const marker = gMaps.buildMarker(self.getLocation(p), self.map)
 
         marker.customFields = {
-          mapIndex: p.mapIndex
+          mapIndex: i
         }
 
         marker.addListener('click', function () {
-          self.infoWindows
-            .forEach((w) => w.close())
-          infoWindow.open(self.map, marker)
-          self.container.markerClicked(this.customFields.mapIndex)
+          // self.infoWindows
+          //   .forEach((w) => w.close())
+          // infoWindow.open(self.map, marker)
+          document.querySelectorAll('.card__gmaps-container')
+            .forEach((p) => p.parentNode.removeChild(p))
+          const position = new google.maps.LatLng(this.position.lat(), this.position.lng())
+          popup = new gMaps.Popup(
+            position,
+            self.buildInfoWindowMarkup(p))
+          popup.setMap(self.map)
+          self.map.setCenter(position)
+          if (self.container) {
+            self.container.markerClicked(this.customFields.mapIndex)
+          }
         })
 
         self.markers.push(marker)
@@ -51,14 +65,17 @@ const MapBuilder = function () {
 
     self.markers = []
 
-    updateMarkers(items)
+    self.updateMarkers(items)
   }
 
-  self.init = function (items, userLocation, container, buildInfoWindowMarkup) {
+  self.init = function (items, userLocation, container, buildInfoWindowMarkup, getLocation = (p) => {
+    return { latitude: p.latitude(), longitude: p.longitude() }
+  }) {
     self.map = gMaps.buildMap(userLocation)
 
     self.container = container
     self.buildInfoWindowMarkup = buildInfoWindowMarkup
+    self.getLocation = getLocation
 
     self.markers
       .forEach((m) => m.setMap(null))
@@ -66,7 +83,7 @@ const MapBuilder = function () {
     self.infoWindows = []
     self.markers = []
 
-    updateMarkers(items)
+    self.updateMarkers(items)
   }
 }
 

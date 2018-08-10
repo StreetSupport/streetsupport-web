@@ -4,7 +4,7 @@ description: Street support makes it easier to help homeless people in Mancheste
 image: https://streetsupport.net/assets/img/og/street-support.png
 layout: default.hbs
 permalink: false
-jsBundle: giveHelp
+jsBundle: generic
 section: givehelp
 page: givehelp
 ---
@@ -18,8 +18,8 @@ page: givehelp
   </div>
 </div>
 
-<div class="block block--city-header city-header">
-  <div class="container container--city-header">
+<div class="block block--header">
+  <div class="container">
     <h1 class="h1 block__header">Give Help <span class="js-city-label"></span></h1>
     <h2 class="h2 block__sub-header">Find out what you can do to help</h2>
   </div>
@@ -35,7 +35,7 @@ page: givehelp
         <div class="give-help__text">
           <h1 class="h1">Help</h1>
           <p>Local charities and voluntary groups supporting people who are homeless need your support. You can see the items, skills and money that is currently needed accross the city.</p>
-          <p class="give-help__contribute">You can also <a class="give-help__contribute-link" href="/give-help/volunteer/">register as a volunteer</a>, or <a class="give-help__contribute-link" href="/give-help/offer-items">offer items</a>, so that organisations can contact you for help.</p>
+          <p>You can also <a href="/give-help/volunteer/">register as a volunteer</a>, or <a href="/give-help/offer-items">offer items</a>, so that organisations can contact you for help.</p>
         </div>
         {{>cta brand="e" link="help/" icon="give" name="See what help is needed" label=""}}
       </section>
@@ -47,7 +47,6 @@ page: givehelp
         </div>
         {{>cta brand="e" link="donate/" icon="donate" name="Make a donation" label=""}}
       </section>
-      <div id="js-charter-output" class="template--maybe-empty"></div>
     </div>
   </div>
 </div>
@@ -63,16 +62,3 @@ page: givehelp
     </div>
   </div>
 </div>
-
-
-<script id="js-charter-tpl" type="text/template">
-\{{#ismanchester}}
-<section class="block__section give-help__section give-help__section--charter-info">
-  <div class="give-help__section__inner give-help__section__inner--charter-info">
-    <h1 class="give-help__title--charter-info">By the way&hellip;</h1>
-    <p>Check out the <a href="https://charter.streetsupport.net">Manchester Homelessness Charter</a>, to pledge action to end homelessness in Manchester, and to find out more about our action groups.</p>
-    <a href="https://charter.streetsupport.net" class="btn btn--brand-e give-help____button--charter-info"><span class="btn__text">Read more about the Charter</span></a>
-  </div>
-</section>
-\{{/ismanchester}}
-</script>

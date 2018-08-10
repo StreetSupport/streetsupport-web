@@ -4,11 +4,13 @@ const location = require('./location/locationSelector')
 
 // Page modules
 var ko = require('knockout')
-var Form = require('./models/OfferItemsModel')
-var OfferItemsMap = require('./models/OfferItemsMap')
+var Form = require('./models/give-help/offer-items/OfferItemsModel')
+var OfferItemsMap = require('./models/give-help/offer-items/OfferItemsMap')
+
+window.initMap = () => { }
 
 location
-  .getCurrent()
+  .getPreviouslySetPostcode()
   .then((currentLocation) => {
     const vm = {
       form: new Form(currentLocation.id),

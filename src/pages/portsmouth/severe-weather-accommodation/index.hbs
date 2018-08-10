@@ -1,12 +1,13 @@
 ---
 title: Severe Weather Emergency Accommodation in Portsmouth - Street Support
 description: Severe Weather Emergency Accommodation provision in Portsmouth.
-image: https://streetsupport.net/assets/img/og/street-support.png
+image:  https://streetsupport.net/assets/img/og/street-support-portsmouth.png
 layout: default.hbs
 permalink: false
 jsBundle: swep
-section: findhelp
-page: swep
+section: portsmouth
+page: portsmouth-advice
+location: portsmouth
 ---
 
 <div class="block block--breadcrumbs">
@@ -14,17 +15,13 @@ page: swep
     <ol class="breadcrumbs__list">
       <li class="breadcrumbs__item"><a href="/">Home</a></li>
       <li class="breadcrumbs__item"><a href="/portsmouth/">Portsmouth</a></li>
+      <li class="breadcrumbs__item"><a href="/portsmouth/advice/">Advice</a></li>
       <li class="breadcrumbs__item">Severe Weather Emergency Accommodation</li>
     </ol>
   </div>
 </div>
 
-<div class="block block--city-header city-header city-header--portsmouth">
-  <div class="container container--city-header">
-    <h1 class="h1 block__header">Severe Weather Emergency Accommodation</h1>
-    <div id="js-swep-output" class="template--maybe-empty"></div>
-  </div>
-</div>
+{{> find-help/advice-header heading="Severe Weather Emergency Accommodation" theLocationId="portsmouth" }}
 
 <div class="block">
   <div class="container">
@@ -43,7 +40,3 @@ page: swep
     
   </div>
 </div>
-
-<script id="js-swep-tpl" type="text/template">
-{{> swep-notification }}
-</script>

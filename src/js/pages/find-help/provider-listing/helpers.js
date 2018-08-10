@@ -4,20 +4,16 @@ const querystring = require('../../../get-url-parameter')
 
 const htmlEncode = require('htmlencode')
 const marked = require('marked')
-marked.setOptions({sanitize: true})
+marked.setOptions({ sanitize: true })
 
 export const buildFindHelpUrl = (locationResult, range = querystring.parameter('range')) => {
   const re = new RegExp(/find-help\/(.*)\//)
   const category = browser.location().pathname.match(re)[1]
-  const location = querystring.parameter('location')
-
-  let url = apiRoutes.cities + locationResult.findHelpId + '/services/' + category
-  if (location === 'my-location') {
-    url = apiRoutes.servicesByCategory + category + '/' + locationResult.latitude + '/' + locationResult.longitude
-  }
-  url += '?range=' + range
-
-  return url
+  return apiRoutes.servicesByCategory +
+    category + '/' +
+    locationResult.latitude + '/' +
+    locationResult.longitude +
+    '?range=' + range
 }
 
 export const getSubCategories = (providers) => {
@@ -25,8 +21,8 @@ export const getSubCategories = (providers) => {
   const toUnique = (acc, subcat) => {
     const match = acc.find((sc) => sc.id === subcat.id)
     const result = match === undefined
-    ? [...acc, subcat]
-    : acc
+      ? [...acc, subcat]
+      : acc
     return result
   }
 
@@ -68,6 +64,9 @@ export const getProvidersForListing = (providers) => {
       telephone: provider.telephone,
       days: groupOpeningTimes(provider.openingTimes),
       isOpen247: provider.isOpen247,
+      subCategoryIds: provider.subCategories
+        .map((sc) => sc.id)
+        .join(' '),
       servicesAvailable: provider.subCategories
         .map((sc) => sc.name)
         .join(', ')

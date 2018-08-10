@@ -3,6 +3,18 @@
 $radius: 7px;
 $spacing: 20px;
 
+.cards__list {
+  @include cf();
+  margin-bottom: 10px;
+
+  &--single-col {
+    @include mq($from: m) {
+      @include span(7 of 12);
+      @include first();
+    }
+  }
+}
+
 .card {
   border-radius: $radius;
   margin-bottom: $spacing;
@@ -11,10 +23,35 @@ $spacing: 20px;
 
 .card__details {
   padding: $spacing;
+  position: relative;
+
+  p:last-of-type {
+    padding-bottom: 16px;
+  }
+
+  &--fat-bottom {
+    height: 250px;
+  }
+}
+
+.card__details-entry {
+  border-bottom: 1px solid $brand-r;
+  margin-bottom: 20px;
+
+  &:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0px;
+  }
 }
 
 .card__title {
   margin-top: 0;
+  text-align: left;
+
+  a { 
+    text-decoration: none;
+    color: white!important;
+  }
 }
 
 .card--donate {
@@ -55,23 +92,67 @@ $spacing: 20px;
   }
 }
 
-.card--brand-h {
-  box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);
+.card__details-dictionary {
+  @include cf();
+  margin: 20px 0 0 0;
+}
 
+.card__details-dictionary-title {
+  font-family: $font-headline;
+  font-weight: $font-headline-weight;
+
+  @include mq($from: m) {
+    float: left;
+    clear: left;
+    margin-right: 1em;
+    width: 150px
+  }
+}
+
+.card__details-dictionary-desc {
+  display: block;
+  margin-bottom: 10px;
+  margin-left: 0;
+  padding-left: 0;
+  @include mq($from: m) {
+    margin-bottom: 0;
+    margin-left: 166px;
+    &::after {
+      content: ' ';
+      height: 1em;
+      display: inline-table;
+    }
+  }
+}
+
+.card--grid-1-of-3 {
+  @include mq($from: m) {
+    @include span(1 of 3);
+    &:nth-of-type(3n) { @include last() }
+  }
+}
+
+.card--grid-1-of-4 {
   @include mq($from: m) {
     @include span(1 of 4);
     &:nth-of-type(4n) { @include last() }
   }
+}
+
+.card--brand-h {
+  box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);
 
   .card__title {
     border-top-right-radius: $radius;
     border-top-left-radius: $radius;
     background: $brand-h;
-    height: 140px;
+    height: 220px;
     padding: 15px 10px;
+    text-align: left;
     * {
       color: white;
     }
+    *:last-child { padding-bottom: 10px }
   }
   .card__details {
     background: white;
@@ -87,4 +168,58 @@ $spacing: 20px;
   .card__details__link {
     text-decoration: underline;
   }
+}
+
+.card--big {
+  width: 100%;
+  .card__title {
+    height: auto;
+  }
+}
+
+.card--gmaps {
+  position: absolute;
+  bottom: 0px;
+  margin-bottom: 0px;
+  left: -110px;
+  width: 100%;
+
+  @include mq($from: m) {
+    left: -150px;
+  }
+
+  .card__title {
+    height: auto;
+    * {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+
+.card__gmaps-container {
+  width: 220px;
+  height: 0;
+  position: absolute;
+  margin-top: -33px;
+
+  @include mq($from: m) {
+    width: 300px;
+  }
+}
+
+.card__gmaps-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Center the tip horizontally. */
+  transform: translate(-50%, 0);
+  /* The tip is a https://css-tricks.com/snippets/css/css-triangle/ */
+  width: 0;
+  height: 0;
+  /* The tip is 8px high, and 12px wide. */
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: /* TIP_HEIGHT= */ 16px solid white;
 }

@@ -19,11 +19,6 @@ page: allorganisations
   </div>
 </div>
 
-  <div class="block block--subpage-header">
-    <div class="container">
-  </div>
-</div>
-
 {{> no-js}}
 
 {{> all-organisations/header-form showSearch="true" }}
@@ -34,27 +29,24 @@ page: allorganisations
     <div class="block__content">
       <!-- ko if: hasOrgs -->
       <!-- ko ifnot: postcodeRetrievalIssue -->
-      <div class="card-sort">
-        <span class="card-sort__title">Sort by:</span>
-        <a class="card-sort__item" href="#a-z" data-bind="click: sortAToZ, css: { 'card-sort__item--selected': isSortedAToZ() }">A-Z</a> 
-        <a class="card-sort__item" href="#nearest" data-bind="click: sortNearest, css: { 'card-sort__item--selected': isSortedNearest() }">Nearest</a>
-      </div>
+      {{> all-organisations/sort }}
       <div data-bind="foreach: orgsToDisplay">
-        <a data-bind="attr: { href: href } ">
-          <article class="card card--brand-h">
+          <article class="card card--brand-h card--grid-1-of-3">
             <div class="card__title">
-              <h1 class="h2" data-bind="text: name"></h1>
+              <a data-bind="attr: { href: href } ">
+                <h1 class="h2" data-bind="text: name"></h1>
+              </a>
+              <p data-bind="html: synopsis"></p>
             </div>
             <div class="card__details">
               <p class="card__details__description" data-bind="text: distanceDescription"></p>
               <a class="card__details__link" data-bind="attr: { href: href } ">More Information</a>
             </div>
           </article>
-        </a>
       </div>
       <div class="card-pagination">
       <!-- ko if: hasMorePages -->
-      <button class="btn btn--brand-e" data-bind="click: loadMore">
+      <button class="btn btn--brand-e btn--full btn--centred" data-bind="click: loadMore">
         <span class="btn__text">Load more</span>
       </button>
       <!-- /ko -->
@@ -62,7 +54,10 @@ page: allorganisations
       <!-- /ko -->
       <!-- /ko -->
       <!-- ko ifnot: hasOrgs -->
+      <!-- ko if: postcode -->
       <p>Sorry, there are no organisations listed near your postcode, please try again.</p>
+      <!-- /ko -->
+      <p>If you know of local organisations that could be included, please use our <a href="/register">registration form</a>.</p>
       <!-- /ko -->
       <!-- ko if: postcodeRetrievalIssue -->
       <p>Sorry, there was a problem with your postcode, please try an alternative postcode nearby.</p>

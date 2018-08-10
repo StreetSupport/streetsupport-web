@@ -10,7 +10,7 @@
 
   // Components
   &__header {
-    text-align: center;
+    text-align: left;
     margin: 0;
 
     &--story {
@@ -19,7 +19,7 @@
   }
 
   &__sub-header {
-    text-align: center;
+    text-align: left;
     margin: 0;
     color: $brand-d;
   }
@@ -42,10 +42,8 @@
     }
 
     a {
-      color: $brand-c;
-      font-family: $font-headline;
-      font-weight: $font-headline-weight;
-      text-decoration: none;
+      color: $brand-r;
+      text-decoration: underline;
     }
 
     .h1,
@@ -116,18 +114,6 @@
         }
       }
     }
-
-    &--city-header {
-      @include mq($from: m) {
-        .cta {
-          @include span(1 of 2);
-        }
-
-        .cta:last-of-type {
-          @include last();
-        }
-      }
-    }
   }
 
   &__primary {
@@ -141,12 +127,32 @@
   }
 
   // Variants
+  &--news {
+    padding: 30px 10px;
+  }
+
+  &--big-change-mcr {
+    background: $big-change-a;
+    padding: 0!important;
+  }
+
+  &--standards-toolkit {
+    background: rgba(10, 133, 100, 0.15);
+    display: flex;
+    align-items: stretch;
+    padding: 0!important;
+    @include mq($from: m) {
+      .block__standards-toolkit-pad {
+        width: 50%;
+        background: url('/assets/img/toolkit-pad.png') right -40px no-repeat;
+      }
+    }
+  }
+
   &--breadcrumbs {
     padding-top: 6px !important;
     padding-bottom: 6px !important;
     background-color: rgba(black, 0.5);
-    position: absolute;
-    z-index: $zIndex-breadcrumb;
     width: 100%;
 
     @media print {
@@ -154,11 +160,7 @@
     }
 
     @include mq($from: m) {
-      top: $header-top + $header-height + $header-height;
-
-      .section--nosubnav & {
-        top: $header-top + $header-height;
-      }
+      margin-top: -5px;
     }
   }
 
@@ -195,32 +197,87 @@
   &--cards {
     background: $brand-q;
     border-top: 1px solid $brand-k;
+    @include cf();
+  }
+
+  &--swep-availability-notification {
+    background: $brand-g;
+    padding: 20px 0px!important;
+    color: white;
+    a {
+       color: $brand-e;
+    }
   }
 }
+
+.block--header,
+.block--home-header,
+.block--location-header {
+  background-image: url('../img/header-background.png');
+  background-repeat: repeat-x;
+  background-position: bottom;
+  padding-top: 60px;
+  padding-bottom: 100px;
+
+  .block__header,
+  .block__sub-header {
+    color: $brand-m;
+  }
+}
+.location-header--southampton {
+  background-image: url('../img/header-background.png'), url('../img/locations/sea-tile.png');
+
+}
+
+.block--location-header,
+.block--home-header {
+  .block__header,
+  .block__sub-header {
+    margin-bottom: 30px;
+    text-align: left!important;
+  }
+
+  .ctas {
+    .btn { 
+      @include span(1 of 2);
+      &:last-of-type {
+        @include last();
+      }
+     }
+    @include mq($from: l) {
+      .btn__text {
+        padding: 15px;
+      }
+    }
+  }
+}
+
 
 .block--header {
-  background-image: url('../img/header-background.png');
-  background-repeat: repeat;
-  color: #fff;
-  padding-top: 160px;
-  padding-bottom: 50px;
-
-  @include mq($from: m) {
-    padding-top: 280px;
-    padding-bottom: 80px;
-  }
+  padding: 80px 0!important;
 }
 
-.block--city-header {
-  background-image: url('../img/header-background.png');
-  background-repeat: repeat;
-  color: #fff;
-  padding-top: 100px;
-  padding-bottom: 50px;
-
+.block--home-header {
   @include mq($from: m) {
-    padding-top: 280px;
-    padding-bottom: 80px;
+    padding-bottom: 30px;
+
+    .container { 
+      & > * {
+        @include span(2 of 3); 
+        @include first();
+      }
+    }
+  }
+}
+.block--location-header {
+  @include mq($from: m) {
+
+    .container { 
+      & > * {
+        @include span(1 of 2); 
+        @include first();
+      }
+    }
   }
 }
 
@@ -255,7 +312,7 @@
 }
 
 .block--subpage-header {
-  padding-top: 90px;
+  padding-top: 0px;
   padding-bottom: 0px;
 
   @media print {
@@ -263,7 +320,6 @@
   }
 
   @include mq($from: m) {
-    padding-top: 250px;
     padding-bottom: 0px;
   }
 
@@ -346,10 +402,6 @@
   }
 }
 
-.block--city-header .block__sub-header {
-  color: white!important;
-}
-
 .template--maybe-empty .block--home-promo {
   padding-bottom: 0px!important;
 }
@@ -385,29 +437,50 @@
     width: 300px;
     margin: 0 auto;
   }
+
+  &--three {
+    @include mq($from: m) {
+      width: 480px;
+    }
+  }
+
+  &--four {
+    @include mq($from: m) {
+      width: 640px;
+    }
+  }
 }
 
 .block-tabs__tab {
   @include span(1 of 2);
 
   background: red;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border-top: 1px solid black;
-  border-right: 1px solid black;
-  border-left: 1px solid black;
-  padding: 10px 30px;
-  margin-top: 4px;
   display: block;
-
-  &:last-of-type { 
-    @include last();
-  }
+  margin-top: 4px;
+  padding: 10px;
+  text-align: center;
 
   &--selected {
     background: blue;
-    padding: 12px 30px;
+    padding: 12px 0px;
     margin-top: 0px;
+  }
+
+  .block-tabs__container--three & {
+    @include span(1 of 3);
+  }
+
+  .block-tabs__container--four & {
+    @include span(1 of 4);
+  }
+
+  &:last-of-type { 
+    @include last();
   }
 
   .block-tabs--cards & {
@@ -425,4 +498,100 @@
     border-right: 1px solid $brand-k;
     border-left: 1px solid $brand-k;
   }
+}
+
+.home__copy {
+  @include mq($from: m) {
+    @include span(6 of 12);
+    .location-selector {
+      text-align: left;
+    }
+
+    &:last-child {
+      @include last();
+    }
+
+    &--left-col {
+      @include first();
+      float: left!important;
+    }
+
+    .h2 { width: 100% } // edge fix
+  }
+
+  &--standards-toolkit {
+    padding: 40px 1rem;
+    max-width: 500px;  // half of $site-container in _variables.scss
+    @include mq($from: m) {
+      padding: 40px 30px 40px 40px;
+    }
+  }
+
+  &--big-change-mcr-logo {
+    background: $big-change-b;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+
+    @include mq($from: m) {
+      position: relative;
+      &:before {
+        background: url('/assets/img/big-change-mcr-triangle.png') top left no-repeat;
+        width: 50px;
+        height: 100%;
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+      &:after {
+        background: url('/assets/img/big-change-mcr-triangle.png') top left no-repeat;
+        width: 50px;
+        height: 100%;
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -1px;
+        transform: rotate(180deg);  
+      }
+    }
+  }
+
+  &--big-change-mcr-text {
+    padding: 40px 20px;
+    background: $big-change-a;
+
+    @include mq($from: m) {
+      padding: 40px 0px;
+    }
+  }
+
+  &--padding {
+    @include mq($from: m) {
+      @include span(5 of 12);
+
+      .home__copy--padding + & {
+        @include push(1 of 12);
+        float: left;
+      }
+    }
+  }
+}
+
+.home__hub-map {
+  border: 1px solid $brand-k;
+  margin: 20px 0;
+  @include mq($from: m) {
+    margin: 0;
+    @include span(1 of 2);
+    @include last();
+  }
+}
+
+.js-map {
+  height: 500px;
+  width: 100%;
 }

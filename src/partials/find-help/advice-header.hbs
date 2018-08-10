@@ -1,0 +1,12 @@
+
+<div class="block block--location-header location-header">
+  <div class="container container--location-header">
+    <h1 class="h1 block__header">{{#if heading }}{{{ heading }}}{{else}}Advice{{/if}}</h1>
+  </div>
+</div>
+
+<div id="js-swep-output"></div>
+
+<script id="js-swep-tpl" type="text/template">
+{{> find-help/swep-notification theLocationId=this.theLocationId }}
+</script>

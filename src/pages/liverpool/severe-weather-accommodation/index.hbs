@@ -1,12 +1,13 @@
 ---
 title: Severe Weather Emergency Accommodation in Liverpool - Street Support
 description: Severe Weather Emergency Accommodation provision in Liverpool.
-image: https://streetsupport.net/assets/img/og/street-support.png
+image: https://streetsupport.net/assets/img/og/street-support-liverpool.png
 layout: default.hbs
 permalink: false
 jsBundle: swep
-section: findhelp
-page: swep
+section: liverpool
+page: liverpool-advice
+location: liverpool
 ---
 
 <div class="block block--breadcrumbs">
@@ -14,17 +15,13 @@ page: swep
     <ol class="breadcrumbs__list">
       <li class="breadcrumbs__item"><a href="/">Home</a></li>
       <li class="breadcrumbs__item"><a href="/liverpool/">Liverpool</a></li>
+      <li class="breadcrumbs__item"><a href="/liverpool/advice/">Advice</a></li>
       <li class="breadcrumbs__item">Severe Weather Emergency Accommodation</li>
     </ol>
   </div>
 </div>
 
-<div class="block block--city-header city-header city-header--liverpool">
-  <div class="container container--city-header">
-    <h1 class="h1 block__header">Severe Weather Emergency Accommodation</h1>
-    <div id="js-swep-output" class="template--maybe-empty"></div>
-  </div>
-</div>
+{{> find-help/advice-header heading="Severe Weather Emergency Accommodation" theLocationId="liverpool" }}
 
 <div class="block">
   <div class="container">
@@ -59,7 +56,3 @@ page: swep
 
   </div>
 </div>
-
-<script id="js-swep-tpl" type="text/template">
-{{> swep-notification }}
-</script>

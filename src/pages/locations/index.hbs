@@ -1,0 +1,59 @@
+---
+title: Street Support Network Locations - Working together to end homelessness
+description: Street Support Network - Find help, and give help, to support people facing and experiencing homelessness across the UK
+image: https://streetsupport.net/assets/img/og/street-support.png
+layout: withGoogle.hbs
+permalink: false
+jsBundle: home
+section: locations
+page: locations
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item">
+        <a href="/">Home</a>
+      </li>
+      <li class="breadcrumbs__item">Locations</li>
+    </ol>
+  </div>
+</div>
+
+<div class="block block--header">
+  <div class="container">
+    <h1 class="h1 block__header">Street Support Network Locations</h1>
+    <h2 class="h2 block__sub-header">Connecting people and organisations locally to End Homelessness</h2>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <div class="home__copy">
+        <h2 class="h2">Where we are</h2>
+        <p>Street Support Network is currently active in several locations across the UK.</p>
+
+        <p class="h3">Want to see what is happening near you? Select one&hellip;</p>
+        <div id="js-location-selector-output"></div>
+      </div>
+      <div class="home__hub-map">
+        <div class="js-map"></div>
+      </div>
+      <div class="home__copy home__copy--left-col">
+        <h2 class="h2">We would love to see the network grow</h2> 
+        <p>If you think Street Support might be useful in your area, please <a href="/about/contact">get in touch</a>.</p>
+          <a href="/about/contact" class="btn btn--brand-e">
+            <span class="btn__text">Get in touch</span>
+          </a>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+{{> loading-spinner}}
+
+<script id="js-location-selector-tpl" type="text/template">
+{{> locations/selector-hogan }}
+</script>
