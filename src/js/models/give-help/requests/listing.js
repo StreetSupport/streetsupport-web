@@ -15,13 +15,17 @@ class NeedsListing {
     this.needs = ko.observableArray()
     this.isMoreToLoad = ko.observable(false)
     this.ranges = ko.observableArray(proximityRanges.ranges)
-    this.currentPageLinks = { }
+    this.currentPageLinks = {}
+
+    this.hasPostcode = ko.computed(() => this.postcode() !== undefined, this)
 
     location.getPreviouslySetPostcode()
       .then((locationResult) => {
-        this.locationResult = locationResult
-        this.postcode(this.locationResult.postcode)
-        this.loadNeeds(this.firstPageUrl)
+        if (locationResult) {
+          this.locationResult = locationResult
+          this.postcode(this.locationResult.postcode)
+          this.loadNeeds(this.firstPageUrl)
+        }
       })
   }
 
