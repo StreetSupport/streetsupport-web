@@ -1,6 +1,5 @@
-module.exports =
-  {
-    page1: {
+module.exports = {
+  page1: {
     'links': {
       'next': null,
       'prev': null,
