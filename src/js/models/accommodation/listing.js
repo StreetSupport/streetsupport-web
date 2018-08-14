@@ -85,13 +85,8 @@ const AccommodationListing = function (addtionalQueryString = '') {
     self.dataIsLoaded(false)
     self.toggleFilterDisplay()
     getCoords(self.locationName(), (postcodeResult) => {
-      const newLocation = {
-        latitude: postcodeResult.latitude,
-        longitude: postcodeResult.longitude,
-        postcode: postcodeResult.postcode
-      }
-      storage.set(storage.keys.userLocationState, newLocation)
-      self.init(newLocation)
+      storage.set(storage.keys.userLocationState, postcodeResult)
+      self.init(postcodeResult)
     }, () => {
       self.items([])
       self.dataIsLoaded(true)

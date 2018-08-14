@@ -92,6 +92,10 @@ describe('Needs Listing', () => {
     expect(qs.pageSize).toEqual('21')
   })
 
+  it('- should show user there are needs', () => {
+    expect(sut.hasNeeds()).toBeTruthy()
+  })
+
   it('- should set needs', () => {
     expect(sut.needs().length).toEqual(21)
   })

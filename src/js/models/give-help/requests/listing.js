@@ -4,6 +4,7 @@ const api = require('../../../get-api-data')
 const browser = require('../../../browser')
 const endpoints = require('../../../api')
 const location = require('../../../location/locationSelector')
+const postcodeLookup = require('../../../location/postcodes')
 const proximityRanges = require('../../../location/proximityRanges')
 
 import { formatNeedsKO } from './needs'
@@ -17,7 +18,8 @@ class NeedsListing {
     this.ranges = ko.observableArray(proximityRanges.ranges)
     this.currentPageLinks = {}
 
-    this.hasPostcode = ko.computed(() => this.postcode() !== undefined, this)
+    this.hasPostcode = ko.computed(() => this.postcode() !== undefined && this.postcode().length, this)
+    this.hasNeeds = ko.computed(() => this.needs().length > 0, this)
 
     location.getPreviouslySetPostcode()
       .then((locationResult) => {
@@ -26,6 +28,24 @@ class NeedsListing {
           this.postcode(this.locationResult.postcode)
           this.loadNeeds(this.firstPageUrl)
         }
+      })
+  }
+
+  loadNextPage () {
+    this.loadNeeds(endpoints.getFullUrl(this.currentPageLinks.next))
+  }
+
+  search () {
+    this.needs([])
+    browser.loading()
+    postcodeLookup.getCoords(
+      this.postcode(), 
+      (result) => {
+        this.locationResult = result
+        this.loadNeeds(this.firstPageUrl)
+      },
+      (err) => {
+        browser.redirect('/500')        
       })
   }
 
@@ -55,10 +75,6 @@ class NeedsListing {
       .join('&')
 
     return `${endpoints.needsHAL}?${qs}`
-  }
-
-  loadNextPage () {
-    this.loadNeeds(endpoints.getFullUrl(this.currentPageLinks.next))
   }
 }
 
