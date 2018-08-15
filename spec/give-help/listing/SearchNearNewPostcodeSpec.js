@@ -8,7 +8,7 @@ const api = require('../../../src/js/get-api-data')
 const browser = require('../../../src/js/browser')
 const endpoints = require('../../../src/js/api')
 const locationSelector = require('../../../src/js/location/locationSelector')
-const Model = require('../../../src/js/models/give-help/requests/Listing')
+const Model = require('../../../src/js/models/give-help/requests/listing')
 const needsData = require('./needsData')
 const postcodeLookup = require('../../../src/js/location/postcodes')
 
