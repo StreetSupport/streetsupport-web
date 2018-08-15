@@ -4,7 +4,7 @@ import sinon from 'sinon'
 
 const api = require('../../../src/js/get-api-data')
 const locationSelector = require('../../../src/js/location/locationSelector')
-const Model = require('../../../src/js/models/give-help/requests/Listing')
+const Model = require('../../../src/js/models/give-help/requests/listing')
 
 describe('Needs Listing - no postcode set', () => {
   let ajaxGetStub,
