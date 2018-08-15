@@ -21,9 +21,6 @@ const MapBuilder = function () {
         }
 
         marker.addListener('click', function () {
-          // self.infoWindows
-          //   .forEach((w) => w.close())
-          // infoWindow.open(self.map, marker)
           document.querySelectorAll('.card__gmaps-container')
             .forEach((p) => p.parentNode.removeChild(p))
           const position = new google.maps.LatLng(this.position.lat(), this.position.lng())

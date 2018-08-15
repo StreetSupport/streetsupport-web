@@ -35,6 +35,7 @@ export const buildInfoWindowMarkup = (p) => {
 
   return `<div class="card card--brand-h card--gmaps">
             <div class="card__title">
+              <button class="card__close js-popup-close" title="close">&#10799;</button>
               <h1 class="h2"><a href="/find-help/organisation/?organisation=${p.serviceProviderId}">${htmlEncode.htmlDecode(p.serviceProviderName)}</a></h1>
               ${suitableForMarkup}
             </div>

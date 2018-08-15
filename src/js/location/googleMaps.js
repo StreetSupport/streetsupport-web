@@ -64,6 +64,11 @@ const Popup = function (position, content) {
   /** Called when the popup is added to the map. */
   Popup.prototype.onAdd = function () {
     this.getPanes().floatPane.appendChild(this.anchor)
+
+    document.querySelector('.js-popup-close')
+      .addEventListener('click', () => {
+        this.onRemove()
+      })
   }
 
   /** Called when the popup is removed from the map. */
