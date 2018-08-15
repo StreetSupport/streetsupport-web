@@ -223,3 +223,14 @@ $spacing: 20px;
   border-right: 12px solid transparent;
   border-top: /* TIP_HEIGHT= */ 16px solid white;
 }
+
+.card__close {
+  background: none;
+  border: none;
+  color: white;
+  display: block;
+  float: right;
+  font-size: 16px;
+  margin: -15px -5px 0 0 !important;
+  padding: 5px !important;
+}

@@ -6,11 +6,14 @@ const ranges = [
   { name: '20k', key: 20000, zoom: 10 }
 ]
 
+const defaultRange = 10000
+
 const getByRange = function (range) {
   return ranges.find((pr) => pr.key === parseInt(range)).zoom || 10
 }
 
 module.exports = {
   ranges,
-  getByRange
+  getByRange,
+  defaultRange
 }
