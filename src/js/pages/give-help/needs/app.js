@@ -3,6 +3,6 @@ import '../../../common'
 
 // Page modules
 var ko = require('knockout')
-var Model = require('../../../models/give-help/requests/Listing')
+var Model = require('../../../models/give-help/requests/listing')
 
 ko.applyBindings(new Model())
