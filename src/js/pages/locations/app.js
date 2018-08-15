@@ -123,7 +123,7 @@ const initMap = function (currentLocation) {
   api
     .data(endpoint)
     .then((result) => {
-      map.init(result.data.items, currentLocation, null, buildInfoWindowMarkup, getLocation)
+      map.init(result.data.items, currentLocation, null, buildInfoWindowMarkup, getLocation, { zoom: 12 })
     }, (_) => {
     })
 }
