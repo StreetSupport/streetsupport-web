@@ -41,16 +41,11 @@ page: giveitems
   </div>
 </div>
 
-<!-- ko if: hasNeeds -->
 <nav class="block-tabs block-tabs--cards">
-  <div class="block-tabs__container block-tabs__container--four">
-    <a class="block-tabs__tab block-tabs__tab--selected js-filter-item js-filter-item-all" data-filter="all" href="#">All</a>
-    <a class="block-tabs__tab js-filter-item" data-filter="items" href="#">Items</a>
-    <a class="block-tabs__tab js-filter-item" data-filter="time" href="#">Time</a>
-    <a class="block-tabs__tab js-filter-item" data-filter="money" href="#">Money</a>
+  <div class="block-tabs__container block-tabs__container--four" data-bind="foreach: filters">
+    <a class="block-tabs__tab" data-bind="click: filterAction, text: label, css: { 'block-tabs__tab--selected': isActive }"></a>
   </div>
 </nav>
-<!-- /ko -->
 
 <div id="js-card-search" class="requests-search is-active">
   <div class="block block--cards">
@@ -64,14 +59,14 @@ page: giveitems
         <div class="requests-detail js-card-detail">
           <div class="card-sort">
             <span class="card-sort__title">Sort by:</span>
-            <a class="card-sort__item js-sort-criteria card-sort__item--selected" href="#" data-sort="date-desc">Date Added</a>
-            <a class="card-sort__item js-sort-criteria" href="#" data-sort="organisation-asc">Organisation</a>
-            <a class="card-sort__item js-sort-criteria" href="#" data-sort="distance-asc">Distance</a>
+            <span data-bind="foreach: sorts">
+              <a class="card-sort__item js-sort-criteria" data-bind="text: label, click: sortAction, css: { 'card-sort__item--selected': isActive }"></a>
+            </span>
           </div>
 
           <section class="block__section">
             <div class="requests">
-              <div class="requests-search__input" action="#">
+              <div class="requests-search__input">
                 <div class="requests-search__container">
                   <label for="search-for-requests" class="hide-screen">Filter requests for help</label>
                   <input autofocus id="search-for-requests" class="search requests-search__autocomplete" placeholder="Filter requests for help by entering a keyword"
@@ -80,7 +75,7 @@ page: giveitems
               </div>
           </section>
 
-          <ul class="requests-listing list" data-bind="foreach: needs">
+          <ul class="requests-listing list" data-bind="foreach: needsToDisplay">
             <li class="card card--brand-h card--grid-1-of-3" data-bind="attr: {id: id}">
               <div class="card__title">
                 <a data-bind="attr: { href: detailsUrl }">
@@ -101,9 +96,11 @@ page: giveitems
           </ul>
 
           <!-- ko if: isMoreToLoad -->
-          <a class="btn btn--brand-e" data-bind="click: loadNextPage">
-            <span class="btn__text">Show More</span>
-          </a>
+          <div class="text-center">
+            <a class="btn btn--brand-e" data-bind="click: loadNextPage">
+              <span class="btn__text">Show More</span>
+            </a>
+          </div>
           <!-- /ko -->
         </div>
         <!-- /ko -->

@@ -8,18 +8,33 @@ const postcodeLookup = require('../../../location/postcodes')
 const proximityRanges = require('../../../location/proximityRanges')
 
 import { formatNeedsKO } from './needs'
+import { getKOSortAscFunc, getKOSortDescFunc, getSortAscFunc } from '../../../sorting'
 
 class NeedsListing {
   constructor () {
+    this.ranges = ko.observableArray(proximityRanges.ranges)
     this.range = ko.observable(proximityRanges.defaultRange)
     this.postcode = ko.observable()
-    this.needs = ko.observableArray()
+    this.allNeeds = ko.observableArray()
+    this.filters = ko.observableArray([
+      { isActive: ko.observable(true), filterAction: () => this.clearFilter(), filterFunction: () => true, label: 'All' },
+      { isActive: ko.observable(false), filterAction: () => this.filterForItems(), filterFunction: (n) => n.type() === 'items', label: 'Items' },
+      { isActive: ko.observable(false), filterAction: () => this.filterForTime(), filterFunction: (n) => n.type() === 'time', label: 'Time' },
+      { isActive: ko.observable(false), filterAction: () => this.filterForMoney(), filterFunction: (n) => n.type() === 'money', label: 'Money' }
+    ])
+    this.currentFilter = ko.observable(this.filters().find((f) => f.label === 'All').filterFunction)
+    this.sorts = ko.observableArray([
+      { isActive: ko.observable(true), sortAction: () => this.sortByDateAdded(), sortFunction: getKOSortDescFunc('neededDate'), label: 'Date Added' },
+      { isActive: ko.observable(false), sortAction: () => this.sortByOrganisation(), sortFunction: getKOSortAscFunc('serviceProviderName'), label: 'Organisation' },
+      { isActive: ko.observable(false), sortAction: () => this.sortByDistance(), sortFunction: getSortAscFunc('distanceAwayInMetres'), label: 'Distance' }
+    ])
+    this.currentSort = ko.observable(this.sorts().find((f) => f.label === 'Date Added').sortFunction)
     this.isMoreToLoad = ko.observable(false)
-    this.ranges = ko.observableArray(proximityRanges.ranges)
     this.currentPageLinks = {}
 
     this.hasPostcode = ko.computed(() => this.postcode() !== undefined && this.postcode().length, this)
-    this.hasNeeds = ko.computed(() => this.needs().length > 0, this)
+    this.needsToDisplay = ko.computed(() => this.allNeeds().filter(this.currentFilter()).sort(this.currentSort()), this)
+    this.hasNeeds = ko.computed(() => this.needsToDisplay().length > 0, this)
 
     location.getPreviouslySetPostcode()
       .then((locationResult) => {
@@ -36,17 +51,62 @@ class NeedsListing {
   }
 
   search () {
-    this.needs([])
-    browser.loading()
+    this.allNeeds([])
     postcodeLookup.getCoords(
-      this.postcode(), 
+      this.postcode(),
       (result) => {
         this.locationResult = result
         this.loadNeeds(this.firstPageUrl)
       },
-      (err) => {
-        browser.redirect('/500')        
+      () => {
+        browser.redirect('/500')
       })
+  }
+
+  filterForItems () {
+    this.setActiveFilter('Items')
+  }
+
+  filterForTime () {
+    this.setActiveFilter('Time')
+  }
+
+  filterForMoney () {
+    this.setActiveFilter('Money')
+  }
+
+  clearFilter () {
+    this.setActiveFilter('All')
+  }
+
+  setActiveFilter (reqFilter) {
+    this.filters()
+      .filter((f) => f.label !== reqFilter)
+      .forEach((f) => f.isActive(false))
+    const filter = this.filters().find((f) => f.label === reqFilter)
+    filter.isActive(true)
+    this.currentFilter(filter.filterFunction)
+  }
+
+  sortByOrganisation () {
+    this.setActiveSort('Organisation')
+  }
+
+  sortByDistance () {
+    this.setActiveSort('Distance')
+  }
+
+  sortByDateAdded () {
+    this.setActiveSort('Date Added')
+  }
+
+  setActiveSort (reqSort) {
+    this.sorts()
+      .filter((f) => f.label !== reqSort)
+      .forEach((f) => f.isActive(false))
+    const sort = this.sorts().find((f) => f.label === reqSort)
+    sort.isActive(true)
+    this.currentSort(sort.sortFunction)
   }
 
   loadNeeds (url) {
@@ -55,7 +115,7 @@ class NeedsListing {
       .data(url)
       .then((result) => {
         this.currentPageLinks = result.data.links
-        this.needs([...this.needs(), ...formatNeedsKO(result.data.items, this.locationResult)])
+        this.allNeeds([...this.allNeeds(), ...formatNeedsKO(result.data.items, this.locationResult)])
         this.isMoreToLoad(result.data.links.next)
         browser.loaded()
       }, (_) => {

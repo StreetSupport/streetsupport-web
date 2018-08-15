@@ -10,12 +10,13 @@ const endpoints = require('../../../src/js/api')
 const locationSelector = require('../../../src/js/location/locationSelector')
 const Model = require('../../../src/js/models/give-help/requests/Listing')
 const needsData = require('./needsData')
-const proximityRanges = require('../../../src/js/location/proximityRanges')
+const postcodeLookup = require('../../../src/js/location/postcodes')
 
-describe('Needs Listing', () => {
+describe('Needs Listing - new postcode search', () => {
   let ajaxGetStub,
     browserLoadingStub,
     browserLoadedStub,
+    postcodeLookupStub,
     sut
 
   const previouslySetLocation = {
@@ -24,12 +25,18 @@ describe('Needs Listing', () => {
     postcode: 'postcode'
   }
 
+  const newLocation = {
+    latitude: 456.7,
+    longitude: 234.5,
+    postcode: 'a new postcode'
+  }
+
   beforeEach(() => {
     ajaxGetStub = sinon.stub(api, 'data')
     ajaxGetStub
       .returns({
         then: function (success) {
-          success({ data: needsData.page1 })
+          success({ data: needsData.page2 })
         }
       })
     browserLoadingStub = sinon.stub(browser, 'loading')
@@ -40,8 +47,20 @@ describe('Needs Listing', () => {
           success(previouslySetLocation)
         }
       })
+    postcodeLookupStub = sinon.stub(postcodeLookup)
+    postcodeLookupStub
+      .getCoords
+      .callsArgWith(1, newLocation) // success callback function
 
     sut = new Model()
+
+    ajaxGetStub.reset()
+    browserLoadingStub.reset()
+    browserLoadedStub.reset()
+
+    sut.postcode('new postcode')
+    sut.range(5000)
+    sut.search()
   })
 
   afterEach(() => {
@@ -49,22 +68,16 @@ describe('Needs Listing', () => {
     browser.loading.restore()
     browser.loaded.restore()
     locationSelector.getPreviouslySetPostcode.restore()
-  })
-
-  it('- should set postcode as that previously saved', () => {
-    expect(sut.postcode()).toEqual(previouslySetLocation.postcode)
-  })
-
-  it('- should default range to 10000m', () => {
-    expect(sut.range()).toEqual(10000)
-  })
-
-  it('- should set ranges', () => {
-    expect(sut.ranges()).toEqual(proximityRanges.ranges)
+    postcodeLookup.getByCoords.restore()
+    postcodeLookup.getCoords.restore()
   })
 
   it('- should notify it is loading', () => {
-    expect(browserLoadingStub.calledOnce).toBeTruthy()
+    expect(browserLoadingStub.called).toBeTruthy()
+  })
+
+  it('- should lookup coords for postcode', () => {
+    expect(postcodeLookupStub.getCoords.getCall(0).args[0]).toEqual('new postcode')
   })
 
   it('- should load needs...', () => {
@@ -78,13 +91,13 @@ describe('Needs Listing', () => {
 
   it('... near to postcode', () => {
     const qs = parseQuery(ajaxGetStub.getCall(0).args[0])
-    expect(qs.latitude).toEqual(previouslySetLocation.latitude.toString())
-    expect(qs.longitude).toEqual(previouslySetLocation.longitude.toString())
+    expect(qs.latitude).toEqual(newLocation.latitude.toString())
+    expect(qs.longitude).toEqual(newLocation.longitude.toString())
   })
 
   it('... up to the desired range', () => {
     const qs = parseQuery(ajaxGetStub.getCall(0).args[0])
-    expect(qs.range).toEqual('10000')
+    expect(qs.range).toEqual('5000')
   })
 
   it('... 21 items at a time', () => {
@@ -97,44 +110,10 @@ describe('Needs Listing', () => {
   })
 
   it('- should set needs', () => {
-    expect(sut.needsToDisplay().length).toEqual(21)
+    expect(sut.needsToDisplay().length).toEqual(4)
   })
 
-  it('- should notify user it has loaded', () => {
+  it('- should notify it is loaded', () => {
     expect(browserLoadedStub.calledAfter(ajaxGetStub)).toBeTruthy()
-  })
-
-  it('- should show user there are more items available', () => {
-    expect(sut.isMoreToLoad()).toBeTruthy()
-  })
-
-  describe('- load more', () => {
-    beforeEach(() => {
-      ajaxGetStub.reset()
-
-      ajaxGetStub
-      .returns({
-        then: function (success) {
-          success({ data: needsData.page2 })
-        }
-      })
-
-      browserLoadingStub.reset()
-      browserLoadedStub.reset()
-      sut.loadNextPage()
-    })
-
-    it('- should show user it is loading', () => {
-      expect(browserLoadingStub.calledOnce).toBeTruthy()
-    })
-
-    it('- should load next page of needs', () => {
-      const url = ajaxGetStub.getCall(0).args[0]
-      expect(url).toEqual(endpoints.getFullUrl(needsData.page1.links.next))
-    })
-
-    it('- should append new page needs to existing needs', () => {
-      expect(sut.needsToDisplay().length).toEqual(25)
-    })
   })
 })
