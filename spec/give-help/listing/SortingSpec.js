@@ -71,7 +71,7 @@ describe('Needs Listing - sorting', () => {
     it('- should sort by org name', () => {
       const first = sut.needsToDisplay()[0]
       const last = sut.needsToDisplay()[sut.needsToDisplay().length - 1]
-      expect(first.distanceAwayInMetres).toBeLessThanOrEqual(last.distanceAwayInMetres)
+      expect(first.distanceAwayInMetres()).toBeLessThanOrEqual(last.distanceAwayInMetres())
     })
   })
 
