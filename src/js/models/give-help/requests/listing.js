@@ -8,7 +8,7 @@ const postcodeLookup = require('../../../location/postcodes')
 const proximityRanges = require('../../../location/proximityRanges')
 
 import { formatNeedsKO } from './needs'
-import { getKOSortAscFunc, getKOSortDescFunc, getSortAscFunc } from '../../../sorting'
+import { getKOSortAscFunc, getKOSortDescFunc } from '../../../sorting'
 
 class NeedsListing {
   constructor () {
@@ -26,7 +26,7 @@ class NeedsListing {
     this.sorts = ko.observableArray([
       { isActive: ko.observable(true), sortAction: () => this.sortByDateAdded(), sortFunction: getKOSortDescFunc('neededDate'), label: 'Date Added' },
       { isActive: ko.observable(false), sortAction: () => this.sortByOrganisation(), sortFunction: getKOSortAscFunc('serviceProviderName'), label: 'Organisation' },
-      { isActive: ko.observable(false), sortAction: () => this.sortByDistance(), sortFunction: getSortAscFunc('distanceAwayInMetres'), label: 'Distance' }
+      { isActive: ko.observable(false), sortAction: () => this.sortByDistance(), sortFunction: getKOSortAscFunc('distanceAwayInMetres'), label: 'Distance' }
     ])
     this.currentSort = ko.observable(this.sorts().find((f) => f.label === 'Date Added').sortFunction)
     this.isMoreToLoad = ko.observable(false)
