@@ -5,7 +5,12 @@ const buildMap = function (userLocation, customOptions = {}, domSelector = '.js-
   const defaultOptions = {
     zoom: 10,
     center: centre,
-    draggable: true
+    draggable: true,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    fullscreenControl: true,
+    zoomControl: true,
+    streetViewControl: false,
+    mapTypeControl: false
   }
   const updatedOptions = Object.assign(defaultOptions, customOptions)
   return new google.maps.Map(document.querySelector(domSelector), updatedOptions)
