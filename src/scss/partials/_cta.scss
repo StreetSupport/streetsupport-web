@@ -67,3 +67,87 @@
     margin-bottom: 0
   }
 }
+
+.home-cta {
+  @include span(1 of 2);
+
+  padding: 10px 0px 10px 0;
+  text-align: center;
+
+  &:nth-of-type(even) {
+    @include last();
+  }
+
+  @include mq($from: m) {
+    @include span(1 of 3);
+    text-align: left;
+    padding: 10px 60px 10px 0;
+
+    &:nth-of-type(even) {
+      @include span(1 of 3);
+    }
+
+    &:nth-of-type(3n) {
+      @include last();
+    }
+  }
+}
+
+.home-cta__link {
+  display: block;
+
+  @include mq($from: m) {
+    padding: 10px 0 0 0;
+    height: 65px;
+  }
+
+  &:before {
+    content: '';
+    display: block;
+    width: 65px;
+    height: 65px;
+    background: url('../img/icon-tileset.png');
+    margin: 0 auto;
+
+    @include mq($from: m) {
+      float: left;
+      margin-top: -10px;
+    }
+  }
+
+  .home-cta--pin & {
+    &:before {
+      background-position: 3px 65px;
+    }
+  }
+
+  .home-cta--help & {
+    &:before {
+      background-position: -97px 65px;
+    }
+  }
+
+  .home-cta--search & {
+    &:before {
+      background-position: -100px -95px;
+    }
+  }
+
+  .home-cta--card & {
+    &:before {
+      background-position: -301px -95px;
+    }
+  }
+
+  .home-cta--book & {
+    &:before {
+      background-position: -1px -95px;
+    }
+  }
+
+  .home-cta--briefcase & {
+    &:before {
+      background-position: -200px -95px;
+    }
+  }
+}
