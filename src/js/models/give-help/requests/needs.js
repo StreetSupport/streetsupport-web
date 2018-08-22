@@ -1,5 +1,6 @@
 import ko from 'knockout'
 import moment from 'moment'
+import htmlencode from 'htmlencode'
 
 const getLocation = require('../../../location/get-location')
 const getDistanceApart = require('../../../location/getDistanceApart')
@@ -28,7 +29,7 @@ export const formatNeedsKO = (needs, position) => {
         id: ko.observable(n.id),
         detailsUrl: ko.observable(n.detailsUrl),
         description: ko.observable(n.description),
-        serviceProviderName: ko.observable(n.serviceProviderName),
+        serviceProviderName: ko.observable(htmlencode.htmlDecode(n.serviceProviderName)),
         locationDescription: ko.observable(n.locationDescription),
         formattedNeededDate: ko.observable(n.formattedNeededDate),
         neededDate: ko.observable(n.neededDate),
