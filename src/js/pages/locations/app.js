@@ -108,6 +108,7 @@ const initMap = function (currentLocation) {
   const buildInfoWindowMarkup = (p) => {
     return `<div class="card card--brand-h card--gmaps">
               <div class="card__title">
+                <button class="card__close js-popup-close" title="close">&#10799;</button>
                 <h1 class="h2">${htmlEncode.htmlDecode(p.serviceProviderName)}</h1>
                 <p>${htmlEncode.htmlDecode(p.serviceProviderSynopsis)}</p>
               </div>
@@ -123,7 +124,7 @@ const initMap = function (currentLocation) {
   api
     .data(endpoint)
     .then((result) => {
-      map.init(result.data.items, currentLocation, null, buildInfoWindowMarkup, getLocation)
+      map.init(result.data.items, currentLocation, null, buildInfoWindowMarkup, getLocation, { zoom: 12 })
     }, (_) => {
     })
 }

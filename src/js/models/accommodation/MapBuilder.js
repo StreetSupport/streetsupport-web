@@ -21,9 +21,6 @@ const MapBuilder = function () {
         }
 
         marker.addListener('click', function () {
-          // self.infoWindows
-          //   .forEach((w) => w.close())
-          // infoWindow.open(self.map, marker)
           document.querySelectorAll('.card__gmaps-container')
             .forEach((p) => p.parentNode.removeChild(p))
           const position = new google.maps.LatLng(this.position.lat(), this.position.lng())
@@ -70,8 +67,8 @@ const MapBuilder = function () {
 
   self.init = function (items, userLocation, container, buildInfoWindowMarkup, getLocation = (p) => {
     return { latitude: p.latitude(), longitude: p.longitude() }
-  }) {
-    self.map = gMaps.buildMap(userLocation)
+  }, customOptions = {}) {
+    self.map = gMaps.buildMap(userLocation, customOptions)
 
     self.container = container
     self.buildInfoWindowMarkup = buildInfoWindowMarkup

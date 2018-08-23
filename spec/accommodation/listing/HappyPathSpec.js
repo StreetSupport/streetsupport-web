@@ -18,7 +18,6 @@ describe('Accommodation - Listing', function () {
   let ajaxGetStub = null
   let browserLoadingStub = null
   let browserLoadedStub = null
-  let storageSetStub = null
 
   beforeEach(() => {
     ajaxGetStub = sinon.stub(ajaxGet, 'data')
@@ -47,7 +46,7 @@ describe('Accommodation - Listing', function () {
         }
       })
     sinon.stub(storage, 'get')
-    storageSetStub = sinon.stub(storage, 'set')
+    sinon.stub(storage, 'set')
     sut = new Model()
   })
 
