@@ -117,37 +117,37 @@
 
   .home-cta--pin & {
     &:before {
-      background-position: 3px 65px;
+      background-position: -20px 87px;
     }
   }
 
   .home-cta--help & {
     &:before {
-      background-position: -97px 65px;
+      background-position: -120px 87px;
     }
   }
 
   .home-cta--search & {
     &:before {
-      background-position: -100px -95px;
+      background-position: -120px -120px;
     }
   }
 
   .home-cta--card & {
     &:before {
-      background-position: -301px -95px;
+      background-position: -320px -120px;
     }
   }
 
   .home-cta--book & {
     &:before {
-      background-position: -1px -95px;
+      background-position: -20px -120px;
     }
   }
 
   .home-cta--briefcase & {
     &:before {
-      background-position: -200px -95px;
+      background-position: -220px -120px;
     }
   }
 }
