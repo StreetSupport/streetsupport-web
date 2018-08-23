@@ -23,6 +23,15 @@
     }
   }
 
+  &--central-cta {
+    @include mq($from: m) {
+      width: 50%;
+    }
+    @include mq($from: l) {
+      width: 33%;
+    }
+  }
+
   &--footer {
     @include mq($from: m) {
       display: flex;
