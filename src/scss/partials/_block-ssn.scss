@@ -37,6 +37,71 @@
     }
   }
 
+  &--news {
+    padding: 30px 10px;
+  }
+
+  &--big-change-mcr {
+    background: $big-change-a;
+    padding: 0!important;
+  }
+
+  &--standards-toolkit {
+    background: rgba(10, 133, 100, 0.15);
+    display: flex;
+    align-items: stretch;
+    padding: 0!important;
+    @include mq($from: m) {
+      .block__standards-toolkit-pad {
+        width: 50%;
+        background: url('/assets/img/toolkit-pad.png') right -40px no-repeat;
+      }
+    }
+  }
+
+  &--highlight {
+    background: $brand-c;
+    background: linear-gradient(to bottom, $brand-b, $brand-c);
+    color: #fff;
+
+    .h1,
+    .h2 {
+      color: #fff;
+    }
+    a {
+      color: $brand-e;
+    }
+  }
+
+  &--minor-highlight {
+    background: $brand-q;
+  }
+
+  &--requests-detail {
+    padding: 20px 0;
+    background: $brand-i;
+  }
+
+  &--big-change-video {
+    background: black;
+    padding: 15px 0 10px 0!important;
+  }
+
+  &--cards {
+    background: $brand-q;
+    border-top: 1px solid $brand-k;
+    @include cf();
+  }
+
+  &--swep-availability-notification {
+    background: $brand-g;
+    padding: 20px 0px!important;
+    color: white;
+    a {
+       color: $brand-e;
+    }
+  }
+
   &__image-image {
     margin-bottom: 20px;
     position: relative;
@@ -93,6 +158,26 @@
       transform: translateY(-50%);
       padding: 0 40px;
       max-width: 500px;
+    }
+  }
+}
+
+.block__content {
+  &--central-cta {
+    text-align: center;
+  }
+
+  &--join-mailing-list {
+    &:before {
+      content: '';
+      width: 60px;
+      height: 50px;
+      background: url('../img/icon-tileset.png') 178px 80px;
+      margin: 10px auto;
+
+      @include mq($from: m) {
+        margin: 0 auto 20px auto;
+      }
     }
   }
 }

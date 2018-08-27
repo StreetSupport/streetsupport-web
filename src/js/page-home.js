@@ -50,7 +50,12 @@ const init = () => {
       if (result.length) {
         redirectToHubPage(result)
       }
-    }, '.js-homepage-promo-location-selector')
+    }, '.js-change-location-select')
+
+    document.querySelector('.js-change-location-btn')
+      .addEventListener('click', () => {
+        redirectToHubPage(document.querySelector('.js-change-location-select').value)
+      })
 
     displayMap(supportedCities.locations)
   }

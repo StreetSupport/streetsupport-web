@@ -48,9 +48,9 @@
 
     .h1,
     .h2 {
-      color: $brand-h;
+      color: $brand-m;
       a {
-        color: $brand-n;
+        color: $brand-m;
       }
     }
   }
@@ -127,27 +127,6 @@
   }
 
   // Variants
-  &--news {
-    padding: 30px 10px;
-  }
-
-  &--big-change-mcr {
-    background: $big-change-a;
-    padding: 0!important;
-  }
-
-  &--standards-toolkit {
-    background: rgba(10, 133, 100, 0.15);
-    display: flex;
-    align-items: stretch;
-    padding: 0!important;
-    @include mq($from: m) {
-      .block__standards-toolkit-pad {
-        width: 50%;
-        background: url('/assets/img/toolkit-pad.png') right -40px no-repeat;
-      }
-    }
-  }
 
   &--breadcrumbs {
     padding-top: 6px !important;
@@ -164,48 +143,9 @@
     }
   }
 
-  &--highlight {
-    background: $brand-c;
-    background: linear-gradient(to bottom, $brand-b, $brand-c);
-    color: #fff;
-
-    .h1,
-    .h2 {
-      color: #fff;
-    }
-    a {
-      color: $brand-e;
-    }
-  }
-
   &--promo {
     @include mq($from: m) {
       text-align: center;
-    }
-  }
-
-  &--requests-detail {
-    padding: 20px 0;
-    background: $brand-i;
-  }
-
-  &--big-change-video {
-    background: black;
-    padding: 15px 0 10px 0!important;
-  }
-
-  &--cards {
-    background: $brand-q;
-    border-top: 1px solid $brand-k;
-    @include cf();
-  }
-
-  &--swep-availability-notification {
-    background: $brand-g;
-    padding: 20px 0px!important;
-    color: white;
-    a {
-       color: $brand-e;
     }
   }
 }
@@ -213,10 +153,6 @@
 .block--header,
 .block--home-header,
 .block--location-header {
-  background-image: url('../img/header-background.png');
-  background-repeat: repeat-x;
-  background-position: bottom;
-  padding-top: 60px;
   padding-bottom: 100px;
 
   .block__header,
@@ -224,9 +160,12 @@
     color: $brand-m;
   }
 }
-.location-header--southampton {
-  background-image: url('../img/header-background.png'), url('../img/locations/sea-tile.png');
 
+.block--home-header,
+.block--location-header {
+  background-image: url('../img/header-background.png');
+  background-repeat: repeat-x;
+  background-position: bottom;
 }
 
 .block--location-header,
@@ -307,97 +246,6 @@
       & + .block__section {
         margin-top: 0px;
       }
-    }
-  }
-}
-
-.block--subpage-header {
-  padding-top: 0px;
-  padding-bottom: 0px;
-
-  @media print {
-    & { padding-top: 0px; }
-  }
-
-  @include mq($from: m) {
-    padding-bottom: 0px;
-  }
-
-  .block__header {
-    color: $brand-h;
-    padding-top: 50px;
-
-    &.has-icon--left {
-      margin: 20px 0;
-      padding-left: 60px;
-      position: relative;
-      text-align: center;
-
-      @include mq($from: m) {
-        margin: 0px 0 10px;
-        padding-left: 0;
-        padding-top: 0px;
-        text-align: center;
-      }
-
-      .block__header__icon {
-        @include size(50px);
-
-        position: absolute;
-        top: 40px;
-        left: 0;
-
-        @include mq($from: m) {
-          position: static;
-        }
-
-        &--big-change {
-          left: 50%;
-          margin-left: -90px;
-          @include mq($from: m) {
-            left: 0;
-            margin-left: 0;
-          }
-        }
-
-        &--give {
-          height: 110px;
-          width: 140px;
-          top: -40px;
-          right: 38px;
-
-          @include mq($from: m) {
-            margin-right: -28px;
-            margin-top: -30px;
-            vertical-align: middle;
-          }
-        }
-
-        &--find-help {
-          @include size(100px);
-          position: absolute;
-          left: 0;
-          top: 15px;
-          @include mq($from: m) {
-            position: inherit;
-            top: 35px;
-          }
-        }
-      }
-    }
-    &--find-help.has-icon--left {
-      padding-top: 50px;
-    }
-  }
-
-  .block__sub-header {
-    color: $brand-m;
-
-    p:first-of-type {
-      margin-top: 0;
-    }
-    p:last-of-type {
-      margin-bottom: 0;
     }
   }
 }
