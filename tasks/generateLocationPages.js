@@ -16,6 +16,7 @@ let cities = []
 gulp.task('l-getCities', (callback) => {
   request(endpoints.cities, function (err, res, body) {
     cities = JSON.parse(body)
+      .filter(c => c.isPublic)
       .sort((a, b) => {
         if (a.name < b.name) return -1
         if (a.name > b.name) return 1
