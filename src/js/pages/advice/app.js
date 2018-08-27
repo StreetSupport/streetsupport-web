@@ -26,7 +26,8 @@ const init = () => {
     }, '.js-change-location-select')
 
     document.querySelector('.js-change-location-btn')
-      .addEventListener('click', () => {
+      .addEventListener('click', (e) => {
+        e.preventDefault()
         redirectToHubPage(document.querySelector('.js-change-location-select').value)
       })
   }
