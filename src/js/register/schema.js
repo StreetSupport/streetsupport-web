@@ -6,8 +6,8 @@ module.exports = {
       'type': 'string',
       'required': true
     },
-    'associatedCity': {
-      'title': 'Associated City',
+    'associatedLocationIds': {
+      'title': 'Associated Locations (ctrl + click to select multiple locations)',
       'type': 'select',
       'enum': ['bournemouth', 'leeds', 'manchester'], // this gets overwritten by gulp task 'supported-cities'
       'required': true
