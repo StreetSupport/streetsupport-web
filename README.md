@@ -17,7 +17,7 @@ Please fork and work in the `develop` branch. Once the update is completed, subm
 * Install Node 6 LTS,
 * Run in Terminal: `npm i gulp-cli -g` (Gulp does not need to be installed globally),
 * In your command line terminal, navigate to the street support project folder,
-* Run: `npm i`. (currently, [snyk](https://snyk.io/) throws an error here, but you can ignore it)
+* Run: `npm i` (Note: if you are on the Code Wifi network, you may have an issue installing modules around CriticalCSS/Phantom; you might need to tether to your mobile phone to get these downloaded.)
 
 See [https://github.com/fephil/garrus](https://github.com/fephil/garrus) for more information about the Frontend workflow.
 
