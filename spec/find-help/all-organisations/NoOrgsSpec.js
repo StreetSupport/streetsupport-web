@@ -4,10 +4,8 @@ const sinon = require('sinon')
 
 const ajax = require('../../../src/js/get-api-data')
 const browser = require('../../../src/js/browser')
-const endpoints = require('../../../src/js/api')
 const location = require('../../../src/js/location/locationSelector')
 const Model = require('../../../src/js/models/all-organisations/listing')
-const spLocationData = require('./spLocationData')
 
 describe('all organisations', () => {
   const locationResult = {
@@ -22,8 +20,6 @@ describe('all organisations', () => {
   }
 
   let ajaxStub = null
-  let browserLoadingStub = null
-  let browserLoadedStub = null
 
   let sut = null
 
@@ -48,8 +44,8 @@ describe('all organisations', () => {
           })
         }
       })
-    browserLoadingStub = sinon.stub(browser, 'loading')
-    browserLoadedStub = sinon.stub(browser, 'loaded')
+    sinon.stub(browser, 'loading')
+    sinon.stub(browser, 'loaded')
 
     sut = new Model()
   })

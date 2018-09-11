@@ -139,6 +139,85 @@ $spacing: 20px;
   }
 }
 
+.card--cta {
+  box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);
+  padding: 15px;
+  text-align: left;
+  height: auto;
+
+  @include mq($from: m) {
+    height: 315px;
+  }
+
+  @include mq($from: l) {
+    height: 305px;
+  }
+
+  p { 
+    @include mq($from: m) {
+      height: 122px 
+    }
+    @include mq($from: l) {
+      height: 112px 
+    }
+  }
+
+  .btn {
+    margin-bottom: 0;
+  }
+
+  .card__title {
+    @include cf();
+    display: flex;
+    align-items: center; 
+    &:before {
+      content: '';
+      display: block;
+      width: 65px;
+      height: 55px;
+      background: url('../img/icon-tileset.png');
+      float: left;
+    }
+
+    &--help {
+      &:before {
+        background-position: -126px 83px;
+      }
+    }
+
+    &--card {
+      &:before {
+        background-position: -326px 185px;
+      }
+    }
+
+    &--briefcase {
+      &:before {
+        background-position: -224px 185px;
+      }
+    }
+
+    &--hand {
+      &:before {
+        background-position: -326px 83px;
+      }
+    }
+
+    &--kettle {
+      &:before {
+        background-position: -120px 285px;
+      }
+    }
+
+    &--street-support {
+      &:before {
+        height: 60px;
+        background-position: -23px 288px;
+      }
+    }
+  }
+}
+
 .card--brand-h {
   box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);
 
@@ -222,4 +301,15 @@ $spacing: 20px;
   border-left: 12px solid transparent;
   border-right: 12px solid transparent;
   border-top: /* TIP_HEIGHT= */ 16px solid white;
+}
+
+.card__close {
+  background: none;
+  border: none;
+  color: white;
+  display: block;
+  float: right;
+  font-size: 16px;
+  margin: -15px -5px 0 0 !important;
+  padding: 5px !important;
 }

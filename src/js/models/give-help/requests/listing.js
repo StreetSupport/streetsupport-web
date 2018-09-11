@@ -1,122 +1,141 @@
-import List from 'list.js'
-const Awesomplete = require('awesomplete')
+const ko = require('knockout')
 
-const activeClass = 'block-tabs__tab--selected'
+const api = require('../../../get-api-data')
+const browser = require('../../../browser')
+const endpoints = require('../../../api')
+const location = require('../../../location/locationSelector')
+const postcodeLookup = require('../../../location/postcodes')
+const proximityRanges = require('../../../location/proximityRanges')
 
-const initList = () => {
-   // List.js
-  const options = {
-    valueNames: [ 'type', 'serviceProviderName', 'creationDate', 'neededDate', 'description', 'keywords', 'distanceAwayInMetres' ],
-    plugins: []
-  }
+import { formatNeedsKO } from './needs'
+import { getKOSortAscFunc, getKOSortDescFunc } from '../../../sorting'
 
-  const theList = new List('js-card-search', options)
-  theList.sort('neededDate', { order: 'desc' })
+class NeedsListing {
+  constructor () {
+    this.ranges = ko.observableArray(proximityRanges.ranges)
+    this.range = ko.observable(proximityRanges.defaultRange)
+    this.postcode = ko.observable()
+    this.allNeeds = ko.observableArray()
+    this.filters = ko.observableArray([
+      { isActive: ko.observable(true), filterAction: () => this.clearFilter(), filterFunction: () => true, label: 'All' },
+      { isActive: ko.observable(false), filterAction: () => this.filterForItems(), filterFunction: (n) => n.type() === 'items', label: 'Items' },
+      { isActive: ko.observable(false), filterAction: () => this.filterForTime(), filterFunction: (n) => n.type() === 'time', label: 'Time' },
+      { isActive: ko.observable(false), filterAction: () => this.filterForMoney(), filterFunction: (n) => n.type() === 'money', label: 'Money' }
+    ])
+    this.currentFilter = ko.observable(this.filters().find((f) => f.label === 'All').filterFunction)
+    this.sorts = ko.observableArray([
+      { isActive: ko.observable(true), sortAction: () => this.sortByDateAdded(), sortFunction: getKOSortDescFunc('neededDate'), label: 'Date Added' },
+      { isActive: ko.observable(false), sortAction: () => this.sortByOrganisation(), sortFunction: getKOSortAscFunc('serviceProviderName'), label: 'Organisation' },
+      { isActive: ko.observable(false), sortAction: () => this.sortByDistance(), sortFunction: getKOSortAscFunc('distanceAwayInMetres'), label: 'Distance' }
+    ])
+    this.currentSort = ko.observable(this.sorts().find((f) => f.label === 'Date Added').sortFunction)
+    this.isMoreToLoad = ko.observable(false)
+    this.currentPageLinks = {}
 
-  return theList
-}
+    this.hasPostcode = ko.computed(() => this.postcode() !== undefined && this.postcode().length, this)
+    this.needsToDisplay = ko.computed(() => this.allNeeds().filter(this.currentFilter()).sort(this.currentSort()), this)
+    this.hasNeeds = ko.computed(() => this.needsToDisplay().length > 0, this)
 
-let initFiltering = (theList) => {
-  let runFiltering = () => {
-    if (activeFilters.length === 0) {
-      resetFiltering()
-      return
-    }
-
-    theList.filter((item) => {
-      if (activeFilters.length > 0) {
-        return (activeFilters.indexOf(item.values().type)) > -1
-      }
-      return true
-    })
-  }
-
-  let resetFiltering = () => {
-    // Reset active states
-    let c
-    let filters = document.querySelectorAll('.js-filter-item')
-
-    activeFilters = []
-
-    for (c = 0; c < filters.length; c++) {
-      filters[c].classList.remove(activeClass)
-    }
-
-    document.querySelector('.js-filter-item-all').classList.add(activeClass)
-
-    // Reset filter & layout
-    theList.filter()
-  }
-
-  let filters = Array.from(document.querySelectorAll('.js-filter-item'))
-  let activeFilters = []
-
-  // Add click listener to each item
-  for (let b = 0; b < filters.length; b++) {
-    filters[b].addEventListener('click', (event) => {
-      let self = event.target
-      let getFilter = self.getAttribute('data-filter')
-      event.preventDefault()
-
-      if (getFilter === 'all') {
-        resetFiltering()
-      } else {
-        document.querySelector('.js-filter-item-all').classList.remove(activeClass)
-        filters.forEach((f) => f.classList.remove(activeClass))
-        self.classList.add(activeClass)
-        activeFilters = [getFilter]
-        runFiltering()
-      }
-    })
-  }
-
-  // Add change listener to `<select>` for small screens
-  let filterList = document.querySelectorAll('.js-filter-list.list-to-dropdown__select')
-  for (let c = 0; c < filterList.length; c++) {
-    filterList[c].addEventListener('change', () => {
-    })
-  }
-}
-
-const initSorting = (theList) => {
-  const sortCriteriaButtons = Array.from(document.querySelectorAll('.js-sort-criteria'))
-  const activeClass = 'card-sort__item--selected'
-  sortCriteriaButtons.forEach((b) => {
-    b.addEventListener('click', (event) => {
-      event.preventDefault()
-      let sortFields = []
-      sortFields['organisation'] = 'serviceProviderName'
-      sortFields['date'] = 'neededDate'
-      sortFields['distance'] = 'distanceAwayInMetres'
-
-      let selectedSort = event.target.getAttribute('data-sort')
-      let [field, direction] = selectedSort.split('-')
-      theList.sort(sortFields[field], { order: direction })
-
-      sortCriteriaButtons.forEach((cb) => {
-        cb.classList.remove(activeClass)
+    location.getPreviouslySetPostcode()
+      .then((locationResult) => {
+        if (locationResult) {
+          this.locationResult = locationResult
+          this.postcode(this.locationResult.postcode)
+          this.loadNeeds(this.firstPageUrl)
+        }
       })
-      event.target.classList.add(activeClass)
-    })
-  })
+  }
+
+  loadNextPage () {
+    this.loadNeeds(endpoints.getFullUrl(this.currentPageLinks.next))
+  }
+
+  search () {
+    this.allNeeds([])
+    postcodeLookup.getCoords(
+      this.postcode(),
+      (result) => {
+        this.locationResult = result
+        this.loadNeeds(this.firstPageUrl)
+      },
+      () => {
+        browser.redirect('/500')
+      })
+  }
+
+  filterForItems () {
+    this.setActiveFilter('Items')
+  }
+
+  filterForTime () {
+    this.setActiveFilter('Time')
+  }
+
+  filterForMoney () {
+    this.setActiveFilter('Money')
+  }
+
+  clearFilter () {
+    this.setActiveFilter('All')
+  }
+
+  setActiveFilter (reqFilter) {
+    this.filters()
+      .filter((f) => f.label !== reqFilter)
+      .forEach((f) => f.isActive(false))
+    const filter = this.filters().find((f) => f.label === reqFilter)
+    filter.isActive(true)
+    this.currentFilter(filter.filterFunction)
+  }
+
+  sortByOrganisation () {
+    this.setActiveSort('Organisation')
+  }
+
+  sortByDistance () {
+    this.setActiveSort('Distance')
+  }
+
+  sortByDateAdded () {
+    this.setActiveSort('Date Added')
+  }
+
+  setActiveSort (reqSort) {
+    this.sorts()
+      .filter((f) => f.label !== reqSort)
+      .forEach((f) => f.isActive(false))
+    const sort = this.sorts().find((f) => f.label === reqSort)
+    sort.isActive(true)
+    this.currentSort(sort.sortFunction)
+  }
+
+  loadNeeds (url) {
+    browser.loading()
+    api
+      .data(url)
+      .then((result) => {
+        this.currentPageLinks = result.data.links
+        this.allNeeds([...this.allNeeds(), ...formatNeedsKO(result.data.items, this.locationResult)])
+        this.isMoreToLoad(result.data.links.next)
+        browser.loaded()
+      }, (_) => {
+        browser.redirect('/500')
+      })
+  }
+
+  get firstPageUrl () {
+    const qsParts = {
+      'latitude': this.locationResult.latitude,
+      'longitude': this.locationResult.longitude,
+      'pageSize': 21,
+      'range': this.range()
+    }
+    const qs = Object.keys(qsParts)
+      .map((k) => `${k}=${qsParts[k]}`)
+      .join('&')
+
+    return `${endpoints.needsHAL}?${qs}`
+  }
 }
 
-export const buildList = () => {
-  const theList = initList()
-
-  initFiltering(theList)
-  initSorting(theList)
-}
-
-export const initAutoComplete = (needs) => {
-  const keywords = needs
-    .reduce((acc, n) => { return [...acc, ...n.keywords] }, [])
-    .map((k) => k.toLowerCase())
-    .filter((k) => k.length > 0)
-
-  const unique = [...new Set(keywords)]
-    .join(',')
-
-  const input = document.querySelector('.search')
-  new Awesomplete(input, {list: unique}) // eslint-disable-line
-}
+module.exports = NeedsListing

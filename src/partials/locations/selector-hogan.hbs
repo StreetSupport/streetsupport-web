@@ -1,8 +1,16 @@
-<div class="location-selector">
-  <label for="location" class="location-selector__label hide-screen">Select a Location: </label>
-  <select class="js-homepage-promo-location-selector js-location-select location-selector__select form__input" name="location" id="location">
-    \{{#locations}}
-    <option \{{#isSelected}}selected\{{/isSelected}} value="\{{id}}">\{{name}}</option>
-    \{{/locations}}
-  </select>
-</div>
+<form class="form location-selector js-change-location-form">
+  <fieldset class="form__fieldset form__fieldset--inline-fill">
+    <legend class="h2 hide-screen">Want to see what's available in our other featured locations?</legend>
+    <div class="form__fieldset-inline-fill-container">
+      <label class="hide-screen" for="location">Select Location</label>
+      <select name="location" class="form__input form__input--inline-fill js-change-location-select"  id="js-location-selector-output">
+          \{{#locations}}
+        <option \{{#isSelected}}selected\{{/isSelected}} value="\{{id}}">\{{name}}</option>
+        \{{/locations}}
+      </select>
+      <button class="btn btn--brand-e btn--inline-fill js-change-location-btn" type="submit">
+        <span class="btn__text">Visit location page</span>
+      </button>
+    </div>
+  </fieldset>
+</form>

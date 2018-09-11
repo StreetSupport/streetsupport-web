@@ -15,7 +15,7 @@ function getAmendedSchema () {
   const ssnCities = cities
     .filter((c) => c.isOpenToRegistrations)
     .map((c) => c.id)
-  schema.properties.associatedCity.enum = ['', ...ssnCities]
+  schema.properties.associatedLocationIds.enum = ssnCities
   return schema
 }
 

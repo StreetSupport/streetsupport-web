@@ -154,7 +154,7 @@
 }
 
 .requests-listing {
-  clear: both;
+  @include cf();
   list-style: none;
   margin: 20px auto;
   padding: 0;

@@ -11,14 +11,23 @@
   }
 }
 
+%align-right {
+  @include mq($from: xxl) {
+    &:before {
+      left: auto;
+      right: 0;
+    }
+  }
+}
+
 .location-header {
   background-position: right bottom;
   background-size: 940px;
   position: relative;
-
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 
   @include mq($from: m) {
     overflow-x: hidden;
@@ -35,32 +44,20 @@
       width: 600px;
     }
   }
-  @include mq($from: xxl) {
-    &:before {
-      left: auto;
-      right: 0;
-    }
-  }
 
   & .container {
     position: relative;
   }
 }
 
-.location--manchester .location-header {
+.location--bolton .location-header {
   @include mq($from: m) {
+    min-height: 400px;
     &:before {
-      background-size: 650px;
-      width: 650px;
-      height: 270px;
-    }
-  }
-}
-
-.location--leeds .location-header {
-  @include mq($from: m) {
-    &:before {
-      height: 278px;
+      background-size: 1003px;
+      width: 1003px;
+      height: 365px;
+      bottom: -1px;
     }
   }
 }
@@ -81,6 +78,46 @@
     }
   }
   @extend %get-in-sea;
+}
+
+.location--bury .location-header {
+  @include mq($from: m) {
+    min-height: 400px;
+    &:before {
+      background-size: 800px;
+      width: 800px;
+      height: 302px;
+    }
+  }
+}
+
+.location--leeds .location-header {
+  @include mq($from: m) {
+    &:before {
+      height: 278px;
+    }
+  }
+}
+
+.location--manchester .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-size: 650px;
+      width: 650px;
+      height: 270px;
+    }
+  }
+}
+
+.location--oldham .location-header {
+  @include mq($from: m) {
+    min-height: 400px;
+    &:before {
+      background-size: 857px;
+      width: 857px;
+      height: 389px;
+    }
+  }
 }
 
 .location--portsmouth .location-header {
@@ -110,4 +147,39 @@
     }
   }
   @extend %get-in-sea;
+}
+
+.location--tameside .location-header {
+  @include mq($from: m) {
+    min-height: 400px;
+    &:before {
+      background-size: 750px;
+      width: 750px;
+      height: 302px;
+    }
+  }
+}
+
+.location--trafford .location-header {
+  @include mq($from: m) {
+    min-height: 400px;
+    &:before {
+      background-size: 807px;
+      width: 807px;
+      height: 342px;
+      bottom: -11px;
+    }
+  }
+}
+
+
+.location--wigan-and-leigh .location-header {
+  @include mq($from: m) {
+    min-height: 400px;
+    &:before {
+      background-size: 800px;
+      width: 800px;
+      height: 354px;
+    }
+  }
 }

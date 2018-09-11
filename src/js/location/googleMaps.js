@@ -5,7 +5,12 @@ const buildMap = function (userLocation, customOptions = {}, domSelector = '.js-
   const defaultOptions = {
     zoom: 10,
     center: centre,
-    draggable: true
+    draggable: true,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    fullscreenControl: true,
+    zoomControl: true,
+    streetViewControl: false,
+    mapTypeControl: false
   }
   const updatedOptions = Object.assign(defaultOptions, customOptions)
   return new google.maps.Map(document.querySelector(domSelector), updatedOptions)
@@ -64,6 +69,11 @@ const Popup = function (position, content) {
   /** Called when the popup is added to the map. */
   Popup.prototype.onAdd = function () {
     this.getPanes().floatPane.appendChild(this.anchor)
+
+    document.querySelector('.js-popup-close')
+      .addEventListener('click', () => {
+        this.onRemove()
+      })
   }
 
   /** Called when the popup is removed from the map. */

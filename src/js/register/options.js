@@ -4,12 +4,9 @@ module.exports = {
     'name': {
       'placeholder': 'The name of your organisation.'
     },
-    'city': {
-      'optionLabels': [
-        'Bournemouth',
-        'Leeds',
-        'Manchester'
-      ]
+    'associatedLocationIds': {
+      'multiple': true,
+      'size': 5
     },
     'shortDescription': {
       'type': 'textarea',

@@ -16,6 +16,7 @@ let cities = []
 gulp.task('l-getCities', (callback) => {
   request(endpoints.cities, function (err, res, body) {
     cities = JSON.parse(body)
+      .filter(c => c.isPublic)
       .sort((a, b) => {
         if (a.name < b.name) return -1
         if (a.name > b.name) return 1
@@ -71,18 +72,6 @@ gulp.task('l-generate-header-css', () => {
     .pipe(gulp.dest(srcFile))
 })
 
-gulp.task('l-generate-desktop-nav', () => {
-  const srcFile = `${config.paths.partials}/nav/`
-  const cityOutput = cities
-    .map((c) => `<ul class="nav__list nav__list--hub" data-city="${c.id}">
-    {{> ${c.id}/nav }}
-  </ul>`)
-    .join(' ')
-
-  return newFile('desktop-locations.hbs', cityOutput)
-    .pipe(gulp.dest(srcFile))
-})
-
 gulp.task('l-generate-mobile-nav', () => {
   const srcFile = `${config.paths.partials}/nav/`
   const cityOutput = cities
@@ -90,7 +79,7 @@ gulp.task('l-generate-mobile-nav', () => {
     .join(`
 `)
 
-  return newFile('mobile-locations.hbs', cityOutput)
+  return newFile('locations.hbs', cityOutput)
     .pipe(gulp.dest(srcFile))
 })
 
@@ -113,7 +102,6 @@ gulp.task('generate-location-files', (callback) => {
     'l-generate-home-pages',
     'l-generate-header-css',
     'l-generate-nav-variables',
-    'l-generate-desktop-nav',
     'l-generate-mobile-nav',
     'l-generate-header-nav',
     callback
