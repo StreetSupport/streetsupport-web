@@ -94,6 +94,20 @@ gulp.task('l-generate-header-nav', () => {
     .pipe(gulp.dest(srcFile))
 })
 
+gulp.task('l-generate-location-dropdown', () => {
+  const srcFile = `${config.paths.partials}/locations/`
+  const cityOutput = 
+  `<select name="location"
+    class="form__input form__input--inline-fill js-change-location-select"
+    id="js-location-selector-output">
+      <option value="">- Select a location -</option>${cities
+    .map((c) => `<option value="${c.id}">${c.name}</option>`)
+    .join(`
+`)}</select>`
+
+  return newFile('_generated-selector-hogan.hbs', cityOutput).pipe(gulp.dest(srcFile))
+})
+
 
 gulp.task('generate-location-files', (callback) => {
   runSequence(
@@ -104,6 +118,7 @@ gulp.task('generate-location-files', (callback) => {
     'l-generate-nav-variables',
     'l-generate-mobile-nav',
     'l-generate-header-nav',
+    'l-generate-location-dropdown',
     callback
   )
 })
