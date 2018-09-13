@@ -67,14 +67,14 @@
     &:before {
       background-size: 842px;
       width: 842px;
-      bottom: 20px;
+      bottom: 0px;
+      height: 400px;
     }
   }
-  @include mq($from: l) {
+  @include mq($from: xxxl) {
     &:before {
-      background-size: 842px;
-      width: 842px;
-      left: 50%;
+      left: auto;
+      right: 0%;
     }
   }
   @extend %get-in-sea;
