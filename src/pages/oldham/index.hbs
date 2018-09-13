@@ -168,7 +168,9 @@ location: oldham
 </script>
 
 <script id="js-location-selector-tpl" type="text/template">
-  {{> locations/_generated-selector-hogan}}
+  \{{#locations}}
+  <option value="\{{id}}"\{{#isSelected}} selected="selected"\{{/isSelected}}>\{{name}}</option>
+  \{{/locations}}
 </script>
 
 <script id="js-statistics-tpl" type="text/template">
