@@ -98,3 +98,7 @@ A number of happy paths are covered by automated browsers tests at: [https://git
 
 CSS styling is written in SCSS, based on [Susy](http://susy.oddbird.net/), in the [BEM](http://getbem.com/introduction/) style, and is auto-prefixed. Build with a mobile-first approach, using [sass-mq](https://github.com/sass-mq/sass-mq) for media queries.
 Each component's styles should reside in its own file. Avoid nesting of elements and modifiers (although there are many cases of nesting at the moment!).
+
+## Supported by
+
+![Browser Stack](/src/img/browser-stack.png)

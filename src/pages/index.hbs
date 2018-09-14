@@ -32,7 +32,7 @@ page: home
         <p>Street Support Network is currently active in several locations across the UK.</p>
 
         <p class="h3">Want to see what is happening near you? Select one&hellip;</p>
-        <div id="js-location-selector-output"></div>
+        {{> locations/selector-hogan hideLegend=true }}
       </div>
       <div class="home__hub-map">
         <div class="js-map"></div>
@@ -102,10 +102,6 @@ page: home
 
 
 {{> loading-spinner}}
-
-<script id="js-location-selector-tpl" type="text/template">
-{{> locations/selector-hogan }}
-</script>
 
 <script id="js-statistics-tpl" type="text/template">
 {{> impact-statistics }}
