@@ -94,6 +94,24 @@ gulp.task('l-generate-header-nav', () => {
     .pipe(gulp.dest(srcFile))
 })
 
+function loactionOptionTag(str, id, isSelected, name) {
+  var selectedStr = ""
+  if (isSelected) {
+    selectedStr = " selected=\"selected\""
+  }
+  return str[0]+id+str[1]+selectedStr+str[2]+name+str[3]
+}
+
+gulp.task('l-generate-location-dropdown', () => {
+  const srcFile = `${config.paths.partials}/locations/`
+  const cityOutput = 
+  `${cities
+    .map((c) => loactionOptionTag`<option value="${c.id}"${c.selected}>${c.name}</option>`)
+    .join(`\n`)}`
+
+  return newFile('_generated-option-tags.hbs', cityOutput).pipe(gulp.dest(srcFile))
+})
+
 
 gulp.task('generate-location-files', (callback) => {
   runSequence(
@@ -104,6 +122,7 @@ gulp.task('generate-location-files', (callback) => {
     'l-generate-nav-variables',
     'l-generate-mobile-nav',
     'l-generate-header-nav',
+    'l-generate-location-dropdown',
     callback
   )
 })
