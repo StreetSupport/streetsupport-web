@@ -158,8 +158,9 @@
   width: 100%;
   @include mq($from: m) {
     flex-grow: 2;
-    width: auto;
+    width: 100px; /* arbitrary width to stop <option> tags messing up flex width */
     margin-right: 0.5em;
+    & * { width: 100px; /* arbitrary width to stop <option> tags messing up flex width */ }
   }
 }
 

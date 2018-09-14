@@ -124,7 +124,10 @@ const initMap = function (currentLocation) {
   api
     .data(endpoint)
     .then((result) => {
-      map.init(result.data.items, currentLocation, null, buildInfoWindowMarkup, getLocation, { zoom: 12 })
+      const zoom = currentLocation.id === 'bournemouth'
+        ? 11 // stinky
+        : 12
+      map.init(result.data.items, currentLocation, null, buildInfoWindowMarkup, getLocation, { zoom })
     }, (_) => {
     })
 }
