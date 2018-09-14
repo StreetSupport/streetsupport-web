@@ -423,9 +423,9 @@ $columned-dropdown-column-count: 3;
         }
       }
     
-      .nav__item--about > &--sub-list,
-      .nav__item--locations > &--sub-list {
-        @include mq($from: m, $until: xxl) {
+      .nav__item--about > .nav__list,
+      .nav__item--locations > .nav__list {
+        @include mq($from: m, $until: xxxl) {
           right: 0px
         }
       }

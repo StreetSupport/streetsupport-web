@@ -51,3 +51,5 @@ src/scss/modules/_generated-location-nav-variables.scss
 src/partials/nav/locations.hbs
 src/scss/partials/_generated-location-header.scss
 src/partials/nav/header-locations.hbs
+src/partials/locations/_generated-selector-hogan.hbs
+src/partials/locations/_generated-option-tags.hbs

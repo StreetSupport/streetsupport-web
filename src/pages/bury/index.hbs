@@ -52,19 +52,7 @@ location: bury
           </div>
         </fieldset>
       </form>
-      <form class="form js-change-location-form">
-        <fieldset class="form__fieldset form__fieldset--inline-fill">
-          <legend class="h2">Want to see what's available in our other featured locations?</legend>
-          <div class="form__fieldset-inline-fill-container">
-            <label class="hide-screen" for="location">Select Location</label>
-            <select name="location" class="form__input form__input--inline-fill js-change-location-select"  id="js-location-selector-output">
-            </select>
-            <button class="btn btn--brand-e btn--inline-fill" type="submit">
-              <span class="btn__text">Visit location page</span>
-            </button>
-          </div>
-        </fieldset>
-      </form>
+      {{> locations/selector-hogan }}
     </div>
     <div class="home__copy">
       <div class="js-map"></div>
@@ -165,12 +153,6 @@ location: bury
       </div>
     </div>
   </div>
-</script>
-
-<script id="js-location-selector-tpl" type="text/template">
-  \{{#locations}}
-  <option value="\{{id}}"\{{#isSelected}} selected="selected"\{{/isSelected}}>\{{name}}</option>
-  \{{/locations}}
 </script>
 
 <script id="js-statistics-tpl" type="text/template">

@@ -41,27 +41,20 @@ const displayMap = function (hubs) {
   }, 1000)
 }
 
-const init = () => {
-  const theData = {
-    locations: [{ id: '', name: '- Select a location -' }, ...supportedCities.locations]
-  }
-  const callback = function () {
-    location.handler((result) => {
-      if (result.length) {
-        redirectToHubPage(result)
-      }
-    }, '.js-change-location-select')
+const initLocationDropdown = function () {
+  location.handler((result) => {
+    if (result.length) {
+      redirectToHubPage(result)
+    }
+  }, '.js-change-location-select')
 
-    document.querySelector('.js-change-location-btn')
-      .addEventListener('click', () => {
-        redirectToHubPage(document.querySelector('.js-change-location-select').value)
-      })
+  document.querySelector('.js-change-location-btn')
+    .addEventListener('click', () => {
+      redirectToHubPage(document.querySelector('.js-change-location-select').value)
+    })
+}
 
-    displayMap(supportedCities.locations)
-  }
-
-  templating.renderTemplate('js-location-selector-tpl', theData, 'js-location-selector-output', callback)
-
+const initStats = function () {
   const stats = [
     { field: 'totalServiceProviders', link: '/find-help/all-service-providers/', label: 'Organisations' },
     { field: 'totalServices', link: '/find-help/', label: 'Services' },
@@ -86,6 +79,12 @@ const init = () => {
       templating.renderTemplate('js-statistics-tpl', theData, 'js-statistics-output')
     }, (_) => {
     })
+}
+
+const init = () => {
+  displayMap(supportedCities.locations)
+  initLocationDropdown()
+  initStats()
 }
 
 init()
