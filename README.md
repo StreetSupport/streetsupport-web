@@ -17,7 +17,7 @@ Please fork and work in the `develop` branch. Once the update is completed, subm
 * Install Node 6 LTS,
 * Run in Terminal: `npm i gulp-cli -g` (Gulp does not need to be installed globally),
 * In your command line terminal, navigate to the street support project folder,
-* Run: `npm i`. (currently, [snyk](https://snyk.io/) throws an error here, but you can ignore it)
+* Run: `npm i` (Note: if you are on the Code Wifi network, you may have an issue installing modules around CriticalCSS/Phantom; you might need to tether to your mobile phone to get these downloaded.)
 
 See [https://github.com/fephil/garrus](https://github.com/fephil/garrus) for more information about the Frontend workflow.
 
@@ -74,7 +74,7 @@ Each page of the site is found under the `/pages/` directory. Each page is repre
 * description: the page's meta description
 * layout: the master layout file (found in `/layouts/`)
 * permalink: ???
-* jsBundle: the js bundle that will be loaded into the page. Bundles are defined in `/webpack.config.js` and each one points to a js file in `/src/js/`
+* jsBundle: the js bundle that will be loaded into the page. Bundles are defined in `/webpack.config.js` and each one points to a js file in `/src/js/`. For basic pages, use `generic`.
 * section: the top level navigation item this page belongs to. See `/src/scss/modules/_variables.scss` for list of sections
 * page: the navigation item for this page. See `/src/scss/modules/_variables.scss` for list of pages
 
@@ -98,7 +98,3 @@ A number of happy paths are covered by automated browsers tests at: [https://git
 
 CSS styling is written in SCSS, based on [Susy](http://susy.oddbird.net/), in the [BEM](http://getbem.com/introduction/) style, and is auto-prefixed. Build with a mobile-first approach, using [sass-mq](https://github.com/sass-mq/sass-mq) for media queries.
 Each component's styles should reside in its own file. Avoid nesting of elements and modifiers (although there are many cases of nesting at the moment!).
-
-## Supported by
-
-![Browser Stack](/src/img/browser-stack.png)
