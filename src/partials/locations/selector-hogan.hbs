@@ -1,12 +1,11 @@
 <form class="form location-selector js-change-location-form">
   <fieldset class="form__fieldset form__fieldset--inline-fill">
-    <legend class="h2 hide-screen">Want to see what's available in our other featured locations?</legend>
+    <legend class="h2{{#if hideLegend}} hide-screen{{/if}}">Want to see what's available in our other featured locations?</legend>
     <div class="form__fieldset-inline-fill-container">
       <label class="hide-screen" for="location">Select Location</label>
-      <select name="location" class="form__input form__input--inline-fill js-change-location-select"  id="js-location-selector-output">
-          \{{#locations}}
-        <option \{{#isSelected}}selected\{{/isSelected}} value="\{{id}}">\{{name}}</option>
-        \{{/locations}}
+      <select name="location" class="form__input form__input--inline-fill js-change-location-select">
+        <option value="">- Select a location -</option>
+        {{> locations/_generated-option-tags }}
       </select>
       <button class="btn btn--brand-e btn--inline-fill js-change-location-btn" type="submit">
         <span class="btn__text">Visit location page</span>

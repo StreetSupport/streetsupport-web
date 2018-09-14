@@ -105,28 +105,11 @@ function loactionOptionTag(str, id, isSelected, name) {
 gulp.task('l-generate-location-dropdown', () => {
   const srcFile = `${config.paths.partials}/locations/`
   const cityOutput = 
-  `<div id="js-location-selector-output">
-     <form class="form location-selector js-change-location-form">
-       <fieldset class="form__fieldset form__fieldset--inline-fill">
-         <legend class="h2 hide-screen">Want to see what's available in our other featured locations?</legend>
-         <div class="form__fieldset-inline-fill-container">
-           <label class="hide-screen" for="location">Select Location</label>
-           <select name="location"
-             class="form__input form__input--inline-fill js-change-location-select"
-             id="js-location-selector-output">
-             <option value="">- Select a location -</option>${cities
-               .map((c) => loactionOptionTag`<option value="${c.id}"${c.selected}>${c.name}</option>`)
-               .join(`\n`)}
-           </select>
-           <button class="btn btn--brand-e btn--inline-fill js-change-location-btn" type="submit">
-             <span class="btn__text">Visit location page</span>
-           </button>
-         </div>
-       </fieldset>
-     </form>
-   </div>`
+  `${cities
+    .map((c) => loactionOptionTag`<option value="${c.id}"${c.selected}>${c.name}</option>`)
+    .join(`\n`)}`
 
-  return newFile('_generated-selector-hogan.hbs', cityOutput).pipe(gulp.dest(srcFile))
+  return newFile('_generated-option-tags.hbs', cityOutput).pipe(gulp.dest(srcFile))
 })
 
 
