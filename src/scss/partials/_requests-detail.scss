@@ -39,7 +39,7 @@
     &--plain { margin: 0 }
 
     @include mq($from: s) {
-      width: inherit;
+      width: 160px;
       &--plain { margin: inherit }
     }
   }
