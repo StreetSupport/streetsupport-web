@@ -32,6 +32,10 @@ describe('Needs Listing', () => {
       })
     sinon.stub(browser, 'loading')
     sinon.stub(browser, 'loaded')
+    sinon.stub(browser, 'location')
+      .returns({
+        hash: ''
+      })
     sinon.stub(locationSelector, 'getPreviouslySetPostcode')
       .returns({
         then: function (success) {
