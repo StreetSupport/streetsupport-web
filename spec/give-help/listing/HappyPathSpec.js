@@ -34,6 +34,10 @@ describe('Needs Listing', () => {
       })
     browserLoadingStub = sinon.stub(browser, 'loading')
     browserLoadedStub = sinon.stub(browser, 'loaded')
+    sinon.stub(browser, 'location')
+      .returns({
+        hash: ''
+      })
     sinon.stub(locationSelector, 'getPreviouslySetPostcode')
       .returns({
         then: function (success) {
@@ -48,6 +52,7 @@ describe('Needs Listing', () => {
     api.data.restore()
     browser.loading.restore()
     browser.loaded.restore()
+    browser.location.restore()
     locationSelector.getPreviouslySetPostcode.restore()
   })
 

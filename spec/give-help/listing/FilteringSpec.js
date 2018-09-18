@@ -10,6 +10,7 @@ const needsData = require('./needsData')
 
 describe('Needs Listing - filtering', () => {
   let ajaxGetStub,
+    browserHistoryStub,
     sut
 
   const previouslySetLocation = {
@@ -28,6 +29,13 @@ describe('Needs Listing - filtering', () => {
       })
     sinon.stub(browser, 'loading')
     sinon.stub(browser, 'loaded')
+    sinon.stub(browser, 'location')
+      .returns({
+        hash: '',
+        pathname: '/give-help/help/'
+      })
+    browserHistoryStub = sinon.stub(browser, 'pushHistory')
+
     sinon.stub(locationSelector, 'getPreviouslySetPostcode')
       .returns({
         then: function (success) {
@@ -42,6 +50,8 @@ describe('Needs Listing - filtering', () => {
     api.data.restore()
     browser.loading.restore()
     browser.loaded.restore()
+    browser.location.restore()
+    browser.pushHistory.restore()
     locationSelector.getPreviouslySetPostcode.restore()
   })
 
@@ -59,6 +69,10 @@ describe('Needs Listing - filtering', () => {
         .filter((n) => n.isActive() === false)
         .map((f) => f.label)
       expect(inActiveFilters.includes('Items')).toBeFalsy()
+    })
+
+    it('- should push history', () => {
+      expect(browserHistoryStub.getCall(0).args[2]).toEqual('/give-help/help/#Items')
     })
   })
 

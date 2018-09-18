@@ -57,6 +57,7 @@ class NeedsListing {
       (result) => {
         this.locationResult = result
         this.loadNeeds(this.firstPageUrl)
+        location.setPostcode(this.postcode())
       },
       () => {
         browser.redirect('/500')
@@ -80,12 +81,17 @@ class NeedsListing {
   }
 
   setActiveFilter (reqFilter) {
-    this.filters()
-      .filter((f) => f.label !== reqFilter)
-      .forEach((f) => f.isActive(false))
     const filter = this.filters().find((f) => f.label === reqFilter)
-    filter.isActive(true)
-    this.currentFilter(filter.filterFunction)
+
+    if (filter) {
+      this.filters()
+        .filter((f) => f.label !== reqFilter)
+        .forEach((f) => f.isActive(false))
+        
+      browser.pushHistory({}, `Give ${reqFilter}`, browser.location().pathname + '#' + reqFilter)
+      filter.isActive(true)
+      this.currentFilter(filter.filterFunction)
+    }
   }
 
   sortByOrganisation () {
@@ -117,6 +123,12 @@ class NeedsListing {
         this.currentPageLinks = result.data.links
         this.allNeeds([...this.allNeeds(), ...formatNeedsKO(result.data.items, this.locationResult)])
         this.isMoreToLoad(result.data.links.next)
+        
+        if(browser.location().hash) {
+          console.log(browser.location().hash)
+          this.setActiveFilter(browser.location().hash.substring(1))
+        }
+
         browser.loaded()
       }, (_) => {
         browser.redirect('/500')
