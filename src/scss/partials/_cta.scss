@@ -87,6 +87,7 @@
       @include span(1 of 3);
     }
 
+    &--right,
     &:nth-of-type(3n) {
       @include last();
     }
@@ -124,6 +125,12 @@
   .home-cta--help & {
     &:before {
       background-position: -120px 87px;
+    }
+  }
+
+  .home-cta--hand & {
+    &:before {
+      background-position: -326px 83px;
     }
   }
 
