@@ -16,6 +16,7 @@ describe('Needs Listing - new postcode search', () => {
   let ajaxGetStub,
     browserLoadingStub,
     browserLoadedStub,
+    setPostcodeStub,
     postcodeLookupStub,
     sut
 
@@ -47,6 +48,7 @@ describe('Needs Listing - new postcode search', () => {
           success(previouslySetLocation)
         }
       })
+    setPostcodeStub = sinon.stub(locationSelector, 'setPostcode')
     postcodeLookupStub = sinon.stub(postcodeLookup)
     postcodeLookupStub
       .getCoords
@@ -68,6 +70,7 @@ describe('Needs Listing - new postcode search', () => {
     browser.loading.restore()
     browser.loaded.restore()
     locationSelector.getPreviouslySetPostcode.restore()
+    locationSelector.setPostcode.restore()
     postcodeLookup.getByCoords.restore()
     postcodeLookup.getCoords.restore()
   })
@@ -78,6 +81,10 @@ describe('Needs Listing - new postcode search', () => {
 
   it('- should lookup coords for postcode', () => {
     expect(postcodeLookupStub.getCoords.getCall(0).args[0]).toEqual('new postcode')
+  })
+
+  it('- should set entered postcode as active postcode', () => {
+    expect(setPostcodeStub.withArgs('new postcode').calledOnce).toBeTruthy()
   })
 
   it('- should load needs...', () => {
