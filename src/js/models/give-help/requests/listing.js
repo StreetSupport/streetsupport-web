@@ -57,6 +57,7 @@ class NeedsListing {
       (result) => {
         this.locationResult = result
         this.loadNeeds(this.firstPageUrl)
+        location.setPostcode(this.postcode())
       },
       () => {
         browser.redirect('/500')
