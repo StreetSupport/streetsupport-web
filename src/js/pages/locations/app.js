@@ -165,6 +165,10 @@ initStatistics(currentLocation)
 initMap(currentLocation)
 initSwep(currentLocation.id)
 
+if(currentLocation.id === 'southampton') {
+  templating.renderTemplate('js-soton-charter-tpl', {}, 'js-soton-charter-output')
+}
+
 const availableFeatures = [
   { isEnabledFlag: 'toolkitIsEnabled', init: initToolkit },
   { isEnabledFlag: 'charterIsEnabled', init: initCharter },
