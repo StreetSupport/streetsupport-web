@@ -166,7 +166,6 @@ initMap(currentLocation)
 initSwep(currentLocation.id)
 
 if(currentLocation.id === 'southampton') {
-  console.log('soton')
   templating.renderTemplate('js-soton-charter-tpl', {}, 'js-soton-charter-output')
 }
 
