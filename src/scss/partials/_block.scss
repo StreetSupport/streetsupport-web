@@ -370,8 +370,16 @@
 
   &--standards-toolkit {
     padding: 40px 1rem;
-    max-width: 500px;  // half of $site-container in _variables.scss
     @include mq($from: m) {
+      max-width: 500px;  // half of $site-container in _variables.scss
+      padding: 40px 30px 40px 40px;
+    }
+  }
+
+  &--soton-charter {
+    padding: 40px 1rem;
+    @include mq($from: m) {
+      max-width: 500px;  // half of $site-container in _variables.scss
       padding: 40px 30px 40px 40px;
     }
   }
