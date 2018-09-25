@@ -384,7 +384,7 @@ module.exports = {
         'id': '58ce4e63b421f81088bb30f0',
         'description': 'Two laptops',
         'type': 'items',
-        'reason': 'We need 2 laptops to assist our work with homeless people - can you help? No problem with second hand as long as they work. Or are you a Manchester business that could help us with a gift in kind?',
+        'reason': 'We need 2 laptops to assist our work with people facing homelessness - can you help? No problem with second hand as long as they work. Or are you a Manchester business that could help us with a gift in kind?',
         'moreInfoUrl': null,
         'postcode': 'M1 1EB',
         'instructions': '',
@@ -512,7 +512,7 @@ module.exports = {
         'neededDate': '2016-09-28T16:04:00.4370000Z',
         'serviceProviderId': 'urban-village-medical-practice',
         'serviceProviderName': 'Urban Village Medical Practice',
-        'serviceProviderSynopsis': 'Urban Village Medical Practice is the main provider of primary health care to homeless people in Manchester.',
+        'serviceProviderSynopsis': 'Urban Village Medical Practice is the main provider of primary health care to people facing homelessness in Manchester.',
         'keywords': [
           'Socks'
         ],
