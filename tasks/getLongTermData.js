@@ -14,6 +14,25 @@ const endpoints = require('../src/js/api')
 import { newFile } from './fileHelpers'
 
 /* calls API and generates static data */
+gulp.task('volunteer-categories', (callback) => {
+  return request(endpoints.volunteerCategories)
+    .pipe(source(`${config.paths.generatedData}full-volunteer-categories.js`))
+    .pipe(gulp.dest('./'))
+})
+
+gulp.task('parse-vol-categories', (callback) => {
+  const cats = JSON.parse(fs.readFileSync(`${config.paths.generatedData}full-volunteer-categories.js`))
+    .items
+    .map(function (c) {
+      return {
+        key: c.key,
+        name: c.description
+      }
+    })
+  return newFile('volunteer-categories.js', `export const categories = ${JSON.stringify(cats)}`)
+    .pipe(gulp.dest(`${config.paths.generatedData}`))
+})
+
 gulp.task('full-categories', (callback) => {
   return request(endpoints.serviceCategories)
     .pipe(source(`${config.paths.generatedData}full-categories.js`))
@@ -80,4 +99,12 @@ gulp.task('parse-categories', (callback) => {
   )
 })
 
-gulp.task('getLongTermData', ['parse-categories', 'supported-cities'])
+gulp.task('parse-vol-categories-task', (callback) => {
+  runSequence(
+    'volunteer-categories',
+    'parse-vol-categories',
+    callback
+  )
+})
+
+gulp.task('getLongTermData', ['parse-categories', 'supported-cities', 'parse-vol-categories-task'])

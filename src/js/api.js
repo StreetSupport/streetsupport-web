@@ -26,6 +26,7 @@ module.exports = {
   needsHAL: p('/v2/service-provider-needs/'),
   needCategories: p('/v1/service-provider-needs/categories'),
   createVolunteerEnquiry: p('/v1/volunteer-enquiries/'),
+  volunteerCategories: p('/v1/volunteer-categories/'),
   createOfferOfItems: p('/v1/offers-of-items/'),
   joinStreetSupportApplications: p('/v1/join-street-support-applications/'),
   offerSponsorship: p('/v1/sponsorship-offers/'),
