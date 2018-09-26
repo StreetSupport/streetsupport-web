@@ -91,10 +91,10 @@ page: volunteer
 	    		<ul class="form__field-list">
 	    			<li class="form__field-item">
 	    				<label class="form__label hide-screen" for="skill-categories">Skill Categories</label>
-							<ul data-bind="foreach: skillsCategories">
+							<ul class="form__field-list" data-bind="foreach: skillsCategories">
 								<li>
-									<input type="checkbox" data-bind="value: key, attr: { id: key, name: key }, checked: $parent.skillCategory" />
-									<label data-bind="text: name, attr: { for: key }"></label>
+									<input class="" type="checkbox" data-bind="value: key, attr: { id: key, name: key }, checked: $parent.skillCategory" />
+									<label class="" data-bind="text: name, attr: { for: key }"></label>
 								</li>
 							</ul>
 	    			</li>
