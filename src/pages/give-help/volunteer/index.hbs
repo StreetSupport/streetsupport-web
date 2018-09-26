@@ -89,6 +89,15 @@ page: volunteer
 	    	<fieldset class="form__fieldset">
 	    		<legend class="h2 form__fieldset-title">Skills and Experience</legend>
 	    		<ul class="form__field-list">
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="skill-categories">Skill Categories</label>
+							<ul class="form__field-list" data-bind="foreach: skillsCategories">
+								<li>
+									<input class="" type="checkbox" data-bind="value: key, attr: { id: key, name: key }, checked: $parent.skillCategory" />
+									<label class="" data-bind="text: name, attr: { for: key }"></label>
+								</li>
+							</ul>
+	    			</li>
 	    			<li class="form__field-item--full">
 	    				<label class="form__label hide-screen form__label hide-screen" for="skillsAndExperience">What are you able to offer? Please include any skills, experience or interests that might be useful - from medical, legal or finance, to cooking and music!</label>
 	    				<textarea class="form__input form__input--multiline" id="skillsAndExperience" data-bind="value: skillsAndExperience" placeholder="Your Skills and Experience"></textarea>
