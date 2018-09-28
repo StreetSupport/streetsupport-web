@@ -57,6 +57,7 @@ export const getProvidersForListing = (providers) => {
   }
 
   const extractService = (provider) => {
+    console.log(provider)
     provider.location.locationDescription = provider.locationDescription
     return {
       info: marked(htmlEncode.htmlDecode(provider.info)),
@@ -64,6 +65,7 @@ export const getProvidersForListing = (providers) => {
       telephone: provider.telephone,
       days: groupOpeningTimes(provider.openingTimes),
       isOpen247: provider.isOpen247,
+      isTelephoneService: provider.isTelephoneService,
       subCategoryIds: provider.subCategories
         .map((sc) => sc.id)
         .join(' '),
