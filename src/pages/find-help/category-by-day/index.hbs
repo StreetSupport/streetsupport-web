@@ -80,6 +80,9 @@ page:
                         \{{#openingTime}} \{{#serviceInfo}}
                         <li> \{{{serviceInfo}}}</li> \{{/serviceInfo}} \{{/openingTime}} \{{#tags}}
                         <li>Suitable for: <span class="result-detail__tags-item">\{{tags}}</span></li>
+                        \{{#isTelephoneService}}
+                        <li>This is a telephone service.</li>
+                        \{{/isTelephoneService}}
                         \{{/tags}}
                         <li>
                           <a href="/find-help/organisation/?organisation=\{{key}}">\{{{name}}}</a> \{{#locationDescription}}

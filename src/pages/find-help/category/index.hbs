@@ -82,11 +82,15 @@ page:
               <dl class="card__details-dictionary">
                 <dt class="card__details-dictionary-title">Services available:</dt>
                 <dd class="card__details-dictionary-desc">\{{servicesAvailable}}</dd>
+
+                \{{#isTelephoneService}}
+                <dd class="card__details-dictionary-desc">This is a telephone service.</p>
+                \{{/isTelephoneService}}
+
                 \{{#tags}}
                   <dt class="card__details-dictionary-title">Suitable for:</dt>
                   <dd class="card__details-dictionary-desc">\{{tags}}</dd>
                 \{{/tags}}
-                
                 \{{#location}}
                 <dt class="card__details-dictionary-title">Address:</dt>
                 <dd class="card__details-dictionary-desc">
