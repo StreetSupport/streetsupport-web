@@ -99,6 +99,9 @@ page: organisation
                         \{{#tags}}
                           <p class="result-detail__target-audience">Suitable for: <span class="result-detail__tags-item">\{{{tags}}}</span></p>
                         \{{/tags}}
+                        \{{#isTelephoneService}}
+                        <p class="result-detail__telephone">This is a telephone service.</p>
+                        \{{/isTelephoneService}}
                         <h2 class="h3">Location</h2>
                         \{{#locationDescription}}<p>\{{{locationDescription}}}</p>\{{/locationDescription}}
                         \{{#address}}
