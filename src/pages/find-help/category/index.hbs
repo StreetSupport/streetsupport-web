@@ -84,9 +84,12 @@ page:
                 <dd class="card__details-dictionary-desc">\{{servicesAvailable}}</dd>
 
                 \{{#isTelephoneService}}
-                <dd class="card__details-dictionary-desc">This is a telephone service.</p>
+                <dd class="card__details-dictionary-desc">This is a telephone service.</dd>
                 \{{/isTelephoneService}}
 
+                \{{#isAppointmentOnly}}
+                <dd class="card__details-dictionary-desc">Access to this service is by appointment only.</dd>
+                \{{/isAppointmentOnly}}
                 \{{#tags}}
                   <dt class="card__details-dictionary-title">Suitable for:</dt>
                   <dd class="card__details-dictionary-desc">\{{tags}}</dd>
