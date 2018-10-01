@@ -63,6 +63,11 @@ const FindHelp = function (location) {
         const subCategoryId = element.getAttribute('id')
         self.setUrl(pageName, subCategoryKey, subCategoryId)
         self.scrollTo(subCategoryId)
+
+        const filterByDayFilter = document.querySelector('.js-filter-by-day')
+        if (filterByDayFilter) {
+          filterByDayFilter.value = subCategoryId
+        }
       }
     }
   }

@@ -87,7 +87,7 @@ class NeedsListing {
       this.filters()
         .filter((f) => f.label !== reqFilter)
         .forEach((f) => f.isActive(false))
-        
+
       browser.pushHistory({}, `Give ${reqFilter}`, browser.location().pathname + '#' + reqFilter)
       filter.isActive(true)
       this.currentFilter(filter.filterFunction)
@@ -123,9 +123,8 @@ class NeedsListing {
         this.currentPageLinks = result.data.links
         this.allNeeds([...this.allNeeds(), ...formatNeedsKO(result.data.items, this.locationResult)])
         this.isMoreToLoad(result.data.links.next)
-        
-        if(browser.location().hash) {
-          console.log(browser.location().hash)
+
+        if (browser.location().hash) {
           this.setActiveFilter(browser.location().hash.substring(1))
         }
 
