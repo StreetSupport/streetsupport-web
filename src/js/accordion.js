@@ -75,13 +75,21 @@ var baseOpen = function (el, context, noAnalytics) {
 }
 
 var close = function (el, context) {
-  for (var i = 0; i < context.length; i++) {
-    var currAccordion = context[i]
+  const closeInActive = function (currAccordion) {
     var children = currAccordion.children
 
     // Remove active classes in accordion
     for (var b = 0; b < children.length; b++) {
       children[b].classList.remove(activeClass)
+    }
+  }
+
+  if (!context.length) {
+    closeInActive(context)
+  } else {
+    for (var i = 0; i < context.length; i++) {
+      var currAccordion = context[i]
+      closeInActive(currAccordion)
     }
   }
 }
