@@ -102,6 +102,9 @@ page: organisation
                         \{{#isTelephoneService}}
                         <p class="result-detail__telephone">This is a telephone service.</p>
                         \{{/isTelephoneService}}
+                        \{{#isAppointmentOnly}}
+                        <p class="result-detail__telephone">Access to this service is by appointment only.</p>
+                        \{{/isAppointmentOnly}}
                         <h2 class="h3">Location</h2>
                         \{{#locationDescription}}<p>\{{{locationDescription}}}</p>\{{/locationDescription}}
                         \{{#address}}

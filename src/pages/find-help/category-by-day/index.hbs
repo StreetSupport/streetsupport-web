@@ -77,13 +77,18 @@ page:
                     </div>
                     <div class="result-detail__times-item result-detail__times-item--timetabled">
                       <ul>
-                        \{{#openingTime}} \{{#serviceInfo}}
-                        <li> \{{{serviceInfo}}}</li> \{{/serviceInfo}} \{{/openingTime}} \{{#tags}}
+                        \{{#openingTime}} 
+                          \{{#serviceInfo}}<li> \{{{serviceInfo}}}</li>\{{/serviceInfo}} 
+                        \{{/openingTime}} 
+                        \{{#tags}}
                         <li>Suitable for: <span class="result-detail__tags-item">\{{tags}}</span></li>
+                        \{{/tags}}
                         \{{#isTelephoneService}}
                         <li>This is a telephone service.</li>
                         \{{/isTelephoneService}}
-                        \{{/tags}}
+                        \{{#isAppointmentOnly}}
+                        <li>Access to this service is by appointment only.</li>
+                        \{{/isAppointmentOnly}}
                         <li>
                           <a href="/find-help/organisation/?organisation=\{{key}}">\{{{name}}}</a> \{{#locationDescription}}
                           <p>\{{locationDescription}}</p>\{{/locationDescription}} \{{#address.street}} \{{#address.street}}

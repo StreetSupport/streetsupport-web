@@ -50,8 +50,6 @@ const VolunteerModel = function (currCityId) {
     if (self.errors().length === 0) {
       browser.loading()
 
-      console.log(self.skillCategory())
-
       var payload = {
         'FirstName': self.firstName(),
         'LastName': self.lastName(),
