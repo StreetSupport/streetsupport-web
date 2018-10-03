@@ -68,8 +68,9 @@
       background-size: 842px;
       width: 842px;
       bottom: 0px;
-      height: 400px;
+      height: 500px;
     }
+    height: 500px;
   }
   @include mq($from: xxxl) {
     &:before {
