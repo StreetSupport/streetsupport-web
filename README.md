@@ -14,10 +14,14 @@ Please fork and work in the `develop` branch. Once the update is completed, subm
 
 ## Install
 
-* Install Node 6 LTS,
+* Install the latest stable Node version,
 * Run in Terminal: `npm i gulp-cli -g` (Gulp does not need to be installed globally),
 * In your command line terminal, navigate to the street support project folder,
-* Run: `npm i` (Note: if you are on the Code Wifi network, you may have an issue installing modules around CriticalCSS/Phantom; you might need to tether to your mobile phone to get these downloaded.)
+* Run: `npm i` 
+  * if you are on the Code Wifi network, you may have an issue installing modules around CriticalCSS/Phantom; you might need to tether to your mobile phone to get these downloaded.)
+  * if this throws errors around Snyk (most likely Windows), see [https://support.snyk.io/snyk-cli/snyk-protect-requires-the-patch-binary].
+
+See Installation Troubleshooting section if Installation fails
 
 See [https://github.com/fephil/garrus](https://github.com/fephil/garrus) for more information about the Frontend workflow.
 
@@ -98,6 +102,48 @@ A number of happy paths are covered by automated browsers tests at: [https://git
 
 CSS styling is written in SCSS, based on [Susy](http://susy.oddbird.net/), in the [BEM](http://getbem.com/introduction/) style, and is auto-prefixed. Build with a mobile-first approach, using [sass-mq](https://github.com/sass-mq/sass-mq) for media queries.
 Each component's styles should reside in its own file. Avoid nesting of elements and modifiers (although there are many cases of nesting at the moment!).
+
+### Installation troubleshooting
+
+#### Gulp Native Code Crashes
+
+````
+gulp[62193]: ../src/node_contextify.cc:631:static void node::contextify::ContextifyScript::New(const FunctionCallbackInfo<v8::Value> &): Assertion `args[1]->IsString()' failed.
+````
+
+Caused by: One of gulp's dependencies are out of date
+
+Solution: Uninstall and reinstall Node Modules
+
+```
+rm -rf node_modules
+npm i
+```
+
+#### Node Sass
+
+```
+ERROR in Missing binding <PROJECT_DIR>/node_modules/node-sass/vendor/darwin-x64-11/binding.node
+Node Sass could not find a binding for your current environment: <ENVIRONMENT> with Node <NODE_VERSION>
+```
+
+Caused by: switching node versions
+
+Solution: Rebuild Project
+
+```
+npm rebuild
+```
+
+#### Cannot download PhantomJS
+
+Caused by: network blocking download
+
+Solution: use an alternative network (best to run `npm i` before attending)
+
+#### Others
+
+If there are problems that aren't mentioned here, post in the slack channel so we can help out and upate these docs.
 
 ## Supported by
 
