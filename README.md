@@ -1,6 +1,6 @@
 # StreetSupport Website
 
-The website codebase for streetsupport.net.
+This repository is for the Street Support website, found at https://streetsupport.net. The websites helps people facing homelessness find services in their area, as as well as sign-posting people wanting to help, to where it is needed. The site acts as a gateway into Street Support's broader remit of helping connect organisations, people with lived experience, policy-makers, and businesses to co-produce lasting solutions.
 
 ## Submitting Updates
 
