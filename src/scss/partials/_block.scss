@@ -384,6 +384,13 @@
     }
   }
 
+  &--bcp-changeforgood {
+    padding: 0 10px;
+    @include mq($from: m) {
+      padding: 40px 30px 40px 40px;
+    }
+  }
+
   &--big-change-mcr-logo {
     background: $big-change-b;
     text-align: center;

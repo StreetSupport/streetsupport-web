@@ -53,3 +53,12 @@ src/scss/partials/_generated-location-header.scss
 src/partials/nav/header-locations.hbs
 src/partials/locations/_generated-selector-hogan.hbs
 src/partials/locations/_generated-option-tags.hbs
+src/pages/bolton/index.hbs
+src/pages/wigan-and-leigh/index.hbs
+src/pages/trafford/index.hbs
+src/pages/tameside/index.hbs
+src/pages/salford/index.hbs
+src/pages/rochdale/index.hbs
+src/pages/oldham/index.hbs
+src/pages/bury/index.hbs
+src/pages/stockport/index.hbs
