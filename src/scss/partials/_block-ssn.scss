@@ -59,6 +59,32 @@
     }
   }
 
+  &--bcp-changeforgood {
+    padding: 0!important;
+    border-top: 70px $sea-blue solid;
+    border-bottom: 70px $sea-blue solid;
+
+    @include mq($from: m) {
+      display: flex;
+    }
+
+    .block__bcp-changeforgood {
+      margin: -70px 10px 0 10px;
+      border-left: 6px white solid;
+      border-right: 6px white solid;
+      border-bottom: 6px white solid;
+      
+      @include mq($from: m) {
+        margin: 0;
+        padding-top: 40px;
+        @include span(6 of 12);
+        border: none;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
   &--soton-charter {
     background: rgba(10, 133, 100, 0.15);
     display: block;
