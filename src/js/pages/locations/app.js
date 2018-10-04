@@ -169,6 +169,10 @@ if (currentLocation.id === 'southampton') {
   templating.renderTemplate('js-soton-charter-tpl', {}, 'js-soton-charter-output')
 }
 
+if (currentLocation.id === 'bournemouth') {
+  templating.renderTemplate('js-bcp-changeforgood-tpl', {}, 'js-bcp-changeforgood-output')
+}
+
 const availableFeatures = [
   { isEnabledFlag: 'toolkitIsEnabled', init: initToolkit },
   { isEnabledFlag: 'charterIsEnabled', init: initCharter },
