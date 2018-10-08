@@ -22,7 +22,6 @@ module.exports = {
   categoryServiceProviders: p('/v2/categorised-service-providers/show/'),
   categoryServiceProvidersByDay: p('/v2/timetabled-service-providers/show/'),
   organisation: p('/v2/service-providers/show/'),
-  needs: p('/v1/service-provider-needs/'),
   needsHAL: p('/v2/service-provider-needs/'),
   needCategories: p('/v1/service-provider-needs/categories'),
   createVolunteerEnquiry: p('/v1/volunteer-enquiries/'),
