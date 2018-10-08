@@ -78,7 +78,7 @@ describe('Needs Listing', () => {
 
   it('... from needs endpoint', () => {
     const url = ajaxGetStub.getCall(0).args[0].split('?')[0]
-    expect(url).toEqual(endpoints.needsHAL)
+    expect(url).toEqual(endpoints.needs)
   })
 
   it('... near to postcode', () => {
