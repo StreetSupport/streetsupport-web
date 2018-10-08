@@ -145,7 +145,7 @@ class NeedsListing {
       .map((k) => `${k}=${qsParts[k]}`)
       .join('&')
 
-    return `${endpoints.needsHAL}?${qs}`
+    return `${endpoints.needs}?${qs}`
   }
 }
 
