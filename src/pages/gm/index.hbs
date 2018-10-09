@@ -1,6 +1,6 @@
 ---
-title: Greater Manchester - Street Support Network
-description: Street Support Network makes it easier to help people facing homelessness in Greater Manchester.
+title: A Bed For Every Night This Winter in Greater Manchester - Street Support Network
+description: Our mission is to provide a bed Every Night for Every Person sleeping rough in Greater Manchester this winter.
 image: https://streetsupport.net/assets/img/og/street-support.png
 layout: default.hbs
 permalink: false
@@ -26,29 +26,52 @@ page: about
   </div>
 </div>
 
+<div class="block block--minor-highlight">
+  <div class="container">
+    <div class="block__content">
+      <h2 class="h2">Help people who are sleeping rough in Greater Manchester</h2>
+      <p>Our mission is to provide a bed Every Night for Every Person sleeping rough in Greater Manchester this winter.</p>
+
+      <h3 class="h3">How can I help?</h3>
+      <p>For this mission to be a success, we need every business and individual in GM to contribute in some way. Here are the key ways you can help&hellip;</p>
+    </div>
+  </div>
+</div>
+
 <div class="block">
   <div class="container">
     <div class="block__content">
+      <article class="card card--cta card--grid-1-of-4">
+        <h2 class="h2 card__title card__title--card">Donate</h2>
+        <p>Make a donation via 'Bed Every Night'.</p>
+        <a href="https://bedeverynight.co.uk/" class="btn btn--brand-e btn--always-full">
+          <span class="btn__text">Donate Now</span>
+        </a>
+      </article>
 
-      <h2 class="h2">Help people who are sleeping rough in Greater Manchester</h2>
+      <article class="card card--cta card--grid-1-of-4">
+        <h2 class="h2 card__title card__title--kettle">Respond to needs</h2>
+        <p>Donate items that are needed this winter.</p>
+        <a href="/gm/needs" class="btn btn--brand-e btn--always-full">
+          <span class="btn__text">Give Help</span>
+        </a>
+      </article>
 
-      <p>Our mission is to provide a bed Every Night for Every Person sleeping rough in Greater Manchester this winter.</p>
+      <article class="card card--cta card--grid-1-of-4">
+        <h2 class="h2 card__title card__title--hand">Volunteer</h2>
+        <p>Volunteer at one of the winter shelters across Greater Manchester.</p>
+        <a href="/give-help/volunteer/" class="btn btn--brand-e btn--always-full">
+          <span class="btn__text">Volunteer</span>
+        </a>
+      </article>
 
-    </div>
-
-    {{> divider }}
-
-    <div class="block__content">
-
-      <h2 class="h2">How can I help?</h2>
-      <p>For this mission to be a success, we need every business and individual in GM to contribute in some way. Here are the key ways you can help...</p>
-      <ul>
-        <li><a href="https://bedeverynight.co.uk/">Make a donation via 'Bed Every Night'</a></li>
-        <li><a href="/gm/needs">Donate items that are needed this winter</a></li>
-        <li><a href="/give-help/volunteer/">Volunteer at one of the winter shelters</a></li>
-        <li><a href="/find-help/">Find out more about support services near you</a></li>
-      </ul>
-
+      <article class="card card--cta card--grid-1-of-4">
+        <h2 class="h2 card__title card__title--help">Learn More</h2>
+        <p>Find out more about support services near you.</p>
+        <a href="/find-help/" class="btn btn--brand-e btn--always-full">
+          <span class="btn__text">Learn More</span>
+        </a>
+      </article>
     </div>
 
     {{> divider }}
@@ -56,7 +79,7 @@ page: about
     <div class="block__content">
     
       <h2 class="h2">What's happening locally?</h2>
-      <p>To find out more about what is happening in your local authority area, visit their pages on Street Support Network...</p>
+      <p>To find out more about what is happening in your local authority area, visit their pages on Street Support Network&hellip;</p>
       <ul>
         <li><a href="/bolton">Bolton</a></li>
         <li><a href="/bury">Bury</a></li>
@@ -69,8 +92,6 @@ page: about
         <li><a href="/trafford">Trafford</a></li>
         <li><a href="/wigan-and-leigh">Wigan and Leigh</a></li>
       </ul>
-
-      {{> social-share}}
     </div>
   </div>
 </div>
@@ -108,7 +129,7 @@ page: about
           </fieldset>
         </form>
       </div>
-    </div>  
+    </div> 
   </div>  
 </div>
 
@@ -116,4 +137,5 @@ page: about
 
 <script id="js-news-tpl" type="text/template">
     {{>news-posts }}
+    {{> social-share}} 
 </script>

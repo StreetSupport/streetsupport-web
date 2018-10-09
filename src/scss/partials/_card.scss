@@ -135,7 +135,11 @@ $spacing: 20px;
 }
 
 .card--grid-1-of-4 {
-  @include mq($from: m) {
+  @include mq($from: m, $until: l) {
+    @include span(1 of 2);
+    &:nth-of-type(2n) { @include last() }
+  }
+  @include mq($from: l) {
     @include span(1 of 4);
     &:nth-of-type(4n) { @include last() }
   }
@@ -208,6 +212,10 @@ $spacing: 20px;
     &--kettle {
       &:before {
         background-position: -120px 285px;
+
+        @include mq($from: l) {
+          width: 90px;
+        }
       }
     }
 
