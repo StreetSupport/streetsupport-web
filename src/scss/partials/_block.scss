@@ -161,17 +161,24 @@
   }
 }
 
+.block__header--gm-header {
+  background: url('../img/gm/gmhan-logo.png') no-repeat top center;
+  padding-top: 160px;
+
+  @include mq($from: m) {
+    padding-top: 40px;
+    padding-left: 200px;
+    background-position: left center;
+    min-height: 160px;
+  }
+}
+
 .block--home-header,
 .block--location-header {
   background-image: url('../img/header-background.png');
   background-repeat: repeat-x;
   background-position: bottom;
 }
-
-.block--gm-header {
-  
-}
-
 .block--location-header,
 .block--home-header {
   .block__header,
@@ -199,6 +206,15 @@
 .block--header {
   padding: 80px 0!important;
 }
+
+.block--gm-header {
+  background: #FFEDA1 url('../img/gm/header-bg.jpg') repeat-x bottom;
+  padding-top: 40px!important;
+  @include mq($from: m) {
+    padding-top: 80px;
+  }
+}
+
 
 .block--home-header {
   @include mq($from: m) {
