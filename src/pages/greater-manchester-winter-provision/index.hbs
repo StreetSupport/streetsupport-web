@@ -1,0 +1,142 @@
+---
+title: Winter Homelessness Provision for Greater Manchester - A Bed For Every Night This Winter in Greater Manchester - Street Support Network
+description: Our mission is to provide a bed Every Night for Every Person sleeping rough in Greater Manchester this winter.
+image: https://streetsupport.net/assets/img/og/street-support.png
+layout: default.hbs
+permalink: false
+jsBundle: gm
+section: about
+page: about
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item">
+        <a href="/">Home</a>
+      </li>
+      <li class="breadcrumbs__item">Greater Manchester Winter Provision</li>
+    </ol>
+  </div>
+</div>
+
+<div class="block block--header block--gm-header">
+  <div class="container">
+    <h1 class="h1 block__header block__header--gm-header">Ending Homelessness in Greater Manchester</h1>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <h2 class="h2">Help people who are sleeping rough in Greater Manchester</h2>
+      <p>Nobody should be sleeping outside, especially not in winter. Plans are currently underway to provide a bed every night plus appropriate support for everyone sleeping outside in Greater Manchester this winter. It's a considerable task involving a great many organisations, charities, the public and private sectors, businesses, faith networks and individuals. Giving people a bed every night and the support they need is a critical first step to help people move away from and move beyond a life on the streets and into secure accommodation.</p>
+
+      <h3 class="h3">How can I help?</h3>
+      <p>For this mission to be a success, we need every business and individual in GM to contribute in some way. Here are the key ways you can help&hellip;</p>
+    </div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+
+      <article class="card card--cta card--grid-1-of-4">
+        <h2 class="h2 card__title card__title--kettle">Respond to needs</h2>
+        <p>Donate items that are needed this winter.</p>
+        <a href="donate-needed-items" class="btn btn--brand-e btn--always-full">
+          <span class="btn__text">Give Items</span>
+        </a>
+      </article>
+      
+      <article class="card card--cta card--grid-1-of-4">
+        <h2 class="h2 card__title card__title--card">Donate</h2>
+        <p>Make a donation via 'Bed Every Night'.</p>
+        <a href="https://bedeverynight.co.uk/" class="btn btn--brand-e btn--always-full">
+          <span class="btn__text">Donate Now</span>
+        </a>
+      </article>
+
+      <article class="card card--cta card--grid-1-of-4">
+        <h2 class="h2 card__title card__title--hand">Volunteer</h2>
+        <p>Volunteer at one of the winter shelters across Greater Manchester.</p>
+        <a href="/give-help/volunteer/" class="btn btn--brand-e btn--always-full">
+          <span class="btn__text">Volunteer</span>
+        </a>
+      </article>
+
+      <article class="card card--cta card--grid-1-of-4">
+        <h2 class="h2 card__title card__title--help">Learn More</h2>
+        <p>Find out more about support services near you.</p>
+        <a href="/find-help/" class="btn btn--brand-e btn--always-full">
+          <span class="btn__text">Learn More</span>
+        </a>
+      </article>
+    </div>
+
+    {{> divider }}
+
+    <div class="block__content">
+    
+      <h2 class="h2">What's happening locally?</h2>
+      <p>To find out more about what is happening in your local authority area, visit their pages on Street Support Network&hellip;</p>
+      <ul>
+        <li><a href="/bolton">Bolton</a></li>
+        <li><a href="/bury">Bury</a></li>
+        <li><a href="/manchester">Manchester</a></li>
+        <li><a href="/oldham">Oldham</a></li>
+        {{!-- <li><a href="/rochdale">Rochdale</a></li> --}}
+        {{!-- <li><a href="/salford">Salford</a></li> --}}
+        {{!-- <li><a href="/stockport">Stockport</a></li> --}}
+        <li><a href="/tameside">Tameside</a></li>
+        <li><a href="/trafford">Trafford</a></li>
+        <li><a href="/wigan-and-leigh">Wigan and Leigh</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="block block--minor-highlight">
+  <div class="container">
+    <div class="block__content block__content--vert-fill">
+      <div class="proximity-form">
+        <h1 class="h2">Do you want to give your time, items or money to help give every person a bed this winter?</h1>
+        <form class="form form--highlighted js-find-help-form">
+          <fieldset class="form__fieldset form__fieldset--inline-fill">
+            <legend class="form__fieldset-title">Find help in your area</legend>
+            <div class="form__fieldset-inline-fill-container">
+              <label class="hide-screen" for="postcode">Your Postcode</label>
+              <input name="postcode" class="form__input form__input--inline-fill js-find-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
+              <button class="btn btn--brand-e btn--inline-fill" type="submit">
+                <span class="btn__text">Find help</span>
+              </button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div class="proximity-form">
+        <h1 class="h2">Do you need local support or this winter?</h1>
+        <form class="form form--highlighted js-give-help-form">
+          <fieldset class="form__fieldset form__fieldset--inline-fill">
+            <legend class="form__fieldset-title">See what's needed in your area</legend>
+            <div class="form__fieldset-inline-fill-container">
+              <label class="hide-screen" for="postcode">Your Postcode</label>
+              <input name="postcode" class="form__input form__input--inline-fill js-give-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
+              <button class="btn btn--brand-e btn--inline-fill" type="submit">
+                <span class="btn__text">Give help</span>
+              </button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div> 
+  </div>  
+</div>
+
+<div id="js-news-output"></div>
+
+<script id="js-news-tpl" type="text/template">
+    {{>news-posts }}
+    {{> social-share}} 
+</script>
