@@ -7,6 +7,7 @@ $spacing: 20px;
   @include cf();
   margin-bottom: 10px;
   list-style: none;
+  padding: 0;
 
   &--single-col {
     @include mq($from: m) {

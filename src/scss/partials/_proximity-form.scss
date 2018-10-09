@@ -1,0 +1,23 @@
+.proximity-form {
+  &:first-child {
+    margin-bottom: 40px;
+  }
+
+  @include mq($from: m) {
+    @include span(1 of 2);
+
+    & > * {
+      width: 100%;
+    }
+
+    &:first-child {
+      margin-bottom: 0px;
+      padding-right: 50px;
+    }
+
+    &:last-child {
+      padding-left: 50px;
+      @include last;
+    }
+  }
+}
