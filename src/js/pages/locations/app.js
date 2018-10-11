@@ -133,18 +133,6 @@ const initMap = function (currentLocation) {
     })
 }
 
-const initToolkit = function () {
-  templating.renderTemplate('js-toolkit-tpl', {}, 'js-toolkit-output')
-}
-
-const initCharter = function () {
-  templating.renderTemplate('js-charter-tpl', {}, 'js-charter-output')
-}
-
-const initBigChange = function () {
-  templating.renderTemplate('js-big-change-tpl', {}, 'js-big-change-output')
-}
-
 const initSwep = function (currentLocationId) {
   api
   .data(endpoints.cities)
@@ -164,24 +152,3 @@ initFindHelp(currentLocation)
 initStatistics(currentLocation)
 initMap(currentLocation)
 initSwep(currentLocation.id)
-
-if (currentLocation.id === 'southampton') {
-  templating.renderTemplate('js-soton-charter-tpl', {}, 'js-soton-charter-output')
-}
-
-if (currentLocation.id === 'bournemouth') {
-  templating.renderTemplate('js-bcp-changeforgood-tpl', {}, 'js-bcp-changeforgood-output')
-}
-
-const availableFeatures = [
-  { isEnabledFlag: 'toolkitIsEnabled', init: initToolkit },
-  { isEnabledFlag: 'charterIsEnabled', init: initCharter },
-  { isEnabledFlag: 'bigChangeIsEnabled', init: initBigChange }
-]
-
-availableFeatures
-  .forEach((f) => {
-    if (currentLocation[f.isEnabledFlag]) {
-      f.init()
-    }
-  })
