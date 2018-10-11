@@ -33,7 +33,7 @@ location: manchester
 <script id="js-faqs-tpl" type="text/template">
   <div class="accordion accordion--day js-accordion">
   \{{#items}}
-    <button id="\{{id}}" class="h3 accordion__header js-header">
+    <button id="\{{id}}" data-tags="\{{tags}}" class="h3 accordion__header js-header">
       \{{{title}}}
       <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
       <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
