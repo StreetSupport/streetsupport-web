@@ -117,7 +117,7 @@ gulp.task('generate-location-files', (callback) => {
   runSequence(
     'l-clean',
     'l-getCities',
-    'l-generate-home-pages',
+    // 'l-generate-home-pages',
     'l-generate-header-css',
     'l-generate-nav-variables',
     'l-generate-mobile-nav',

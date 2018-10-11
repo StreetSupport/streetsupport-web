@@ -1,0 +1,207 @@
+---
+title: Street Support Stockport - Working together to end homelessness in Stockport
+description: Street Support - Find help, and give help, to support people who are homeless in Stockport
+image: https://streetsupport.net/assets/img/og/street-support-stockport.png
+layout: withGoogle.hbs
+permalink: false
+jsBundle: location-home-page
+section: home
+page: stockport
+location: stockport
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item">Stockport</li>
+    </ol>
+  </div>
+</div>
+
+<div class="block block--location-header location-header location-header--stockport">
+  <div class="container">
+    <h1 class="h1 block__header">Street Support Stockport</h1>
+    <h2 class="h2 block__sub-header">Connecting people and organisations locally, to end homelessness in Stockport.</h2>
+    <div class="ctas">
+      <a href="/find-help" class="btn btn--brand-d">
+        <span class="btn__text">Find Help</span>
+      </a>
+      <a href="/give-help" class="btn btn--brand-e">
+        <span class="btn__text">Give Help</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="js-swep-output"></div>
+
+<div class="block">
+  <div class="container">
+    <div class="home__copy home__copy--padding">
+      <h1 class="h2">You're in Stockport</h1>
+      <form class="form form--highlighted js-find-help-form">
+        <fieldset class="form__fieldset form__fieldset--inline-fill">
+          <legend class="form__fieldset-title">Find organisations near you:</legend>
+          <div class="form__fieldset-inline-fill-container">
+            <label class="hide-screen" for="postcode">Your Postcode</label>
+            <input name="postcode" class="form__input form__input--inline-fill js-find-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
+            <button class="btn btn--brand-e btn--inline-fill" type="submit">
+              <span class="btn__text">Find help</span>
+            </button>
+          </div>
+        </fieldset>
+      </form>
+      {{> locations/selector-hogan }}
+    </div>
+    <div class="home__copy">
+      <div class="js-map"></div>
+    </div>
+  </div>
+</div>
+
+<div id="js-statistics-output"></div>
+
+<div id="js-big-change-output"></div>
+
+<div id="js-charter-output"></div>
+
+<div id="js-soton-charter-output"></div>
+
+<div id="js-bcp-changeforgood-output"></div>
+
+<div id="js-toolkit-output"></div>
+
+<div class="block block--minor-highlight">
+  <div class="container container--central-cta">
+    <div class="block__content block__content--central-cta block__content--join-mailing-list">
+      <h1 class="h2">Get in touch</h1>
+      <p>If you would like to get involved, or have any offers, questions or suggestion, please get in touch at <a href="mailto: stockport@streetsupport.net">stockport@streetsupport.net</a>.</p>
+    </div>
+  </div>
+</div>
+
+<div id="js-news-output"></div>
+
+<div class="block block--highlight block--promo">
+  <div class="container">
+    <div class="block__content partners">
+      {{> stockport/supporters }}
+      <p>We are looking for businesses and organisations to <a href="/give-help/partnership/">support us</a> so that we can continue to develop this resource.</p>
+      <p>If you share our vision of a society without homelessness, please <a href="mailto:sponsorship@streetsupport.net">get in touch</a>.</p>
+    </div>
+  </div>
+</div>
+
+{{> loading-spinner}}
+
+<script id="js-swep-tpl" type="text/template">
+{{> find-help/swep-notification theLocationId="stockport" }}
+</script>
+
+<script id="js-big-change-tpl" type="text/template">
+  <div class="block block--big-change-mcr">
+    <div class="container container--big-change-mcr">
+      <div class="home__copy home__copy--big-change-mcr-logo">
+        <img src="/assets/img/mcr-homelessness-partnership.png" alt="Big Change Stockport #BigChangeMcr" />
+        <span class="big-change-banner__heading-text">Stockport</span>
+        <span class="big-change-banner__heading-text big-change-banner__heading-text--minor">ending</span>
+        <span class="big-change-banner__heading-text">homelessness</span>
+      </div>
+      <div class="home__copy home__copy--padding home__copy--big-change-mcr-text">
+        <h1>Big Change in Stockport</h1>
+        <p>Big Change pays for practical items individuals need to build independent lives away from the streets. If everyone who lives, works or visits Stockport donates, together we can make a Big Change!</p>
+        <a class="btn btn--big-change" href="/stockport/bigchangemcr/">
+          <span class="btn__text">Check out Big Change</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script id="js-toolkit-tpl" type="text/template">
+  <div class="block block--standards-toolkit">
+    <div class="block__standards-toolkit-pad"></div>
+    <div class="home__copy home__copy--standards-toolkit">
+      <h1>Standards Toolkit</h1>
+      <p>Are you a volunteer-led group that provides support for people on the streets? We have put together this best practice guide to help you protect the vulnerable adults that use these services, your volunteers and members of the public.</p>
+      <p>This toolkit makes it easier for you to develop and be recognised for the quality of your service. The information, training and support provided here supports you to ensure you have adequate standards and safeguarding in place.</p>
+      <a class="btn btn--brand-e" href="/manchester/standards-toolkit/">
+        <span class="btn__text">More information</span>
+      </a>
+    </div>
+  </div>
+</script>
+
+<script id="js-news-tpl" type="text/template">
+    {{>news-posts }}
+</script>
+
+<script id="js-charter-tpl" type="text/template">
+  <div class="block">
+    <div class="container">
+      <div class="home__copy home__copy--padding">
+        <h1>Stockport Homelessness Charter</h1>
+        <p>The Stockport Homelessness Charter is a symbol of our mission to end homelessness in our city by uniting people, organisations and businesses with one shared vision.</p>
+        <a class="btn btn--brand-e" href="https://charter.streetsupport.net">
+          <span class="btn__text">Let's end homelessness</span>
+        </a>
+      </div>
+      <div class="home__copy home__copy--mcr-charter">
+        <picture>
+        <source media="(max-width: 600px)" srcset="/assets/img/town-hall_400x267.jpg">
+        <source media="(min-width: 800px)" srcset="/assets/img/town-hall_600x400.jpg">
+        <source media="(min-width: 1000px)" srcset="/assets/img/town-hall_900x600.jpg">
+          <img src="/assets/img/town-hall_900x600.jpg" alt="The Stockport Homelessness Charter Launch">
+        </picture>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script id="js-soton-charter-tpl" type="text/template">
+  <div class="block block--soton-charter">
+    <div class="block__soton-charter">
+      <div class="block__soton-charter-buildings">
+        <div class="content">
+          <div class="title">
+            <h1>Homelessness Charter</h1>
+            <h2 class="h3">Southampton</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="home__copy home__copy--soton-charter">
+      <h1>Southampton Homelessness Charter</h1>
+      <p>Join us in our vision for Southampton - A city where no-one needs to sleep rough or beg.</p>
+      <a class="btn btn--brand-e" href="https://spark.adobe.com/page/9w36MxwzN5pvN/">
+        <span class="btn__text">Click here to find out more</span>
+      </a>
+    </div>
+  </div>
+</script>
+
+<script id="js-bcp-changeforgood-tpl" type="text/template">
+  <div class="block block--bcp-changeforgood">
+    <div class="container">
+      <div class="block__bcp-changeforgood">
+        <img src="/assets/img/bcp-banner.png" width="100%" alt="bournemouth, christchurch and poole landmarks" />
+      </div>
+      <div class="home__copy home__copy--bcp-changeforgood">
+        <h1>Change For Good Bournemouth, Christchurch &amp; Poole</h1>
+        <p>'Change For Good' is a central fund that supports individuals who are homeless to move away from the streets of Bournemouth, Christchurch &amp; Poole.</p>
+        <p><a href="/find-help/all-service-providers/">Local charities and organisations</a> work directly with individuals who are homeless, and apply for funds to pay for items they need.</p>
+        <p>Your donations will help pay for things like the deposit to rent a home, a training course, or clothes for a job interview - practical things that could lead to change for good.</p>
+        <p>The fund is managed by <a href="https://www.dorsetcommunityfoundation.org/">Dorset Community Foundation</a>, (Reg. Charity Number: 1122113).</p>
+        
+        <a class="btn btn--brand-e" href="https://www.justgiving.com/campaign/changeforgoodBournemouth">
+          <span class="btn__text">Donate Now</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script id="js-statistics-tpl" type="text/template">
+  {{> impact-statistics }}
+</script>
