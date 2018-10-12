@@ -1,0 +1,96 @@
+
+<h3 class="h2 requests-detail__heading requests-detail__heading--i-want-to-volunteer">I Want to Volunteer!</h3>
+<div class="block block--requests-detail">
+  <div class="container">
+    <div class="block__content">
+    	<form id="js-form" class="form form--volunteer" data-bind="submit: submitForm">
+	    	<fieldset class="form__fieldset">
+	    		<legend class="h2 form__fieldset-title">About You</legend>
+	    		<ul class="form__field-list">
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="firstname">First Name *</label>
+	    				<input class="form__input" type="text" id="firstname" data-bind="value: firstName" placeholder="First Name (required)"></input>
+	    			</li>
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="lastname">Last Name *</label>
+	    				<input class="form__input" type="text" id="lastname" data-bind="value: lastName" placeholder="Last Name (required)"></input>
+	    			</li>
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="email">Email *</label>
+	    				<input class="form__input" type="email" id="email" data-bind="value: email" placeholder="Email Address (required)"></input>
+	    			</li>
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="telephone">Telephone</label>
+	    				<input class="form__input" type="text" id="telephone" data-bind="value: telephone" placeholder="Telephone Number"></input>
+	    			</li>
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="city">City</label>
+              <select class="form__input" data-bind="
+                  options: cities,
+                  optionsText: 'name',
+                  optionsValue: 'id',
+                  value: city">
+              </select>
+	    			</li>
+	    			<li class="form__field-item">
+	    				<label class="form__label hide-screen" for="postcode">Postcode *</label>
+	    				<input class="form__input" type="text" id="postcode" data-bind="value: postcode" placeholder="Postcode (required)"></input>
+	    			</li>
+	    		</ul>
+	    	</fieldset>
+	    	<fieldset class="form__fieldset">
+	    		<legend class="h2 form__fieldset-title">Skills and Experience</legend>
+	    		<ul class="form__field-list">
+	    			<li class="form__field-item--full">
+	    				<label class="form__label hide-screen form__label hide-screen" for="skillsAndExperience">What are you able to offer? Please include any skills, experience or interests that might be useful - from medical, legal or finance, to cooking and music!</label>
+	    				<textarea class="form__input form__input--multiline" id="skillsAndExperience" data-bind="value: skillsAndExperience" placeholder="Your Skills and Experience"></textarea>
+	    			</li>
+	    		</ul>
+	    	</fieldset>
+	    	<fieldset class="form__fieldset">
+	    		<legend class="h2 form__fieldset-title">Availability</legend>
+	    		<ul class="form__field-list">
+	    			<li class="form__field-item--full">
+	    				<label class="form__label hide-screen form__label hide-screen" for="availability">When are generally available to help? How often are you able to help?</label>
+	    				<textarea class="form__input form__input--multiline" id="availability" data-bind="value: availability" placeholder="When are you available to help?"></textarea>
+	    			</li>
+	    		</ul>
+	    	</fieldset>
+	    	<fieldset class="form__fieldset">
+	    		<legend class="h2 form__fieldset-title">Resources</legend>
+	    		<ul class="form__field-list">
+	    			<li class="form__field-item--full">
+	    				<label class="form__label hide-screen form__label hide-screen" for="resources">Is there anything else you could offer? eg meeting rooms, car/van for transport, tools.</label>
+	    				<textarea class="form__input form__input--multiline" id="resources" data-bind="value: resources" placeholder="Have you other resources such as venues, transport or tools to offer?"></textarea>
+	    			</li>
+	    		</ul>
+	    	</fieldset>
+        <fieldset class="form__fieldset">
+          <ul class="form__field-list">
+            <li class="form__field-item form__field-item--full">
+              <label class="form__label--checkbox" for="isOptedIn">
+                <input type="checkbox" id="isOptedIn" data-bind="attr: { value: isOptedIn }, checked: isOptedIn" class="form__input--checkbox" />
+								 I would like to receive occasional updates about new volunteer opportunities.
+                </label>
+            </li>
+          </ul>
+        </fieldset>
+	    	<button type="submit" class="btn btn--brand-d form__submit"><span class="btn__text">Submit</span></button>
+    	</form>
+
+      <div id="js-fail" class="hide">
+        <h2 class="h2">Technical Error</h2>
+        <p>There has been a technical error. Please <a href="/about/contact/">contact Street Support</a>.</p>
+      </div>
+
+      <div id="js-success" class="hide">
+        <h2 class="h2">Thank you for submitting your details!</h2>
+        <p>You have been added to our central database. Your borough will contact you directly with more information.</p>
+      </div>
+
+      {{> social-share}}
+    </div>
+  </div>
+</div>
+
+<div id="spin"></div>
