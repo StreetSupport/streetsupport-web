@@ -45,6 +45,7 @@ module.exports = {
     register: path.join(__dirname, '/src/js/page-register'),
     'location-home-page': path.join(__dirname, 'src/js/pages/locations/app'),
     emergencyhelp: path.join(__dirname, 'src/js/page-advice'),
+    adviceV2: path.join(__dirname, 'src/js/page-advice-faqs'),
     swep: path.join(__dirname, 'src/js/page-swep'),
     swepRedirect: path.join(__dirname, 'src/js/page-swep-redirect'),
     impact: path.join(__dirname, 'src/js/page-impact'),
@@ -55,7 +56,9 @@ module.exports = {
     accomListing: path.join(__dirname, 'src/js/pages/accommodation/listing/app'),
     accomMap: path.join(__dirname, 'src/js/pages/accommodation/map/app'),
     accomDetails: path.join(__dirname, 'src/js/pages/accommodation/details/app'),
-    'general-advice': path.join(__dirname, 'src/js/pages/advice/app')
+    'general-advice': path.join(__dirname, 'src/js/pages/advice/app'),
+    'gm': path.join(__dirname, 'src/js/pages/gm/app'),
+    'gm-offer-items': path.join(__dirname, 'src/js/pages/gm/offer-items')
   },
   output: {
     path: path.join(__dirname, '/_dist/assets/js/'),

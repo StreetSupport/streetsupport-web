@@ -14,7 +14,7 @@ const ko = require('knockout')
 
 const buildUrl = () => {
   const cardId = getUrlParams.parameter('id').replace('/', '')
-  return `${apiRoutes.needsHAL}${cardId}`
+  return `${apiRoutes.needs}${cardId}`
 }
 
 const initClickEvents = (data) => {
