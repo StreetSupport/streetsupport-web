@@ -14,6 +14,28 @@ $spacing: 20px;
       @include span(7 of 12);
       @include first();
     }
+
+    @media print {
+      & {
+        width: 100%;
+        float: none;
+        margin-right: 0;
+
+        .accordion {
+          max-width: 100%;
+          box-shadow: none;
+
+          .accordion__header {
+            padding-left: 10px;
+            color: white;
+
+            .accordion__icon {
+              display: none;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -21,6 +43,12 @@ $spacing: 20px;
   border-radius: $radius;
   margin-bottom: $spacing;
   text-align: center;
+
+  @media print {
+    & {
+      box-shadow: none;
+    }
+  }
 }
 
 .card__details {

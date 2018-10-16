@@ -331,6 +331,10 @@
   }
 }
 
+.block-tabs--cards {
+  @include printHide();
+}
+
 .block-tabs__tab {
   @include span(1 of 2);
 
