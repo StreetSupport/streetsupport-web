@@ -2,9 +2,9 @@
 
 This repository is for the Street Support website, found at https://streetsupport.net. The website helps people facing homelessness find services in their area, as as well as sign-posting people wanting to help, to where it is needed. The site acts as a gateway into Street Support's broader remit of helping connect organisations, people with lived experience, policy-makers, and businesses to co-produce lasting solutions.
 
-## Submitting Updates
+## Contributing
 
-Please fork and work in the `develop` branch. Once the update is completed, submit a pull request into `develop`. Travis CI automatically builds on each commit to `develop`, `uat` and `prod`.
+I will be adding any updates as issues on Github. Please fork and work in the `develop` branch. Once the update is completed, submit a pull request into `develop`. Travis CI automatically builds on each commit to `develop`, `uat` and `prod`.
 
 ## Build Status
 
