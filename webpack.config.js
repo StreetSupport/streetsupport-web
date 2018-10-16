@@ -45,6 +45,7 @@ module.exports = {
     register: path.join(__dirname, '/src/js/page-register'),
     'location-home-page': path.join(__dirname, 'src/js/pages/locations/app'),
     emergencyhelp: path.join(__dirname, 'src/js/page-advice'),
+    adviceV2: path.join(__dirname, 'src/js/page-advice-faqs'),
     swep: path.join(__dirname, 'src/js/page-swep'),
     swepRedirect: path.join(__dirname, 'src/js/page-swep-redirect'),
     impact: path.join(__dirname, 'src/js/page-impact'),
