@@ -4,7 +4,9 @@ This repository is for the Street Support website, found at https://streetsuppor
 
 ## Contributing
 
-I will be adding any updates as issues on Github. Please fork and work in the `develop` branch. Once the update is completed, submit a pull request into `develop`. Travis CI automatically builds on each commit to `develop`, `uat` and `prod`.
+I will be adding any updates we receive from our users as issues on Github. Please fork and work in the `develop` branch. Once the update is completed, submit a pull request into `develop`. Travis CI automatically builds on each commit to `develop`, `uat` and `prod`.
+
+I would also appreciate any issues/PRs for bugs you may come across, and general fixes/refactorings. Where possible, please write a test that covers your code change.
 
 ## Build Status
 
