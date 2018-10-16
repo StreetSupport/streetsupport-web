@@ -2,7 +2,7 @@
 title: Winter Homelessness Provision for Greater Manchester - A Bed For Every Night This Winter in Greater Manchester - Street Support Network
 description: Our mission is to provide a bed Every Night for Every Person sleeping rough in Greater Manchester this winter.
 image: https://streetsupport.net/assets/img/og/street-support.png
-layout: default.hbs
+layout: withGoogle.hbs
 permalink: false
 jsBundle: gm
 section: home
@@ -77,23 +77,38 @@ page: home
     </div>
 
     {{> divider }}
-
-    <div class="block__content">
-    
-      <h2 class="h2">What's happening locally?</h2>
-      <p>To find out more about what is happening in your local authority area, visit their pages on Street Support Network&hellip;</p>
-      <ul>
-        <li><a href="/bolton">Bolton</a></li>
-        <li><a href="/bury">Bury</a></li>
-        <li><a href="/manchester">Manchester</a></li>
-        <li><a href="/oldham">Oldham</a></li>
-        {{!-- <li><a href="/rochdale">Rochdale</a></li> --}}
-        {{!-- <li><a href="/salford">Salford</a></li> --}}
-        {{!-- <li><a href="/stockport">Stockport</a></li> --}}
-        <li><a href="/tameside">Tameside</a></li>
-        <li><a href="/trafford">Trafford</a></li>
-        <li><a href="/wigan-and-leigh">Wigan and Leigh</a></li>
-      </ul>
+    <div class="home__copy home__copy--padding">
+      <h1 class="h2">Find out what's happening near you</h1>
+      <form class="form form--highlighted js-find-help-form">
+        <fieldset class="form__fieldset form__fieldset--inline-fill">
+          <legend class="form__fieldset-title">Find organisations near you:</legend>
+          <div class="form__fieldset-inline-fill-container">
+            <label class="hide-screen" for="postcode">Your Postcode</label>
+            <input name="postcode" class="form__input form__input--inline-fill js-find-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
+            <button class="btn btn--brand-e btn--inline-fill" type="submit">
+              <span class="btn__text">Find help</span>
+            </button>
+          </div>
+        </fieldset>
+      </form>
+      <form class="form location-selector js-change-location-form">
+        <fieldset class="form__fieldset form__fieldset--inline-fill">
+          <legend class="h2">What is being done in my borough?</legend>
+          <div class="form__fieldset-inline-fill-container">
+            <label class="hide-screen" for="location">Select a borough</label>
+            <select name="location" class="form__input form__input--inline-fill js-change-location-select">
+              <option value="">- Select a borough -</option>
+              {{> locations/_gm-option-tags }}
+            </select>
+            <button class="btn btn--brand-e btn--inline-fill js-change-location-btn" type="submit">
+              <span class="btn__text">Visit your borough page</span>
+            </button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <div class="home__copy">
+      <div class="js-map"></div>
     </div>
   </div>
 </div>
