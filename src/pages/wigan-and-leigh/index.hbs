@@ -1,0 +1,112 @@
+---
+title: Street Support Wigan and Leigh - Working together to end homelessness in Wigan and Leigh
+description: Street Support - Find help, and give help, to support people who are homeless in Wigan and Leigh
+image: https://streetsupport.net/assets/img/og/street-support-wigan-and-leigh.png
+layout: withGoogle.hbs
+permalink: false
+jsBundle: location-home-page
+section: home
+page: wigan-and-leigh
+location: wigan-and-leigh
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item">Wigan and Leigh</li>
+    </ol>
+  </div>
+</div>
+
+<div class="block block--location-header location-header location-header--wigan-and-leigh">
+  <div class="container">
+    <h1 class="h1 block__header">Street Support Wigan and Leigh</h1>
+    <h2 class="h2 block__sub-header">Connecting people and organisations locally, to end homelessness in Wigan and Leigh.</h2>
+    <div class="ctas">
+      <a href="/find-help" class="btn btn--brand-d">
+        <span class="btn__text">Find Help</span>
+      </a>
+      <a href="/give-help" class="btn btn--brand-e">
+        <span class="btn__text">Give Help</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="js-swep-output"></div>
+
+<div class="block">
+  <div class="container">
+    <div class="home__copy home__copy--padding">
+      <h1 class="h2">You're in Wigan and Leigh</h1>
+      <form class="form form--highlighted js-find-help-form">
+        <fieldset class="form__fieldset form__fieldset--inline-fill">
+          <legend class="form__fieldset-title">Find organisations near you:</legend>
+          <div class="form__fieldset-inline-fill-container">
+            <label class="hide-screen" for="postcode">Your Postcode</label>
+            <input name="postcode" class="form__input form__input--inline-fill js-find-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
+            <button class="btn btn--brand-e btn--inline-fill" type="submit">
+              <span class="btn__text">Find help</span>
+            </button>
+          </div>
+        </fieldset>
+      </form>
+      {{> locations/selector-hogan }}
+    </div>
+    <div class="home__copy">
+      <div class="js-map"></div>
+    </div>
+  </div>
+</div>
+
+<div id="js-statistics-output"></div>
+
+<div class="block block--real-change-wal">
+  <div class="container">
+    <img class="real-change-wal__logo" src="/assets/img/real-change-w-and-l/logo.png" alt="Real Change Wigan and Leigh logo" width="88" height="127" />
+    <h1 class="real-change-wal__heading">Help to make a Real Change in Wigan and Leigh</h1>
+    <section class="real-change-wal__copy">
+      <p>Real Change pays for practical items individuals need to build independent lives away from the streets.</p>
+      <p>If everyone who lives, works or visits Wigan & Leigh donates, together we can make a Real Change to homelessness!</p>
+      <a href="https://realchangewiganandleigh.co.uk" class="btn btn--brand-e">
+        <span class="btn__text">Click here to donate</span>
+      </a>
+    </section>
+  </div>
+</div>
+
+<div class="block block--minor-highlight">
+  <div class="container container--central-cta">
+    <div class="block__content block__content--central-cta block__content--join-mailing-list">
+      <h1 class="h2">Get in touch</h1>
+      <p>If you would like to get involved, or have any offers, questions or suggestion, please get in touch at <a href="mailto: wigan-and-leigh@streetsupport.net">wigan-and-leigh@streetsupport.net</a>.</p>
+    </div>
+  </div>
+</div>
+
+<div id="js-news-output"></div>
+
+<div class="block block--highlight block--promo">
+  <div class="container">
+    <div class="block__content partners">
+      {{> wigan-and-leigh/supporters }}
+      <p>We are looking for businesses and organisations to <a href="/give-help/partnership/">support us</a> so that we can continue to develop this resource.</p>
+      <p>If you share our vision of a society without homelessness, please <a href="mailto:sponsorship@streetsupport.net">get in touch</a>.</p>
+    </div>
+  </div>
+</div>
+
+{{> loading-spinner}}
+
+<script id="js-swep-tpl" type="text/template">
+{{> find-help/swep-notification theLocationId="wigan-and-leigh" }}
+</script>
+
+<script id="js-news-tpl" type="text/template">
+    {{>news-posts }}
+</script>
+
+<script id="js-statistics-tpl" type="text/template">
+  {{> impact-statistics }}
+</script>
