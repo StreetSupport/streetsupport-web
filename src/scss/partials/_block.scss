@@ -28,12 +28,13 @@
     @include cf();
 
     p {
-      &:first-of-type {
-        margin-top: 0;
-      }
-
       &:last-of-type {
         margin-bottom: 0px;
+      }
+
+      &:first-of-type {
+        margin-top: 0;
+        margin-bottom: 16px;
       }
 
       .btn {

@@ -46,6 +46,10 @@ const VolunteerModel = function (currCityId) {
   self.resources = ko.observable('')
   self.isOptedIn = ko.observable(false)
 
+  if (browser.location().pathname.includes('greater-manchester/volunteer')) {
+    self.skillCategory(['gm-winter-volunteer'])
+  }
+
   self.submitForm = function () {
     if (self.errors().length === 0) {
       browser.loading()

@@ -26,3 +26,4 @@ getApiData
       accordion.init(false, -1)
     })
   })
+  
