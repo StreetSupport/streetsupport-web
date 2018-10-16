@@ -28,12 +28,13 @@
     @include cf();
 
     p {
-      &:first-of-type {
-        margin-top: 0;
-      }
-
       &:last-of-type {
         margin-bottom: 0px;
+      }
+
+      &:first-of-type {
+        margin-top: 0;
+        margin-bottom: 16px;
       }
 
       .btn {
@@ -170,6 +171,17 @@
     padding-left: 200px;
     background-position: left center;
     min-height: 160px;
+  }
+}
+
+.bed-every-night-logo {
+  display: block;
+  width: 351px;
+  margin: 0 auto 20px auto;
+
+  @include mq($from: m) {
+    float: right;
+    margin: 20px;
   }
 }
 

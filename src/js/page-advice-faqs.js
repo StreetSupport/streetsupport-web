@@ -22,7 +22,7 @@ getApiData
     const data = {
       items: result.data.items
     }
-    templating.renderTemplate('js-faqs-tpl', data, 'js-faqs-output', () => { 
+    templating.renderTemplate('js-faqs-tpl', data, 'js-faqs-output', () => {
       accordion.init(false, -1)
     })
   })
