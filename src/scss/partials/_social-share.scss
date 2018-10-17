@@ -5,6 +5,8 @@
   text-align: center;
   line-height: 40px;
 
+  @include printHide();
+
   &--home {
     margin-top: 20px;
   }
