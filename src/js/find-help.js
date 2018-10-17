@@ -1,4 +1,5 @@
 const browser = require('./browser')
+const print = require('./navigation/print')
 const querystring = require('./get-url-parameter')
 import { PostcodeProximity } from './components/PostcodeProximity'
 
@@ -31,6 +32,8 @@ const FindHelp = function (location) {
     : querystring.parameter('range')
 
   self.initFindHelpPostcodesLocationSelector = (onChangeCallback) => {
+    print.init()
+
     const decoratedCallback = (locationResult, range) => {
       self.currentRange = range
       const location = browser.location()
