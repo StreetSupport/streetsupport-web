@@ -67,7 +67,7 @@ const AccommodationListing = function (addtionalQueryString = '') {
         f.value(undefined)
       })
     self.selectedType('')
-    // TODO: reset value of referralRequired
+    self.referralRequired(undefined)
   }
 
   const getTypeKeyValuePairs = function () {

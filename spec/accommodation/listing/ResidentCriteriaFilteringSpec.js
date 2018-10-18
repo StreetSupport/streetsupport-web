@@ -23,6 +23,11 @@ describe('Accommodation - Listing - Resident Criteria Filtering', function () {
     'acceptsYoungPeople',
     'acceptsBenefitsClaimants']
 
+  const referralKeys = [
+    false,
+    true
+  ]
+
   beforeEach(() => {
     ajaxGetStub = sinon.stub(ajaxGet, 'data')
       .returns({
@@ -119,7 +124,55 @@ describe('Accommodation - Listing - Resident Criteria Filtering', function () {
     // TODO: Test selecting a value
     // TODO: Add another update test for referralRequired
     // TODO: Update reset test to check the referralRequired was updated
-    
 
+    // it('- should set up the referral dropdown to be unselected', () => {
+    //   expect()
+    // })
+
+
+    // it('- should set up filters to be unselected', () => {
+    //   filterKeys
+    //     .forEach((k) => {
+    //       const filter = sut.residentCriteriaFilters().find((f) => f.dataFieldName() === k)
+    //       expect(filter.value()).toEqual(undefined)
+    //     })
+    // })
+    //
+    // describe('- select some filters', () => {
+    //   beforeEach(() => {
+    //     sut.residentCriteriaFilters().find((f) => f.dataFieldName() === 'acceptsMen').value(false)
+    //     sut.residentCriteriaFilters().find((f) => f.dataFieldName() === 'acceptsCouples').value(true)
+    //   })
+    //
+    //   describe('- update', () => {
+    //     beforeEach(() => {
+    //       sut.updateListing()
+    //     })
+    //
+    //     it('- should update with new results', () => {
+    //       const calledAsExpected = ajaxGetStub
+    //         .withArgs(api.accommodation + '?latitude=123.4&longitude=567.8&acceptsMen=false&acceptsCouples=true')
+    //         .calledOnce
+    //       expect(calledAsExpected).toBeTruthy()
+    //     })
+    //
+    //     it('- should replace old results', () => {
+    //       expect(sut.items().length).toEqual(data.items.length)
+    //     })
+    //   })
+    //
+    //   describe('- reset', () => {
+    //     beforeEach(() => {
+    //       sut.resetFilter()
+    //     })
+    //
+    //     it('- should set up filters to be unselected', () => {
+    //       filterKeys
+    //         .forEach((k) => {
+    //           const filter = sut.residentCriteriaFilters().find((f) => f.dataFieldName() === k)
+    //           expect(filter.value()).toEqual(undefined)
+    //         })
+    //     })
+    //   })
   })
 })
