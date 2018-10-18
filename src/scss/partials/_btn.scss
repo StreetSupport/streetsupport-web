@@ -178,3 +178,7 @@
     margin: 0;
   }
 }
+
+.js-print-btn {
+  @include printHide();
+}
