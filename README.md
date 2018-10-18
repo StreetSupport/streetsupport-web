@@ -23,7 +23,7 @@ I would also appreciate any issues/PRs for bugs you may come across, and general
   * if you are on the Code Wifi network, you may have an issue installing modules around CriticalCSS/Phantom; you might need to tether to your mobile phone to get these downloaded.)
   * if this throws errors around Snyk (most likely Windows), see [https://support.snyk.io/snyk-cli/snyk-protect-requires-the-patch-binary].
 
-See Installation Troubleshooting section if Installation fails
+See Installation Troubleshooting section if Installation fails...
 
 See [https://github.com/fephil/garrus](https://github.com/fephil/garrus) for more information about the Frontend workflow.
 
