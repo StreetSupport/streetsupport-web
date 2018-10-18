@@ -51,6 +51,10 @@
     @include span(2 of 6);
     @include last();
   }
+
+  .form__fieldset {
+    margin-top: 0
+  }
 }
 
 .form__fieldset {
