@@ -1,23 +1,24 @@
 /* global location, history */
 
-var ko = require('knockout')
+const ko = require('knockout')
 require('knockout.validation') // No variable here is deliberate!
 
-var apiRoutes = require('../api')
-var postApi = require('../post-api-data')
-var browser = require('../browser')
-var supportedCities = require('../location/supportedCities')
+const apiRoutes = require('../api')
+const postApi = require('../post-api-data')
+const browser = require('../browser')
+const supportedCities = require('../location/supportedCities')
+import { categories as volCategories } from '../../data/generated/volunteer-categories'
 
-var formId = 'js-form'
-var failId = 'js-fail'
-var successId = 'js-success'
-var theForm = document.getElementById(formId)
-var theFail = document.getElementById(failId)
-var theSuccess = document.getElementById(successId)
-var hideClass = 'hide'
+const formId = 'js-form'
+const failId = 'js-fail'
+const successId = 'js-success'
+const theForm = document.getElementById(formId)
+const theFail = document.getElementById(failId)
+const theSuccess = document.getElementById(successId)
+const hideClass = 'hide'
 
-var VolunteerModel = function (currCityId) {
-  var self = this
+const VolunteerModel = function (currCityId) {
+  const self = this
 
   ko.validation.init({
     insertMessages: true,
@@ -39,9 +40,15 @@ var VolunteerModel = function (currCityId) {
   })
   self.postcode = ko.observable('').extend({ required: true })
   self.skillsAndExperience = ko.observable('')
+  self.skillsCategories = ko.observableArray(volCategories)
+  self.skillCategory = ko.observableArray([])
   self.availability = ko.observable('')
   self.resources = ko.observable('')
   self.isOptedIn = ko.observable(false)
+
+  if (browser.location().pathname.includes('greater-manchester/volunteer')) {
+    self.skillCategory(['gm-winter-volunteer'])
+  }
 
   self.submitForm = function () {
     if (self.errors().length === 0) {
@@ -54,6 +61,7 @@ var VolunteerModel = function (currCityId) {
         'Telephone': self.telephone(),
         'City': self.city(),
         'Postcode': self.postcode(),
+        'SkillsCategories': self.skillCategory(),
         'SkillsAndExperienceDescription': self.skillsAndExperience(),
         'AvailabilityDescription': self.availability(),
         'ResourcesDescription': self.resources(),

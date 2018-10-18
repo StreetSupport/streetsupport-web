@@ -17,7 +17,44 @@ const browser = require('./browser')
 const locationSelector = require('./location/locationSelector')
 const categories = require('../data/generated/service-categories')
 
+const timesOfDay = [
+  { id: 'Morning', startTime: '06:00', endTime: '12:00' },
+  { id: 'Afternoon', startTime: '12:00', endTime: '17:00' },
+  { id: 'Evening', startTime: '17:00', endTime: '24:00' }
+]
+
 let findHelp = null
+
+const bindFilters = function () {
+  document.querySelector('.js-filter-by-day')
+    .addEventListener('change', function () {
+      openAccordion(this.value)
+      findHelp.scrollTo(this.value)
+    })
+  document.querySelector('.js-filter-by-time')
+    .addEventListener('change', function () {
+      const selectedTimeOfDay = timesOfDay.find((t) => t.id === this.value)
+      const resultItems = Array.from(document.querySelectorAll('.result-detail__item'))
+      resultItems
+        .forEach((i) => {
+          i.style.display = 'block'
+        })
+
+      if (selectedTimeOfDay !== undefined) {
+        resultItems
+          .filter((i) => {
+            return !(
+              (i.getAttribute('data-start-time') < selectedTimeOfDay.startTime &&
+              i.getAttribute('data-end-time') > selectedTimeOfDay.startTime) ||
+              (i.getAttribute('data-start-time') > selectedTimeOfDay.startTime &&
+              i.getAttribute('data-start-time') < selectedTimeOfDay.endTime))
+          })
+          .forEach((i) => {
+            i.style.display = 'none'
+          })
+      }
+    })
+}
 
 const onLocationCriteriaChange = (result, range) => {
   browser.loading()
@@ -30,6 +67,7 @@ let onRenderCallback = function () {
   findHelp.setUrl('category', 'sub-category', querystring.parameter('sub-category'))
 
   browser.loaded()
+  bindFilters()
 }
 
 function buildList (url, locationResult) {
@@ -69,6 +107,7 @@ function buildList (url, locationResult) {
           analytics.init(document.title)
 
           browser.loaded()
+          bindFilters()
         }
       } else {
         template = 'js-category-no-results-result-tpl'
@@ -79,6 +118,8 @@ function buildList (url, locationResult) {
         categoryId: data.categoryKey,
         categoryName: data.categoryName,
         categorySynopsis: marked(data.synopsis),
+        daysOfWeek: data.daysServices.map((ds) => { return { id: ds.name } }),
+        timesOfDay: timesOfDay,
         location: locationResult.name,
         postcode: locationResult.postcode,
         nearestSupportedId: locationResult.nearestSupported !== undefined ? locationResult.nearestSupported.id : '',
@@ -113,15 +154,20 @@ const buildUrl = (locationResult, range = querystring.parameter('range')) => {
   return `${apiRoutes.categoryServiceProvidersByDay}${findHelp.theCategory}/long/${locationResult.longitude}/lat/${locationResult.latitude}?range=${range}`
 }
 
+const openAccordion = function (subCategory) {
+  var el = document.getElementById(subCategory)
+  var context = document.querySelector('.js-accordion')
+
+  var useAnalytics = true
+
+  accordion.reOpen(el, context, useAnalytics)
+}
+
 const initAccordionHistoryBackHandler = function (subCategoryKey, accordion) {
   window.onpopstate = function () {
     var subCategory = querystring.parameter(subCategoryKey)
     if (subCategory.length) {
-      var el = document.getElementById(subCategory)
-      var context = document.querySelector('.js-accordion')
-      var useAnalytics = true
-
-      accordion.reOpen(el, context, useAnalytics)
+      openAccordion(subCategory)
     }
   }
 }

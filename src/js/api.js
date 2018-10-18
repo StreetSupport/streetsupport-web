@@ -22,10 +22,10 @@ module.exports = {
   categoryServiceProviders: p('/v2/categorised-service-providers/show/'),
   categoryServiceProvidersByDay: p('/v2/timetabled-service-providers/show/'),
   organisation: p('/v2/service-providers/show/'),
-  needs: p('/v1/service-provider-needs/'),
-  needsHAL: p('/v2/service-provider-needs/'),
+  needs: p('/v2/service-provider-needs/'),
   needCategories: p('/v1/service-provider-needs/categories'),
   createVolunteerEnquiry: p('/v1/volunteer-enquiries/'),
+  volunteerCategories: p('/v1/volunteer-categories/'),
   createOfferOfItems: p('/v1/offers-of-items/'),
   joinStreetSupportApplications: p('/v1/join-street-support-applications/'),
   offerSponsorship: p('/v1/sponsorship-offers/'),
@@ -37,6 +37,7 @@ module.exports = {
   analyticsSnapshot: p('/v1/analytics-statistics/'),
   bestPracticeAwardApplications: p('/v1/manchester-best-practice-awards/applications/'),
   bestPracticeEnquiries: p('/v1/manchester-best-practice-enquiries/'),
-  accommodation: p('/v1/accommodation/')
+  accommodation: p('/v1/accommodation/'),
+  faqs: p('/v1/faqs/')
 }
 

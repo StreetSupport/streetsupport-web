@@ -1,6 +1,4 @@
 .result-detail {
-  margin-top: 20px;
-
   &__header {
     margin-top: 0;
   }
@@ -41,18 +39,17 @@
   }
 
   &__times-title {
-    margin: 0 40px 0 0;
-    padding: 0 0 5px 0;
-    min-width: 85px;
-    float: left;
     font-weight: $font-headline-weight;
+    margin: 0;
+    width: 120px;
 
     .accordion--day & {
       float: none;
     }
 
     @include mq($from: m) {
-      width: 120px;
+      float: left;
+
       &--timetabled {
         width: auto;
       }
@@ -60,12 +57,12 @@
   }
 
   &__times-items {
-    margin: 0 0 0 20px;
-    padding: 0px 0px 5px 0px;
-    float: right;
+    margin: 0 0 10px;
+    margin-inline-start: 0;
 
     @include mq($from: m) {
       float: left;
+      width: calc(100% - 120px);
     }
 
     .accordion--day & {
@@ -74,12 +71,25 @@
   }
 
   &__times-item {
-    margin-left: 140px;
+    margin: 0 0 0 40px;
+
     &--timetabled {
-      margin-left: 0
+      margin-left: 0;
     }
+
     &--provider-listing {
-      margin-left: 160px
+      margin-left: 160px;
+    }
+
+    @include mq($until: m) {
+
+      &:first-of-type {
+        margin-left: 0;
+      }
+    }
+
+    @include mq($from: m) {
+      margin: 0 0 0 140px;
     }
   }
 

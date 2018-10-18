@@ -1,4 +1,5 @@
 const browser = require('./browser')
+const print = require('./navigation/print')
 const querystring = require('./get-url-parameter')
 import { PostcodeProximity } from './components/PostcodeProximity'
 
@@ -31,6 +32,8 @@ const FindHelp = function (location) {
     : querystring.parameter('range')
 
   self.initFindHelpPostcodesLocationSelector = (onChangeCallback) => {
+    print.init()
+
     const decoratedCallback = (locationResult, range) => {
       self.currentRange = range
       const location = browser.location()
@@ -63,6 +66,11 @@ const FindHelp = function (location) {
         const subCategoryId = element.getAttribute('id')
         self.setUrl(pageName, subCategoryKey, subCategoryId)
         self.scrollTo(subCategoryId)
+
+        const filterByDayFilter = document.querySelector('.js-filter-by-day')
+        if (filterByDayFilter) {
+          filterByDayFilter.value = subCategoryId
+        }
       }
     }
   }

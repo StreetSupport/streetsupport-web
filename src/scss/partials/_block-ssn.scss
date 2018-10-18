@@ -37,6 +37,231 @@
     }
   }
 
+  &--news {
+    padding: 30px 10px;
+  }
+
+  &--big-change-mcr {
+    background: $big-change-a;
+    padding: 0!important;
+  }
+
+  &--standards-toolkit {
+    background: rgba(10, 133, 100, 0.15);
+    display: flex;
+    align-items: stretch;
+    padding: 0!important;
+    @include mq($from: m) {
+      .block__standards-toolkit-pad {
+        width: 50%;
+        background: url('/assets/img/toolkit-pad.png') right -40px no-repeat;
+      }
+    }
+  }
+
+  &--bcp-changeforgood {
+    padding: 0!important;
+    border-top: 70px $sea-blue solid;
+    border-bottom: 70px $sea-blue solid;
+
+    @include mq($from: m) {
+      display: flex;
+    }
+
+    .block__bcp-changeforgood {
+      margin: -70px 10px 0 10px;
+      border-left: 6px white solid;
+      border-right: 6px white solid;
+      border-bottom: 6px white solid;
+      
+      @include mq($from: m) {
+        margin: 0;
+        padding-top: 40px;
+        @include span(6 of 12);
+        border: none;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  &--soton-charter {
+    background: rgba(10, 133, 100, 0.15);
+    display: block;
+    padding: 0!important;
+
+    @include mq($from: m) {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .block__soton-charter {
+      width: 100%;
+      height: 500px;
+      background: white url('/assets/img/header-background.png') right bottom repeat-x;
+
+      @include mq($from: m) {
+        width: 50%;
+      }
+    }
+
+    .block__soton-charter-buildings {
+      height: 100%;
+      width: 100%;
+      position: relative;
+      background: url('/assets/img/locations/southampton.png') center bottom no-repeat;
+
+      & .content {
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        height: 100%;
+        position: absolute;
+        text-align: center;
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & .title {
+          h1 {
+            border-top: 3px solid #ec6262;
+            border-bottom: 3px solid #ec6262;
+            width: auto;
+            display: inline-block;
+          }
+
+          h2 {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  }
+
+  &--real-change-wal {
+    padding: 0 20px 30px 20px!important;
+    background: #5e71ba;
+    background-image: url('/assets/img/real-change-w-and-l/bg-triangle-top-mobile.png'),
+                      url('/assets/img/real-change-w-and-l/bg-triangle-bottom-mobile.png');
+    background-position: top left,
+                         bottom right;  
+    background-repeat: no-repeat,
+                       no-repeat;
+
+    @include mq($from: m) {
+      .container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding-top: 60px;
+      }
+    }
+    @include mq($from: xl) {
+      background: url('/assets/img/real-change-w-and-l/bg-desktop.png') no-repeat 50% top;
+      padding: 0 20px!important;
+
+      .container {
+        padding-top: 0;
+        height: 405px;
+        align-items: center;
+        flex-direction: row;
+      }
+    }
+
+    .real-change-wal__logo {
+      width: 70px;
+      height: 101px;
+
+      @include mq($from: m) {
+        position: absolute;
+        top: 0;
+        left: 20px;
+      }
+      
+      @include mq($from: xl) {
+        width: 88px;
+        height: 127px;
+      }
+    }
+
+    .real-change-wal__heading {
+      background: url('/assets/img/real-change-w-and-l/title-mobile.png') no-repeat;
+      width: 239px;
+      height: 136px;
+      margin: 95px auto 40px auto;
+      text-indent: -9999px;   
+      white-space: nowrap;
+
+      @include mq($from: s) {
+        margin-top: 40px;
+      }
+
+      @include mq($from: m) {
+        margin-top: 0px;
+        padding-top: 40px;
+      }
+      
+      @include mq($from: xl) {
+        background: url('/assets/img/real-change-w-and-l/title-desktop.png') no-repeat right;
+        width: 372px;
+        height: 213px;
+        margin: 0 5% 0 0;
+        width: 55%;
+      }
+    }
+
+    .real-change-wal__copy {
+      color: white;
+      @include mq($from: xl) {
+        width: 40%;
+      }
+    }
+  }
+
+  &--highlight {
+    background: $brand-c;
+    background: linear-gradient(to bottom, $brand-b, $brand-c);
+    color: #fff;
+
+    .h1,
+    .h2 {
+      color: #fff;
+    }
+    a {
+      color: $brand-e;
+    }
+  }
+
+  &--minor-highlight {
+    background: $brand-q;
+  }
+
+  &--requests-detail {
+    padding: 20px 0;
+    background: $brand-i;
+  }
+
+  &--big-change-video {
+    background: black;
+    padding: 15px 0 10px 0!important;
+  }
+
+  &--cards {
+    background: $brand-q;
+    border-top: 1px solid $brand-k;
+    @include cf();
+  }
+
+  &--swep-availability-notification {
+    background: $brand-g;
+    padding: 20px 0px!important;
+    color: white;
+    a {
+       color: $brand-e;
+    }
+  }
+
   &__image-image {
     margin-bottom: 20px;
     position: relative;
@@ -93,6 +318,35 @@
       transform: translateY(-50%);
       padding: 0 40px;
       max-width: 500px;
+    }
+  }
+}
+
+.block__content {
+  &--central-cta {
+    text-align: center;
+  }
+
+  &--join-mailing-list {
+    &:before {
+      content: '';
+      width: 60px;
+      height: 50px;
+      background: url('../img/icon-tileset.png') 178px 80px;
+      margin: 10px auto;
+
+      @include mq($from: m) {
+        margin: 0 auto 20px auto;
+      }
+    }
+  }
+
+  &--vert-fill {
+    padding: 40px 0;
+    @include mq($from: m) {
+      padding: 0;
+      display: flex;
+      align-items: flex-end;
     }
   }
 }

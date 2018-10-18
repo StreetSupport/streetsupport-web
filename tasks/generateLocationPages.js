@@ -16,6 +16,7 @@ let cities = []
 gulp.task('l-getCities', (callback) => {
   request(endpoints.cities, function (err, res, body) {
     cities = JSON.parse(body)
+      .filter(c => c.isPublic)
       .sort((a, b) => {
         if (a.name < b.name) return -1
         if (a.name > b.name) return 1
@@ -71,18 +72,6 @@ gulp.task('l-generate-header-css', () => {
     .pipe(gulp.dest(srcFile))
 })
 
-gulp.task('l-generate-desktop-nav', () => {
-  const srcFile = `${config.paths.partials}/nav/`
-  const cityOutput = cities
-    .map((c) => `<ul class="nav__list nav__list--hub" data-city="${c.id}">
-    {{> ${c.id}/nav }}
-  </ul>`)
-    .join(' ')
-
-  return newFile('desktop-locations.hbs', cityOutput)
-    .pipe(gulp.dest(srcFile))
-})
-
 gulp.task('l-generate-mobile-nav', () => {
   const srcFile = `${config.paths.partials}/nav/`
   const cityOutput = cities
@@ -90,7 +79,7 @@ gulp.task('l-generate-mobile-nav', () => {
     .join(`
 `)
 
-  return newFile('mobile-locations.hbs', cityOutput)
+  return newFile('locations.hbs', cityOutput)
     .pipe(gulp.dest(srcFile))
 })
 
@@ -105,17 +94,35 @@ gulp.task('l-generate-header-nav', () => {
     .pipe(gulp.dest(srcFile))
 })
 
+function loactionOptionTag(str, id, isSelected, name) {
+  var selectedStr = ""
+  if (isSelected) {
+    selectedStr = " selected=\"selected\""
+  }
+  return str[0]+id+str[1]+selectedStr+str[2]+name+str[3]
+}
+
+gulp.task('l-generate-location-dropdown', () => {
+  const srcFile = `${config.paths.partials}/locations/`
+  const cityOutput = 
+  `${cities
+    .map((c) => loactionOptionTag`<option value="${c.id}"${c.selected}>${c.name}</option>`)
+    .join(`\n`)}`
+
+  return newFile('_generated-option-tags.hbs', cityOutput).pipe(gulp.dest(srcFile))
+})
+
 
 gulp.task('generate-location-files', (callback) => {
   runSequence(
     'l-clean',
     'l-getCities',
-    'l-generate-home-pages',
+    // 'l-generate-home-pages',
     'l-generate-header-css',
     'l-generate-nav-variables',
-    'l-generate-desktop-nav',
     'l-generate-mobile-nav',
     'l-generate-header-nav',
+    'l-generate-location-dropdown',
     callback
   )
 })

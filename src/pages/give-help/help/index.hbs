@@ -1,6 +1,6 @@
 ---
 title: Requests for Help - Street Support
-description: Organisations need specific items, skills and money to support homeless people - can you help?
+description: Organisations need specific items, skills and money to support people facing homelessness - can you help?
 image: https://streetsupport.net/assets/img/og/street-support.png
 layout: default.hbs
 permalink: false
@@ -8,11 +8,16 @@ jsBundle: giverequests
 section: givehelp
 page: giveitems
 ---
+
 <div class="block block--breadcrumbs">
   <div class="container">
     <ol class="breadcrumbs__list">
-      <li class="breadcrumbs__item"><a href="/">Home</a></li>
-      <li class="breadcrumbs__item"><a href="/give-help/">Give Help</a></li>
+      <li class="breadcrumbs__item">
+        <a href="/">Home</a>
+      </li>
+      <li class="breadcrumbs__item">
+        <a href="/give-help/">Give Help</a>
+      </li>
       <li class="breadcrumbs__item">Help</li>
     </ol>
   </div>
@@ -20,17 +25,25 @@ page: giveitems
 
 <div class="block">
   <div class="container">
-    <div class="block__content" id="js-header-output">
+    <div class="block__content">
+      <header class="multi-form-header">
+        <h1 class="h1">Give Help</h1>
+        <p>You can help make big changes to homelessness by giving items, your time or money to local organisations so they
+          can continue their good work. If you can't spot anything suitable at the moment, use our
+          <a href="/give-help/volunteer/">volunteer form</a>, or
+          <a href="/give-help/offer-items/">offer items</a> that you are willing to donate. Interested organisations will then get in touch with you directly.</p>
+        <!-- ko ifnot: hasPostcode -->
+        <p>Please enter your postcode to find nearby organisations with needs.</p>
+        <!-- /ko -->
+      </header>
+      {{> proximity-search/knockout }}
     </div>
   </div>
 </div>
 
 <nav class="block-tabs block-tabs--cards">
-  <div class="block-tabs__container block-tabs__container--four">
-    <a class="block-tabs__tab block-tabs__tab--selected js-filter-item js-filter-item-all" data-filter="all" href="#">All</a>
-    <a class="block-tabs__tab js-filter-item" data-filter="items" href="#">Items</a>
-    <a class="block-tabs__tab js-filter-item" data-filter="time" href="#">Time</a>
-    <a class="block-tabs__tab js-filter-item" data-filter="money" href="#">Money</a>
+  <div class="block-tabs__container block-tabs__container--four" data-bind="foreach: filters">
+    <a class="block-tabs__tab" data-bind="click: filterAction, text: label, css: { 'block-tabs__tab--selected': isActive }"></a>
   </div>
 </nav>
 
@@ -38,78 +51,52 @@ page: giveitems
   <div class="block block--cards">
     <div class="container">
       <div class="block__content">
-        <div id="js-card-list-output">
-          {{> loading-spinner}}
+        <!-- ko ifnot: hasNeeds -->
+        <p>There are are no needs registered near you yet. Please try another postcode.</p>
+        <p>If you know of local organisations that could be included, please use our <a href="/register">registration form</a>, or if they are already included but their needs aren't listed, please <a href="/about/contact">let us know</a>.</p>
+        <!-- /ko -->
+        <!-- ko if: hasNeeds -->
+        <div class="requests-detail js-card-detail">
+          <div class="card-sort">
+            <span class="card-sort__title">Sort by:</span>
+            <span data-bind="foreach: sorts">
+              <a class="card-sort__item js-sort-criteria" data-bind="text: label, click: sortAction, css: { 'card-sort__item--selected': isActive }"></a>
+            </span>
+          </div>
+
+          <ul class="cards__list list" data-bind="foreach: needsToDisplay">
+            <li class="card card--brand-h card--grid-1-of-3" data-bind="attr: {id: id}">
+              <div class="card__title">
+                <a data-bind="attr: { href: detailsUrl }">
+                  <h1 class="h2" data-bind="html: description"></h1>
+                </a>
+              </div>
+              <div class="card__details card__details--fat-bottom">
+                <p class="h3 serviceProviderName" data-bind="text: serviceProviderName"></p>
+                <p class="locationDescription" data-bind="text: locationDescription"></p>
+                <p class="formattedNeededDate">Posted:
+                  <time data-bind="attr: { datetime: neededDate }, text: formattedNeededDate"></time>
+                </p>
+                <a data-bind="attr: { href: detailsUrl }" class="btn btn--brand-e">
+                  <span class="btn__text">I Can Help!</span>
+                </a>
+              </div>
+            </li>
+          </ul>
+
+          <!-- ko if: isMoreToLoad -->
+          <div class="text-center">
+            <a class="btn btn--brand-e" data-bind="click: loadNextPage">
+              <span class="btn__text">Show More</span>
+            </a>
+          </div>
+          <!-- /ko -->
+        </div>
+        <!-- /ko -->
         </div>
       </div>
-      <div class="btn" id="js-show-more-btn-output"></div>
     </div>
   </div>
 </div>
 
-<div class="requests-detail js-card-detail is-hidden">
-  <div id="js-card-detail-output"></div>
-</div>
-
-<script id="js-header-tpl" type="text/template">
-<header class="multi-form-header">
-  <h1 class="h1">Give Help</h1>
-  <p>You can help make big changes to homelessness by giving items, your time or money to local organisations so they can continue their good work. If you can't spot anything suitable at the moment, use our <a href="/give-help/volunteer/">volunteer form</a>, or <a href="/give-help/offer-items/">offer items</a> that you are willing to donate. Interested organisations will then get in touch with you directly.</p>
-</header>
-
-{{> proximity-search/hogan }}
-</script>
-
-<script id="js-no-data-tpl" type="text/template">
-  <div class="block__section">
-    \{{#geoLocationUnavailable}}
-    <p>Unfortunately, we cannot determine your location. Please ensure location is enabled on your device.</p>
-    \{{/geoLocationUnavailable}}
-    \{{^geoLocationUnavailable}}
-    \{{^postcode}}
-    <p>Please enter your postcode to find nearby organisations with needs.</p>
-    \{{/postcode}}
-    \{{#postcode}}
-    <p>There are are no needs registered near you yet. Please try another postcode.</p>
-    \{{/postcode}}
-    \{{/geoLocationUnavailable}}
-    <p>If you know of local organisations that could be included, please use our <a href="/register">registration form</a>, or if they are already included but their needs aren't listed, please <a href="/about/contact">let us know</a>.</p>
-  </div>
-</script>
-
-<script id="js-card-list-tpl" type="text/template">
-<div class="card-sort">
-  <span class="card-sort__title">Sort by:</span>
-  <a class="card-sort__item js-sort-criteria card-sort__item--selected" href="#" data-sort="date-desc">Date Added</a> 
-  <a class="card-sort__item js-sort-criteria" href="#" data-sort="organisation-asc">Organisation</a> 
-  <a class="card-sort__item js-sort-criteria" href="#" data-sort="distance-asc">Distance</a> 
-</div>
-  <section class="block__section">
-    <div class="requests">
-      <div class="requests-search__input" action="#">
-        <div class="requests-search__container">
-          <label for="search-for-requests" class="hide-screen">Filter requests for help</label>
-          <input autofocus id="search-for-requests" class="search requests-search__autocomplete" placeholder="Filter requests for help by entering a keyword" />
-        </div>
-      </div>
-  </section>
-  <ul id="js-card-list" class="requests-listing list">
-    \{{#card}}
-      {{> give-help-card this}}
-    \{{/card}}
-  </ul>
-</script>
-
-<script id="js-show-more-tpl" type="text/template">
-  \{{#isMore}}
-    <a class="btn btn--brand-e js-show-more-btn">
-        <span class="btn__text">Show More</span>
-    </a>
-  \{{/isMore}}
-</script>
-
-<script id="js-cards-tpl" type="text/template">
-\{{#card}}
-  {{> give-help-card this}}
-\{{/card}}
-</script>
+{{> loading-spinner}}

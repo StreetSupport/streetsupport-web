@@ -29,6 +29,11 @@ export const getSubCategories = (providers) => {
   return providers
     .reduce(toJustSubCats, [])
     .reduce(toUnique, [])
+    .sort((a, b) => {
+      if (a.name < b.name) return -1
+      if (a.name > b.name) return 1
+      return 0
+    })
 }
 
 export const getProvidersForListing = (providers) => {
@@ -64,6 +69,8 @@ export const getProvidersForListing = (providers) => {
       telephone: provider.telephone,
       days: groupOpeningTimes(provider.openingTimes),
       isOpen247: provider.isOpen247,
+      isTelephoneService: provider.isTelephoneService,
+      isAppointmentOnly: provider.isAppointmentOnly,
       subCategoryIds: provider.subCategories
         .map((sc) => sc.id)
         .join(' '),

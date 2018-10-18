@@ -28,12 +28,13 @@
     @include cf();
 
     p {
-      &:first-of-type {
-        margin-top: 0;
-      }
-
       &:last-of-type {
         margin-bottom: 0px;
+      }
+
+      &:first-of-type {
+        margin-top: 0;
+        margin-bottom: 16px;
       }
 
       .btn {
@@ -48,9 +49,9 @@
 
     .h1,
     .h2 {
-      color: $brand-h;
+      color: $brand-m;
       a {
-        color: $brand-n;
+        color: $brand-m;
       }
     }
   }
@@ -127,27 +128,6 @@
   }
 
   // Variants
-  &--news {
-    padding: 30px 10px;
-  }
-
-  &--big-change-mcr {
-    background: $big-change-a;
-    padding: 0!important;
-  }
-
-  &--standards-toolkit {
-    background: rgba(10, 133, 100, 0.15);
-    display: flex;
-    align-items: stretch;
-    padding: 0!important;
-    @include mq($from: m) {
-      .block__standards-toolkit-pad {
-        width: 50%;
-        background: url('/assets/img/toolkit-pad.png') right -40px no-repeat;
-      }
-    }
-  }
 
   &--breadcrumbs {
     padding-top: 6px !important;
@@ -160,21 +140,7 @@
     }
 
     @include mq($from: m) {
-      top: $header-top + $header-height + $header-height;
-    }
-  }
-
-  &--highlight {
-    background: $brand-c;
-    background: linear-gradient(to bottom, $brand-b, $brand-c);
-    color: #fff;
-
-    .h1,
-    .h2 {
-      color: #fff;
-    }
-    a {
-      color: $brand-e;
+      margin-top: -5px;
     }
   }
 
@@ -183,40 +149,11 @@
       text-align: center;
     }
   }
-
-  &--requests-detail {
-    padding: 20px 0;
-    background: $brand-i;
-  }
-
-  &--big-change-video {
-    background: black;
-    padding: 15px 0 10px 0!important;
-  }
-
-  &--cards {
-    background: $brand-q;
-    border-top: 1px solid $brand-k;
-    @include cf();
-  }
-
-  &--swep-availability-notification {
-    background: $brand-g;
-    padding: 20px 0px!important;
-    color: white;
-    a {
-       color: $brand-e;
-    }
-  }
 }
 
 .block--header,
 .block--home-header,
 .block--location-header {
-  background-image: url('../img/header-background.png');
-  background-repeat: repeat-x;
-  background-position: bottom;
-  padding-top: 60px;
   padding-bottom: 100px;
 
   .block__header,
@@ -224,11 +161,36 @@
     color: $brand-m;
   }
 }
-.location-header--southampton {
-  background-image: url('../img/header-background.png'), url('../img/locations/sea-tile.png');
 
+.block__header--gm-header {
+  background: url('../img/gm/gmhan-logo.png') no-repeat top center;
+  padding-top: 180px;
+
+  @include mq($from: m) {
+    padding-top: 40px;
+    padding-left: 200px;
+    background-position: left center;
+    min-height: 160px;
+  }
 }
 
+.bed-every-night-logo {
+  display: block;
+  width: 351px;
+  margin: 0 auto 20px auto;
+
+  @include mq($from: m) {
+    float: right;
+    margin: 20px;
+  }
+}
+
+.block--home-header,
+.block--location-header {
+  background-image: url('../img/header-background.png');
+  background-repeat: repeat-x;
+  background-position: bottom;
+}
 .block--location-header,
 .block--home-header {
   .block__header,
@@ -256,6 +218,15 @@
 .block--header {
   padding: 80px 0!important;
 }
+
+.block--gm-header {
+  background: #FFEDA1 url('../img/gm/header-bg.jpg') repeat-x bottom;
+  padding-top: 40px!important;
+  @include mq($from: m) {
+    padding-top: 80px;
+  }
+}
+
 
 .block--home-header {
   @include mq($from: m) {
@@ -311,97 +282,6 @@
   }
 }
 
-.block--subpage-header {
-  padding-top: 0px;
-  padding-bottom: 0px;
-
-  @media print {
-    & { padding-top: 0px; }
-  }
-
-  @include mq($from: m) {
-    padding-bottom: 0px;
-  }
-
-  .block__header {
-    color: $brand-h;
-    padding-top: 50px;
-
-    &.has-icon--left {
-      margin: 20px 0;
-      padding-left: 60px;
-      position: relative;
-      text-align: center;
-
-      @include mq($from: m) {
-        margin: 0px 0 10px;
-        padding-left: 0;
-        padding-top: 0px;
-        text-align: center;
-      }
-
-      .block__header__icon {
-        @include size(50px);
-
-        position: absolute;
-        top: 40px;
-        left: 0;
-
-        @include mq($from: m) {
-          position: static;
-        }
-
-        &--big-change {
-          left: 50%;
-          margin-left: -90px;
-          @include mq($from: m) {
-            left: 0;
-            margin-left: 0;
-          }
-        }
-
-        &--give {
-          height: 110px;
-          width: 140px;
-          top: -40px;
-          right: 38px;
-
-          @include mq($from: m) {
-            margin-right: -28px;
-            margin-top: -30px;
-            vertical-align: middle;
-          }
-        }
-
-        &--find-help {
-          @include size(100px);
-          position: absolute;
-          left: 0;
-          top: 15px;
-          @include mq($from: m) {
-            position: inherit;
-            top: 35px;
-          }
-        }
-      }
-    }
-    &--find-help.has-icon--left {
-      padding-top: 50px;
-    }
-  }
-
-  .block__sub-header {
-    color: $brand-m;
-
-    p:first-of-type {
-      margin-top: 0;
-    }
-    p:last-of-type {
-      margin-bottom: 0;
-    }
-  }
-}
-
 .template--maybe-empty .block--home-promo {
   padding-bottom: 0px!important;
 }
@@ -451,6 +331,10 @@
   }
 }
 
+.block-tabs--cards {
+  @include printHide();
+}
+
 .block-tabs__tab {
   @include span(1 of 2);
 
@@ -460,6 +344,7 @@
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border-top: 1px solid black;
+  cursor: pointer;
   display: block;
   margin-top: 4px;
   padding: 10px;
@@ -521,7 +406,22 @@
 
   &--standards-toolkit {
     padding: 40px 1rem;
-    max-width: 500px;  // half of $site-container in _variables.scss
+    @include mq($from: m) {
+      max-width: 500px;  // half of $site-container in _variables.scss
+      padding: 40px 30px 40px 40px;
+    }
+  }
+
+  &--soton-charter {
+    padding: 40px 1rem;
+    @include mq($from: m) {
+      max-width: 500px;  // half of $site-container in _variables.scss
+      padding: 40px 30px 40px 40px;
+    }
+  }
+
+  &--bcp-changeforgood {
+    padding: 0 10px;
     @include mq($from: m) {
       padding: 40px 30px 40px 40px;
     }

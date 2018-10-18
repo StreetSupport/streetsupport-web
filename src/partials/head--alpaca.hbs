@@ -12,23 +12,6 @@
     <meta property="og:description" content="{{description}}" />
     <meta property="og:image" content="{{description}}" />
 
-    <style>
-      .header--desktop,
-      .hubs-nav {
-        display: none;
-      }
-      @media (min-width:46.875em) {
-        nav--mobile {
-          display: none;
-        }
-        
-        .header--desktop,
-        .hubs-nav {
-          display: block;
-        }
-      }
-    </style>
-
     <link rel="stylesheet" href="{{site.url}}assets/css/site.css?v={{site.cssVersion}}" />
 
     <!-- Google Tag Manager -->
@@ -64,8 +47,9 @@
     <!-- alpaca -->
     <link type="text/css" href="//code.cloudcms.com/alpaca/1.5.18/bootstrap/alpaca.min.css" rel="stylesheet" />
     <script type="text/javascript" src="//code.cloudcms.com/alpaca/1.5.18/bootstrap/alpaca.min.js"></script>
+    <style>.nav__item--hub-nav { display: none }</style>
   </head>
-  <body class="page--{{page}} section--{{section}}">
+  <body class="page--{{page}} section--{{section}} location--{{location}}">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PVPXCXT"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

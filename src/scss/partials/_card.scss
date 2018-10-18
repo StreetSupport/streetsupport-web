@@ -6,11 +6,35 @@ $spacing: 20px;
 .cards__list {
   @include cf();
   margin-bottom: 10px;
+  list-style: none;
+  padding: 0;
 
   &--single-col {
     @include mq($from: m) {
       @include span(7 of 12);
       @include first();
+    }
+
+    @media print {
+      & {
+        width: 100%;
+        float: none;
+        margin-right: 0;
+
+        .accordion {
+          max-width: 100%;
+          box-shadow: none;
+
+          .accordion__header {
+            padding-left: 10px;
+            color: white;
+
+            .accordion__icon {
+              display: none;
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -19,6 +43,12 @@ $spacing: 20px;
   border-radius: $radius;
   margin-bottom: $spacing;
   text-align: center;
+
+  @media print {
+    & {
+      box-shadow: none;
+    }
+  }
 }
 
 .card__details {
@@ -30,7 +60,7 @@ $spacing: 20px;
   }
 
   &--fat-bottom {
-    height: 250px;
+    height: 226px;
   }
 }
 
@@ -133,9 +163,96 @@ $spacing: 20px;
 }
 
 .card--grid-1-of-4 {
-  @include mq($from: m) {
+  @include mq($from: m, $until: l) {
+    @include span(1 of 2);
+    &:nth-of-type(2n) { @include last() }
+  }
+  @include mq($from: l) {
     @include span(1 of 4);
     &:nth-of-type(4n) { @include last() }
+  }
+}
+
+.card--cta {
+  box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);
+  padding: 15px;
+  text-align: left;
+  height: auto;
+
+  @include mq($from: m) {
+    height: 315px;
+  }
+
+  @include mq($from: l) {
+    height: 305px;
+  }
+
+  p { 
+    @include mq($from: m) {
+      height: 122px 
+    }
+    @include mq($from: l) {
+      height: 112px 
+    }
+  }
+
+  .btn {
+    margin-bottom: 0;
+  }
+
+  .card__title {
+    @include cf();
+    display: flex;
+    align-items: center; 
+    &:before {
+      content: '';
+      display: block;
+      width: 65px;
+      height: 55px;
+      background: url('../img/icon-tileset.png');
+      float: left;
+    }
+
+    &--help {
+      &:before {
+        background-position: -126px 83px;
+      }
+    }
+
+    &--card {
+      &:before {
+        background-position: -326px 185px;
+      }
+    }
+
+    &--briefcase {
+      &:before {
+        background-position: -224px 185px;
+      }
+    }
+
+    &--hand {
+      &:before {
+        background-position: -326px 83px;
+      }
+    }
+
+    &--kettle {
+      &:before {
+        background-position: -120px 285px;
+
+        @include mq($from: l) {
+          width: 90px;
+        }
+      }
+    }
+
+    &--street-support {
+      &:before {
+        height: 60px;
+        background-position: -23px 288px;
+      }
+    }
   }
 }
 
@@ -147,7 +264,7 @@ $spacing: 20px;
     border-top-left-radius: $radius;
     background: $brand-h;
     height: 220px;
-    padding: 15px 10px;
+    padding: 20px 10px 10px 10px;
     text-align: left;
     * {
       color: white;
@@ -160,6 +277,11 @@ $spacing: 20px;
     border-bottom-right-radius: $radius;
     border-bottom-left-radius: $radius;
   }
+
+  .card__details p {
+    padding: 0px;
+    margin-bottom: 20px;
+  }
   
   .card__details__description {
     text-decoration: none!important;
@@ -167,6 +289,7 @@ $spacing: 20px;
   }
   .card__details__link {
     text-decoration: underline;
+    @include printHide();
   }
 }
 
@@ -222,4 +345,15 @@ $spacing: 20px;
   border-left: 12px solid transparent;
   border-right: 12px solid transparent;
   border-top: /* TIP_HEIGHT= */ 16px solid white;
+}
+
+.card__close {
+  background: none;
+  border: none;
+  color: white;
+  display: block;
+  float: right;
+  font-size: 16px;
+  margin: -15px -5px 0 0 !important;
+  padding: 5px !important;
 }

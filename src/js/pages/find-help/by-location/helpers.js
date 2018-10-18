@@ -29,14 +29,23 @@ export const buildInfoWindowMarkup = (p) => {
   const suitableForMarkup = p.tags.length > 0
     ? `<p>Suitable for: ${p.tags.join(', ')}</p>`
     : ''
+  const isTelephoneServiceMarkup = p.isTelephoneService
+    ? '<p>This is a telephone service.</p>'
+    : ''
+  const isAppointmentOnlyMarkup = p.isAppointmentOnly
+    ? '<p>Access to this service is by appointment only.</p>'
+    : ''
   const telephoneMarkup = p.telephone !== null && p.telephone.length > 0
     ? `<p>Telephone: ${p.telephone}</p>`
     : ''
 
   return `<div class="card card--brand-h card--gmaps">
             <div class="card__title">
+              <button class="card__close js-popup-close" title="close">&#10799;</button>
               <h1 class="h2"><a href="/find-help/organisation/?organisation=${p.serviceProviderId}">${htmlEncode.htmlDecode(p.serviceProviderName)}</a></h1>
               ${suitableForMarkup}
+              ${isTelephoneServiceMarkup}
+              ${isAppointmentOnlyMarkup}
             </div>
             <div class="card__details">
               ${telephoneMarkup}

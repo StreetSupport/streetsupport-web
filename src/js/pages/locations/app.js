@@ -9,39 +9,40 @@ const api = require('../../get-api-data')
 const browser = require('../../browser')
 const endpoints = require('../../api')
 const location = require('../../location/locationSelector')
-const supportedCities = require('../../location/supportedCities')
 const templating = require('../../template-render')
 const wp = require('../../wordpress')
 const MapBuilder = require('../../models/accommodation/MapBuilder')
 
 const initLocations = function (currentLocationId) {
-  const callback = () => {
-    const ui = {
-      form: document.querySelector('.js-change-location-form'),
-      select: document.querySelector('.js-change-location-select')
-    }
-
-    ui.form.addEventListener('submit', function (e) {
-      e.preventDefault()
-      const reqLocation = ui.select.value
-      if (reqLocation) {
-        location.setCurrent(reqLocation)
-        browser.redirect(`/${reqLocation}`)
-      }
-    })
+  const ui = {
+    form: document.querySelector('.js-change-location-form'),
+    select: document.querySelector('.js-change-location-select')
   }
 
-  const locations = supportedCities.locations.map((c) => {
-    return {
-      id: c.id,
-      name: c.name,
-      isSelected: c.id === currentLocationId
+  ui.form.addEventListener('submit', function (e) {
+    e.preventDefault()
+    const reqLocation = ui.select.value
+    if (reqLocation) {
+      location.setCurrent(reqLocation)
+      browser.redirect(`/${reqLocation}`)
     }
   })
-  const theData = {
-    locations: [{ name: 'Select a location' }, ...locations]
+
+  const redirectToHubPage = function (locationId) {
+    location.setCurrent(locationId)
+    browser.redirect(`/${locationId}`)
   }
-  templating.renderTemplate('js-location-selector-tpl', theData, 'js-location-selector-output', callback)
+
+  Array.from(document.querySelector('.js-change-location-select'))
+  .filter((t) => t.tagName === 'OPTION')
+  .find((o) => o.value === currentLocationId)
+  .setAttribute('selected', 'selected')
+
+  location.handler((result) => {
+    if (result.length) {
+      redirectToHubPage(result)
+    }
+  }, '.js-change-location-select')
 }
 
 const initNews = function (currentLocationId) {
@@ -108,6 +109,7 @@ const initMap = function (currentLocation) {
   const buildInfoWindowMarkup = (p) => {
     return `<div class="card card--brand-h card--gmaps">
               <div class="card__title">
+                <button class="card__close js-popup-close" title="close">&#10799;</button>
                 <h1 class="h2">${htmlEncode.htmlDecode(p.serviceProviderName)}</h1>
                 <p>${htmlEncode.htmlDecode(p.serviceProviderSynopsis)}</p>
               </div>
@@ -123,21 +125,12 @@ const initMap = function (currentLocation) {
   api
     .data(endpoint)
     .then((result) => {
-      map.init(result.data.items, currentLocation, null, buildInfoWindowMarkup, getLocation)
+      const zoom = currentLocation.id === 'bournemouth'
+        ? 11 // stinky
+        : 12
+      map.init(result.data.items, currentLocation, null, buildInfoWindowMarkup, getLocation, { zoom })
     }, (_) => {
     })
-}
-
-const initToolkit = function () {
-  templating.renderTemplate('js-toolkit-tpl', {}, 'js-toolkit-output')
-}
-
-const initCharter = function () {
-  templating.renderTemplate('js-charter-tpl', {}, 'js-charter-output')
-}
-
-const initBigChange = function () {
-  templating.renderTemplate('js-big-change-tpl', {}, 'js-big-change-output')
 }
 
 const initSwep = function (currentLocationId) {
@@ -159,16 +152,3 @@ initFindHelp(currentLocation)
 initStatistics(currentLocation)
 initMap(currentLocation)
 initSwep(currentLocation.id)
-
-const availableFeatures = [
-  { isEnabledFlag: 'toolkitIsEnabled', init: initToolkit },
-  { isEnabledFlag: 'charterIsEnabled', init: initCharter },
-  { isEnabledFlag: 'bigChangeIsEnabled', init: initBigChange }
-]
-
-availableFeatures
-  .forEach((f) => {
-    if (currentLocation[f.isEnabledFlag]) {
-      f.init()
-    }
-  })
