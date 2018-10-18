@@ -54,10 +54,12 @@ const AccommodationListing = function (addtionalQueryString = '') {
     new SearchFilter('acceptsBenefitsClaimants', 'Benefits Claimants')
   ])
 
-  self.referralIsRequired = ko.observableArray([
-    {key: 0, value: 'No'},
-    {key: 1, value: 'Yes'}
+  self.referralOptions = ko.observableArray([
+    {value: false, name: 'No'},
+    {value: true, name: 'Yes'}
   ])
+
+  self.referralRequired = ko.observable()
 
   self.resetFilter = function () {
     self.residentCriteriaFilters()
@@ -65,6 +67,7 @@ const AccommodationListing = function (addtionalQueryString = '') {
         f.value(undefined)
       })
     self.selectedType('')
+    // TODO: reset value of referralRequired
   }
 
   const getTypeKeyValuePairs = function () {
@@ -75,9 +78,9 @@ const AccommodationListing = function (addtionalQueryString = '') {
   }
 
   const getReferralKeyValuePairs = function () {
-    const referralValue = self.referralIsRequired()
-    return referralValue && referralValue.length
-      ? [({ key: 'referralIsRequired', value: referralValue })]
+    const referralValue = self.referralRequired()
+    return typeof referralValue !== 'undefined' && referralValue !== null
+      ? [({ key: 'referralRequired', value: referralValue })]
       : []
   }
 
@@ -125,7 +128,6 @@ const AccommodationListing = function (addtionalQueryString = '') {
 
   self.init = (currentLocation) => {
     self.items([])
-    console.log(self)
     if (currentLocation) {
       const endpoint = `${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}${getQuerystring()}${self.addtionalQueryString}`
       self.locationName(currentLocation.postcode)

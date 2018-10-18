@@ -113,5 +113,13 @@ describe('Accommodation - Listing - Resident Criteria Filtering', function () {
           })
       })
     })
+
+
+    // TODO: Add test for referral required dropdown set up unselected
+    // TODO: Test selecting a value
+    // TODO: Add another update test for referralRequired
+    // TODO: Update reset test to check the referralRequired was updated
+    
+
   })
 })
