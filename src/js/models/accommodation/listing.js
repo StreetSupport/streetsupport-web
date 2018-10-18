@@ -26,8 +26,6 @@ const AccommodationListing = function (addtionalQueryString = '') {
   self.accomTypes = ko.observableArray(categories)
   self.selectedType = ko.observable('')
   self.locationName = ko.observable()
-  // TODO: Hook up to request to send for filtering
-  // self.referralIsRequired = ko.observableArray(referralOpts)
 
   self.nextPageEndpoint = ko.observable()
 
@@ -56,6 +54,11 @@ const AccommodationListing = function (addtionalQueryString = '') {
     new SearchFilter('acceptsBenefitsClaimants', 'Benefits Claimants')
   ])
 
+  self.referralIsRequired = ko.observableArray([
+    {key: 0, value: 'No'},
+    {key: 1, value: 'Yes'}
+  ])
+
   self.resetFilter = function () {
     self.residentCriteriaFilters()
       .forEach((f) => {
@@ -71,6 +74,13 @@ const AccommodationListing = function (addtionalQueryString = '') {
       : []
   }
 
+  const getReferralKeyValuePairs = function () {
+    const referralValue = self.referralIsRequired()
+    return referralValue && referralValue.length
+      ? [({ key: 'referralIsRequired', value: referralValue })]
+      : []
+  }
+
   const getFilterKeyValuePairs = function () {
     return self.residentCriteriaFilters()
       .filter((f) => f.value() !== undefined)
@@ -78,7 +88,7 @@ const AccommodationListing = function (addtionalQueryString = '') {
   }
 
   const getQuerystring = function () {
-    return getFilterKeyValuePairs().concat(getTypeKeyValuePairs())
+    return getFilterKeyValuePairs().concat(getTypeKeyValuePairs()).concat(getReferralKeyValuePairs())
       .map((f) => `&${f.key}=${f.value}`)
       .join('')
   }
@@ -115,6 +125,7 @@ const AccommodationListing = function (addtionalQueryString = '') {
 
   self.init = (currentLocation) => {
     self.items([])
+    console.log(self)
     if (currentLocation) {
       const endpoint = `${endpoints.accommodation}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}${getQuerystring()}${self.addtionalQueryString}`
       self.locationName(currentLocation.postcode)
