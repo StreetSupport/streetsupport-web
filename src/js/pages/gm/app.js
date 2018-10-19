@@ -64,9 +64,9 @@ const initLocations = function (currentLocationId) {
   }
 
   Array.from(document.querySelector('.js-change-location-select'))
-  .filter((t) => t.tagName === 'OPTION')
-  .find((o) => o.value === currentLocationId)
-  .setAttribute('selected', 'selected')
+    .filter((t) => t.tagName === 'OPTION')
+    .find((o) => o.value === currentLocationId)
+    .setAttribute('selected', 'selected')
 
   location.handler((result) => {
     if (result.length) {
@@ -105,7 +105,6 @@ const initMap = function (currentLocation) {
     })
 }
 
-
 const initNews = function () {
   const totalPostsToShow = 3
   wp
@@ -120,7 +119,7 @@ const initNews = function () {
 }
 
 initNews()
-initMap(cities.find((c) => c.id === "manchester"))
+initMap(cities.find((c) => c.id === 'manchester'))
 
 location
   .getPreviouslySetPostcode()
