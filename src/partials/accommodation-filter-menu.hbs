@@ -17,7 +17,7 @@
       <ul class="accommodation-listing__filter-facet-group">
         <li>
           <label class="accommodation-listing__filter-facet-options-title">Type:</label>
-          <select class="form__input form__input--inline form__input--short accommodation-listing__type-dropdown" data-bind="
+          <select class="form__input form__input--inline form__input--short accommodation-listing__dropdown" data-bind="
               options: accomTypes,
               optionsText: 'name',
               optionsValue: 'key',
@@ -26,7 +26,19 @@
           </select>
         </li>
       </ul>
-
+      <h2 class="h3">Referrals:</h2>
+      <ul class="accommodation-listing__filter-facet-group">
+        <li>
+          <label for="" class="accommodation-listing__filter-facet-options-title">Referral Required:</label>
+          <select class="form__input form__input--inline form__input--short accommodation-listing__dropdown" data-bind="
+            options: referralOptions,
+            optionsText: 'name',
+            optionsValue: 'value',
+            optionsCaption: '-- select --',
+            value: referralRequired">
+          </select>
+        </li>
+      </ul>
       <h2 class="h3">Suitable For:</h2>
       <ul class="accommodation-listing__filter-facet-group" data-bind="foreach: residentCriteriaFilters">
         <li>

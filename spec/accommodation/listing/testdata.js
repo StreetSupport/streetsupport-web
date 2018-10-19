@@ -19,7 +19,7 @@ export const data = {
       'latitude': 53.4755361548836,
       'longitude': -2.25848699844466,
       'accommodationType': 'hosted',
-      'referralIsRequired': true
+      'referralRequired': true
     },
     {
       'id': '58f7447dd021fb3db0e7eff3',
@@ -35,7 +35,7 @@ export const data = {
       'latitude': 53.4734508348179,
       'longitude': -2.25003749221795,
       'accommodationType': 'hostel',
-      'referralIsRequired': false
+      'referralRequired': false
     },
     {
       'id': '58fe197692855634c0ad905e',
@@ -51,7 +51,7 @@ export const data = {
       'latitude': 53.4775516308628,
       'longitude': -2.23576284972915,
       'accommodationType': 'hostel',
-      'referralIsRequired': true
+      'referralRequired': true
     },
     {
       'id': '58fe21699285563a68b0778e',
@@ -67,7 +67,7 @@ export const data = {
       'latitude': 53.4775516308628,
       'longitude': -2.23576284972915,
       'accommodationType': 'hosted',
-      'referralIsRequired': false
+      'referralRequired': false
     }
   ],
   'total': 5
@@ -94,7 +94,7 @@ export const dataPage2 = {
       'latitude': 53.4755361548836,
       'longitude': -2.25848699844466,
       'accommodationType': 'hosted',
-      'referralIsRequired': true
+      'referralRequired': true
     }
   ],
   'total': 5
