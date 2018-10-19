@@ -62,7 +62,7 @@ describe('Accommodation - Listing - Referral Filtering', function () {
   })
 
   it('- should set up the referral dropdown to be unselected', () => {
-    expect(sut.referralRequired()).toEqual(undefined)
+    expect(sut.referralRequired()).toEqual()
   })
 
   describe('- filter on referrals', () => {
