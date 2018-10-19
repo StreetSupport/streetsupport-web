@@ -11,17 +11,9 @@ const querystring = require('../../../src/js/get-url-parameter')
 import * as storage from '../../../src/js/storage'
 import { data } from './testdata'
 
-describe('Accommodation - Listing - Resident Criteria Filtering', function () {
+describe('Accommodation - Listing - Referral Filtering', function () {
   let sut = null
   let ajaxGetStub = null
-
-  const filterKeys = ['acceptsMen',
-    'acceptsWomen',
-    'acceptsCouples',
-    'acceptsSingleSexCouples',
-    'acceptsFamilies',
-    'acceptsYoungPeople',
-    'acceptsBenefitsClaimants']
 
   beforeEach(() => {
     ajaxGetStub = sinon.stub(ajaxGet, 'data')
@@ -69,18 +61,13 @@ describe('Accommodation - Listing - Resident Criteria Filtering', function () {
     storage.set.restore()
   })
 
-  it('- should set up filters to be unselected', () => {
-    filterKeys
-      .forEach((k) => {
-        const filter = sut.residentCriteriaFilters().find((f) => f.dataFieldName() === k)
-        expect(filter.value()).toEqual(undefined)
-      })
+  it('- should set up the referral dropdown to be unselected', () => {
+    expect(sut.referralRequired()).toEqual(undefined)
   })
 
-  describe('- select some filters', () => {
+  describe('- filter on referrals', () => {
     beforeEach(() => {
-      sut.residentCriteriaFilters().find((f) => f.dataFieldName() === 'acceptsMen').value(false)
-      sut.residentCriteriaFilters().find((f) => f.dataFieldName() === 'acceptsCouples').value(true)
+      sut.referralRequired(true)
     })
 
     describe('- update', () => {
@@ -90,7 +77,7 @@ describe('Accommodation - Listing - Resident Criteria Filtering', function () {
 
       it('- should update with new results', () => {
         const calledAsExpected = ajaxGetStub
-          .withArgs(api.accommodation + '?latitude=123.4&longitude=567.8&acceptsMen=false&acceptsCouples=true')
+          .withArgs(api.accommodation + '?latitude=123.4&longitude=567.8&referralRequired=true')
           .calledOnce
         expect(calledAsExpected).toBeTruthy()
       })
@@ -105,12 +92,8 @@ describe('Accommodation - Listing - Resident Criteria Filtering', function () {
         sut.resetFilter()
       })
 
-      it('- should set up filters to be unselected', () => {
-        filterKeys
-          .forEach((k) => {
-            const filter = sut.residentCriteriaFilters().find((f) => f.dataFieldName() === k)
-            expect(filter.value()).toEqual(undefined)
-          })
+      it('- should set up the referral dropdown to be unselected', () => {
+        expect(sut.referralRequired()).toEqual(undefined)
       })
     })
   })
