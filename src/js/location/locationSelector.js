@@ -65,8 +65,6 @@ const _determineLocationRetrievalMethod = () => {
 }
 
 const getSelectedLocationId = (defaultValue = 'elsewhere') => {
-    const saved = cookies.get(cookies.keys.location)
-    console.log(saved, supportedCities.get(saved), defaultValue)
   try {
     const saved = cookies.get(cookies.keys.location)
     return supportedCities.get(saved).id
