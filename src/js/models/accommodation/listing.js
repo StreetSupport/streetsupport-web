@@ -54,18 +54,33 @@ const AccommodationListing = function (addtionalQueryString = '') {
     new SearchFilter('acceptsBenefitsClaimants', 'Benefits Claimants')
   ])
 
+  self.referralOptions = ko.observableArray([
+    {value: false, name: 'No'},
+    {value: true, name: 'Yes'}
+  ])
+
+  self.referralRequired = ko.observable()
+
   self.resetFilter = function () {
     self.residentCriteriaFilters()
       .forEach((f) => {
         f.value(undefined)
       })
     self.selectedType('')
+    self.referralRequired(undefined)
   }
 
   const getTypeKeyValuePairs = function () {
     const selectedType = self.selectedType()
     return selectedType && selectedType.length
       ? [({ key: 'accomType', value: selectedType })]
+      : []
+  }
+
+  const getReferralKeyValuePairs = function () {
+    const referralValue = self.referralRequired()
+    return typeof referralValue !== 'undefined' && referralValue !== null
+      ? [({ key: 'referralRequired', value: referralValue })]
       : []
   }
 
@@ -76,7 +91,7 @@ const AccommodationListing = function (addtionalQueryString = '') {
   }
 
   const getQuerystring = function () {
-    return getFilterKeyValuePairs().concat(getTypeKeyValuePairs())
+    return getFilterKeyValuePairs().concat(getTypeKeyValuePairs()).concat(getReferralKeyValuePairs())
       .map((f) => `&${f.key}=${f.value}`)
       .join('')
   }
