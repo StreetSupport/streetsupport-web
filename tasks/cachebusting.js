@@ -7,5 +7,5 @@ import fs from 'fs'
 
 // HTML minify task
 gulp.task('cachebusting', (callback) => {
-  fs.writeFile(config.paths.data + 'cachebusting.json', '{"date": "'+ new Date().getTime() + '"}', callback);
+  fs.writeFile(config.paths.data + 'cachebusting.json', '{"date": "' + new Date().getTime() + '"}', callback);
 })
