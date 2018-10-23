@@ -99,7 +99,7 @@ const initMap = function (currentLocation) {
   api
     .data(endpoint)
     .then((result) => {
-      const zoom = 9
+      const zoom = 10
       map.init(result.data.items, currentLocation, null, buildInfoWindowMarkup, getLocation, { zoom })
     }, (_) => {
     })
