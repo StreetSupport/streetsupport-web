@@ -52,7 +52,10 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
         return acc
       }, [])
   }, self)
-
+  self.hasClientGroupFilters = ko.computed(() => {
+    return self.clientGroupFilters().length
+  }, self)
+  
   self.clientGroupFiltersApplied = []
 
   self.addClientGroupToFilter = (clientGroupKey) => {

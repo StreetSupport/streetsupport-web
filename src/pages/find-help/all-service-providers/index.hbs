@@ -29,6 +29,7 @@ page: allorganisations
     <div class="block__content">
       <!-- ko if: hasOrgs -->
       <!-- ko ifnot: postcodeRetrievalIssue -->
+      <!-- ko if: hasClientGroupFilters -->
       <div class="card-sort">
         <span class="card-sort__title">Filter for:</span>
         <div data-bind="foreach: clientGroupFilters">
@@ -37,6 +38,7 @@ page: allorganisations
           </button>
         </div>
       </div>
+      <!-- /ko -->
       {{> all-organisations/sort }}
       <div data-bind="foreach: orgsToDisplay">
           <article class="card card--brand-h card--grid-1-of-3" data-bind="attr: { 'data-cg': clientGroupKeys }">
