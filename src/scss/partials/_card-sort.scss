@@ -1,10 +1,11 @@
 .card-sort {
   @include cf();
-  margin: 30px 0px 20px;
+  margin: 0px 0 10px;
 }
 
 .card-sort__title {
   margin-right: 15px;
+  float: left;
 }
 
 .card-sort__item {
