@@ -29,9 +29,17 @@ page: allorganisations
     <div class="block__content">
       <!-- ko if: hasOrgs -->
       <!-- ko ifnot: postcodeRetrievalIssue -->
+      <div class="card-sort">
+        <span class="card-sort__title">Filter for:</span>
+        <div data-bind="foreach: clientGroupFilters">
+          <button class="btn btn--brand-p btn--togglable" data-bind="click: click, css: { 'is-selected': isSelected }">
+            <span class="btn__text" data-bind="text: name"></span>
+          </button>
+        </div>
+      </div>
       {{> all-organisations/sort }}
       <div data-bind="foreach: orgsToDisplay">
-          <article class="card card--brand-h card--grid-1-of-3">
+          <article class="card card--brand-h card--grid-1-of-3" data-bind="attr: { 'data-cg': clientGroupKeys }">
             <div class="card__title">
               <a data-bind="attr: { href: href } ">
                 <h1 class="h2" data-bind="text: name"></h1>
