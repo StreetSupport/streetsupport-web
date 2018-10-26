@@ -44,7 +44,7 @@ export const getCoords = (postcode, success, failure) => {
       { isOutcode: false, resourceName: 'postcodes', map: (result) => result }
     ]
       .find((oc) => oc.isOutcode === isOutcode(postcode))
-
+    
     ajaxGet
       .data(`${postcodesDomain}${outcome.resourceName}/${postcode}`)
       .then((postcodeResult) => {
