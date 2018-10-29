@@ -53,7 +53,7 @@ gulp.task('l-generate-advice2-pages', (callback) => {
       const newContent = srcContent
         .replace(new RegExp('locationId', 'g'), c.id)
         .replace(new RegExp('locationName', 'g'), c.name)
-      const dest = `${pagesRoot}${c.id}/advice2.hbs`   
+      const dest = `${pagesRoot}${c.id}/advice/index2.hbs`   
       fs.writeFileSync(dest, newContent)
     })
   callback()
@@ -132,7 +132,7 @@ gulp.task('generate-location-files', (callback) => {
     'l-clean',
     'l-getCities',
     // 'l-generate-home-pages',
-    'l-generate-advice2-pages',
+    //'l-generate-advice2-pages',
     'l-generate-header-css',
     'l-generate-nav-variables',
     'l-generate-mobile-nav',
