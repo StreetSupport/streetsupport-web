@@ -16,12 +16,13 @@ getApiData
   .then((result) => {
     result.data.items
       .forEach((i) => {
-        console.log(i.body, marked(i.body))
         i.body = marked(htmlencode.htmlDecode(i.body))
       })
     const data = {
+      hasItems: result.data.items.length > 0,
       items: result.data.items
     }
+    console.log(data)
     templating.renderTemplate('js-faqs-tpl', data, 'js-faqs-output', () => {
       accordion.init(false, -1)
     })
