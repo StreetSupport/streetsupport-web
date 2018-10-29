@@ -5,6 +5,8 @@ const location = require('../../location/locationSelector')
 const supportedCities = require('../../location/supportedCities')
 const templating = require('../../template-render')
 
+const GetFaqs = require('../../models/faqs/app')
+
 const redirectToHubPage = function (locationId) {
   location.setCurrent(locationId)
   browser.redirect(`/${locationId}/advice`)
@@ -33,6 +35,8 @@ const init = () => {
   }
 
   templating.renderTemplate('js-location-selector-tpl', theData, 'js-location-selector-output', callback)
+
+  new GetFaqs('general')
 }
 
 init()
