@@ -32,6 +32,18 @@
     }
   }
 
+  &--gm-header {
+  background: url('../img/gm/gmhan-logo.png') no-repeat top center;
+  padding-top: 180px;
+
+  @include mq($from: m) {
+    padding: 40px 20px 40px 0;
+    padding-left: 200px;
+    background-position: 20px center;
+    min-height: 160px;
+  }
+}
+
   &--footer {
     @include mq($from: m) {
       display: flex;

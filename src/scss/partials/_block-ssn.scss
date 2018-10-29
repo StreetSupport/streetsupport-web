@@ -266,6 +266,17 @@
     background: #f0f0f0;
   }
 
+  &--gm-header {
+    @include mq($from: m) {
+      background: #FFEDA1 url('../img/gm/header-bg.jpg') repeat-x bottom;
+      padding: 40px 0!important;
+    }
+
+    &:hover {
+      background: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) ), #FFEDA1 url('../img/gm/header-bg.jpg') repeat-x bottom;
+    }
+  }
+
   &__image-image {
     margin-bottom: 20px;
     position: relative;
@@ -352,5 +363,11 @@
       display: flex;
       align-items: flex-end;
     }
+  }
+}
+
+.block__link {
+  &:hover {
+      text-decoration: none!important;
   }
 }
