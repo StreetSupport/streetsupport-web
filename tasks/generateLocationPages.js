@@ -10,6 +10,7 @@ import { newFile } from './fileHelpers'
 
 const pagesRoot = `${config.paths.pages}`
 const homePageSrc = `${pagesRoot}locations/_home-page.hbs`
+const advice2PageSrc = `${pagesRoot}locations/_advice2.hbs`
 
 let cities = []
 
@@ -40,6 +41,19 @@ gulp.task('l-generate-home-pages', (callback) => {
         .replace(new RegExp('locationId', 'g'), c.id)
         .replace(new RegExp('locationName', 'g'), c.name)
       const dest = `${pagesRoot}${c.id}/index.hbs`   
+      fs.writeFileSync(dest, newContent)
+    })
+  callback()
+})
+
+gulp.task('l-generate-advice2-pages', (callback) => {
+  const srcContent = fs.readFileSync(advice2PageSrc, 'utf-8')
+  cities
+    .forEach((c) => {
+      const newContent = srcContent
+        .replace(new RegExp('locationId', 'g'), c.id)
+        .replace(new RegExp('locationName', 'g'), c.name)
+      const dest = `${pagesRoot}${c.id}/advice2.hbs`   
       fs.writeFileSync(dest, newContent)
     })
   callback()
@@ -118,6 +132,7 @@ gulp.task('generate-location-files', (callback) => {
     'l-clean',
     'l-getCities',
     // 'l-generate-home-pages',
+    'l-generate-advice2-pages',
     'l-generate-header-css',
     'l-generate-nav-variables',
     'l-generate-mobile-nav',
