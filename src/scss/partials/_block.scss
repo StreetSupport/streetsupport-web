@@ -169,18 +169,6 @@
   }
 }
 
-.block__header--gm-header {
-  background: url('../img/gm/gmhan-logo.png') no-repeat top center;
-  padding-top: 180px;
-
-  @include mq($from: m) {
-    padding-top: 40px;
-    padding-left: 200px;
-    background-position: left center;
-    min-height: 160px;
-  }
-}
-
 .bed-every-night-logo {
   display: block;
   width: 351px;
@@ -225,15 +213,6 @@
 .block--header {
   padding: 80px 0!important;
 }
-
-.block--gm-header {
-  background: #FFEDA1 url('../img/gm/header-bg.jpg') repeat-x bottom;
-  padding-top: 40px!important;
-  @include mq($from: m) {
-    padding-top: 80px;
-  }
-}
-
 
 .block--home-header {
   @include mq($from: m) {
