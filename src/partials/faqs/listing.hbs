@@ -1,0 +1,21 @@
+  \{{#hasItems }}
+    <p>Find advice on commonly asked questions about how to find help and give help to those facing homelessness in your area. Click on a question to view the answer.</p>
+    <div class="accordion accordion--day js-accordion">
+    \{{#items}}
+      <button id="\{{id}}" data-tags="\{{tags}}" class="h3 accordion__header js-header">
+        \{{{title}}}
+        <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
+        <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
+      </button>
+      <div class="accordion__item js-item">
+        <div class="accordion__inner">
+          \{{{body}}}
+        </div>
+      </div>
+    \{{/items}}
+    </div>
+    <p>If you have additional questions or useful information to share, please let us know at <a href="mailto:info@streetsupport.net">info@streetsupport.net</a></p>
+  \{{/hasItems}}
+  \{{^hasItems }}
+    <p>Sorry; we are still collating information for your location. In the mean time, you can find <a href="/find-help/">homelessness support services near you</a>.</p>
+  \{{/hasItems}}
