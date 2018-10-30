@@ -1,10 +1,10 @@
 ---
 title: Emergency Homeless Help in Tameside - Street Support
-description: Street support makes it easier to help people facing homelessness in Tameside. Here's how to get help in an emergency.
+description: Street support makes it easier to help people facing homelessness. Here's how to get help in an emergency.
 image: https://streetsupport.net/assets/img/og/street-support-tameside.jpg
 layout: default.hbs
 permalink: false
-jsBundle: emergencyhelp
+jsBundle: adviceV2
 section: tameside
 page: tameside-advice
 location: tameside
@@ -20,36 +20,17 @@ location: tameside
   </div>
 </div>
 
-{{> find-help/advice-header theLocationId="tameside" }}
+{{> find-help/advice-header theLocationId="tameside" sub-heading="Find useful advice related to homelessness in your
+area" }}
 
 <div class="block">
   <div class="container">
     <div class="block__content">
-      <p>If you see someone sleeping rough you can contact the Impact project, see below, and give them details of where you saw the person and request them to do an outreach visit.</p>
-      <h2 class="h2">The Impact Project</h2>
-      <p>The Impact Project will work assertively through its outreach service to make contact with rough sleepers, to provide advice, information and practical help.</p>
-      <p>Reports of rough sleeping can be made to the Impact Project on <a href="tel:01613301557">0161 330 1557</a>.</p>
-      <p>Agencies and members of the public who wish to report sightings of rough sleepers should provide as much detail as possible to maximise the potential for successful contact to be made on outreach visits. Ideally reports should confirm that the person has been seen bedded down along with a brief description, any information about the persons identification and as much detail as possible of where they can be found.</p>
-      <p>You can also report sightings of rough sleepers to the national Streetlink service on <a href="tel:03005000914">0300 500 0914</a>. Further details of the <a href="http://www.streetlink.org.uk/">Streetlink service can be found by following this link</a>. This information is passed back to local services.</p>
-      <h2 class="h2">Tameside Housing Advice</h2>
-      <p>Tameside Housing Advice provide advice, assistance and homelessness assessments.</p>
-      <h3 class="h3">Visit in Person</h3>
-      <ul>
-        <li>Monday to Thursday: 9am – 3pm</li>
-        <li>Friday: from 10am</li>
-      </ul>
-      <p>Tameside Housing Advice<br />
-      119-125 Old Street,<br />
-      Ashton under Lyne.<br />
-      OL6 7RL</p>
-      <h3 class="h3">By Telephone</h3>
-      <ul>
-        <li>Monday to Thursday: 9am – 5pm</li>
-        <li>Friday: 10am - 4pm</li>
-      </ul>
-      <p>Telephone: <a href="tel:01613312700">0161 331 2700</a></p>
-      <p>Out of Hours telephone: <a href="tel:01613312700">0161 331 2700</a></p>
-      {{> social-share}}
+      <div id="js-faqs-output"></div>
     </div>
   </div>
 </div>
+
+<script id="js-faqs-tpl" type="text/template">
+  {{> faqs/listing }}
+</script>
