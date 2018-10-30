@@ -88,29 +88,28 @@ page: home
     {{> divider }}
     <div class="home__copy home__copy--padding">
       <h1 class="h2">Find out what's happening near you</h1>
-      <form class="form form--highlighted js-find-help-form">
-        <fieldset class="form__fieldset form__fieldset--inline-fill">
-          <legend class="form__fieldset-title">Find organisations near you:</legend>
-          <div class="form__fieldset-inline-fill-container">
-            <label class="hide-screen" for="postcode">Your Postcode</label>
-            <input name="postcode" class="form__input form__input--inline-fill js-find-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
-            <button class="btn btn--brand-e btn--inline-fill" type="submit">
-              <span class="btn__text">Find help</span>
-            </button>
-          </div>
-        </fieldset>
-      </form>
       <form class="form location-selector js-change-location-form">
         <fieldset class="form__fieldset form__fieldset--inline-fill">
-          <legend class="h2">What is being done in my borough?</legend>
           <div class="form__fieldset-inline-fill-container">
-            <label class="hide-screen" for="location">Select a borough</label>
+            <label class="hide-screen" for="location">Select a borough:</label>
             <select name="location" class="form__input form__input--inline-fill js-change-location-select">
               <option value="">- Select a borough -</option>
               {{> locations/_gm-option-tags }}
             </select>
             <button class="btn btn--brand-e btn--inline-fill js-change-location-btn" type="submit">
               <span class="btn__text">Visit your borough page</span>
+            </button>
+          </div>
+        </fieldset>
+      </form>
+      <form class="form form--highlighted js-find-help-form">
+        <fieldset class="form__fieldset form__fieldset--inline-fill">
+          <legend class="form__fieldset-title">Find local support organisations:</legend>
+          <div class="form__fieldset-inline-fill-container">
+            <label class="hide-screen" for="postcode">Your Postcode</label>
+            <input name="postcode" class="form__input form__input--inline-fill js-find-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
+            <button class="btn btn--brand-e btn--inline-fill" type="submit">
+              <span class="btn__text">Find help</span>
             </button>
           </div>
         </fieldset>
@@ -141,7 +140,7 @@ page: home
         </form>
       </div>
       <div class="proximity-form">
-        <h1 class="h2">Do you want to give your time, items or money to help give every person a bed this winter?</h1>
+        <h1 class="h2">Do you want to do something to help?</h1>
         <form class="form form--highlighted js-give-help-form">
           <fieldset class="form__fieldset form__fieldset--inline-fill">
             <legend class="form__fieldset-title">See what's needed in your area</legend>
