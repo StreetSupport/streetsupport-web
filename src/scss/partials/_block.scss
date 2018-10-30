@@ -45,6 +45,13 @@
     a {
       color: $brand-r;
       text-decoration: underline;
+      &.full-size-link {
+        display: block;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+        color: inherit;
+      }
     }
 
     .h1,
