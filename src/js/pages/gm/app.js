@@ -19,7 +19,16 @@ const initForms = function (currentLocation) {
     postcode: document.querySelector('.js-find-help-postcode')
   }
 
-  findHelp.postcode.value = currentLocation.postcode
+  const giveHelp = {
+    form: document.querySelector('.js-give-help-form'),
+    postcode: document.querySelector('.js-give-help-postcode')
+  }
+
+  if(currentLocation) {
+    findHelp.postcode.value = currentLocation.postcode
+    giveHelp.postcode.value = currentLocation.postcode
+  }
+
   findHelp.form.addEventListener('submit', function (e) {
     e.preventDefault()
     const reqLocation = findHelp.postcode.value
@@ -28,12 +37,6 @@ const initForms = function (currentLocation) {
     }, () => alert('We could not find your postcode, please try a nearby one'))
   })
 
-  const giveHelp = {
-    form: document.querySelector('.js-give-help-form'),
-    postcode: document.querySelector('.js-give-help-postcode')
-  }
-
-  giveHelp.postcode.value = currentLocation.postcode
   giveHelp.form.addEventListener('submit', function (e) {
     e.preventDefault()
     const reqLocation = giveHelp.postcode.value
@@ -43,36 +46,26 @@ const initForms = function (currentLocation) {
   })
 }
 
-const initLocations = function (currentLocationId) {
+const initLocations = function (currentLocation) {
   const ui = {
     form: document.querySelector('.js-change-location-form'),
     select: document.querySelector('.js-change-location-select')
   }
-
   ui.form.addEventListener('submit', function (e) {
     e.preventDefault()
     const reqLocation = ui.select.value
     if (reqLocation) {
       location.setCurrent(reqLocation)
-      browser.redirect(`/${reqLocation}`)
+      browser.redirect(`/${reqLocation}/advice`)
     }
   })
 
-  const redirectToHubPage = function (locationId) {
-    location.setCurrent(locationId)
-    browser.redirect(`/${locationId}`)
+  if(currentLocation) {
+    Array.from(document.querySelector('.js-change-location-select'))
+      .filter((t) => t.tagName === 'OPTION')
+      .find((o) => o.value === currentLocation.id)
+      .setAttribute('selected', 'selected')
   }
-
-  Array.from(document.querySelector('.js-change-location-select'))
-    .filter((t) => t.tagName === 'OPTION')
-    .find((o) => o.value === currentLocationId)
-    .setAttribute('selected', 'selected')
-
-  location.handler((result) => {
-    if (result.length) {
-      redirectToHubPage(result)
-    }
-  }, '.js-change-location-select')
 }
 
 window.initMap = () => { }
@@ -125,5 +118,5 @@ location
   .getPreviouslySetPostcode()
   .then((result) => {
     initForms(result)
-    initLocations(result.id)
+    initLocations(result)
   })
