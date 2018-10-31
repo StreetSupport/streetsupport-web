@@ -277,6 +277,13 @@
     }
   }
 
+  &--aben-header {
+      background:#f0f0f0;
+      &:hover {
+      background: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) ), #f0f0f0;
+    }
+  }
+
   &__image-image {
     margin-bottom: 20px;
     position: relative;
