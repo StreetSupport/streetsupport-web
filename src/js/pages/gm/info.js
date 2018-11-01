@@ -3,6 +3,7 @@
 // Common modules
 import '../../common'
 
+const accordion = require('../../accordion')
 const browser = require('../../browser')
 const location = require('../../location/locationSelector')
 
@@ -31,5 +32,6 @@ const initLocations = function (currentLocation) {
 location
   .getPreviouslySetPostcode()
   .then((result) => {
+    accordion.init(false, -1)
     initLocations(result)
   })
