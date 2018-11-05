@@ -36,7 +36,7 @@ const init = () => {
 
   templating.renderTemplate('js-location-selector-tpl', theData, 'js-location-selector-output', callback)
 
-  new GetFaqs('general')
+  GetFaqs('general')
 }
 
 init()

@@ -1,5 +1,3 @@
-/* global alert */
-
 // Common modules
 import '../../common'
 
@@ -21,7 +19,7 @@ const initLocations = function (currentLocation) {
     }
   })
 
-  if(currentLocation) {
+  if (currentLocation) {
     Array.from(document.querySelector('.js-change-location-select'))
       .filter((t) => t.tagName === 'OPTION')
       .find((o) => o.value === currentLocation.id)
