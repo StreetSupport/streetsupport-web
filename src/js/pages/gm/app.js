@@ -24,7 +24,7 @@ const initForms = function (currentLocation) {
     postcode: document.querySelector('.js-give-help-postcode')
   }
 
-  if(currentLocation) {
+  if (currentLocation) {
     findHelp.postcode.value = currentLocation.postcode
     giveHelp.postcode.value = currentLocation.postcode
   }
@@ -60,7 +60,7 @@ const initLocations = function (currentLocation) {
     }
   })
 
-  if(currentLocation) {
+  if (currentLocation) {
     Array.from(document.querySelector('.js-change-location-select'))
       .filter((t) => t.tagName === 'OPTION')
       .find((o) => o.value === currentLocation.id)
