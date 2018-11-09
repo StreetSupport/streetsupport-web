@@ -11,6 +11,8 @@ const locationSelector = require('../../../src/js/location/locationSelector')
 const Model = require('../../../src/js/models/give-help/requests/listing')
 const needsData = require('./needsData')
 const postcodeLookup = require('../../../src/js/location/postcodes')
+const querystring = require('../../../src/js/get-url-parameter')
+const storage = require('../../../src/js/storage')
 
 describe('Needs Listing - new postcode search', () => {
   let ajaxGetStub,
@@ -42,6 +44,8 @@ describe('Needs Listing - new postcode search', () => {
       })
     browserLoadingStub = sinon.stub(browser, 'loading')
     browserLoadedStub = sinon.stub(browser, 'loaded')
+    sinon.stub(browser, 'location')
+      .returns({})
     sinon.stub(locationSelector, 'getPreviouslySetPostcode')
       .returns({
         then: function (success) {
@@ -49,10 +53,12 @@ describe('Needs Listing - new postcode search', () => {
         }
       })
     setPostcodeStub = sinon.stub(locationSelector, 'setPostcode')
-    postcodeLookupStub = sinon.stub(postcodeLookup)
+    postcodeLookupStub = sinon.stub(postcodeLookup, 'getCoords')
     postcodeLookupStub
-      .getCoords
       .callsArgWith(1, newLocation) // success callback function
+    sinon.stub(querystring, 'parameter')
+    sinon.stub(storage, 'get')
+    sinon.stub(storage, 'set')
 
     sut = new Model()
 
@@ -60,19 +66,22 @@ describe('Needs Listing - new postcode search', () => {
     browserLoadingStub.reset()
     browserLoadedStub.reset()
 
-    sut.postcode('new postcode')
-    sut.range(5000)
-    sut.search()
+    sut.proximitySearch.postcode('new postcode')
+    sut.proximitySearch.range(5000)
+    sut.proximitySearch.search()
   })
 
   afterEach(() => {
     api.data.restore()
     browser.loading.restore()
     browser.loaded.restore()
+    browser.location.restore()
     locationSelector.getPreviouslySetPostcode.restore()
     locationSelector.setPostcode.restore()
-    postcodeLookup.getByCoords.restore()
     postcodeLookup.getCoords.restore()
+    querystring.parameter.restore()
+    storage.get.restore()
+    storage.set.restore()
   })
 
   it('- should notify it is loading', () => {
@@ -80,7 +89,7 @@ describe('Needs Listing - new postcode search', () => {
   })
 
   it('- should lookup coords for postcode', () => {
-    expect(postcodeLookupStub.getCoords.getCall(0).args[0]).toEqual('new postcode')
+    expect(postcodeLookupStub.getCall(0).args[0]).toEqual('new postcode')
   })
 
   it('- should set entered postcode as active postcode', () => {
