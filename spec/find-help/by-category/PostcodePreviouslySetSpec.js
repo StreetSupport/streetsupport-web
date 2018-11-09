@@ -4,6 +4,7 @@ const sinon = require('sinon')
 
 const ajax = require('../../../src/js/get-api-data')
 const browser = require('../../../src/js/browser')
+const endpoints = require('../../../src/js/api')
 const postcodeLookup = require('../../../src/js/location/postcodes')
 const querystring = require('../../../src/js/get-url-parameter')
 const storage = require('../../../src/js/storage')
@@ -88,7 +89,7 @@ describe('Find Help by Category - postcode previously set', () => {
   })
 
   it('- should retrieve items from API', () => {
-    expect(apiGetStub.getCall(0).args[0]).toEqual('https://ssn-api-dev.azurewebsites.net/v2/service-categories/support/456.7/234.5?range=10000')
+    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/support/456.7/234.5?range=10000'))
   })
 
   it('- should show it is loaded', () => {

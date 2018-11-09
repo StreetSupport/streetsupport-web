@@ -1,6 +1,7 @@
 /* global describe, beforeEach, afterEach, it, expect */
 
 const sinon = require('sinon')
+const marked = require('marked')
 
 const browser = require('../../../src/js/browser')
 const postcodeLookup = require('../../../src/js/location/postcodes')
@@ -12,7 +13,7 @@ import FindHelpByCategory from '../../../src/js/models/find-help/by-category'
 
 describe('Find Help by Category - no postcode set', () => {
   let sut,
-      postcodeLookupStub
+  postcodeLookupStub
 
   beforeEach(() => {
     sinon.stub(browser, 'location')
@@ -44,7 +45,7 @@ describe('Find Help by Category - no postcode set', () => {
 
   it('- should set category synopsis', () => {
     const serviceCategory = categories.find((sc) => sc.key === 'support')
-    expect(sut.category.categorySynopsis()).toEqual(`<p>${serviceCategory.synopsis}</p>\n`)
+    expect(sut.category.categorySynopsis()).toEqual(marked(serviceCategory.synopsis))
   })
 
   it('- should set proximity search range to 10k', () => {
