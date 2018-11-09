@@ -66,6 +66,14 @@ export const getProvidersForListing = (providers) => {
     return {
       info: marked(htmlEncode.htmlDecode(provider.info)),
       location: provider.location,
+      hasLocationDescription: provider.locationDescription !== undefined && provider.locationDescription.length > 0,
+      locationDescription: provider.locationDescription,
+      fullAddress: htmlEncode.htmlDecode(`${[provider.location.streetLine1, provider.location.streetLine2, provider.location.streetLine3, provider.location.streetLine4, provider.location.city]
+        .filter((l) => l !== null && l.length > 0)
+        .map((l) => l.trim())
+        .join(', ')}. ${provider.location.postcode.toUpperCase()}`),
+      viewMapsUrl: `https://www.google.co.uk/maps/place/${provider.location.postcode}`,
+      hasTelephone: provider.telephone !== null,
       telephone: provider.telephone,
       days: groupOpeningTimes(provider.openingTimes),
       isOpen247: provider.isOpen247,
@@ -90,13 +98,16 @@ export const getProvidersForListing = (providers) => {
 
     const [head, ...tail] = providersDictionary[id] // eslint-disable-line
 
-    return {
+    const data = {
       providerId: head.serviceProviderId,
-      providerName: head.serviceProviderName,
+      providerName: htmlEncode.htmlDecode(head.serviceProviderName),
+      providerPageUrl: `/find-help/organisation/?organisation=${head.serviceProviderId}`,
       services,
-      tags: head.tags ? head.tags.join(', ') : [],
+      tags: head.tags ? head.tags.join(', ') : '',
       subCategories: subCategories
     }
+
+    return data
   }
 
   const toDictionary = (acc, p) => {

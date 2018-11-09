@@ -18,26 +18,22 @@ const outcodeData = {
   'result': {
     'outcode': 'PR1',
     'longitude': -2.70180329214157,
-    'latitude': 53.7574212969406,
+    'latitude': 53.7574212969406
   }
 }
 
 describe('postcodes - get coords', () => {
   let ajaxGetStub,
-    failureCalled,
     successParameter,
     storageSetStub
 
   const success = (result) => {
     successParameter = result
   }
-  const failure = () => {
-    failureCalled = true
-  }
+  const failure = () => {}
 
   beforeEach(() => {
     successParameter = null
-    failureCalled = false
     ajaxGetStub = sinon.stub(ajax, 'data')
     storageSetStub = sinon.stub(storage, 'set')
   })

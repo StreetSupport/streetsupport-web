@@ -1,8 +1,5 @@
 import '../../../common'
 
-const marked = require('marked')
-marked.setOptions({sanitize: true})
-
 const ko = require('knockout')
 
 const locationSelector = require('../../../location/locationSelector')

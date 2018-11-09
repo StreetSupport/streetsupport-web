@@ -7,6 +7,8 @@ const browser = require('../../../src/js/browser')
 const locationSelector = require('../../../src/js/location/locationSelector')
 const Model = require('../../../src/js/models/give-help/requests/listing')
 const needsData = require('./needsData')
+const querystring = require('../../../src/js/get-url-parameter')
+const storage = require('../../../src/js/storage')
 
 describe('Needs Listing - filtering', () => {
   let ajaxGetStub,
@@ -42,6 +44,8 @@ describe('Needs Listing - filtering', () => {
           success(previouslySetLocation)
         }
       })
+    sinon.stub(querystring, 'parameter')
+    sinon.stub(storage, 'get')
 
     sut = new Model()
   })
@@ -53,6 +57,8 @@ describe('Needs Listing - filtering', () => {
     browser.location.restore()
     browser.pushHistory.restore()
     locationSelector.getPreviouslySetPostcode.restore()
+    querystring.parameter.restore()
+    storage.get.restore()
   })
 
   describe('- for items', () => {
