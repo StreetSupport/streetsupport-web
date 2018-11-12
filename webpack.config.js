@@ -29,6 +29,7 @@ module.exports = {
     supporters: path.join(__dirname, '/src/js/page-supporters'),
     generic: path.join(__dirname, '/src/js/page-generic'),
     findhelp: path.join(__dirname, '/src/js/page-find-help'),
+    'find-help-by-category-v2': path.join(__dirname, '/src/js/pages/find-help/by-category/app'),
     category: path.join(__dirname, '/src/js/page-category'),
     categorybyday: path.join(__dirname, '/src/js/page-category-by-day'),
     categorybylocation: path.join(__dirname, '/src/js/page-category-by-location'),

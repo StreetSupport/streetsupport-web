@@ -59,8 +59,8 @@ let popHistory = () => {
 }
 
 let setOnHistoryPop = (onPopCallback) => {
-  window.onpopstate = () => {
-    onPopCallback()
+  window.onpopstate = (e) => {
+    onPopCallback(e)
   }
 }
 

@@ -4,17 +4,16 @@ const api = require('../../../get-api-data')
 const browser = require('../../../browser')
 const endpoints = require('../../../api')
 const location = require('../../../location/locationSelector')
-const postcodeLookup = require('../../../location/postcodes')
-const proximityRanges = require('../../../location/proximityRanges')
 
 import { formatNeedsKO } from './needs'
 import { getKOSortAscFunc, getKOSortDescFunc } from '../../../sorting'
 
+import ProximitySearch from '../../ProximitySearch'
+
 class NeedsListing {
   constructor () {
-    this.ranges = ko.observableArray(proximityRanges.ranges)
-    this.range = ko.observable(proximityRanges.defaultRange)
-    this.postcode = ko.observable()
+    this.proximitySearch = new ProximitySearch(this)
+
     this.allNeeds = ko.observableArray()
     this.filters = ko.observableArray([
       { isActive: ko.observable(true), filterAction: () => this.clearFilter(), filterFunction: () => true, label: 'All' },
@@ -32,7 +31,7 @@ class NeedsListing {
     this.isMoreToLoad = ko.observable(false)
     this.currentPageLinks = {}
 
-    this.hasPostcode = ko.computed(() => this.postcode() !== undefined && this.postcode().length, this)
+    this.hasPostcode = ko.computed(() => this.proximitySearch.postcode() !== undefined && this.proximitySearch.postcode().length, this)
     this.needsToDisplay = ko.computed(() => this.allNeeds().filter(this.currentFilter()).sort(this.currentSort()), this)
     this.hasNeeds = ko.computed(() => this.needsToDisplay().length > 0, this)
 
@@ -40,7 +39,7 @@ class NeedsListing {
       .then((locationResult) => {
         if (locationResult) {
           this.locationResult = locationResult
-          this.postcode(this.locationResult.postcode)
+          this.proximitySearch.postcode(this.locationResult.postcode)
           this.loadNeeds(this.firstPageUrl)
         }
       })
@@ -50,18 +49,16 @@ class NeedsListing {
     this.loadNeeds(endpoints.getFullUrl(this.currentPageLinks.next))
   }
 
-  search () {
+  onProximitySearch (postcodeLookupResult) {
     this.allNeeds([])
-    postcodeLookup.getCoords(
-      this.postcode(),
-      (result) => {
-        this.locationResult = result
-        this.loadNeeds(this.firstPageUrl)
-        location.setPostcode(this.postcode())
-      },
-      () => {
-        browser.redirect('/500')
-      })
+    this.locationResult = postcodeLookupResult
+    this.loadNeeds(this.firstPageUrl)
+    location.setPostcode(this.proximitySearch.postcode())
+  }
+
+  onProximitySearchFail (error) {
+    console.log(error)
+    browser.redirect('/500')
   }
 
   filterForItems () {
@@ -139,7 +136,7 @@ class NeedsListing {
       'latitude': this.locationResult.latitude,
       'longitude': this.locationResult.longitude,
       'pageSize': 21,
-      'range': this.range()
+      'range': this.proximitySearch.range()
     }
     const qs = Object.keys(qsParts)
       .map((k) => `${k}=${qsParts[k]}`)

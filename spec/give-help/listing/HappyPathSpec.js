@@ -11,6 +11,8 @@ const locationSelector = require('../../../src/js/location/locationSelector')
 const Model = require('../../../src/js/models/give-help/requests/listing')
 const needsData = require('./needsData')
 const proximityRanges = require('../../../src/js/location/proximityRanges')
+const querystring = require('../../../src/js/get-url-parameter')
+const storage = require('../../../src/js/storage')
 
 describe('Needs Listing', () => {
   let ajaxGetStub,
@@ -44,6 +46,8 @@ describe('Needs Listing', () => {
           success(previouslySetLocation)
         }
       })
+    sinon.stub(querystring, 'parameter')
+    sinon.stub(storage, 'get')
 
     sut = new Model()
   })
@@ -54,18 +58,20 @@ describe('Needs Listing', () => {
     browser.loaded.restore()
     browser.location.restore()
     locationSelector.getPreviouslySetPostcode.restore()
+    querystring.parameter.restore()
+    storage.get.restore()
   })
 
   it('- should set postcode as that previously saved', () => {
-    expect(sut.postcode()).toEqual(previouslySetLocation.postcode)
+    expect(sut.proximitySearch.postcode()).toEqual(previouslySetLocation.postcode)
   })
 
   it('- should default range to 10000m', () => {
-    expect(sut.range()).toEqual(10000)
+    expect(sut.proximitySearch.range()).toEqual(10000)
   })
 
   it('- should set ranges', () => {
-    expect(sut.ranges()).toEqual(proximityRanges.ranges)
+    expect(sut.proximitySearch.ranges()).toEqual(proximityRanges.ranges)
   })
 
   it('- should notify it is loading', () => {
