@@ -30,6 +30,7 @@ module.exports = {
     generic: path.join(__dirname, '/src/js/page-generic'),
     findhelp: path.join(__dirname, '/src/js/page-find-help'),
     'find-help-by-category-v2': path.join(__dirname, '/src/js/pages/find-help/by-category/app'),
+    'find-help-by-day-v2': path.join(__dirname, '/src/js/pages/find-help/by-day/app'),
     category: path.join(__dirname, '/src/js/page-category'),
     categorybyday: path.join(__dirname, '/src/js/page-category-by-day'),
     categorybylocation: path.join(__dirname, '/src/js/page-category-by-location'),

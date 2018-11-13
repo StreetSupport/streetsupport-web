@@ -57,10 +57,14 @@ const getNewContent = function (src, cat) {
 }
 
 const getNewTimeTabledContent = function (src, cat) {
-  const result = src
+  let result = src
     .replace('page:', `page: find-help-${cat.key}`)
     .replace('title:', `title: ${cat.name} Services Timetable - Street Support`)
     .replace('description:', `description: Timetable of ${cat.name} Services available near your location`)
+    .replace('theServiceCategoryId', cat.key)
+    
+    result = result.split('theServiceCategoryName').join(cat.name)
+    result = result.split('theServiceCategorySynopsis').join(marked(cat.synopsis))
   return result
 }
 

@@ -1,147 +1,136 @@
 ---
-title:
-description:
+title: Support Services Timetable - Street Support
+description: Timetable of Support Services available near your location
 image: https://streetsupport.net/assets/img/og/street-support.jpg
 layout: default.hbs
 permalink: false
-jsBundle: categorybyday
+jsBundle: find-help-by-day-v2
 section: findhelp
-page:
+page: find-help-support
 ---
 
-{{> no-js}}
-
-<div id="js-category-result-output" class="template"></div>
-
-<div id="spin"></div>
-
-<script id="js-category-no-results-result-tpl" type="text/template">
-
-{{> find-help/breadcrumb }}
+{{> find-help/breadcrumb_injected categoryName="Support" }}
 
 <div class="block">
   <div class="container">
     <div class="block__content">
-      {{> find-help/header }}
-      {{> proximity-search/hogan }}
+      <header class="multi-form-header">
+        <h1 class="h1">Support</h1>
+        <p>Support, advice, and help with referrals.</p>
+
+        <p>To find services near you, please enter your postcode.</p>
+        <button class="btn btn--brand-d js-print-btn">
+          <span class="btn__text">Print this page</span>
+        </button>
+      </header>
+      {{> proximity-search/ko }}
     </div>
   </div>
 </div>
 
-{{> find-help/view-type-tabs timetableIsSelected="true" }}
+{{> find-help/view-type-tabs_injected timetableIsSelected="true" categoryId="support" }}
 
 <div class="block block--cards">
-  <div class="container block__inner">
+  <div class="container">
     <div class="block__content">
-      <div class="result-detail">
-        {{> no-services geoLocationUnavailable="geoLocationUnavailable" }}
+
+      <!-- ko ifnot: proximitySearch.postcode -->
+      <!-- ko ifnot: hasItems -->
+      <p>Please enter a postcode to begin your search. You can use a full postcode eg: 'M1 2HX', or a partial postcode
+        eg: 'M1'.</p>
+      <!-- /ko -->
+      <!-- /ko -->
+      <!-- ko if: proximitySearch.postcode -->
+      <!-- ko ifnot: hasItems -->
+      <p>There are currently no services matching your search. If you know of one, please <a href="info@streetsupport.net">contact
+          us</a>.</p>
+      <!-- /ko -->
+      <!-- /ko -->
+
+      <!-- ko if: hasItems -->
+      <div class="subcat-filter form--highlighted">
+        <p class="subcat-filter__label">Filter results:</p>
+        <ul class="form__field-list">
+          <li class="form__field-item">
+            <label class="form__label" for="day-of-week">Day of Week:</label>
+            <select class="form__input" data-bind="
+            options: daysOfWeek,
+            optionsText: 'id',
+            optionsValue: 'id',
+            value: dayOfWeek">
+        </select>
+          </li>
+          <li class="form__field-item">
+            <label class="form__label" for="time-of-day">Time of Day:</label>
+            <select class="form__input" data-bind="
+            options: timesOfDay,
+            optionsText: 'id',
+            optionsValue: 'id',
+            optionsCaption: '-- all day --',
+            value: timeOfDay">
+        </select>
+          </li>
+        </ul>
       </div>
-    </div>
-  </div>
-</div>
-</script>
 
-<script id="js-category-result-tpl" type="text/template">
-
- {{> find-help/breadcrumb }}
-
-  <div class="block">
-    <div class="container">
-      <div class="block__content">
-        {{> find-help/header }}
-        {{> proximity-search/hogan }}
-      </div>
-    </div>
-  </div>
-
-  {{> find-help/view-type-tabs timetableIsSelected="true" }}
-
-  <div class="block block--cards">
-    <div class="container block__inner">
-      <div class="block__content">
-        <div class="subcat-filter form--highlighted">
-          <p class="subcat-filter__label">Filter results:</p>
-          <ul class="form__field-list">
-            <li class="form__field-item">
-              <label class="form__label" for="day-of-week">Day of Week:</label>
-              <select id="day-of-week" name="day-of-week" class="form__input js-filter-by-day">
-                \{{#daysOfWeek}}
-                  <option value="\{{id}}">\{{id}}</option>
-                \{{/daysOfWeek}}
-              </select>
-            </li>
-            <li class="form__field-item">
-              <label class="form__label" for="time-of-day">Time of Day:</label>
-              <select id="time-of-day" name="time-of-day" class="form__input js-filter-by-time">
-                <option>-- All Day --</option>
-                \{{#timesOfDay}}
-                  <option value="\{{id}}">\{{id}}</option>
-                \{{/timesOfDay}}
-              </select>
-            </li>
-          </ul>
-        </div>
-
-        <div class="cards__list cards__list--single-col">
-          \{{#organisations}}
-          <div class="result-detail">
-            <div class="accordion accordion--day js-accordion">
-              \{{#daysServices}}
-              <button id="\{{{name}}}" class="h3 accordion__header js-header">
-                \{{{name}}}
-                <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
-                <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
-              </button>
-              <div class="accordion__item js-item">
-                <div class="accordion__inner">
-                  <div class="result-detail__times-list">
-                    \{{#serviceProviders}}
-                    <div class="result-detail__item" \{{#openingTime}} data-start-time="\{{startTime}}" data-end-time="\{{endTime}}">\{{/openingTime}}
-                      <div class="result-detail__times-title--timetabled h2">\{{#openingTime}} \{{startTime}} - \{{endTime}} \{{/openingTime}}
-                      </div>
-                      <div class="result-detail__times-item result-detail__times-item--timetabled">
-                        <ul>
-                          \{{#openingTime}} 
-                            \{{#serviceInfo}}<li> \{{{serviceInfo}}}</li>\{{/serviceInfo}} 
-                          \{{/openingTime}} 
-                          \{{#tags}}
-                          <li>Suitable for: <span class="result-detail__tags-item">\{{tags}}</span></li>
-                          \{{/tags}}
-                          \{{#isTelephoneService}}
-                          <li>This is a telephone service.</li>
-                          \{{/isTelephoneService}}
-                          \{{#isAppointmentOnly}}
-                          <li>Access to this service is by appointment only.</li>
-                          \{{/isAppointmentOnly}}
-                          <li>
-                            <a href="/find-help/organisation/?organisation=\{{key}}">\{{{name}}}</a> \{{#locationDescription}}
-                            <p>\{{locationDescription}}</p>\{{/locationDescription}} \{{#address.street}} \{{#address.street}}
-                            \{{{address.street}}}, \{{/address.street}} \{{#address.street1}} \{{address.street1}}, \{{/address.street1}}
-                            \{{#address.street2}} \{{address.street2}}, \{{/address.street2}} \{{#address.street3}} \{{address.street3}},
-                            \{{/address.street3}} \{{#address.city}} \{{address.city}}. \{{/address.city}} \{{address.postcode}}
-                            - <a href="https://www.google.co.uk/maps/place/\{{address.postcode}}">View on Map</a> \{{/address.street}}
-                          </li>
-                          \{{#address.telephone}}
-                          <li>Telephone: \{{address.telephone}} </li> \{{/address.telephone}}
-                        </ul>
-                      </div>
+      <div class="cards__list cards__list--single-col">
+        <div class="result-detail">
+          <div class="accordion accordion--day" data-bind="foreach: items">
+            <button class="h3 accordion__header" data-bind="css: { 'is-active': isSelected }, click: toggle">
+              <span data-bind="html: name"></span>
+              <svg class="svg-plus-dims accordion__icon accordion__icon--open">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use>
+              </svg>
+              <svg class="svg-minus-dims accordion__icon accordion__icon--close">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use>
+              </svg>
+            </button>
+            <div class="accordion__item" data-bind="css: { 'is-active': isSelected }">
+              <div class="accordion__inner">
+                <div class="result-detail__times-list" data-bind="foreach: serviceProviders">
+                  <div class="result-detail__item" data-bind="css: { 'hide-screen': isNotVisible }">
+                    <div class="result-detail__times-title--timetabled h2" data-bind="with: openingTime">
+                      <span data-bind="text: startTime"></span> - <span data-bind="text: endTime"></span>
                     </div>
-                    \{{/serviceProviders}}
+                    <div class="result-detail__times-item result-detail__times-item--timetabled">
+                      <ul>
+                        <!-- ko if: hasServiceInfo -->
+                        <li data-bind="html: serviceInfo"></li>
+                        <!-- /ko -->
+                        <!-- ko if: hasTags -->
+                        <li>Suitable for: <span class="result-detail__tags-item" data-bind="text: tags"></span></li>
+                        <!-- /ko -->
+                        <!-- ko if: isTelephoneService -->
+                        <li>This is a telephone service.</li>
+                        <!-- /ko -->
+                        <!-- ko if: isAppointmentOnly -->
+                        <li>Access to this service is by appointment only.</li>
+                        <!-- /ko -->
+                        <li>
+                          <a data-bind="attr: { href: orgUrl }, html: name"></a>
+                          <!-- ko if: hasLocationDescription -->
+                          <p data-bind="text: locationDescription"></p>
+                          <!-- /ko -->
+                          <p><span data-bind="text: fullAddress"></span>
+                            - <a data-bind="attr: { href: viewMapsUrl }">View on Map</a></p>
+                        </li>
+                        <!-- ko if: hasTelephone -->
+                        <li>Telephone: <span data-bind="text: address.telephone"></span></li>
+                        <!-- /ko -->
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
-              \{{/daysServices}}
             </div>
           </div>
-          \{{/organisations}}
         </div>
       </div>
+      <!-- /ko -->
+      
     </div>
-
-    <p class="text-center">Please note, the information here is provided and maintained by the organisations. If you see anything that is incorrect
-      or incomplete, please <a href="/about/contact/">get in touch</a>.</p>
-
-    {{> social-share}}
-
+    {{> social-share }}
   </div>
-</script>
+</div>
+
+<div id="spin"></div>
