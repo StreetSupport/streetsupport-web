@@ -2,6 +2,7 @@ const apiRoutes = require('../../../api')
 const browser = require('../../../browser')
 const querystring = require('../../../get-url-parameter')
 
+const ko = require('knockout')
 const htmlEncode = require('htmlencode')
 const marked = require('marked')
 marked.setOptions({ sanitize: true })
@@ -36,6 +37,10 @@ export const getSubCategories = (providers) => {
     })
 }
 
+const hasLocationDescription = (description) => {
+  return description !== null && description !== undefined && description.length > 0
+}
+
 export const getProvidersForListing = (providers) => {
   const groupOpeningTimes = (ungrouped) => {
     const toDictionary = (acc, curr) => {
@@ -62,16 +67,20 @@ export const getProvidersForListing = (providers) => {
   }
 
   const extractService = (provider) => {
+    const getFullAddress = (location) => {
+      return htmlEncode.htmlDecode(`${[location.streetLine1, location.streetLine2, location.streetLine3, location.streetLine4, location.city]
+        .filter((l) => l !== null && l.length > 0)
+        .map((l) => l.trim())
+        .join(', ')}. ${location.postcode.toUpperCase()}`)
+    }
+
     provider.location.locationDescription = provider.locationDescription
     return {
       info: marked(htmlEncode.htmlDecode(provider.info)),
       location: provider.location,
-      hasLocationDescription: provider.locationDescription !== undefined && provider.locationDescription.length > 0,
+      hasLocationDescription: hasLocationDescription(provider.locationDescription),
       locationDescription: provider.locationDescription,
-      fullAddress: htmlEncode.htmlDecode(`${[provider.location.streetLine1, provider.location.streetLine2, provider.location.streetLine3, provider.location.streetLine4, provider.location.city]
-        .filter((l) => l !== null && l.length > 0)
-        .map((l) => l.trim())
-        .join(', ')}. ${provider.location.postcode.toUpperCase()}`),
+      fullAddress: getFullAddress(provider.location),
       viewMapsUrl: `https://www.google.co.uk/maps/place/${provider.location.postcode}`,
       hasTelephone: provider.telephone !== null,
       telephone: provider.telephone,
@@ -126,4 +135,51 @@ export const getProvidersForListing = (providers) => {
     .map((id) => formatNewProvider(id, providersDictionary))
 
   return mapped
+}
+
+export const getServicesByDay = (dayServices) => {
+  const getFullAddress = (location) => {
+    return htmlEncode.htmlDecode(`${[location.street, location.street1, location.street2, location.street3, location.city]
+      .filter((l) => l !== null && l.length > 0)
+      .map((l) => l.trim())
+      .join(', ')}. ${location.postcode.toUpperCase()}`)
+  }
+
+  const sortByOpeningTimes = (days) => {
+    days.forEach(function (day) {
+      day.isSelected = ko.observable(false)
+      day.toggle = (e) => {
+        day.isSelected(!day.isSelected())
+      }
+      day.serviceProviders = day.serviceProviders
+        .sort((a, b) => {
+          if (a.openingTime.startTime < b.openingTime.startTime) return -1
+          if (a.openingTime.startTime > b.openingTime.startTime) return 1
+          return 0
+        })
+      day.serviceProviders
+        .forEach((sp) => {
+          sp.name = htmlEncode.htmlDecode(sp.name)
+          sp.orgUrl = `/find-help/organisation/?organisation=${sp.key}`
+          sp.hasServiceInfo = hasLocationDescription(sp.serviceInfo)
+          sp.hasLocationDescription = hasLocationDescription(sp.locationDescription)
+          sp.fullAddress = getFullAddress(sp.address)
+          sp.viewMapsUrl = `https://www.google.co.uk/maps/place/${sp.address.postcode}`
+          sp.hasTelephone = sp.address.telephone !== null && sp.address.telephone.length > 0
+          sp.hasTags = sp.tags.length > 0
+          sp.isNotVisible = ko.observable(false)
+        })
+    })
+    return days
+  }
+
+  function sortDaysFromToday (days) {
+    // api days: monday == 0!
+    var today = new Date().getDay() - 1
+    var past = days.slice(0, today)
+    var todayToTail = days.slice(today)
+    return todayToTail.concat(past)
+  }
+
+  return sortByOpeningTimes(sortDaysFromToday(dayServices))
 }

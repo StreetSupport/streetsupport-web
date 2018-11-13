@@ -156,7 +156,7 @@ export default class FindHelpByCategory {
     return subCats
   }
 
-  setSubCatFilter(subCatId) {
+  setSubCatFilter (subCatId) {
     const selectedSubCatFilter = this.subCatFilters()
       .find((sc) => sc.id === subCatId)
 
