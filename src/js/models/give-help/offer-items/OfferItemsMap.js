@@ -100,11 +100,11 @@ var OfferItemModel = function () {
           document.querySelectorAll('.card__gmaps-container')
             .forEach((p) => p.parentNode.removeChild(p))
           popup = new googleMaps.Popup(
-            this.position.lat(), 
+            this.position.lat(),
             this.position.lng(),
             buildInfoWindowMarkup(provider))
           popup.setMap(self.map)
-          self.map.setCenter(position)
+          self.map.setCenter(new google.maps.LatLng(this.position.lat(), this.position.lng()))
         })
 
         self.markers.push(marker)
