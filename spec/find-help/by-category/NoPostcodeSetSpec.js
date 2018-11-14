@@ -13,7 +13,7 @@ import FindHelpByCategory from '../../../src/js/models/find-help/by-category'
 
 describe('Find Help by Category - no postcode set', () => {
   let sut,
-  postcodeLookupStub
+    postcodeLookupStub
 
   beforeEach(() => {
     sinon.stub(browser, 'location')

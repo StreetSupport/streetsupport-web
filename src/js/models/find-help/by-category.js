@@ -8,8 +8,8 @@ const endpoints = require('../../api')
 const querystring = require('../../get-url-parameter')
 
 import { getProvidersForListing } from '../../pages/find-help/provider-listing/helpers'
-import ProximitySearch from '../ProximitySearch'
-import FindHelpCategory from './FindHelpCategory'
+
+import FindHelp from './FindHelp'
 
 class SubCatFilter {
   constructor (data, container) {
@@ -25,15 +25,20 @@ class SubCatFilter {
   }
 }
 
-export default class FindHelpByCategory {
+export default class FindHelpByCategory extends FindHelp {
   constructor () {
-    this.category = new FindHelpCategory()
+    super([{
+      qsKey: 'subCatId',
+      getValue: () => {
+        const selectedSubCatFilter = this.subCatFilters().find((sc) => sc.isSelected())
+        return selectedSubCatFilter
+          ? selectedSubCatFilter.id
+          : undefined
+      }
+    }])
     const postcodeInQuerystring = querystring.parameter('postcode')
-    this.proximitySearch = new ProximitySearch(this, postcodeInQuerystring)
     this.allItems = ko.observableArray([])
-    this.items = ko.observableArray([])
     this.subCatFilters = ko.computed(this.getSubCatFilters, this)
-    this.hasItems = ko.computed(() => this.items().length > 0, this)
 
     this.shouldShowSubCatFilter = ko.computed(() => {
       return this.subCatFilters().length > 1
@@ -76,10 +81,6 @@ export default class FindHelpByCategory {
       })
   }
 
-  onProximitySearchFail () {
-    window.alert('Sorry, your postcode could not be found. Please try a different, nearby postcode. Alternatively, you can use just the first portion eg: "M1".')
-  }
-
   onSubCatFilter (subCatId) {
     this.subCatFilters()
       .filter((sc) => sc.id !== subCatId)
@@ -97,39 +98,6 @@ export default class FindHelpByCategory {
     if (e.state && e.state.postcode !== thisDoobrey.proximitySearch.postcode()) {
       thisDoobrey.proximitySearch.postcode(e.state.postcode)
       thisDoobrey.proximitySearch.search()
-    }
-  }
-
-  pushHistory () {
-    const postcodeqs = querystring.parameter('postcode')
-    const subCatIdqs = querystring.parameter('subCatId')
-
-    const postcode = this.proximitySearch.postcode()
-    const selectedSubCatFilter = this.subCatFilters().find((sc) => sc.isSelected())
-
-    const subCatId = selectedSubCatFilter
-      ? selectedSubCatFilter.id
-      : undefined
-
-    if (postcode !== postcodeqs || subCatId !== subCatIdqs) {
-      const kvps = [
-        { key: 'postcode', value: postcode },
-        { key: 'subCatId', value: subCatId }
-      ]
-        .filter((kv) => kv.value !== undefined)
-
-      const qs = kvps
-        .map((kv) => `${kv.key}=${kv.value}`)
-        .join('&')
-
-      const history = {}
-      kvps
-        .forEach((kvp) => {
-          history[kvp.key] = kvp.value
-        })
-
-      const newUrl = `?${qs}`
-      browser.pushHistory(history, '', newUrl)
     }
   }
 

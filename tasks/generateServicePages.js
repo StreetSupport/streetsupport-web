@@ -69,10 +69,14 @@ const getNewTimeTabledContent = function (src, cat) {
 }
 
 const getNewLocationContent = function (src, cat) {
-  const result = src
+  let result = src
     .replace('page:', `page: find-help-${cat.key}`)
     .replace('title:', `title: ${cat.name} Services by Location - Street Support`)
     .replace('description:', `description: ${cat.name} Services by location available near you`)
+    .replace('theServiceCategoryId', cat.key)
+    
+  result = result.split('theServiceCategoryName').join(cat.name)
+  result = result.split('theServiceCategorySynopsis').join(marked(cat.synopsis))
   return result
 }
 
