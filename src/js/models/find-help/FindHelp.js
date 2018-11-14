@@ -22,43 +22,50 @@ export default class FindHelp {
   }
 
   pushHistory () {
-    const doobies = [
-      { qsKey: 'postcode', getValue: () => this.proximitySearch.postcode() },
-      ...this.filters
-    ]
+    const getValues = (d) => {
+      return {
+        qsKey: d.qsKey,
+        qsValue: querystring.parameter(d.qsKey),
+        currentValue: d.getValue()
+      }
+    }
 
-    const mapped = doobies
-      .map((d) => {
-        return {
-          qsKey: d.qsKey,
-          qsValue: querystring.parameter(d.qsKey),
-          currentValue: d.getValue()
-        }
-      })
-
-    const valueHasChanged = mapped
-      .reduce((acc, next) => {
+    const anyValueHasChanged = (filters) => {
+      return filters
+        .reduce((acc, next) => {
         return acc
           ? true
           : next.qsValue !== next.currentValue
-      }, false)
+        }, false)
+    }
 
-    if (valueHasChanged) {
-      const kvps = mapped
-        .filter((kv) => kv.currentValue !== undefined)
-
-      const qs = kvps
+    const buildQuerystring = (kvps) => {
+      return kvps
         .map((kv) => `${kv.qsKey}=${kv.currentValue}`)
         .join('&')
+    }
 
+    const buildHistory = (kvps) => {
       const history = {}
       kvps
         .forEach((kvp) => {
           history[kvp.qsKey] = kvp.currentValue
         })
+      return history
+    }
 
-      const newUrl = `?${qs}`
-      browser.pushHistory(history, '', newUrl)
+    const filters = [
+      { qsKey: 'postcode', getValue: () => this.proximitySearch.postcode() },
+      ...this.filters
+    ]
+      .map(getValues)
+
+    if (anyValueHasChanged(filters)) {
+      const kvps = filters
+        .filter((kv) => kv.currentValue !== undefined)
+
+      const newUrl = `?${buildQuerystring(kvps)}`
+      browser.pushHistory(buildHistory(kvps), '', newUrl)
     }
   }
 }
