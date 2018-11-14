@@ -42,9 +42,9 @@ window.initMap = function () {
             marker.addListener('click', function () {
               document.querySelectorAll('.card__gmaps-container')
                 .forEach((p) => p.parentNode.removeChild(p))
-              const position = new google.maps.LatLng(this.position.lat(), this.position.lng())
               popup = new googleMaps.Popup(
-                position,
+                this.position.lat(), 
+                this.position.lng(),
                 buildInfoWindowMarkup(p))
               popup.setMap(map)
               map.setCenter(position)
