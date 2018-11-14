@@ -8,16 +8,12 @@ const endpoints = require('../../api')
 const querystring = require('../../get-url-parameter')
 
 import { getServicesByDay } from '../../pages/find-help/provider-listing/helpers'
-import ProximitySearch from '../ProximitySearch'
-import FindHelpCategory from './FindHelpCategory'
+import FindHelp from './FindHelp'
 
-export default class FindHelpByDay {
+export default class FindHelpByDay extends FindHelp {
   constructor () {
-    this.category = new FindHelpCategory()
+    super([{ qsKey: 'day', getValue: () => this.dayOfWeek() }])
     const postcodeInQuerystring = querystring.parameter('postcode')
-    this.proximitySearch = new ProximitySearch(this, postcodeInQuerystring)
-    this.items = ko.observableArray([])
-    this.hasItems = ko.computed(() => this.items().length > 0, this)
 
     this.timesOfDay = [
       { id: 'Morning', startTime: '06:00', endTime: '12:00' },
@@ -83,9 +79,9 @@ export default class FindHelpByDay {
       .then((result) => {
         const parsedData = getServicesByDay(result.data.daysServices)
         this.items(parsedData)
-        
+
         this.daysOfWeek(this.items().map((d) => { return { id: d.name } }))
-        
+
         this.items()
           .forEach((d) => {
             d.isSelected.subscribe((isNowSelected) => {
@@ -113,12 +109,7 @@ export default class FindHelpByDay {
       })
   }
 
-  onProximitySearchFail () {
-    window.alert('Sorry, your postcode could not be found. Please try a different, nearby postcode. Alternatively, you can use just the first portion eg: "M1".')
-  }
-
   onBrowserHistoryBack (thisDoobrey, e) {
-    this.setSubCatFilter(e.state.subCatId)
     if (e.state && e.state.postcode !== thisDoobrey.proximitySearch.postcode()) {
       thisDoobrey.proximitySearch.postcode(e.state.postcode)
       thisDoobrey.proximitySearch.search()
