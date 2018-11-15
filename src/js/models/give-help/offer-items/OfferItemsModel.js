@@ -2,10 +2,11 @@ var ko = require('knockout')
 require('knockout.validation') // No variable here is deliberate!
 
 var apiRoutes = require('../../../api')
-var getApi = require('../../../get-api-data')
 var postApi = require('../../../post-api-data')
 var browser = require('../../../browser')
 var supportedCities = require('../../../location/supportedCities')
+
+import { categories } from '../../../../data/generated/need-categories'
 
 var OfferItemModel = function (currCityId) {
   var self = this
@@ -99,20 +100,10 @@ var OfferItemModel = function (currCityId) {
   self.errors = ko.validation.group(self)
 
   self.init = () => {
-    browser.loading()
-
-    getApi
-      .data(apiRoutes.needCategories)
-      .then((result) => {
-        browser.loaded()
-        const cats = result.data
-        cats.forEach((c) => {
-          c.isChecked = ko.observable(false)
-        })
-        self.categories(cats)
-      }, (_) => {
-        browser.redirect('/500/')
-      })
+    categories.forEach((c) => {
+      c.isChecked = ko.observable(false)
+    })
+    self.categories(categories)
   }
 
   self.init()

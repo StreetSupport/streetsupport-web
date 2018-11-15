@@ -36,6 +36,7 @@ module.exports = {
     'donate-v2': path.join(__dirname, '/src/js/pages/donate/app'),
     'all-organisations-v2': path.join(__dirname, '/src/js/pages/all-organisations/app'),
     'all-organisations-v2-map': path.join(__dirname, '/src/js/pages/all-organisations/map/app'),
+    'give-help': path.join(__dirname, '/src/js/pages/give-help/index/app'),
     giverequests: path.join(__dirname, '/src/js/pages/give-help/needs/app'),
     requestDetails: path.join(__dirname, '/src/js/pages/give-help/needs/request/app'),
     sponsor: path.join(__dirname, '/src/js/page-sponsor'),
