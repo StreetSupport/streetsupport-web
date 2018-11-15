@@ -1,4 +1,4 @@
-Array.prototype.sortVSL = function (fieldName, isAscending = true) {
+Array.prototype.sortVSL = function (fieldName, isAscending = true) { // eslint-disable-line
   const sortResult = isAscending ? -1 : 1
   return this
     .sort((a, b) => {
@@ -8,10 +8,10 @@ Array.prototype.sortVSL = function (fieldName, isAscending = true) {
     })
 }
 
-Array.prototype.sortAsc = function (fieldName) {
+Array.prototype.sortAsc = function (fieldName) { // eslint-disable-line
   return this.sortVSL(fieldName)
 }
 
-Array.prototype.sortDesc = function (fieldName) {
+Array.prototype.sortDesc = function (fieldName) { // eslint-disable-line
   return this.sortVSL(fieldName, false)
 }
