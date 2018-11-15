@@ -158,7 +158,7 @@
       }
     }
     @include mq($from: xl) {
-      background: url('/assets/img/real-change-w-and-l/bg-desktop.png') no-repeat 50% top;
+      background: #fbbf09 url('/assets/img/real-change-w-and-l/bg-desktop.png') no-repeat 50% top;
       padding: 0 20px!important;
 
       .container {
