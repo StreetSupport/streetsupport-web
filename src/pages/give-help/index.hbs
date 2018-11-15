@@ -94,6 +94,10 @@ page: givehelp
   <!-- /ko -->
 
   <!-- ko if: realChangeIsEnabled -->
+  <!-- ko if: isWiganRealChangeTemplate -->
+  {{> locations/banners/wigan-and-leigh-real-change }}
+  <!-- /ko -->
+  <!-- ko if: isDefaultTemplate -->
   <div class="block" style="background: #FBBF09">
     <div class="container">
       <h1><span data-bind="text: realChangeTitle"></span> in <span data-bind="text: locationName"></span></h1>
@@ -103,6 +107,7 @@ page: givehelp
       </a>
     </div>
   </div>
+  <!-- /ko -->
   <!-- /ko -->
 
 <!-- /ko -->
