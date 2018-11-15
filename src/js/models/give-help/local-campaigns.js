@@ -20,8 +20,9 @@ export default class LocalCampaigns {
       this.locationName = location.name
       this.realChangeUrl = location.realChangeUrl
       this.realChangeTitle = location.realChangeTitle
-      this.isWiganRealChangeTemplate = location.key === "wigan-and-leigh"
-      this.isDefaultTemplate = location.key === "leeds"
+      this.isWiganRealChangeTemplate = location.key === 'wigan-and-leigh'
+      this.isBournemouthTemplate = location.key === 'bournemouth'
+      this.isDefaultTemplate = location.key === 'leeds'
 
       campaigns
         .forEach((c) => {
