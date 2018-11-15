@@ -33,9 +33,9 @@ export default class FindHelp {
     const anyValueHasChanged = (filters) => {
       return filters
         .reduce((acc, next) => {
-        return acc
-          ? true
-          : next.qsValue !== next.currentValue
+          return acc
+            ? true
+            : next.qsValue !== next.currentValue
         }, false)
     }
 

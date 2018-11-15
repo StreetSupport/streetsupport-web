@@ -13,6 +13,8 @@ const endpoints = require('../src/js/api')
 
 import { newFile } from './fileHelpers'
 
+require('../src/js/arrayExtensions')
+
 /* calls API and generates static data */
 gulp.task('volunteer-categories', (callback) => {
   return request(endpoints.volunteerCategories)
@@ -29,13 +31,20 @@ gulp.task('parse-vol-categories', (callback) => {
         name: c.description
       }
     })
-    .sort((a, b) => {
-      if (a.name < b.name) return -1
-      if (a.name > b.name) return 1
-      return 0
-    })
+    .sortAsc('name')
   return newFile('volunteer-categories.js', `export const categories = ${JSON.stringify(cats)}`)
     .pipe(gulp.dest(`${config.paths.generatedData}`))
+})
+
+gulp.task('need-categories', (callback) => {
+  return request(endpoints.needCategories)
+    .pipe(source(`${config.paths.generatedData}need-categories.js`))
+    .pipe(streamify(jeditor(function (data) {
+      return data
+        .sortAsc('value')
+    })))
+    .pipe(replace('[', 'export const categories = ['))
+    .pipe(gulp.dest('./'))
 })
 
 gulp.task('full-categories', (callback) => {
@@ -54,11 +63,7 @@ gulp.task('main-categories', (callback) => {
         name: c.name
       }
     })
-    .sort((a, b) => {
-      if (a.sortOrder > b.sortOrder) return -1
-      if (a.sortOrder < b.sortOrder) return 1
-      return 0
-    })
+    .sortDesc('sortOrder')
   return newFile('service-categories.js', `export const categories = ${JSON.stringify(cats)}`)
     .pipe(gulp.dest(`${config.paths.generatedData}`))
 })
@@ -73,11 +78,7 @@ gulp.task('accom-categories', (callback) => {
         name: c.name
       }
     })
-    .sort((a, b) => {
-      if (a.name < b.name) return -1
-      if (a.name > b.name) return 1
-      return 0
-    })
+    .sortAsc('name')
   return newFile('accom-categories.js', `export const categories = ${JSON.stringify(cats)}`)
     .pipe(gulp.dest(`${config.paths.generatedData}`))
 })
@@ -86,11 +87,7 @@ gulp.task('supported-cities', (callback) => {
   return request(endpoints.cities)
     .pipe(source(`${config.paths.generatedData}supported-cities.js`))
     .pipe(streamify(jeditor((cities) => cities
-      .sort((a, b) => {
-        if (a.name < b.name) return -1
-        if (a.name > b.name) return 1
-        return 0
-      })
+      .sortAsc('name')
     )))
     .pipe(replace('[{', 'export const cities = [{'))
     .pipe(gulp.dest('./'))
@@ -112,4 +109,10 @@ gulp.task('parse-vol-categories-task', (callback) => {
   )
 })
 
-gulp.task('getLongTermData', ['parse-categories', 'supported-cities', 'parse-vol-categories-task'])
+gulp.task('getLongTermData',
+[
+  'parse-categories', 
+  'supported-cities', 
+  'need-categories', 
+  'parse-vol-categories-task'
+])
