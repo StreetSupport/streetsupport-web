@@ -4,7 +4,7 @@ description: Street support makes it easier to help people facing homelessness i
 image: https://streetsupport.net/assets/img/og/street-support.jpg
 layout: default.hbs
 permalink: false
-jsBundle: generic
+jsBundle: give-help
 section: givehelp
 page: givehelp
 ---
@@ -20,8 +20,8 @@ page: givehelp
 
 <div class="block block--header"> 
   <div class="container">
-    <h1 class="h1 block__header">Give Help <span class="js-city-label"></span></h1>
-    <h2 class="h2 block__sub-header">Find out what you can do to help</h2
+    <h1 class="h1 block__header">Give Help</h1>
+    <h2 class="h2 block__sub-header">Find out what you can do to help</h2>
   </div>
 </div>
 
@@ -76,3 +76,33 @@ page: givehelp
     </div>
   </div>
 </div>
+
+<!-- ko if: hasCampaigns -->
+<div class="block"> 
+  <div class="container">
+    <h1 class="h1">Local Campaigns</h1>
+    <p>Campaigns currently running in <span data-bind="text: locationName"></span>:</p>
+  </div>
+</div>
+
+  <!-- ko if: abenIsEnabled -->
+  {{> locations/gm-banner }}
+  <!-- /ko -->
+
+  <!-- ko if: bigChangeIsEnabled -->
+  {{> locations/banners/big-change-mcr }}
+  <!-- /ko -->
+
+  <!-- ko if: realChangeIsEnabled -->
+  <div class="block" style="background: #FBBF09">
+    <div class="container">
+      <h1><span data-bind="text: realChangeTitle"></span> in <span data-bind="text: locationName"></span></h1>
+      <p><span data-bind="text: realChangeTitle"></span> pays for practical items individuals need to build independent lives away from the streets. If everyone who lives, works or visits <span data-bind="text: locationName"></span> donates, together we can make a Big Change!</p>
+      <a class="btn btn--big-change" data-bind="attr: { href: realChangeUrl }">
+        <span class="btn__text">Check out <span data-bind="text: realChangeTitle"></span></span>
+      </a>
+    </div>
+  </div>
+  <!-- /ko -->
+
+<!-- /ko -->
