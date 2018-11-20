@@ -19,6 +19,7 @@ const buildMap = function (userLocation, customOptions = {}, domSelector = '.js-
 const buildMarker = function (location, map, customOptions) {
   const defaultOptions = {
     position: { lat: location.latitude, lng: location.longitude },
+    icon: '/assets/img/map-pin.png',
     map: map
   }
   return new google.maps.Marker(Object.assign(defaultOptions, customOptions))
