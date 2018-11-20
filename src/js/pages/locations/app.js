@@ -81,7 +81,7 @@ const initStatistics = function (currentLocation) {
     { field: 'totalVolunteers', link: '/give-help/volunteer/', label: 'Volunteers' },
     { field: 'totalNeeds', link: '/give-help/help/', label: 'Needs' }
   ]
-  const requiredStats = currentLocation.homePageStats.length
+  const requiredStats = currentLocation.homePageStats
     ? currentLocation.homePageStats
     : ['totalServiceProviders', 'totalNeeds', 'totalVolunteers']
   api
