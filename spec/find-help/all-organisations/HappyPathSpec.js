@@ -145,11 +145,6 @@ describe('all organisations', () => {
         sut.nextPage()
         sut.nextPage()
         sut.nextPage()
-        console.log(
-          sut.organisations().length,
-          sut.pageSize,
-          sut.pageIndex()
-        )
       })
   
       it('- should show next page button', () => {
