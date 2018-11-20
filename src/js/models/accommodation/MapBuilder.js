@@ -74,6 +74,8 @@ const MapBuilder = function () {
   self.init = function (items, userLocation, container, buildInfoWindowMarkup, getLocation = (p) => {
     return { latitude: p.latitude(), longitude: p.longitude() }
   }, customOptions = {}) {
+
+
     self.map = gMaps.buildMap(userLocation, customOptions)
 
     self.container = container
