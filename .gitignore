@@ -36,7 +36,7 @@ src/pages/find-help/training/
 src/pages/find-help/activities/
 src/pages/find-help/support/
 src/pages/find-help/employment/
-
+src/pages/find-help/financial/
 src/data/generated/
 src/partials/nav/service-cats.hbs
 src/scss/modules/_generated-variables.scss
