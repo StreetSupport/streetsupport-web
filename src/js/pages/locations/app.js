@@ -12,6 +12,7 @@ const location = require('../../location/locationSelector')
 const templating = require('../../template-render')
 const wp = require('../../wordpress')
 const MapBuilder = require('../../models/accommodation/MapBuilder')
+import { categories } from '../../../data/generated/service-categories'
 
 const initLocations = function (currentLocationId) {
   const ui = {
@@ -57,20 +58,33 @@ const initNews = function (currentLocationId) {
 }
 
 const initFindHelp = function (currentLocation) {
+  const cats = categories
+  cats.find((c) => c.key === 'accom').key = 'accommodation'
+
   const ui = {
     form: document.querySelector('.js-find-help-form'),
+    select: document.querySelector('.js-find-help-cats'),
     postcode: document.querySelector('.js-find-help-postcode')
   }
+
+  cats
+    .forEach((c) => {
+      const option = document.createElement('option')
+      option.setAttribute('value', c.key)
+      option.innerText = c.name
+
+      console.log(option)
+      ui.select.appendChild(option)
+    })
 
   ui.postcode.setAttribute('placeholder', `your postcode: eg ${currentLocation.postcode}`)
   ui.postcode.value = currentLocation.postcode
 
   ui.form.addEventListener('submit', function (e) {
     e.preventDefault()
-    const reqLocation = ui.postcode.value
-    location.setPostcode(reqLocation, () => {
-      browser.redirect('/find-help/all-service-providers/')
-    }, () => alert('We could not find your postcode, please try a nearby one'))
+    const reqPostcode = ui.postcode.value
+    const reqService = ui.select.value
+    browser.redirect(`/find-help/${reqService}/?postcode=${reqPostcode}`)
   })
 }
 
