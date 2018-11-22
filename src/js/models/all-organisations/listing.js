@@ -1,6 +1,8 @@
 import ko from 'knockout'
 import { htmlDecode } from 'htmlencode'
 
+require('../../arrayExtensions')
+
 const ajax = require('../../get-api-data')
 const browser = require('../../browser')
 const endpoints = require('../../api')
@@ -12,6 +14,7 @@ class ClientGroupFilter {
   constructor (cgData, listener) {
     this.key = cgData.key
     this.name = cgData.name
+    this.sortPosition = cgData.sortPosition
     this.listener = listener
     this.isSelected = ko.observable(false)
   }
@@ -51,11 +54,12 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
           })
         return acc
       }, [])
+      .sortDesc('sortPosition')
   }, self)
   self.hasClientGroupFilters = ko.computed(() => {
     return self.clientGroupFilters().length
   }, self)
-  
+
   self.clientGroupFiltersApplied = []
 
   self.addClientGroupToFilter = (clientGroupKey) => {
@@ -145,7 +149,7 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
         }
       },
       (error) => {
-        console.log({error})
+        console.log({ error })
         self.postcodeRetrievalIssue(true)
       })
   }
