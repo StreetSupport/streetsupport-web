@@ -157,6 +157,13 @@
   outline: none;
   padding: 10px;
   width: 100%;
+
+  & + label + & {
+    margin-top: 10px;
+    @include mq($from: m) {
+      margin-top: 0;
+    }
+  }
 }
 
 .form__input--inline {
