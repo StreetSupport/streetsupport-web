@@ -108,6 +108,18 @@
     }
   }
 
+  &--brand-h {
+    .btn__text {
+      background-color: $brand-h;
+      color: #fff;
+      box-shadow: 0px 3px 0px 0px darken( $brand-h, 15% );
+
+      &:hover {
+        background-color: darken( $brand-h, 5% );
+      }
+    }
+  }
+
   &--big-change {
     .btn__text {
       background-color: $big-change-b;
@@ -166,6 +178,20 @@
       .btn__text {
         padding: 8px 20px;
       }
+    }
+  }
+
+  &--togglable {
+    display: inline-block;
+    margin: -2px 0 0 0;
+    .btn__text {
+      font-size: 0.8em;
+      padding: 5px 8px;
+      background: $brand-q;
+    }
+    &.btn--brand-p.is-selected .btn__text {
+      background: $brand-p;
+      color: white;
     }
   }
 
