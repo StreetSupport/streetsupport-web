@@ -133,6 +133,17 @@
   @extend %get-in-sea;
 }
 
+.location--rochdale .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-size: 800px;
+      background-position: left bottom;
+      width: 100%;
+      bottom: -18px;
+    }
+  }
+}
+
 .location--southampton .location-header {
   @include mq($from: m) {
     &:before {
@@ -148,6 +159,17 @@
     }
   }
   @extend %get-in-sea;
+}
+
+.location--stockport .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-size: 800px;
+      background-position: left bottom;
+      width: 100%;
+      bottom: 7px;
+    }
+  }
 }
 
 .location--tameside .location-header {
