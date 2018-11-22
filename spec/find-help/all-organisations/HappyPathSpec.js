@@ -118,6 +118,11 @@ describe('all organisations', () => {
     expect(org.distanceDescription).toEqual('9592.95 km away')
   })
 
+  it('- should set client groups', () => {
+    const org = sut.organisations()[0]
+    expect(org.clientGroupKeys).toEqual(['cg-1', 'cg-2'])
+  })
+
   it('- should notify user it has loaded', () => {
     expect(browserLoadedStub.calledAfter(ajaxStub)).toBeTruthy()
   })
@@ -234,6 +239,53 @@ describe('all organisations', () => {
       it('- should filter by search query', () => {
         expect(sut.orgsToDisplay().length).toEqual(1)
         expect(sut.orgsToDisplay()[0].key).toEqual('people-first-housing')
+      })
+    })
+  })
+
+  describe('- client group filters', () => {
+    it('- should list available filters', () => {
+      expect(sut.clientGroupFilters().length).toEqual(4)
+    })
+
+    describe('- filtering', () => {
+      beforeEach(() => {
+        sut.clientGroupFilters().find((cgf) => cgf.key === 'cg-3').click()
+      })
+
+      it('- should filter displayed orgs to only those with matching client group', () => {
+        expect(sut.orgsToDisplay().length).toEqual(2)
+      })
+
+      describe('- with multiple', () => {
+        let filterToToggle
+
+        beforeEach(() => {
+          filterToToggle = sut.clientGroupFilters().find((cgf) => cgf.key === 'cg-4')
+          filterToToggle.click()
+        })
+  
+        it('- should mark filter as selected', () => {
+          expect(filterToToggle.isSelected()).toBeTruthy()
+        })
+  
+        it('- should filter displayed orgs to only those with matching client group', () => {
+          expect(sut.orgsToDisplay().length).toEqual(1)
+        })
+
+        describe('- toggle off', () => {
+          beforeEach(() => {
+            filterToToggle.click()
+          })
+    
+          it('- should filter displayed orgs to only those with matching client group', () => {
+            expect(sut.orgsToDisplay().length).toEqual(2)
+          })
+  
+          it('- should un-mark filter as selected', () => {
+            expect(filterToToggle.isSelected()).toBeFalsy()
+          })
+        })
       })
     })
   })
