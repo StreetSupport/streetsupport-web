@@ -1,5 +1,3 @@
-/* global alert */
-
 // Common modules
 import '../../common'
 
