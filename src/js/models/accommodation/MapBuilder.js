@@ -27,7 +27,6 @@ const MapBuilder = function () {
           const location = self.getLocation(p)
 
           const position = new google.maps.LatLng(location.latitude, location.longitude)
-
           popup = new gMaps.Popup(
             location.latitude,
             location.longitude,
