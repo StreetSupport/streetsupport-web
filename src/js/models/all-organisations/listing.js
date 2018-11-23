@@ -133,8 +133,13 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
   }
 
   self.search = function () {
-    const keyContainsQuery = (o) => o.name.toLowerCase().includes(self.searchQuery().toLowerCase())
-    self.orgsToDisplay(self.organisations().filter(keyContainsQuery))
+    location.getPreviouslySetPostcode()
+      .then((currentLocation) => {
+        loadOrgsForName(self.searchQuery(), currentLocation)
+      }, (err) => {
+        console.log(err)
+        browser.redirect('/500')
+      })
   }
 
   self.getByPostcode = function () {
@@ -155,7 +160,7 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
   }
 
   const groupByOrg = function (orgLocations, currLocation) {
-    return orgLocations
+    const orgs = orgLocations
       .reduce((acc, next) => {
         const { distanceInMetres, description } = getDistanceApart(
           { latA: next.latitude, longA: next.longitude },
@@ -186,6 +191,26 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
         }
         return acc
       }, [])
+    orgs.forEach((o) => {
+      const nearestOrgLocation = o.locations.sort(sortByDistanceAway)[0]
+      o.distanceInMetres = nearestOrgLocation.distanceInMetres
+      o.distanceDescription = nearestOrgLocation.distanceDescription
+    })
+    return orgs
+  }
+
+  const loadOrgsForName = function (name, currentLocation) {
+    browser.loading()
+    ajax
+      .data(`${endpoints.serviceProviderLocations}?providerName=${name}`)
+      .then((result) => {
+        const orgs = groupByOrg(result.data.items, currentLocation)
+        self.organisations(orgs)
+        paginate()
+        browser.loaded()
+      }, (_) => {
+        browser.redirect('/500')
+      })
   }
 
   const loadOrgsForLocation = function (location) {
@@ -194,11 +219,6 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
       .data(`${endpoints.serviceProviderLocations}?pageSize=1000&latitude=${location.latitude}&longitude=${location.longitude}&range=${self.range()}`)
       .then((result) => {
         const orgs = groupByOrg(result.data.items, location)
-        orgs.forEach((o) => {
-          const nearestOrgLocation = o.locations.sort(sortByDistanceAway)[0]
-          o.distanceInMetres = nearestOrgLocation.distanceInMetres
-          o.distanceDescription = nearestOrgLocation.distanceDescription
-        })
         self.organisations(self.orgsFilter
           ? orgs.filter(self.orgsFilter)
           : orgs)
