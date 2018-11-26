@@ -69,7 +69,7 @@ const getSelectedLocationId = () => {
     const saved = cookies.get(cookies.keys.location)
     return supportedCities.get(saved).id
   } catch (err) {
-    browser.redirect('/404')
+    console.log(`could not find supported location: ${saved}`)
   }
 }
 
