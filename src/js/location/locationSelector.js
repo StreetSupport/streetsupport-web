@@ -64,23 +64,26 @@ const _determineLocationRetrievalMethod = () => {
   }
 }
 
-const getSelectedLocationId = (defaultValue = 'elsewhere') => {
+const getSelectedLocationId = () => {
   try {
     const saved = cookies.get(cookies.keys.location)
     return supportedCities.get(saved).id
   } catch (err) {
-    return defaultValue
+    browser.redirect('/404')
   }
 }
 
+/**
+ * retrieves location from URL
+ */
 const getCurrentHub = () => {
-  const saved = browser.location().pathname.split('/')[1]
-  if (getSelectedLocationId() !== saved) {
-    setCurrent(saved)
+  const fromUrl = browser.location().pathname.split('/')[1]
+  if (getSelectedLocationId() !== fromUrl) {
+    setCurrent(fromUrl)
     browser.reload()
   }
 
-  return supportedCities.get(saved)
+  return supportedCities.get(fromUrl)
 }
 
 const buildLocationResult = (userLocationState) => {
