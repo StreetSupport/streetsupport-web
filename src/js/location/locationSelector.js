@@ -64,26 +64,23 @@ const _determineLocationRetrievalMethod = () => {
   }
 }
 
-const getSelectedLocationId = () => {
+const getSelectedLocationId = (defaultValue = 'elsewhere') => {
   try {
     const saved = cookies.get(cookies.keys.location)
     return supportedCities.get(saved).id
   } catch (err) {
-    console.log(`could not find supported location: ${saved}`)
+    return defaultValue
   }
 }
 
-/**
- * retrieves location from URL
- */
 const getCurrentHub = () => {
-  const fromUrl = browser.location().pathname.split('/')[1]
-  if (getSelectedLocationId() !== fromUrl) {
-    setCurrent(fromUrl)
+  const saved = browser.location().pathname.split('/')[1]
+  if (getSelectedLocationId() !== saved) {
+    setCurrent(saved)
     browser.reload()
   }
 
-  return supportedCities.get(fromUrl)
+  return supportedCities.get(saved)
 }
 
 const buildLocationResult = (userLocationState) => {

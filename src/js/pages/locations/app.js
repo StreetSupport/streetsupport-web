@@ -1,3 +1,6 @@
+/* global alert */
+
+// Common modules
 import '../../common'
 
 import htmlEncode from 'htmlencode'
@@ -21,7 +24,8 @@ const initLocations = function (currentLocationId) {
     e.preventDefault()
     const reqLocation = ui.select.value
     if (reqLocation) {
-      redirectToHubPage(reqLocation)
+      location.setCurrent(reqLocation)
+      browser.redirect(`/${reqLocation}`)
     }
   })
 
@@ -68,6 +72,8 @@ const initFindHelp = function (currentLocation) {
       const option = document.createElement('option')
       option.setAttribute('value', c.key)
       option.innerText = c.name
+
+      console.log(option)
       ui.select.appendChild(option)
     })
 
