@@ -1,15 +1,11 @@
 import './common'
 
-const browser = require('./browser')
 const locationSelector = require('./location/locationSelector')
 const getApiData = require('./get-api-data')
 const apiRoutes = require('./api')
 const templating = require('./template-render')
 
-const locationId = locationSelector.getSelectedLocationId()
-if (window.location.href.indexOf(locationId) === -1) {
-  browser.redirect('/' + locationId + '/severe-weather-accommodation/')
-}
+const locationId = locationSelector.getCurrentHub()
 
 getApiData
   .data(apiRoutes.cities)
