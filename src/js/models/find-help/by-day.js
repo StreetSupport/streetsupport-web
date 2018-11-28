@@ -48,10 +48,7 @@ export default class FindHelpByDay extends FindHelp {
       this.proximitySearch.search()
     }
 
-    if (this.proximitySearch.latitude !== null &&
-      this.proximitySearch.longitude !== null &&
-      this.proximitySearch.latitude !== undefined &&
-      this.proximitySearch.longitude !== undefined) {
+    if (this.proximitySearch.hasCoords()) {
       this.onProximitySearch()
     }
 

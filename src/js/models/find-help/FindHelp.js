@@ -10,8 +10,7 @@ export default class FindHelp {
   constructor (filters = []) {
     this.filters = filters
     this.category = new FindHelpCategory()
-    const postcodeInQuerystring = querystring.parameter('postcode')
-    this.proximitySearch = new ProximitySearch(this, postcodeInQuerystring)
+    this.proximitySearch = new ProximitySearch(this)
 
     this.items = ko.observableArray([])
     this.hasItems = ko.computed(() => this.items().length > 0, this)

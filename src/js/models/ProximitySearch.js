@@ -23,6 +23,13 @@ export default class ProximitySearch {
     }
   }
 
+  hasCoords () {
+    return this.latitude !== null &&
+           this.longitude !== null &&
+           this.latitude !== undefined &&
+           this.longitude !== undefined
+  }
+
   search () {
     if (this.postcode()) {
       postcodeLookup.getCoords(

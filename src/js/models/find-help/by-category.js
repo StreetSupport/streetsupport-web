@@ -36,7 +36,6 @@ export default class FindHelpByCategory extends FindHelp {
           : undefined
       }
     }])
-    const postcodeInQuerystring = querystring.parameter('postcode')
     this.allItems = ko.observableArray([])
     this.subCatFilters = ko.computed(this.getSubCatFilters, this)
 
@@ -44,15 +43,13 @@ export default class FindHelpByCategory extends FindHelp {
       return this.subCatFilters().length > 1
     }, this)
 
+    const postcodeInQuerystring = querystring.parameter('postcode')
     if (postcodeInQuerystring) {
       this.proximitySearch.postcode(postcodeInQuerystring)
       this.proximitySearch.search()
     }
 
-    if (this.proximitySearch.latitude !== null &&
-      this.proximitySearch.longitude !== null &&
-      this.proximitySearch.latitude !== undefined &&
-      this.proximitySearch.longitude !== undefined) {
+    if (this.proximitySearch.hasCoords()) {
       this.onProximitySearch()
     }
 
