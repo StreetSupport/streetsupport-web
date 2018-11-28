@@ -31,6 +31,8 @@ describe('Needs Listing - sorting', () => {
     sinon.stub(browser, 'loading')
     sinon.stub(browser, 'loaded')
     sinon.stub(browser, 'location')
+    sinon.stub(browser, 'pushHistory')
+    sinon.stub(browser, 'setOnHistoryPop')
       .returns({})
     sinon.stub(locationSelector, 'getPreviouslySetPostcode')
       .returns({
@@ -39,7 +41,7 @@ describe('Needs Listing - sorting', () => {
         }
       })
     sinon.stub(querystring, 'parameter')
-    sinon.stub(storage, 'get')
+    sinon.stub(storage, 'get').returns(previouslySetLocation)
 
     sut = new Model()
   })
@@ -49,6 +51,8 @@ describe('Needs Listing - sorting', () => {
     browser.loading.restore()
     browser.loaded.restore()
     browser.location.restore()
+    browser.pushHistory.restore()
+    browser.setOnHistoryPop.restore()
     locationSelector.getPreviouslySetPostcode.restore()
     querystring.parameter.restore()
     storage.get.restore()

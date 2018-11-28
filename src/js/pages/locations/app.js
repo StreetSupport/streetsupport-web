@@ -1,5 +1,3 @@
-/* global alert */
-
 // Common modules
 import '../../common'
 
@@ -72,8 +70,6 @@ const initFindHelp = function (currentLocation) {
       const option = document.createElement('option')
       option.setAttribute('value', c.key)
       option.innerText = c.name
-
-      console.log(option)
       ui.select.appendChild(option)
     })
 

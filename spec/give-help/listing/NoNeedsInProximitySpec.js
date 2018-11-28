@@ -34,6 +34,7 @@ describe('Needs Listing', () => {
       })
     sinon.stub(browser, 'loading')
     sinon.stub(browser, 'loaded')
+    sinon.stub(browser, 'setOnHistoryPop')
     sinon.stub(browser, 'location')
       .returns({
         hash: ''
@@ -55,6 +56,7 @@ describe('Needs Listing', () => {
     browser.loading.restore()
     browser.loaded.restore()
     browser.location.restore()
+    browser.setOnHistoryPop.restore()
     locationSelector.getPreviouslySetPostcode.restore()
     querystring.parameter.restore()
     storage.get.restore()
