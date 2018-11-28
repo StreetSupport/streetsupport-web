@@ -9,6 +9,7 @@ import { formatNeedsKO } from './needs'
 import { getKOSortAscFunc, getKOSortDescFunc } from '../../../sorting'
 
 import ProximitySearch from '../../ProximitySearch'
+import pushHistory from '../../../history'
 
 class NeedsListing {
   constructor () {
@@ -39,7 +40,7 @@ class NeedsListing {
     if (postcodeInQuerystring) {
       this.proximitySearch.postcode(postcodeInQuerystring)
       this.proximitySearch.search()
-    }else if (this.proximitySearch.hasCoords()) {
+    } else if (this.proximitySearch.hasCoords()) {
       this.onProximitySearch()
     }
 
@@ -69,7 +70,7 @@ class NeedsListing {
   }
 
   onBrowserHistoryBack (thisDoobrey, e) {
-    if(e.state) {
+    if (e.state) {
       this.setActiveFilter(e.state.type)
       if (e.state.postcode !== thisDoobrey.proximitySearch.postcode()) {
         thisDoobrey.proximitySearch.postcode(e.state.postcode)
@@ -79,39 +80,7 @@ class NeedsListing {
   }
 
   pushHistory () {
-    const getValues = (d) => {
-      return {
-        qsKey: d.qsKey,
-        qsValue: querystring.parameter(d.qsKey),
-        currentValue: d.getValue()
-      }
-    }
-
-    const anyValueHasChanged = (filters) => {
-      return filters
-        .reduce((acc, next) => {
-          return acc
-            ? true
-            : next.qsValue !== next.currentValue
-        }, false)
-    }
-
-    const buildQuerystring = (kvps) => {
-      return kvps
-        .map((kv) => `${kv.qsKey}=${kv.currentValue}`)
-        .join('&')
-    }
-
-    const buildHistory = (kvps) => {
-      const history = {}
-      kvps
-        .forEach((kvp) => {
-          history[kvp.qsKey] = kvp.currentValue
-        })
-      return history
-    }
-
-    const filters = [
+    pushHistory([
       { qsKey: 'postcode', getValue: () => this.proximitySearch.postcode() },
       {
         qsKey: 'type',
@@ -122,16 +91,7 @@ class NeedsListing {
             : null
         }
       }
-    ]
-      .map(getValues)
-
-    if (anyValueHasChanged(filters)) {
-      const kvps = filters
-        .filter((kv) => kv.currentValue !== undefined)
-
-      const newUrl = `?${buildQuerystring(kvps)}`
-      browser.pushHistory(buildHistory(kvps), '', newUrl)
-    }
+    ])
   }
 
   filterForItems () {

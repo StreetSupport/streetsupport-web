@@ -1,10 +1,8 @@
 import ko from 'knockout'
 
-const browser = require('../../browser')
 import FindHelpCategory from './FindHelpCategory'
+import pushHistory from '../../history'
 import ProximitySearch from '../ProximitySearch'
-
-const querystring = require('../../get-url-parameter')
 
 export default class FindHelp {
   constructor (filters = []) {
@@ -21,50 +19,9 @@ export default class FindHelp {
   }
 
   pushHistory () {
-    const getValues = (d) => {
-      return {
-        qsKey: d.qsKey,
-        qsValue: querystring.parameter(d.qsKey),
-        currentValue: d.getValue()
-      }
-    }
-
-    const anyValueHasChanged = (filters) => {
-      return filters
-        .reduce((acc, next) => {
-          return acc
-            ? true
-            : next.qsValue !== next.currentValue
-        }, false)
-    }
-
-    const buildQuerystring = (kvps) => {
-      return kvps
-        .map((kv) => `${kv.qsKey}=${kv.currentValue}`)
-        .join('&')
-    }
-
-    const buildHistory = (kvps) => {
-      const history = {}
-      kvps
-        .forEach((kvp) => {
-          history[kvp.qsKey] = kvp.currentValue
-        })
-      return history
-    }
-
-    const filters = [
+    pushHistory([
       { qsKey: 'postcode', getValue: () => this.proximitySearch.postcode() },
       ...this.filters
-    ]
-      .map(getValues)
-
-    if (anyValueHasChanged(filters)) {
-      const kvps = filters
-        .filter((kv) => kv.currentValue !== undefined)
-
-      const newUrl = `?${buildQuerystring(kvps)}`
-      browser.pushHistory(buildHistory(kvps), '', newUrl)
-    }
+    ])
   }
 }
