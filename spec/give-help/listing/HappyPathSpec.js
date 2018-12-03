@@ -7,7 +7,6 @@ import { parseQuery } from '../../support/url'
 const api = require('../../../src/js/get-api-data')
 const browser = require('../../../src/js/browser')
 const endpoints = require('../../../src/js/api')
-const locationSelector = require('../../../src/js/location/locationSelector')
 const Model = require('../../../src/js/models/give-help/requests/listing')
 const needsData = require('./needsData')
 const proximityRanges = require('../../../src/js/location/proximityRanges')
@@ -36,18 +35,15 @@ describe('Needs Listing', () => {
       })
     browserLoadingStub = sinon.stub(browser, 'loading')
     browserLoadedStub = sinon.stub(browser, 'loaded')
+    sinon.stub(browser, 'pushHistory')
+    sinon.stub(browser, 'setOnHistoryPop')
     sinon.stub(browser, 'location')
       .returns({
         hash: ''
       })
-    sinon.stub(locationSelector, 'getPreviouslySetPostcode')
-      .returns({
-        then: function (success) {
-          success(previouslySetLocation)
-        }
-      })
     sinon.stub(querystring, 'parameter')
-    sinon.stub(storage, 'get')
+    sinon.stub(storage, 'get').returns(previouslySetLocation)
+    sinon.stub(storage, 'set')
 
     sut = new Model()
   })
@@ -56,10 +52,12 @@ describe('Needs Listing', () => {
     api.data.restore()
     browser.loading.restore()
     browser.loaded.restore()
+    browser.pushHistory.restore()
+    browser.setOnHistoryPop.restore()
     browser.location.restore()
-    locationSelector.getPreviouslySetPostcode.restore()
     querystring.parameter.restore()
     storage.get.restore()
+    storage.set.restore()
   })
 
   it('- should set postcode as that previously saved', () => {

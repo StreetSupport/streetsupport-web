@@ -109,7 +109,7 @@ const getPreviouslySetPostcode = () => {
   return deferred.promise
 }
 
-const setPostcode = (postcode, onSuccessCallback, onErrorCallback) => {
+const setPostcode = (postcode, onSuccessCallback = () => {}, onErrorCallback = () => {}) => {
   postcodes.getCoords(postcode, (coordsResult) => {
     storage.set(storage.keys.userLocationState, coordsResult)
     onSuccessCallback(buildLocationResult(coordsResult))
