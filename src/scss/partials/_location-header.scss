@@ -144,6 +144,19 @@
   }
 }
 
+
+.location--salford .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-size: 680px;
+      background-position: left bottom;
+      width: 100%;
+      height: 349px;
+      bottom: -49px;
+    }
+  }
+}
+
 .location--southampton .location-header {
   @include mq($from: m) {
     &:before {
