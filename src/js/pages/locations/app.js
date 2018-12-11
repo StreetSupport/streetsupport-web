@@ -91,9 +91,10 @@ const initStatistics = function (currentLocation) {
     { field: 'totalVolunteers', link: '/give-help/volunteer/', label: 'Volunteers' },
     { field: 'totalNeeds', link: '/give-help/help/', label: 'Needs' }
   ]
-  const requiredStats = currentLocation.homePageStats
+  const requiredStats = currentLocation.homePageStats && currentLocation.homePageStats.length > 0
     ? currentLocation.homePageStats
     : ['totalServiceProviders', 'totalNeeds', 'totalVolunteers']
+
   api
     .data(endpoints.statistics + currentLocation.id + '/latest')
     .then((result) => {
