@@ -1,12 +1,33 @@
 import ko from 'knockout'
 import { htmlDecode } from 'htmlencode'
 
+require('../../arrayExtensions')
+
 const ajax = require('../../get-api-data')
 const browser = require('../../browser')
 const endpoints = require('../../api')
 const location = require('../../location/locationSelector')
 const proximityRanges = require('../../location/proximityRanges')
 const getDistanceApart = require('../../location/getDistanceApart')
+
+class ClientGroupFilter {
+  constructor (cgData, listener) {
+    this.key = cgData.key
+    this.name = cgData.name
+    this.sortPosition = cgData.sortPosition
+    this.listener = listener
+    this.isSelected = ko.observable(false)
+  }
+
+  click () {
+    this.isSelected(!this.isSelected())
+    if (this.isSelected()) {
+      this.listener.addClientGroupToFilter(this.key)
+    } else {
+      this.listener.removeClientGroupToFilter(this.key)
+    }
+  }
+}
 
 function OrgListing (orgsFilter = null, pageSize = 8) {
   const self = this
@@ -22,6 +43,35 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
   self.organisations = ko.observableArray()
   self.orgsToDisplay = ko.observableArray()
 
+  self.clientGroupFilters = ko.computed(() => {
+    return self.organisations()
+      .reduce((acc, nextOrg) => {
+        nextOrg.clientGroups
+          .forEach((nextCg) => {
+            if (!acc.find((cg) => cg.key === nextCg.key)) {
+              acc = [...acc, new ClientGroupFilter(nextCg, self)]
+            }
+          })
+        return acc
+      }, [])
+      .sortDesc('sortPosition')
+  }, self)
+  self.hasClientGroupFilters = ko.computed(() => {
+    return self.clientGroupFilters().length
+  }, self)
+
+  self.clientGroupFiltersApplied = []
+
+  self.addClientGroupToFilter = (clientGroupKey) => {
+    self.clientGroupFiltersApplied.push(clientGroupKey)
+    paginate()
+  }
+
+  self.removeClientGroupToFilter = (clientGroupKey) => {
+    self.clientGroupFiltersApplied = self.clientGroupFiltersApplied.filter((cgk) => cgk !== clientGroupKey)
+    paginate()
+  }
+
   self.currentSort = ko.observable()
 
   self.postcodeRetrievalIssue = ko.observable(false)
@@ -33,7 +83,14 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
   self.isSortedNearest = ko.computed(() => self.currentSort() === 'nearest', self)
 
   const paginate = function () {
-    self.orgsToDisplay(self.organisations().slice(0, self.pageIndex()))
+    const servesAllClientGroupsRequested = (org) => {
+      const intersection = self.clientGroupFiltersApplied.filter(x => org.clientGroupKeys.includes(x))
+      return intersection.length === self.clientGroupFiltersApplied.length
+    }
+    const orgsToDisplay = self.organisations()
+      .filter((o) => servesAllClientGroupsRequested(o))
+      .slice(0, self.pageIndex())
+    self.orgsToDisplay(orgsToDisplay)
   }
 
   self.prevPage = function () {
@@ -76,8 +133,13 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
   }
 
   self.search = function () {
-    const keyContainsQuery = (o) => o.name.toLowerCase().includes(self.searchQuery().toLowerCase())
-    self.orgsToDisplay(self.organisations().filter(keyContainsQuery))
+    location.getPreviouslySetPostcode()
+      .then((currentLocation) => {
+        loadOrgsForName(self.searchQuery(), currentLocation)
+      }, (err) => {
+        console.log(err)
+        browser.redirect('/500')
+      })
   }
 
   self.getByPostcode = function () {
@@ -92,13 +154,13 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
         }
       },
       (error) => {
-        console.log({error})
+        console.log({ error })
         self.postcodeRetrievalIssue(true)
       })
   }
 
   const groupByOrg = function (orgLocations, currLocation) {
-    return orgLocations
+    const orgs = orgLocations
       .reduce((acc, next) => {
         const { distanceInMetres, description } = getDistanceApart(
           { latA: next.latitude, longA: next.longitude },
@@ -120,6 +182,8 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
             donationDescription: next.donationDescription,
             itemDonationDescription: next.itemDonationDescription,
             needCategories: next.needCategories,
+            clientGroups: next.clientGroups,
+            clientGroupKeys: next.clientGroups.map((cg) => cg.key),
             locations: [
               next
             ]
@@ -127,6 +191,26 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
         }
         return acc
       }, [])
+    orgs.forEach((o) => {
+      const nearestOrgLocation = o.locations.sort(sortByDistanceAway)[0]
+      o.distanceInMetres = nearestOrgLocation.distanceInMetres
+      o.distanceDescription = nearestOrgLocation.distanceDescription
+    })
+    return orgs
+  }
+
+  const loadOrgsForName = function (name, currentLocation) {
+    browser.loading()
+    ajax
+      .data(`${endpoints.serviceProviderLocations}?providerName=${name}`)
+      .then((result) => {
+        const orgs = groupByOrg(result.data.items, currentLocation)
+        self.organisations(orgs)
+        paginate()
+        browser.loaded()
+      }, (_) => {
+        browser.redirect('/500')
+      })
   }
 
   const loadOrgsForLocation = function (location) {
@@ -135,11 +219,6 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
       .data(`${endpoints.serviceProviderLocations}?pageSize=1000&latitude=${location.latitude}&longitude=${location.longitude}&range=${self.range()}`)
       .then((result) => {
         const orgs = groupByOrg(result.data.items, location)
-        orgs.forEach((o) => {
-          const nearestOrgLocation = o.locations.sort(sortByDistanceAway)[0]
-          o.distanceInMetres = nearestOrgLocation.distanceInMetres
-          o.distanceDescription = nearestOrgLocation.distanceDescription
-        })
         self.organisations(self.orgsFilter
           ? orgs.filter(self.orgsFilter)
           : orgs)

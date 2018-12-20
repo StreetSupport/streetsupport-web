@@ -1,10 +1,10 @@
 ---
 title: Give Help - Street Support
 description: Street support makes it easier to help people facing homelessness in Manchester. Here's some ways you can give help.
-image: https://streetsupport.net/assets/img/og/street-support.png
+image: https://streetsupport.net/assets/img/og/street-support.jpg
 layout: default.hbs
 permalink: false
-jsBundle: generic
+jsBundle: give-help
 section: givehelp
 page: givehelp
 ---
@@ -20,8 +20,8 @@ page: givehelp
 
 <div class="block block--header"> 
   <div class="container">
-    <h1 class="h1 block__header">Give Help <span class="js-city-label"></span></h1>
-    <h2 class="h2 block__sub-header">Find out what you can do to help</h2
+    <h1 class="h1 block__header">Give Help</h1>
+    <h2 class="h2 block__sub-header">Find out what you can do to help</h2>
   </div>
 </div>
 
@@ -49,7 +49,7 @@ page: givehelp
         <h2 class="h2 card__title card__title--briefcase">Get your business involved</h2>
         <p>By supporting the movement to end homelessness, you can play a key role in supporting charities and volunteer groups, and help to change policy.</p>
         <a href="/give-help/business-support" class="btn btn--brand-e btn--always-full">
-          <span class="btn__text">See what you can give</span>
+          <span class="btn__text">See how to support us</span>
         </a>
       </article>
       <article class="card card--cta card--grid-1-of-3">
@@ -68,11 +68,49 @@ page: givehelp
       </article>
       <article class="card card--cta card--grid-1-of-3">
         <h2 class="h2 card__title card__title--street-support">Help Street Support</h2>
-        <p>Can you offer your time on a regular basis and join our small and friendly team of volunteers?</p>
-        <a href="/give-help/volunteer" class="btn btn--brand-e btn--always-full">
-          <span class="btn__text">Help us</span>
+        <p>We are a small independent team and rely on funding from businesses and individuals to keep running.</p>
+        <a href="https://www.justgiving.com/streetsupportnetwork" class="btn btn--brand-e btn--always-full">
+          <span class="btn__text">Donate to Street Support</span>
         </a>
       </article>
     </div>
   </div>
 </div>
+
+<!-- ko if: hasCampaigns -->
+<div class="block"> 
+  <div class="container">
+    <h1 class="h1">Local Campaigns</h1>
+    <p>Campaigns currently running in <span data-bind="text: locationName"></span>:</p>
+  </div>
+</div>
+
+  <!-- ko if: abenIsEnabled -->
+  {{> locations/gm-banner }}
+  <!-- /ko -->
+
+  <!-- ko if: bigChangeIsEnabled -->
+  {{> locations/banners/big-change-mcr }}
+  <!-- /ko -->
+
+  <!-- ko if: realChangeIsEnabled -->
+  <!-- ko if: isWiganRealChangeTemplate -->
+  {{> locations/banners/wigan-and-leigh-real-change }}
+  <!-- /ko -->
+  <!-- ko if: isBournemouthTemplate -->
+  {{> bournemouth/bcp-change-for-good }}
+  <!-- /ko -->
+  <!-- ko if: isDefaultTemplate -->
+  <div class="block" style="background: #FBBF09">
+    <div class="container">
+      <h1><span data-bind="text: realChangeTitle"></span> in <span data-bind="text: locationName"></span></h1>
+      <p><span data-bind="text: realChangeTitle"></span> pays for practical items individuals need to build independent lives away from the streets. If everyone who lives, works or visits <span data-bind="text: locationName"></span> donates, together we can make a Big Change!</p>
+      <a class="btn btn--big-change" data-bind="attr: { href: realChangeUrl }">
+        <span class="btn__text">Check out <span data-bind="text: realChangeTitle"></span></span>
+      </a>
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- /ko -->
+
+<!-- /ko -->

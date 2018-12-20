@@ -1,7 +1,7 @@
 ---
 title: Street Support Bournemouth, Christchurch & Poole - Working together to end homelessness in Bournemouth, Christchurch & Poole
 description: Street Support - Find help, and give help, to support people who are homeless in Bournemouth, Christchurch & Poole
-image: https://streetsupport.net/assets/img/og/street-support-bournemouth.png
+image: https://streetsupport.net/assets/img/og/street-support-bournemouth.jpg
 layout: withGoogle.hbs
 permalink: false
 jsBundle: location-home-page
@@ -40,18 +40,7 @@ location: bournemouth
   <div class="container">
     <div class="home__copy home__copy--padding">
       <h1 class="h2">You're in Bournemouth, Christchurch & Poole</h1>
-      <form class="form form--highlighted js-find-help-form">
-        <fieldset class="form__fieldset form__fieldset--inline-fill">
-          <legend class="form__fieldset-title">Find organisations near you:</legend>
-          <div class="form__fieldset-inline-fill-container">
-            <label class="hide-screen" for="postcode">Your Postcode</label>
-            <input name="postcode" class="form__input form__input--inline-fill js-find-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
-            <button class="btn btn--brand-e btn--inline-fill" type="submit">
-              <span class="btn__text">Find help</span>
-            </button>
-          </div>
-        </fieldset>
-      </form>
+      {{> locations/find-help }}
       {{> locations/selector-hogan }}
     </div>
     <div class="home__copy">
@@ -62,24 +51,7 @@ location: bournemouth
 
 <div id="js-statistics-output"></div>
 
-<div class="block block--bcp-changeforgood">
-  <div class="container">
-    <div class="block__bcp-changeforgood">
-      <img src="/assets/img/bcp-banner.png" width="100%" alt="bournemouth, christchurch and poole landmarks" />
-    </div>
-    <div class="home__copy home__copy--bcp-changeforgood">
-      <h1>Change For Good Bournemouth, Christchurch &amp; Poole</h1>
-      <p>'Change For Good' is a central fund that supports individuals who are homeless to move away from the streets of Bournemouth, Christchurch &amp; Poole.</p>
-      <p><a href="/find-help/all-service-providers/">Local charities and organisations</a> work directly with individuals who are homeless, and apply for funds to pay for items they need.</p>
-      <p>Your donations will help pay for things like the deposit to rent a home, a training course, or clothes for a job interview - practical things that could lead to change for good.</p>
-      <p>The fund is managed by <a href="https://www.dorsetcommunityfoundation.org/">Dorset Community Foundation</a>, (Reg. Charity Number: 1122113).</p>
-      
-      <a class="btn btn--brand-e" href="https://www.justgiving.com/campaign/changeforgoodBournemouth">
-        <span class="btn__text">Donate Now</span>
-      </a>
-    </div>
-  </div>
-</div>
+{{> bournemouth/bcp-change-for-good }}
 
 <div class="block block--minor-highlight">
   <div class="container container--central-cta">

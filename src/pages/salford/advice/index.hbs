@@ -1,10 +1,10 @@
 ---
 title: Emergency Homeless Help in Salford - Street Support
-description: Street support makes it easier to help people facing homelessness in Salford. Here's how to get help in an emergency.
-image: https://streetsupport.net/assets/img/og/street-support-salford.png
+description: Street support makes it easier to help people facing homelessness. Here's how to get help in an emergency.
+image: https://streetsupport.net/assets/img/og/street-support-salford.jpg
 layout: default.hbs
 permalink: false
-jsBundle: emergencyhelp
+jsBundle: adviceV2
 section: salford
 page: salford-advice
 location: salford
@@ -20,50 +20,17 @@ location: salford
   </div>
 </div>
 
-{{> find-help/advice-header theLocationId="salford" }}
+{{> find-help/advice-header theLocationId="salford" sub-heading="Find useful advice related to homelessness in your
+area" }}
 
 <div class="block">
   <div class="container">
     <div class="block__content">
-      <a name="council-info"></a>
-      <h2 class="h2">Support from Salford Council</h2>
-      <p>To tell Salford council you are homeless:</p>
-      <ul>
-        <li>Visit Salford council town hall</li>
-        <li>Call <a href="tel:08453454345">0845 345 4345</a> (Mon/Tue/Thu/Fri 8.30am-4.30pm, Wed 1-4.30pm)</li>
-        <li>Outside those hours in an emergency call <a href="tel:01617948888">0161 794 8888</a></li>
-        <li>Email <a href="mailto:housing.advicecentre@salford.gov.uk">housing.advicecentre@salford.gov.uk</a></li>
-      </ul>
-
-      <p>To tell Salford homes about someone who is sleeping rough:</p>
-      <ul>
-        <li>Email <a href="mailto:supportten@salford.gov.uk">supportten@salford.gov.uk</a></li>
-      </ul>
-
-      <a name="support-services"></a>
-      <h2 class="h2">Support services</h2>
-      <p>If you would like support through the process, or if you don't qualify as legally homeless, it is best to go to one of the local <a href="/find-help/dropin/timetable/">drop in centres</a> who can advise you on what options are available for you.</p>
-
-      <a name="swep"></a>
-      <h2 class="h2">Emergency Accomodation in Winter</h2>
-      <p>During periods of severe cold weather, when forecast to fall to zero degrees or below, additional emergency accommodation is provided by the council. This is often called 'SWEP' - severe weather emergency provision.</p>
-      <p>Please contact: <a href="https://goo.gl/maps/yiQ7umWhM742">Salford Housing Options, 7 Wesley Street, Swinton. M27 6AD</a></p>
-      <ul>
-        <li>Opening hours: Mon, Tues, Thurs, Fri: 08:30am – 4:30pm</li>
-        <li>Wed: 1pm – 4:30pm</li>
-        <li>Tel: <a href="tel:01616071620">0161 607 1620</a></li>
-        <li>Out of hours: <a href="tel:01617948888">0161 794 8888</a></li>
-      </ul>
-
-      <p>There are outreach workers covering different areas in the city to connect with people who are rough sleeping and helping them to get inside if possible. Each individual is assessed so that appropriate accommodation can be found based on their needs.</p>
-
-      <p>There could be cases where accommodation providers may feel that they are not able to accommodate someone for example through violent behaviour, but the underlying principles of SWEP mean that every effort is made to find somewhere suitable.</p>
-
-      <a href="https://news.streetsupport.net/tag/swep/" class="btn btn--brand-e">
-        <span class="btn__text">Read more about SWEP</span>
-      </a>
-
-      {{> social-share}}
+      <div id="js-faqs-output"></div>
     </div>
   </div>
 </div>
+
+<script id="js-faqs-tpl" type="text/template">
+  {{> faqs/listing }}
+</script>

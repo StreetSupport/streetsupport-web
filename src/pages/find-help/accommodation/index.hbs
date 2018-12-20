@@ -1,7 +1,7 @@
 ---
 title: Accommodation - Street Support
 description: Accommodation options for those facing homelessness.
-image: https://streetsupport.net/assets/img/og/street-support.png
+image: https://streetsupport.net/assets/img/og/street-support.jpg
 layout: default.hbs
 permalink: false
 jsBundle: generic
@@ -33,7 +33,9 @@ page: find-help-accom
       <div class="block__cta block__cta--3 accommodation-splash">
         {{>cta brand="e" link="/find-help/accommodation/advice/" icon="accom-advice" name="Read our <span class=\"line-break\"></span> advice guide"}}
         {{>cta brand="e" link="/find-help/support/?sub-category=housing" icon="accom-find" name="Find <span class=\"line-break\"></span> support services"}}
-        {{>cta brand="e" link="/find-help/accommodation/listing/" icon="accom-listing" name="Browse <span class=\"line-break\"></span> all accommodation"}}
+        <span class="cta cta--last-of-3">
+          {{>cta brand="e"noWrapper="true" link="/find-help/accommodation/listing/" icon="accom-listing" name="Browse <span class=\"line-break\"></span> all accommodation"}}
+        </span>
       </div>
     </div>
 

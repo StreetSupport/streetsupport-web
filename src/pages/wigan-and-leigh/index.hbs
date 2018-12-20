@@ -1,7 +1,7 @@
 ---
 title: Street Support Wigan and Leigh - Working together to end homelessness in Wigan and Leigh
 description: Street Support - Find help, and give help, to support people who are homeless in Wigan and Leigh
-image: https://streetsupport.net/assets/img/og/street-support-wigan-and-leigh.png
+image: https://streetsupport.net/assets/img/og/street-support-wigan-and-leigh.jpg
 layout: withGoogle.hbs
 permalink: false
 jsBundle: location-home-page
@@ -34,24 +34,13 @@ location: wigan-and-leigh
   </div>
 </div>
 
-<div id="js-swep-output"></div>
+{{> locations/gm-banner }}<div id="js-swep-output"></div>
 
 <div class="block">
   <div class="container">
     <div class="home__copy home__copy--padding">
       <h1 class="h2">You're in Wigan and Leigh</h1>
-      <form class="form form--highlighted js-find-help-form">
-        <fieldset class="form__fieldset form__fieldset--inline-fill">
-          <legend class="form__fieldset-title">Find organisations near you:</legend>
-          <div class="form__fieldset-inline-fill-container">
-            <label class="hide-screen" for="postcode">Your Postcode</label>
-            <input name="postcode" class="form__input form__input--inline-fill js-find-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
-            <button class="btn btn--brand-e btn--inline-fill" type="submit">
-              <span class="btn__text">Find help</span>
-            </button>
-          </div>
-        </fieldset>
-      </form>
+      {{> locations/find-help }}
       {{> locations/selector-hogan }}
     </div>
     <div class="home__copy">
@@ -62,19 +51,7 @@ location: wigan-and-leigh
 
 <div id="js-statistics-output"></div>
 
-<div class="block block--real-change-wal">
-  <div class="container">
-    <img class="real-change-wal__logo" src="/assets/img/real-change-w-and-l/logo.png" alt="Real Change Wigan and Leigh logo" width="88" height="127" />
-    <h1 class="real-change-wal__heading">Help to make a Real Change in Wigan and Leigh</h1>
-    <section class="real-change-wal__copy">
-      <p>Real Change pays for practical items individuals need to build independent lives away from the streets.</p>
-      <p>If everyone who lives, works or visits Wigan & Leigh donates, together we can make a Real Change to homelessness!</p>
-      <a href="https://realchangewiganandleigh.co.uk" class="btn btn--brand-e">
-        <span class="btn__text">Click here to donate</span>
-      </a>
-    </section>
-  </div>
-</div>
+{{> locations/banners/wigan-and-leigh-real-change }}
 
 <div class="block block--minor-highlight">
   <div class="container container--central-cta">

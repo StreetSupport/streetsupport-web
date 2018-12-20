@@ -1,10 +1,10 @@
 ---
 title: Emergency Homeless Help in Trafford - Street Support
-description: Street support makes it easier to help people facing homelessness in Trafford. Here's how to get help in an emergency.
-image: https://streetsupport.net/assets/img/og/street-support-trafford.png
+description: Street support makes it easier to help people facing homelessness. Here's how to get help in an emergency.
+image: https://streetsupport.net/assets/img/og/street-support-trafford.jpg
 layout: default.hbs
 permalink: false
-jsBundle: emergencyhelp
+jsBundle: adviceV2
 section: trafford
 page: trafford-advice
 location: trafford
@@ -20,49 +20,17 @@ location: trafford
   </div>
 </div>
 
-{{> find-help/advice-header theLocationId="trafford" }}
+{{> find-help/advice-header theLocationId="trafford" sub-heading="Find useful advice related to homelessness in your
+area" }}
 
 <div class="block">
   <div class="container">
     <div class="block__content">
-      <h2 class="h2">Support from Trafford Council</h2>
-      <p>To inform Housing Options Service Trafford (HOST) you are homeless:</p>
-      <ul>
-        <li>Visit Sale Waterside, Sale, Manchester, M33 7ZF</li>
-        <li>Call <a href="tel:01619122230">0161 912 2230</a> Monday to Friday 9am – 5pm (except Wednesday 1pm-5pm)</li>
-        <li>Email <a href="mailto:host@salixhomes.org">host@salixhomes.org</a></li>
-      </ul>
-      <p>Outside the above hours in an emergency call <a href="tel:08002182000">0800 218 2000</a></p>
-      <p>To inform Housing Options Service Trafford (HOST) about someone who is sleeping rough:</p>
-      <ul>
-        <li>Call 0161 912 2230 Monday to Friday 9am – 5pm (except Wednesday 1pm-5pm)</li>
-        <li>Email either: 
-          <ul>
-            <li><a href="mailto:host@salixhomes.org">host@salixhomes.org</a></li>
-            <li>or our Tenancy Support Team: <a href="mailto:host.floating.support@salixhomes.org">host.floating.support@salixhomes.org</a></li>
-          </ul>
-        </li>
-        <li>Alternatively call Street Link on <a href="tel:03005000914">0300 500 0914</a> or visit <a href="https://www.streetlink.org.uk">www.streetlink.org.uk</a></li>
-      </ul>
-      <p>Please call 999 if someone is unwell or distressed. Don't put yourself in danger or approach someone acting strangely, even to help.</p>      
-
-      <a name="support-services"></a>
-      <h2 class="h2">Support services</h2>
-      <p>If you would like support through the process, or if you don't qualify as legally homeless, it is best to go to one of the local <a href="/find-help/dropin/timetable/">drop in centres</a> who can advise you on what options are available for you.</p>
-
-      <a name="swep"></a>
-      <h2 class="h2">Emergency Accomodation in Winter</h2>
-      <p>During periods of severe cold weather, when forecast to fall to zero degrees or below, additional emergency accommodation is provided by the council. This is often called 'SWEP' - severe weather emergency provision.</p>
-      <p>There are outreach workers covering different areas in the city to connect with people who are rough sleeping and helping them to get inside if possible. Each individual is assessed so that appropriate accommodation can be found based on their needs.</p>
-      <p>There could be cases where accommodation providers may feel that they are not able to accommodate someone for example through violent behaviour, but the underlying principles of SWEP mean that every effort is made to find somewhere suitable.</p>
-      
-      <a href="https://news.streetsupport.net/tag/swep/" class="btn btn--brand-e">
-        <span class="btn__text">Read news about SWEP</span>
-      </a>
-  
-      {{> social-share}}
+      <div id="js-faqs-output"></div>
     </div>
   </div>
 </div>
 
-
+<script id="js-faqs-tpl" type="text/template">
+  {{> faqs/listing }}
+</script>

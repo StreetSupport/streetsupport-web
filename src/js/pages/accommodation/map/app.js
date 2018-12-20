@@ -1,5 +1,7 @@
 import '../../../common'
 
+window.initMap = () => { }
+
 const ko = require('knockout')
 const Listing = require('../../../models/accommodation/listing')
 const Map = require('../../../models/accommodation/map')

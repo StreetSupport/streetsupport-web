@@ -20,6 +20,12 @@
     &:last-of-type {
       @include last();
     }
+
+    
+
+    &--last-of-3 {
+      margin-left: 0!important;
+    }
   }
 
   // Because a split element is a 4 column item, resize them here

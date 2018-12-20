@@ -7,14 +7,20 @@ const clean = (input) => {
     .toUpperCase()
 }
 
-export const getByCoords = ({latitude, longitude}, success, failure) => {
+const isOutcode = (postcode) => {
+  return postcode && postcode.replace(/\s/g, '').length < 5
+}
+
+const postcodesDomain = 'https://api.postcodes.io/'
+
+export const getByCoords = ({ latitude, longitude }, success, failure) => {
   const key = `${latitude},${longitude}`
   const cachedPostcode = storage.get(key)
   if (cachedPostcode) {
     success(cachedPostcode)
   } else {
     ajaxGet
-      .data(`https://api.postcodes.io/postcodes?lon=${longitude}&lat=${latitude}`)
+      .data(`${postcodesDomain}postcodes?lon=${longitude}&lat=${latitude}`)
       .then((postcodeResult) => {
         const postcode = postcodeResult.data.result[0].postcode
         storage.set(key, postcode)
@@ -33,15 +39,17 @@ export const getCoords = (postcode, success, failure) => {
   if (cachedPostcode) {
     success(cachedPostcode)
   } else {
+    const outcome = [
+      { isOutcode: true, resourceName: 'outcodes', map: (result) => { result.postcode = result.outcode; return result } },
+      { isOutcode: false, resourceName: 'postcodes', map: (result) => result }
+    ]
+      .find((oc) => oc.isOutcode === isOutcode(postcode))
+
     ajaxGet
-      .data(`https://api.postcodes.io/postcodes/${postcode}`)
+      .data(`${postcodesDomain}${outcome.resourceName}/${postcode}`)
       .then((postcodeResult) => {
         if (postcodeResult.status === 'ok') {
-          const result = {
-            postcode: postcodeResult.data.result.postcode,
-            longitude: postcodeResult.data.result.longitude,
-            latitude: postcodeResult.data.result.latitude
-          }
+          const result = outcome.map(postcodeResult.data.result)
           storage.set(clean(postcode), result)
           success(result)
         } else {

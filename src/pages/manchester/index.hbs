@@ -1,7 +1,7 @@
 ---
 title: Street Support Manchester - Working together to end homelessness in Manchester
 description: Street Support - Find help, and give help, to support people who are homeless in Manchester
-image: https://streetsupport.net/assets/img/og/street-support-manchester.png
+image: https://streetsupport.net/assets/img/og/street-support-manchester.jpg
 layout: withGoogle.hbs
 permalink: false
 jsBundle: location-home-page
@@ -34,24 +34,13 @@ location: manchester
   </div>
 </div>
 
-<div id="js-swep-output"></div>
+{{> locations/gm-banner }}<div id="js-swep-output"></div>
 
 <div class="block">
   <div class="container">
     <div class="home__copy home__copy--padding">
       <h1 class="h2">You're in Manchester</h1>
-      <form class="form form--highlighted js-find-help-form">
-        <fieldset class="form__fieldset form__fieldset--inline-fill">
-          <legend class="form__fieldset-title">Find organisations near you:</legend>
-          <div class="form__fieldset-inline-fill-container">
-            <label class="hide-screen" for="postcode">Your Postcode</label>
-            <input name="postcode" class="form__input form__input--inline-fill js-find-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
-            <button class="btn btn--brand-e btn--inline-fill" type="submit">
-              <span class="btn__text">Find help</span>
-            </button>
-          </div>
-        </fieldset>
-      </form>
+      {{> locations/find-help }}
       {{> locations/selector-hogan }}
     </div>
     <div class="home__copy">
@@ -62,23 +51,7 @@ location: manchester
 
 <div id="js-statistics-output"></div>
 
-<div class="block block--big-change-mcr">
-  <div class="container container--big-change-mcr">
-    <div class="home__copy home__copy--big-change-mcr-logo">
-      <img src="/assets/img/mcr-homelessness-partnership.png" alt="Big Change Manchester #BigChangeMcr" />
-      <span class="big-change-banner__heading-text">Manchester</span>
-      <span class="big-change-banner__heading-text big-change-banner__heading-text--minor">ending</span>
-      <span class="big-change-banner__heading-text">homelessness</span>
-    </div>
-    <div class="home__copy home__copy--padding home__copy--big-change-mcr-text">
-      <h1>Big Change in Manchester</h1>
-      <p>Big Change pays for practical items individuals need to build independent lives away from the streets. If everyone who lives, works or visits Manchester donates, together we can make a Big Change!</p>
-      <a class="btn btn--big-change" href="/manchester/bigchangemcr/">
-        <span class="btn__text">Check out Big Change</span>
-      </a>
-    </div>
-  </div>
-</div>
+{{> locations/banners/big-change-mcr }}
 
 <div class="block">
   <div class="container">

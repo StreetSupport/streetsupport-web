@@ -1,0 +1,25 @@
+<form class="form form--highlighted form--proximity-search" data-bind="with: proximitySearch">
+  <p>To find services near you, please enter your postcode.</p>
+  <fieldset class="form__fieldset">
+    <legend>Showing requests within:</legend>
+    <ol class="form__field-list">
+      <li class="form__field-item form__field-item--proximity-search-range">
+        <label class="form__label hide-screen" for="range">Range</label>
+        <select class="location-selector__select form__input form__input--inline form__input--short" data-bind="
+            options: ranges,
+            optionsText: 'name',
+            optionsValue: 'key',
+            value: range">
+        </select>
+      </li>
+      <li class="form__field-item form__field-item--proximity-search-of"><span>of</span></li>
+      <li class="form__field-item form__field-item--proximity-search-postcode">
+        <label class="form__label hide-screen" for="postcode">Your postcode</label>
+        <input class="form__input" id="postcode" type="text" placeholder="eg. M1" data-bind="textInput: postcode"></input>
+      </li>
+    </ol>
+    <button class="btn btn--cosy btn--always-full btn--brand-e" type="submit" data-bind="click: search">
+      <span class="btn__text">Search</span>
+    </button>
+  </fieldset>
+</form>

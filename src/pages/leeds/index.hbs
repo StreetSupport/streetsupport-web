@@ -1,7 +1,7 @@
 ---
 title: Street Support Leeds - Working together to end homelessness in Leeds
 description: Street Support - Find help, and give help, to support people who are homeless in Leeds
-image: https://streetsupport.net/assets/img/og/street-support-leeds.png
+image: https://streetsupport.net/assets/img/og/street-support-leeds.jpg
 layout: withGoogle.hbs
 permalink: false
 jsBundle: location-home-page
@@ -40,18 +40,7 @@ location: leeds
   <div class="container">
     <div class="home__copy home__copy--padding">
       <h1 class="h2">You're in Leeds</h1>
-      <form class="form form--highlighted js-find-help-form">
-        <fieldset class="form__fieldset form__fieldset--inline-fill">
-          <legend class="form__fieldset-title">Find organisations near you:</legend>
-          <div class="form__fieldset-inline-fill-container">
-            <label class="hide-screen" for="postcode">Your Postcode</label>
-            <input name="postcode" class="form__input form__input--inline-fill js-find-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
-            <button class="btn btn--brand-e btn--inline-fill" type="submit">
-              <span class="btn__text">Find help</span>
-            </button>
-          </div>
-        </fieldset>
-      </form>
+      {{> locations/find-help }}
       {{> locations/selector-hogan }}
     </div>
     <div class="home__copy">
@@ -61,6 +50,16 @@ location: leeds
 </div>
 
 <div id="js-statistics-output"></div>
+
+<div class="block" style="background: #FBBF09">
+    <div class="container">
+      <h1>Big Change Leeds</h1>
+      <p>Big Change pays for practical items individuals need to build independent lives away from the streets. If everyone who lives, works or visits Leeds donates, together we can make a Big Change!</p>
+      <a class="btn btn--big-change" href="http://www.bigchangeleeds.co.uk/">
+        <span class="btn__text">Check out Big Change</span>
+      </a>
+    </div>
+  </div>
 
 <div class="block block--minor-highlight">
   <div class="container container--central-cta">

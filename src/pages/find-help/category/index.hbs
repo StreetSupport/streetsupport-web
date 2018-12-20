@@ -1,141 +1,120 @@
 ---
 title:
 description:
-image: https://streetsupport.net/assets/img/og/street-support.png
+image: https://streetsupport.net/assets/img/og/street-support.jpg
 layout: default.hbs
 permalink: false
-jsBundle: category
+jsBundle: find-help-by-category-v2
 section: findhelp
 page:
 ---
 
-{{> no-js}}
-
-<div id="js-category-result-output" class="template"></div>
-<div id="spin"></div>
-
-<script id="js-category-no-results-result-tpl" type="text/template">
-{{> find-help/breadcrumb }}
+{{> find-help/breadcrumb_injected categoryName="theServiceCategoryName" }}
 
 <div class="block">
   <div class="container">
     <div class="block__content">
-      {{> find-help/header }}
-      {{> proximity-search/hogan }}
+      <header class="multi-form-header">
+        <h1 class="h1">theServiceCategoryName</h1>
+        theServiceCategorySynopsis
+        <p>To find services near you, please enter your postcode.</p>
+        <button class="btn btn--brand-d js-print-btn">
+          <span class="btn__text">Print this page</span>
+        </button>
+      </header>
+      {{> proximity-search/ko }}
     </div>
   </div>
 </div>
 
-{{> find-help/view-type-tabs listingIsSelected="true" }}
+{{> find-help/view-type-tabs_injected listingIsSelected="true" categoryId="theServiceCategoryId" }}
 
 <div class="block block--cards">
   <div class="container">
     <div class="block__content">
-      {{> no-services }}
-      {{> social-share }}
-    </div>
-  </div>
-</div>
-</script>
 
-<script id="js-category-result-tpl" type="text/template">
-{{> find-help/breadcrumb }}
-
-<div class="block">
-  <div class="container">
-    <div class="block__content">
-      {{> find-help/header }}
-      {{> proximity-search/hogan }}
-    </div>
-  </div>
-</div>
-
-{{> find-help/view-type-tabs listingIsSelected="true" }}
-
-<div class="block block--cards">
-  <div class="container">
-    <div class="block__content">
-      \{{#shouldShowFilter}}
+      <!-- ko if: shouldShowSubCatFilter -->
       <div class="subcat-filter form--highlighted">
         <p class="subcat-filter__label">Filter by service provided:</p>
-        <ul class="list-to-dropdown subcat-filter__items">
-          <li class="subcat-filter__item js-filter-item on" data-id="">All</li>
-          \{{#subCategories}}
-          <li class="subcat-filter__item js-filter-item" data-id="\{{id}}">\{{name}}</li>
-          \{{/subCategories}}
+        <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: subCatFilters">
+          <li class="subcat-filter__item js-filter-item" data-bind="text: name, click: filter, css: { 'on': isSelected }"></li>
         </ul>
       </div>
-      \{{/shouldShowFilter}}
+      <!-- /ko -->
 
-      <div class="cards__list cards__list--single-col">
-        \{{#organisations}}
-        <div class="card card--brand-h card--big js-header" data-subcats="\{{#subCategories}} \{{id}} \{{/subCategories}}">
-          <div class="card__title">
-            <a data-bind="attr: { href: href } ">
-              <h1 class="h2">\{{{providerName}}}</h1>
+      <!-- ko ifnot: proximitySearch.postcode -->
+      <!-- ko ifnot: hasItems -->
+      <p>Please enter a postcode to begin your search. You can use a full postcode eg: 'M1 2HX', or a partial postcode eg: 'M1'.</p>
+      <!-- /ko -->
+      <!-- /ko -->
+      <!-- ko if: proximitySearch.postcode -->
+      <!-- ko ifnot: hasItems -->
+      <p>There are currently no services matching your search. If you know of one, please <a href="info@streetsupport.net">contact us</a>.</p>
+      <!-- /ko -->
+      <!-- /ko -->
+
+      <div class="cards__list cards__list--single-col" data-bind="foreach: items">
+        <article class="card card--brand-h card--big js-header">
+          <header class="card__title">
+            <a data-bind="attr: { href: providerPageUrl } ">
+              <h1 class="h2" data-bind="text: providerName"></h1>
             </a>
-          </div>
-          <div class="card__details">
-            \{{#services}}
-            <div class="card__details-entry js-item" data-subcats="\{{subCategoryIds}}">
-              \{{#info}}\{{{info}}}\{{/info}}
-              <dl class="card__details-dictionary">
-                <dt class="card__details-dictionary-title">Services available:</dt>
-                <dd class="card__details-dictionary-desc">\{{servicesAvailable}}</dd>
+          </header>
 
-                \{{#isTelephoneService}}
-                <dd class="card__details-dictionary-desc">This is a telephone service.</dd>
-                \{{/isTelephoneService}}
-
-                \{{#isAppointmentOnly}}
-                <dd class="card__details-dictionary-desc">Access to this service is by appointment only.</dd>
-                \{{/isAppointmentOnly}}
-                \{{#tags}}
+          <section class="card__details">
+            <div data-bind="foreach: services">
+              <div class="card__details-entry js-item">
+                <div data-bind="html: info"></div>
+                <dl class="card__details-dictionary">
+                  <dt class="card__details-dictionary-title">Services available:</dt>
+                  <dd class="card__details-dictionary-desc" data-bind="text: servicesAvailable"></dd>
+                  <!-- ko if: isTelephoneService -->
+                  <dd class="card__details-dictionary-desc">This is a telephone service.</dd>
+                  <!-- /ko -->
+                  <!-- ko if: isAppointmentOnly -->
+                  <dd class="card__details-dictionary-desc">Access to this service is by appointment only.</dd>
+                  <!-- /ko -->
                   <dt class="card__details-dictionary-title">Suitable for:</dt>
-                  <dd class="card__details-dictionary-desc">\{{tags}}</dd>
-                \{{/tags}}
-                \{{#location}}
-                <dt class="card__details-dictionary-title">Address:</dt>
-                <dd class="card__details-dictionary-desc">
-                    \{{#locationDescription}}<p>\{{locationDescription}}</p>\{{/locationDescription}}
-                    \{{#streetLine1}} \{{{streetLine1}}}, \{{/streetLine1}} 
-                    \{{#streetLine2}} \{{{streetLine2}}, \{{/streetLine2}} 
-                    \{{#streetLine3}} \{{{streetLine3}}, \{{/streetLine3}}
-                    \{{#streetLine4}} \{{{streetLine4}}, \{{/streetLine4}}
-                    \{{#city}} \{{city}}. \{{/city}}
-                    \{{#postcode}} \{{postcode}}  - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">View on Map</a>\{{/postcode}}
-                </dd>
-                \{{/location}}
-                <dt class="card__details-dictionary-title">Opening times:</dt>
+                  <dd class="card__details-dictionary-desc" data-bind="text: $parent.tags"></dd>
+                  <dt class="card__details-dictionary-title">Address:</dt>
+                  <dd class="card__details-dictionary-desc">
+                    <!-- ko if: hasLocationDescription -->
+                    <p data-bind="text: locationDescription"></p>
+                    <!-- /ko -->
+                    <span data-bind="text: fullAddress"></span> - <a data-bind="attr: { href: viewMapsUrl }">View on
+                      Map</a>
+                  </dd>
 
-                <dd class="card__details-dictionary-desc">
-                  \{{#isOpen247}}
-                  Open 24 hours a day, 7 days a week
-                  \{{/isOpen247}}
-                  \{{^isOpen247}}
-                  <dl class="result-detail__times-list">
-                    \{{#days}}
-                    <dt class="result-detail__times-title">\{{day}}</dt>
-                    \{{#openingTimes}}
-                    <dd class="result-detail__times-item">\{{ . }}</dd>
-                    \{{/openingTimes}}
-                    \{{/days}}
-                  </dl>
-                  \{{/isOpen247}}
-                </dd>
-                \{{#telephone}}
-                <dt class="card__details-dictionary-title">Telephone:</dt>
-                <dd class="card__details-dictionary-desc">\{{telephone}}</dd>
-                \{{/telephone}}
-              </dl>
+                  <dt class="card__details-dictionary-title">Opening times:</dt>
+                  <dd class="card__details-dictionary-desc">
+                    <!-- ko if: isOpen247 -->
+                    Open 24 hours a day, 7 days a week
+                    <!-- /ko -->
+                    <!-- ko ifnot: isOpen247 -->
+                    <dl class="result-detail__times-list" data-bind="foreach: days">
+                      <dt class="result-detail__times-title" data-bind="text: day"></dt>
+                      <span data-bind="foreach: openingTimes">
+                        <dd class="result-detail__times-item" data-bind="text: $rawData"></dd>
+                      </span>
+                    </dl>
+                    <!-- /ko -->
+                  </dd>
+                  <!-- ko if: hasTelephone -->
+                  <dt class="card__details-dictionary-title">Telephone:</dt>
+                  <dd class="card__details-dictionary-desc" data-bind="text: telephone"></dd>
+                  <!-- /ko -->
+                </dl>
+              </div>
             </div>
-            \{{/services}}
-            <a class="card__details__link" href="/find-help/organisation/?organisation=\{{providerId}}">More Information</a>
-          </div>
-        </div>
-        \{{/organisations}}
+            <a class="card__details__link" data-bind="attr: { href: providerPageUrl }">More Information</a>
+          </section>
+
+        </article>
       </div>
+
     </div>
+    {{> social-share }}
   </div>
 </div>
-</script>
+
+<div id="spin"></div>

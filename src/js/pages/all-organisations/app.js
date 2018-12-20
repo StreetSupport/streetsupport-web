@@ -5,4 +5,4 @@ import '../../common'
 var ko = require('knockout')
 var Model = require('../../models/all-organisations/listing')
 
-ko.applyBindings(new Model(null, 6))
+ko.applyBindings(new Model(null, 1000))

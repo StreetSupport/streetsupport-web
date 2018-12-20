@@ -11,11 +11,7 @@ const myLocationId = 'my-location'
 
 const _useMyLocation = (deferred) => {
   const defaultResolution = () => {
-    let cityId = myLocationId
-    const saved = cookies.get(cookies.keys.location)
-    if (saved !== undefined && saved.length > 0) {
-      cityId = supportedCities.get(saved).id
-    }
+    let cityId = getSelectedLocationId(myLocationId)
     deferred.resolve({
       id: cityId,
       findHelpId: myLocationId,
@@ -28,11 +24,7 @@ const _useMyLocation = (deferred) => {
   }
   deviceGeo.location()
     .then((userLocation) => {
-      let cityId = 'my-location'
-      const saved = cookies.get(cookies.keys.location)
-      if (cookies.get(cookies.keys.location) !== undefined && saved.length > 0) {
-        cityId = supportedCities.get(saved).id
-      }
+      let cityId = getSelectedLocationId('my-location')
       postcodes.getByCoords(userLocation.coords, (postcode) => {
         storage.set(storage.keys.userLocationState, {
           'postcode': postcode,
@@ -72,12 +64,13 @@ const _determineLocationRetrievalMethod = () => {
   }
 }
 
-const getSelectedLocationId = () => {
-  const saved = cookies.get(cookies.keys.location)
-  if (saved !== undefined && saved.length > 0) {
+const getSelectedLocationId = (defaultValue = 'elsewhere') => {
+  try {
+    const saved = cookies.get(cookies.keys.location)
     return supportedCities.get(saved).id
+  } catch (err) {
+    return defaultValue
   }
-  return 'elsewhere'
 }
 
 const getCurrentHub = () => {
@@ -116,7 +109,7 @@ const getPreviouslySetPostcode = () => {
   return deferred.promise
 }
 
-const setPostcode = (postcode, onSuccessCallback, onErrorCallback) => {
+const setPostcode = (postcode, onSuccessCallback = () => {}, onErrorCallback = () => {}) => {
   postcodes.getCoords(postcode, (coordsResult) => {
     storage.set(storage.keys.userLocationState, coordsResult)
     onSuccessCallback(buildLocationResult(coordsResult))

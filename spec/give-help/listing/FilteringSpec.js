@@ -4,9 +4,10 @@ import sinon from 'sinon'
 
 const api = require('../../../src/js/get-api-data')
 const browser = require('../../../src/js/browser')
-const locationSelector = require('../../../src/js/location/locationSelector')
 const Model = require('../../../src/js/models/give-help/requests/listing')
 const needsData = require('./needsData')
+const querystring = require('../../../src/js/get-url-parameter')
+const storage = require('../../../src/js/storage')
 
 describe('Needs Listing - filtering', () => {
   let ajaxGetStub,
@@ -29,6 +30,7 @@ describe('Needs Listing - filtering', () => {
       })
     sinon.stub(browser, 'loading')
     sinon.stub(browser, 'loaded')
+    sinon.stub(browser, 'setOnHistoryPop')
     sinon.stub(browser, 'location')
       .returns({
         hash: '',
@@ -36,12 +38,9 @@ describe('Needs Listing - filtering', () => {
       })
     browserHistoryStub = sinon.stub(browser, 'pushHistory')
 
-    sinon.stub(locationSelector, 'getPreviouslySetPostcode')
-      .returns({
-        then: function (success) {
-          success(previouslySetLocation)
-        }
-      })
+    sinon.stub(querystring, 'parameter')
+    sinon.stub(storage, 'get').returns(previouslySetLocation)
+    sinon.stub(storage, 'set')
 
     sut = new Model()
   })
@@ -50,9 +49,12 @@ describe('Needs Listing - filtering', () => {
     api.data.restore()
     browser.loading.restore()
     browser.loaded.restore()
-    browser.location.restore()
     browser.pushHistory.restore()
-    locationSelector.getPreviouslySetPostcode.restore()
+    browser.setOnHistoryPop.restore()
+    browser.location.restore()
+    querystring.parameter.restore()
+    storage.get.restore()
+    storage.set.restore()
   })
 
   describe('- for items', () => {
@@ -72,7 +74,7 @@ describe('Needs Listing - filtering', () => {
     })
 
     it('- should push history', () => {
-      expect(browserHistoryStub.getCall(0).args[2]).toEqual('/give-help/help/#Items')
+      expect(browserHistoryStub.getCall(1).args[2]).toEqual('?postcode=postcode&type=Items')
     })
   })
 
@@ -85,7 +87,7 @@ describe('Needs Listing - filtering', () => {
       expect(sut.needsToDisplay().filter((n) => n.type() !== 'time').length).toEqual(0)
     })
 
-    it('- should set active filter to items', () => {
+    it('- should set active filter to time', () => {
       const inActiveFilters = sut.filters()
         .filter((n) => n.isActive() === false)
         .map((f) => f.label)

@@ -3,6 +3,7 @@ import fs from 'fs'
 import gulp from 'gulp'
 import request from 'request'
 import runSequence from 'run-sequence'
+import marked from 'marked'
 
 import config from '../foley.json'
 import endpoints from '../src/js/api'
@@ -28,7 +29,8 @@ gulp.task('getServiceCategories', (callback) => {
       .map((c) => {
         return {
           key: c.key,
-          name: c.name
+          name: c.name,
+          synopsis: c.synopsis
         }
       })
     callback()
@@ -43,26 +45,38 @@ gulp.task('getCities', (callback) => {
 })
 
 const getNewContent = function (src, cat) {
-  const result = src
+  let result = src
     .replace('page:', `page: find-help-${cat.key}`)
     .replace('title:', `title: ${cat.name} Services - Street Support`)
     .replace('description:', `description: A comprehensive listing of ${cat.name} Services available near your location`)
+    .replace('theServiceCategoryId', cat.key)
+    
+    result = result.split('theServiceCategoryName').join(cat.name)
+    result = result.split('theServiceCategorySynopsis').join(marked(cat.synopsis))
   return result
 }
 
 const getNewTimeTabledContent = function (src, cat) {
-  const result = src
+  let result = src
     .replace('page:', `page: find-help-${cat.key}`)
     .replace('title:', `title: ${cat.name} Services Timetable - Street Support`)
     .replace('description:', `description: Timetable of ${cat.name} Services available near your location`)
+    .replace('theServiceCategoryId', cat.key)
+    
+    result = result.split('theServiceCategoryName').join(cat.name)
+    result = result.split('theServiceCategorySynopsis').join(marked(cat.synopsis))
   return result
 }
 
 const getNewLocationContent = function (src, cat) {
-  const result = src
+  let result = src
     .replace('page:', `page: find-help-${cat.key}`)
     .replace('title:', `title: ${cat.name} Services by Location - Street Support`)
     .replace('description:', `description: ${cat.name} Services by location available near you`)
+    .replace('theServiceCategoryId', cat.key)
+    
+  result = result.split('theServiceCategoryName').join(cat.name)
+  result = result.split('theServiceCategorySynopsis').join(marked(cat.synopsis))
   return result
 }
 

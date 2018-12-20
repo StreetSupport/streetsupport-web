@@ -1,68 +1,56 @@
 ---
 title:
 description:
-image: https://streetsupport.net/assets/img/og/street-support.png
+image: https://streetsupport.net/assets/img/og/street-support.jpg
 layout: withGoogle.hbs
 permalink: false
-jsBundle: categorybylocation
+jsBundle: find-help-by-location-v2
 section: findhelp
 page:
 ---
 
-{{> no-js}}
+{{> find-help/breadcrumb_injected categoryName="theServiceCategoryName" }}
 
-<div id="js-category-result-output" class="template"></div>
-
-<div id="spin"></div>
-
-<script id="js-category-no-results-result-tpl" type="text/template">
-  {{> find-help/breadcrumb }}
-
-  <div class="block">
-    <div class="container">
-      <div class="block__content">
-        {{> find-help/header }}
-        {{> proximity-search/hogan }}
-      </div>
-    </div>
-  </div>
-
-  {{> find-help/view-type-tabs mapIsSelected="true" }}
-
-  <div class="block block--cards">
-    <div class="container">
-      <div class="block__content">
-        {{> no-services geoLocationUnavailable="geoLocationUnavailable" }}
-      </div>
-    </div>
-  </div>
-</script>
-
-<script id="js-category-result-tpl" type="text/template">
-  {{> find-help/breadcrumb }}
-
-  <div class="block">
-    <div class="container">
-      <div class="block__content">
-        {{> find-help/header }}
-        {{> proximity-search/hogan }}
-      </div>
-    </div>
-  </div>
-
-  {{> find-help/view-type-tabs mapIsSelected="true" }}
-
-  <div class="block block--cards">
-    <div class="container">
-      <div class="block__content">
-        <div class="js-map services-map"></div>
-      </div>
-
-      <p class="text-center">Please note, the information here is provided and maintained by the organisations. If you see anything that is incorrect or incomplete, please <a href="/about/contact/">get in touch</a>.</p>
-
-      {{> social-share}}
-
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <header class="multi-form-header">
+        <h1 class="h1">theServiceCategoryName</h1>
+        theServiceCategorySynopsis
+        <p>To find services near you, please enter your postcode.</p>
+        <button class="btn btn--brand-d js-print-btn">
+          <span class="btn__text">Print this page</span>
+        </button>
+      </header>
+      {{> proximity-search/ko }}
     </div>
   </div>
 </div>
-</script>
+
+{{> find-help/view-type-tabs_injected mapIsSelected="true" categoryId="theServiceCategoryId" }}
+
+<div class="block block--cards">
+  <div class="container">
+    <div class="block__content">
+
+      <!-- ko ifnot: proximitySearch.postcode -->
+      <!-- ko ifnot: hasItems -->
+      <p>Please enter a postcode to begin your search. You can use a full postcode eg: 'M1 2HX', or a partial postcode eg: 'M1'.</p>
+      <!-- /ko -->
+      <!-- /ko -->
+      <!-- ko if: proximitySearch.postcode -->
+      <!-- ko ifnot: hasItems -->
+      <p>There are currently no services matching your search. If you know of one, please <a href="info@streetsupport.net">contact us</a>.</p>
+      <!-- /ko -->
+      <!-- /ko -->
+
+      <!-- ko if: hasItems -->
+      <div class="js-map services-map"></div>
+      <!-- /ko -->
+
+    </div>
+    {{> social-share }}
+  </div>
+</div>
+
+<div id="spin"></div>

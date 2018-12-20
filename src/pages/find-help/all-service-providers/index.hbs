@@ -1,7 +1,7 @@
 ---
 title: All Service Providers - Street Support
 description: Street support makes it easier to help people facing homelessness. Find help relevant to your needs.
-image: https://streetsupport.net/assets/img/og/street-support.png
+image: https://streetsupport.net/assets/img/og/street-support.jpg
 layout: default.hbs
 permalink: false
 jsBundle: all-organisations-v2
@@ -29,9 +29,19 @@ page: allorganisations
     <div class="block__content">
       <!-- ko if: hasOrgs -->
       <!-- ko ifnot: postcodeRetrievalIssue -->
+      <!-- ko if: hasClientGroupFilters -->
+      <div class="card-sort">
+        <span class="card-sort__title">Filter for:</span>
+        <div data-bind="foreach: clientGroupFilters">
+          <button class="btn btn--brand-p btn--togglable" data-bind="click: click, css: { 'is-selected': isSelected }">
+            <span class="btn__text" data-bind="text: name"></span>
+          </button>
+        </div>
+      </div>
+      <!-- /ko -->
       {{> all-organisations/sort }}
       <div data-bind="foreach: orgsToDisplay">
-          <article class="card card--brand-h card--grid-1-of-3">
+          <article class="card card--brand-h card--grid-1-of-3" data-bind="attr: { 'data-cg': clientGroupKeys }">
             <div class="card__title">
               <a data-bind="attr: { href: href } ">
                 <h1 class="h2" data-bind="text: name"></h1>
@@ -43,13 +53,6 @@ page: allorganisations
               <a class="card__details__link" data-bind="attr: { href: href } ">More Information</a>
             </div>
           </article>
-      </div>
-      <div class="card-pagination">
-      <!-- ko if: hasMorePages -->
-      <button class="btn btn--brand-e btn--full btn--centred" data-bind="click: loadMore">
-        <span class="btn__text">Load more</span>
-      </button>
-      <!-- /ko -->
       </div>
       <!-- /ko -->
       <!-- /ko -->

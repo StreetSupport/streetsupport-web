@@ -23,10 +23,16 @@ const MapBuilder = function () {
         marker.addListener('click', function () {
           document.querySelectorAll('.card__gmaps-container')
             .forEach((p) => p.parentNode.removeChild(p))
-          const position = new google.maps.LatLng(this.position.lat(), this.position.lng())
+
+          const location = self.getLocation(p)
+
+          const position = new google.maps.LatLng(location.latitude, location.longitude)
+
           popup = new gMaps.Popup(
-            position,
+            location.latitude,
+            location.longitude,
             self.buildInfoWindowMarkup(p))
+
           popup.setMap(self.map)
           self.map.setCenter(position)
           if (self.container) {

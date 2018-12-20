@@ -1,10 +1,10 @@
 ---
 title: Emergency Homeless Help in Bury - Street Support
-description: Street support makes it easier to help people facing homelessness in Bury. Here's how to get help in an emergency.
-image: https://streetsupport.net/assets/img/og/street-support-bury.png
+description: Street support makes it easier to help people facing homelessness. Here's how to get help in an emergency.
+image: https://streetsupport.net/assets/img/og/street-support-bury.jpg
 layout: default.hbs
 permalink: false
-jsBundle: emergencyhelp
+jsBundle: adviceV2
 section: bury
 page: bury-advice
 location: bury
@@ -20,41 +20,17 @@ location: bury
   </div>
 </div>
 
-{{> find-help/advice-header theLocationId="bury" }}
+{{> find-help/advice-header theLocationId="bury" sub-heading="Find useful advice related to homelessness in your
+area" }}
 
 <div class="block">
   <div class="container">
     <div class="block__content">
-      <h2 class="h2">Support from Bury Council</h2>
-      <p>To tell Bury council you are homeless:</p>
-      <ul>
-        <li>Mon-Fri 10am-1pm visit Bury council town hall</li>
-        <li>Mon-Fri 8.45am-5pm call 0161 253 5537</li>
-        <li>Outside those hours in an emergency call 0161 253 6606</li>
-        <li>Email <a href="mailto:HAT@bury.gov.uk">HAT@bury.gov.uk</a></li>
-      </ul>
-
-      <p>To tell Bury council about someone who is sleeping rough:</p>
-      <ul>
-        <li>Call 07813 459832 (24h service)</li>
-        <li>Email <a href="mailto:buryrs@calico.org.uk">buryrs@calico.org.uk</a></li>
-      </ul>
-
-      <a name="support-services"></a>
-      <h2 class="h2">Support services</h2>
-      <p>If you would like support through the process, or if you don't qualify as legally homeless, it is best to go to one of the local <a href="/find-help/dropin/timetable/">drop in centres</a> who can advise you on what options are available for you.</p>
-
-      <a name="swep"></a>
-      <h2 class="h2">Emergency Accomodation in Winter</h2>
-      <p>During periods of severe cold weather, when forecast to fall to zero degrees or below, additional emergency accommodation is provided by the council. This is often called 'SWEP' - severe weather emergency provision.</p>
-      <p>The usual guidelines over who the council has a duty to provide emergency accommodations for are lifted, and extra provision is made for rough sleepers, regardless of their status. To establish whether or not this is a severe cold weather period, people are advised to contact your council.</p>
-      <p>There could be cases where accommodation providers may feel that they are not able to accommodate someone for example through violent behaviour, but the underlying principles of SWEP mean that every effort is made to find somewhere suitable.</p>
-
-      <a href="https://news.streetsupport.net/tag/swep/" class="btn btn--brand-e">
-        <span class="btn__text">Read news about SWEP</span>
-      </a>
-
-      {{> social-share}}
+      <div id="js-faqs-output"></div>
     </div>
   </div>
 </div>
+
+<script id="js-faqs-tpl" type="text/template">
+  {{> faqs/listing }}
+</script>

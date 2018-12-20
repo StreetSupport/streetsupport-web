@@ -19,7 +19,6 @@ const buildMap = function (userLocation, customOptions = {}, domSelector = '.js-
 const buildMarker = function (location, map, customOptions) {
   const defaultOptions = {
     position: { lat: location.latitude, lng: location.longitude },
-    icon: '/assets/img/map-pin.png',
     map: map
   }
   return new google.maps.Marker(Object.assign(defaultOptions, customOptions))
@@ -48,9 +47,9 @@ const addCircleMarker = function (location, map) {
   })
 }
 
-const Popup = function (position, content) {
-  const Popup = function (position, content) {
-    this.position = position
+const Popup = function (lat, long, content) {
+  const Popup = function (lat, long, content) {
+    this.position = new google.maps.LatLng(lat, long)
 
     var newDiv = document.createElement('div')
     newDiv.innerHTML = content
@@ -115,7 +114,7 @@ const Popup = function (position, content) {
       })
   }
 
-  return new Popup(position, content)
+  return new Popup(lat, long, content)
 }
 
 module.exports = {

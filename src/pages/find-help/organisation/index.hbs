@@ -1,7 +1,7 @@
 ---
 title: Organisation - Street Support
 description: Street support makes it easier to help people facing homelessness.
-image: https://streetsupport.net/assets/img/og/street-support.png
+image: https://streetsupport.net/assets/img/og/street-support.jpg
 layout: default.hbs
 permalink: false
 jsBundle: organisation
@@ -11,11 +11,24 @@ page: organisation
 
 {{> no-js}}
 
-<div id="js-organisation-output" class="template"></div>
+<div id="js-breadcrumb-output"></div>
+<div id="js-header-output"></div>
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <div id="js-organisation-output" class="template"></div>
+      <div id="js-accommodation-output"></div>
+      <div id="js-contact-output"></div>
+
+    <p class="text-center">Please note, the information here is provided and maintained by this organisation. If you see anything that is incorrect or incomplete, please <a href="/about/contact/">get in touch</a>.</p>
+    {{> social-share}}
+    </div>
+  </div>
+</div>
 
 <div id="spin"></div>
 
-<script id="js-organisation-tpl" type="text/template">
+<script id="js-breadcrumb-tpl" type="text/template">
   <div class="block block--breadcrumbs">
     <div class="container">
       <ol class="breadcrumbs__list">
@@ -27,7 +40,9 @@ page: organisation
       </ol>
     </div>
   </div>
+</script>
 
+<script id="js-header-tpl" type="text/template">
   <div class="block block--header">
     <div class="container">
       \{{#organisation}}
@@ -40,197 +55,202 @@ page: organisation
       \{{/organisation}}
     </div>
   </div>
+</script>
 
-  <div class="block">
-    <div class="container">
-      <div class="block__content">
-        <div class="result-detail">
-          \{{#organisation}}
-           <h3 class="h3">\{{{shortDescription}}}</h3>
-           \{{{description}}}
-           <ul class="result-detail__provider-tag-list">
-           \{{#formattedTags}}
-            <li class="result-detail__provider-tag-item result-detail__provider-tag-item--\{{ id }}">\{{ name }}</li>
-           \{{/formattedTags}}
-           </ul>
+<script id="js-organisation-tpl" type="text/template">
+  <div class="result-detail">
+    \{{#organisation}}
+      <h3 class="h3">\{{{shortDescription}}}</h3>
+      \{{{description}}}
+      <ul class="result-detail__provider-tag-list">
+      \{{#formattedTags}}
+      <li class="result-detail__provider-tag-item result-detail__provider-tag-item--\{{ id }}">\{{ name }}</li>
+      \{{/formattedTags}}
+      </ul>
 
-           \{{#hasAddresses}}
-           <h2 class="h2">Locations</h2>
-           \{{#addresses}}
-              <ul class="result-detail__address-list h3">
-                <li class="result-detail__address-item">\{{#street}} \{{{street}}}, \{{/street}} \{{#street1}} \{{{street1}}}, \{{/street1}} \{{#street2}} \{{{street2}}}, \{{/street2}}
-                \{{#street3}} \{{{street3}}}, \{{/street3}}</li>
-                <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
-                <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a> \{{/postcode}}</li>
-              </ul>
-              \{{#isOpen247}}
-              <p>Open 24 hours a day, 7 days a week</p>
-              \{{/isOpen247}}
-              <dl class="result-detail__times-list">
-              \{{#telephone}}
-              <p class="result-detail__telephone">Telephone: \{{{telephone}}}</p>
-              \{{/telephone}}
-              \{{^isOpen247}}
-                \{{#openingDays}}
-                  <dt class="result-detail__times-title">\{{day}}</dt>
-                  <dd class="result-detail__times-items">
-                  \{{#openingTimes}}
-                    <span class="result-detail__times-item">\{{startTime}} - \{{endTime}}</span>
-                  \{{/openingTimes}}
-                  </dd>
-                \{{/openingDays}}
-                </dl>
-              \{{/isOpen247}}
+      \{{#hasAddresses}}
+      <h2 class="h2">Locations</h2>
+      \{{#addresses}}
+        <ul class="result-detail__address-list h3">
+          <li class="result-detail__address-item">\{{#street}} \{{{street}}}, \{{/street}} \{{#street1}} \{{{street1}}}, \{{/street1}} \{{#street2}} \{{{street2}}}, \{{/street2}}
+          \{{#street3}} \{{{street3}}}, \{{/street3}}</li>
+          <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
+          <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a> \{{/postcode}}</li>
+        </ul>
+        \{{#isOpen247}}
+        <p>Open 24 hours a day, 7 days a week</p>
+        \{{/isOpen247}}
+        <dl class="result-detail__times-list">
+        \{{#telephone}}
+        <p class="result-detail__telephone">Telephone: \{{{telephone}}}</p>
+        \{{/telephone}}
+        \{{^isOpen247}}
+          \{{#openingDays}}
+            <dt class="result-detail__times-title">\{{day}}</dt>
+            <dd class="result-detail__times-items">
+            \{{#openingTimes}}
+              <span class="result-detail__times-item">\{{startTime}} - \{{endTime}}</span>
+            \{{/openingTimes}}
+            </dd>
+          \{{/openingDays}}
+          </dl>
+        \{{/isOpen247}}
 
-              \{{#hasServices}}
-              <h4 class="h4">Services Provided</h4>
-              <div class="accordion__incopy">
-                <div class="accordion accordion--organisation js-accordion">
-                  \{{#services}}
-                    <button class="h3 accordion__header js-header">
-                      \{{{name}}}
-                      <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
-                      <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
-                    </button>
-                    <div class="accordion__item js-item">
-                      <div class="accordion__inner">
-                        <p>\{{{info}}}</p>
-                        \{{#tags}}
-                          <p class="result-detail__target-audience">Suitable for: <span class="result-detail__tags-item">\{{{tags}}}</span></p>
-                        \{{/tags}}
-                        \{{#isTelephoneService}}
-                        <p class="result-detail__telephone">This is a telephone service.</p>
-                        \{{/isTelephoneService}}
-                        \{{#isAppointmentOnly}}
-                        <p class="result-detail__telephone">Access to this service is by appointment only.</p>
-                        \{{/isAppointmentOnly}}
-                        <h2 class="h3">Location</h2>
-                        \{{#locationDescription}}<p>\{{{locationDescription}}}</p>\{{/locationDescription}}
-                        \{{#address}}
-                          \{{#street}}
-                          <ul class="result-detail__address-list">
-                            <li class="result-detail__address-item">\{{#street}} \{{{street}}}, \{{/street}} \{{#street1}} \{{{street1}}}, \{{/street1}} \{{#street2}} \{{{street2}}}, \{{/street2}}
-                            \{{#street3}} \{{{street3}}}, \{{/street3}}</li>
-                            <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
-                            <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a></li>
-                          </ul>
-                          \{{/street}}
-                          \{{#telephone}}
-                          <h2 class="h3">Telephone</h2>
-                          <p class="result-detail__telephone">\{{{telephone}}}</p>
-                          \{{/telephone}}
-                        \{{/address}}
-                        \{{#isOpen247}}
-                        <p>Open 24 hours a day, 7 days a week</p>
-                        \{{/isOpen247}}
-                        \{{^isOpen247}}
-                          <h2 class="h3">Opening Times</h2>
-                          <dl class="result-detail__times-list">
-                            \{{#openingTimes}}
-                            <dt class="result-detail__times-title">\{{day}}</dt>
-                            <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
-                            \{{/openingTimes}}
-                          </dl>
-                        \{{/isOpen247}}
-                      </div>
-                    </div>
-                  \{{/services}}
+        \{{#hasServices}}
+        <h4 class="h4">Services Provided</h4>
+        <div class="accordion__incopy">
+          <div class="accordion accordion--organisation js-accordion">
+            \{{#services}}
+              <button class="h3 accordion__header js-header">
+                \{{{name}}}
+                <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
+                <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
+              </button>
+              <div class="accordion__item js-item">
+                <div class="accordion__inner">
+                  <p>\{{{info}}}</p>
+                  \{{#tags}}
+                    <p class="result-detail__target-audience">Suitable for: <span class="result-detail__tags-item">\{{{tags}}}</span></p>
+                  \{{/tags}}
+                  \{{#isTelephoneService}}
+                  <p class="result-detail__telephone">This is a telephone service.</p>
+                  \{{/isTelephoneService}}
+                  \{{#isAppointmentOnly}}
+                  <p class="result-detail__telephone">Access to this service is by appointment only.</p>
+                  \{{/isAppointmentOnly}}
+                  <h2 class="h3">Location</h2>
+                  \{{#locationDescription}}<p>\{{{locationDescription}}}</p>\{{/locationDescription}}
+                  \{{#address}}
+                    \{{#street}}
+                    <ul class="result-detail__address-list">
+                      <li class="result-detail__address-item">\{{#street}} \{{{street}}}, \{{/street}} \{{#street1}} \{{{street1}}}, \{{/street1}} \{{#street2}} \{{{street2}}}, \{{/street2}}
+                      \{{#street3}} \{{{street3}}}, \{{/street3}}</li>
+                      <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
+                      <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a></li>
+                    </ul>
+                    \{{/street}}
+                    \{{#telephone}}
+                    <h2 class="h3">Telephone</h2>
+                    <p class="result-detail__telephone">\{{{telephone}}}</p>
+                    \{{/telephone}}
+                  \{{/address}}
+                  \{{#isOpen247}}
+                  <p>Open 24 hours a day, 7 days a week</p>
+                  \{{/isOpen247}}
+                  \{{^isOpen247}}
+                    <h2 class="h3">Opening Times</h2>
+                    <dl class="result-detail__times-list">
+                      \{{#openingTimes}}
+                      <dt class="result-detail__times-title">\{{day}}</dt>
+                      <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
+                      \{{/openingTimes}}
+                    </dl>
+                  \{{/isOpen247}}
                 </div>
               </div>
-              \{{/hasServices}}
-            \{{/addresses}}
-            \{{/hasAddresses}}
+            \{{/services}}
+          </div>
+        </div>
+        \{{/hasServices}}
+      \{{/addresses}}
+      \{{/hasAddresses}}
 
-            \{{#hasOtherServices}}
-            <h2 class="h2">Services Provided at Other Locations</h2>
-            <div class="accordion__incopy">
-              <div class="accordion accordion--organisation js-accordion">
-                \{{#providedServices}}
-                  <button class="h3 accordion__header js-header">
-                    \{{{name}}}
-                    <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
-                    <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
-                  </button>
-                  <div class="accordion__item js-item">
-                    <div class="accordion__inner">
-                      <p>\{{{info}}}</p>
-                      \{{#tags}}
-                        <p>Suitable for: <span class="result-detail__tags-item">\{{{tags}}}</span></p>
-                      \{{/tags}}
-                      <h2 class="h3">Location</h2>
-                      \{{#locationDescription}}<p>\{{{locationDescription}}}</p>\{{/locationDescription}}
-                      \{{#address}}
-                        \{{#street}}
-                        <ul class="result-detail__address-list">
-                          <li class="result-detail__address-item">\{{#street}} \{{{street}}}, \{{/street}} \{{#street1}} \{{{street1}}}, \{{/street1}} \{{#street2}} \{{{street2}}}, \{{/street2}}
-                          \{{#street3}} \{{{street3}}}, \{{/street3}}</li>
-                          <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
-                          <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a></li>
-                        </ul>
-                        \{{/street}}
-                      \{{/address}}
-                      <h2 class="h3">Opening Times</h2>
-                      <dl class="result-detail__times-list">
-                        \{{#openingTimes}}
-                        <dt class="result-detail__times-title">\{{day}}</dt>
-                        <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
-                        \{{/openingTimes}}
-                      </dl>
-                    </div>
-                  </div>
-                \{{/providedServices}}
+      \{{#hasOtherServices}}
+      <h2 class="h2">Services Provided at Other Locations</h2>
+      <div class="accordion__incopy">
+        <div class="accordion accordion--organisation js-accordion">
+          \{{#providedServices}}
+            <button class="h3 accordion__header js-header">
+              \{{{name}}}
+              <svg class="svg-plus-dims accordion__icon accordion__icon--open"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use></svg>
+              <svg class="svg-minus-dims accordion__icon accordion__icon--close"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use></svg>
+            </button>
+            <div class="accordion__item js-item">
+              <div class="accordion__inner">
+                <p>\{{{info}}}</p>
+                \{{#tags}}
+                  <p>Suitable for: <span class="result-detail__tags-item">\{{{tags}}}</span></p>
+                \{{/tags}}
+                <h2 class="h3">Location</h2>
+                \{{#locationDescription}}<p>\{{{locationDescription}}}</p>\{{/locationDescription}}
+                \{{#address}}
+                  \{{#street}}
+                  <ul class="result-detail__address-list">
+                    <li class="result-detail__address-item">\{{#street}} \{{{street}}}, \{{/street}} \{{#street1}} \{{{street1}}}, \{{/street1}} \{{#street2}} \{{{street2}}}, \{{/street2}}
+                    \{{#street3}} \{{{street3}}}, \{{/street3}}</li>
+                    <li class="result-detail__address-item">\{{#city}} \{{city}}, \{{/city}}</li>
+                    <li class="result-detail__address-item">\{{#postcode}} \{{postcode}} \{{/postcode}} - <a href="https://www.google.co.uk/maps/place/\{{postcode}}">Map</a></li>
+                  </ul>
+                  \{{/street}}
+                \{{/address}}
+                <h2 class="h3">Opening Times</h2>
+                <dl class="result-detail__times-list">
+                  \{{#openingTimes}}
+                  <dt class="result-detail__times-title">\{{day}}</dt>
+                  <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
+                  \{{/openingTimes}}
+                </dl>
               </div>
             </div>
-            \{{/hasOtherServices}}
-
-            \{{#donationUrl}}
-            <h2 class="h2">Donate Money</h2>
-            <p>\{{{donationDescription}}}</p>
-            <a href="\{{donationUrl}}" target="_blank" rel="noreferrer noopener" class="btn btn--brand-d">
-              <span class="btn__text">Donate to \{{{name}}}</span>
-            </a>
-            \{{/donationUrl}}
-
-            \{{#itemsDonationDescription}}
-            <h2 class="h2">Donate Items</h2>
-            <p>\{{{itemsDonationDescription}}}</p>
-            \{{#itemsDonationUrl}}
-            <a href="\{{itemsDonationUrl}}" target="_blank" rel="noreferrer noopener" class="btn btn--brand-d">
-              <span class="btn__text">Donate items to \{{{name}}}</span>
-            </a>
-            \{{/itemsDonationUrl}}
-            \{{/itemsDonationDescription}}
-
-            <h2 class="h2">Contact</h2>
-            <dl class="result-detail__contact-list">
-              \{{#telephone}}
-                <dt class="result-detail__contact-title">Telephone:</dt>
-                <dd class="result-detail__contact-item"><a href="tel:\{{telephone}}">\{{telephone}}</a></dd>
-              \{{/telephone}}
-              \{{#email}}
-                <dt class="result-detail__contact-title">Email:</dt>
-                <dd class="result-detail__contact-item"><a href="mailto:\{{email}}">\{{email}}</a></dd>
-              \{{/email}}
-              \{{#website}}
-                <dt class="result-detail__contact-title">Website:</dt>
-                <dd class="result-detail__contact-item"><a href="\{{website}}">Website</a></dd>
-              \{{/website}}
-              \{{#twitter}}
-                <dt class="result-detail__contact-title">Twitter:</dt>
-                <dd class="result-detail__contact-item"><a href="\{{twitter}}">Twitter page</a></dd>
-              \{{/twitter}}
-              \{{#facebook}}
-                <dt class="result-detail__contact-title">Facebook:</dt>
-                <dd class="result-detail__contact-item"><a href="\{{facebook}}">Facebook page</a></dd>
-              \{{/facebook}}
-            </dl>
-
-          <p class="text-center">Please note, the information here is provided and maintained by this organisation. If you see anything that is incorrect or incomplete, please <a href="/about/contact/">get in touch</a>.</p>
-          \{{/organisation}}
-          {{> social-share}}
-
+          \{{/providedServices}}
         </div>
       </div>
-    </div>
+      \{{/hasOtherServices}}
+    \{{/organisation}}
   </div>
+</script>
+
+<script id="js-accommodation-tpl" type="text/template">
+  <h2 class="h2">Accommodation</h2>
+  <ul>
+  \{{#items}}
+  <li><a href="/find-help/accommodation/listing/details/?id=\{{id}}">\{{name}}</a></li>
+  \{{/items}}
+  </ul>
+</script>
+
+<script id="js-contact-tpl" type="text/template">
+  \{{#organisation}}
+    \{{#donationUrl}}
+    <h2 class="h2">Donate Money</h2>
+    <p>\{{{donationDescription}}}</p>
+    <a href="\{{donationUrl}}" target="_blank" rel="noreferrer noopener" class="btn btn--brand-d">
+      <span class="btn__text">Donate to \{{{name}}}</span>
+    </a>
+    \{{/donationUrl}}
+
+    \{{#itemsDonationDescription}}
+    <h2 class="h2">Donate Items</h2>
+    <p>\{{{itemsDonationDescription}}}</p>
+    \{{#itemsDonationUrl}}
+    <a href="\{{itemsDonationUrl}}" target="_blank" rel="noreferrer noopener" class="btn btn--brand-d">
+      <span class="btn__text">Donate items to \{{{name}}}</span>
+    </a>
+    \{{/itemsDonationUrl}}
+    \{{/itemsDonationDescription}}
+
+    <h2 class="h2">Contact</h2>
+    <dl class="result-detail__contact-list">
+      \{{#telephone}}
+        <dt class="result-detail__contact-title">Telephone:</dt>
+        <dd class="result-detail__contact-item"><a href="tel:\{{telephone}}">\{{telephone}}</a></dd>
+      \{{/telephone}}
+      \{{#email}}
+        <dt class="result-detail__contact-title">Email:</dt>
+        <dd class="result-detail__contact-item"><a href="mailto:\{{email}}">\{{email}}</a></dd>
+      \{{/email}}
+      \{{#website}}
+        <dt class="result-detail__contact-title">Website:</dt>
+        <dd class="result-detail__contact-item"><a href="\{{website}}">Website</a></dd>
+      \{{/website}}
+      \{{#twitter}}
+        <dt class="result-detail__contact-title">Twitter:</dt>
+        <dd class="result-detail__contact-item"><a href="\{{twitter}}">Twitter page</a></dd>
+      \{{/twitter}}
+      \{{#facebook}}
+        <dt class="result-detail__contact-title">Facebook:</dt>
+        <dd class="result-detail__contact-item"><a href="\{{facebook}}">Facebook page</a></dd>
+      \{{/facebook}}
+    </dl>
+  \{{/organisation}}
 </script>

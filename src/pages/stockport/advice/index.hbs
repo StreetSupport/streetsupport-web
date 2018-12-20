@@ -1,10 +1,10 @@
 ---
 title: Emergency Homeless Help in Stockport - Street Support
-description: Street support makes it easier to help people facing homelessness in Stockport. Here's how to get help in an emergency.
-image: https://streetsupport.net/assets/img/og/street-support-stockport.png
+description: Street support makes it easier to help people facing homelessness. Here's how to get help in an emergency.
+image: https://streetsupport.net/assets/img/og/street-support-stockport.jpg
 layout: default.hbs
 permalink: false
-jsBundle: emergencyhelp
+jsBundle: adviceV2
 section: stockport
 page: stockport-advice
 location: stockport
@@ -20,43 +20,17 @@ location: stockport
   </div>
 </div>
 
-{{> find-help/advice-header theLocationId="stockport" }}
+{{> find-help/advice-header theLocationId="stockport" sub-heading="Find useful advice related to homelessness in your
+area" }}
 
 <div class="block">
   <div class="container">
     <div class="block__content">
-      <a name="council-info"></a>
-      <h2 class="h2">Support from Stockport Council</h2>
-      <p>To tell Stockport council you are homeless:</p>
-      <ul>
-        <li>Visit Stockport council town hall</li>
-        <li>Mon-Fri 9.30am-4pm call <a href="tel:01614743772">0161 474 3772</a></li>
-        <li>Outside those hours in an emergency call <a href="tel:01614742818">0161 474 2818</a></li>
-        <li>Email <a href="mailto:homechoice@stockporthomes.org">homechoice@stockporthomes.org</a></li>
-      </ul>
-
-      <p>To tell Stockport homes about someone who is sleeping rough:</p>
-      <ul>
-        <li>Call 0161 474 4237</li>
-        <li>Email <a href="mailto:homechoice@stockporthomes.org">homechoice@stockporthomes.org</a></li>
-      </ul>
-
-      <a name="support-services"></a>
-      <h2 class="h2">Support services</h2>
-      <p>If you would like support through the process, or if you don't qualify as legally homeless, it is best to go to one of the local <a href="/find-help/dropin/timetable/">drop in centres</a> who can advise you on what options are available for you.</p>
-
-      <a name="swep"></a>
-      <h2 class="h2">Emergency Accomodation in Winter</h2>
-      <p>During periods of severe cold weather, when forecast to fall to zero degrees or below, additional emergency accommodation is provided by the council. This is often called 'SWEP' - severe weather emergency provision.</p>
-      <p>If you are aware of someone who is sleeping rough, please contact Stockport Homes on <a href="tel:01614744237">0161 474 4237</a> or email <a href="mailto:homechoice@stockporthomes.org">homechoice@stockporthomes.org</a> with details of when and where you saw them and what they looked like.</p>
-      <p>There are outreach workers covering different areas in the city to connect with people who are rough sleeping and helping them to get inside if possible. Each individual is assessed so that appropriate accommodation can be found based on their needs.</p>
-      <p>There could be cases where accommodation providers may feel that they are not able to accommodate someone for example through violent behaviour, but the underlying principles of SWEP mean that every effort is made to find somewhere suitable.</p>
-
-      <a href="https://news.streetsupport.net/tag/swep/" class="btn btn--brand-e">
-        <span class="btn__text">Read news about SWEP</span>
-      </a>
-
-      {{> social-share}}
+      <div id="js-faqs-output"></div>
     </div>
   </div>
 </div>
+
+<script id="js-faqs-tpl" type="text/template">
+  {{> faqs/listing }}
+</script>
