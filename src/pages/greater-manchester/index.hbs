@@ -26,26 +26,30 @@ page: home
   </div>
 </div>
 
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <p>Greater Manchester Homelessness Action Network (GMHAN) brings together people with personal insight into homelessness, people from frontline organisation, public sector and others to find more effective solutions.</p>
+      <p>There are various <a href="#gm-initiatives">GM wide initiatives addressing different challenges faced by people experiencing homelessness</a>. A top priority for this winter is to support people who are sleeping rough to move inside through the 'Bed Every Night' initiative.</p>
+    </div>
+  </div>
+</div>
 <div class="block block--bed-every-night">
   <div class="container">
     <div class="block__content">
       <a href="https://bedeverynight.co.uk/">
         <img src="/assets/img/gm/bed-every-night-logo.png" alt="A Bed For Every Night logo" class="bed-every-night-logo" />
       </a>
-      <h2 class="h2">Help people who are sleeping rough in Greater Manchester</h2>
-      <p>Rough sleeping is the most visible form of homelessness, in Greater Manchester we have adopted the goal to end the need for anyone to sleep on the streets by May 2020.</p>
-      <p>There is a lot of work underway at all times of year by local authorities and the voluntary sector to prevent and reduce homelessness. This year we want to build on that, so our goal is to provide a place for every person sleeping rough every night right through the coming winter, from 1 November to 31 March.</p>
+      <h2 class="h2">Help people who are sleeping rough in Greater Manchester this winter</h2>
+      <p>Rough sleeping is the most visible form of homelessness, in Greater Manchester we have adopted the goal to end
+        the need for anyone to sleep on the streets by May 2020.</p>
+      <p>There is a lot of work underway at all times of year by local authorities and the voluntary sector to prevent
+        and reduce homelessness. This year we want to build on that, so our goal is to provide a place for every person
+        sleeping rough every night right through the coming winter, from 1 November to 31 March.</p>
+      <p>Here's how you can help:</p>
       <p></p>
-      <h3 class="h3">Want to help?<br />
-      We can show you how to.<br />
-      Quickly and easily.<br />
-      <h3 class="h3">Click below to donate things, money or your time.
     </div>
-  </div>
-</div>
-
-<div class="block">
-  <div class="container">
     <div class="block__content">
 
       <article class="card card--cta card--grid-1-of-4">
@@ -88,51 +92,17 @@ page: home
         </a>
       </article>
     </div>
-
-    {{> divider }}
-    <div class="home__copy home__copy--padding">
-      <h1 class="h2">Find out what's happening near you</h1>
-      <form class="form location-selector js-change-location-form">
-        <fieldset class="form__fieldset form__fieldset--inline-fill">
-          <div class="form__fieldset-inline-fill-container">
-            <label class="hide-screen" for="location">Select a borough:</label>
-            <select name="location" class="form__input form__input--inline-fill js-change-location-select">
-              <option value="">- Select a borough -</option>
-              {{> locations/_gm-option-tags }}
-            </select>
-            <button class="btn btn--brand-e btn--inline-fill js-change-location-btn" type="submit">
-              <span class="btn__text">Visit your borough page</span>
-            </button>
-          </div>
-        </fieldset>
-      </form>
-      <form class="form form--highlighted js-find-help-form">
-        <fieldset class="form__fieldset form__fieldset--inline-fill">
-          <legend class="form__fieldset-title">Find local support organisations:</legend>
-          <div class="form__fieldset-inline-fill-container">
-            <label class="hide-screen" for="postcode">Your Postcode</label>
-            <input name="postcode" class="form__input form__input--inline-fill js-find-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
-            <button class="btn btn--brand-e btn--inline-fill" type="submit">
-              <span class="btn__text">Find help</span>
-            </button>
-          </div>
-        </fieldset>
-      </form>
-    </div>
-    <div class="home__copy">
-      <div class="js-map"></div>
-    </div>
   </div>
 </div>
 
-<div class="block block--minor-highlight">
+<div class="block">
   <div class="container">
     <div class="block__content block__content--vert-fill">
       <div class="proximity-form">
         <h1 class="h2">Do you need local support this winter?</h1>
         <form class="form form--highlighted js-find-help-form">
           <fieldset class="form__fieldset form__fieldset--inline-fill">
-            <legend class="form__fieldset-title">Find help in your area</legend>
+            <legend class="form__fieldset-title">Find support services in your area</legend>
             <div class="form__fieldset-inline-fill-container">
               <label class="hide-screen" for="postcode">Your Postcode</label>
               <input name="postcode" class="form__input form__input--inline-fill js-find-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
@@ -143,9 +113,44 @@ page: home
           </fieldset>
         </form>
       </div>
+
       <div class="proximity-form">
-        <h1 class="h2">Do you want to do something to help?</h1>
-        <form class="form form--highlighted js-give-help-form">
+        <h1 class="h2">Not sure how to get help?</h1>
+        <form class="form location-selector form--highlighted js-change-location-form">
+          <fieldset class="form__fieldset form__fieldset--inline-fill">
+            <legend class="form__fieldset-title">Get advice for your borough</legend>
+            <div class="form__fieldset-inline-fill-container">
+              <label class="hide-screen" for="location">Get advice for your borough:</label>
+              <select name="location" class="form__input form__input--inline-fill js-change-location-select">
+                <option value="">- Select a borough -</option>
+                {{> locations/_gm-option-tags }}
+              </select>
+              <button class="btn btn--brand-e btn--inline-fill js-change-location-btn" type="submit">
+                <span class="btn__text">Get advice</span>
+              </button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    {{> divider }}
+    <div class="block__content">
+      <a name="gm-initiatives"></a>
+      <h1 class="h2">Want to help?</h1>
+      <p>There are various ways to support people experiencing homelessness in Greater Manchester. Organisations, public services and voluntary groups work closely together to share resources and maximise the donations made.</p>
+      <div class="home__copy home__copy--padding">
+        <h2 class="h3">Support people directly</h2>
+        <ul>
+          <li><a href="http://bigchangemcr.co.uk">Big Change Manchester</a> - Big Change pays for practical items individuals in Central Manchester need to build independent lives away from the streets.</li>
+          <li><a href="https://realchangewiganandleigh.co.uk/">Real Change Wigan and Leigh</a> - Real Change pays for practical items individuals in Wigan and Leigh need to build independent lives away from the streets.</li>
+          <li><a href="https://mydonate.bt.com/charities/boaztrust">Migrant Relief Fund</a> - This fund provides a crisis grant to destitute migrants who have no access to public funds.</li>
+        </ul>
+        <h2 class="h3">Support a project</h2>
+        <ul>
+          <li><a href="https://bedeverynight.co.uk/">A Bed Every Night</a> - supports the provision of shelter and support for people who are sleeping rough across Greater Manchester this winter.</li>
+        </ul>
+        <h2 class="h3">Support local organisations</h2>
+        <form class="form js-give-help-form">
           <fieldset class="form__fieldset form__fieldset--inline-fill">
             <legend class="form__fieldset-title">See what's needed in your area</legend>
             <div class="form__fieldset-inline-fill-container">
@@ -158,15 +163,31 @@ page: home
           </fieldset>
         </form>
       </div>
-    </div> 
-  </div>  
+      <div class="home__copy">
+        <h2 class="h3">Find local organisations</h2>
+        <form class="form js-find-orgs-form">
+          <fieldset class="form__fieldset form__fieldset--inline-fill">
+            <legend class="form__fieldset-title">Find an organisation near you:</legend>
+            <div class="form__fieldset-inline-fill-container">
+              <label class="hide-screen" for="postcode">Your Postcode</label>
+              <input name="postcode" class="form__input form__input--inline-fill js-find-orgs-postcode" placeholder="your postcode: eg M1 2HX"></input>
+              <button class="btn btn--brand-e btn--inline-fill" type="submit">
+                <span class="btn__text">Find organisations</span>
+              </button>
+            </div>
+          </fieldset>
+        </form>
+        <div class="js-map"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="block block--highlight">
-  <div class="container container--central-cta">
+  <div class="container">
     <div class="block__content block__content--central-cta block__content--join-mailing-list">
       <h1 class="h2">Get involved</h1>
-      <p>If you would like to get involved and help end homelessness across Greater Manchester, <a href="https://streetsupport.us12.list-manage.com/subscribe?u=da9a1d4bb2b1a69a981456972&id=3c6ae13085">join our mailing list</a>.</p>
+      <p> If you would like to get involved with GMHAN and find out about future events, please <a href="https://streetsupport.us12.list-manage.com/subscribe?u=da9a1d4bb2b1a69a981456972&id=3c6ae13085">join our mailing list</a>.</p>
     </div>
   </div>
 </div>
