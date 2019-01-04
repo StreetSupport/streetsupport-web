@@ -50,7 +50,10 @@ const initLocationDropdown = function () {
 
   document.querySelector('.js-change-location-btn')
     .addEventListener('click', () => {
-      redirectToHubPage(document.querySelector('.js-change-location-select').value)
+      const locationId = document.querySelector('.js-change-location-select').value
+      if (locationId.length > 0) {
+        redirectToHubPage(locationId)
+      }
     })
 }
 

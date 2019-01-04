@@ -21,7 +21,7 @@ const initLocations = function (currentLocationId) {
   ui.form.addEventListener('submit', function (e) {
     e.preventDefault()
     const reqLocation = ui.select.value
-    if (reqLocation) {
+    if (reqLocation.length > 0) {
       location.setCurrent(reqLocation)
       browser.redirect(`/${reqLocation}`)
     }
@@ -38,7 +38,7 @@ const initLocations = function (currentLocationId) {
   .setAttribute('selected', 'selected')
 
   location.handler((result) => {
-    if (result.length) {
+    if (result.length > 0) {
       redirectToHubPage(result)
     }
   }, '.js-change-location-select')
