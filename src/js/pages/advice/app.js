@@ -30,7 +30,10 @@ const init = () => {
     document.querySelector('.js-change-location-btn')
       .addEventListener('click', (e) => {
         e.preventDefault()
-        redirectToHubPage(document.querySelector('.js-change-location-select').value)
+        const locationId = document.querySelector('.js-change-location-select').value
+        if (locationId.length > 0) {
+          redirectToHubPage(locationId)
+        }
       })
   }
 
