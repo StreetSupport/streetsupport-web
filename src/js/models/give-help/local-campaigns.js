@@ -10,6 +10,13 @@ export default class LocalCampaigns {
 
     const campaigns = ['bigChangeIsEnabled', 'abenIsEnabled', 'realChangeIsEnabled']
 
+    const locationCampaigns = [
+      { key: 'isWiganRealChangeTemplate', locationKey: 'wigan-and-leigh' },
+      { key: 'isRochdaleRealChangeTemplate', locationKey: 'rochdale' },
+      { key: 'isBournemouthTemplate', locationKey: 'bournemouth' },
+      { key: 'isDefaultTemplate', locationKey: 'leeds' }
+    ]
+
     if (location) {
       this.hasCampaigns = campaigns
         .reduce((acc, next) => {
@@ -20,9 +27,10 @@ export default class LocalCampaigns {
       this.locationName = location.name
       this.realChangeUrl = location.realChangeUrl
       this.realChangeTitle = location.realChangeTitle
-      this.isWiganRealChangeTemplate = location.key === 'wigan-and-leigh'
-      this.isBournemouthTemplate = location.key === 'bournemouth'
-      this.isDefaultTemplate = location.key === 'leeds'
+      locationCampaigns
+        .forEach((c) => {
+          this[c.key] = location.key === c.locationKey
+        })
 
       campaigns
         .forEach((c) => {
