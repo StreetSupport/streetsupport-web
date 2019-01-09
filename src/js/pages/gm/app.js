@@ -62,7 +62,7 @@ const initForms = function (currentLocation) {
 }
 
 const initLocations = function (currentLocation) {
-console.log('init locations')
+  console.log('init locations')
 
   const ui = {
     form: document.querySelector('.js-change-location-form'),

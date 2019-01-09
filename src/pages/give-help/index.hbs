@@ -95,7 +95,10 @@ page: givehelp
 
   <!-- ko if: realChangeIsEnabled -->
   <!-- ko if: isWiganRealChangeTemplate -->
-  {{> locations/banners/wigan-and-leigh-real-change }}
+  {{> locations/banners/real-change-banner-wigan-and-leigh }}
+  <!-- /ko -->
+  <!-- ko if: isRochdaleRealChangeTemplate -->
+  {{> locations/banners/real-change-banner-rochdale }}
   <!-- /ko -->
   <!-- ko if: isBournemouthTemplate -->
   {{> bournemouth/bcp-change-for-good }}
