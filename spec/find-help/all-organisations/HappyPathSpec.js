@@ -139,19 +139,19 @@ describe('all organisations', () => {
     it('- should show prev page button', () => {
       expect(sut.hasPrevPages()).toBeTruthy()
     })
-  
+
     it('- should show next page button', () => {
       expect(sut.hasMorePages()).toBeTruthy()
     })
 
-    fdescribe('- penultimate page', () => {
+    describe('- penultimate page', () => {
       beforeEach(() => {
         sut.nextPage()
         sut.nextPage()
         sut.nextPage()
         sut.nextPage()
       })
-  
+
       it('- should show next page button', () => {
         expect(sut.hasMorePages()).toBeTruthy()
       })
