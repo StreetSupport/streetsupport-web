@@ -96,6 +96,7 @@ const formatData = function (data) {
       a.services = data.providedServices
         .filter((s) => s.address.postcode.replace(/\s/gi, '') === a.postcode.replace(/\s/gi, ''))
       a.hasServices = a.services.length > 0
+      a.hasOpeningTimes = a.openingDays.length > 0
 
       setOrgOtherServicesAsServicesNotAssignedToAddress(a)
     })
