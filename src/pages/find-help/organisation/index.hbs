@@ -80,11 +80,14 @@ page: organisation
         \{{#isOpen247}}
         <p>Open 24 hours a day, 7 days a week</p>
         \{{/isOpen247}}
+        \{{#isAppointmentOnly}}
+        <p>Please contact us for information on accessing services at this location</p>
+        \{{/isAppointmentOnly}}
         <dl class="result-detail__times-list">
         \{{#telephone}}
         <p class="result-detail__telephone">Telephone: \{{{telephone}}}</p>
         \{{/telephone}}
-        \{{^isOpen247}}
+        \{{^hasOpeningTimes}}
           \{{#openingDays}}
             <dt class="result-detail__times-title">\{{day}}</dt>
             <dd class="result-detail__times-items">
@@ -94,7 +97,7 @@ page: organisation
             </dd>
           \{{/openingDays}}
           </dl>
-        \{{/isOpen247}}
+        \{{/hasOpeningTimes}}
 
         \{{#hasServices}}
         <h4 class="h4">Services Provided</h4>
@@ -137,7 +140,7 @@ page: organisation
                   \{{#isOpen247}}
                   <p>Open 24 hours a day, 7 days a week</p>
                   \{{/isOpen247}}
-                  \{{^isOpen247}}
+                  \{{^hasOpeningTimes}}
                     <h2 class="h3">Opening Times</h2>
                     <dl class="result-detail__times-list">
                       \{{#openingTimes}}
@@ -145,7 +148,7 @@ page: organisation
                       <dd class="result-detail__times-item">\{{startTime}} - \{{endTime}}</dd>
                       \{{/openingTimes}}
                     </dl>
-                  \{{/isOpen247}}
+                  \{{/hasOpeningTimes}}
                 </div>
               </div>
             \{{/services}}
