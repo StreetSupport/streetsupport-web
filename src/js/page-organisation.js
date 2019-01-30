@@ -135,10 +135,13 @@ getApiData.data(organisationUrl)
 getApiData.data(accommodationUrl)
   .then((result) => {
     if (result.data.total > 0) {
-      const theData = {
-        items: result.data.items
+      var accEntries = result.data.items
+      for (var i = 0; i <= accEntries.length - 1; i++){
+        accEntries[i].name = htmlEncode.htmlDecode(accEntries[i].name)
       }
-      console.log(theData)
+      const theData = {
+        items: accEntries
+      }
       templating.renderTemplate('js-accommodation-tpl', theData, 'js-accommodation-output')
     }
   })
