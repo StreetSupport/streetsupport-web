@@ -108,26 +108,14 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
     paginate()
   }
 
-  const sortAlphabetical = function (a, b) {
-    if (a.name < b.name) return -1
-    if (a.name > b.name) return 1
-    return 0
-  }
-
-  const sortByDistanceAway = function (a, b) {
-    if (a.distanceInMetres < b.distanceInMetres) return -1
-    if (a.distanceInMetres > b.distanceInMetres) return 1
-    return 0
-  }
-
   self.sortAToZ = function () {
-    self.organisations(self.organisations().sort(sortAlphabetical))
+    self.organisations(self.organisations().sortAsc('name'))
     self.currentSort('atoz')
     paginate()
   }
 
   self.sortNearest = function () {
-    self.organisations(self.organisations().sort(sortByDistanceAway))
+    self.organisations(self.organisations().sortAsc('distanceInMetres'))
     self.currentSort('nearest')
     paginate()
   }
@@ -136,8 +124,7 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
     location.getPreviouslySetPostcode()
       .then((currentLocation) => {
         loadOrgsForName(self.searchQuery(), currentLocation)
-      }, (err) => {
-        console.log(err)
+      }, () => {
         browser.redirect('/500')
       })
   }
@@ -153,50 +140,69 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
           self.postcodeRetrievalIssue(true)
         }
       },
-      (error) => {
-        console.log({ error })
+      () => {
         self.postcodeRetrievalIssue(true)
       })
   }
 
   const groupByOrg = function (orgLocations, currLocation) {
-    const orgs = orgLocations
-      .reduce((acc, next) => {
-        const { distanceInMetres, description } = getDistanceApart(
-          { latA: next.latitude, longA: next.longitude },
-          { latB: currLocation.latitude, longB: currLocation.longitude },
-          'km'
-        )
-        next.distanceInMetres = distanceInMetres
-        next.distanceDescription = description
-        const existing = acc.find((o) => o.key === next.serviceProviderKey)
-        if (existing) {
-          existing.locations.push(next)
-        } else {
-          acc.push({
-            key: next.serviceProviderKey,
-            name: htmlDecode(next.serviceProviderName),
-            synopsis: htmlDecode(next.serviceProviderSynopsis),
-            href: `/find-help/organisation?organisation=${next.serviceProviderKey}`,
-            donationUrl: next.donationUrl,
-            donationDescription: next.donationDescription,
-            itemDonationDescription: next.itemDonationDescription,
-            needCategories: next.needCategories,
-            clientGroups: next.clientGroups,
-            clientGroupKeys: next.clientGroups.map((cg) => cg.key),
-            locations: [
-              next
-            ]
-          })
-        }
-        return acc
-      }, [])
-    orgs.forEach((o) => {
-      const nearestOrgLocation = o.locations.sort(sortByDistanceAway)[0]
+    const mapOrg = (next) => {
+      return {
+        key: next.serviceProviderKey,
+        name: htmlDecode(next.serviceProviderName),
+        synopsis: htmlDecode(next.serviceProviderSynopsis),
+        href: `/find-help/organisation?organisation=${next.serviceProviderKey}`,
+        donationUrl: next.donationUrl,
+        donationDescription: next.donationDescription,
+        itemDonationDescription: next.itemDonationDescription,
+        needCategories: next.needCategories,
+        clientGroups: next.clientGroups,
+        clientGroupKeys: next.clientGroups.map((cg) => cg.key),
+        locations: [
+          next
+        ],
+        distanceInMetres: 0,
+        distanceDescription: ''
+      }
+    }
+
+    const toSameServiceProviderKey = (acc, next) => {
+      const existing = acc.find((o) => o.key === next.serviceProviderKey)
+      if (existing) {
+        existing.locations.push(next)
+      } else {
+        acc.push(mapOrg(next))
+      }
+      return acc
+    }
+
+    const setProximity = (o) => {
+      const { distanceInMetres, description } = getDistanceApart(
+        { latA: o.latitude, longA: o.longitude },
+        { latB: currLocation.latitude, longB: currLocation.longitude },
+        'km'
+      )
+      o.distanceInMetres = distanceInMetres
+      o.distanceDescription = description
+    }
+
+    const setNearestLocation = (o) => {
+      const nearestOrgLocation = o.locations.sortAsc('distanceInMetres')[0]
       o.distanceInMetres = nearestOrgLocation.distanceInMetres
       o.distanceDescription = nearestOrgLocation.distanceDescription
-    })
-    return orgs
+    }
+
+    if (!currLocation) {
+      return orgLocations
+        .reduce(toSameServiceProviderKey, [])
+    } else {
+      orgLocations
+        .forEach(setProximity)
+      const orgs = orgLocations
+        .reduce(toSameServiceProviderKey, [])
+      orgs.forEach(setNearestLocation)
+      return orgs
+    }
   }
 
   const loadOrgsForName = function (name, currentLocation) {
@@ -204,8 +210,7 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
     ajax
       .data(`${endpoints.serviceProviderLocations}?providerName=${name}`)
       .then((result) => {
-        const orgs = groupByOrg(result.data.items, currentLocation)
-        self.organisations(orgs)
+        self.organisations(groupByOrg(result.data.items, currentLocation))
         paginate()
         browser.loaded()
       }, (_) => {
@@ -231,16 +236,16 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
   }
 
   const init = function (location) {
-    self.postcode(location.postcode)
-
-    loadOrgsForLocation(location)
+    if (location) {
+      self.postcode(location.postcode)
+      loadOrgsForLocation(location)
+    }
   }
 
   location.getPreviouslySetPostcode()
     .then((result) => {
       init(result)
-    }, (err) => {
-      console.log(err)
+    }, () => {
       browser.redirect('/500')
     })
 }
