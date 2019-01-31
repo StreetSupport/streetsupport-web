@@ -43,7 +43,6 @@ const initForms = function (currentLocation) {
     }, () => alert('We could not find your postcode, please try a nearby one'))
   })
 
-
   findOrgs.form.addEventListener('submit', function (e) {
     e.preventDefault()
     const reqLocation = findOrgs.postcode.value
