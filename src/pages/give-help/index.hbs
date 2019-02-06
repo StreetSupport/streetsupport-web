@@ -18,7 +18,7 @@ page: givehelp
   </div>
 </div>
 
-<div class="block block--header"> 
+<div class="block block--header">
   <div class="container">
     <h1 class="h1 block__header">Give Help</h1>
     <h2 class="h2 block__sub-header">Find out what you can do to help</h2>
@@ -78,7 +78,7 @@ page: givehelp
 </div>
 
 <!-- ko if: hasCampaigns -->
-<div class="block"> 
+<div class="block">
   <div class="container">
     <h1 class="h1">Local Campaigns</h1>
     <p>Campaigns currently running in <span data-bind="text: locationName"></span>:</p>
@@ -91,6 +91,10 @@ page: givehelp
 
   <!-- ko if: bigChangeIsEnabled -->
   {{> locations/banners/big-change-mcr }}
+  <!-- /ko -->
+
+  <!-- ko if: isManchester -->
+  <!-- insert migrant fund banner here
   <!-- /ko -->
 
   <!-- ko if: realChangeIsEnabled -->
