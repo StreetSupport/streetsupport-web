@@ -136,7 +136,7 @@ getApiData.data(accommodationUrl)
   .then((result) => {
     if (result.data.total > 0) {
       var accEntries = result.data.items
-      for (var i = 0; i <= accEntries.length - 1; i++){
+      for (var i = 0; i <= accEntries.length - 1; i++) {
         accEntries[i].name = htmlEncode.htmlDecode(accEntries[i].name)
       }
       const theData = {

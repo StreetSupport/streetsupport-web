@@ -14,7 +14,8 @@ export default class LocalCampaigns {
       { key: 'isWiganRealChangeTemplate', locationKey: 'wigan-and-leigh' },
       { key: 'isRochdaleRealChangeTemplate', locationKey: 'rochdale' },
       { key: 'isBournemouthTemplate', locationKey: 'bournemouth' },
-      { key: 'isDefaultTemplate', locationKey: 'leeds' }
+      { key: 'isDefaultTemplate', locationKey: 'leeds' },
+      { key: 'isManchester', locationKey: 'manchester' }
     ]
 
     if (location) {
