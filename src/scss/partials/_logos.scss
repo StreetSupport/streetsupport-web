@@ -8,3 +8,17 @@
     margin: 40px 0 0;
   }
 }
+
+.partnership__icon--medium {
+  width: 270px;
+  height: 300px;
+  margin: 0 auto;
+  display: block;
+}
+
+.partnership__icon--right {
+  @include mq($from: m) {
+    margin-bottom: 20px;
+    float: right;
+  }
+}

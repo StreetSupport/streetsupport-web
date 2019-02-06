@@ -73,7 +73,7 @@
       border-left: 6px white solid;
       border-right: 6px white solid;
       border-bottom: 6px white solid;
-      
+
       @include mq($from: m) {
         margin: 0;
         padding-top: 40px;
@@ -145,7 +145,7 @@
     background-image: url('/assets/img/real-change-banner/bg-triangle-top-mobile.png'),
                       url('/assets/img/real-change-banner/bg-triangle-bottom-mobile.png');
     background-position: top left,
-                         bottom right;  
+                         bottom right;
     background-repeat: no-repeat,
                        no-repeat;
 
@@ -159,7 +159,7 @@
     }
     @include mq($from: xl) {
       padding: 0 20px!important;
-      
+
       &--rochdale {
         background: #fbbf09 url('/assets/img/real-change-banner/rochdale/bg-desktop.png') no-repeat 50% top;
       }
@@ -192,7 +192,7 @@
         top: 0;
         left: 20px;
       }
-      
+
       @include mq($from: xl) {
         width: 88px;
         height: 127px;
@@ -203,7 +203,7 @@
       width: 239px;
       height: 136px;
       margin: 95px auto 40px auto;
-      text-indent: -9999px;   
+      text-indent: -9999px;
       white-space: nowrap;
 
       @include mq($from: s) {
@@ -214,7 +214,7 @@
         margin-top: 0px;
         padding-top: 40px;
       }
-      
+
       @include mq($from: xl) {
         width: 372px;
         height: 213px;
@@ -383,6 +383,20 @@
       width: 60px;
       height: 50px;
       background: url('../img/icon-tileset.png') 178px 80px;
+      margin: 10px auto;
+
+      @include mq($from: m) {
+        margin: 0 auto 20px auto;
+      }
+    }
+  }
+
+  &--donate {
+    &:before {
+      content: '';
+      width: 60px;
+      height: 50px;
+      background: url('../img/icon-tileset.png') 76px 189px;
       margin: 10px auto;
 
       @include mq($from: m) {
