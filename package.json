@@ -28,7 +28,7 @@
     "css-mqpacker": "5.0.1",
     "cssnano": "3.9.1",
     "del": "2.2.2",
-    "gulp": "3.9.1",
+    "gulp": "^3.9.1",
     "gulp-debug": "3.0.0",
     "gulp-htmlmin": "3.0.0",
     "gulp-if": "2.0.2",
