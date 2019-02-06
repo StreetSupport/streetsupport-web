@@ -14,14 +14,11 @@
   height: 300px;
   margin: 0 auto;
   display: block;
-
-  @include mq($from: m) {
-    margin-bottom: 20px;
-  }
 }
 
 .partnership__icon--right {
   @include mq($from: m) {
+    margin-bottom: 20px;
     float: right;
   }
 }

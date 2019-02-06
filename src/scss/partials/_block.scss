@@ -380,7 +380,7 @@
 
     &:last-child {
       @include last();
-    } 
+    }
 
     &--left-col {
       @include first();
@@ -411,6 +411,12 @@
     @include mq($from: m) {
       padding: 40px 30px 40px 40px;
     }
+  }
+
+  &--migrant-fund-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   &--big-change-mcr-logo {
