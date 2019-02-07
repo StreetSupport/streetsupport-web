@@ -28,7 +28,7 @@
     "css-mqpacker": "5.0.1",
     "cssnano": "3.9.1",
     "del": "2.2.2",
-    "gulp": "3.9.1",
+    "gulp": "^3.9.1",
     "gulp-debug": "3.0.0",
     "gulp-htmlmin": "3.0.0",
     "gulp-if": "2.0.2",
@@ -87,7 +87,7 @@
     "marked": "0.4.0",
     "moment": "2.19.3",
     "q": "1.4.1",
-    "snyk": "^1.47.0",
+    "snyk": "^1.124.1",
     "spin.js": "2.3.2",
     "svg4everybody": "2.1.4",
     "wpapi": "^1.1.2"

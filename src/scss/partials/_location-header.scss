@@ -3,7 +3,7 @@
     &:after {
       content: '';
       width: 100%;
-      height: 64px; 
+      height: 64px;
       background: url('../img/locations/sea-tile.png') repeat-x;
       position: absolute;
       bottom: 0;
@@ -105,8 +105,8 @@
     &:before {
       background-size: 650px;
       width: 650px;
-      height: 270px;
     }
+    min-height: 320px;
   }
 }
 
