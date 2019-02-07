@@ -413,6 +413,14 @@
     }
   }
 
+  &--migrant-fund {
+    padding: 40px 20px;
+
+    @include mq($from: m) {
+      padding: 0px;
+    }
+  }
+
   &--migrant-fund-logo {
     display: flex;
     flex-direction: column;
