@@ -149,13 +149,16 @@ function processPosts (posts) {
       // TODO: Investigate Image Sizes in WP Admin
       if (typeof (postItem._embedded['wp:featuredmedia']) !== 'undefined') {
         postItem.featured_media_object = postItem._embedded['wp:featuredmedia'][0]
-
         postItem.featured_media_object.srcset = ''
-        if (Object.getOwnPropertyNames(postItem.featured_media_object.media_details.sizes).length !== 0) {
+
+        if (postItem.featured_media_object.media_details &&
+          Object.getOwnPropertyNames(postItem.featured_media_object.media_details.sizes).length !== 0) {
           var srcset = []
+
           _.each(postItem.featured_media_object.media_details.sizes, function (sizeItem) {
             srcset.push(`${sizeItem.source_url} ${sizeItem.width}w`)
           })
+
           postItem.featured_media_object.srcset = srcset.join(', ')
         }
       }
