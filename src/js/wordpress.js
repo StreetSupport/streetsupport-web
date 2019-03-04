@@ -8,7 +8,6 @@ const api = new WPAPI({
   endpoint: 'https://news.streetsupport.net/wp-json',
   routes: apiRootJSON.routes
 })
-const _ = require('lodash')
 const striptags = require('striptags')
 
 // TODO: Enable Caching
@@ -131,15 +130,16 @@ function getPostsByCategory (category, limit, offset, resolveEmbedded) {
 }
 
 function processPosts (posts) {
-  return _.map(posts, (postItem) => {
+  return posts.map((postItem) => {
     postItem.date_gmt_object = moment(postItem.date_gmt)
     postItem.date_local_formatted = postItem.date_gmt_object.local().format('DD/MM/YYYY')
     postItem.date_local_iso = postItem.date_gmt_object.local().toISOString(true)
 
+    const excerpt = striptags(postItem.excerpt.rendered)
     // TODO Experiment with built in trunc function
-    postItem.short_excerpt = _.truncate(striptags(postItem.excerpt.rendered), {
-      'length': 100
-    })
+    postItem.short_excerpt = excerpt.length <= 100
+      ? excerpt
+      : `${excerpt.substr(0, 100)}&hellip;`
 
     if (typeof (postItem._embedded) !== 'undefined') {
       postItem.author_object = typeof (postItem._embedded['author']) !== 'undefined'
@@ -147,17 +147,21 @@ function processPosts (posts) {
         : null
 
       // TODO: Investigate Image Sizes in WP Admin
-      if (typeof (postItem._embedded['wp:featuredmedia']) !== 'undefined') {
+      if (typeof (postItem._embedded['wp:featuredmedia']) !== 'undefined' &&
+        postItem._embedded['wp:featuredmedia'][0].code !== 'rest_forbidden') {
         postItem.featured_media_object = postItem._embedded['wp:featuredmedia'][0]
 
         postItem.featured_media_object.srcset = ''
+
         if (Object.getOwnPropertyNames(postItem.featured_media_object.media_details.sizes).length !== 0) {
-          var srcset = []
-          _.each(postItem.featured_media_object.media_details.sizes, function (sizeItem) {
-            srcset.push(`${sizeItem.source_url} ${sizeItem.width}w`)
+          postItem.featured_media_object.srcset = Array.from(postItem.featured_media_object.media_details.sizes)
+          .map(function (sizeItem) {
+            return `${sizeItem.source_url} ${sizeItem.width}w`
           })
-          postItem.featured_media_object.srcset = srcset.join(', ')
+          .join(', ')
         }
+      } else {
+        postItem.featured_media_object = null
       }
 
       if (typeof (postItem._embedded['wp:term']) !== 'undefined') {
