@@ -9,7 +9,7 @@ const location = require('../../../src/js/location/locationSelector')
 const Model = require('../../../src/js/models/all-organisations/listing')
 const spLocationData = require('./spLocationData')
 
-fdescribe('all organisations - search by name - no location set', () => {
+describe('all organisations - search by name - no location set', () => {
   const locationResult = null
   let ajaxStub = null
   let sut = null
