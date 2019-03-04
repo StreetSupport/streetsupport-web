@@ -1,6 +1,6 @@
 ---
-title: Winter Homelessness Provision for Greater Manchester - A Bed For Every Night This Winter in Greater Manchester - Street Support Network
-description: Our mission is to provide a bed Every Night for Every Person sleeping rough in Greater Manchester this winter.
+title: Greater Manchester - GM Homelessness Action Network and A Bed Every Night - Street Support Network
+description: Greater Manchester Homelessness Action Network (GMHAN) and A Bed Every Night
 image: https://streetsupport.net/assets/img/og/street-support.jpg
 layout: withGoogle.hbs
 permalink: false
@@ -15,7 +15,7 @@ page: home
       <li class="breadcrumbs__item">
         <a href="/">Home</a>
       </li>
-      <li class="breadcrumbs__item">Greater Manchester Winter Provision</li>
+      <li class="breadcrumbs__item">Greater Manchester</li>
     </ol>
   </div>
 </div>
@@ -31,11 +31,62 @@ page: home
   <div class="container">
     <div class="block__content">
       <p>Greater Manchester Homelessness Action Network (GMHAN) brings together people with personal insight into homelessness, people from frontline organisation, public sector and others to find more effective solutions.</p>
-      <p>There are various <a href="#gm-initiatives">GM wide initiatives addressing different challenges faced by people experiencing homelessness</a>. A top priority for this winter is to support people who are sleeping rough to move inside through the 'Bed Every Night' initiative.</p>
+      <p>There are various <a href="#gm-initiatives">GM wide initiatives addressing different challenges faced by people experiencing homelessness</a></p>
     </div>
   </div>
 </div>
-<div class="block block--bed-every-night">
+<div class="block block--minor-highlight">
+  <div class="container">
+    <div class="block__content">
+      <a name="gm-initiatives"></a>
+      <h1 class="h2">Ways to help</h1>
+      <p>There are various ways to support people experiencing homelessness in Greater Manchester. Organisations, public services and voluntary groups work closely together to share resources and maximise the donations made.</p>
+      <div class="home__copy home__copy--padding">
+        <h2 class="h3">Support people directly</h2>
+        <ul>
+          <li><a href="http://bigchangemcr.co.uk">Big Change Manchester</a> - Big Change pays for practical items individuals in Central Manchester need to build independent lives away from the streets.</li>
+          <li><a href="https://realchangewiganandleigh.co.uk/">Real Change Wigan and Leigh</a> - Real Change pays for practical items individuals in Wigan and Leigh need to build independent lives away from the streets.</li>
+          <li><a href="https://mydonate.bt.com/charities/boaztrust">Migrant Relief Fund</a> - This fund provides a crisis grant to destitute migrants who have no access to public funds.</li>
+        </ul>
+        <h2 class="h3">Support a project</h2>
+        <ul>
+          <li><a href="https://bedeverynight.co.uk/">A Bed Every Night</a> - supports the provision of shelter and support for people who are sleeping rough across Greater Manchester this winter.</li>
+        </ul>
+        <h2 class="h3">Support local organisations</h2>
+        <form class="form js-give-help-form">
+          <fieldset class="form__fieldset form__fieldset--inline-fill">
+            <legend class="form__fieldset-title">See what's needed in your area</legend>
+            <div class="form__fieldset-inline-fill-container">
+              <label class="hide-screen" for="postcode">Your Postcode</label>
+              <input name="postcode" class="form__input form__input--inline-fill js-give-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
+              <button class="btn btn--brand-e btn--inline-fill" type="submit">
+                <span class="btn__text">Give help</span>
+              </button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div class="home__copy">
+        <h2 class="h3">Find local organisations</h2>
+        <form class="form js-find-orgs-form">
+          <fieldset class="form__fieldset form__fieldset--inline-fill">
+            <legend class="form__fieldset-title">Find an organisation near you:</legend>
+            <div class="form__fieldset-inline-fill-container">
+              <label class="hide-screen" for="postcode">Your Postcode</label>
+              <input name="postcode" class="form__input form__input--inline-fill js-find-orgs-postcode" placeholder="your postcode: eg M1 2HX"></input>
+              <button class="btn btn--brand-e btn--inline-fill" type="submit">
+                <span class="btn__text">Find organisations</span>
+              </button>
+            </div>
+          </fieldset>
+        </form>
+        <div class="js-map"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="block">
   <div class="container">
     <div class="block__content">
       <a href="https://bedeverynight.co.uk/">
@@ -133,53 +184,6 @@ page: home
         </form>
       </div>
     </div>
-    {{> divider }}
-    <div class="block__content">
-      <a name="gm-initiatives"></a>
-      <h1 class="h2">Want to help?</h1>
-      <p>There are various ways to support people experiencing homelessness in Greater Manchester. Organisations, public services and voluntary groups work closely together to share resources and maximise the donations made.</p>
-      <div class="home__copy home__copy--padding">
-        <h2 class="h3">Support people directly</h2>
-        <ul>
-          <li><a href="http://bigchangemcr.co.uk">Big Change Manchester</a> - Big Change pays for practical items individuals in Central Manchester need to build independent lives away from the streets.</li>
-          <li><a href="https://realchangewiganandleigh.co.uk/">Real Change Wigan and Leigh</a> - Real Change pays for practical items individuals in Wigan and Leigh need to build independent lives away from the streets.</li>
-          <li><a href="https://mydonate.bt.com/charities/boaztrust">Migrant Relief Fund</a> - This fund provides a crisis grant to destitute migrants who have no access to public funds.</li>
-        </ul>
-        <h2 class="h3">Support a project</h2>
-        <ul>
-          <li><a href="https://bedeverynight.co.uk/">A Bed Every Night</a> - supports the provision of shelter and support for people who are sleeping rough across Greater Manchester this winter.</li>
-        </ul>
-        <h2 class="h3">Support local organisations</h2>
-        <form class="form js-give-help-form">
-          <fieldset class="form__fieldset form__fieldset--inline-fill">
-            <legend class="form__fieldset-title">See what's needed in your area</legend>
-            <div class="form__fieldset-inline-fill-container">
-              <label class="hide-screen" for="postcode">Your Postcode</label>
-              <input name="postcode" class="form__input form__input--inline-fill js-give-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
-              <button class="btn btn--brand-e btn--inline-fill" type="submit">
-                <span class="btn__text">Give help</span>
-              </button>
-            </div>
-          </fieldset>
-        </form>
-      </div>
-      <div class="home__copy">
-        <h2 class="h3">Find local organisations</h2>
-        <form class="form js-find-orgs-form">
-          <fieldset class="form__fieldset form__fieldset--inline-fill">
-            <legend class="form__fieldset-title">Find an organisation near you:</legend>
-            <div class="form__fieldset-inline-fill-container">
-              <label class="hide-screen" for="postcode">Your Postcode</label>
-              <input name="postcode" class="form__input form__input--inline-fill js-find-orgs-postcode" placeholder="your postcode: eg M1 2HX"></input>
-              <button class="btn btn--brand-e btn--inline-fill" type="submit">
-                <span class="btn__text">Find organisations</span>
-              </button>
-            </div>
-          </fieldset>
-        </form>
-        <div class="js-map"></div>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -196,5 +200,5 @@ page: home
 
 <script id="js-news-tpl" type="text/template">
     {{> news-posts }}
-    {{> social-share }} 
+    {{> social-share }}
 </script>
