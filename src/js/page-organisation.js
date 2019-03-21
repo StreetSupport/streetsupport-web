@@ -1,18 +1,19 @@
 import './common'
 
-var urlParameter = require('./get-url-parameter')
-var accordion = require('./accordion')
-var htmlEncode = require('htmlencode')
-var marked = require('marked')
-marked.setOptions({sanitize: true})
-var apiRoutes = require('./api')
-var getApiData = require('./get-api-data')
-var analytics = require('./analytics')
-var templating = require('./template-render')
-var browser = require('./browser')
+const urlParameter = require('./get-url-parameter')
+const accordion = require('./accordion')
+const htmlEncode = require('htmlencode')
+const marked = require('marked')
+marked.setOptions({ sanitize: true })
+const apiRoutes = require('./api')
+const getApiData = require('./get-api-data')
+const analytics = require('./analytics')
+const templating = require('./template-render')
+const browser = require('./browser')
 
-var theOrganisation = urlParameter.parameter('organisation')
-var organisationUrl = apiRoutes.organisation += theOrganisation
+const theOrganisation = urlParameter.parameter('organisation')
+const organisationUrl = `${apiRoutes.organisation}${theOrganisation}`
+const accommodationUrl = `${apiRoutes.accommodation}?providerId=${theOrganisation}`
 
 browser.loading()
 
@@ -95,6 +96,7 @@ const formatData = function (data) {
       a.services = data.providedServices
         .filter((s) => s.address.postcode.replace(/\s/gi, '') === a.postcode.replace(/\s/gi, ''))
       a.hasServices = a.services.length > 0
+      a.hasOpeningTimes = a.openingDays.length > 0
 
       setOrgOtherServicesAsServicesNotAssignedToAddress(a)
     })
@@ -108,20 +110,38 @@ const formatData = function (data) {
   return data
 }
 
-getApiData.data(organisationUrl).then(function (result) {
-  var data = result.data
+getApiData.data(organisationUrl)
+  .then(function (result) {
+    var data = result.data
 
-  var theTitle = htmlEncode.htmlDecode(data.name + ' - Street Support')
-  document.title = theTitle
+    var theTitle = htmlEncode.htmlDecode(data.name + ' - Street Support')
+    document.title = theTitle
 
-  // Append object name for Hogan
-  var theData = { organisation: formatData(result.data) }
+    // Append object name for Hogan
+    var theData = { organisation: formatData(result.data) }
 
-  var callback = function () {
-    browser.loaded()
-    accordion.init()
-    analytics.init(theTitle)
-  }
+    var callback = function () {
+      browser.loaded()
+      accordion.init()
+      analytics.init(theTitle)
+    }
 
-  templating.renderTemplate('js-organisation-tpl', theData, 'js-organisation-output', callback)
-})
+    templating.renderTemplate('js-breadcrumb-tpl', theData, 'js-breadcrumb-output')
+    templating.renderTemplate('js-header-tpl', theData, 'js-header-output')
+    templating.renderTemplate('js-organisation-tpl', theData, 'js-organisation-output')
+    templating.renderTemplate('js-contact-tpl', theData, 'js-contact-output', callback)
+  })
+
+getApiData.data(accommodationUrl)
+  .then((result) => {
+    if (result.data.total > 0) {
+      var accEntries = result.data.items
+      for (var i = 0; i <= accEntries.length - 1; i++) {
+        accEntries[i].name = htmlEncode.htmlDecode(accEntries[i].name)
+      }
+      const theData = {
+        items: accEntries
+      }
+      templating.renderTemplate('js-accommodation-tpl', theData, 'js-accommodation-output')
+    }
+  })

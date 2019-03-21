@@ -19,6 +19,11 @@ const initForms = function (currentLocation) {
     postcode: document.querySelector('.js-find-help-postcode')
   }
 
+  const findOrgs = {
+    form: document.querySelector('.js-find-orgs-form'),
+    postcode: document.querySelector('.js-find-orgs-postcode')
+  }
+
   const giveHelp = {
     form: document.querySelector('.js-give-help-form'),
     postcode: document.querySelector('.js-give-help-postcode')
@@ -26,6 +31,7 @@ const initForms = function (currentLocation) {
 
   if (currentLocation) {
     findHelp.postcode.value = currentLocation.postcode
+    findOrgs.postcode.value = currentLocation.postcode
     giveHelp.postcode.value = currentLocation.postcode
   }
 
@@ -34,6 +40,14 @@ const initForms = function (currentLocation) {
     const reqLocation = findHelp.postcode.value
     location.setPostcode(reqLocation, () => {
       browser.redirect('/find-help/')
+    }, () => alert('We could not find your postcode, please try a nearby one'))
+  })
+
+  findOrgs.form.addEventListener('submit', function (e) {
+    e.preventDefault()
+    const reqLocation = findOrgs.postcode.value
+    location.setPostcode(reqLocation, () => {
+      browser.redirect('/find-help/all-service-providers/')
     }, () => alert('We could not find your postcode, please try a nearby one'))
   })
 
@@ -47,6 +61,8 @@ const initForms = function (currentLocation) {
 }
 
 const initLocations = function (currentLocation) {
+  console.log('init locations')
+
   const ui = {
     form: document.querySelector('.js-change-location-form'),
     select: document.querySelector('.js-change-location-select')

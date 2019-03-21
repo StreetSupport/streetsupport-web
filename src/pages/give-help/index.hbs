@@ -18,7 +18,7 @@ page: givehelp
   </div>
 </div>
 
-<div class="block block--header"> 
+<div class="block block--header">
   <div class="container">
     <h1 class="h1 block__header">Give Help</h1>
     <h2 class="h2 block__sub-header">Find out what you can do to help</h2>
@@ -49,7 +49,7 @@ page: givehelp
         <h2 class="h2 card__title card__title--briefcase">Get your business involved</h2>
         <p>By supporting the movement to end homelessness, you can play a key role in supporting charities and volunteer groups, and help to change policy.</p>
         <a href="/give-help/business-support" class="btn btn--brand-e btn--always-full">
-          <span class="btn__text">See what you can give</span>
+          <span class="btn__text">See how to support us</span>
         </a>
       </article>
       <article class="card card--cta card--grid-1-of-3">
@@ -68,9 +68,9 @@ page: givehelp
       </article>
       <article class="card card--cta card--grid-1-of-3">
         <h2 class="h2 card__title card__title--street-support">Help Street Support</h2>
-        <p>Can you offer your time on a regular basis and join our small and friendly team of volunteers?</p>
-        <a href="/give-help/volunteer" class="btn btn--brand-e btn--always-full">
-          <span class="btn__text">Help us</span>
+        <p>We are a small independent team and rely on funding from businesses and individuals to keep running.</p>
+        <a href="https://www.justgiving.com/streetsupportnetwork" class="btn btn--brand-e btn--always-full">
+          <span class="btn__text">Donate to Street Support</span>
         </a>
       </article>
     </div>
@@ -78,7 +78,7 @@ page: givehelp
 </div>
 
 <!-- ko if: hasCampaigns -->
-<div class="block"> 
+<div class="block">
   <div class="container">
     <h1 class="h1">Local Campaigns</h1>
     <p>Campaigns currently running in <span data-bind="text: locationName"></span>:</p>
@@ -93,9 +93,18 @@ page: givehelp
   {{> locations/banners/big-change-mcr }}
   <!-- /ko -->
 
+  <!-- ko if: isManchester -->
+  {{> locations/banners/migrant-destitution-fund-banner }}
+
+  <!-- /ko -->
+
+
   <!-- ko if: realChangeIsEnabled -->
   <!-- ko if: isWiganRealChangeTemplate -->
-  {{> locations/banners/wigan-and-leigh-real-change }}
+  {{> locations/banners/real-change-banner-wigan-and-leigh }}
+  <!-- /ko -->
+  <!-- ko if: isRochdaleRealChangeTemplate -->
+  {{> locations/banners/real-change-banner-rochdale }}
   <!-- /ko -->
   <!-- ko if: isBournemouthTemplate -->
   {{> bournemouth/bcp-change-for-good }}

@@ -40,6 +40,13 @@ p {
   line-height: 1.5;
 }
 
+.para--two-thirds {
+
+  @include mq($from: m) {
+    margin-right: 290px;
+  }
+}
+
 ul {
   li {
     margin-bottom: 5px;
@@ -68,6 +75,8 @@ dl {
 
 strong {
   font-weight: $font-headline-weight;
+  font-family: $font-headline;
+  font-size: 15px;
 }
 
 .text-left {
@@ -105,3 +114,25 @@ strong {
     width: 1px;
   }
 }
+
+.quote {
+  clear: both;
+  padding: 10px;
+}
+
+.quote__body {
+  color: $brand-h;
+  font-size: 18px;
+  font-family: $font-headline;
+  font-weight: $font-headline-weight;
+
+  &::before {
+    content: open-quote;
+  }
+  &::after {
+    content: open-quote;
+  }
+
+  margin-bottom: 20px;
+}
+

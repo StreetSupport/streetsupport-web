@@ -9,7 +9,10 @@
         <figure class="post__image\{{^featured_media_object}} post__image--empty\{{/featured_media_object}}">
           <a href="\{{link}}">
             \{{#featured_media_object}}
-            <img src="\{{media_details.sizes.medium.source_url}}" srcset="\{{ srcset }}" alt="\{{alt_text}}"> \{{/featured_media_object}} \{{^featured_media_object}}
+            <img src="\{{media_details.sizes.medium.source_url}}" srcset="\{{ srcset }}" alt="\{{alt_text}}">
+            \{{/featured_media_object}}
+
+            \{{^featured_media_object}}
             <svg class="svg-logo-dims">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#logo"></use>
             </svg>

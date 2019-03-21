@@ -1,32 +1,25 @@
-// List styles
-
-.list-grid {
-  @include cf();
-
-  clear: both;
-  list-style-type: none;
-  padding: 0;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.list-grid__item {
-  display: inline-block;
-  margin: 0 10px 20px 10px;
-  padding: 0;
-  width: 60px;
-}
-
-.list-unstyled {
+.list--unstyled {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.list-inline {
+.list--inline {
 
 }
 
-.list-inline__item {
+.list--inline__item {
   display: inline-block;
+}
+.list--two-column {
+  columns: 100px 2;
+  margin-right: 30%;
+  padding: 0;
+}
+.list__item {
+  display: inline-block;
+  width: 100%;
+  &::before {
+    content: '\25cf\a0\a0';
+  }
 }

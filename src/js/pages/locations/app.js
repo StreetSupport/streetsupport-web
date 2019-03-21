@@ -21,7 +21,7 @@ const initLocations = function (currentLocationId) {
   ui.form.addEventListener('submit', function (e) {
     e.preventDefault()
     const reqLocation = ui.select.value
-    if (reqLocation) {
+    if (reqLocation.length > 0) {
       location.setCurrent(reqLocation)
       browser.redirect(`/${reqLocation}`)
     }
@@ -38,7 +38,7 @@ const initLocations = function (currentLocationId) {
   .setAttribute('selected', 'selected')
 
   location.handler((result) => {
-    if (result.length) {
+    if (result.length > 0) {
       redirectToHubPage(result)
     }
   }, '.js-change-location-select')
@@ -91,9 +91,10 @@ const initStatistics = function (currentLocation) {
     { field: 'totalVolunteers', link: '/give-help/volunteer/', label: 'Volunteers' },
     { field: 'totalNeeds', link: '/give-help/help/', label: 'Needs' }
   ]
-  const requiredStats = currentLocation.homePageStats
+  const requiredStats = currentLocation.homePageStats && currentLocation.homePageStats.length > 0
     ? currentLocation.homePageStats
     : ['totalServiceProviders', 'totalNeeds', 'totalVolunteers']
+
   api
     .data(endpoints.statistics + currentLocation.id + '/latest')
     .then((result) => {

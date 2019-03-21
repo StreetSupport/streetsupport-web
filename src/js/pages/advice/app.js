@@ -13,14 +13,12 @@ const redirectToHubPage = function (locationId) {
 }
 
 const init = () => {
-  const selectedCity = supportedCities.locations.find(l => l.id === location.getSelectedLocationId())
-  if (selectedCity) {
-    selectedCity.isSelected = true
-  }
   const theData = {
     locations: [{ id: '', name: '- Select a location -' }, ...supportedCities.locations]
   }
   const callback = function () {
+    document.querySelector('.js-change-location-select').value = location.getSelectedLocationId()
+
     location.handler((result) => {
       if (result.length) {
         redirectToHubPage(result)
@@ -30,7 +28,10 @@ const init = () => {
     document.querySelector('.js-change-location-btn')
       .addEventListener('click', (e) => {
         e.preventDefault()
-        redirectToHubPage(document.querySelector('.js-change-location-select').value)
+        const locationId = document.querySelector('.js-change-location-select').value
+        if (locationId.length > 0) {
+          redirectToHubPage(locationId)
+        }
       })
   }
 

@@ -195,7 +195,7 @@
   }
 
   .ctas {
-    .btn { 
+    .btn {
       @include span(1 of 2);
       &:last-of-type {
         @include last();
@@ -218,9 +218,9 @@
   @include mq($from: m) {
     padding-bottom: 30px;
 
-    .container { 
+    .container {
       & > * {
-        @include span(2 of 3); 
+        @include span(2 of 3);
         @include first();
       }
     }
@@ -229,9 +229,9 @@
 .block--location-header {
   @include mq($from: m) {
 
-    .container { 
+    .container {
       & > * {
-        @include span(1 of 2); 
+        @include span(1 of 2);
         @include first();
       }
     }
@@ -350,7 +350,7 @@
     @include span(1 of 4);
   }
 
-  &:last-of-type { 
+  &:last-of-type {
     @include last();
   }
 
@@ -413,6 +413,20 @@
     }
   }
 
+  &--migrant-fund {
+    padding: 40px 20px;
+
+    @include mq($from: m) {
+      padding: 0px;
+    }
+  }
+
+  &--migrant-fund-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   &--big-change-mcr-logo {
     background: $big-change-b;
     text-align: center;
@@ -443,7 +457,7 @@
         position: absolute;
         top: 0;
         right: -1px;
-        transform: rotate(180deg);  
+        transform: rotate(180deg);
       }
     }
   }
