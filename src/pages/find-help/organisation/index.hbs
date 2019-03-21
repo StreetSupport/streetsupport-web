@@ -87,7 +87,7 @@ page: organisation
         \{{#telephone}}
         <p class="result-detail__telephone">Telephone: \{{{telephone}}}</p>
         \{{/telephone}}
-        \{{^hasOpeningTimes}}
+        \{{#hasOpeningTimes}}
           \{{#openingDays}}
             <dt class="result-detail__times-title">\{{day}}</dt>
             <dd class="result-detail__times-items">
@@ -140,7 +140,7 @@ page: organisation
                   \{{#isOpen247}}
                   <p>Open 24 hours a day, 7 days a week</p>
                   \{{/isOpen247}}
-                  \{{^hasOpeningTimes}}
+                  \{{#hasOpeningTimes}}
                     <h2 class="h3">Opening Times</h2>
                     <dl class="result-detail__times-list">
                       \{{#openingTimes}}
