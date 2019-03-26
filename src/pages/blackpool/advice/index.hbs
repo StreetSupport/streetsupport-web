@@ -1,10 +1,10 @@
 ---
 title: Emergency Homeless Help in Blackpool - Street Support
-description: Street support makes it easier to help people facing homelessness in Blackpool. Here's how to get help in an emergency.
+description: Street support makes it easier to help people facing homelessness. Here's how to get help in an emergency.
 image: https://streetsupport.net/assets/img/og/street-support-blackpool.jpg
 layout: default.hbs
 permalink: false
-jsBundle: emergencyhelp
+jsBundle: adviceV2
 section: blackpool
 page: blackpool-advice
 location: blackpool
@@ -20,13 +20,17 @@ location: blackpool
   </div>
 </div>
 
-{{> find-help/advice-header theLocationId="blackpool" }}
+{{> find-help/advice-header theLocationId="blackpool" sub-heading="Find useful advice related to homelessness in your
+area" }}
 
 <div class="block">
   <div class="container">
     <div class="block__content">
-      <p>Insert content here!</p>
-      {{> social-share}}
+      <div id="js-faqs-output"></div>
     </div>
   </div>
 </div>
+
+<script id="js-faqs-tpl" type="text/template">
+  {{> faqs/listing }}
+</script>
