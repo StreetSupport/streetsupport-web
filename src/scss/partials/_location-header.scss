@@ -50,6 +50,19 @@
   }
 }
 
+.location--blackpool .location-header {
+  @include mq($from: m) {
+    min-height: 400px;
+    &:before {
+      left: auto;
+      right: 0;
+      background-size: 670px;
+      width: 670px;
+      height: 400px;
+    }
+  }
+}
+
 .location--bolton .location-header {
   @include mq($from: m) {
     min-height: 400px;
