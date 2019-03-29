@@ -9,6 +9,7 @@ import runSequence from 'run-sequence'
 const locationId = argv.locationId
 const locationName = argv.locationName
 
+const rootDir = `${config.paths.pages}${locationId}`
 const advicePageDir = `${config.paths.pages}${locationId}/advice`
 const swepPageDir = `${config.paths.pages}${locationId}/severe-weather-accommodation`
 const partialsDir = `${config.paths.partials}${locationId}`
@@ -16,15 +17,24 @@ const partialsDir = `${config.paths.partials}${locationId}`
 gulp.task('anl-create-dirs', () => {
   if (locationId === undefined || locationId.length === 0) throw 'Please provide the id of the new location'
   if (locationName === undefined || locationName.length === 0) throw 'Please provide the name of the new location'
-  
-  fs.mkdirSync(`${config.paths.pages}${locationId}`)
+
+  fs.mkdirSync(`${rootDir}`)
   fs.mkdirSync(`${advicePageDir}`)
   fs.mkdirSync(`${swepPageDir}`)
   fs.mkdirSync(`${partialsDir}`)
 })
 
+gulp.task('anl-create-home-page', () => {
+  const srcContent = fs.readFileSync(`${config.paths.pages}locations/_home-page.hbs`, 'utf-8')
+  const newContent = srcContent
+    .replace(new RegExp('locationId', 'g'), locationId)
+    .replace(new RegExp('locationName', 'g'), locationName)
+  const dest = `${rootDir}/index.hbs`
+  fs.writeFileSync(dest, newContent)
+})
+
 gulp.task('anl-create-advice-page', () => {
-  const srcContent = fs.readFileSync(`${config.paths.pages}locations/_advice.hbs`, 'utf-8')
+  const srcContent = fs.readFileSync(`${config.paths.pages}locations/_advice2.hbs`, 'utf-8')
   const newContent = srcContent
     .replace(new RegExp('locationId', 'g'), locationId)
     .replace(new RegExp('locationName', 'g'), locationName)
@@ -60,6 +70,7 @@ gulp.task('anl-create-nav-partial', () => {
 gulp.task('add-new-location', (callback) => {
   runSequence(
     'anl-create-dirs',
+    'anl-create-home-page',
     'anl-create-advice-page',
     'anl-create-swep-page',
     'anl-create-supporters-partial',
