@@ -68,6 +68,12 @@
     width: 100%;
   }
 
+  &--small {
+    .btn__text {
+      padding: 5px 10px;
+    }
+  }
+
   &--in-copy {
     margin-top: 0;
   }
