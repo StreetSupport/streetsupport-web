@@ -1,0 +1,12 @@
+.postcode-multi-button {
+  .btn {
+    @include span(1 of 2);
+    &:last-child {
+      @include last();
+    }
+  }
+@include mq($from:m) {
+  @include span(2 of 4);
+  @include push(1 of 4);
+  }
+}
