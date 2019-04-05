@@ -19,20 +19,15 @@ const initForms = function (currentLocation) {
     postcode: document.querySelector('.js-find-help-postcode')
   }
 
-  const findOrgs = {
-    form: document.querySelector('.js-find-orgs-form'),
-    postcode: document.querySelector('.js-find-orgs-postcode')
-  }
-
-  const giveHelp = {
-    form: document.querySelector('.js-give-help-form'),
-    postcode: document.querySelector('.js-give-help-postcode')
+  const giveHelpFindOrgs = {
+    giveHelpBtn: document.querySelector('.js-give-help-btn'),
+    findOrgsBtn: document.querySelector('.js-find-orgs-btn'),
+    postcode: document.querySelector('.js-give-help-orgs-postcode')
   }
 
   if (currentLocation) {
     findHelp.postcode.value = currentLocation.postcode
-    findOrgs.postcode.value = currentLocation.postcode
-    giveHelp.postcode.value = currentLocation.postcode
+    giveHelpFindOrgs.postcode.value = currentLocation.postcode
   }
 
   findHelp.form.addEventListener('submit', function (e) {
@@ -43,17 +38,17 @@ const initForms = function (currentLocation) {
     }, () => alert('We could not find your postcode, please try a nearby one'))
   })
 
-  findOrgs.form.addEventListener('submit', function (e) {
+  giveHelpFindOrgs.findOrgsBtn.addEventListener('click', function (e) {
     e.preventDefault()
-    const reqLocation = findOrgs.postcode.value
+    const reqLocation = giveHelpFindOrgs.postcode.value
     location.setPostcode(reqLocation, () => {
       browser.redirect('/find-help/all-service-providers/')
     }, () => alert('We could not find your postcode, please try a nearby one'))
   })
 
-  giveHelp.form.addEventListener('submit', function (e) {
+  giveHelpFindOrgs.giveHelpBtn.addEventListener('click', function (e) {
     e.preventDefault()
-    const reqLocation = giveHelp.postcode.value
+    const reqLocation = giveHelpFindOrgs.postcode.value
     location.setPostcode(reqLocation, () => {
       browser.redirect('/give-help/help')
     }, () => alert('We could not find your postcode, please try a nearby one'))
@@ -61,8 +56,6 @@ const initForms = function (currentLocation) {
 }
 
 const initLocations = function (currentLocation) {
-  console.log('init locations')
-
   const ui = {
     form: document.querySelector('.js-change-location-form'),
     select: document.querySelector('.js-change-location-select')
