@@ -33,7 +33,9 @@ class NeedsListing {
     this.currentPageLinks = {}
 
     this.hasPostcode = ko.computed(() => this.proximitySearch.postcode() !== undefined && this.proximitySearch.postcode().length, this)
-    this.needsToDisplay = ko.computed(() => this.allNeeds().filter(this.currentFilterFunction()).sort(this.currentSortFunction()), this)
+    this.priorityNeeds = ko.computed(() => this.allNeeds().filter((n) => n.isPriority()))
+    this.nonPriorityNeeds = ko.computed(() => this.allNeeds().filter((n) => !n.isPriority()))
+    this.needsToDisplay = ko.computed(() => [...this.priorityNeeds(), ...this.nonPriorityNeeds().filter(this.currentFilterFunction()).sort(this.currentSortFunction())], this)
     this.hasNeeds = ko.computed(() => this.needsToDisplay().length > 0, this)
 
     const postcodeInQuerystring = querystring.parameter('postcode')

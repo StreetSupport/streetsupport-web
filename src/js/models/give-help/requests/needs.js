@@ -35,7 +35,8 @@ export const formatNeedsKO = (needs, position) => {
         neededDate: ko.observable(n.neededDate),
         distanceAwayInMetres: ko.observable(n.distanceAwayInMetres),
         keywords: ko.observableArray(n.keywords),
-        type: ko.observable(n.type)
+        type: ko.observable(n.type),
+        isPriority: ko.observable(n.isPriority)
       }
     })
 }
