@@ -221,6 +221,17 @@
   }
 }
 
+.location--wakefield .location-header {
+  @include mq($from: m) {
+    min-height: 400px;
+    &:before {
+      background-size: 807px;
+      width: 807px;
+      height: 351px;
+      bottom: -65px;
+    }
+  }
+}
 
 .location--wigan-and-leigh .location-header {
   @include mq($from: m) {
