@@ -4,6 +4,7 @@ const sinon = require('sinon')
 const marked = require('marked')
 
 const browser = require('../../../src/js/browser')
+const listToDropdown = require('../../../src/js/list-to-dropdown')
 const postcodeLookup = require('../../../src/js/location/postcodes')
 const querystring = require('../../../src/js/get-url-parameter')
 const storage = require('../../../src/js/storage')
@@ -21,6 +22,7 @@ describe('Find Help by Category - no postcode set', () => {
         pathname: '/find-help/support/'
       })
     sinon.stub(browser, 'pushHistory')
+    sinon.stub(listToDropdown, 'init')
     sinon.stub(browser, 'setOnHistoryPop')
     postcodeLookupStub = sinon.stub(postcodeLookup, 'getCoords')
     sinon.stub(querystring, 'parameter')
@@ -33,6 +35,7 @@ describe('Find Help by Category - no postcode set', () => {
     browser.location.restore()
     browser.pushHistory.restore()
     browser.setOnHistoryPop.restore()
+    listToDropdown.init.restore()
     postcodeLookup.getCoords.restore()
     querystring.parameter.restore()
     storage.get.restore()
