@@ -13,13 +13,15 @@ import utils from './utils'
 var resizeTimer
 var $listToSelect
 var $dropdownCreatedCallback
+var $onChangeCallback
 
 /**
 * @function init
 * @memberOf listToDropdown
 */
-var init = function (dropdownCreatedCallback) {
+var init = function (dropdownCreatedCallback = () => {}, onChangeCallback = () => {}) {
   $dropdownCreatedCallback = dropdownCreatedCallback
+  $onChangeCallback = onChangeCallback
 
   $listToSelect = document.querySelectorAll('.list-to-dropdown')
   convertToDropdown()
@@ -98,6 +100,9 @@ function createDropdown (j, $list) {
       $option.value = text
       $select.appendChild($option)
     }
+
+    console.log($onChangeCallback)
+    $select.addEventListener('change', $onChangeCallback)
   }
   $dropdownCreatedCallback()
 }

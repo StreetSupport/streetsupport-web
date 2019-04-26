@@ -6,6 +6,7 @@ const ajax = require('../../get-api-data')
 const browser = require('../../browser')
 const endpoints = require('../../api')
 const querystring = require('../../get-url-parameter')
+const listToDropdown = require('../../list-to-dropdown')
 
 import { getProvidersForListing } from '../../pages/find-help/provider-listing/helpers'
 
@@ -38,6 +39,15 @@ export default class FindHelpByCategory extends FindHelp {
     }])
     this.allItems = ko.observableArray([])
     this.subCatFilters = ko.computed(this.getSubCatFilters, this)
+
+    this.subCatFilters.subscribe(() => {
+      listToDropdown.init(
+        () => {},
+        (event) => {
+          this.onSubCatFilterByName(event.target.value)
+        }
+      )
+    })
 
     this.shouldShowSubCatFilter = ko.computed(() => {
       return this.subCatFilters().length > 1
@@ -88,6 +98,11 @@ export default class FindHelpByCategory extends FindHelp {
       : this.allItems()
     this.items(filtered)
     this.pushHistory()
+  }
+
+  onSubCatFilterByName(subCatName) {
+    const subCatId = this.subCatFilters().find((sc) => sc.name === subCatName).id
+    this.onSubCatFilter(subCatId)
   }
 
   onBrowserHistoryBack (thisDoobrey, e) {
