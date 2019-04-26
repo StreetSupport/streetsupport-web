@@ -5,6 +5,7 @@ const sinon = require('sinon')
 const ajax = require('../../../src/js/get-api-data')
 const browser = require('../../../src/js/browser')
 const endpoints = require('../../../src/js/api')
+const listToDropdown = require('../../../src/js/list-to-dropdown')
 const postcodeLookup = require('../../../src/js/location/postcodes')
 const querystring = require('../../../src/js/get-url-parameter')
 const storage = require('../../../src/js/storage')
@@ -47,7 +48,7 @@ describe('Find Help by Category - postcode set in proximity search', () => {
       })
     browserPushHistoryStub = sinon.stub(browser, 'pushHistory')
     sinon.stub(browser, 'setOnHistoryPop')
-
+    sinon.stub(listToDropdown, 'init')
     postcodeLookupStub = sinon.stub(postcodeLookup, 'getCoords')
     postcodeLookupStub
       .callsArgWith(1, newLocation) // success callback function
@@ -69,6 +70,7 @@ describe('Find Help by Category - postcode set in proximity search', () => {
     browser.location.restore()
     browser.pushHistory.restore()
     browser.setOnHistoryPop.restore()
+    listToDropdown.init.restore()
     postcodeLookup.getCoords.restore()
     querystring.parameter.restore()
     storage.get.restore()
