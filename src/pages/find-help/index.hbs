@@ -31,7 +31,16 @@ page: findhelp
       <form class="form location-selector form--highlighted js-change-location-form">
         <fieldset class="form__fieldset form__fieldset--inline-fill">
           <legend class="form__fieldset-title">Get advice for your area</legend>
-          <span id="js-cities-list-output"></span>
+          <div class="form__fieldset-inline-fill-container">
+            <label class="hide-screen" for="location">Select your area:</label>
+            <select name="location" class="form__input form__input--inline-fill js-change-location-select">
+              <option value="">- Select an area -</option>
+              {{> locations/_generated-option-tags }}
+            </select>
+            <button class="btn btn--brand-e btn--inline-fill js-change-location-btn" type="submit">
+              <span class="btn__text">Get advice</span>
+            </button>
+          </div>
         </fieldset>
       </form>
 
@@ -62,21 +71,6 @@ page: findhelp
 </div>
 
 <div id="spin"></div>
-
-<script id="js-cities-list-tpl" type="text/template">
-<div class="form__fieldset-inline-fill-container">
-  <label class="hide-screen" for="location">Select your area:</label>
-  <select name="location" class="form__input form__input--inline-fill js-change-location-select">
-    <option value="">- Select an area -</option>
-    \{{#cities}}
-    <option value="\{{id}}">\{{name}}</option>
-    \{{/cities}}
-  </select>
-  <button class="btn btn--brand-e btn--inline-fill js-change-location-btn" type="submit">
-    <span class="btn__text">Get advice</span>
-  </button>
-</div>
-</script>
 
 <script id="js-category-list-tpl" type="text/template">
   \{{#categories}}
