@@ -100,7 +100,7 @@ export default class FindHelpByCategory extends FindHelp {
     this.pushHistory()
   }
 
-  onSubCatFilterByName(subCatName) {
+  onSubCatFilterByName (subCatName) {
     const subCatId = this.subCatFilters().find((sc) => sc.name === subCatName).id
     this.onSubCatFilter(subCatId)
   }
