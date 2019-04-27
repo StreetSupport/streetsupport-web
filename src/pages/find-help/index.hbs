@@ -50,8 +50,7 @@ page: findhelp
       <h2 class="h2">Find local services to help you get what you need</h2>
       <p>From a supportive chat and a warm meal, to legal advice and medical help, find help near you by selecting a category below.</p>
       <div class="block__cta--3 result-grid">
-
-        <div id="js-category-list-output" class="template"></div>
+        {{> find-help/_generated-service-cats-ctas }}
       </div>
 
       <div class="title-with-button">
@@ -71,17 +70,3 @@ page: findhelp
 </div>
 
 <div id="spin"></div>
-
-<script id="js-category-list-tpl" type="text/template">
-  \{{#categories}}
-    <span class="cta">
-      <a class="btn btn--brand-d" id="\{{key}}" href="\{{page}}">
-        <span class="btn__icon">
-          <svg class="svg-\{{key}}-dims"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{site.url}}assets/svgsprite.svg#\{{key}}"></use></svg>
-          <span class="btn__overlay"></span>
-        </span>
-        <span class="btn__text">\{{name}}</span>
-      </a>
-    </span>
-  \{{/categories}}
-</script>
