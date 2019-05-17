@@ -86,6 +86,9 @@ page: find-help-support
             </button>
             <div class="accordion__item" data-bind="css: { 'is-active': isSelected }">
               <div class="accordion__inner">
+                <!-- ko ifnot: hasServices -->
+                <p>Sorry, there are no services available on this day.</p>
+                <!-- /ko -->
                 <div class="result-detail__times-list" data-bind="foreach: serviceProviders">
                   <div class="result-detail__item" data-bind="css: { 'hide-screen': isNotVisible }">
                     <div class="result-detail__times-title--timetabled h2" data-bind="with: openingTime">
@@ -126,7 +129,7 @@ page: find-help-support
         </div>
       </div>
       <!-- /ko -->
-      
+
     </div>
     {{> social-share }}
   </div>
