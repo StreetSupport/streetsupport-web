@@ -169,6 +169,9 @@ export const getServicesByDay = (dayServices) => {
           sp.hasTags = sp.tags.length > 0
           sp.isNotVisible = ko.observable(false)
         })
+      day.hasServices = ko.computed(() => {
+        return day.serviceProviders.filter(sp => !sp.isNotVisible()).length > 0
+      }, day)
     })
     return days
   }
