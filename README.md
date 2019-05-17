@@ -19,7 +19,7 @@ I would also appreciate any issues/PRs for bugs you may come across, and general
 * Install the latest stable Node version,
 * Run in Terminal: `npm i gulp-cli -g` (Gulp does not need to be installed globally),
 * In your command line terminal, navigate to the street support project folder,
-* Run: `npm i` 
+* Run: `npm i`
   * if you are on the Code Wifi network, you may have an issue installing modules around CriticalCSS/Phantom; you might need to tether to your mobile phone to get these downloaded.)
   * if this throws errors around Snyk (most likely Windows), see [https://support.snyk.io/snyk-cli/snyk-protect-requires-the-patch-binary].
 
@@ -145,7 +145,7 @@ Solution: use an alternative network (best to run `npm i` before attending)
 
 #### Others
 
-If there are problems that aren't mentioned here, post in the slack channel so we can help out and upate these docs.
+If there are problems that aren't mentioned here, post in the slack channel so we can help out and update these docs.
 
 ## Supported by
 
