@@ -8,17 +8,17 @@ describe('Homepage behaviour', function() {
       .pause(5000)
   });
 
-  it('has title', function () {    
+  it('has title', function () {
     expect(browser.getTitle()).toBe("Street Support Network - Working together to end homelessness");
   });
 
-  it('has Find Help CTA', function () {    
+  it('has Find Help CTA', function () {
     var findHelpCTA = browser.element('.btn--brand-d=Find Help');
     expect(findHelpCTA).not.toBeNull();
   });
 
-  it('has Give Help CTA', function () {    
-    var giveHelpCTA = browser.element('.btn--brand-e=Give Help');
+  it('has Give Help CTA', function () {
+    var giveHelpCTA = browser.element('.btn--brand-e=wangers');
     expect(giveHelpCTA).not.toBeNull();
   });
 });
