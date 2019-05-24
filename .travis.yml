@@ -14,7 +14,7 @@ jobs:
       - chmod +x ./deploy-website.sh
       script: "./deploy-website.sh"
     - stage: acceptance_test
-      if: branch IN (release,uat,develop)
+      if: branch IN (release,uat,develop,bstack)
       script: ./node_modules/.bin/wdio ./automated-tests/browserstack.conf.js
 env:
   global:
