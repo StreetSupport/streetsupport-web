@@ -8,6 +8,10 @@ describe('Homepage behaviour', function() {
       .pause(5000)
   });
 
+  it('should fail', () => {
+    expect(true).toBeFalsy();
+  })
+
   it('has title', function () {
     expect(browser.getTitle()).toBe("Street Support Network - Working together to end homelessness");
   });
@@ -18,7 +22,7 @@ describe('Homepage behaviour', function() {
   });
 
   it('has Give Help CTA', function () {
-    var giveHelpCTA = browser.element('.btn--brand-e=wangers');
+    var giveHelpCTA = browser.element('.btn--brand-e=Give Help');
     expect(giveHelpCTA).not.toBeNull();
   });
 });
