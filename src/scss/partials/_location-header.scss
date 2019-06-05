@@ -157,6 +157,19 @@
   }
 }
 
+.location--reading .location-header {
+  @include mq($from: m) {
+    min-height: 400px;
+    &:before {
+      background-size: 645px;
+      width: 858px;
+      height: 351px;
+      bottom: -17px;
+      left: 50%;
+    }
+  }
+}
+
 
 .location--salford .location-header {
   @include mq($from: m) {

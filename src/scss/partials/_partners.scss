@@ -184,14 +184,14 @@
         background-image: url(/assets/img/dorset-community-foundation.png);
       }
     }
-    
+
     &--bournemouth-council {
       width: 204px;
       a {
         background-image: url(/assets/img/bournemouth-council.png);
       }
     }
-    
+
     &--christchurch-council {
       width: 110px;
       a {
@@ -291,6 +291,78 @@
 
       a {
         background-image: url(/assets/img/oasis.png);
+      }
+    }
+
+    &--readistreet-reading {
+      width: 200px;
+
+      a {
+        background-image: url(/assets/img/reading-logos/readistreet.gif);
+      }
+    }
+
+    &--b4n-reading {
+      width: 250px;
+
+      a {
+        background-image: url(/assets/img/reading-logos/b4n.jpg);
+      }
+    }
+
+    &--faith-reading {
+      width: 200px;
+
+      a {
+        background-image: url(/assets/img/reading-logos/faith.jpg);
+      }
+    }
+
+    &--reading-foodbank {
+      width: 250px;
+
+      a {
+        background-image: url(/assets/img/reading-logos/reading-foodbank.png);
+      }
+    }
+
+    &--reading-citizens-advice {
+      width: 260px;
+
+      a {
+        background-image: url(/assets/img/reading-logos/citizens-advice.svg);
+      }
+    }
+
+    &--rehab-reading {
+      width: 120px;
+
+      a {
+        background-image: url(/assets/img/reading-logos/rehab.png);
+      }
+    }
+
+    &--reading-salvation-army {
+      width: 100px;
+
+      a {
+        background-image: url(/assets/img/reading-logos/salvation-army.gif);
+      }
+    }
+
+    &--reading-meam {
+      width: 200px;
+
+      a {
+        background-image: url(/assets/img/reading-logos/meam.png);
+      }
+    }
+
+    &--reading-mungos {
+      width: 200px;
+
+      a {
+        background-image: url(/assets/img/reading-logos/mungos.jpg);
       }
     }
   }
