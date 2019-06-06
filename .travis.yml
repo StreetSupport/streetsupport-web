@@ -6,10 +6,16 @@ node_js:
 cache:
   directories:
   - node_modules
-before_script:
-- npm install -g gulp-cli
-- chmod +x ./deploy-website.sh
-script: "./deploy-website.sh"
+jobs:
+  include:
+    - stage: deploy
+      before_script:
+      - npm install -g gulp-cli
+      - chmod +x ./deploy-website.sh
+      script: "./deploy-website.sh"
+    - stage: acceptance_test
+      if: branch IN (release,uat,develop,bstack)
+      script: ./node_modules/.bin/wdio ./automated-tests/browserstack.conf.js
 env:
   global:
   - secure: d8JEN3U0aA/BOlpU5ownSLvtMMD8Vkn3/abujoiCNflg4Zk6rVZUYUwo+NIKKc1lwV0pEWXE0LKzWk1ZsCW72A00SW6PXEduSk6/yD7OXaKl8otpq3UxvJK1Y2DvPi0uuxJ/zxZqvQBgIkhZTatZ9XMI2e61qiYgYS+MQz8iIig0MbR3Ugasr3IWbBvhqJY+Km0s9N+JjlKO3FeYYeo7WGoJeI5aaK04gDfjqNhbhgQ3anHy39VEfO2UC8SH3QbRYOup4ol4rpm6UkvBjSt6JtPMXatfAiOeDe7HW4MP4eLe8ORTtPF2vLnxYMlH1GyUinssRyNQfkA0YpK6lSOPX3CQ/ZdgIjqpYCwCTBBS27ZAaBh4NF1sYld42FCuIuy4uj5wjO3tB5M0ic17BgO8G01UfVPDfyBux7v7gz1ncth5qo1tFLznpK3hXwy2TjRPg2sas2DVvcRnOUOXRloC12XR6TC0twBKMYZJ84Kvgdvt0RPb1bo3wOSOUbezF4eEt19wca+ldrCKaxqJkPq7NEDU1RS0SP0rql6sddmhBH3jLOcM2FE/GwzCZ/DQnJgnn6FFTNtP234c8tIRvfX26jsu3RkPPARq/VW1EysEaTlsGkRO149DzAgis7BwdU/ycziSqxbjVRnNt7k2fqrBsfgpMk5ChXbiAPOJQVzYPdU=
@@ -23,3 +29,8 @@ env:
 notifications:
   slack:
     secure: V9EUneEioTlx0UGCOEYTZhMV58VCUn/p55DwcDCgsuaowTKG3mOPzn/8k7mTs8nA1mjNVcwIFUsOFB8m1V7stEEzFXmHjog8Bv/in2OeTwZoh7qIqJZXIwO21x58qQ17MGTvsjsPGI+0fmVpbELNd8/i37EPCZBK6n+5Jx70ZeZjOibAT8+HfGQ+6HMuLWeiyr5+d0JAhcLhFj0Iozbby0v9b5Dhkc5bpBnefA8FGJTQs7zh0qOa64KKm3UHv7x21BRTEoECsbCSjyzvp55C/JMXdBzCUT/p0B96ZXz3zoLlm0Y3ffNE0+yPMh7AvNAFQM/YqvZn9O9vK+H2wJjI1hi4gXZEKZEcLUYoOfUaqHPSVR+Np97tCyu6hdN1np1VpLTtAvhNCj4mmItwbL2jVDYl3SLAlGyDMqQfP9uIa4wWxi11I6jhSdfisXTP3C9otShaxTkkTVngUkIDOrMSNL01znh/Ob32jXxW+BUeVke+8h+OFV+zxgAtiN8soHLbLH+uT73aEhR/RX/82jSn8mT/uTC739gp25rjEfA0bijRKtDjmaOXju8BQ1P6+yhauFEsnbwnuDtlPfn0M4p3hKTtsszjghSEAudHd/lf68Nh3aHWhIBgkt8/5KdlZgqE9GkPd3qiyE5m89b0fiaIKDabHAWiF4OiGDRFxv2aJeg=
+addons:
+  browserstack:
+    username: admin841
+    access_key:
+      secure: "ofFEC8mlVPvrworgcK2dFffn0RoyeVwO5cxNjSL0k7vH2tErE65Mc2UNaQKk92n4AjONtm8QqI6HiGBEV6LWV89HmSeKfgXVq1v6oe1TMvl1guQBZgTKzheA4XutnqDUhSvrMt/apDxNfl33yXAeWmyW6EVZ0wSdSdf4VC0xyU0etA7aZqaD/V6GKsmPT15ut3EbuT2pa4EIMhlgHmzTduDhOAGz5gXVzTeJfAI3TyO0boqieztxjQArf8Bey8RkOzkEbAoqTKLnbjJl6dl3M3/R2RqPsDZhnrUm+rLUJrrOhRIB3j0l2NjtyrZtgMynzm+yCqfHuvCrxbHMzsOLBkiDLl3zZzRp0l7fc8G/os24eNEuT1PjV/dqHAEPT/fpbMJxyKzHW0Nahzm4vNir95sKx0BQP3mzM+mu8qObNcAGEfCuaU6K5MzBM1r/xwmQGm1dlamtZumNsrlCmmdAjT7Z6qX1BZEU5QVRZzO1LpOeFO9aLpey12uqjmjWrOCOJMotLiCIWLvlid+0UE52r9wDp+BxXNNBnfM99GNdnXG+czkj+MTuKYNR1c45g/fgB8oN1XonbI+b6X5P+a89tmVMcujbRS1DIQQUdUWAKF3AZMy3uTx85QCJpWVAP12lEqJ2tWE7HfnggwgdzrNA4MFw5CR/gno4x+K9AdDThJ0="

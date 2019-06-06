@@ -66,6 +66,9 @@
     "stylelint-config-standard": "15.0.1",
     "susy": "2.2.14",
     "vinyl-source-stream": "^1.1.0",
+    "wdio-jasmine-framework": "^0.3.6",
+    "wdio-mocha-framework": "^0.6.3",
+    "webdriverio": "^4.13.2",
     "webpack": "1.14.0",
     "yargs": "6.5.0"
   },
@@ -100,7 +103,8 @@
   "scripts": {
     "snyk-protect": "snyk protect",
     "prepublish": "npm run snyk-protect",
-    "prepare": "npm run snyk-protect"
+    "prepare": "npm run snyk-protect",
+    "browserstack": "wdio automated-tests/browserstack.conf.js"
   },
   "snyk": true
 }
