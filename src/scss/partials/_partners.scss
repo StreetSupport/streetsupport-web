@@ -365,6 +365,14 @@
         background-image: url(/assets/img/reading-logos/mungos.jpg);
       }
     }
+
+    &--reading-launchpad {
+      width: 200px;
+
+      a {
+        background-image: url(/assets/img/reading-logos/launchpad.png);
+      }
+    }
   }
 }
 
