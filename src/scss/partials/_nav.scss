@@ -129,6 +129,12 @@ $columned-dropdown-column-count: 3;
   }
 }
 
+body, html { 
+  @include mq($until: m) {
+    overflow-x: hidden;
+  }
+}
+
 .nav {
   @media print {
     & {
