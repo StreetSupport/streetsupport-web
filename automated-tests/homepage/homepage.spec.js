@@ -8,10 +8,6 @@ describe('Homepage behaviour', function() {
       .pause(5000)
   });
 
-  it('should fail', () => {
-    expect(true).toBeFalsy();
-  })
-
   it('has title', function () {
     expect(browser.getTitle()).toBe("Street Support Network - Working together to end homelessness");
   });
