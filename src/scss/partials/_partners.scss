@@ -373,6 +373,14 @@
         background-image: url(/assets/img/reading-logos/launchpad.png);
       }
     }
+
+    &--reading-rbc {
+      width: 200px;
+
+      a {
+        background-image: url(/assets/img/reading-logos/RBC.jpg)
+      }
+    }
   }
 }
 
