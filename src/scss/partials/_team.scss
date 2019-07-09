@@ -77,6 +77,12 @@
   }
 }
 
+.team__member-title--samra {
+  &::before, &::after {
+    background-image: url('/assets/img/samra-said.jpg')
+  }
+}
+
 .team__member-title--joanne {
   &::before, &::after {
     background-image: url('/assets/img/jo.jpg')
