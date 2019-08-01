@@ -19,15 +19,15 @@ const initForms = function (currentLocation) {
     postcode: document.querySelector('.js-find-help-postcode')
   }
 
-  const giveHelpFindOrgs = {
+  const giveHelpDonate = {
     giveHelpBtn: document.querySelector('.js-give-help-btn'),
-    findOrgsBtn: document.querySelector('.js-find-orgs-btn'),
+    donateBtn: document.querySelector('.js-donate-btn'),
     postcode: document.querySelector('.js-give-help-orgs-postcode')
   }
 
   if (currentLocation) {
     findHelp.postcode.value = currentLocation.postcode
-    giveHelpFindOrgs.postcode.value = currentLocation.postcode
+    giveHelpDonate.postcode.value = currentLocation.postcode
   }
 
   findHelp.form.addEventListener('submit', function (e) {
@@ -38,17 +38,17 @@ const initForms = function (currentLocation) {
     }, () => alert('We could not find your postcode, please try a nearby one'))
   })
 
-  giveHelpFindOrgs.findOrgsBtn.addEventListener('click', function (e) {
+  giveHelpDonate.donateBtn.addEventListener('click', function (e) {
     e.preventDefault()
-    const reqLocation = giveHelpFindOrgs.postcode.value
+    const reqLocation = giveHelpDonate.postcode.value
     location.setPostcode(reqLocation, () => {
-      browser.redirect('/find-help/all-service-providers/')
+      browser.redirect('/give-help/donate/')
     }, () => alert('We could not find your postcode, please try a nearby one'))
   })
 
-  giveHelpFindOrgs.giveHelpBtn.addEventListener('click', function (e) {
+  giveHelpDonate.giveHelpBtn.addEventListener('click', function (e) {
     e.preventDefault()
-    const reqLocation = giveHelpFindOrgs.postcode.value
+    const reqLocation = giveHelpDonate.postcode.value
     location.setPostcode(reqLocation, () => {
       browser.redirect('/give-help/help')
     }, () => alert('We could not find your postcode, please try a nearby one'))
