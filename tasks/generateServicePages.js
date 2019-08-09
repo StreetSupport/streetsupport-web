@@ -54,10 +54,27 @@ gulp.task('getCities', (callback) => {
   })
 })
 
+const getNewTitle = function (catName, suffix = '') {
+  const services = 'Services'
+  const parts = catName.includes(services)
+    ? [
+      catName.trim(),
+      suffix,
+      '- Street Support'
+    ]
+    : [
+      catName.trim(),
+      services,
+      suffix,
+      '- Street Support'
+    ]
+  return parts.join(' ')
+}
+
 const getNewContent = function (src, cat) {
   let result = src
     .replace('page:', `page: find-help-${cat.key}`)
-    .replace('title:', `title: ${cat.name} Services - Street Support`)
+    .replace('title:', `title: ${getNewTitle(cat.name)}`)
     .replace('description:', `description: A comprehensive listing of ${cat.name} Services available near your location`)
     .replace('theServiceCategoryId', cat.key)
 
@@ -69,7 +86,7 @@ const getNewContent = function (src, cat) {
 const getNewTimeTabledContent = function (src, cat) {
   let result = src
     .replace('page:', `page: find-help-${cat.key}`)
-    .replace('title:', `title: ${cat.name} Services Timetable - Street Support`)
+    .replace('title:', `title: ${getNewTitle(cat.name, 'Timetable')}`)
     .replace('description:', `description: Timetable of ${cat.name} Services available near your location`)
     .replace('theServiceCategoryId', cat.key)
 
@@ -81,7 +98,7 @@ const getNewTimeTabledContent = function (src, cat) {
 const getNewLocationContent = function (src, cat) {
   let result = src
     .replace('page:', `page: find-help-${cat.key}`)
-    .replace('title:', `title: ${cat.name} Services by Location - Street Support`)
+    .replace('title:', `title: ${getNewTitle(cat.name, 'by Location')}`)
     .replace('description:', `description: ${cat.name} Services by location available near you`)
     .replace('theServiceCategoryId', cat.key)
 
