@@ -105,6 +105,18 @@
   }
 }
 
+.location--exeter .location-header {
+  @include mq($from: m) {
+    min-height: 400px;
+    &:before {
+      background-size: 886px;
+      width: 892px;
+      height: 354px;
+      bottom: 8px;
+    }
+  }
+}
+
 .location--leeds .location-header {
   @include mq($from: m) {
     &:before {
