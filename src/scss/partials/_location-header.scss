@@ -107,12 +107,17 @@
 
 .location--exeter .location-header {
   @include mq($from: m) {
-    min-height: 400px;
     &:before {
       background-size: 886px;
       width: 892px;
-      height: 354px;
       bottom: 8px;
+      height: 354px;
+    }
+  }
+  @include mq($from: xxxl) {
+    &:before {
+      left: auto;
+      right: 0%;
     }
   }
 }
