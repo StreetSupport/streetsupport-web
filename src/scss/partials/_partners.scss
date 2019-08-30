@@ -66,11 +66,13 @@
       }
     }
 
+    //manchester
+
     &--booth-centre {
       width: 114px;
 
       a {
-        background-image: url(/assets/img/booth-centre.png);
+        background-image: url(/assets/img/manchester-logos/booth-centre.png);
       }
     }
 
@@ -78,7 +80,7 @@
       width: 132px;
 
       a {
-        background-image: url(/assets/img/bruntwood.png);
+        background-image: url(/assets/img/manchester-logos/bruntwood.png);
       }
     }
 
@@ -98,7 +100,7 @@
       width: 140px;
 
       a {
-        background-image: url(/assets/img/gm-mayors-fund.png);
+        background-image: url(/assets/img/manchester-logos/gm-mayors-fund.png);
       }
     }
 
@@ -118,7 +120,7 @@
       width: 120px;
 
       a {
-        background-image: url(/assets/img/cityco.png);
+        background-image: url(/assets/img/manchester-logos/cityco.png);
       }
     }
 
@@ -126,7 +128,7 @@
       width: 110px;
 
       a {
-        background-image: url(/assets/img/one-agency.png);
+        background-image: url(/assets/img/manchester-logos/one-agency.png);
       }
     }
 
@@ -134,7 +136,7 @@
       width: 250px;
 
       a {
-        background-image: url(/assets/img/dentsu-aegis.png);
+        background-image: url(/assets/img/manchester-logos/dentsu-aegis.png);
       }
     }
 
@@ -142,9 +144,17 @@
       width: 175px;
 
       a {
-        background-image: url(/assets/img/manchester-city-council.png);
+        background-image: url(/assets/img/manchester-logos/manchester-city-council.png);
       }
     }
+
+    &--human-appeal {
+      a {
+        background-image: url(/assets/img/manchester-logos/human-appeal-logo.svg);
+      }
+    }
+
+    //leeds
 
     &--leedsbid {
       width: 220px;
@@ -157,10 +167,12 @@
       }
     }
 
+    //bournemouth
+
     &--bournemouth-uni {
       width: 250px;
       a {
-        background-image: url(/assets/img/bournemouth-university_250px.png);
+        background-image: url(/assets/img/bournemouth-logos/bournemouth-university_250px.png);
       }
     }
 
@@ -174,23 +186,25 @@
     &--dorset-pcc {
       width: 250px;
       a {
-        background-image: url(/assets/img/dorset-pcc.png);
+        background-image: url(/assets/img/bournemouth-logos/dorset-pcc.png);
       }
     }
 
     &--dorset-comm-fdn {
       width: 250px;
       a {
-        background-image: url(/assets/img/dorset-community-foundation.png);
+        background-image: url(/assets/img/bournemouth-logos/dorset-community-foundation.png);
       }
     }
 
     &--bcp-council {
       width: 204px;
       a {
-        background-image: url(/assets/img/bcp-council.png);
+        background-image: url(/assets/img/bournemouth-logos/bcp-council.png);
       }
     }
+
+    //liverpool
 
     &--liverpoolbid {
       width: 294px;
@@ -221,15 +235,11 @@
       }
     }
 
-    &--human-appeal {
-      a {
-        background-image: url(/assets/img/human-appeal-logo.svg);
-      }
-    }
+    //southampton
 
     &--go-southampton {
       a {
-        background-image: url(/assets/img/go-southampton.png);
+        background-image: url(/assets/img/southampton-logos/go-southampton.png);
       }
     }
 
@@ -237,7 +247,7 @@
       width: 200px;
 
       a {
-        background-image: url(/assets/img/rotary-southampton.png);
+        background-image: url(/assets/img/southampton-logos/rotary-southampton.png);
       }
     }
 
@@ -245,7 +255,7 @@
       width: 180px;
 
       a {
-        background-image: url(/assets/img/southampton-voluntary-services.png);
+        background-image: url(/assets/img/southampton-logos/southampton-voluntary-services.png);
       }
     }
 
@@ -253,14 +263,14 @@
       width: 200px;
 
       a {
-        background-image: url(/assets/img/society-of-james.png);
+        background-image: url(/assets/img/southampton-logos/society-of-james.png);
       }
     }
 
     &--southampton-city-council {
       width: 200px;
       a {
-        background-image: url(/assets/img/southampton-city-council.png);
+        background-image: url(/assets/img/southampton-logos/southampton-city-council.png);
       }
     }
 
@@ -268,7 +278,7 @@
       width: 160px;
 
       a {
-        background-image: url(/assets/img/citylife-church.png);
+        background-image: url(/assets/img/southampton-logos/citylife-church.png);
       }
     }
 
@@ -276,7 +286,7 @@
       width: 140px;
 
       a {
-        background-image: url(/assets/img/oasis.png);
+        background-image: url(/assets/img/southampton-logos/oasis.png);
       }
     }
 
