@@ -315,6 +315,17 @@
     }
   }
 
+  &--light-highlight {
+    background: transparent;
+    background: linear-gradient(180deg, $brand-a 0%, $brand-b 100%);
+    color: #fff;
+
+    a {
+      color: $brand-e;
+    }
+}
+
+
   &--mcr-partnership {
     background: black;
     background: linear-gradient(to bottom, rgba(0,0,0,0.8), black);
@@ -483,8 +494,43 @@
   }
 }
 
+.sleeping-rough-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sleeping-rough-title__heading {
+  text-align: left;
+  width: 230px;
+  @include mq($from: s) {
+    width: auto;
+  }
+}
+
+.sleeping-rough-title__icon {
+  height: 60px;
+  width: 60px;
+  margin-right: 15px;
+@include mq($from: s) {
+  height: 70px;
+  width: 70px;
+}
+@include mq($from: m) {
+  height: 49px;
+  width: 49px;
+  }
+}
+
+.sleeping-rough-title__content {
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+
 .block__link {
   &:hover {
       text-decoration: none!important;
   }
 }
+
