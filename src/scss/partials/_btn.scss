@@ -78,6 +78,15 @@
     margin-top: 0;
   }
 
+  &--emergency-advice {
+    width: 100%;
+    padding: 0;
+
+    @include mq($from: m) {
+      width: 50%;
+    }
+  }
+
   &--brand-d {
     .btn__text {
       background-color: $brand-d;
