@@ -220,6 +220,9 @@
       &--wigan-and-leigh {
         background: #fbbf09 url('/assets/img/real-change-banner/wigan-and-leigh/bg-desktop.png') no-repeat 50% top;
       }
+      &--oldham {
+        background: #fbbf09 url('/assets/img/real-change-banner/oldham/bg-desktop.png') no-repeat 50% top;
+      }
 
       .container {
         padding-top: 0;
@@ -235,6 +238,10 @@
 
     &--rochdale {
       background-color: #388269;
+    }
+
+    &--oldham {
+      background-color: #e96187;
     }
 
     .real-change-banner__logo {
@@ -289,6 +296,13 @@
 
         @include mq($from: xl) {
           background: url('/assets/img/real-change-banner/rochdale/title-desktop.png') no-repeat right;
+        }
+      }
+      &--oldham {
+        background: url('/assets/img/real-change-banner/oldham/title-mobile.png') no-repeat;
+
+        @include mq($from: xl) {
+          background: url('/assets/img/real-change-banner/oldham/title-desktop.png') no-repeat right;
         }
       }
     }
