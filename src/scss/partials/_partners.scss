@@ -445,6 +445,33 @@
         background-image: url(/assets/img/exeter-logos/exeter-bchange.jpg)
       }
     }
+
+    //cambridge
+
+    &--cambridge-council {
+      width: 250px;
+
+      a {
+        background-image: url(/assets/img/cambridge-logos/cambridge-council.png)
+      }
+    }
+
+    &--cambridge-gonville {
+      width: 150px;
+
+      a {
+        background-image: url(/assets/img/cambridge-logos/cambridge-gonville.jpg)
+      }
+    }
+
+    &--cambridge-partnership {
+      width: 250px;
+
+      a {
+        background-image: url(/assets/img/cambridge-logos/cambridge-partnership.png)
+      }
+    }
+
   }
 }
 

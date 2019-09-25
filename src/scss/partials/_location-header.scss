@@ -105,6 +105,23 @@
   }
 }
 
+.location--cambridge .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-size: 644px;
+      width: 650px;
+      bottom: 9px;
+      height: 335px;
+    }
+  }
+  @include mq($from: xxxl) {
+    &:before {
+      left: auto;
+      right: 5%;
+    }
+  }
+}
+
 .location--exeter .location-header {
   @include mq($from: m) {
     &:before {
