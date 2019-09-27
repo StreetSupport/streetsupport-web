@@ -11,6 +11,7 @@ const templating = require('../../template-render')
 const wp = require('../../wordpress')
 const MapBuilder = require('../../models/accommodation/MapBuilder')
 import { categories } from '../../../data/generated/service-categories'
+const { cities } = require('../../../data/generated/supported-cities')
 
 const initLocations = function (currentLocationId) {
   const ui = {
@@ -147,14 +148,10 @@ const initMap = function (currentLocation) {
 }
 
 const initSwep = function (currentLocationId) {
-  api
-  .data(endpoints.cities)
-  .then((result) => {
-    const city = result.data.find((c) => c.id === currentLocationId)
-    if (city.swepIsAvailable) {
-      templating.renderTemplate('js-swep-tpl', city, 'js-swep-output')
-    }
-  }, (_) => {})
+  const city = cities.find((c) => c.id === currentLocationId)
+  if (city.swepIsAvailable) {
+    templating.renderTemplate('js-swep-tpl', city, 'js-swep-output')
+  }
 }
 
 const currentLocation = location.getCurrentHub()
