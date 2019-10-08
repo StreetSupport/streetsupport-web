@@ -147,6 +147,23 @@
   }
 }
 
+.location--luton .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-size: 692px;
+      width: 650px;
+      bottom: 8px;
+      height: 335px;
+    }
+  }
+  @include mq($from: xxxl) {
+    &:before {
+      left: auto;
+      right: 3%;
+    }
+  }
+}
+
 .location--manchester .location-header {
   @include mq($from: m) {
     &:before {
