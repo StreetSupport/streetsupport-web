@@ -57,3 +57,8 @@ patch:
   'npm:marked:20170907':
     - marked:
         patched: '2017-11-01T06:09:05.408Z'
+  SNYK-JS-HTTPSPROXYAGENT-469131:
+    - snyk > proxy-agent > https-proxy-agent:
+        patched: '2019-10-09T22:21:51.884Z'
+    - snyk > proxy-agent > pac-proxy-agent > https-proxy-agent:
+        patched: '2019-10-09T22:21:51.884Z'
