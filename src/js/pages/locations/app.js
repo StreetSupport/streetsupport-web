@@ -34,9 +34,9 @@ const initLocations = function (currentLocationId) {
   }
 
   Array.from(document.querySelector('.js-change-location-select'))
-  .filter((t) => t.tagName === 'OPTION')
-  .find((o) => o.value === currentLocationId)
-  .setAttribute('selected', 'selected')
+    .filter((t) => t.tagName === 'OPTION')
+    .find((o) => o.value === currentLocationId)
+    .setAttribute('selected', 'selected')
 
   location.handler((result) => {
     if (result.length > 0) {
@@ -90,11 +90,12 @@ const initStatistics = function (currentLocation) {
     { field: 'totalServiceProviders', link: '/find-help/all-service-providers/', label: 'Organisations' },
     { field: 'totalPledges', link: 'https://charter.streetsupport.net/progress/', label: 'Pledges' },
     { field: 'totalVolunteers', link: '/give-help/volunteer/', label: 'Volunteers' },
+    { field: 'totalServices', link: '/find-help/', label: 'Services' },
     { field: 'totalNeeds', link: '/give-help/help/', label: 'Needs' }
   ]
   const requiredStats = currentLocation.homePageStats && currentLocation.homePageStats.length > 0
     ? currentLocation.homePageStats
-    : ['totalServiceProviders', 'totalNeeds', 'totalVolunteers']
+    : ['totalServiceProviders', 'totalNeeds', 'totalServices']
 
   api
     .data(endpoints.statistics + currentLocation.id + '/latest')
