@@ -251,6 +251,35 @@
     }
   }
 
+  &--reading-print-map {
+    background: rgba(10, 133, 100, 0.15);
+    display: block;
+    padding: 0!important;
+
+    @include mq($from: m) {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .block__reading-print-map {
+      width: 100%;
+      height: 350px;
+      background: url('/assets/img/maps/reading.png') right bottom;
+      box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.5);
+
+      @include mq($from: m) {
+        width: 50%;
+      }
+    }
+
+    .block__reading-map-pin {
+      height: 70%;
+      width: 70%;
+      position: relative;
+      background: url('/assets/img/maps/map-pin.svg') center no-repeat;
+    }
+  }
+
   &--real-change-banner {
     padding: 0 20px 30px 20px!important;
     background-color: #5e71ba;
