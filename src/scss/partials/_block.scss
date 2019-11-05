@@ -430,6 +430,14 @@
     }
   }
 
+  &--mcr-print-map {
+    padding: 40px 1rem;
+    @include mq($from: m) {
+      max-width: 500px;  // half of $site-container in _variables.scss
+      padding: 10px 30px 10px 40px;
+    }
+  }
+
   &--bcp-changeforgood {
     padding: 0 10px;
     @include mq($from: m) {
