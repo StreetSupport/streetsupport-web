@@ -445,6 +445,13 @@
     }
   }
 
+  &--big-change-luton {
+    padding: 0 10px;
+    @include mq($from: m) {
+      padding: 40px 30px 40px 40px;
+    }
+  }
+
   &--migrant-fund {
     padding: 40px 20px;
 
