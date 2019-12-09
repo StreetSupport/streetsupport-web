@@ -281,6 +281,23 @@
     }
   }
 
+  &--video-banner {
+    background: transparent;
+    background: linear-gradient(180deg, $brand-a 0%, $brand-b 100%);
+    color: #fff;
+    object-fit: cover;
+
+    padding: 0!important;
+
+    @media screen and (min-width: 750px) {
+      .video-section {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
+
   &--reading-print-map {
     background: rgba(10, 133, 100, 0.15);
     display: block;

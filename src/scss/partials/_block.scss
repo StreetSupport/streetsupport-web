@@ -460,6 +460,13 @@
     }
   }
 
+  &--video-banner {
+    padding: 40px 1rem;
+    @include mq($from: m) {
+      padding: 10px 30px 10px 40px;
+    }
+  }
+
   &--migrant-fund-logo {
     display: flex;
     flex-direction: column;
