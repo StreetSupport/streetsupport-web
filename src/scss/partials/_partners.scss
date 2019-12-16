@@ -198,9 +198,23 @@
     }
 
     &--bcp-council {
-      width: 204px;
+      width: 130px;
       a {
         background-image: url(/assets/img/bournemouth-logos/bcp-council.png);
+      }
+    }
+
+    &--wiseability-bournemouth {
+      width: 190px;
+      a {
+        background-image: url(/assets/img/bournemouth-logos/wiseability-bournemouth.png);
+      }
+    }
+
+    &--bbo-bournemouth {
+      width: 250px;
+      a {
+        background-image: url(/assets/img/bournemouth-logos/bbo-bournemouth.png);
       }
     }
 
