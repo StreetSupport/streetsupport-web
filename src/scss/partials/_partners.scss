@@ -479,7 +479,7 @@
     //cambridge
 
     &--cambridge-council {
-      width: 250px;
+      width: 150px;
 
       a {
         background-image: url(/assets/img/cambridge-logos/cambridge-council.png)
@@ -495,7 +495,7 @@
     }
 
     &--cambridge-partnership {
-      width: 250px;
+      width: 160px;
 
       a {
         background-image: url(/assets/img/cambridge-logos/cambridge-partnership.png)
@@ -503,7 +503,7 @@
     }
 
     &--cambridge-foodbank {
-      width: 250px;
+      width: 120px;
 
       a {
         background-image: url(/assets/img/cambridge-logos/cambridge-foodbank.jpg)
@@ -539,6 +539,14 @@
 
       a {
         background-image: url(/assets/img/cambridge-logos/cambridge-winter-comfort.jpg)
+      }
+    }
+
+    &--cambridge-ccf {
+      width: 250px;
+
+      a {
+        background-image: url(/assets/img/cambridge-logos/cambridge-ccf.jpg)
       }
     }
 
@@ -641,7 +649,7 @@
     }
 
     &--luton-squared {
-      width: 150px;
+      width: 200px;
 
       a {
         background-image: url(/assets/img/luton-logos/luton-squared.jpg)
@@ -661,6 +669,14 @@
 
       a {
         background-image: url(/assets/img/luton-logos/luton-ca.png)
+      }
+    }
+
+    &--luton-ymca {
+      width: 200px;
+
+      a {
+        background-image: url(/assets/img/luton-logos/luton-ymca.jpg)
       }
     }
   }
