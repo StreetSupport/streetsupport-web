@@ -99,6 +99,10 @@
 
     img {
       padding-top: 70px;
+
+      &:hover {
+        opacity: 0.9;
+      }
     }
 
     .block__big-change-luton {
