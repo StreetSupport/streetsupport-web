@@ -91,8 +91,7 @@
 
   &--big-change-luton {
     padding: 0!important;
-    border-top: 70px $brand-b solid;
-    border-bottom: 70px $brand-b solid;
+    background: rgba(10, 133, 100, 0.15);
 
     @include mq($from: m) {
       display: flex;
@@ -104,9 +103,6 @@
 
     .block__big-change-luton {
       margin: -70px 10px 0 10px;
-      border-left: 6px white solid;
-      border-right: 6px white solid;
-      border-bottom: 6px white solid;
 
       @include mq($from: m) {
         margin: 0;
