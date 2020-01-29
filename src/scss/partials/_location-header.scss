@@ -122,23 +122,6 @@
   }
 }
 
-.location--exeter .location-header {
-  @include mq($from: m) {
-    &:before {
-      background-size: 886px;
-      width: 892px;
-      bottom: 8px;
-      height: 354px;
-    }
-  }
-  @include mq($from: xxxl) {
-    &:before {
-      left: auto;
-      right: 0%;
-    }
-  }
-}
-
 .location--leeds .location-header {
   @include mq($from: m) {
     &:before {
