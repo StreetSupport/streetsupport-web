@@ -452,6 +452,21 @@
     }
   }
 
+  &--cambridge-street-aid {
+    padding: 0 10px;
+    @include mq($from: m) {
+      padding: 40px 30px 20px 45px;
+    }
+  }
+
+  &--it-takes-a-city {
+    padding: 40px 20px;
+
+    @include mq($from: m) {
+      padding: 0px;
+    }
+  }
+
   &--migrant-fund {
     padding: 40px 20px;
 
@@ -468,6 +483,12 @@
   }
 
   &--migrant-fund-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &--it-takes-a-city-logo {
     display: flex;
     flex-direction: column;
     justify-content: center;
