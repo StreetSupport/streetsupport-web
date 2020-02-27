@@ -119,6 +119,44 @@
     }
   }
 
+  &--cambridge-street-aid {
+    padding: 0!important;
+    background: rgba(10, 133, 100, 0.15);
+
+    @include mq($from: m) {
+      padding-top: 100px;
+      display: flex;
+    }
+    img {
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    .street-aid-video {
+      padding-top: 100px;
+      height: 415px;
+      width: 560px;
+      @include mq($from: m) {
+        height: 315px;
+        padding: 0;
+      }
+    }
+
+    .block__cambridge-street-aid {
+      margin: -70px 10px 0 10px;
+
+      @include mq($from: m) {
+        margin: 0;
+        padding-top: 40px;
+        @include span(6 of 12);
+        border: none;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
   &--southampton-charter {
     background: rgba(10, 133, 100, 0.15);
     display: block;
@@ -349,7 +387,7 @@
 
     .block__mcr-map-pin {
       height: 60%;
-      width: 125%;
+      width: 80%;
       position: relative;
       background: url('/assets/img/maps/map-pin.svg') center no-repeat;
     }

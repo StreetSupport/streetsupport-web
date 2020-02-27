@@ -45,6 +45,10 @@ p {
   font-weight: $font-headline-weight;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .para--two-thirds {
 
   @include mq($from: m) {
