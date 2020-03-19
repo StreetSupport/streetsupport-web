@@ -74,6 +74,21 @@
   }
 }
 
+.cta--cv-notification {
+  background-color: $brand-g;
+  @include cf();
+  @include span(8 of $grid-column);
+  float: none;
+
+  a {
+    color: #fff;
+
+    &:hover {
+        color: $brand-j;
+      }
+  }
+}
+
 .home-cta {
   @include span(1 of 2);
 
