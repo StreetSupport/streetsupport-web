@@ -20,12 +20,6 @@ page: home
   </div>
 </div>
 
-<div class="cta--cv-notification">
-  <div class="container text-center">
-    <p><a href="/find-help/advice"><span>CORONAVIRUS - What should I do?</span></a></p>
-  </div>
-</div>
-
 <div class="block block--header block--gm-header">
   <div class="container container--gm-header">
     <h1 class="h1 block__header">Tackling Homelessness in Greater Manchester</h1>
@@ -36,7 +30,50 @@ page: home
 <div class="block">
   <div class="container">
     <div class="block__content">
-      <p>Greater Manchester Homelessness Action Network (GMHAN) brings together people with personal insight into homelessness, people from frontline organisation, public sector and others to find more effective solutions.</p>
+      <p>Greater Manchester Homelessness Action Network (GMHAN) brings together people with personal insight into homelessness, people from frontline organisations, public sector and others to find more effective solutions. For updates about homelessness in Greater Manchester, join our <a href="https://streetsupport.us12.list-manage.com/subscribe?u=da9a1d4bb2b1a69a981456972&id=3c6ae13085">mailing list</a>.</p>
+      <h2 class="h2">Covid-19 crisis response</h2>
+      <p>During the current Covid-19 crisis, we're working together at GMHAN to co-ordinate an effective response. There will be regular information circulated via our <a href="http://streetsupport.us12.list-manage1.com/subscribe?u=da9a1d4bb2b1a69a981456972&id=52ba96f2af">mailing list</a> and we will be collating different perspectives from across the network.</p>
+      <p>There is co-ordination at Greater Manchester level with each Local Authority leading on their locality response. For specific information about your borough, select it from the box below. General updates will be posted on our <a href="https://news.streetsupport.net/tag/greater-manchester/">news section</a>.</p>
+    </div>
+  </div>
+</div>
+<div class="block">
+  <div class="container">
+    <div class="block__content block__content--vert-fill">
+      <div class="proximity-form">
+        <h1 class="h2">Need to know what to do?</h1>
+        <form class="form location-selector form--highlighted js-change-location-form">
+          <fieldset class="form__fieldset form__fieldset--inline-fill">
+            <legend class="form__fieldset-title">Get advice for your borough</legend>
+            <div class="form__fieldset-inline-fill-container">
+              <label class="hide-screen" for="location">Get advice for your borough:</label>
+              <select name="location" class="form__input form__input--inline-fill js-change-location-select">
+                <option value="">- Select a borough -</option>
+                {{> locations/_gm-option-tags }}
+              </select>
+              <button class="btn btn--brand-e btn--inline-fill js-change-location-btn" type="submit">
+                <span class="btn__text">Get advice</span>
+              </button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+      <div class="proximity-form">
+        <h1 class="h2">Do you need local support?</h1>
+        <form class="form form--highlighted js-find-help-form">
+          <fieldset class="form__fieldset form__fieldset--inline-fill">
+            <legend class="form__fieldset-title">Find support services in your area</legend>
+            <div class="form__fieldset-inline-fill-container">
+              <label class="hide-screen" for="postcode">Your Postcode</label>
+              <input name="postcode" class="form__input form__input--inline-fill js-find-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
+              <button class="btn btn--brand-e btn--inline-fill" type="submit">
+                <span class="btn__text">Find help</span>
+              </button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
     </div>
   </div>
 </div>
@@ -134,47 +171,6 @@ page: home
           </button>
         </a>
       </article>
-    </div>
-  </div>
-</div>
-
-<div class="block">
-  <div class="container">
-    <div class="block__content block__content--vert-fill">
-      <div class="proximity-form">
-        <h1 class="h2">Do you need local support this winter?</h1>
-        <form class="form form--highlighted js-find-help-form">
-          <fieldset class="form__fieldset form__fieldset--inline-fill">
-            <legend class="form__fieldset-title">Find support services in your area</legend>
-            <div class="form__fieldset-inline-fill-container">
-              <label class="hide-screen" for="postcode">Your Postcode</label>
-              <input name="postcode" class="form__input form__input--inline-fill js-find-help-postcode" placeholder="your postcode: eg M1 2HX"></input>
-              <button class="btn btn--brand-e btn--inline-fill" type="submit">
-                <span class="btn__text">Find help</span>
-              </button>
-            </div>
-          </fieldset>
-        </form>
-      </div>
-
-      <div class="proximity-form">
-        <h1 class="h2">Not sure how to get help?</h1>
-        <form class="form location-selector form--highlighted js-change-location-form">
-          <fieldset class="form__fieldset form__fieldset--inline-fill">
-            <legend class="form__fieldset-title">Get advice for your borough</legend>
-            <div class="form__fieldset-inline-fill-container">
-              <label class="hide-screen" for="location">Get advice for your borough:</label>
-              <select name="location" class="form__input form__input--inline-fill js-change-location-select">
-                <option value="">- Select a borough -</option>
-                {{> locations/_gm-option-tags }}
-              </select>
-              <button class="btn btn--brand-e btn--inline-fill js-change-location-btn" type="submit">
-                <span class="btn__text">Get advice</span>
-              </button>
-            </div>
-          </fieldset>
-        </form>
-      </div>
     </div>
   </div>
 </div>
