@@ -20,6 +20,8 @@ page: find-help-accom
   </div>
 </div>
 
+{{> locations/banners/cv-accom-notification }}
+
 {{> accommodation/header }}
 {{> accommodation/view-tabs listSelected="true" }}
 
@@ -42,7 +44,7 @@ page: find-help-accom
             <!-- ko if: nextPageEndpoint -->
             <button class="btn btn--brand-e btn--centred" data-bind="click: loadNext">
               <span class="btn__text">Load More</span>
-            </button>    
+            </button>
             <!-- /ko -->
           <!-- /ko -->
         </section>
