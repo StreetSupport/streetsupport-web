@@ -30,6 +30,14 @@ page: impact
     <div class="block__content text-center">
       <p>Our mission is to make it easier for anyone experiencing homelessness to get the help they need. We connect organisations that provide services, with individuals and businesses that want to do something to help. Here are the latest key facts and examples of how Street Support is making an impact.</p>
 
+      <div>
+        <h2>Impact Report</h2>
+        <p><a href="">Key highlights of Street Support Network Impact Report 2016-2019</a>.</p>
+        <p><a href="">Impact Report 2016-2019 (full report)</a>.</p>
+      </div>
+
+    {{> divider}}
+
       <section class="latest-statistics">
         <h2 class="h1 latest-statistics__heading">Latest Statistics</h2>
         <ul class="latest-statistics__items">
@@ -70,19 +78,6 @@ page: impact
           <dt class="latest-statistics__item-title">Unique Page Views to date</dt>
           </dl></li>
         </ul>
-      </section>
-      {{> divider}}
-      <section class="impact-updates text-left">
-        <h2 class="h1">Latest Impact News</h2>
-        <div data-bind="foreach: impactUpdates">
-          <article class="impact-update">
-            <h3 class="h2">
-              <span class="impact-update__display-date" data-bind="text: displayDate"></span>
-              <span class="impact-update__city" data-bind="text: city"></span>
-            </h3>
-            <div data-bind="html: contentForDisplay"></div>
-          </article>
-        </div>
       </section>
 
       {{> social-share}}
