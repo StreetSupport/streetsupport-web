@@ -95,6 +95,12 @@
   }
 }
 
+.team__member-title--paula {
+  &::before, &::after {
+    background-image: url('/assets/img/mugshots/paula.png')
+  }
+}
+
 .team__member-title--charles {
   &::before, &::after {
     background-image: url('/assets/img/mugshots/charles.jpg')
