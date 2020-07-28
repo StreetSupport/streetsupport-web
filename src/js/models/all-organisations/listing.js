@@ -221,14 +221,15 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
   const loadOrgsForLocation = function (location) {
     browser.loading()
     ajax
-      .data(`${endpoints.serviceProviderLocations}?pageSize=1000&latitude=${location.latitude}&longitude=${location.longitude}&range=${self.range()}`)
+      .data(`${endpoints.serviceProviderLocations}?pageSize=9&latitude=${location.latitude}&longitude=${location.longitude}&range=${self.range()}`)
       .then((result) => {
         const orgs = groupByOrg(result.data.items, location)
         self.organisations(self.orgsFilter
           ? orgs.filter(self.orgsFilter)
           : orgs)
         self.sortNearest()
-        paginate()
+        // NOTE: we don't need this line becuse we call paginate() in the sortNearest()
+        //paginate()
         browser.loaded()
       }, (_) => {
         browser.redirect('/500')
