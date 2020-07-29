@@ -37,7 +37,7 @@ describe('all organisations', () => {
 
     ajaxStub = sinon.stub(ajax, 'data')
     ajaxStub
-      .withArgs(`${endpoints.serviceProviderLocations}?pageSize=1000&latitude=${locationResult.latitude}&longitude=${locationResult.longitude}&range=10000`)
+      .withArgs(`${endpoints.serviceProviderLocations}?pageSize=50&latitude=${locationResult.latitude}&longitude=${locationResult.longitude}&range=10000&index=0`)
       .returns({
         then: (success) => {
           success({
@@ -76,8 +76,8 @@ describe('all organisations', () => {
     expect(sut.hasOrgs()).toBeTruthy()
   })
 
-  it('- should display first eight orgs', () => {
-    expect(sut.orgsToDisplay().length).toEqual(8)
+  it('- should display first fifty orgs', () => {
+    expect(sut.orgsToDisplay().length).toEqual(50)
     expect(sut.orgsToDisplay()[0].key).toEqual('streets-ahead')
   })
 
@@ -132,8 +132,8 @@ describe('all organisations', () => {
       sut.nextPage()
     })
 
-    it('- should display next eight orgs', () => {
-      expect(sut.orgsToDisplay()[sut.pageSize].key).toEqual('nacro-housing-services')
+    it('- should display next fifty orgs', () => {
+      expect(sut.orgsToDisplay()[sut.pageSize].key).toEqual('compassion-food-bank')
     })
 
     it('- should show prev page button', () => {
@@ -141,15 +141,12 @@ describe('all organisations', () => {
     })
 
     it('- should show next page button', () => {
-      expect(sut.hasMorePages()).toBeTruthy()
+      expect(sut.hasMorePages()).toBeFalsy()
     })
 
     describe('- penultimate page', () => {
       beforeEach(() => {
-        sut.nextPage()
-        sut.nextPage()
-        sut.nextPage()
-        sut.nextPage()
+        sut.prevPage()
       })
 
       it('- should show next page button', () => {
@@ -157,21 +154,8 @@ describe('all organisations', () => {
       })
     })
 
-    it('- should show next page button', () => {
-      expect(sut.hasMorePages()).toBeTruthy()
-    })
-
-    describe('- penultimate page', () => {
-      beforeEach(() => {
-        sut.nextPage()
-        sut.nextPage()
-        sut.nextPage()
-        sut.nextPage()
-      })
-
-      it('- should show next page button', () => {
-        expect(sut.hasMorePages()).toBeTruthy()
-      })
+    it('- should not show next page button', () => {
+      expect(sut.hasMorePages()).toBeFalsy()
     })
 
     describe('- no more items', () => {

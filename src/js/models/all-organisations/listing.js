@@ -29,7 +29,7 @@ class ClientGroupFilter {
   }
 }
 
-function OrgListing (orgsFilter = null, pageSize = 8) {
+function OrgListing (orgsFilter = null, pageSize = 50) {
   const self = this
 
   self.orgsFilter = orgsFilter
@@ -42,6 +42,7 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
   self.searchQuery = ko.observable()
   self.organisations = ko.observableArray()
   self.orgsToDisplay = ko.observableArray()
+  self.totalItems = ko.observable()
 
   self.clientGroupFilters = ko.computed(() => {
     return self.organisations()
@@ -78,7 +79,7 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
 
   self.hasOrgs = ko.computed(() => self.organisations().length > 0, self)
   self.hasPrevPages = ko.computed(() => self.pageIndex() > 0, self)
-  self.hasMorePages = ko.computed(() => self.pageIndex() < self.organisations().length, self)
+  self.hasMorePages =  ko.computed(() => self.pageIndex() < self.totalItems(), self)
   self.isSortedAToZ = ko.computed(() => self.currentSort() === 'atoz', self)
   self.isSortedNearest = ko.computed(() => self.currentSort() === 'nearest', self)
 
@@ -105,7 +106,13 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
 
   self.loadMore = function () {
     self.pageIndex(self.pageIndex() + self.pageSize)
-    paginate()
+
+    location.getPreviouslySetPostcode()
+      .then((result) => {
+        init(result)
+      }, () => {
+        browser.redirect('/500')
+      })
   }
 
   self.sortAToZ = function () {
@@ -221,15 +228,14 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
   const loadOrgsForLocation = function (location) {
     browser.loading()
     ajax
-      .data(`${endpoints.serviceProviderLocations}?pageSize=9&latitude=${location.latitude}&longitude=${location.longitude}&range=${self.range()}`)
+      .data(`${endpoints.serviceProviderLocations}?pageSize=50&latitude=${location.latitude}&longitude=${location.longitude}&range=${self.range()}&index=${self.pageIndex() - self.pageSize}`)
       .then((result) => {
+        self.totalItems(result.data.total)
         const orgs = groupByOrg(result.data.items, location)
-        self.organisations(self.orgsFilter
-          ? orgs.filter(self.orgsFilter)
-          : orgs)
+        self.organisations(self.organisations().concat(self.orgsFilter
+            ? orgs.filter(self.orgsFilter)
+            : orgs))
         self.sortNearest()
-        // NOTE: we don't need this line becuse we call paginate() in the sortNearest()
-        //paginate()
         browser.loaded()
       }, (_) => {
         browser.redirect('/500')
