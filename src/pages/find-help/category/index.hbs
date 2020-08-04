@@ -113,6 +113,15 @@ page:
       </div>
 
     </div>
+
+    <!-- ko if: hasMorePages -->
+    <footer class="block-footer">
+      <button class="btn btn--cosy btn--brand-e" type="submit" data-bind="click: loadMore">
+        <span class="btn__text">Load more</span>
+      </button>
+    </footer>
+    <!-- /ko -->
+
     {{> social-share }}
   </div>
 </div>

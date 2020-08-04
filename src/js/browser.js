@@ -34,6 +34,13 @@ let getBody = () => {
 var loading = function () {
   getBody().className += ' page-loading'
   getLoader().spin(document.getElementById('spin'))
+
+  // Add notification mesage on loading Map
+  if (document.getElementById('notification-map') !== null) {
+    var notificationMap = document.getElementById('notification-map').cloneNode(true)
+    notificationMap.style.display = 'block'
+    document.getElementById('spin').getElementsByClassName('spinner')[0].appendChild(notificationMap)
+  }
 }
 
 var loaded = function () {

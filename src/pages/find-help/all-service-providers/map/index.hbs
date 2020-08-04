@@ -42,15 +42,16 @@ page: allorganisations
       <p>Sorry, there was a problem with your postcode, please try an alternative postcode nearby.</p>
       <!-- /ko -->
     </div>
-
-    <!-- ko if: hasMorePages -->
-    <footer class="block-footer">
-      <button class="btn btn--cosy btn--brand-e" type="submit" data-bind="click: loadMore">
-        <span class="btn__text">Load more</span>
-      </button>
-    </footer>
-    <!-- /ko -->
   </div>
 </div>
 
-<div id="spin"></div>
+<div id="spin">
+  <div id="notification-map" style="display: none; margin-top: 35px; margin-left: -180px; width: 360px; text-align: center; background:rgba(255,255,255, 0.9); padding: 5px">
+    <span>
+      We are just finding the organisations in your area.
+    </span> 
+    <span>
+      Won't be long now...
+    </span>
+  </div>
+</div>

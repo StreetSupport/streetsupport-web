@@ -6,13 +6,11 @@ const marked = require('marked')
 marked.setOptions({ sanitize: true })
 
 const ko = require('knockout')
-
 const locationSelector = require('../../../location/locationSelector')
 const googleMaps = require('../../../location/googleMaps')
 const proximityRanges = require('../../../location/proximityRanges')
-
 const OrgRetrieval = require('../../../models/all-organisations/listing')
-const model = new OrgRetrieval()
+const model = new OrgRetrieval(null, 10000)
 ko.applyBindings(model)
 
 window.initMap = function () {

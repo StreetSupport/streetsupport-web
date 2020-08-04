@@ -38,7 +38,14 @@ export default class FindHelpByCategory extends FindHelp {
       }
     }])
     this.allItems = ko.observableArray([])
+    this.allOriginalItems = ko.observableArray([])
     this.subCatFilters = ko.computed(this.getSubCatFilters, this)
+
+    this.isLoaded = false
+    this.pageSize = 25
+    this.pageIndex = ko.observable(0)
+    this.totalItems = ko.observable(0)
+    this.hasMorePages = ko.computed(() => (this.pageIndex() + this.pageSize) < this.totalItems(), this)
 
     this.subCatFilters.subscribe(() => {
       listToDropdown.init(
@@ -59,7 +66,7 @@ export default class FindHelpByCategory extends FindHelp {
       this.proximitySearch.search()
     }
 
-    if (this.proximitySearch.hasCoords()) {
+    if (this.proximitySearch.hasCoords() && !this.isLoaded) {
       this.onProximitySearch()
     }
 
@@ -68,16 +75,25 @@ export default class FindHelpByCategory extends FindHelp {
     })
   }
 
+  loadMore () {
+    this.pageIndex(this.pageIndex() + this.pageSize)
+    this.onProximitySearch()
+  }
   onProximitySearch () {
+    this.isLoaded = true
     browser.loading()
     const subCatIdInQuerystring = querystring.parameter('subCatId')
     if (!subCatIdInQuerystring) {
       this.pushHistory()
     }
     ajax
-      .data(`${endpoints.serviceCategories}${this.category.categoryId}/${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}`)
+      .data(`${endpoints.serviceCategories}${this.category.categoryId}/${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}`)
       .then((result) => {
-        this.allItems(getProvidersForListing(result.data.providers))
+        if (this.totalItems() === 0) {
+          this.totalItems(result.data.total)
+        }
+        this.allOriginalItems(this.allOriginalItems().concat(result.data.providers))
+        this.allItems(getProvidersForListing(this.allOriginalItems()))
         this.items(this.allItems())
 
         if (subCatIdInQuerystring) {

@@ -79,7 +79,7 @@ function OrgListing (orgsFilter = null, pageSize = 50) {
 
   self.hasOrgs = ko.computed(() => self.organisations().length > 0, self)
   self.hasPrevPages = ko.computed(() => self.pageIndex() > 0, self)
-  self.hasMorePages =  ko.computed(() => self.pageIndex() < self.totalItems(), self)
+  self.hasMorePages = ko.computed(() => self.pageIndex() < self.totalItems(), self)
   self.isSortedAToZ = ko.computed(() => self.currentSort() === 'atoz', self)
   self.isSortedNearest = ko.computed(() => self.currentSort() === 'nearest', self)
 
@@ -106,7 +106,6 @@ function OrgListing (orgsFilter = null, pageSize = 50) {
 
   self.loadMore = function () {
     self.pageIndex(self.pageIndex() + self.pageSize)
-
     location.getPreviouslySetPostcode()
       .then((result) => {
         init(result)
@@ -228,7 +227,7 @@ function OrgListing (orgsFilter = null, pageSize = 50) {
   const loadOrgsForLocation = function (location) {
     browser.loading()
     ajax
-      .data(`${endpoints.serviceProviderLocations}?pageSize=50&latitude=${location.latitude}&longitude=${location.longitude}&range=${self.range()}&index=${self.pageIndex() - self.pageSize}`)
+      .data(`${endpoints.serviceProviderLocations}?pageSize=${self.pageSize}&latitude=${location.latitude}&longitude=${location.longitude}&range=${self.range()}&index=${self.pageIndex() - self.pageSize}`)
       .then((result) => {
         self.totalItems(result.data.total)
         const orgs = groupByOrg(result.data.items, location)

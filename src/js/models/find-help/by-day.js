@@ -15,6 +15,13 @@ export default class FindHelpByDay extends FindHelp {
     super([{ qsKey: 'day', getValue: () => this.dayOfWeek() }])
     const postcodeInQuerystring = querystring.parameter('postcode')
 
+    this.isLoaded = false
+    this.pageSize = 25
+    this.pageIndex = ko.observable(0)
+    this.totalItems = ko.observable(0)
+    this.hasMorePages = ko.computed(() => (this.pageIndex() + this.pageSize) < this.totalItems(), this)
+    this.allOriginalItems = ko.observableArray([])
+
     this.timesOfDay = [
       { id: 'Morning', startTime: '06:00', endTime: '12:00' },
       { id: 'Afternoon', startTime: '12:00', endTime: '17:30' },
@@ -48,7 +55,7 @@ export default class FindHelpByDay extends FindHelp {
       this.proximitySearch.search()
     }
 
-    if (this.proximitySearch.hasCoords()) {
+    if (this.proximitySearch.hasCoords() && !this.isLoaded) {
       this.onProximitySearch()
     }
 
@@ -64,19 +71,37 @@ export default class FindHelpByDay extends FindHelp {
     this.pushHistory()
   }
 
+  loadMore () {
+    this.pageIndex(this.pageIndex() + this.pageSize)
+    this.onProximitySearch()
+  }
+
   onProximitySearch () {
+    this.isLoaded = true
     const dayOfWeekqs = querystring.parameter('day')
     if (!dayOfWeekqs) {
       this.pushHistory()
     }
     browser.loading()
-    const url = `${endpoints.categoryServiceProvidersByDay}${this.category.categoryId}/long/${this.proximitySearch.longitude}/lat/${this.proximitySearch.latitude}?range=${this.proximitySearch.range()}`
+    const url = `${endpoints.categoryServiceProvidersByDay}${this.category.categoryId}/long/${this.proximitySearch.longitude}/lat/${this.proximitySearch.latitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}`
     ajax
       .data(url)
       .then((result) => {
-        const parsedData = getServicesByDay(result.data.daysServices)
-        this.items(parsedData)
+        if (this.totalItems() === 0) {
+          this.totalItems(result.data.total)
+        }
 
+        if (this.allOriginalItems().length > 0) {
+          this.allOriginalItems().forEach((item, index) => {
+            this.allOriginalItems()[index].serviceProviders = this.allOriginalItems()[index].serviceProviders.concat(result.data.daysServices.filter((day) => day.name === item.name)[0].serviceProviders)
+          })
+        } else {
+          this.allOriginalItems(this.allOriginalItems().concat(result.data.daysServices))
+        }
+
+        const parsedData = getServicesByDay(this.allOriginalItems())
+        this.items([])
+        this.items(parsedData)
         this.daysOfWeek(this.items().map((d) => { return { id: d.name } }))
 
         this.items()
@@ -93,7 +118,6 @@ export default class FindHelpByDay extends FindHelp {
               }
             })
           })
-
         if (dayOfWeekqs) {
           this.items()
             .find((d) => d.name === dayOfWeekqs)

@@ -81,7 +81,7 @@ describe('Find Help by Category - postcode and day set in querystring', () => {
   })
 
   it('- should retrieve items from API', () => {
-    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/timetabled-service-providers/show/support/long/234.5/lat/456.7?range=10000'))
+    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/timetabled-service-providers/show/support/long/234.5/lat/456.7?range=10000&pageSize=25&index=0'))
   })
 
   it('- should set selected day', () => {
