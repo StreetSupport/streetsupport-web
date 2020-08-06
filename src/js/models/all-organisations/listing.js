@@ -243,19 +243,23 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
     }
   }
 
-  const postcodeInQuerystring = querystring.parameter('postcode')
-  if (postcodeInQuerystring) {
-    self.postcode(postcodeInQuerystring)
-    self.getByPostcode()
+  const getPostCode = function () {
+    const postcodeInQuerystring = querystring.parameter('postcode')
+
+    if (postcodeInQuerystring) {
+      self.postcode(postcodeInQuerystring)
+      self.getByPostcode()
+    } else {
+      location.getPreviouslySetPostcode()
+      .then((result) => {
+        init(result)
+      }, () => {
+        browser.redirect('/500')
+      })
+    }
   }
-  else {
-    location.getPreviouslySetPostcode()
-    .then((result) => {
-      init(result)
-    }, () => {
-      browser.redirect('/500')
-    })
-  }
+
+  getPostCode()
 }
 
 module.exports = OrgListing
