@@ -9,6 +9,7 @@ const endpoints = require('../../api')
 const location = require('../../location/locationSelector')
 const proximityRanges = require('../../location/proximityRanges')
 const getDistanceApart = require('../../location/getDistanceApart')
+const querystring = require('../../get-url-parameter')
 
 class ClientGroupFilter {
   constructor (cgData, listener) {
@@ -242,12 +243,19 @@ function OrgListing (orgsFilter = null, pageSize = 8) {
     }
   }
 
-  location.getPreviouslySetPostcode()
+  const postcodeInQuerystring = querystring.parameter('postcode')
+  if (postcodeInQuerystring) {
+    self.postcode(postcodeInQuerystring)
+    self.getByPostcode()
+  }
+  else {
+    location.getPreviouslySetPostcode()
     .then((result) => {
       init(result)
     }, () => {
       browser.redirect('/500')
     })
+  }
 }
 
 module.exports = OrgListing
