@@ -16,10 +16,7 @@ export default class FindHelpByDay extends FindHelp {
     const postcodeInQuerystring = querystring.parameter('postcode')
 
     this.isLoaded = false
-    this.pageSize = 25
-    this.pageIndex = ko.observable(0)
-    this.totalItems = ko.observable(0)
-    this.hasMorePages = ko.computed(() => (this.pageIndex() + this.pageSize) < this.totalItems(), this)
+    this.day = ko.observable(0)
     this.allOriginalItems = ko.observableArray([])
 
     this.timesOfDay = [
@@ -29,25 +26,16 @@ export default class FindHelpByDay extends FindHelp {
     ]
     this.timeOfDay = ko.observable()
     this.timeOfDay.subscribe((newTimeOfDay) => {
-      const selectedTimeOfDay = this.timesOfDay.find((t) => t.id === newTimeOfDay)
-      const insideOfSelectedTimePeriod = (openingTime) => (
-        (openingTime.startTime < selectedTimeOfDay.startTime &&
-          openingTime.endTime > selectedTimeOfDay.startTime) ||
-        (openingTime.startTime > selectedTimeOfDay.startTime &&
-          openingTime.startTime < selectedTimeOfDay.endTime)
-      )
-      this.items()
-        .forEach((day) => {
-          day.serviceProviders.forEach((sp) => {
-            sp.isNotVisible(selectedTimeOfDay !== undefined && !insideOfSelectedTimePeriod(sp.openingTime))
-          })
-        })
+      this.setTimeOfDay(newTimeOfDay)
     })
 
     this.daysOfWeek = ko.observableArray([])
     this.dayOfWeek = ko.observable()
     this.dayOfWeek.subscribe((selectedDay) => {
       this.daySetActive(this.items().find((d) => d.name === selectedDay))
+      if(this.getDayOfWeekValue(selectedDay) !== this.day()){
+        this.onProximitySearch()
+      }
     })
 
     if (postcodeInQuerystring) {
@@ -64,6 +52,22 @@ export default class FindHelpByDay extends FindHelp {
     })
   }
 
+  setTimeOfDay (newTimeOfDay) {
+      const selectedTimeOfDay = this.timesOfDay.find((t) => t.id === newTimeOfDay)
+      const insideOfSelectedTimePeriod = (openingTime) => (
+        (openingTime.startTime < selectedTimeOfDay.startTime &&
+          openingTime.endTime > selectedTimeOfDay.startTime) ||
+        (openingTime.startTime > selectedTimeOfDay.startTime &&
+          openingTime.startTime < selectedTimeOfDay.endTime)
+      )
+      this.items()
+        .forEach((day) => {
+          day.serviceProviders.forEach((sp) => {
+            sp.isNotVisible(selectedTimeOfDay !== undefined && !insideOfSelectedTimePeriod(sp.openingTime))
+          })
+        })
+  }
+
   daySetActive (activeDay) {
     if (!activeDay.isSelected()) {
       activeDay.isSelected(true)
@@ -71,35 +75,23 @@ export default class FindHelpByDay extends FindHelp {
     this.pushHistory()
   }
 
-  loadMore () {
-    this.pageIndex(this.pageIndex() + this.pageSize)
-    this.onProximitySearch()
-  }
-
   onProximitySearch () {
     this.isLoaded = true
     const dayOfWeekqs = querystring.parameter('day')
     if (!dayOfWeekqs) {
       this.pushHistory()
+      this.day(new Date().getDay() - 1)
     }
+    else {
+      this.day(this.getDayOfWeekValue(dayOfWeekqs))
+    }
+
     browser.loading()
-    const url = `${endpoints.categoryServiceProvidersByDay}${this.category.categoryId}/long/${this.proximitySearch.longitude}/lat/${this.proximitySearch.latitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}`
+    const url = `${endpoints.categoryServiceProvidersByDay}${this.category.categoryId}/long/${this.proximitySearch.longitude}/lat/${this.proximitySearch.latitude}?range=${this.proximitySearch.range()}&day=${this.day()}`
     ajax
       .data(url)
       .then((result) => {
-        if (this.totalItems() === 0) {
-          this.totalItems(result.data.total)
-        }
-
-        if (this.allOriginalItems().length > 0) {
-          this.allOriginalItems().forEach((item, index) => {
-            this.allOriginalItems()[index].serviceProviders = this.allOriginalItems()[index].serviceProviders.concat(result.data.daysServices.filter((day) => day.name === item.name)[0].serviceProviders)
-          })
-        } else {
-          this.allOriginalItems(this.allOriginalItems().concat(result.data.daysServices))
-        }
-
-        const parsedData = getServicesByDay(this.allOriginalItems())
+        const parsedData = getServicesByDay(result.data.daysServices)
         this.items([])
         this.items(parsedData)
         this.daysOfWeek(this.items().map((d) => { return { id: d.name } }))
@@ -125,7 +117,9 @@ export default class FindHelpByDay extends FindHelp {
         } else {
           this.items()[0].isSelected(true)
         }
-
+        if(this.timeOfDay()){
+          this.setTimeOfDay(this.timeOfDay())
+        }
         browser.loaded()
       })
   }
@@ -163,6 +157,27 @@ export default class FindHelpByDay extends FindHelp {
 
       const newUrl = `?${qs}`
       browser.pushHistory(history, '', newUrl)
+    }
+  }
+
+  getDayOfWeekValue(day) {
+    switch (day) {
+      case 'Monday':
+        return 0
+      case 'Tuesday':
+        return 1
+      case 'Wednesday':
+        return 2
+      case 'Thursday':
+        return 3
+      case 'Friday':
+        return 4
+      case 'Saturday':
+        return 5
+      case 'Sunday':
+        return 6
+      default:
+        return 0
     }
   }
 }
