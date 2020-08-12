@@ -27,7 +27,7 @@ class SubCatFilter {
 }
 
 export default class FindHelpByCategory extends FindHelp {
-  constructor () {
+  constructor (pageSize = 25) {
     super([{
       qsKey: 'subCatId',
       getValue: () => {
@@ -42,7 +42,7 @@ export default class FindHelpByCategory extends FindHelp {
     this.subCatFilters = ko.computed(this.getSubCatFilters, this)
 
     this.isLoaded = false
-    this.pageSize = 25
+    this.pageSize = pageSize
     this.pageIndex = ko.observable(0)
     this.totalItems = ko.observable(0)
     this.hasMorePages = ko.computed(() => (this.pageIndex() + this.pageSize) < this.totalItems(), this)
