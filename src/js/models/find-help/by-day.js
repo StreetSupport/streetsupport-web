@@ -33,7 +33,7 @@ export default class FindHelpByDay extends FindHelp {
     this.dayOfWeek = ko.observable()
     this.dayOfWeek.subscribe((selectedDay) => {
       this.daySetActive(this.items().find((d) => d.name === selectedDay))
-      if(this.getDayOfWeekValue(selectedDay) !== this.day()){
+      if (this.getDayOfWeekValue(selectedDay) !== this.day()) {
         this.onProximitySearch()
       }
     })
@@ -53,19 +53,19 @@ export default class FindHelpByDay extends FindHelp {
   }
 
   setTimeOfDay (newTimeOfDay) {
-      const selectedTimeOfDay = this.timesOfDay.find((t) => t.id === newTimeOfDay)
-      const insideOfSelectedTimePeriod = (openingTime) => (
-        (openingTime.startTime < selectedTimeOfDay.startTime &&
-          openingTime.endTime > selectedTimeOfDay.startTime) ||
-        (openingTime.startTime > selectedTimeOfDay.startTime &&
-          openingTime.startTime < selectedTimeOfDay.endTime)
-      )
-      this.items()
-        .forEach((day) => {
-          day.serviceProviders.forEach((sp) => {
-            sp.isNotVisible(selectedTimeOfDay !== undefined && !insideOfSelectedTimePeriod(sp.openingTime))
-          })
+    const selectedTimeOfDay = this.timesOfDay.find((t) => t.id === newTimeOfDay)
+    const insideOfSelectedTimePeriod = (openingTime) => (
+      (openingTime.startTime < selectedTimeOfDay.startTime &&
+        openingTime.endTime > selectedTimeOfDay.startTime) ||
+      (openingTime.startTime > selectedTimeOfDay.startTime &&
+        openingTime.startTime < selectedTimeOfDay.endTime)
+    )
+    this.items()
+      .forEach((day) => {
+        day.serviceProviders.forEach((sp) => {
+          sp.isNotVisible(selectedTimeOfDay !== undefined && !insideOfSelectedTimePeriod(sp.openingTime))
         })
+      })
   }
 
   daySetActive (activeDay) {
@@ -81,8 +81,7 @@ export default class FindHelpByDay extends FindHelp {
     if (!dayOfWeekqs) {
       this.pushHistory()
       this.day(new Date().getDay() - 1)
-    }
-    else {
+    } else {
       this.day(this.getDayOfWeekValue(dayOfWeekqs))
     }
 
@@ -117,7 +116,8 @@ export default class FindHelpByDay extends FindHelp {
         } else {
           this.items()[0].isSelected(true)
         }
-        if(this.timeOfDay()){
+
+        if (this.timeOfDay()) {
           this.setTimeOfDay(this.timeOfDay())
         }
         browser.loaded()
@@ -160,7 +160,7 @@ export default class FindHelpByDay extends FindHelp {
     }
   }
 
-  getDayOfWeekValue(day) {
+  getDayOfWeekValue (day) {
     switch (day) {
       case 'Monday':
         return 0

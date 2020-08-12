@@ -35,7 +35,7 @@ var loading = function () {
   getBody().className += ' page-loading'
   getLoader().spin(document.getElementById('spin'))
 
-  // Add notification mesage on loading Map
+  // Add notification mesage on loading Map. It is a temporary solution. I've not created test for it.
   if (document.getElementById('notification-map') !== null) {
     var notificationMap = document.getElementById('notification-map').cloneNode(true)
     notificationMap.style.display = 'block'
