@@ -8,6 +8,7 @@ const endpoints = require('../../../src/js/api')
 const location = require('../../../src/js/location/locationSelector')
 const Model = require('../../../src/js/models/all-organisations/listing')
 const spLocationData = require('./spLocationData')
+const querystring = require('../../../src/js/get-url-parameter')
 
 describe('all organisations', () => {
   const locationResult = {
@@ -28,6 +29,8 @@ describe('all organisations', () => {
   let sut = null
 
   beforeEach(() => {
+    sinon.stub(querystring, 'parameter')
+
     sinon.stub(location, 'getPreviouslySetPostcode')
       .returns({
         then: (success) => {
@@ -58,6 +61,7 @@ describe('all organisations', () => {
     browser.loading.restore()
     browser.loaded.restore()
     location.getPreviouslySetPostcode.restore()
+    querystring.parameter.restore()
   })
 
   it('- should set postcode from location', () => {

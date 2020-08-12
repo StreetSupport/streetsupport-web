@@ -65,6 +65,11 @@ const initFindHelp = function (currentLocation) {
     postcode: document.querySelector('.js-find-help-postcode')
   }
 
+  const allOrganisationsOption = document.createElement('option')
+  allOrganisationsOption.setAttribute('value', 'all-service-providers')
+  allOrganisationsOption.innerText = 'All Organisations'
+  ui.select.appendChild(allOrganisationsOption)
+
   cats
     .forEach((c) => {
       const option = document.createElement('option')
