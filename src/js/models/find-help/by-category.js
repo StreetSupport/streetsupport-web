@@ -79,6 +79,7 @@ export default class FindHelpByCategory extends FindHelp {
     this.pageIndex(this.pageIndex() + this.pageSize)
     this.onProximitySearch()
   }
+
   onProximitySearch () {
     this.isLoaded = true
     browser.loading()

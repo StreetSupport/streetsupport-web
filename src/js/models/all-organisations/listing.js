@@ -232,8 +232,8 @@ function OrgListing (orgsFilter = null, pageSize = 50) {
         self.totalItems(result.data.total)
         const orgs = groupByOrg(result.data.items, location)
         self.organisations(self.organisations().concat(self.orgsFilter
-            ? orgs.filter(self.orgsFilter)
-            : orgs))
+          ? orgs.filter(self.orgsFilter)
+          : orgs))
         self.sortNearest()
         browser.loaded()
       }, (_) => {
