@@ -171,24 +171,22 @@ describe('all organisations', () => {
         sut.nextPage()
         sut.nextPage()
         sut.nextPage()
-        sut.nextPage()
-        sut.nextPage()
       })
 
       it('- should show next page button', () => {
-        expect(sut.hasMorePages()).toBeFalsy()
+        expect(sut.hasMorePages()).toBeTruthy()
       })
     })
 
     describe('- no more items', () => {
       beforeEach(() => {
-        for (let i = 2; i < Math.ceil(sut.organisations().length / sut.pageSize); i++) {
+        for (let i = 1; i < Math.ceil(sut.organisations().length / sut.pageSize); i++) {
           sut.nextPage()
         }
       })
 
       it('- should hide next page button', () => {
-        expect(sut.hasMorePages()).toBeTruthy()
+        expect(sut.hasMorePages()).toBeFalsy()
       })
     })
   })
