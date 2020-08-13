@@ -61,8 +61,7 @@ describe('Find Help by Category - postcode and subcatid set in querystring', () 
 
     sinon.stub(storage, 'set')
     sinon.stub(storage, 'get').returns({})
-
-    sut = new FindHelpByCategory()
+    sut = new FindHelpByCategory(5)
   })
 
   afterEach(() => {
@@ -84,7 +83,7 @@ describe('Find Help by Category - postcode and subcatid set in querystring', () 
   })
 
   it('- should retrieve items from API', () => {
-    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/support/456.7/234.5?range=10000'))
+    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/support/456.7/234.5?range=10000&pageSize=5&index=0'))
   })
 
   it('- should filter items by subCatId', () => {
@@ -94,5 +93,27 @@ describe('Find Help by Category - postcode and subcatid set in querystring', () 
 
   it('- should not update url', () => {
     expect(browserPushHistoryStub.called).toBeFalsy()
+  })
+
+  it('- should show load more button', () => {
+    expect(sut.hasMorePages()).toBeTruthy()
+  })
+
+  it('- should be pageIndex equals to 0', () => {
+    expect(sut.pageIndex()).toEqual(0)
+  })
+
+  describe('- click load more', () => {
+    beforeEach(() => {
+      sut.loadMore()
+    })
+
+    it('- should not show load more button', () => {
+      expect(sut.hasMorePages()).toBeFalsy()
+    })
+
+    it('- should be pageIndex equals to 5', () => {
+      expect(sut.pageIndex()).toEqual(5)
+    })
   })
 })

@@ -91,7 +91,7 @@ describe('Find Help by Category - postcode previously set', () => {
   })
 
   it('- should retrieve items from API', () => {
-    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/support/456.7/234.5?range=10000'))
+    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/support/456.7/234.5?range=10000&pageSize=25&index=0'))
   })
 
   it('- should show it is loaded', () => {

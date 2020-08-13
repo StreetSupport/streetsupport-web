@@ -40,7 +40,7 @@ describe('all organisations', () => {
 
     ajaxStub = sinon.stub(ajax, 'data')
     ajaxStub
-      .withArgs(`${endpoints.serviceProviderLocations}?pageSize=1000&latitude=${locationResult.latitude}&longitude=${locationResult.longitude}&range=10000`)
+      .withArgs(`${endpoints.serviceProviderLocations}?pageSize=8&latitude=${locationResult.latitude}&longitude=${locationResult.longitude}&range=10000&index=0`)
       .returns({
         then: (success) => {
           success({
@@ -53,7 +53,7 @@ describe('all organisations', () => {
     browserLoadingStub = sinon.stub(browser, 'loading')
     browserLoadedStub = sinon.stub(browser, 'loaded')
 
-    sut = new Model()
+    sut = new Model(null, 8)
   })
 
   afterEach(() => {
@@ -180,7 +180,7 @@ describe('all organisations', () => {
 
     describe('- no more items', () => {
       beforeEach(() => {
-        for (let i = 2; i < Math.ceil(sut.organisations().length / sut.pageSize); i++) {
+        for (let i = 1; i < Math.ceil(sut.organisations().length / sut.pageSize); i++) {
           sut.nextPage()
         }
       })

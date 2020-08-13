@@ -15,17 +15,23 @@ import FindHelp from './FindHelp'
 
 import { buildInfoWindowMarkup } from '../../pages/find-help/by-location/helpers'
 
+import ko from 'knockout'
+
 export default class FindHelpByCategory extends FindHelp {
   constructor () {
     super()
     const postcodeInQuerystring = querystring.parameter('postcode')
+
+    this.isLoaded = false
+    this.pageSize = 10000
+    this.pageIndex = ko.observable(0)
 
     if (postcodeInQuerystring) {
       this.proximitySearch.postcode(postcodeInQuerystring)
       this.proximitySearch.search()
     }
 
-    if (this.proximitySearch.hasCoords()) {
+    if (this.proximitySearch.hasCoords() && !this.isLoaded) {
       this.onProximitySearch()
     }
 
@@ -35,12 +41,12 @@ export default class FindHelpByCategory extends FindHelp {
   }
 
   onProximitySearch () {
+    this.isLoaded = true
     browser.loading()
     ajax
-      .data(`${endpoints.serviceCategories}${this.category.categoryId}/${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}`)
+      .data(`${endpoints.serviceCategories}${this.category.categoryId}/${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}`)
       .then((result) => {
         this.items(result.data.providers)
-
         this.displayMap()
         this.pushHistory()
 
