@@ -40,7 +40,7 @@ describe('all organisations', () => {
 
     ajaxStub = sinon.stub(ajax, 'data')
     ajaxStub
-      .withArgs(`${endpoints.serviceProviderLocations}?pageSize=50&latitude=${locationResult.latitude}&longitude=${locationResult.longitude}&range=10000&index=0`)
+      .withArgs(`${endpoints.serviceProviderLocations}?pageSize=8&latitude=${locationResult.latitude}&longitude=${locationResult.longitude}&range=10000&index=0`)
       .returns({
         then: (success) => {
           success({
@@ -53,7 +53,7 @@ describe('all organisations', () => {
     browserLoadingStub = sinon.stub(browser, 'loading')
     browserLoadedStub = sinon.stub(browser, 'loaded')
 
-    sut = new Model()
+    sut = new Model(null, 8)
   })
 
   afterEach(() => {
@@ -80,8 +80,8 @@ describe('all organisations', () => {
     expect(sut.hasOrgs()).toBeTruthy()
   })
 
-  it('- should display first fifty orgs', () => {
-    expect(sut.orgsToDisplay().length).toEqual(50)
+  it('- should display first eight orgs', () => {
+    expect(sut.orgsToDisplay().length).toEqual(8)
     expect(sut.orgsToDisplay()[0].key).toEqual('streets-ahead')
   })
 
@@ -136,8 +136,8 @@ describe('all organisations', () => {
       sut.nextPage()
     })
 
-    it('- should display next fifty orgs', () => {
-      expect(sut.orgsToDisplay()[sut.pageSize].key).toEqual('compassion-food-bank')
+    it('- should display next eight orgs', () => {
+      expect(sut.orgsToDisplay()[sut.pageSize].key).toEqual('nacro-housing-services')
     })
 
     it('- should show prev page button', () => {
@@ -145,12 +145,15 @@ describe('all organisations', () => {
     })
 
     it('- should show next page button', () => {
-      expect(sut.hasMorePages()).toBeFalsy()
+      expect(sut.hasMorePages()).toBeTruthy()
     })
 
     describe('- penultimate page', () => {
       beforeEach(() => {
-        sut.prevPage()
+        sut.nextPage()
+        sut.nextPage()
+        sut.nextPage()
+        sut.nextPage()
       })
 
       it('- should show next page button', () => {
@@ -158,8 +161,23 @@ describe('all organisations', () => {
       })
     })
 
-    it('- should not show next page button', () => {
-      expect(sut.hasMorePages()).toBeFalsy()
+    it('- should show next page button', () => {
+      expect(sut.hasMorePages()).toBeTruthy()
+    })
+
+    describe('- penultimate page', () => {
+      beforeEach(() => {
+        sut.nextPage()
+        sut.nextPage()
+        sut.nextPage()
+        sut.nextPage()
+        sut.nextPage()
+        sut.nextPage()
+      })
+
+      it('- should show next page button', () => {
+        expect(sut.hasMorePages()).toBeFalsy()
+      })
     })
 
     describe('- no more items', () => {
@@ -170,7 +188,7 @@ describe('all organisations', () => {
       })
 
       it('- should hide next page button', () => {
-        expect(sut.hasMorePages()).toBeFalsy()
+        expect(sut.hasMorePages()).toBeTruthy()
       })
     })
   })
