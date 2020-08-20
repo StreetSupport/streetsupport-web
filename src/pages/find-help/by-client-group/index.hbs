@@ -1,0 +1,135 @@
+---
+title: Families - Street Support
+description: Street support makes it easier to help people facing homelessness. Find help relevant to your needs.
+image: https://streetsupport.net/assets/img/og/street-support.jpg
+layout: default.hbs
+permalink: false
+jsBundle: by-client-group
+section: findhelp
+page: by-client-group
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
+      <li class="breadcrumbs__item" data-bind="text: clientGroupName"></li>
+    </ol>
+  </div>
+</div>
+
+{{> locations/banners/cv-notification }}
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <header class="multi-form-header">
+        <h1 class="h1" data-bind="text: clientGroupName"></h1>
+        <p>To find services near you, please enter your postcode.</p>
+        <button class="btn btn--brand-d js-print-btn">
+          <span class="btn__text">Print this page</span>
+        </button>
+      </header>
+      {{> proximity-search/ko }}
+    </div>
+  </div>
+</div>
+
+<nav class="block-tabs block-tabs--cards">
+  <div class="block-tabs__container block-tabs__container--three">
+    <a class="block-tabs__tab block-tabs__tab--selected" data-bind="attr: { href: listingHref }">Listing</a>
+    <a class="block-tabs__tab" data-bind="attr: { href: timetableHref }">Timetable</a>
+    <a class="block-tabs__tab" data-bind="attr: { href: mapHref }">Map</a>
+  </div>
+</nav>
+
+<div class="block block--cards">
+  <div class="container">
+    <div class="block__content">
+
+      <!-- ko ifnot: proximitySearch.postcode -->
+      <!-- ko ifnot: hasItems -->
+      <p>Please enter a postcode to begin your search. You can use a full postcode eg: 'M1 2HX', or a partial postcode eg: 'M1'.</p>
+      <!-- /ko -->
+      <!-- /ko -->
+      <!-- ko if: proximitySearch.postcode -->
+      <!-- ko ifnot: hasItems -->
+      <p>There are currently no services matching your search. If you know of one, please <a href="info@streetsupport.net">contact us</a>.</p>
+      <!-- /ko -->
+      <!-- /ko -->
+
+      <div class="cards__list cards__list--single-col" data-bind="foreach: items">
+        <article class="card card--brand-h card--big js-header">
+          <header class="card__title">
+            <a data-bind="attr: { href: providerPageUrl } ">
+              <h1 class="h2" data-bind="text: providerName"></h1>
+            </a>
+          </header>
+
+          <section class="card__details">
+            <div data-bind="foreach: services">
+              <div class="card__details-entry js-item">
+                <div data-bind="html: info"></div>
+                <dl class="card__details-dictionary">
+                  <dt class="card__details-dictionary-title">Services available:</dt>
+                  <dd class="card__details-dictionary-desc" data-bind="text: servicesAvailable"></dd>
+                  <!-- ko if: isTelephoneService -->
+                  <dd class="card__details-dictionary-desc">This is a telephone service.</dd>
+                  <!-- /ko -->
+                  <!-- ko if: isAppointmentOnly -->
+                  <dd class="card__details-dictionary-desc">Access to this service is by appointment only.</dd>
+                  <!-- /ko -->
+                  <dt class="card__details-dictionary-title">Suitable for:</dt>
+                  <dd class="card__details-dictionary-desc" data-bind="text: $parent.tags"></dd>
+                  <dt class="card__details-dictionary-title">Address:</dt>
+                  <dd class="card__details-dictionary-desc">
+                    <!-- ko if: hasLocationDescription -->
+                    <p data-bind="text: locationDescription"></p>
+                    <!-- /ko -->
+                    <span data-bind="text: fullAddress"></span> - <a data-bind="attr: { href: viewMapsUrl }">View on
+                      Map</a>
+                  </dd>
+
+                  <dt class="card__details-dictionary-title">Opening times:</dt>
+                  <dd class="card__details-dictionary-desc">
+                    <!-- ko if: isOpen247 -->
+                    Open 24 hours a day, 7 days a week
+                    <!-- /ko -->
+                    <!-- ko ifnot: isOpen247 -->
+                    <dl class="result-detail__times-list" data-bind="foreach: days">
+                      <dt class="result-detail__times-title" data-bind="text: day"></dt>
+                      <span data-bind="foreach: openingTimes">
+                        <dd class="result-detail__times-item" data-bind="text: $rawData"></dd>
+                      </span>
+                    </dl>
+                    <!-- /ko -->
+                  </dd>
+                  <!-- ko if: hasTelephone -->
+                  <dt class="card__details-dictionary-title">Telephone:</dt>
+                  <dd class="card__details-dictionary-desc" data-bind="text: telephone"></dd>
+                  <!-- /ko -->
+                </dl>
+              </div>
+            </div>
+            <a class="card__details__link" data-bind="attr: { href: providerPageUrl }">More Information</a>
+          </section>
+
+        </article>
+      </div>
+
+    </div>
+
+    <!-- ko if: hasMorePages -->
+    <footer class="block-footer">
+      <button class="btn btn--cosy btn--brand-e" type="submit" data-bind="click: loadMore">
+        <span class="btn__text">Load more</span>
+      </button>
+    </footer>
+    <!-- /ko -->
+
+    {{> social-share }}
+  </div>
+</div>
+
+<div id="spin"></div>
