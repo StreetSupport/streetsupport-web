@@ -8,6 +8,7 @@ const endpoints = require('../../../src/js/api')
 const location = require('../../../src/js/location/locationSelector')
 const Model = require('../../../src/js/models/all-organisations/listing')
 const spLocationData = require('./spLocationData')
+const querystring = require('../../../src/js/get-url-parameter')
 
 describe('all organisations', () => {
   const locationResult = {
@@ -28,6 +29,8 @@ describe('all organisations', () => {
   let sut = null
 
   beforeEach(() => {
+    sinon.stub(querystring, 'parameter')
+
     sinon.stub(location, 'getPreviouslySetPostcode')
       .returns({
         then: (success) => {
@@ -37,7 +40,7 @@ describe('all organisations', () => {
 
     ajaxStub = sinon.stub(ajax, 'data')
     ajaxStub
-      .withArgs(`${endpoints.serviceProviderLocations}?pageSize=1000&latitude=${locationResult.latitude}&longitude=${locationResult.longitude}&range=10000`)
+      .withArgs(`${endpoints.serviceProviderLocations}?pageSize=8&latitude=${locationResult.latitude}&longitude=${locationResult.longitude}&range=10000&index=0`)
       .returns({
         then: (success) => {
           success({
@@ -50,7 +53,7 @@ describe('all organisations', () => {
     browserLoadingStub = sinon.stub(browser, 'loading')
     browserLoadedStub = sinon.stub(browser, 'loaded')
 
-    sut = new Model()
+    sut = new Model(null, 8)
   })
 
   afterEach(() => {
@@ -58,6 +61,7 @@ describe('all organisations', () => {
     browser.loading.restore()
     browser.loaded.restore()
     location.getPreviouslySetPostcode.restore()
+    querystring.parameter.restore()
   })
 
   it('- should set postcode from location', () => {
@@ -176,7 +180,7 @@ describe('all organisations', () => {
 
     describe('- no more items', () => {
       beforeEach(() => {
-        for (let i = 2; i < Math.ceil(sut.organisations().length / sut.pageSize); i++) {
+        for (let i = 1; i < Math.ceil(sut.organisations().length / sut.pageSize); i++) {
           sut.nextPage()
         }
       })

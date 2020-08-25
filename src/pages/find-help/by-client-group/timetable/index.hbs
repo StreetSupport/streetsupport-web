@@ -1,22 +1,31 @@
 ---
-title:
-description:
+title: Families Timetable - Street Support
+description: Street support makes it easier to help people facing homelessness. Find help relevant to your needs with our map view.
 image: https://streetsupport.net/assets/img/og/street-support.jpg
-layout: default.hbs
+layout: withGoogle.hbs
 permalink: false
-jsBundle: find-help-by-day-v2
+jsBundle: by-client-group-timetable
 section: findhelp
-page: find-help-support
+page: by-client-group
 ---
 
-{{> find-help/breadcrumb_injected categoryName="theServiceCategoryName" }}
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item"><a href="/find-help/">Find Help</a></li>
+      <li class="breadcrumbs__item" data-bind="text: clientGroupName"></li>
+    </ol>
+  </div>
+</div>
+
+{{> locations/banners/cv-notification }}
 
 <div class="block">
   <div class="container">
     <div class="block__content">
       <header class="multi-form-header">
-        <h1 class="h1">theServiceCategoryName</h1>
-        theServiceCategorySynopsis
+        <h1 class="h1" data-bind="text: clientGroupName"></h1>
         <p>To find services near you, please enter your postcode.</p>
         <button class="btn btn--brand-d js-print-btn">
           <span class="btn__text">Print this page</span>
@@ -27,7 +36,13 @@ page: find-help-support
   </div>
 </div>
 
-{{> find-help/view-type-tabs_injected timetableIsSelected="true" categoryId="theServiceCategoryId" }}
+<nav class="block-tabs block-tabs--cards">
+  <div class="block-tabs__container block-tabs__container--three">
+    <a class="block-tabs__tab" data-bind="attr: { href: listingHref }">Listing</a>
+    <a class="block-tabs__tab block-tabs__tab--selected" data-bind="attr: { href: timetableHref }">Timetable</a>
+    <a class="block-tabs__tab" data-bind="attr: { href: mapHref }">Map</a>
+  </div>
+</nav>
 
 <div class="block block--cards">
   <div class="container">

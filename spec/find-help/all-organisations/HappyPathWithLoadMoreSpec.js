@@ -4,8 +4,10 @@ const sinon = require('sinon')
 
 const ajax = require('../../../src/js/get-api-data')
 const browser = require('../../../src/js/browser')
+const endpoints = require('../../../src/js/api')
 const location = require('../../../src/js/location/locationSelector')
 const Model = require('../../../src/js/models/all-organisations/listing')
+const spLocationData = require('./spLocationData')
 const querystring = require('../../../src/js/get-url-parameter')
 
 describe('all organisations', () => {
@@ -21,6 +23,8 @@ describe('all organisations', () => {
   }
 
   let ajaxStub = null
+  let browserLoadingStub = null
+  let browserLoadedStub = null
 
   let sut = null
 
@@ -41,16 +45,14 @@ describe('all organisations', () => {
           success({
             'status': 'ok',
             'statusCode': 200,
-            'data': {
-              items: []
-            }
+            'data': spLocationData.page1
           })
         }
       })
-    sinon.stub(browser, 'loading')
-    sinon.stub(browser, 'loaded')
+    browserLoadingStub = sinon.stub(browser, 'loading')
+    browserLoadedStub = sinon.stub(browser, 'loaded')
 
-    sut = new Model()
+    sut = new Model(null, 8)
   })
 
   afterEach(() => {
@@ -61,7 +63,36 @@ describe('all organisations', () => {
     querystring.parameter.restore()
   })
 
-  it('- should set hasOrgs to false', () => {
-    expect(sut.hasOrgs()).toBeFalsy()
-  })
+    describe('- click load more 1st time', () => {
+      beforeEach(() => {
+        sut.loadMore()
+      })
+
+      it('- should show load more button', () => {
+        expect(sut.hasMorePages()).toBeTruthy()
+      })
+
+      it('- should be indexPage equals to 16', () => {
+        expect(sut.pageIndex()).toEqual(16)
+      })
+
+      describe('- click load more many times', () => {
+        beforeEach(() => {
+          sut.loadMore()
+          sut.loadMore()
+          sut.loadMore()
+          sut.loadMore()
+          sut.loadMore()
+          sut.loadMore()
+        })
+
+        it('- should not show load more button', () => {
+          expect(sut.hasMorePages()).toBeFalsy()
+        })
+
+        it('- should be indexPage equals to 64', () => {
+          expect(sut.pageIndex()).toEqual(64)
+        })
+      })
+    })
 })

@@ -4,11 +4,13 @@ const sinon = require('sinon')
 
 const ajax = require('../../../src/js/get-api-data')
 const browser = require('../../../src/js/browser')
+const endpoints = require('../../../src/js/api')
 const location = require('../../../src/js/location/locationSelector')
 const Model = require('../../../src/js/models/all-organisations/listing')
+const spLocationData = require('./spLocationData')
 const querystring = require('../../../src/js/get-url-parameter')
 
-describe('all organisations', () => {
+describe('all organisations by postcode', () => {
   const locationResult = {
     'id': 'my-location',
     'findHelpId': 'my-location',
@@ -17,17 +19,22 @@ describe('all organisations', () => {
     'latitude': 567.8,
     'isPublic': true,
     'isSelectableInBody': false,
-    'postcode': 'M1 2HX'
+    'postcode': 'M1'
   }
 
   let ajaxStub = null
+  let browserLoadingStub = null
+  let browserLoadedStub = null
 
   let sut = null
 
   beforeEach(() => {
-    sinon.stub(querystring, 'parameter')
+    const queryStringStub = sinon.stub(querystring, 'parameter')
+    queryStringStub
+      .withArgs('postcode')
+      .returns(locationResult.postcode)
 
-    sinon.stub(location, 'getPreviouslySetPostcode')
+    sinon.stub(location, 'setPostcode')
       .returns({
         then: (success) => {
           success(locationResult)
@@ -36,19 +43,18 @@ describe('all organisations', () => {
 
     ajaxStub = sinon.stub(ajax, 'data')
     ajaxStub
+      .withArgs(`${endpoints.serviceProviderLocations}?pageSize=1000&latitude=${locationResult.latitude}&longitude=${locationResult.longitude}&range=10000`)
       .returns({
         then: (success) => {
           success({
             'status': 'ok',
             'statusCode': 200,
-            'data': {
-              items: []
-            }
+            'data': spLocationData.page1
           })
         }
       })
-    sinon.stub(browser, 'loading')
-    sinon.stub(browser, 'loaded')
+    browserLoadingStub = sinon.stub(browser, 'loading')
+    browserLoadedStub = sinon.stub(browser, 'loaded')
 
     sut = new Model()
   })
@@ -57,11 +63,11 @@ describe('all organisations', () => {
     ajax.data.restore()
     browser.loading.restore()
     browser.loaded.restore()
-    location.getPreviouslySetPostcode.restore()
+    location.setPostcode.restore()
     querystring.parameter.restore()
   })
 
-  it('- should set hasOrgs to false', () => {
-    expect(sut.hasOrgs()).toBeFalsy()
+  it('- should set postcode from url parameter', () => {
+    expect(sut.postcode()).toEqual(locationResult.postcode)
   })
 })

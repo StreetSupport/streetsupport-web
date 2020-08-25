@@ -2,15 +2,14 @@
 
 const sinon = require('sinon')
 
-const ajax = require('../../../src/js/get-api-data')
-const browser = require('../../../src/js/browser')
-const endpoints = require('../../../src/js/api')
-const listToDropdown = require('../../../src/js/list-to-dropdown')
-const postcodeLookup = require('../../../src/js/location/postcodes')
-const querystring = require('../../../src/js/get-url-parameter')
-const storage = require('../../../src/js/storage')
+const ajax = require('../../../../src/js/get-api-data')
+const browser = require('../../../../src/js/browser')
+const endpoints = require('../../../../src/js/api')
+const postcodeLookup = require('../../../../src/js/location/postcodes')
+const querystring = require('../../../../src/js/get-url-parameter')
+const storage = require('../../../../src/js/storage')
 
-import FindHelpByCategory from '../../../src/js/models/find-help/by-category'
+import FindHelpByClientGroup from '../../../../src/js/models/find-help/by-client-group/by-category'
 import data from './supportServiceData'
 
 const newLocation = {
@@ -19,14 +18,15 @@ const newLocation = {
   postcode: 'a new postcode'
 }
 
-describe('Find Help by Category - postcode set in proximity search', () => {
+describe('Find Help by Client Group - postcode set in proximity search', () => {
   let sut,
     apiGetStub,
     browserLoadingStub,
     browserLoadedStub,
     browserPushHistoryStub,
     postcodeLookupStub,
-    storageSetStub
+    storageSetStub,
+    queryStringStub
 
   beforeEach(() => {
     apiGetStub = sinon.stub(ajax, 'data')
@@ -44,21 +44,24 @@ describe('Find Help by Category - postcode set in proximity search', () => {
     browserLoadedStub = sinon.stub(browser, 'loaded')
     sinon.stub(browser, 'location')
       .returns({
-        pathname: '/find-help/support/'
+        pathname: '/find-help/by-client-group/'
       })
     browserPushHistoryStub = sinon.stub(browser, 'pushHistory')
     sinon.stub(browser, 'setOnHistoryPop')
-    sinon.stub(listToDropdown, 'init')
     postcodeLookupStub = sinon.stub(postcodeLookup, 'getCoords')
     postcodeLookupStub
       .callsArgWith(1, newLocation) // success callback function
 
-    sinon.stub(querystring, 'parameter')
+    queryStringStub = sinon.stub(querystring, 'parameter')
+
+    queryStringStub
+    .withArgs('key')
+    .returns('families')
 
     storageSetStub = sinon.stub(storage, 'set')
     sinon.stub(storage, 'get').returns({})
 
-    sut = new FindHelpByCategory()
+    sut = new FindHelpByClientGroup()
     sut.proximitySearch.postcode(newLocation.postcode)
     sut.proximitySearch.search()
   })
@@ -70,7 +73,6 @@ describe('Find Help by Category - postcode set in proximity search', () => {
     browser.location.restore()
     browser.pushHistory.restore()
     browser.setOnHistoryPop.restore()
-    listToDropdown.init.restore()
     postcodeLookup.getCoords.restore()
     querystring.parameter.restore()
     storage.get.restore()
@@ -86,7 +88,13 @@ describe('Find Help by Category - postcode set in proximity search', () => {
   })
 
   it('- should retrieve items from API', () => {
-    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/support/456.7/234.5?range=10000&pageSize=25&index=0'))
+    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/456.7/234.5?range=10000&pageSize=25&index=0&clientGroup=families'))
+  })
+
+  it('- should set tab links', () => {
+    expect(sut.listingHref()).toEqual(`/find-help/by-client-group/?key=families&postcode=${sut.proximitySearch.postcode()}`)
+    expect(sut.timetableHref()).toEqual(`/find-help/by-client-group/timetable/?key=families&postcode=${sut.proximitySearch.postcode()}`)
+    expect(sut.mapHref()).toEqual(`/find-help/by-client-group/map/?key=families&postcode=${sut.proximitySearch.postcode()}`)
   })
 
   it('- should set hasItems to true', () => {
@@ -103,55 +111,22 @@ describe('Find Help by Category - postcode set in proximity search', () => {
     expect(storageSetStub.getCall(0).args[1]).toEqual({ latitude: 456.7, longitude: 234.5, postcode: 'a new postcode' })
   })
 
-  it('- should prepend show all filter', () => {
-    expect(sut.subCatFilters()[0].name).toEqual('Show All')
-  })
-
-  it('- should set show all filter as selected', () => {
-    expect(sut.subCatFilters()[0].isSelected()).toBeTruthy()
-  })
-
-  it('- should set shouldShowSubCatFilter', () => {
-    expect(sut.shouldShowSubCatFilter()).toBeTruthy()
-  })
-
   it('- should set postcode in querystring', () => {
-    const expected = browserPushHistoryStub.withArgs({ postcode: newLocation.postcode }, '', `?postcode=${newLocation.postcode}`).calledOnce
+    const expected = browserPushHistoryStub.withArgs({ key: 'families', postcode: newLocation.postcode }, '', `?key=families&postcode=${newLocation.postcode}`).calledOnce
     expect(expected).toBeTruthy()
   })
 
-  describe('- filter by subcat', () => {
-    let subCatToFilterOn
-
+  describe('update postcode in proximity search', () => {
+    var updatedPostcode = 'updated postcode'
     beforeEach(() => {
-      subCatToFilterOn = sut.subCatFilters()[1]
-      subCatToFilterOn.filter()
+      sut.proximitySearch.postcode(updatedPostcode)
+      sut.proximitySearch.search()
     })
 
-    it('- should set only this filter to selected', () => {
-      const selectedSubCatFilters = sut.subCatFilters().filter((sc) => sc.isSelected())
-      expect(selectedSubCatFilters[0].id).toEqual(subCatToFilterOn.id)
-      expect(selectedSubCatFilters.length).toEqual(1)
-    })
-
-    it('- should filter items', () => {
-      expect(sut.items().length).toBeLessThan(28)
-    })
-
-    it('- should set subcat in querystring', () => {
-      const expected = browserPushHistoryStub.withArgs({ postcode: newLocation.postcode, subCatId: subCatToFilterOn.id }, '', `?postcode=${newLocation.postcode}&subCatId=${subCatToFilterOn.id}`).calledOnce
-      expect(expected).toBeTruthy()
-    })
-
-    describe('- and the reset', () => {
-      beforeEach(() => {
-        let subCatToFilterOn = sut.subCatFilters()[0]
-        subCatToFilterOn.filter()
-      })
-
-      it('- should filter items', () => {
-        expect(sut.items().length).toEqual(28)
-      })
+    it('- should set updated tab links', () => {
+      expect(sut.listingHref()).toEqual(`/find-help/by-client-group/?key=families&postcode=${updatedPostcode}`)
+      expect(sut.timetableHref()).toEqual(`/find-help/by-client-group/timetable/?key=families&postcode=${updatedPostcode}`)
+      expect(sut.mapHref()).toEqual(`/find-help/by-client-group/map/?key=families&postcode=${updatedPostcode}`)
     })
   })
 })

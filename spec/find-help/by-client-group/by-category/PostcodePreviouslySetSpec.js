@@ -2,15 +2,14 @@
 
 const sinon = require('sinon')
 
-const ajax = require('../../../src/js/get-api-data')
-const browser = require('../../../src/js/browser')
-const listToDropdown = require('../../../src/js/list-to-dropdown')
-const endpoints = require('../../../src/js/api')
-const postcodeLookup = require('../../../src/js/location/postcodes')
-const querystring = require('../../../src/js/get-url-parameter')
-const storage = require('../../../src/js/storage')
+const ajax = require('../../../../src/js/get-api-data')
+const browser = require('../../../../src/js/browser')
+const endpoints = require('../../../../src/js/api')
+const postcodeLookup = require('../../../../src/js/location/postcodes')
+const querystring = require('../../../../src/js/get-url-parameter')
+const storage = require('../../../../src/js/storage')
 
-import FindHelpByCategory from '../../../src/js/models/find-help/by-category'
+import FindHelpByClientGroup from '../../../../src/js/models/find-help/by-client-group/by-category'
 import data from './supportServiceData'
 
 const newLocation = {
@@ -19,12 +18,13 @@ const newLocation = {
   postcode: 'a new postcode'
 }
 
-describe('Find Help by Category - postcode previously set', () => {
+describe('Find Help by Client Group - postcode previously set', () => {
   let sut,
     apiGetStub,
     browserLoadingStub,
     browserLoadedStub,
-    postcodeLookupStub
+    postcodeLookupStub,
+    queryStringStub
 
   beforeEach(() => {
     apiGetStub = sinon.stub(ajax, 'data')
@@ -42,18 +42,22 @@ describe('Find Help by Category - postcode previously set', () => {
     browserLoadedStub = sinon.stub(browser, 'loaded')
     sinon.stub(browser, 'location')
       .returns({
-        pathname: '/find-help/support/'
+        pathname: '/find-help/by-client-group/'
       })
     sinon.stub(browser, 'pushHistory')
     sinon.stub(browser, 'setOnHistoryPop')
-    sinon.stub(listToDropdown, 'init')
     postcodeLookupStub = sinon.stub(postcodeLookup, 'getCoords')
-    sinon.stub(querystring, 'parameter')
+    queryStringStub = sinon.stub(querystring, 'parameter')
+
+    queryStringStub
+      .withArgs('key')
+      .returns('families')
+
     sinon.stub(storage, 'set')
     sinon.stub(storage, 'get')
       .returns(newLocation)
 
-    sut = new FindHelpByCategory()
+    sut = new FindHelpByClientGroup()
   })
 
   afterEach(() => {
@@ -63,7 +67,6 @@ describe('Find Help by Category - postcode previously set', () => {
     browser.pushHistory.restore()
     browser.setOnHistoryPop.restore()
     browser.location.restore()
-    listToDropdown.init.restore()
     postcodeLookup.getCoords.restore()
     querystring.parameter.restore()
     storage.get.restore()
@@ -91,7 +94,7 @@ describe('Find Help by Category - postcode previously set', () => {
   })
 
   it('- should retrieve items from API', () => {
-    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/support/456.7/234.5?range=10000&pageSize=25&index=0'))
+    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/456.7/234.5?range=10000&pageSize=25&index=0&clientGroup=families'))
   })
 
   it('- should show it is loaded', () => {
