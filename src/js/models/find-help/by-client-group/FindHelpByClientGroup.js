@@ -6,14 +6,16 @@ const querystring = require('../../../get-url-parameter')
 
 export default class FindHelpByClientGroup {
   constructor () {
+    // this.filters = filters
+    this.clientGroup = new FindHelpClientGroup()
     this.proximitySearch = new ProximitySearch(this)
 
     this.items = ko.observableArray([])
     this.hasItems = ko.computed(() => this.items().length > 0, this)
 
-    this.listingHref = ko.observable()
-    this.timetableHref = ko.observable()
-    this.mapHref = ko.observable()
+    // this.listingHref = ko.observable()
+    // this.timetableHref = ko.observable()
+    // this.mapHref = ko.observable()
   }
 
   onProximitySearchFail () {
@@ -22,7 +24,7 @@ export default class FindHelpByClientGroup {
 
   pushHistory () {
     pushHistory([
-      { qsKey: 'key', getValue: () => querystring.parameter('key') },
+      // { qsKey: 'key', getValue: () => querystring.parameter('key') },
       { qsKey: 'postcode', getValue: () => this.proximitySearch.postcode() }
     ])
   }

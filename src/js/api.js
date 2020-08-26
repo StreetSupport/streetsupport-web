@@ -1,5 +1,5 @@
 var local = 'http://localhost:55881'
-var dev = 'https://ssn-api-dev.azurewebsites.net'
+var dev = 'http://localhost:55881' // 'https://ssn-api-dev.azurewebsites.net'
 var staging = 'https://ssn-api-uat.azurewebsites.net'
 var live = 'https://ssn-api-prod.azurewebsites.net'
 
@@ -38,6 +38,6 @@ module.exports = {
   bestPracticeAwardApplications: p('/v1/manchester-best-practice-awards/applications/'),
   bestPracticeEnquiries: p('/v1/manchester-best-practice-enquiries/'),
   accommodation: p('/v1/accommodation/'),
-  faqs: p('/v1/faqs/')
+  faqs: p('/v1/faqs/'),
+  clientGroups: p('/v1/client-groups/get')
 }
-

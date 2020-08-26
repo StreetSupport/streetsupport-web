@@ -25,8 +25,8 @@ export default class FindHelpByCategory extends FindHelpByClientGroup {
     this.isLoaded = false
     this.pageSize = 10000
     this.pageIndex = ko.observable(0)
-    this.clientGroupKey = ko.observable()
-    this.clientGroupName = ko.observable()
+    // this.clientGroupKey = ko.observable()
+    // this.clientGroupName = ko.observable()
 
     if (postcodeInQuerystring) {
       this.proximitySearch.postcode(postcodeInQuerystring)
@@ -45,16 +45,15 @@ export default class FindHelpByCategory extends FindHelpByClientGroup {
   onProximitySearch () {
     this.isLoaded = true
     browser.loading()
-    this.clientGroupKey(querystring.parameter('key'))
+    // this.clientGroupKey(querystring.parameter('key'))
 
-    this.listingHref(`/find-help/by-client-group/?key=${querystring.parameter('key')}&postcode=${this.proximitySearch.postcode()}`)
-    this.timetableHref(`/find-help/by-client-group/timetable/?key=${querystring.parameter('key')}&postcode=${this.proximitySearch.postcode()}`)
-    this.mapHref(`/find-help/by-client-group/map/?key=${querystring.parameter('key')}&postcode=${this.proximitySearch.postcode()}`)
+    // this.listingHref(`/find-help/by-client-group/?key=${querystring.parameter('key')}&postcode=${this.proximitySearch.postcode()}`)
+    // this.timetableHref(`/find-help/by-client-group/timetable/?key=${querystring.parameter('key')}&postcode=${this.proximitySearch.postcode()}`)
+    // this.mapHref(`/find-help/by-client-group/map/?key=${querystring.parameter('key')}&postcode=${this.proximitySearch.postcode()}`)
 
     ajax
-      .data(`${endpoints.serviceCategories}${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}&clientGroup=${this.clientGroupKey()}`)
+      .data(`${endpoints.serviceCategories}${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}&clientGroup=${this.clientGroup.key}`)
       .then((result) => {
-        this.clientGroupName(result.data.clientGroup.name)
         this.items(result.data.providers)
         this.displayMap()
         this.pushHistory()
