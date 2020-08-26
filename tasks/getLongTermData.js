@@ -112,6 +112,15 @@ gulp.task('parse-vol-categories-task', (callback) => {
 gulp.task('client-groups', (callback) => {
   return request(endpoints.clientGroups)
     .pipe(source(`${config.paths.generatedData}client-groups.js`))
+    .pipe(streamify(jeditor((clientGroups) => clientGroups.map(function (c) {
+      return {
+        key: c.key,
+        name: c.name,
+        sortPosition: c.sortPosition
+      }
+    }).sortDesc('sortPosition')
+    )))
+    .pipe(replace('[{', 'export const clientGroups = [{'))
     .pipe(gulp.dest('./'))
 })
 

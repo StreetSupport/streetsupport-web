@@ -9,24 +9,15 @@ import config from '../foley.json'
 import endpoints from '../src/js/api'
 
 const findHelpSrc = `${config.paths.pages}find-help/group/`
-const categoryPageSrc = `${findHelpSrc}by-client-group/index.hbs`
-const timetabledPageSrc = `${findHelpSrc}by-client-group/timetable/index.hbs`
-const locationPageSrc = `${findHelpSrc}by-client-group/map/index.hbs`
+const categoryPageSrc = `${config.paths.pages}find-help/group/index.hbs`
+const timetabledPageSrc = `${config.paths.pages}find-help/group/by-day/index.hbs`
+const locationPageSrc = `${config.paths.pages}find-help/group/by-location/index.hbs`
 const generatedPagesSrc = `${config.paths.pages}_generated/`
 
 let clientGroups = []
 let cities = []
 
 gulp.task('getClientGroups', (callback) => {
-  // const getPageUrl = (key) => {
-  //   switch (key) {
-  //     case 'meals': return 'meals/timetable'
-  //     case 'dropin': return 'dropin/timetable'
-  //     case 'accom': return 'accommodation'
-  //     default: return key
-  //   }
-  // }
-
   request(endpoints.clientGroups, function (err, res, body) {
     clientGroups = JSON.parse(body)
       .sort((a, b) => {
@@ -39,14 +30,13 @@ gulp.task('getClientGroups', (callback) => {
           key: c.key,
           name: c.name,
           page: c.key
-          // page: getPageUrl(c.key)
         }
       })
     callback()
   })
 })
 
-gulp.task('getCities', (callback) => {
+gulp.task('getCitiesCG', (callback) => {
   request(endpoints.cities, function (err, res, body) {
     cities = JSON.parse(body)
     callback()
@@ -103,21 +93,21 @@ const getNewLocationContent = function (src, cat) {
   return result
 }
 
-gulp.task('reset', () => {
+gulp.task('resetCG', () => {
   const generatedCategoryDirectories = clientGroups
-    .map((c) => `${findHelpSrc}/${c.key}`)
+    .map((c) => `${findHelpSrc}${c.key}`)
   return del([...generatedCategoryDirectories, generatedPagesSrc])
 })
 
-gulp.task('clean-generated-files', () => {
+gulp.task('clean-generated-filesCG', () => {
   return del([generatedPagesSrc])
 })
 
-gulp.task('make-generated-files-directory', () => {
+gulp.task('make-generated-files-directoryCG', () => {
   fs.mkdirSync(generatedPagesSrc)
 })
 
-gulp.task('generate-provider-directories', () => {
+gulp.task('generate-provider-directoriesCG', () => {
   clientGroups
     .forEach((c) => {
       const destDir = `${generatedPagesSrc}${c.key}`
@@ -127,7 +117,7 @@ gulp.task('generate-provider-directories', () => {
     })
 })
 
-gulp.task('generate-provider-listing-pages', () => {
+gulp.task('generate-provider-listing-pagesCG', () => {
   const srcContent = fs.readFileSync(categoryPageSrc, 'utf-8')
 
   clientGroups
@@ -138,7 +128,7 @@ gulp.task('generate-provider-listing-pages', () => {
     })
 })
 
-gulp.task('generate-timetabled-pages', () => {
+gulp.task('generate-timetabled-pagesCG', () => {
   const srcContent = fs.readFileSync(timetabledPageSrc, 'utf-8')
 
   clientGroups
@@ -149,7 +139,7 @@ gulp.task('generate-timetabled-pages', () => {
     })
 })
 
-gulp.task('generate-map-pages', () => {
+gulp.task('generate-map-pagesCG', () => {
   const srcContent = fs.readFileSync(locationPageSrc, 'utf-8')
 
   clientGroups
@@ -160,21 +150,21 @@ gulp.task('generate-map-pages', () => {
     })
 })
 
-gulp.task('copy-to-find-help', () => {
+gulp.task('copy-to-find-helpCG', () => {
   return gulp.src(generatedPagesSrc + '**/*', {})
     .pipe(gulp.dest(findHelpSrc))
 })
 
 gulp.task('generate-client-group-pages', (callback) => {
   runSequence(
-    'reset',
+    'resetCG',
     'getClientGroups',
-    'getCities',
-    'make-generated-files-directory',
-    'generate-provider-directories',
-    ['generate-provider-listing-pages', 'generate-timetabled-pages', 'generate-map-pages'],
-    'copy-to-find-help',
-    'clean-generated-files',
+    'getCitiesCG',
+    'make-generated-files-directoryCG',
+    'generate-provider-directoriesCG',
+    ['generate-provider-listing-pagesCG', 'generate-timetabled-pagesCG', 'generate-map-pagesCG'],
+    'copy-to-find-helpCG',
+    'clean-generated-filesCG',
     callback
   )
 })

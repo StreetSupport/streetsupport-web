@@ -17,8 +17,6 @@ export default class FindHelpByDay extends FindHelpByClientGroup {
     this.isLoaded = false
     this.day = ko.observable(0)
     this.allOriginalItems = ko.observableArray([])
-    // this.clientGroupKey = ko.observable()
-    // this.clientGroupName = ko.observable()
 
     this.timesOfDay = [
       { id: 'Morning', startTime: '06:00', endTime: '12:00' },
@@ -79,11 +77,6 @@ export default class FindHelpByDay extends FindHelpByClientGroup {
   onProximitySearch () {
     this.isLoaded = true
     const dayOfWeekqs = querystring.parameter('day')
-    // this.clientGroupKey(querystring.parameter('key'))
-
-    // this.listingHref(`/find-help/by-client-group/?key=${querystring.parameter('key')}&postcode=${this.proximitySearch.postcode()}`)
-    // this.timetableHref(`/find-help/by-client-group/timetable/?key=${querystring.parameter('key')}&postcode=${this.proximitySearch.postcode()}`)
-    // this.mapHref(`/find-help/by-client-group/map/?key=${querystring.parameter('key')}&postcode=${this.proximitySearch.postcode()}`)
 
     if (!dayOfWeekqs) {
       this.pushHistory()
@@ -93,11 +86,10 @@ export default class FindHelpByDay extends FindHelpByClientGroup {
     }
 
     browser.loading()
-    const url = `${endpoints.categoryServiceProvidersByDay}long/${this.proximitySearch.longitude}/lat/${this.proximitySearch.latitude}?range=${this.proximitySearch.range()}&day=${this.day()}&clientGroup=${this.clientGroup.key}`
+    const url = `${endpoints.categoryServiceProvidersByDay}long/${this.proximitySearch.longitude}/lat/${this.proximitySearch.latitude}?range=${this.proximitySearch.range()}&day=${this.day()}&clientGroup=${this.encodeClientGroupKey(this.clientGroup.clientGroupKey)}`
     ajax
       .data(url)
       .then((result) => {
-        this.clientGroupName(result.data.clientGroup.name)
         const parsedData = getServicesByDay(result.data.daysServices)
         this.items([])
         this.items(parsedData)
@@ -142,7 +134,6 @@ export default class FindHelpByDay extends FindHelpByClientGroup {
   }
 
   pushHistory () {
-    // const clientGroupKey = querystring.parameter('key')
     const postcodeqs = querystring.parameter('postcode')
     const dayOfWeekqs = querystring.parameter('day')
 
@@ -151,7 +142,6 @@ export default class FindHelpByDay extends FindHelpByClientGroup {
 
     if (postcode !== postcodeqs || day !== dayOfWeekqs) {
       const kvps = [
-        // { key: 'key', value: clientGroupKey },
         { key: 'postcode', value: postcode },
         { key: 'day', value: day }
       ]

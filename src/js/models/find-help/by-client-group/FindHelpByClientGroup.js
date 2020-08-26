@@ -2,20 +2,22 @@ import ko from 'knockout'
 
 import pushHistory from '../../../history'
 import ProximitySearch from '../../ProximitySearch'
-const querystring = require('../../../get-url-parameter')
+import FindHelpClientGroup from './FindHelpClientGroup'
 
 export default class FindHelpByClientGroup {
   constructor () {
-    // this.filters = filters
     this.clientGroup = new FindHelpClientGroup()
     this.proximitySearch = new ProximitySearch(this)
 
     this.items = ko.observableArray([])
     this.hasItems = ko.computed(() => this.items().length > 0, this)
+  }
 
-    // this.listingHref = ko.observable()
-    // this.timetableHref = ko.observable()
-    // this.mapHref = ko.observable()
+  encodeClientGroupKey (key) {
+    if (key.charAt(key.length - 1) === '+') {
+      return key.slice(0, -1) + '%2B';
+    }
+    return key;
   }
 
   onProximitySearchFail () {
@@ -24,7 +26,6 @@ export default class FindHelpByClientGroup {
 
   pushHistory () {
     pushHistory([
-      // { qsKey: 'key', getValue: () => querystring.parameter('key') },
       { qsKey: 'postcode', getValue: () => this.proximitySearch.postcode() }
     ])
   }

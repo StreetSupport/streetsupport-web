@@ -1,15 +1,11 @@
-import ko from 'knockout'
-import marked from 'marked'
+// import ko from 'knockout'
 
-const browser = require('../../browser')
-import { clientGroups } from '../../../data/generated/client-groups'
+const browser = require('../../../browser')
+import { clientGroups } from '../../../../data/generated/client-groups'
 
 export default class FindHelpClientGroup {
   constructor () {
-    const re = new RegExp(/find-help\/([\w -]*[a-zA-Z]\+)\//)
-    this.clientGroupId = browser.location().pathname.match(re)[1]
-    const clientGroup = clientGroups.find((c) => c.key === this.clientGroupId)
-
-    this.clientGroupName = ko.observable(clientGroup.name)
+    const re = new RegExp(/find-help\/group\/([\w]{1,}[\w-]*[a-zA-Z0-9]\+?)\//)
+    this.clientGroupKey = browser.location().pathname.match(re)[1]
   }
 }

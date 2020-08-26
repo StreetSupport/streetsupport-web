@@ -16,8 +16,6 @@ export default class FindHelpByCategory extends FindHelpByClientGroup {
 
     this.allItems = ko.observableArray([])
     this.allOriginalItems = ko.observableArray([])
-    // this.clientGroupKey = ko.observable()
-    // this.clientGroupName = ko.observable()
     this.isLoaded = false
     this.pageSize = pageSize
     this.pageIndex = ko.observable(0)
@@ -47,16 +45,10 @@ export default class FindHelpByCategory extends FindHelpByClientGroup {
   onProximitySearch () {
     this.isLoaded = true
     browser.loading()
-    // this.clientGroupKey(querystring.parameter('key'))
-
-    // this.listingHref(`/find-help/by-client-group/?key=${querystring.parameter('key')}&postcode=${this.proximitySearch.postcode()}`)
-    // this.timetableHref(`/find-help/by-client-group/timetable/?key=${querystring.parameter('key')}&postcode=${this.proximitySearch.postcode()}`)
-    // this.mapHref(`/find-help/by-client-group/map/?key=${querystring.parameter('key')}&postcode=${this.proximitySearch.postcode()}`)
-
     this.pushHistory()
 
     ajax
-      .data(`${endpoints.serviceCategories}${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}&clientGroup=${this.category.key}`)
+      .data(`${endpoints.serviceCategories}${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}&clientGroup=${this.encodeClientGroupKey(this.clientGroup.clientGroupKey)}`)
       .then((result) => {
         if (this.totalItems() === 0) {
           this.totalItems(result.data.total)
