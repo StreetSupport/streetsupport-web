@@ -1,7 +1,6 @@
 /* global describe, beforeEach, afterEach, it, expect */
 
 const sinon = require('sinon')
-
 const ajax = require('../../../src/js/get-api-data')
 const browser = require('../../../src/js/browser')
 const endpoints = require('../../../src/js/api')

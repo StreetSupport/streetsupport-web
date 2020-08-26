@@ -1,5 +1,4 @@
 import ko from 'knockout'
-
 import pushHistory from '../../../history'
 import ProximitySearch from '../../ProximitySearch'
 import FindHelpClientGroup from './FindHelpClientGroup'

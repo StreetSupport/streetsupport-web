@@ -1,7 +1,6 @@
 /* global describe, beforeEach, afterEach, it, expect */
 
 const sinon = require('sinon')
-
 const browser = require('../../../src/js/browser')
 const postcodeLookup = require('../../../src/js/location/postcodes')
 const storage = require('../../../src/js/storage')

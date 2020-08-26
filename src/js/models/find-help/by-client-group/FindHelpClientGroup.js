@@ -1,5 +1,3 @@
-// import ko from 'knockout'
-
 const browser = require('../../../browser')
 
 export default class FindHelpClientGroup {
