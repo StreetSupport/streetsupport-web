@@ -1,7 +1,6 @@
 // import ko from 'knockout'
 
 const browser = require('../../../browser')
-import { clientGroups } from '../../../../data/generated/client-groups'
 
 export default class FindHelpClientGroup {
   constructor () {

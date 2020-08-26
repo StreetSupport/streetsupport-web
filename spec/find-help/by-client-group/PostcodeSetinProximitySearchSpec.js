@@ -1,15 +1,15 @@
-/* global describe, beforeAll, afterAll, it, expect */
+/* global describe, beforeEach, afterEach, it, expect */
 
 const sinon = require('sinon')
 
-const ajax = require('../../../../src/js/get-api-data')
-const browser = require('../../../../src/js/browser')
-const endpoints = require('../../../../src/js/api')
-const postcodeLookup = require('../../../../src/js/location/postcodes')
-const querystring = require('../../../../src/js/get-url-parameter')
-const storage = require('../../../../src/js/storage')
+const ajax = require('../../../src/js/get-api-data')
+const browser = require('../../../src/js/browser')
+const endpoints = require('../../../src/js/api')
+const postcodeLookup = require('../../../src/js/location/postcodes')
+const querystring = require('../../../src/js/get-url-parameter')
+const storage = require('../../../src/js/storage')
 
-import FindHelpByDay from '../../../../src/js/models/find-help/by-client-group/by-day'
+import FindHelpByClientGroup from '../../../src/js/models/find-help/by-client-group/by-group'
 import data from './supportServiceData'
 
 const newLocation = {
@@ -18,16 +18,17 @@ const newLocation = {
   postcode: 'a new postcode'
 }
 
-describe('Find Help by Day - postcode set in proximity search', () => {
+describe('Find Help by Client Group - postcode set in proximity search', () => {
   let sut,
     apiGetStub,
     browserLoadingStub,
     browserLoadedStub,
     browserPushHistoryStub,
     postcodeLookupStub,
-    storageSetStub
+    storageSetStub,
+    queryStringStub
 
-  beforeAll(() => {
+  beforeEach(() => {
     apiGetStub = sinon.stub(ajax, 'data')
     apiGetStub.returns({
       then: function (success, error) {
@@ -43,25 +44,25 @@ describe('Find Help by Day - postcode set in proximity search', () => {
     browserLoadedStub = sinon.stub(browser, 'loaded')
     sinon.stub(browser, 'location')
       .returns({
-        pathname: '/find-help/group/families/timetable'
+        pathname: '/find-help/group/families/'
       })
     browserPushHistoryStub = sinon.stub(browser, 'pushHistory')
     sinon.stub(browser, 'setOnHistoryPop')
-
     postcodeLookupStub = sinon.stub(postcodeLookup, 'getCoords')
     postcodeLookupStub
       .callsArgWith(1, newLocation) // success callback function
 
-    sinon.stub(querystring, 'parameter')
+    queryStringStub = sinon.stub(querystring, 'parameter')
+
     storageSetStub = sinon.stub(storage, 'set')
     sinon.stub(storage, 'get').returns({})
 
-    sut = new FindHelpByDay()
+    sut = new FindHelpByClientGroup()
     sut.proximitySearch.postcode(newLocation.postcode)
     sut.proximitySearch.search()
   })
 
-  afterAll(() => {
+  afterEach(() => {
     ajax.data.restore()
     browser.loading.restore()
     browser.loaded.restore()
@@ -83,7 +84,7 @@ describe('Find Help by Day - postcode set in proximity search', () => {
   })
 
   it('- should retrieve items from API', () => {
-    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl(`/v2/timetabled-service-providers/show/long/234.5/lat/456.7?range=10000&day=${new Date().getDay() - 1}&clientGroup=families`))
+    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/456.7/234.5?range=10000&pageSize=25&index=0&clientGroup=families'))
   })
 
   it('- should set hasItems to true', () => {
@@ -103,53 +104,5 @@ describe('Find Help by Day - postcode set in proximity search', () => {
   it('- should set postcode in querystring', () => {
     const expected = browserPushHistoryStub.withArgs({ postcode: newLocation.postcode }, '', `?postcode=${newLocation.postcode}`).calledOnce
     expect(expected).toBeTruthy()
-  })
-
-  it('- should set first day as selected', () => {
-    expect(sut.dayOfWeek()).toEqual(sut.items()[0].name)
-  })
-
-  describe('- open accordion', () => {
-    const dayIndexToOpen = 0
-    beforeAll(() => {
-      sut.items()[dayIndexToOpen].isSelected(true)
-    })
-
-    it('- should close any open ones', () => {
-      sut.items()
-        .filter((d, i) => i !== dayIndexToOpen)
-        .forEach((d) => {
-          expect(d.isSelected()).toBeFalsy()
-        })
-    })
-  })
-
-  describe('- filtering by day', () => {
-    const dayIndexToOpen = 0
-    beforeAll(() => {
-      sut.dayOfWeek(sut.items()[dayIndexToOpen].name)
-    })
-
-    it('- should open requested', () => {
-      expect(sut.items()[dayIndexToOpen].isSelected()).toBeTruthy()
-    })
-  })
-
-  describe('- filtering by time of day', () => {
-    beforeAll(() => {
-      sut.timeOfDay('Evening')
-    })
-
-    it('- should hide morning and afternoon services', () => {
-      sut.items()
-        .reduce((acc, next) => [...acc, ...next.serviceProviders], [])
-        .forEach((sp) => {
-          if (sp.openingTime.endTime <= '17:30') {
-            expect(sp.isNotVisible()).toBeTruthy()
-          } else {
-            expect(sp.isNotVisible()).toBeFalsy()
-          }
-        })
-    })
   })
 })

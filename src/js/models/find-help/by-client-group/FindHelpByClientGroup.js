@@ -15,9 +15,9 @@ export default class FindHelpByClientGroup {
 
   encodeClientGroupKey (key) {
     if (key.charAt(key.length - 1) === '+') {
-      return key.slice(0, -1) + '%2B';
+      return key.slice(0, -1) + '%2B'
     }
-    return key;
+    return key
   }
 
   onProximitySearchFail () {
