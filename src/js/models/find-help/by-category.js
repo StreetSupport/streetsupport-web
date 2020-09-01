@@ -67,7 +67,7 @@ export default class FindHelpByCategory extends FindHelp {
     }
 
     if (this.proximitySearch.hasCoords() && !this.isLoaded) {
-      this.onProximitySearch()
+      this.onProximitySearch(false)
     }
 
     browser.setOnHistoryPop((e) => {
@@ -77,22 +77,27 @@ export default class FindHelpByCategory extends FindHelp {
 
   loadMore () {
     this.pageIndex(this.pageIndex() + this.pageSize)
-    this.onProximitySearch()
+    this.onProximitySearch(true)
   }
 
-  onProximitySearch () {
+  onProximitySearch (isLoadMore = false) {
     this.isLoaded = true
     browser.loading()
     const subCatIdInQuerystring = querystring.parameter('subCatId')
     if (!subCatIdInQuerystring) {
       this.pushHistory()
     }
+    if (isLoadMore !== true) {
+      this.pageIndex(0)
+    }
     ajax
       .data(`${endpoints.serviceCategories}${this.category.categoryId}/${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}`)
       .then((result) => {
-        if (this.totalItems() === 0) {
+        if (isLoadMore !== true) {
           this.totalItems(result.data.total)
+          this.allOriginalItems([])
         }
+
         this.allOriginalItems(this.allOriginalItems().concat(result.data.providers))
         this.allItems(getProvidersForListing(this.allOriginalItems()))
         this.items(this.allItems())

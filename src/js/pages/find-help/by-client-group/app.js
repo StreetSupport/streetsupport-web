@@ -1,7 +1,7 @@
 import '../../../common'
 import ko from 'knockout'
-import FindHelpByCategory from '../../../models/find-help/by-client-group/by-group'
+import FindHelpByClientGroup from '../../../models/find-help/by-client-group/by-group'
 
-const model = new FindHelpByCategory()
+const model = new FindHelpByClientGroup()
 
 ko.applyBindings(model)

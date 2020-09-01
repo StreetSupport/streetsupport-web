@@ -3,8 +3,9 @@ import pushHistory from '../../../history'
 import ProximitySearch from '../../ProximitySearch'
 import FindHelpClientGroup from './FindHelpClientGroup'
 
-export default class FindHelpByClientGroup {
-  constructor () {
+export default class FindHelp {
+  constructor (filters = []) {
+    this.filters = filters
     this.clientGroup = new FindHelpClientGroup()
     this.proximitySearch = new ProximitySearch(this)
 
@@ -25,7 +26,8 @@ export default class FindHelpByClientGroup {
 
   pushHistory () {
     pushHistory([
-      { qsKey: 'postcode', getValue: () => this.proximitySearch.postcode() }
+      { qsKey: 'postcode', getValue: () => this.proximitySearch.postcode() },
+      ...this.filters
     ])
   }
 }

@@ -32,6 +32,21 @@ page:
   <div class="container">
     <div class="block__content">
 
+      <!-- ko if: shouldShowCatFilter -->
+      <div class="subcat-filter form--highlighted">
+        <p class="subcat-filter__label">Filter by category:</p>
+
+        <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: catFilters">
+          <li class="js-filter-item">
+            <label class="subcat-filter__checkable_item js-filter-item" data-bind="attr: { for: id }">
+              <input type="checkbox" data-bind="attr: { id: id, }, checked: isSelected, click: filterOnCheck" class="form__input--checkbox" />
+              <span  data-bind="text: name, css: { 'on': isSelected }, click: filter"></span>
+            </label>
+          </li>
+        </ul>
+      </div>
+      <!-- /ko -->
+
       <!-- ko ifnot: proximitySearch.postcode -->
       <!-- ko ifnot: hasItems -->
       <p>Please enter a postcode to begin your search. You can use a full postcode eg: 'M1 2HX', or a partial postcode eg: 'M1'.</p>
