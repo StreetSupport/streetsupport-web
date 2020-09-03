@@ -33,6 +33,7 @@ gulp.task('default', (callback) => {
     'getLongTermData',
     'generate-service-pages',
     'generate-location-files',
+    'generate-client-group-pages',
     'jasmine',
     'standardlint',
     'clean',
@@ -50,13 +51,14 @@ gulp.task('deploy', (callback) => {
     'getLongTermData',
     'generate-service-pages',
     'generate-location-files',
+    'generate-client-group-pages',
     'jasmine',
     'standardlint',
     'clean',
     'cachebusting',
     'metalsmith',
     ['htmlmin', 'svgsprite', 'scss', 'webpack', 'img'],
-    'criticalcss', 
+    'criticalcss',
     'copy',
     callback
   )

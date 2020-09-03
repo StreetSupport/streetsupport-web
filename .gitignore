@@ -24,6 +24,7 @@ backstop_data
 test/visual/results
 .idea
 
+src/pages/find-help/group
 src/pages/find-help/accom/
 src/pages/find-help/communications/
 src/pages/find-help/dropin/
@@ -47,3 +48,7 @@ src/partials/nav/header-locations.hbs
 src/partials/locations/_generated-selector-hogan.hbs
 src/partials/locations/_generated-option-tags.hbs
 src/partials/find-help/_generated-service-cats-ctas.hbs
+
+!src/pages/find-help/group/index.hbs
+!src/pages/find-help/group/by-day/index.hbs
+!src/pages/find-help/group/by-location/index.hbs

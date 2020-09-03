@@ -30,7 +30,7 @@ class ClientGroupFilter {
   }
 }
 
-function OrgListing (orgsFilter = null, pageSize = 50) {
+function OrgListing (orgsFilter = null, pageSize = 25) {
   const self = this
 
   self.orgsFilter = orgsFilter

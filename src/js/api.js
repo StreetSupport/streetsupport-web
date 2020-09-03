@@ -38,6 +38,6 @@ module.exports = {
   bestPracticeAwardApplications: p('/v1/manchester-best-practice-awards/applications/'),
   bestPracticeEnquiries: p('/v1/manchester-best-practice-enquiries/'),
   accommodation: p('/v1/accommodation/'),
-  faqs: p('/v1/faqs/')
+  faqs: p('/v1/faqs/'),
+  clientGroups: p('/v1/client-groups/all-client-groups')
 }
-

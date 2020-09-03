@@ -109,10 +109,26 @@ gulp.task('parse-vol-categories-task', (callback) => {
   )
 })
 
+gulp.task('client-groups', (callback) => {
+  return request(endpoints.clientGroups)
+    .pipe(source(`${config.paths.generatedData}client-groups.js`))
+    .pipe(streamify(jeditor((clientGroups) => clientGroups.map(function (c) {
+      return {
+        key: c.key,
+        name: c.name,
+        sortPosition: c.sortPosition
+      }
+    }).sortDesc('sortPosition')
+    )))
+    .pipe(replace('[{', 'export const clientGroups = [{'))
+    .pipe(gulp.dest('./'))
+})
+
 gulp.task('getLongTermData',
 [
-  'parse-categories', 
-  'supported-cities', 
-  'need-categories', 
-  'parse-vol-categories-task'
+  'parse-categories',
+  'supported-cities',
+  'need-categories',
+  'parse-vol-categories-task',
+  'client-groups'
 ])

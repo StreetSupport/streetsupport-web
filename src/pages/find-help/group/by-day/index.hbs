@@ -2,21 +2,20 @@
 title:
 description:
 image: https://streetsupport.net/assets/img/og/street-support.jpg
-layout: default.hbs
+layout: withGoogle.hbs
 permalink: false
-jsBundle: find-help-by-day-v2
+jsBundle: by-client-group-timetable
 section: findhelp
-page: find-help-support
+page:
 ---
 
-{{> find-help/breadcrumb_injected categoryName="theServiceCategoryName" }}
+{{> find-help/breadcrumb_injected categoryName="theClientGroupName" }}
 
 <div class="block">
   <div class="container">
     <div class="block__content">
       <header class="multi-form-header">
-        <h1 class="h1">theServiceCategoryName</h1>
-        theServiceCategorySynopsis
+        <h1 class="h1">theClientGroupName</h1>
         <p>To find services near you, please enter your postcode.</p>
         <button class="btn btn--brand-d js-print-btn">
           <span class="btn__text">Print this page</span>
@@ -27,7 +26,7 @@ page: find-help-support
   </div>
 </div>
 
-{{> find-help/view-type-tabs_injected timetableIsSelected="true" categoryId="theServiceCategoryId" }}
+{{> find-help/view-type-tabs_injected timetableIsSelected="true" categoryId="group/theClientGroupId" }}
 
 <div class="block block--cards">
   <div class="container">
