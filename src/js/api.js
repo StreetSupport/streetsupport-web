@@ -39,5 +39,5 @@ module.exports = {
   bestPracticeEnquiries: p('/v1/manchester-best-practice-enquiries/'),
   accommodation: p('/v1/accommodation/'),
   faqs: p('/v1/faqs/'),
-  clientGroups: p('/v1/client-groups/get')
+  clientGroups: p('/v1/client-groups/all-client-groups')
 }
