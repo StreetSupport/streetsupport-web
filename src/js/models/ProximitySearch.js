@@ -23,6 +23,26 @@ export default class ProximitySearch {
     }
   }
 
+  // getCategories () {
+  //   let categories = storage.get(storage.keys.categories)
+  //   return categories
+  // }
+
+  // getSubCategories () {
+  //   let subCategories = storage.get(storage.keys.subCategories)
+  //   return subCategories
+  // }
+
+  // setCategoriesSubCategories (cat, subCat) {
+  //   let categories = storage.set(storage.keys.categories, cat)
+  //   let subCategories = storage.set(storage.keys.subCategories, subCat)
+
+  //   return {
+  //     'categories': categories,
+  //     'subCategories': subCategories
+  //   }
+  // }
+
   hasCoords () {
     return this.latitude !== null &&
            this.longitude !== null &&
@@ -41,7 +61,7 @@ export default class ProximitySearch {
           storage.set(storage.keys.userLocationState, postcodeResult)
           this.latitude = postcodeResult.latitude
           this.longitude = postcodeResult.longitude
-          this.container.onProximitySearch(postcodeResult)
+          this.container.onProximitySearch(false, true)
         },
         (error) => {
           this.container.onProximitySearchFail(error)

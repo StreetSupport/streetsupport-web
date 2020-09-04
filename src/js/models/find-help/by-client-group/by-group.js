@@ -10,29 +10,47 @@ const listToDropdown = require('../../../list-to-dropdown')
 
 import { getProvidersForListing } from '../../../pages/find-help/provider-listing/helpers'
 import FindHelp from './FindHelp'
+import { categories } from '../../../../data/generated/service-categories'
 
 class CatFilter {
   constructor (data, container) {
-    this.id = data.categoryId
-    this.name = data.categoryName
+    this.id = data.key
+    this.name = data.name
     this.container = container
     this.isSelected = ko.observable(false)
+    this.subCategories = ko.observableArray(data.subCategories ? data.subCategories.map((sc) => new SubCatFilter(sc)) : [])
   }
 
-  filter () {
-    this.isSelected(!this.isSelected())
-    this.container.onCatFilter(this.id)
+  filter (isInit = false) {
+    this.isSelected(isInit === true ? true : !this.isSelected())
+    this.setSubcategories()
+    this.container.onCatFilter(this.id, isInit === true ? true : false)
   }
 
   filterOnCheck () {
+    this.setSubcategories()
     this.container.onCatFilter(this.id)
-
     return true
+  }
+
+  setSubcategories () {
+    this.subCategories().forEach((x) => {
+      x.isSelected(this.isSelected())
+    })
+  }
+}
+
+class SubCatFilter {
+  constructor (data) {
+    this.id = data.key
+    this.name = data.name
+    this.isSelected = ko.observable(false)
   }
 }
 
 export default class FindHelpByClientGroup extends FindHelp {
   constructor (pageSize = 25) {
+    // super([])
     super([{
       qsKey: 'catIds',
       getValue: () => {
@@ -40,6 +58,21 @@ export default class FindHelpByClientGroup extends FindHelp {
         return selectedCatFilters && selectedCatFilters.length
           ? selectedCatFilters.join(',')
           : undefined
+      }
+    },
+    {
+      qsKey: 'subCatIds',
+      getValue: () => {
+        var categories = this.catFilters().filter((c) => c.id !== undefined && c.isSelected())
+        if (categories && categories.length) {
+          const selectedSubCatFilters = categories.map((c) => c.subCategories())
+                                                  .reduce(function (a, b) { return a.concat(b) })
+                                                  .map((sc) => sc.id)
+          return selectedSubCatFilters && selectedSubCatFilters.length
+                  ? selectedSubCatFilters.join(',')
+                  : undefined
+        }
+        return undefined
       }
     }])
 
@@ -73,7 +106,7 @@ export default class FindHelpByClientGroup extends FindHelp {
     }
 
     if (this.proximitySearch.hasCoords() && !this.isLoaded) {
-      this.onProximitySearch()
+      this.onProximitySearch(false, true)
     }
 
     browser.setOnHistoryPop((e) => {
@@ -83,24 +116,62 @@ export default class FindHelpByClientGroup extends FindHelp {
 
   loadMore () {
     this.pageIndex(this.pageIndex() + this.pageSize)
-    this.onProximitySearch(true)
+    this.onProximitySearch(true, false)
   }
 
-  onProximitySearch (isLoadMore = false) {
+  clearCategoriesFilter () {
+    this.catFilters().forEach((x) => {
+      x.isSelected(false)
+      x.setSubcategories()
+    })
+  }
+
+  // writeToSotrage () {
+  //   var selectedCatFilters = this.catFilters().filter((c) => c.id !== undefined && c.isSelected()).map((c) => c.id)
+
+  //   var categories = this.catFilters().filter((c) => c.id !== undefined && c.isSelected())
+  //   if (categories && categories.length) {
+  //     const selectedSubCatFilters = categories.map((c) => c.subCategories())
+  //                                             .reduce(function (a, b) { return a.concat(b) })
+  //                                             .map((sc) => sc.id)
+  //     this.proximitySearch.setCategoriesSubCategories(selectedCatFilters && selectedCatFilters.length ? selectedCatFilters.join(',') : undefined,
+  //                                                     selectedSubCatFilters && selectedSubCatFilters.length ? selectedSubCatFilters.join(',') : undefined)
+  //   }
+  // }
+
+  onProximitySearch (isLoadMore, isInit) {
     this.isLoaded = true
     browser.loading()
-    const catIdsInQuerystring = querystring.parameter('catIds')
+    var catIdsInQuerystring = querystring.parameter('catIds')
+    var subCatIdsInQuerystring = querystring.parameter('subCatIds')
+    // var catIdsInQuerystring = this.proximitySearch.getCategories()
+    // var subCatIdsInQuerystring = this.proximitySearch.getSubCategories()
+    var isEmptyQuery = false;
 
-    if (!catIdsInQuerystring) {
+    if (isInit && this.catFilters().length > 1 && !catIdsInQuerystring) {
+      this.catFilters()[1].isSelected(true)
+      this.catFilters()[1].setSubcategories()
+
+      // this.writeToSotrage ()
       this.pushHistory()
+      catIdsInQuerystring = querystring.parameter('catIds')
+      subCatIdsInQuerystring = querystring.parameter('subCatIds')
+      // catIdsInQuerystring = this.proximitySearch.getCategories()
+      // subCatIdsInQuerystring = this.proximitySearch.getSubCategories()
+      isEmptyQuery = true
+    } else if (!catIdsInQuerystring) {
+      this.pushHistory()
+      isEmptyQuery = true
     }
-    if (isLoadMore !== true) {
+
+    if (!isLoadMore) {
       this.pageIndex(0)
     }
+
     ajax
-      .data(`${endpoints.serviceCategories}${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}&clientGroup=${this.encodeClientGroupKey(this.clientGroup.clientGroupKey)}&catIds=employment&subCatIds=paid`)
+      .data(`${endpoints.serviceCategories}${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}&clientGroup=${this.encodeClientGroupKey(this.clientGroup.clientGroupKey)}&catIds=${catIdsInQuerystring}&subCatIds=${subCatIdsInQuerystring}`)
       .then((result) => {
-        if (isLoadMore !== true) {
+        if (!isLoadMore) {
           this.totalItems(result.data.total)
           this.allOriginalItems([])
         }
@@ -109,7 +180,7 @@ export default class FindHelpByClientGroup extends FindHelp {
         this.allItems(getProvidersForListing(this.allOriginalItems()))
         this.items(this.allItems())
 
-        if (catIdsInQuerystring) {
+        if (isInit && !isEmptyQuery) {
           this.setCatFilter(catIdsInQuerystring)
         }
 
@@ -120,63 +191,46 @@ export default class FindHelpByClientGroup extends FindHelp {
   }
 
   onBrowserHistoryBack (thisDoobrey, e) {
+    if(e.state && e.state) {
+      this.clearCategoriesFilter()
+      this.setCatFilter(e.state.catIds)
+    }
+
     if (e.state && e.state.postcode !== thisDoobrey.proximitySearch.postcode()) {
       this.proximitySearch.postcode(e.state.postcode)
+      //this.setCatFilter(this.proximitySearch.getCategories())
       this.proximitySearch.search()
     }
   }
 
-  onCatFilter (catId) {
+  onCatFilter (catId, isInit = false) {
     if (!catId) {
       this.catFilters()
       .forEach((c) => c.isSelected(this.catFilters().find((f) => c.categoryId === undefined).isSelected()))
-    }
-    else {
+    } else {
       if (this.catFilters().filter((f) => f.id !== undefined).every((e) => e.isSelected() === true)) {
         this.catFilters().find((f) => f.id === undefined).isSelected(true)
-      }
-      else {
-         this.catFilters().find((f) => f.id === undefined).isSelected(false)
+      } else {
+        this.catFilters().find((f) => f.id === undefined).isSelected(false)
       }
     }
-
-    const filtered = catId !== undefined
-                ? this.allItems().filter((i) => i.services.find((c) => this.catFilters().find((f) => c.categoryId === f.id).isSelected()))
-                : this.allItems().filter((i) => i.services.find((c) => this.catFilters().find((f) => undefined === f.id).isSelected()))
-    this.items(filtered)
     this.pushHistory()
+    //this.writeToSotrage ()
+
+    if (!isInit) {
+      this.onProximitySearch(false, false)
+    }
   }
 
-  // TODO: Rewrite when we get new mobile designv
+  // TODO: Rewrite when we get new mobile design
   // onCatFilterByName (catName) {
   //   const catId = this.catFilters().find((c) => c.name === catName).id
   //   this.onCatFilter(catId)
   // }
 
   getCatFilters () {
-    const toFlatCatList = (acc, next) => {
-      const newCatFilters = next.services
-        .map((c) => new CatFilter(c, this))
-      return [...acc, ...newCatFilters]
-    }
-
-    const toDistinct = (acc, next) => {
-      return (!acc.find((c) => c.id === next.id))
-        ? [...acc, next]
-        : acc
-    }
-
-    const showAll = new CatFilter({ categoryName: 'Show All', isSelected: false }, this)
-
-    const cats = [showAll, ...this.allItems()
-      .reduce(toFlatCatList, [])
-      .reduce(toDistinct, [])
-      .sortAsc('name')]
-
-      if (cats.length > 1 && !querystring.parameter('catIds')) {
-        cats[1].isSelected(true)
-      }
-
+    const showAll = new CatFilter({ name: 'Show All', isSelected: false }, this)
+    const cats = [showAll, ...categories.map((c) => new CatFilter(c, this)).sortAsc('name')]
     return cats
   }
 
@@ -185,8 +239,8 @@ export default class FindHelpByClientGroup extends FindHelp {
     const selectedCatFilters = this.catFilters()
       .filter((c) => listIds.some((i) => i === c.id))
 
-      if (selectedCatFilters) {
-        selectedCatFilters.forEach((f) => f.filter());
-      }
+    if (selectedCatFilters) {
+      selectedCatFilters.forEach((f) => f.filter(true))
+    }
   }
 }
