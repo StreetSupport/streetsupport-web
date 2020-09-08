@@ -47,15 +47,6 @@ export default class FindHelpByCategory extends FindHelp {
     this.totalItems = ko.observable(0)
     this.hasMorePages = ko.computed(() => (this.pageIndex() + this.pageSize) < this.totalItems(), this)
 
-    this.subCatFilters.subscribe(() => {
-      listToDropdown.init(
-        () => {},
-        (event) => {
-          this.onSubCatFilterByName(event.target.value)
-        }
-      )
-    })
-
     this.shouldShowSubCatFilter = ko.computed(() => {
       return this.subCatFilters().length > 1
     }, this)
@@ -105,6 +96,13 @@ export default class FindHelpByCategory extends FindHelp {
         if (subCatIdInQuerystring) {
           this.setSubCatFilter(subCatIdInQuerystring)
         }
+
+        listToDropdown.init(
+          () => {},
+          (event) => {
+            this.onSubCatFilterByName(event.target.value)
+          }
+        )
 
         browser.loaded()
       })

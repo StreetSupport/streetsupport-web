@@ -37,7 +37,7 @@ page:
         <p class="subcat-filter__label">Filter by category:</p>
 
         <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: catFilters">
-          <li class="js-filter-item">
+          <li class="subcat-filter__item js-filter-item">
             <label class="subcat-filter__checkable_item js-filter-item" data-bind="attr: { for: id }">
               <input type="checkbox" data-bind="attr: { id: id, }, checked: isSelected, click: filterOnCheck" class="form__input--checkbox" />
               <span  data-bind="text: name, css: { 'on': isSelected }, click: filter"></span>

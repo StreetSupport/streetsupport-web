@@ -22,9 +22,16 @@ class CatFilter {
   }
 
   filter (isInit = false) {
+    // If is isInit == true it means we load page first time and we need to set selected categories to TRUE.
     this.isSelected(isInit === true ? true : !this.isSelected())
     this.setSubcategories()
     this.container.onCatFilter(this.id, isInit === true ? true : false)
+  }
+
+  filterMobile () {
+    this.isSelected(true)
+    this.setSubcategories()
+    this.container.onCatMobileFilter(this.id)
   }
 
   filterOnCheck () {
@@ -50,7 +57,6 @@ class SubCatFilter {
 
 export default class FindHelpByClientGroup extends FindHelp {
   constructor (pageSize = 25) {
-    // super([])
     super([{
       qsKey: 'catIds',
       getValue: () => {
@@ -85,16 +91,6 @@ export default class FindHelpByClientGroup extends FindHelp {
     this.hasMorePages = ko.computed(() => (this.pageIndex() + this.pageSize) < this.totalItems(), this)
     this.catFilters = ko.computed(this.getCatFilters, this)
 
-    // TODO: Rewrite when we get new mobile design
-    // this.catFilters.subscribe(() => {
-    //   listToDropdown.init(
-    //     () => {},
-    //     (event) => {
-    //       this.onCatFilterByName(event.target.value)
-    //     }
-    //   )
-    // })
-
     this.shouldShowCatFilter = ko.computed(() => {
       return this.catFilters().length > 1
     }, this)
@@ -126,52 +122,48 @@ export default class FindHelpByClientGroup extends FindHelp {
     })
   }
 
-  // writeToSotrage () {
-  //   var selectedCatFilters = this.catFilters().filter((c) => c.id !== undefined && c.isSelected()).map((c) => c.id)
-
-  //   var categories = this.catFilters().filter((c) => c.id !== undefined && c.isSelected())
-  //   if (categories && categories.length) {
-  //     const selectedSubCatFilters = categories.map((c) => c.subCategories())
-  //                                             .reduce(function (a, b) { return a.concat(b) })
-  //                                             .map((sc) => sc.id)
-  //     this.proximitySearch.setCategoriesSubCategories(selectedCatFilters && selectedCatFilters.length ? selectedCatFilters.join(',') : undefined,
-  //                                                     selectedSubCatFilters && selectedSubCatFilters.length ? selectedSubCatFilters.join(',') : undefined)
-  //   }
-  // }
+  initMoblileDropdown () {
+    listToDropdown.init(
+      () => {},
+      (event) => {
+        this.onCatFilterByName(event.target.value)
+      }
+    )
+  }
 
   onProximitySearch (isLoadMore, isInit) {
+    // We have static list of filter-categories. As result we need to initialize it once.
+    if (!this.isLoaded) {
+      this.initMoblileDropdown()
+    }
+
     this.isLoaded = true
     browser.loading()
     var catIdsInQuerystring = querystring.parameter('catIds')
     var subCatIdsInQuerystring = querystring.parameter('subCatIds')
-    // var catIdsInQuerystring = this.proximitySearch.getCategories()
-    // var subCatIdsInQuerystring = this.proximitySearch.getSubCategories()
     var isEmptyQuery = false;
 
+    // If isInit == true it means we load page first time and need to get url parameters.
     if (isInit && this.catFilters().length > 1 && !catIdsInQuerystring) {
       this.catFilters()[1].isSelected(true)
       this.catFilters()[1].setSubcategories()
-
-      // this.writeToSotrage ()
       this.pushHistory()
       catIdsInQuerystring = querystring.parameter('catIds')
       subCatIdsInQuerystring = querystring.parameter('subCatIds')
-      // catIdsInQuerystring = this.proximitySearch.getCategories()
-      // subCatIdsInQuerystring = this.proximitySearch.getSubCategories()
       isEmptyQuery = true
     } else if (!catIdsInQuerystring) {
       this.pushHistory()
       isEmptyQuery = true
     }
 
-    if (!isLoadMore) {
+    if (isLoadMore !== true) {
       this.pageIndex(0)
     }
 
     ajax
       .data(`${endpoints.serviceCategories}${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}&clientGroup=${this.encodeClientGroupKey(this.clientGroup.clientGroupKey)}&catIds=${catIdsInQuerystring}&subCatIds=${subCatIdsInQuerystring}`)
       .then((result) => {
-        if (!isLoadMore) {
+        if (isLoadMore !== true) {
           this.totalItems(result.data.total)
           this.allOriginalItems([])
         }
@@ -198,7 +190,6 @@ export default class FindHelpByClientGroup extends FindHelp {
 
     if (e.state && e.state.postcode !== thisDoobrey.proximitySearch.postcode()) {
       this.proximitySearch.postcode(e.state.postcode)
-      //this.setCatFilter(this.proximitySearch.getCategories())
       this.proximitySearch.search()
     }
   }
@@ -214,19 +205,28 @@ export default class FindHelpByClientGroup extends FindHelp {
         this.catFilters().find((f) => f.id === undefined).isSelected(false)
       }
     }
-    this.pushHistory()
-    //this.writeToSotrage ()
 
+    this.pushHistory()
+
+    // If isInit == true it means we have just called onProximitySearch() and we don't need to call onProximitySearch() again.
     if (!isInit) {
       this.onProximitySearch(false, false)
     }
   }
 
-  // TODO: Rewrite when we get new mobile design
-  // onCatFilterByName (catName) {
-  //   const catId = this.catFilters().find((c) => c.name === catName).id
-  //   this.onCatFilter(catId)
-  // }
+  onCatFilterByName (catName) {
+    const category = this.catFilters().find((c) => c.name === catName.trim())
+    category.filterMobile()
+  }
+
+  onCatMobileFilter (catId) {
+    let isSelected = catId !== undefined ? false : true;
+    this.catFilters()
+      .filter((c) => c.id !== catId)
+      .forEach((c) => c.isSelected(isSelected))
+    this.pushHistory()
+    this.onProximitySearch(false, false)
+  }
 
   getCatFilters () {
     const showAll = new CatFilter({ name: 'Show All', isSelected: false }, this)
