@@ -25,7 +25,7 @@ class CatFilter {
     // If is isInit == true it means we load page first time and we need to set selected categories to TRUE.
     this.isSelected(isInit === true ? true : !this.isSelected())
     this.setSubcategories()
-    this.container.onCatFilter(this.id, isInit === true ? true : false)
+    this.container.onCatFilter(this.id, isInit === true)
   }
 
   filterMobile () {
@@ -141,7 +141,7 @@ export default class FindHelpByClientGroup extends FindHelp {
     browser.loading()
     var catIdsInQuerystring = querystring.parameter('catIds')
     var subCatIdsInQuerystring = querystring.parameter('subCatIds')
-    var isEmptyQuery = false;
+    var isEmptyQuery = false
 
     // If isInit == true it means we load page first time and need to get url parameters.
     if (isInit && this.catFilters().length > 1 && !catIdsInQuerystring) {
@@ -183,7 +183,7 @@ export default class FindHelpByClientGroup extends FindHelp {
   }
 
   onBrowserHistoryBack (thisDoobrey, e) {
-    if(e.state && e.state) {
+    if (e.state && e.state) {
       this.clearCategoriesFilter()
       this.setCatFilter(e.state.catIds)
     }
@@ -220,7 +220,7 @@ export default class FindHelpByClientGroup extends FindHelp {
   }
 
   onCatMobileFilter (catId) {
-    let isSelected = catId !== undefined ? false : true;
+    let isSelected = !(catId !== undefined)
     this.catFilters()
       .filter((c) => c.id !== catId)
       .forEach((c) => c.isSelected(isSelected))
