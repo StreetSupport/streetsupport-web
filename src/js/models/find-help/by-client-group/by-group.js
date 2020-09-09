@@ -154,6 +154,7 @@ export default class FindHelpByClientGroup extends FindHelp {
           x.isSelected(true)
         })
       }
+
       this.pushHistory()
       catIdsInQuerystring = querystring.parameter('catIds')
       subCatIdsInQuerystring = querystring.parameter('subCatIds')
