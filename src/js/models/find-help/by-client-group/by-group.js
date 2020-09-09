@@ -1,6 +1,7 @@
 require('../../../arrayExtensions')
 
 import ko from 'knockout'
+import utils from '../../../utils'
 
 const ajax = require('../../../get-api-data')
 const browser = require('../../../browser')
@@ -145,8 +146,14 @@ export default class FindHelpByClientGroup extends FindHelp {
 
     // If isInit == true it means we load page first time and need to get url parameters.
     if (isInit && this.catFilters().length > 1 && !catIdsInQuerystring) {
-      this.catFilters()[1].isSelected(true)
-      this.catFilters()[1].setSubcategories()
+      if (!utils.isSmallscreen()) {
+        this.catFilters()[1].isSelected(true)
+        this.catFilters()[1].setSubcategories()
+      } else if (utils.isSmallscreen()) {
+        this.catFilters().forEach((x) => {
+          x.isSelected(true)
+        })
+      }
       this.pushHistory()
       catIdsInQuerystring = querystring.parameter('catIds')
       subCatIdsInQuerystring = querystring.parameter('subCatIds')
