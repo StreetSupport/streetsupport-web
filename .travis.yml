@@ -1,5 +1,6 @@
 git:
-  depth: 1
+# In order to fix error 'reference not a tree'. It is a temporary value. https://www.scivision.dev/travis-ci-git-depth-reference-not-a-tree/
+  depth: 50
 language: node_js
 node_js:
 - '8'
