@@ -73,7 +73,9 @@ export default class FindHelpByClientGroup extends FindHelp {
         var categories = this.catFilters().filter((c) => c.id !== undefined && c.isSelected())
         if (categories && categories.length) {
           const selectedSubCatFilters = categories.map((c) => c.subCategories())
-                                                  .reduce(function (a, b) { return a.concat(b) })
+                                                  .reduce(function (a, b) {
+                                                    return a.concat(b.filter((sc) => sc.isSelected()))
+                                                  })
                                                   .map((sc) => sc.id)
           return selectedSubCatFilters && selectedSubCatFilters.length
                   ? selectedSubCatFilters.join(',')
@@ -152,6 +154,7 @@ export default class FindHelpByClientGroup extends FindHelp {
       } else if (utils.isSmallscreen()) {
         this.catFilters().forEach((x) => {
           x.isSelected(true)
+          x.setSubcategories()
         })
       }
 
@@ -205,7 +208,10 @@ export default class FindHelpByClientGroup extends FindHelp {
   onCatFilter (catId, isInit = false) {
     if (!catId) {
       this.catFilters()
-      .forEach((c) => c.isSelected(this.catFilters().find((f) => c.categoryId === undefined).isSelected()))
+      .forEach((c) => {
+        c.isSelected(this.catFilters().find((f) => c.categoryId === undefined).isSelected())
+        c.setSubcategories()
+      })
     } else {
       if (this.catFilters().filter((f) => f.id !== undefined).every((e) => e.isSelected() === true)) {
         this.catFilters().find((f) => f.id === undefined).isSelected(true)
@@ -246,7 +252,6 @@ export default class FindHelpByClientGroup extends FindHelp {
     var listIds = catIds.split(',')
     const selectedCatFilters = this.catFilters()
       .filter((c) => listIds.some((i) => i === c.id))
-
     if (selectedCatFilters) {
       selectedCatFilters.forEach((f) => f.filter(true))
     }

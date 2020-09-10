@@ -266,7 +266,7 @@ function OrgListing (orgsFilter = null, pageSize = 25) {
     } else {
       location.getPreviouslySetPostcode()
       .then((result) => {
-        init(result)
+        init(result, false)
       }, () => {
         browser.redirect('/500')
       })

@@ -19,7 +19,7 @@ const newLocation = {
   postcode: 'a new postcode'
 }
 
-describe('Find Help by Client Group - postcode, client group key, catIds, subCatIds set in querystring', () => {
+describe('Find Help by Client Group - postcode and client group key set in querystring', () => {
   let sut,
     apiGetStub,
     browserPushHistoryStub,
@@ -57,14 +57,6 @@ describe('Find Help by Client Group - postcode, client group key, catIds, subCat
     .withArgs('postcode')
     .returns(newLocation.postcode)
 
-    queryStringStub
-    .withArgs('catIds')
-    .returns('meals')
-
-    queryStringStub
-    .withArgs('subCatIds')
-    .returns('general')
-
     sinon.stub(storage, 'set')
     sinon.stub(storage, 'get').returns({})
 
@@ -90,33 +82,60 @@ describe('Find Help by Client Group - postcode, client group key, catIds, subCat
     expect(postcodeLookupStub.getCall(0).args[0]).toEqual(newLocation.postcode)
   })
 
-  it('- should retrieve items from API', () => {
-    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/456.7/234.5?range=10000&pageSize=5&index=0&clientGroup=families&catIds=meals&subCatIds=general'))
+  it('- should select only the first category and its subcategories', () => {
+    for (let i = 0; i < sut.catFilters().length; i++) {
+      if (i == 1) {
+        expect(sut.catFilters()[i].isSelected()).toBeTruthy()
+        for (let j = 0; j < sut.catFilters()[i].subCategories().length - 1; j++) {
+          expect(sut.catFilters()[i].subCategories()[j].isSelected()).toBeTruthy()
+        }
+        continue;
+      }
+      expect(sut.catFilters()[i].isSelected()).toBeFalsy()
+      for (let j = 0; j < sut.catFilters()[i].subCategories().length - 1; j++) {
+        expect(sut.catFilters()[i].subCategories()[j].isSelected()).toBeFalsy()
+      }
+    }
   })
 
-  it('- should not update url', () => {
-    expect(browserPushHistoryStub.called).toBeFalsy()
+  it('- should select also the last category and its subcategories', () => {
+    for (let i = 0; i < sut.catFilters().length; i++) {
+      if (i == 1 || i == sut.catFilters().length - 1) {
+        if (i == sut.catFilters().length - 1) {
+          sut.catFilters()[i].filter()
+        }
+        expect(sut.catFilters()[i].isSelected()).toBeTruthy()
+        for (let j = 0; j < sut.catFilters()[i].subCategories().length - 1; j++) {
+          expect(sut.catFilters()[i].subCategories()[j].isSelected()).toBeTruthy()
+        }
+        continue;
+      }
+      expect(sut.catFilters()[i].isSelected()).toBeFalsy()
+      for (let j = 0; j < sut.catFilters()[i].subCategories().length - 1; j++) {
+        expect(sut.catFilters()[i].subCategories()[j].isSelected()).toBeFalsy()
+      }
+    }
   })
 
-  it('- should show load more button', () => {
-    expect(sut.hasMorePages()).toBeTruthy()
-  })
+  it('- should select and then clear all categories and its subcategories', () => {
+    for (let i = 0; i < sut.catFilters().length; i++) {
+      if (i == 0) {
+        sut.catFilters()[i].filter()
+      }
+      expect(sut.catFilters()[i].isSelected()).toBeTruthy()
+      for (let j = 0; j < sut.catFilters()[i].subCategories().length - 1; j++) {
+        expect(sut.catFilters()[i].subCategories()[j].isSelected()).toBeTruthy()
+      }
+    }
 
-  it('- should be pageIndex equals to 0', () => {
-    expect(sut.pageIndex()).toEqual(0)
-  })
-
-  describe('- click load more', () => {
-    beforeEach(() => {
-      sut.loadMore()
-    })
-
-    it('- should not show load more button', () => {
-      expect(sut.hasMorePages()).toBeFalsy()
-    })
-
-    it('- should be pageIndex equals to 5', () => {
-      expect(sut.pageIndex()).toEqual(5)
-    })
+    for (let i = 0; i < sut.catFilters().length; i++) {
+      if (i == 0) {
+        sut.catFilters()[i].filter()
+      }
+      expect(sut.catFilters()[i].isSelected()).toBeFalsy()
+      for (let j = 0; j < sut.catFilters()[i].subCategories().length - 1; j++) {
+        expect(sut.catFilters()[i].subCategories()[j].isSelected()).toBeFalsy()
+      }
+    }
   })
 })
