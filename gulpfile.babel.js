@@ -33,8 +33,7 @@ gulp.task('default', (callback) => {
     'getLongTermData',
     'generate-service-pages',
     'generate-location-files',
-    // TODO: Commented it for testing deployment issue
-    // 'generate-client-group-pages',
+    'generate-client-group-pages',
     'jasmine',
     'standardlint',
     'clean',
@@ -52,8 +51,7 @@ gulp.task('deploy', (callback) => {
     'getLongTermData',
     'generate-service-pages',
     'generate-location-files',
-    // TODO: Commented it for testing deployment issue
-    // 'generate-client-group-pages',
+    'generate-client-group-pages',
     'jasmine',
     'standardlint',
     'clean',
