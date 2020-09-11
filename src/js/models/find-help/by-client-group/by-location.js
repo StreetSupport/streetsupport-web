@@ -11,13 +11,13 @@ const googleMaps = require('../../../location/googleMaps')
 const proximityRanges = require('../../../location/proximityRanges')
 const querystring = require('../../../get-url-parameter')
 
-import FindHelpByClientGroup from './FindHelpByClientGroup'
+import FindHelp from './FindHelp'
 
 import { buildInfoWindowMarkup } from '../../../pages/find-help/by-location/helpers'
 
 import ko from 'knockout'
 
-export default class FindHelpByCategory extends FindHelpByClientGroup {
+export default class FindHelpByClientGroup extends FindHelp {
   constructor () {
     super()
     const postcodeInQuerystring = querystring.parameter('postcode')

@@ -41,7 +41,7 @@ export default class ProximitySearch {
           storage.set(storage.keys.userLocationState, postcodeResult)
           this.latitude = postcodeResult.latitude
           this.longitude = postcodeResult.longitude
-          this.container.onProximitySearch(postcodeResult)
+          this.container.onProximitySearch(false, true)
         },
         (error) => {
           this.container.onProximitySearchFail(error)

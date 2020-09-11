@@ -109,7 +109,7 @@ function OrgListing (orgsFilter = null, pageSize = 25) {
     self.pageIndex(self.pageIndex() + self.pageSize)
     location.getPreviouslySetPostcode()
       .then((result) => {
-        init(result)
+        init(result, true)
       }, () => {
         browser.redirect('/500')
       })
@@ -225,13 +225,21 @@ function OrgListing (orgsFilter = null, pageSize = 25) {
       })
   }
 
-  const loadOrgsForLocation = function (location) {
+  const loadOrgsForLocation = function (location, isLoadMore = false) {
     browser.loading()
+    if (isLoadMore !== true) {
+      self.pageIndex(self.pageSize)
+    }
     ajax
       .data(`${endpoints.serviceProviderLocations}?pageSize=${self.pageSize}&latitude=${location.latitude}&longitude=${location.longitude}&range=${self.range()}&index=${self.pageIndex() - self.pageSize}`)
       .then((result) => {
         self.totalItems(result.data.total)
         const orgs = groupByOrg(result.data.items, location)
+
+        if (isLoadMore !== true) {
+          self.organisations([])
+        }
+
         self.organisations(self.organisations().concat(self.orgsFilter
           ? orgs.filter(self.orgsFilter)
           : orgs))
@@ -242,10 +250,10 @@ function OrgListing (orgsFilter = null, pageSize = 25) {
       })
   }
 
-  const init = function (location) {
+  const init = function (location, isLoadMore = false) {
     if (location) {
       self.postcode(location.postcode)
-      loadOrgsForLocation(location)
+      loadOrgsForLocation(location, isLoadMore)
     }
   }
 
@@ -258,7 +266,7 @@ function OrgListing (orgsFilter = null, pageSize = 25) {
     } else {
       location.getPreviouslySetPostcode()
       .then((result) => {
-        init(result)
+        init(result, false)
       }, () => {
         browser.redirect('/500')
       })

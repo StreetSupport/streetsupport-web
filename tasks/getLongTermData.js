@@ -60,7 +60,8 @@ gulp.task('main-categories', (callback) => {
         key: c.key,
         synopsis: c.synopsis,
         sortOrder: c.sortOrder,
-        name: c.name
+        name: c.name,
+        subCategories: c.subCategories
       }
     })
     .sortDesc('sortOrder')

@@ -8,9 +8,9 @@ const endpoints = require('../../../api')
 const querystring = require('../../../get-url-parameter')
 
 import { getServicesByDay } from '../../../pages/find-help/provider-listing/helpers'
-import FindHelpByClientGroup from './FindHelpByClientGroup'
+import FindHelp from './FindHelp'
 
-export default class FindHelpByDay extends FindHelpByClientGroup {
+export default class FindHelpByDay extends FindHelp {
   constructor () {
     super([{ qsKey: 'day', getValue: () => this.dayOfWeek() }])
     const postcodeInQuerystring = querystring.parameter('postcode')

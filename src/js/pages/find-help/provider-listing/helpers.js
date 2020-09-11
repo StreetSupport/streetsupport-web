@@ -93,7 +93,9 @@ export const getProvidersForListing = (providers) => {
         .join(' '),
       servicesAvailable: provider.subCategories
         .map((sc) => sc.name)
-        .join(', ')
+        .join(', '),
+      categoryId: provider.categoryId,
+      categoryName: provider.categoryName
     }
   }
 

@@ -38,7 +38,19 @@
     text-decoration: none;
     cursor: pointer;
   }
-  &.on {
+  &.on, .on {
     text-decoration: none;
+  }
+}
+
+.subcat-filter__checkable_item {
+  display: block;
+  width: 100%;
+
+  span{
+    text-decoration: underline;
+    &.on {
+      text-decoration: none;
+    }
   }
 }

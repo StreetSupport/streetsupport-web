@@ -7,9 +7,11 @@ const endpoints = require('../../../src/js/api')
 const postcodeLookup = require('../../../src/js/location/postcodes')
 const querystring = require('../../../src/js/get-url-parameter')
 const storage = require('../../../src/js/storage')
+const listToDropdown = require('../../../src/js/list-to-dropdown')
 
 import FindHelpByClientGroup from '../../../src/js/models/find-help/by-client-group/by-group'
 import data from './supportServiceData'
+import utils from '../../../src/js/utils'
 
 const newLocation = {
   latitude: 456.7,
@@ -44,9 +46,19 @@ describe('Find Help by Client Group - postcode previously set', () => {
         pathname: '/find-help/group/families/'
       })
     sinon.stub(browser, 'pushHistory')
+    sinon.stub(utils, 'isSmallscreen').returns(false)
+    sinon.stub(listToDropdown, 'init')
     sinon.stub(browser, 'setOnHistoryPop')
     postcodeLookupStub = sinon.stub(postcodeLookup, 'getCoords')
     queryStringStub = sinon.stub(querystring, 'parameter')
+
+    queryStringStub
+      .withArgs('catIds')
+      .returns('meals')
+
+    queryStringStub
+      .withArgs('subCatIds')
+      .returns('general')
 
     sinon.stub(storage, 'set')
     sinon.stub(storage, 'get')
@@ -60,6 +72,8 @@ describe('Find Help by Client Group - postcode previously set', () => {
     browser.loading.restore()
     browser.loaded.restore()
     browser.pushHistory.restore()
+    utils.isSmallscreen.restore()
+    listToDropdown.init.restore()
     browser.setOnHistoryPop.restore()
     browser.location.restore()
     postcodeLookup.getCoords.restore()
@@ -89,7 +103,7 @@ describe('Find Help by Client Group - postcode previously set', () => {
   })
 
   it('- should retrieve items from API', () => {
-    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/456.7/234.5?range=10000&pageSize=25&index=0&clientGroup=families'))
+    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/456.7/234.5?range=10000&pageSize=25&index=0&clientGroup=families&catIds=meals&subCatIds=general'))
   })
 
   it('- should show it is loaded', () => {
