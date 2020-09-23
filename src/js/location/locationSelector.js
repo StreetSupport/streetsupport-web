@@ -83,6 +83,10 @@ const getCurrentHub = () => {
   return supportedCities.get(saved)
 }
 
+const getCurrentHubFromCookies = () => {
+    return supportedCities.get(getSelectedLocationId()) || {}
+}
+
 const buildLocationResult = (userLocationState) => {
   return {
     'id': 'my-location',
@@ -150,7 +154,8 @@ const exportedObj = {
   setPostcode: setPostcode,
   getCurrentHub: getCurrentHub,
   setCurrent: setCurrent,
-  handler: onChange
+  handler: onChange,
+  getCurrentHubFromCookies: getCurrentHubFromCookies
 }
 
 module.exports = exportedObj
