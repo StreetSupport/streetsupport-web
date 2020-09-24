@@ -6,8 +6,58 @@ layout: withGoogle.hbs
 permalink: false
 jsBundle: families-landing-page
 section: families
-page:
+page: families
 ---
+
+<style>
+#search-wrapper {
+  margin-left: 100px;
+  margin-top:50px;
+  height: 400px;
+  width: 100%;
+}
+
+/* The search field */
+#search {
+  box-sizing: border-box;
+  background-image: url('/assets/img/search-icon.png');
+  background-position: 18px 18px;
+  background-repeat: no-repeat;
+  font-size: 18px;
+  padding: 14px 20px 12px 45px;
+  border: 1px solid #707070;
+  border-radius: 50px;
+  max-width: 350px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  position: absolute;
+  background-color: #FFFFFF;
+  border: 1px solid  #707070;
+  z-index: 1;
+  margin-top: 10px;
+  box-shadow: 5px 5px 5px rgba(0,0,0, 0.1);
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+</style>
 
 <div class="block block--breadcrumbs">
   <div class="container">
@@ -37,21 +87,12 @@ page:
   </div>
 </div>
 
-<div style="width: 30%; margin-left: 100px;">
-  <form class="form form--text-search">
-    <fieldset class="form__fieldset">
-      <legend class="hide-screen">Search for advices:</legend>
-      <ol class="form__field-list">
-        <li class="form__field-item">
-          <label class="form__label" for="search">Search for advices:</label>
-          <input class="form__input" id="search" type="text" data-bind="textInput: searchQuery"></input>
-        </li>
-      </ol>
-      <button class="btn btn--cosy btn--brand-e" type="submit" data-bind="click: search">
-        <span class="btn__text">Search</span>
-      </button>
-    </fieldset>
-  </form>
+<div id="search-wrapper">
+  <div class="dropdown">
+    <input type="text" placeholder="Search our advice" class="form__input" id="search" data-bind="textInput: searchQuery, hasFocus: isSelectedSearchInput">
+    <div class="dropdown-content" data-bind="visible: showFilteredAdvice, foreach: filteredAdvice" >
+      <a href="#" data-bind="text: breadcrumbs, attr: { 'data-id': id }"></a>
+    </div>
+  </div>
 </div>
-
 {{> loading-spinner}}
