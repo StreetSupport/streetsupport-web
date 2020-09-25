@@ -52,33 +52,66 @@ function Families () {
     })
   }
 
+  self.sortByTitle = function (a, b, searchTermRegex) {
+    let resA = a.title().toLowerCase().trim().match(searchTermRegex)
+    resA = resA !== null ? resA.length : 0
+
+    let resB = b.title().toLowerCase().trim().match(searchTermRegex)
+    resB = resB !== null ? resB.length : 0
+
+    if ((resB - resA) === 0) {
+      return self.sortByTag(a, b, searchTermRegex)
+    }
+    return resB - resA
+  }
+
   self.filterByTitle = function (searchTermRegex) {
     let filteredByTitle = ko.observableArray(self.advice().filter((x) => {
                                                                     let result = x.title().toLowerCase().trim().match(searchTermRegex);
-                                                                    return result != null && result.length
+                                                                    return result !== null && result.length
                                                                   })
-                            .sort((a, b) => b.title().toLowerCase().trim().match(searchTermRegex).length
-                                          - a.title().toLowerCase().trim().match(searchTermRegex).length))
+                            .sort((a, b) => self.sortByTitle(a, b, searchTermRegex)))
     return filteredByTitle
+  }
+
+  self.sortByTag = function (a, b, searchTermRegex) {
+    let resA = a.tags().filter((y) => y !== 'families').join(' ').match(searchTermRegex)
+    resA = resA !== null ? resA.length : 0
+
+    let resB = b.tags().filter((y) => y !== 'families').join(' ').replaceAll('-', ' ').match(searchTermRegex)
+    resB = resB !== null ? resB.length : 0
+
+    if ((resB - resA) === 0) {
+      return self.sortByContent(a, b, searchTermRegex)
+    }
+    return resB - resA
   }
 
   self.filterByTag = function (searchTermRegex) {
     let filteredByTag = ko.observableArray(self.filteredAdvice().filter((x) => {
                                                                           let result = x.tags().filter((y) => y !== 'families').join(' ').replaceAll('-', ' ').match(searchTermRegex)
-                                                                          return result != null && result.length
+                                                                          return result !== null && result.length
                                                                         })
-                          .sort((a, b) => b.tags().filter((y) => y !== 'families').join(' ').replaceAll('-', ' ').match(searchTermRegex).length
-                                        - a.tags().filter((y) => y !== 'families').join(' ').match(searchTermRegex).length))
+                          .sort((a, b) => self.sortByTag(a, b, searchTermRegex)))
     return filteredByTag
+  }
+
+  self.sortByContent = function (a, b, searchTermRegex) {
+    let resContentA = a.body().toLowerCase().trim().match(searchTermRegex)
+    resContentA = resContentA !== null ? resContentA.length : 0
+
+    let resContentB = b.body().toLowerCase().trim().match(searchTermRegex)
+    resContentB = resContentB !== null ? resContentB.length : 0
+
+    return resContentB - resContentA
   }
 
   self.filterByContent = function (searchTermRegex) {
     let filteredByContent = ko.observableArray(self.filteredAdvice().filter((x) => {
                                                                               let result = x.body().toLowerCase().trim().match(searchTermRegex)
-                                                                              return result != null && result.length
+                                                                              return result !== null && result.length
                                                                             })
-                              .sort((a, b) => b.body().toLowerCase().trim().match(searchTermRegex).length
-                                            - a.body().toLowerCase().trim().match(searchTermRegex).length))
+                              .sort((a, b) => self.sortByContent(a, b, searchTermRegex)))
     return filteredByContent
   }
 
