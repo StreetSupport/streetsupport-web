@@ -1,0 +1,12 @@
+
+<div id="search-wrapper" data-bind="with: searchFamilyAdvice">
+  <div class="dropdown">
+    <button id="searchBtn" class="btn btn--cosy btn--brand-e" data-bind="click: searchAll">
+      <span class="btn__text">Search</span>
+    </button>
+    <input type="text" placeholder="Search our advice" class="form__input" id="search" data-bind="textInput: searchQuery, hasFocus: isSelectedSearchInput, event: { keyup: searchAll } ">
+    <div class="dropdown-content" data-bind="visible: showFilteredAdvice, foreach: filteredAdvice" >
+      <a data-bind="text: breadcrumbs, attr: { 'data-id': id, 'href': '/families/advice?id='+id() }"></a>
+    </div>
+  </div>
+</div>

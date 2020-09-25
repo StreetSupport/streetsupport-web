@@ -1,11 +1,11 @@
 // Common modules
-import '../js/common'
+import '../../../common'
 import ko from 'knockout'
 
-const api = require('../js/get-api-data')
-const browser = require('../js/browser')
-const endpoints = require('../js/api')
-const location = require('../js/location/locationSelector')
+const api = require('../../../get-api-data')
+const browser = require('../../../browser')
+const endpoints = require('../../../api')
+const location = require('../../../location/locationSelector')
 
 function SearchFamilyAdvice () {
   const self = this
@@ -19,6 +19,7 @@ function SearchFamilyAdvice () {
 
   self.isSelectedSearchInput.subscribe((newValue) => {
     if (!newValue) {
+      // TODO: Fix issue when we select breadcrumb from list
       self.showFilteredAdvice(false)
     } else if (newValue && self.searchQuery().trim().length && self.filteredAdvice().length) {
       self.showFilteredAdvice(true)
@@ -57,7 +58,6 @@ function SearchFamilyAdvice () {
       }))
       browser.loaded()
     }, (_) => {
-      console.log('fail')
       browser.redirect('/500')
     })
   }
@@ -147,6 +147,12 @@ function SearchFamilyAdvice () {
     }
 
     self.showFilteredAdvice(self.filteredAdvice().length)
+  }
+
+  self.searchAll = function (data, event) {
+    if (event.which === 1 || event.which === 13) {
+      document.location.href = `/families/advice/result?searchQuery=${self.searchQuery().trim()}`;
+    }
   }
 
   self.getAdvice()
