@@ -18,13 +18,16 @@ function SearchFamilyAdvice () {
   self.searchQuery = ko.observable('')
 
   self.isSelectedSearchInput.subscribe((newValue) => {
-    if (!newValue) {
-      // TODO: Fix issue when we select breadcrumb from list
-      self.showFilteredAdvice(false)
-    } else if (newValue && self.searchQuery().trim().length && self.filteredAdvice().length) {
+    if (newValue && self.searchQuery().trim().length && self.filteredAdvice().length) {
       self.showFilteredAdvice(true)
     }
   })
+
+  self.onInputLostFocus = function (data, event) {
+    if (event.relatedTarget === null || event.relatedTarget != null && event.relatedTarget.className !== 'breadcrumbs-list') {
+      self.showFilteredAdvice(false)
+    }
+  }
 
   self.searchQuery.subscribe(() => {
     if (currentLocation.id) {
@@ -151,7 +154,7 @@ function SearchFamilyAdvice () {
 
   self.searchAll = function (data, event) {
     if (event.which === 1 || event.which === 13) {
-      document.location.href = `/families/advice/result?searchQuery=${self.searchQuery().trim()}`;
+      document.location.href = `/families/advice/result?searchQuery=${self.searchQuery().trim()}`
     }
   }
 

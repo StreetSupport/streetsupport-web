@@ -12,8 +12,7 @@ const querystring = require('../../get-url-parameter')
 function FamilyAdvice () {
   const self = this
   const adviceIdInQuerystring = querystring.parameter('id')
-
-  self.advice = ko.observable({})
+  self.advice = ko.observable()
 
   self.getAdvice = function () {
     browser.loading()

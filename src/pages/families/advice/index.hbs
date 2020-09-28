@@ -41,11 +41,13 @@ page: families-advice
   </div>
 </div>
 
+<!-- ko if: advice -->
 <div data-bind="with: advice">
   <div><b>Title</b></div>
   <div data-bind="text: title"></div>
   <div><b>Body</b></div>
   <div data-bind="text: body"></div>
 </div>
+<!-- /ko -->
 
 {{> loading-spinner}}
