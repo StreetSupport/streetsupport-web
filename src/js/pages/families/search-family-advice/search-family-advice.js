@@ -39,7 +39,7 @@ function SearchFamilyAdvice () {
   })
 
   self.onSearchAdviceFail = function () {
-    window.alert('Please choose your location in the Locations menu item.')
+    window.alert('Please choose your location in the Locations menu.')
   }
 
   self.getAdvice = function () {
@@ -73,7 +73,7 @@ function SearchFamilyAdvice () {
     resB = resB !== null ? resB.length : 0
 
     if ((resB - resA) === 0) {
-      return self.sortByTag(a, b, searchTermRegex)
+      return self.sortByParentScenario(a, b, searchTermRegex)
     }
     return resB - resA
   }
@@ -87,11 +87,36 @@ function SearchFamilyAdvice () {
     return filteredByTitle
   }
 
-  self.sortByTag = function (a, b, searchTermRegex) {
-    let resA = a.tags().filter((y) => y !== 'families').join(' ').match(searchTermRegex)
+  self.sortByParentScenario = function (a, b, searchTermRegex) {
+    let resA = a.parentScenario() !== null ? a.parentScenario().name.toLowerCase().trim().match(searchTermRegex) : null
     resA = resA !== null ? resA.length : 0
 
-    let resB = b.tags().filter((y) => y !== 'families').join(' ').replaceAll('-', ' ').match(searchTermRegex)
+    let resB = b.parentScenario() !== null ? b.parentScenario().name.toLowerCase().trim().match(searchTermRegex) : null
+    resB = resB !== null ? resB.length : 0
+
+    if ((resB - resA) === 0) {
+      return self.sortByTag(a, b, searchTermRegex)
+    }
+    return resB - resA
+  }
+
+  self.filterByParentScenario = function (searchTermRegex) {
+    let filteredByTitle = ko.observableArray(self.filteredAdvice().filter((x) => {
+                                                                            if (x.parentScenario() !== null) {
+                                                                              let result = x.parentScenario().name.toLowerCase().trim().match(searchTermRegex);
+                                                                              return result !== null && result.length
+                                                                            }
+                                                                            return false
+                                                                          })
+                            .sort((a, b) => self.sortByParentScenario(a, b, searchTermRegex)))
+    return filteredByTitle
+  }
+
+  self.sortByTag = function (a, b, searchTermRegex) {
+    let resA = a.tags() !== null ? a.tags().filter((y) => y !== 'families').join(' ').match(searchTermRegex) : null
+    resA = resA !== null ? resA.length : 0
+
+    let resB = b.tags() !== null ? b.tags().filter((y) => y !== 'families').join(' ').replaceAll('-', ' ').match(searchTermRegex) : null
     resB = resB !== null ? resB.length : 0
 
     if ((resB - resA) === 0) {
@@ -102,8 +127,11 @@ function SearchFamilyAdvice () {
 
   self.filterByTag = function (searchTermRegex) {
     let filteredByTag = ko.observableArray(self.filteredAdvice().filter((x) => {
-                                                                          let result = x.tags().filter((y) => y !== 'families').join(' ').replaceAll('-', ' ').match(searchTermRegex)
-                                                                          return result !== null && result.length
+                                                                          if (x.tags() !== null) {
+                                                                            let result = x.tags().filter((y) => y !== 'families').join(' ').replaceAll('-', ' ').match(searchTermRegex)
+                                                                            return result !== null && result.length
+                                                                          }
+                                                                          return false
                                                                         })
                           .sort((a, b) => self.sortByTag(a, b, searchTermRegex)))
     return filteredByTag
@@ -139,11 +167,14 @@ function SearchFamilyAdvice () {
       let filteredByTitle = self.filterByTitle(searchTermRegex)
       self.filteredAdvice(self.advice().filter((x) => !filteredByTitle().some((y) => x.id() === y.id()) ))
 
+      let filteredByParentScenario = self.filterByParentScenario(searchTermRegex)
+      self.filteredAdvice(self.filteredAdvice().filter((x) => !filteredByParentScenario().some((y) => x.id() === y.id()) ))
+
       let filteredByTag = self.filterByTag(searchTermRegex)
       self.filteredAdvice(self.filteredAdvice().filter((x) => !filteredByTag().some((y) => x.id() === y.id()) ))
 
       let filteredByContent = self.filterByContent(searchTermRegex)
-      self.filteredAdvice(filteredByTitle().concat(filteredByTag()).concat(filteredByContent()))
+      self.filteredAdvice(filteredByTitle().concat(filteredByParentScenario()).concat(filteredByTag()).concat(filteredByContent()))
     }
     else {
       self.filteredAdvice([])
