@@ -84,7 +84,7 @@ const getCurrentHub = () => {
 }
 
 const getCurrentHubFromCookies = () => {
-    return supportedCities.get(getSelectedLocationId()) || {}
+  return supportedCities.get(getSelectedLocationId()) || {}
 }
 
 const buildLocationResult = (userLocationState) => {
