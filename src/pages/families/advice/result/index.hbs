@@ -43,7 +43,7 @@ page: families-advice-result
 
 <div data-bind="with: searchFamilyAdvice">
   <div data-bind="foreach: filteredAdvice">
-    <div><a data-bind="text: breadcrumbs, attr: { 'href': '/families/advice?id='+id() }"></a></div>
+    <div><a data-bind="text: breadcrumbs, attr: { 'href': '/families/advice?id='+id() + '&parentScenarioKey=' + parentScenarioKey() }"></a></div>
   </div>
 </div>
 
