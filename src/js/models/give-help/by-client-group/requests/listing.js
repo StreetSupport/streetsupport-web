@@ -10,11 +10,12 @@ import { getKOSortAscFunc, getKOSortDescFunc } from '../../../../sorting'
 
 import ProximitySearch from '../../../ProximitySearch'
 import pushHistory from '../../../../history'
+import GiveHelpClientGroup from '../GiveHelpClientGroup'
 
 class NeedsListing {
   constructor () {
     this.proximitySearch = new ProximitySearch(this)
-
+    this.clientGroup = new GiveHelpClientGroup()
     this.allNeeds = ko.observableArray()
     this.filters = ko.observableArray([
       { isActive: ko.observable(true), filterAction: () => this.clearFilter(), filterFunction: () => true, label: 'All' },
@@ -52,7 +53,7 @@ class NeedsListing {
   }
 
   loadNextPage () {
-    this.loadNeeds(endpoints.getFullUrl(this.currentPageLinks.next))
+    this.loadNeeds(endpoints.getFullUrl(this.currentPageLinks.next + `&clientGroup=${this.encodeClientGroupKey(this.clientGroup.clientGroupKey)}`))
   }
 
   onProximitySearch () {
@@ -166,14 +167,22 @@ class NeedsListing {
     const qsParts = {
       'latitude': this.proximitySearch.latitude,
       'longitude': this.proximitySearch.longitude,
-      'pageSize': 21,
-      'range': this.proximitySearch.range()
+      'pageSize': 1,
+      'range': this.proximitySearch.range(),
+      'clientGroup': this.encodeClientGroupKey(this.clientGroup.clientGroupKey)
     }
     const qs = Object.keys(qsParts)
       .map((k) => `${k}=${qsParts[k]}`)
       .join('&')
 
     return `${endpoints.needs}?${qs}`
+  }
+
+  encodeClientGroupKey (key) {
+    if (key.charAt(key.length - 1) === '+') {
+      return key.slice(0, -1) + '%2B'
+    }
+    return key
   }
 }
 
