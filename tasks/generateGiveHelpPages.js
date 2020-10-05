@@ -7,8 +7,8 @@ import runSequence from 'run-sequence'
 import config from '../foley.json'
 import endpoints from '../src/js/api'
 
-const giveHelpSrc = `${config.paths.pages}give-help/group/help/`
-const giveHelpPageSrc = `${config.paths.pages}give-help/group/help/index.hbs`
+const giveHelpSrc = `${config.paths.pages}give-help/help/group/`
+const giveHelpPageSrc = `${config.paths.pages}give-help/help/group/index.hbs`
 const generatedPagesSrc = `${config.paths.pages}_generated/`
 
 let clientGroups = []
@@ -33,9 +33,7 @@ gulp.task('getGiveHelpClientGroups', (callback) => {
 })
 
 const getNewContent = function (src, cat) {
-  let result = src.replace('theClientGroupId', cat.name)
-
-    result = result.split('theClientGroupName').join(cat.name)
+  let result = src.split('theClientGroupName').join(cat.name)
   return result
 }
 
