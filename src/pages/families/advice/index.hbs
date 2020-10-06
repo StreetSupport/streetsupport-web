@@ -34,7 +34,7 @@ page: families-advice
       <a href="/find-help/group/families/" class="btn btn--brand-d">
         <span class="btn__text">Find Help</span>
       </a>
-      <a href="/give-help/group/help/families/" class="btn btn--brand-e">
+      <a href="/give-help/help/group/families/" class="btn btn--brand-e">
         <span class="btn__text">Give Help</span>
       </a>
     </div>
@@ -42,12 +42,44 @@ page: families-advice
 </div>
 
 <!-- ko if: advice -->
-<div data-bind="with: advice">
+{{!-- <div data-bind="with: advice">
   <div><b>Breadcrumbs</b></div>
   <div data-bind="text: breadcrumbs"></div>
   <div><b>Body</b></div>
   <div data-bind="text: body"></div>
-</div>
+</div> --}}
 <!-- /ko -->
+
+
+<div class="block__content">
+  <div class="subcat-filter form--highlighted" style="float: left; margin-right: 50px">
+    <p class="subcat-filter__label">Filter by:</p>
+
+<!-- ko if: hasParentScenarios -->
+    <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: parentScenarios">
+      <li class="subcat-filter__item js-filter-item">
+        <label class="subcat-filter__checkable_item js-filter-item">
+          <input name="parent-scenario" type="radio" data-bind="attr: { id: key, checked: isSelected }, change: changeParentScenario" class="form__input--checkbox" />
+          <span  data-bind="text: name"></span>
+        </label>
+      </li>
+    </ul>
+<!-- /ko -->
+  </div>
+
+  <div class="cards__list cards__list--single-col" data-bind="with: advice">
+    <article class="card card--brand-h card--big js-header">
+      <header class="card__title">
+          <h1 class="h2" data-bind="text: breadcrumbs"></h1>
+      </header>
+
+      <section class="card__details" >
+        <div data-bind="text: body"></div>
+      </section>
+
+    </article>
+  </div>
+
+</div>
 
 {{> loading-spinner}}

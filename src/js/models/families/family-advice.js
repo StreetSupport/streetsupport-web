@@ -5,15 +5,30 @@ const browser = require('../../browser')
 const endpoints = require('../../api')
 const querystring = require('../../get-url-parameter')
 const location = require('../../location/locationSelector')
+const htmlEncode = require('htmlencode')
+
+class ParentScenario {
+  constructor (data, container) {
+    this.key = data.key
+    this.name = data.name
+    this.container = container
+    this.isSelected = data.isSelected
+  }
+
+  changeParentScenario () {
+    this.isSelected(true)
+  }
+}
 
 function FamilyAdvice () {
   const self = this
   const currentLocation = location.getCurrentHubFromCookies()
   const adviceIdInQuerystring = querystring.parameter('id')
   const parentScenarioKeyInQuerystring = querystring.parameter('parentScenarioKey')
-  self.advice = ko.observable()
+  self.advice = ko.observable({})
   self.parentScenarios = ko.observableArray()
   self.adviceByParentScenario = ko.observableArray()
+  self.hasParentScenarios = ko.computed(() => self.parentScenarios().length > 0, this)
 
   self.getAdvice = function () {
     browser.loading()
@@ -30,10 +45,10 @@ function FamilyAdvice () {
             sortPosition: ko.observable(x.sortPosition),
             tags: ko.observableArray(x.tags),
             title: ko.observable(x.title),
-            breadcrumbs: ko.observable(`Families > ${x.parentScenario ? x.parentScenario.name + ' > ' : ''}${x.title}`)
+            breadcrumbs: ko.observable(`Families > ${x.parentScenario ? x.parentScenario.name + ' > ' : ''}${x.title}`),
+            isSelected: ko.observable(x.id === adviceIdInQuerystring)          
           }
         }))
-
         self.advice(self.adviceByParentScenario().filter((x) => x.id() === adviceIdInQuerystring)[0])
         browser.loaded()
       }, (_) => {
@@ -66,10 +81,11 @@ function FamilyAdvice () {
       .then((result) => {
         self.parentScenarios(result.data
           .map(p => {
-            return {
-              key: p.key,
-              name: htmlEncode.htmlDecode(p.name)
-            }
+            return new ParentScenario ({
+              key: ko.observable(p.key),
+              name: ko.observable(htmlEncode.htmlDecode(p.name)),
+              isSelected: ko.observable(p.key === parentScenarioKeyInQuerystring)        
+            }, self)
           })
         )
       }, () => {
