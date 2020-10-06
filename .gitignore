@@ -48,9 +48,7 @@ src/partials/nav/header-locations.hbs
 src/partials/locations/_generated-selector-hogan.hbs
 src/partials/locations/_generated-option-tags.hbs
 src/partials/find-help/_generated-service-cats-ctas.hbs
-src/pages/give-help/help/group
 
 !src/pages/find-help/group/index.hbs
 !src/pages/find-help/group/by-day/index.hbs
 !src/pages/find-help/group/by-location/index.hbs
-!src/pages/give-help/help/group/index.hbs
