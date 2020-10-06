@@ -7,19 +7,6 @@ const querystring = require('../../get-url-parameter')
 const location = require('../../location/locationSelector')
 const htmlEncode = require('htmlencode')
 
-class ParentScenario {
-  constructor (data, container) {
-    this.key = data.key
-    this.name = data.name
-    this.container = container
-    this.isSelected = data.isSelected
-  }
-
-  changeParentScenario () {
-    this.isSelected(true)
-  }
-}
-
 function FamilyAdvice () {
   const self = this
   const currentLocation = location.getCurrentHubFromCookies()
@@ -75,26 +62,7 @@ function FamilyAdvice () {
     }
   }
 
-  self.getParentScenarios = () => {
-    api
-      .data(`${endpoints.parentScenarios}`)
-      .then((result) => {
-        self.parentScenarios(result.data
-          .map(p => {
-            return new ParentScenario ({
-              key: ko.observable(p.key),
-              name: ko.observable(htmlEncode.htmlDecode(p.name)),
-              isSelected: ko.observable(p.key === parentScenarioKeyInQuerystring)        
-            }, self)
-          })
-        )
-      }, () => {
-        self.handleServerError()
-      })
-  }
-
   self.getAdvice()
-  self.getParentScenarios()
 }
 
 module.exports = FamilyAdvice
