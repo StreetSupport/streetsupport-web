@@ -5,20 +5,6 @@ const browser = require('../../browser')
 const endpoints = require('../../api')
 const querystring = require('../../get-url-parameter')
 const location = require('../../location/locationSelector')
-const htmlEncode = require('htmlencode')
-
-class ParentScenario {
-  constructor (data, container) {
-    this.key = data.key
-    this.name = data.name
-    this.container = container
-    this.isSelected = data.isSelected
-  }
-
-  changeParentScenario () {
-    this.isSelected(true)
-  }
-}
 
 function FamilyAdvice () {
   const self = this
@@ -46,19 +32,16 @@ function FamilyAdvice () {
             tags: ko.observableArray(x.tags),
             title: ko.observable(x.title),
             breadcrumbs: ko.observable(`Families > ${x.parentScenario ? x.parentScenario.name + ' > ' : ''}${x.title}`),
-            isSelected: ko.observable(x.id === adviceIdInQuerystring)          
-          }
+            isSelected: ko.observable(x.id === adviceIdInQuerystring)}
         }))
         self.advice(self.adviceByParentScenario().filter((x) => x.id() === adviceIdInQuerystring)[0])
         browser.loaded()
       }, (_) => {
         browser.redirect('/500')
       })
-    }
-    else {
+    } else {
       api
-      .data(`${endpoints.faqs}/${adviceIdInQuerystring}`)
-      .then((result) => {
+      .data(`${endpoints.faqs}/${adviceIdInQuerystring}`).then((result) => {
         self.advice({
           id: ko.observable(result.data.id),
           body: ko.observable(result.data.body),
@@ -75,26 +58,7 @@ function FamilyAdvice () {
     }
   }
 
-  self.getParentScenarios = () => {
-    api
-      .data(`${endpoints.parentScenarios}`)
-      .then((result) => {
-        self.parentScenarios(result.data
-          .map(p => {
-            return new ParentScenario ({
-              key: ko.observable(p.key),
-              name: ko.observable(htmlEncode.htmlDecode(p.name)),
-              isSelected: ko.observable(p.key === parentScenarioKeyInQuerystring)        
-            }, self)
-          })
-        )
-      }, () => {
-        self.handleServerError()
-      })
-  }
-
   self.getAdvice()
-  self.getParentScenarios()
 }
 
 module.exports = FamilyAdvice

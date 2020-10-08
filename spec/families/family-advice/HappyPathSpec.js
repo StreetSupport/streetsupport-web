@@ -41,7 +41,7 @@ describe('Get Family Advice', () => {
     queryStringStub.restore()
   })
 
-  // it('- should build breadcrumbs', () => {
-  //   expect(sut.advice().breadcrumbs()).toEqual('Families > Parent scenario 1 > Family 1 common')
-  // })
+  it('- should build breadcrumbs', () => {
+    expect(sut.advice().breadcrumbs()).toEqual('Families > Parent scenario 1 > Family 1 common')
+  })
 })
