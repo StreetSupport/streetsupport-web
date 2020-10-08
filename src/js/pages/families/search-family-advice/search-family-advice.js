@@ -50,6 +50,7 @@ function SearchFamilyAdvice () {
           body: ko.observable(x.body),
           locationKey: ko.observable(x.locationKey),
           parentScenario: ko.observable(x.parentScenario),
+          parentScenarioKey: ko.observable(x.parentScenario ? x.parentScenario.key : ''),
           sortPosition: ko.observable(x.sortPosition),
           tags: ko.observableArray(x.tags),
           title: ko.observable(x.title),

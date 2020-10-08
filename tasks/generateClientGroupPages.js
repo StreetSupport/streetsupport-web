@@ -3,7 +3,6 @@ import fs from 'fs'
 import gulp from 'gulp'
 import request from 'request'
 import runSequence from 'run-sequence'
-import marked from 'marked'
 
 import config from '../foley.json'
 import endpoints from '../src/js/api'
@@ -94,9 +93,9 @@ const getNewLocationContent = function (src, cat) {
 }
 
 gulp.task('resetCG', () => {
-  const generatedCategoryDirectories = clientGroups
+  const generatedClientGroupsDirectories = clientGroups
     .map((c) => `${findHelpSrc}${c.key}`)
-  return del([...generatedCategoryDirectories, generatedPagesSrc])
+  return del([...generatedClientGroupsDirectories, generatedPagesSrc])
 })
 
 gulp.task('clean-generated-filesCG', () => {
@@ -155,7 +154,7 @@ gulp.task('copy-to-find-helpCG', () => {
     .pipe(gulp.dest(findHelpSrc))
 })
 
-gulp.task('generate-client-group-pages', (callback) => {
+gulp.task('generate-find-help-client-group-pages', (callback) => {
   runSequence(
     'resetCG',
     'getClientGroups',
