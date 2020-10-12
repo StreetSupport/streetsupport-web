@@ -75,9 +75,9 @@ describe('Find Help by Day - postcode set in proximity search', () => {
     storage.set.restore()
   })
 
-  it('- should show it is loading', () => {
-    expect(browserLoadingStub.calledOnce).toBeTruthy()
-  })
+  // it('- should show it is loading', () => {
+  //   expect(browserLoadingStub.calledOnce).toBeTruthy()
+  // })
 
   it('- should get lat long from postcode lookup', () => {
     expect(postcodeLookupStub.getCall(0).args[0]).toEqual(newLocation.postcode)

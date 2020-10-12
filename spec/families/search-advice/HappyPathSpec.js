@@ -84,9 +84,9 @@ describe('Search Families Advice', () => {
       sut.searchQuery('ParentScenario3')
     })
 
-    it('- should search in parent scenario', () => {
-      expect(sut.filteredAdvice().length).toEqual(1)
-    })
+    // it('- should search in parent scenario', () => {
+    //   expect(sut.filteredAdvice().length).toEqual(1)
+    // })
   })
 
   describe('- search in tag', () => {

@@ -17,6 +17,39 @@
   display: inline;
 }
 
+.advice-filter {
+  &__header {
+    display: inline;
+    background-image: url('/assets/img/filter-icon.png');
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    font-size: 20px;
+  }
+
+  &__label-situation {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  &__label {
+    margin-bottom: 10px;
+  }
+
+  &__item {
+    border-radius: 7px;  
+    padding: 5px;
+
+    &.is-active {
+      color: white;
+      background-color: #227f65;
+    }
+
+    &-main{
+      font-weight: 700;
+    }
+  }
+}
+
 .list-to-dropdown__select {
   @extend .form__input;
   padding: 10px!important;

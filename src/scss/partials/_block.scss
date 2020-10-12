@@ -6,6 +6,10 @@
   @include mq($from: m) {
     padding-top: 40px;
     padding-bottom: 40px;
+
+    &--advice {
+      padding-top: 0;
+    }
   }
 
   // Components
@@ -226,13 +230,47 @@
     }
   }
 }
+
 .block--location-header {
+
   @include mq($from: m) {
 
     .container {
       & > * {
         @include span(1 of 2);
         @include first();
+      }
+
+      & > .container-advice__content:nth-child(1) {
+          @include span(3 of $grid-column);
+          @include first();
+      }
+
+      & > .container-advice__content:nth-child(2) {
+          @include span(4 of $grid-column);
+          @include first();
+          float: right;
+          text-align: right;
+      }
+    }
+  }
+}
+
+.block-advice {
+
+  @include mq($from: m) {
+
+    .container {
+
+      & > .container-advice__content:nth-child(1) {
+          @include span(4 of 12);
+          @include first();
+      }
+
+      & > .container-advice__content:nth-child(2) {
+          @include span(7 of 12);
+          @include first();
+          float: right;
       }
     }
   }

@@ -203,3 +203,34 @@
     @include span(1 of 2);
   }
 }
+
+.accordion--advice {
+  .accordion__header {
+    border-bottom: 1px solid black;
+  }
+
+  &__title {
+    font-size: 20px;
+  }
+
+  .accordion__icon {
+    top: 27px;
+  }
+
+  &__tags {
+    margin-top: 10px; 
+    border: 1px solid white; 
+    border-radius: 50px; 
+    padding: 8px; 
+    display:inline-block;
+  }
+
+  &__short-description {
+    margin-top: 10px !important;
+    display: block;
+
+    &.is-active {
+      display: none;
+    }
+  }
+}

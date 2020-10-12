@@ -1,12 +1,12 @@
 
-<div id="search-wrapper" data-bind="with: searchFamilyAdvice">
+<div id="search-wrapper" class="search" data-bind="with: searchFamilyAdvice">
   <div class="dropdown">
-    <button id="searchBtn" class="btn btn--cosy btn--brand-e" data-bind="click: searchAll">
-      <span class="btn__text">Search</span>
-    </button>
-    <input type="text" placeholder="Search our advice" class="form__input" id="search" data-bind="textInput: searchQuery, hasFocus: isSelectedSearchInput, event: { keyup: searchAll, focusout: onInputLostFocus } ">
-    <div class="dropdown-content" data-bind="visible: showFilteredAdvice, foreach: filteredAdvice" >
+    <input type="text" placeholder="Search for advice..." id="search" class="search__input" data-bind="textInput: searchQuery, hasFocus: isSelectedSearchInput, event: { keyup: searchAll, focusout: onInputLostFocus } ">
+    <div class="dropdown--content" data-bind="visible: showFilteredAdvice, foreach: filteredAdvice" style="max-height: 200px; overflow: auto;">
       <a class="breadcrumbs-list" data-bind="text: breadcrumbs, attr: { 'data-id': id, 'href': '/families/advice?id='+id() + '&parentScenarioKey=' + parentScenarioKey() }"></a>
     </div>
   </div>
+  <button class="btn btn--cosy btn--brand-e btn--full" data-bind="click: searchAll">
+    <span class="btn__text">Search</span>
+  </button>
 </div>

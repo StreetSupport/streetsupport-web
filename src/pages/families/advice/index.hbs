@@ -12,42 +12,143 @@ page: families-advice
 <div class="block block--breadcrumbs">
   <div class="container">
     <ol class="breadcrumbs__list">
-      <li class="breadcrumbs__item">Result</li>
       <li class="breadcrumbs__item">Advice</li>
       <li class="breadcrumbs__item">
         <a href="/families">Families</a>
       </li>
-      <li class="breadcrumbs__item">
-        <a href="/">Home</a>
+      <!-- ko if: currentParentScenario -->
+      <li class="breadcrumbs__item" data-bind="with: currentParentScenario">
+        <a href="/" data-bind="text: name"></a>
       </li>
+      <!-- /ko -->
+      <!-- ko if: currentAdvice -->
+      <li class="breadcrumbs__item" data-bind="with: currentAdvice">
+        <a href="/" data-bind="text: title"></a>
+      </li>
+      <!-- /ko -->
     </ol>
   </div>
 </div>
 
-{{!-- {{> locations/banners/cv-banner }} --}}
-
-<div class="block block--location-header location-header location-header--manchester">
+<div class="block block--location-header location-header" style="display: block;">
   <div class="container">
-    <h1 class="h1 block__header">Supporting families facing homelessness</h1>
-    <h2 class="h2 block__sub-header">We have worked with teams from across UK to provide you with information specifically aimed at helping families facing homelessness</h2>
-    <div class="ctas">
-      <a href="/find-help/group/families/" class="btn btn--brand-d">
-        <span class="btn__text">Find Help</span>
-      </a>
-      <a href="/give-help/help/group/families/" class="btn btn--brand-e">
-        <span class="btn__text">Give Help</span>
-      </a>
+    <div class="container-advice__content">
+      <h1 class="h1 block__header">Advice for families facing homelessness</h1>
+    </div>
+    <div class="container-advice__content">
+      {{> families/search-family-advice }}
     </div>
   </div>
 </div>
 
-<!-- ko if: advice -->
-<div data-bind="with: advice">
-  <div><b>Breadcrumbs</b></div>
-  <div data-bind="text: breadcrumbs"></div>
-  <div><b>Body</b></div>
-  <div data-bind="text: body"></div>
+<div class="block block-advice">
+  <div class="container">
+    <div class="container-advice__content">
+      <p class="advice-filter__header">Filter by:</p>
+      <div class="form--highlighted advice-filter">
+        <p class="advice-filter__label-situation">Current situation</p>
+        <!-- ko if: hasParentScenarios -->
+        <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: parentScenarios">
+          <li>
+            <label class="">
+              <input hidden="hidden" name="parent-scenario" type="radio" data-bind="attr: { id: id, checked: isSelected }, event: { change: changeParentScenario }" />
+              <span class="advice-filter__item advice-filter__item-main" data-bind="text: name, css: { 'is-active': isSelected }"></span>
+            </label>
+
+            <!-- ko if: $parent.hasAdvice && isSelected-->
+            <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: $parent.adviceByParentScenario">
+              <li>
+                <label>
+                  <input hidden="hidden" name="advice" type="radio" data-bind="attr: { id: id, checked: isSelected }, event: { change: changeAdvice }" />
+                  <span class="advice-filter__item" data-bind="text: title"></span>
+                </label>
+              </li>
+            </ul>
+            <!-- /ko -->
+
+          </li>
+        </ul>
+        <!-- /ko -->
+      </div>
+    </div>
+    
+    <div class="container-advice__content">      
+      <!-- ko if: currentAdvice -->
+      <div class="block__content" data-bind="with: currentAdvice">
+        <h1 class="h1" data-bind="text: title"></h1>
+        <p data-bind="text: body"></p>
+      </div>
+      <!-- /ko -->
+
+      {{> divider }}
+      <div class="block__content">  
+        <!-- ko if: adviceByParentScenario -->
+        <div class="cards__list">
+          <h2 class="h2">Frequently asked questions</h1>
+          <div class="result-detail">
+            <div class="accordion accordion--advice" data-bind="foreach: adviceByParentScenario">
+              <button class="h3 accordion__header" data-bind="css: { 'is-active': isSelected }, click: toggle">
+                <span class="accordion--advice__title" data-bind="html: title"></span>
+                <svg class="svg-plus-dims accordion__icon accordion__icon--open">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use>
+                </svg>
+                <svg class="svg-minus-dims accordion__icon accordion__icon--close">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use>
+                </svg>
+
+                <div data-bind="foreach: tags">
+                  <div class="accordion--advice__tags" data-bind="text: $data"></div>
+                  <!-- ko if: $index() === ($parent.tags().length - 1) -->
+                  <div class="accordion--advice__tags">Current parent scenario</div>
+                  <!-- /ko -->
+                </div>
+                <p class="accordion--advice__short-description" data-bind="text: (body().length > 50 ? body().substring(0, 49) + '...' : body), css: { 'is-active': isSelected }"></p>
+              </button>
+              <div class="accordion__item" data-bind="css: { 'is-active': isSelected }">
+                <div class="accordion__inner" data-bind="text: body">
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /ko -->
+      </div>
+    </div>
+
+  </div>
 </div>
-<!-- /ko -->
+
+{{> divider }}
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <section class="block__content--central-cta block__section">
+        <h1>More useful resources</h1>
+      </section>
+      <article class="card card--cta card--grid-1-of-3">
+        <h2 class="h2 card__title card__title--help">Find local services</h2>
+        <p>Losing your home is distressing situation no-one should face alone. Find out what you need to do in your area to get the best help by selecting a supported area.</p>
+        <a href="/find-help/group/families/" class="btn btn--brand-e btn--always-full">
+          <span class="btn__text">Find help</span>
+        </a>
+      </article>
+      <article class="card card--cta card--grid-1-of-3">
+        <h2 class="h2 card__title card__title--hand">Want to know how you can help?</h2>
+        <p>Whether it's offering your time, giving practical items, making a donation or help change policies - there is lots you can do to make a difference.</p>
+        <a href="/give-help/help/group/families" class="btn btn--brand-e btn--always-full">
+          <span class="btn__text">Give help</span>
+        </a>
+      </article>
+      <article class="card card--cta card--grid-1-of-3">
+        <h2 class="h2 card__title card__title--street-support card__title--street-support--advice">Read our latest news about families</h2>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod</p>
+        <a href="https://news.streetsupport.net/tag/families/" class="btn btn--brand-e btn--always-full">
+          <span class="btn__text">Read news</span>
+        </a>
+      </article>
+    </div>
+  </div>
+</div>
 
 {{> loading-spinner}}
