@@ -11,13 +11,13 @@ const googleMaps = require('../../../location/googleMaps')
 const proximityRanges = require('../../../location/proximityRanges')
 const querystring = require('../../../get-url-parameter')
 
-import FindHelpByClientGroup from './FindHelpByClientGroup'
+import FindHelp from './FindHelp'
 
 import { buildInfoWindowMarkup } from '../../../pages/find-help/by-location/helpers'
 
 import ko from 'knockout'
 
-export default class FindHelpByCategory extends FindHelpByClientGroup {
+export default class FindHelpByClientGroup extends FindHelp {
   constructor () {
     super()
     const postcodeInQuerystring = querystring.parameter('postcode')
@@ -25,8 +25,6 @@ export default class FindHelpByCategory extends FindHelpByClientGroup {
     this.isLoaded = false
     this.pageSize = 10000
     this.pageIndex = ko.observable(0)
-    this.clientGroupKey = ko.observable()
-    this.clientGroupName = ko.observable()
 
     if (postcodeInQuerystring) {
       this.proximitySearch.postcode(postcodeInQuerystring)
@@ -45,16 +43,10 @@ export default class FindHelpByCategory extends FindHelpByClientGroup {
   onProximitySearch () {
     this.isLoaded = true
     browser.loading()
-    this.clientGroupKey(querystring.parameter('key'))
-
-    this.listingHref(`/find-help/by-client-group/?key=${querystring.parameter('key')}&postcode=${this.proximitySearch.postcode()}`)
-    this.timetableHref(`/find-help/by-client-group/timetable/?key=${querystring.parameter('key')}&postcode=${this.proximitySearch.postcode()}`)
-    this.mapHref(`/find-help/by-client-group/map/?key=${querystring.parameter('key')}&postcode=${this.proximitySearch.postcode()}`)
 
     ajax
-      .data(`${endpoints.serviceCategories}${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}&clientGroup=${this.clientGroupKey()}`)
+      .data(`${endpoints.serviceCategories}${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}&clientGroup=${this.encodeClientGroupKey(this.clientGroup.clientGroupKey)}`)
       .then((result) => {
-        this.clientGroupName(result.data.clientGroup.name)
         this.items(result.data.providers)
         this.displayMap()
         this.pushHistory()

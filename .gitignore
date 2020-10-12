@@ -24,6 +24,7 @@ backstop_data
 test/visual/results
 .idea
 
+src/pages/find-help/group
 src/pages/find-help/accom/
 src/pages/find-help/communications/
 src/pages/find-help/dropin/
@@ -37,6 +38,7 @@ src/pages/find-help/activities/
 src/pages/find-help/support/
 src/pages/find-help/employment/
 src/pages/find-help/financial/
+src/pages/give-help/help/group/*
 src/data/generated/
 src/partials/nav/service-cats.hbs
 src/scss/modules/_generated-variables.scss
@@ -47,3 +49,8 @@ src/partials/nav/header-locations.hbs
 src/partials/locations/_generated-selector-hogan.hbs
 src/partials/locations/_generated-option-tags.hbs
 src/partials/find-help/_generated-service-cats-ctas.hbs
+
+!src/pages/give-help/help/group/index.hbs
+!src/pages/find-help/group/index.hbs
+!src/pages/find-help/group/by-day/index.hbs
+!src/pages/find-help/group/by-location/index.hbs

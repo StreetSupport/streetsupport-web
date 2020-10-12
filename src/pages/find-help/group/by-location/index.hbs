@@ -1,0 +1,65 @@
+---
+title:
+description:
+image: https://streetsupport.net/assets/img/og/street-support.jpg
+layout: withGoogle.hbs
+permalink: false
+jsBundle: find-help-by-client-group-map
+section: findhelp
+page:
+---
+
+{{> find-help/breadcrumb_injected categoryName="theClientGroupName" }}
+
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <header class="multi-form-header">
+        <h1 class="h1">theClientGroupName</h1>
+        <p>To find services near you, please enter your postcode.</p>
+        <button class="btn btn--brand-d js-print-btn">
+          <span class="btn__text">Print this page</span>
+        </button>
+      </header>
+      {{> proximity-search/ko }}
+    </div>
+  </div>
+</div>
+
+{{> find-help/view-type-tabs_injected mapIsSelected="true" categoryId="group/theClientGroupId" }}
+
+<div class="block block--cards">
+  <div class="container">
+    <div class="block__content">
+
+      <!-- ko ifnot: proximitySearch.postcode -->
+      <!-- ko ifnot: hasItems -->
+      <p>Please enter a postcode to begin your search. You can use a full postcode eg: 'M1 2HX', or a partial postcode eg: 'M1'.</p>
+      <!-- /ko -->
+      <!-- /ko -->
+      <!-- ko if: proximitySearch.postcode -->
+      <!-- ko ifnot: hasItems -->
+      <p>There are currently no services matching your search. If you know of one, please <a href="info@streetsupport.net">contact us</a>.</p>
+      <!-- /ko -->
+      <!-- /ko -->
+
+      <!-- ko if: hasItems -->
+      <div class="js-map services-map"></div>
+      <!-- /ko -->
+
+    </div>
+    {{> social-share }}
+  </div>
+</div>
+
+{{!-- Add notification message on loading Map. It is a temporary solution. --}}
+<div id="spin">
+  <div id="notification-map" style="display: none; margin-top: 35px; margin-left: -180px; width: 360px; text-align: center; background:rgba(255,255,255, 0.9); padding: 5px">
+    <span>
+      We are just finding the organisations in your area.
+    </span>
+    <span>
+      Won't be long now...
+    </span>
+  </div>
+</div>

@@ -29,7 +29,8 @@ module.exports = {
         ],
         'longitude': -2.22764482381055,
         'latitude': 53.4865827925854,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '57e3fa6acbad0f1e28bf3de7',
@@ -53,7 +54,8 @@ module.exports = {
         ],
         'longitude': -2.22764482381055,
         'latitude': 53.4865827925854,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '58239c62ddad5b11dcdd8840',
@@ -81,7 +83,8 @@ module.exports = {
         ],
         'longitude': -2.22764482381055,
         'latitude': 53.4865827925854,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '58239b9fddad5b11dcdd87f7',
@@ -106,7 +109,8 @@ module.exports = {
         ],
         'longitude': -2.22764482381055,
         'latitude': 53.4865827925854,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '57e3fa26cbad0f1e28bf3dc2',
@@ -131,7 +135,8 @@ module.exports = {
         ],
         'longitude': -2.22764482381055,
         'latitude': 53.4865827925854,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '57eb711fcbad0f1a6092eb2a',
@@ -156,7 +161,8 @@ module.exports = {
         ],
         'longitude': -2.22764482381055,
         'latitude': 53.4865827925854,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '57e3fae4cbad0f1e28bf3e31',
@@ -182,7 +188,8 @@ module.exports = {
         ],
         'longitude': -2.22764482381055,
         'latitude': 53.4865827925854,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '58d38afab421f80a84d887cb',
@@ -207,7 +214,8 @@ module.exports = {
         ],
         'longitude': -2.22764482381055,
         'latitude': 53.4865827925854,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '58a5a20f0bc3da271c6a96e1',
@@ -233,7 +241,8 @@ module.exports = {
         ],
         'longitude': -2.22764482381055,
         'latitude': 53.4865827925854,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '57750792474f8b125854f352',
@@ -256,7 +265,8 @@ module.exports = {
         ],
         'longitude': -2.2277651447334,
         'latitude': 53.4865376210618,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '571003a20dad0a129803f44a',
@@ -280,7 +290,8 @@ module.exports = {
         ],
         'longitude': -2.2277651447334,
         'latitude': 53.4865376210618,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '571004190dad0a129803f44b',
@@ -304,7 +315,8 @@ module.exports = {
         ],
         'longitude': -2.2277651447334,
         'latitude': 53.4865376210618,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '56d9b9c9a3b948fda0b49373',
@@ -328,7 +340,8 @@ module.exports = {
         ],
         'longitude': -2.2316221630479,
         'latitude': 53.4835909837923,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '58c689621b4f880c10b65295',
@@ -355,7 +368,8 @@ module.exports = {
         ],
         'longitude': -2.2316221630479,
         'latitude': 53.4835909837923,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '56d9ba46a3b948fda0b49374',
@@ -378,7 +392,8 @@ module.exports = {
         ],
         'longitude': -2.2316221630479,
         'latitude': 53.4835909837923,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '58ce4e63b421f81088bb30f0',
@@ -401,7 +416,8 @@ module.exports = {
         ],
         'longitude': -2.2316221630479,
         'latitude': 53.4835909837923,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '56d9bab5a3b948fda0b49375',
@@ -425,7 +441,8 @@ module.exports = {
         ],
         'longitude': -2.2316221630479,
         'latitude': 53.4835909837923,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '58e7fac1faad651940cd72ec',
@@ -448,7 +465,8 @@ module.exports = {
         ],
         'longitude': -2.23401712221756,
         'latitude': 53.483397559647,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '5876aff7b2c3d60fc0ed730f',
@@ -471,7 +489,8 @@ module.exports = {
         ],
         'longitude': -2.23401712221756,
         'latitude': 53.483397559647,
-        'customMessage': 'Sleeping bags needed for @y_p_s_f to use for cold weather provision.'
+        'customMessage': 'Sleeping bags needed for @y_p_s_f to use for cold weather provision.',
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '5878f000b2c3d6186c0d7bf8',
@@ -495,7 +514,8 @@ module.exports = {
         ],
         'longitude': -2.23401712221756,
         'latitude': 53.483397559647,
-        'customMessage': 'Mobile creche needed for mothers attending training for @y_p_s_f'
+        'customMessage': 'Mobile creche needed for mothers attending training for @y_p_s_f',
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '57ebe9f0cbad0f3754c3246e',
@@ -518,7 +538,8 @@ module.exports = {
         ],
         'longitude': -2.2194727271716,
         'latitude': 53.4829038305992,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       }
     ],
     'total': 26
@@ -552,7 +573,8 @@ module.exports = {
         ],
         'longitude': -2.21807396831887,
         'latitude': 53.492227407038,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '581b5c18ea21fb1b7c7453d8',
@@ -575,7 +597,8 @@ module.exports = {
         ],
         'longitude': -2.23605822866979,
         'latitude': 53.4819014613034,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '581b764bea21fb1b7c74540d',
@@ -598,7 +621,8 @@ module.exports = {
         ],
         'longitude': -2.23605822866979,
         'latitude': 53.4819014613034,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       },
       {
         'id': '58062adecbad0f199c89e1ce',
@@ -621,7 +645,8 @@ module.exports = {
         ],
         'longitude': -2.23605822866979,
         'latitude': 53.4819014613034,
-        'customMessage': null
+        'customMessage': null,
+        "clientGroups":[{"key":"age-under-21","name":"Under 21s only","sortPosition":1186},{"key":"families","name":"Families","sortPosition":1191}]
       }
     ],
     'total': 72

@@ -1,0 +1,22 @@
+{
+  "id": "5f6b28d3a27c1d88789591cf",
+  "locationKey": "manchester",
+  "title": "Family 1 common",
+  "body": "Food body content",
+  "sortPosition": 0,
+  "tags": [
+    "families",
+    "another-tag",
+    "last-item",
+    "test"
+  ],
+  "parentScenario": {
+    "key": "parent-scenario-1",
+    "name": "Parent scenario 1",
+    "sortPosition": 1000,
+    "id": "5f69bf51a27c1c3b84fe6447",
+    "documentCreationDate": "2020-09-22T09:09:37.4840000Z",
+    "documentModifiedDate": "2020-09-22T09:09:37.4840000Z",
+    "createdBy": "migration"
+  }
+}

@@ -47,7 +47,6 @@ var convertToDropdown = function () {
   var $list
   for (var i = 0; i < $listToSelect.length; ++i) {
     $list = $listToSelect[i]
-
     var id = 'list-to-dropdown_' + i
 
     if (!document.getElementById(id) !== null) {
@@ -73,6 +72,9 @@ var convertToDropdown = function () {
 */
 function createDropdown (j, $list) {
   var id = 'list-to-dropdown__select_' + j
+  if (document.getElementById(id) !== null) {
+    document.getElementById(id).remove()
+  }
 
   if (document.getElementById(id) === null) {
     var $select = document.createElement('select')
@@ -80,7 +82,6 @@ function createDropdown (j, $list) {
     $select.classList.add('list-to-dropdown__select')
 
     var cssClasses = $list.classList
-
     for (var i = 0; i < cssClasses.length; i++) {
       var cssClass = cssClasses[i]
       if (cssClass !== 'list-to-dropdown') {
@@ -94,14 +95,13 @@ function createDropdown (j, $list) {
 
     var $listItems = $list.children
     for (var k = 0; k < $listItems.length; ++k) {
-      var text = $listItems[k].innerText
+      var text = $listItems[k].innerText.trim()
       var $option = document.createElement('option')
       $option.innerText = text
       $option.value = text
       $select.appendChild($option)
     }
 
-    console.log($onChangeCallback)
     $select.addEventListener('change', $onChangeCallback)
   }
   $dropdownCreatedCallback()

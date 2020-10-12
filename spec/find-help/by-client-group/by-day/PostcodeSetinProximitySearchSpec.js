@@ -1,7 +1,6 @@
 /* global describe, beforeAll, afterAll, it, expect */
 
 const sinon = require('sinon')
-
 const ajax = require('../../../../src/js/get-api-data')
 const browser = require('../../../../src/js/browser')
 const endpoints = require('../../../../src/js/api')
@@ -43,7 +42,7 @@ describe('Find Help by Day - postcode set in proximity search', () => {
     browserLoadedStub = sinon.stub(browser, 'loaded')
     sinon.stub(browser, 'location')
       .returns({
-        pathname: '/find-help/by-client-group/timetable'
+        pathname: '/find-help/group/families/timetable'
       })
     browserPushHistoryStub = sinon.stub(browser, 'pushHistory')
     sinon.stub(browser, 'setOnHistoryPop')
@@ -52,11 +51,7 @@ describe('Find Help by Day - postcode set in proximity search', () => {
     postcodeLookupStub
       .callsArgWith(1, newLocation) // success callback function
 
-    const queryStringStub = sinon.stub(querystring, 'parameter')
-    queryStringStub
-      .withArgs('key')
-      .returns('families')
-
+    sinon.stub(querystring, 'parameter')
     storageSetStub = sinon.stub(storage, 'set')
     sinon.stub(storage, 'get').returns({})
 
@@ -90,12 +85,6 @@ describe('Find Help by Day - postcode set in proximity search', () => {
     expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl(`/v2/timetabled-service-providers/show/long/234.5/lat/456.7?range=10000&day=${new Date().getDay() - 1}&clientGroup=families`))
   })
 
-  it('- should set tab links', () => {
-    expect(sut.listingHref()).toEqual(`/find-help/by-client-group/?key=families&postcode=${sut.proximitySearch.postcode()}`)
-    expect(sut.timetableHref()).toEqual(`/find-help/by-client-group/timetable/?key=families&postcode=${sut.proximitySearch.postcode()}`)
-    expect(sut.mapHref()).toEqual(`/find-help/by-client-group/map/?key=families&postcode=${sut.proximitySearch.postcode()}`)
-  })
-
   it('- should set hasItems to true', () => {
     expect(sut.hasItems()).toBeTruthy()
   })
@@ -111,7 +100,7 @@ describe('Find Help by Day - postcode set in proximity search', () => {
   })
 
   it('- should set postcode in querystring', () => {
-    const expected = browserPushHistoryStub.withArgs({ key: 'families', postcode: newLocation.postcode }, '', `?key=families&postcode=${newLocation.postcode}`).calledOnce
+    const expected = browserPushHistoryStub.withArgs({ postcode: newLocation.postcode }, '', `?postcode=${newLocation.postcode}`).calledOnce
     expect(expected).toBeTruthy()
   })
 
@@ -160,20 +149,6 @@ describe('Find Help by Day - postcode set in proximity search', () => {
             expect(sp.isNotVisible()).toBeFalsy()
           }
         })
-    })
-  })
-
-  describe('update postcode in proximity search', () => {
-    var updatedPostcode = 'updated postcode'
-    beforeEach(() => {
-      sut.proximitySearch.postcode(updatedPostcode)
-      sut.proximitySearch.search()
-    })
-
-    it('- should set updated tab links', () => {
-      expect(sut.listingHref()).toEqual(`/find-help/by-client-group/?key=families&postcode=${updatedPostcode}`)
-      expect(sut.timetableHref()).toEqual(`/find-help/by-client-group/timetable/?key=families&postcode=${updatedPostcode}`)
-      expect(sut.mapHref()).toEqual(`/find-help/by-client-group/map/?key=families&postcode=${updatedPostcode}`)
     })
   })
 })
