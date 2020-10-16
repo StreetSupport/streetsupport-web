@@ -265,7 +265,7 @@
     }
   }
 
-  &--bcp-charter {
+  &--bournemouth-charter {
     background: rgba(10, 133, 100, 0.15);
     display: block;
     padding: 0!important;
@@ -275,7 +275,7 @@
       align-items: stretch;
     }
 
-    .block__bcp-charter {
+    .block__bournemouth-charter {
       width: 100%;
       height: 500px;
       background: white url('/assets/img/header-background.png') right bottom repeat-x;
@@ -285,11 +285,11 @@
       }
     }
 
-    .block__bcp-charter-buildings {
+    .block__bournemouth-charter-buildings {
       height: 100%;
       width: 100%;
       position: relative;
-      background: url('/assets/img/locations/bcp.png') center bottom no-repeat;
+      background: url('/assets/img/locations/bournemouth.png') center bottom no-repeat;
 
       & .content {
         background: rgba(0, 0, 0, 0.5);
