@@ -40,5 +40,6 @@ module.exports = {
   accommodation: p('/v1/accommodation/'),
   faqs: p('/v1/faqs/'),
   clientGroups: p('/v1/client-groups/all-client-groups'),
-  parentScenarios: p('/v1/parent-scenarios')
+  parentScenarios: p('/v1/parent-scenarios'),
+  contentPages: p('/v1/content-pages')
 }
