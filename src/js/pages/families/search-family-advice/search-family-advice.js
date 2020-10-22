@@ -31,7 +31,7 @@ function SearchFamilyAdvice () {
 
   self.getAdvice = function () {
     api
-    .data(`${endpoints.contetnPages}?tags=families&type=advice&pageSize=100000&index=0`)
+    .data(`${endpoints.contentPages}?tags=families&type=advice&pageSize=100000&index=0`)
     .then((result) => {
       self.advice(result.data.items.map((x) => {
         let parentScenario = self.parentScenarios().filter((y) => y.id() === x.parentScenarioId)[0]

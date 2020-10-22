@@ -12,9 +12,12 @@ const SearchFamilyAdvice = require('../../pages/families/search-family-advice/se
 class ParentScenario {
   constructor (data, container) {
     this.id = data.id
-    this.name = data.name
-    this.container = container
+    this.title = data.name
+    this.sortPosition = data.sortPosition
+    this.tags = data.tags
     this.isSelected = data.isSelected
+    this.isParentScenario = true
+    this.container = container
   }
 
   changeParentScenario () {
@@ -33,11 +36,11 @@ class Advice {
     this.id = data.id
     this.title = data.title
     this.body = data.body
-    this.locationKey = data.locationKey
     this.parentScenarioId = data.parentScenarioId
     this.sortPosition = data.sortPosition
     this.tags = data.tags
     this.isSelected = data.isSelected
+    this.isParentScenario = false
     this.container = container
   }
 
@@ -78,13 +81,12 @@ function FamilyAdvice () {
     browser.loading()
     if (self.parentScenarioIdInQuerystring()) {
       api
-      .data(`${endpoints.contetnPages}?tags=families&type=advice&pageSize=100000&index=0&parentScenarioId=${self.parentScenarioIdInQuerystring()}`)
+      .data(`${endpoints.contentPages}?tags=families&type=advice&pageSize=100000&index=0&parentScenarioId=${self.parentScenarioIdInQuerystring()}`)
       .then((result) => {
         self.adviceByParentScenario(result.data.items.map((x) => {
           return new Advice ({
             id: ko.observable(x.id),
             body: ko.observable(x.body),
-            locationKey: ko.observable(x.locationKey),
             parentScenarioId: ko.observable(x.parentScenarioId),
             sortPosition: ko.observable(x.sortPosition),
             tags: ko.observableArray(x.tags),
@@ -93,13 +95,12 @@ function FamilyAdvice () {
           } , self)
         }))
 
-        debugger
         if (self.adviceByParentScenario().filter((x) => x.id() === self.adviceIdInQuerystring()).length) {
           self.currentAdvice(self.adviceByParentScenario().filter((x) => x.id() === self.adviceIdInQuerystring())[0])
         } else {
-          self.currentAdvice(self.adviceByParentScenario()[0])
+          self.currentAdvice(self.currentParentScenario())
         }
-        debugger
+
         self.adviceIdInQuerystring(self.currentAdvice().id())
         //self.pushHistory()
         browser.loaded()
@@ -108,11 +109,10 @@ function FamilyAdvice () {
       })
     } else {
       api
-      .data(`${endpoints.faqs}/${self.adviceIdInQuerystring()}`).then((result) => {
+      .data(`${endpoints.contentPages}/${self.adviceIdInQuerystring()}`).then((result) => {
         self.currentAdvice(new Advice ({
           id: ko.observable(result.data.id),
           body: ko.observable(result.data.body),
-          locationKey: ko.observable(result.data.locationKey),
           sortPosition: ko.observable(result.data.sortPosition),
           tags: ko.observableArray(result.data.tags),
           title: ko.observable(result.data.title),
