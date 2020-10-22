@@ -113,6 +113,18 @@
   }
 }
 
+.team__member-title--rachel {
+  &::before, &::after {
+    background-image: url('/assets/img/mugshots/rachel.png')
+  }
+}
+
+.team__member-title--julie {
+  &::before, &::after {
+    background-image: url('/assets/img/mugshots/julie.png')
+  }
+}
+
 .team__member-title--jez {
   &::before, &::after {
     background-image: url('/assets/img/mugshots/jez.jpg')
