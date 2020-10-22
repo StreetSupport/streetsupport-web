@@ -115,7 +115,7 @@ describe('Find Help by Client Group - postcode set in proximity search', () => {
   })
 
   it('- should set postcode, catIds and subCatIds in querystring', () => {
-    const expected = browserPushHistoryStub.withArgs({ postcode: newLocation.postcode, catIds: 'meals', subCatIds: 'general' }, '', `?postcode=${newLocation.postcode}&catIds=meals&subCatIds=general`).calledOnce
+    const expected = browserPushHistoryStub.withArgs({ postcode: newLocation.postcode, catIds: 'meals', subCatIds: 'general,community-grocers' }, '', `?postcode=${newLocation.postcode}&catIds=meals&subCatIds=general,community-grocers`).calledOnce
     expect(expected).toBeTruthy()
   })
 })
