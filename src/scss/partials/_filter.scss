@@ -38,6 +38,7 @@
   &__item {
     border-radius: 7px;  
     padding: 5px;
+    width: fit-content;
 
     &.is-active {
       color: white;

@@ -18,10 +18,10 @@ page: families-advice
       </li>
       <!-- ko if: currentParentScenario -->
       <li class="breadcrumbs__item" data-bind="with: currentParentScenario">
-        <a href="/" data-bind="text: name"></a>
+        <a data-bind="text: title, attr: { 'data-id': id, 'href': '/families/advice?parentScenarioId=' + id() }"></a>
       </li>
       <!-- /ko -->
-      <!-- ko if: currentAdvice -->
+      <!-- ko if: currentAdvice() && !currentAdvice().isParentScenario() -->
       <li class="breadcrumbs__item" data-bind="with: currentAdvice">
         <a href="/" data-bind="text: title"></a>
       </li>
@@ -54,18 +54,22 @@ page: families-advice
         <!-- ko if: hasParentScenarios -->
         <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: parentScenarios">
           <li>
-            <label class="">
-              <input hidden="hidden" name="parent-scenario" type="radio" data-bind="attr: { id: id, checked: isSelected }, event: { change: changeParentScenario }" />
-              <span class="advice-filter__item advice-filter__item-main" data-bind="text: name, css: { 'is-active': isSelected }"></span>
-            </label>
+            <div class="advice-filter__item advice-filter__item-main" data-bind="css: { 'is-active': isSelected }">
+              <label>
+                <input hidden="hidden" name="advice" type="radio" data-bind="attr: { id: id, checked: isSelected }, event: { change: changeParentScenario }" />
+                <span data-bind="text: title"></span>
+              </label>
+            </div>
 
-            <!-- ko if: $parent.hasAdvice && isSelected-->
+            <!-- ko if: $parent.hasAdvice && isCurrentParentScenario -->
             <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: $parent.adviceByParentScenario">
               <li>
-                <label>
-                  <input hidden="hidden" name="advice" type="radio" data-bind="attr: { id: id, checked: isSelected }, event: { change: changeAdvice }" />
-                  <span class="advice-filter__item" data-bind="text: title"></span>
-                </label>
+                <div class="advice-filter__item" data-bind="css: { 'is-active': isSelected }">
+                  <label>
+                    <input hidden="hidden" name="advice" type="radio" data-bind="attr: { id: id, checked: isSelected }, event: { change: changeAdvice }" />
+                    <span data-bind="text: title"></span>
+                  </label>
+                </div>
               </li>
             </ul>
             <!-- /ko -->
@@ -80,17 +84,17 @@ page: families-advice
       <!-- ko if: currentAdvice -->
       <div class="block__content" data-bind="with: currentAdvice">
         <h1 class="h1" data-bind="text: title"></h1>
-        <p data-bind="text: body"></p>
+        <p class="block__content--advice" data-bind="text: body"></p>
       </div>
       <!-- /ko -->
 
       {{> divider }}
       <div class="block__content">  
-        <!-- ko if: adviceByParentScenario -->
+        <!-- ko if: hasFAQs -->
         <div class="cards__list">
           <h2 class="h2">Frequently asked questions</h1>
           <div class="result-detail">
-            <div class="accordion accordion--advice" data-bind="foreach: adviceByParentScenario">
+            <div class="accordion accordion--advice" data-bind="foreach: faqs">
               <button class="h3 accordion__header" data-bind="css: { 'is-active': isSelected }, click: toggle">
                 <span class="accordion--advice__title" data-bind="html: title"></span>
                 <svg class="svg-plus-dims accordion__icon accordion__icon--open">
@@ -102,8 +106,12 @@ page: families-advice
 
                 <div data-bind="foreach: tags">
                   <div class="accordion--advice__tags" data-bind="text: $data"></div>
-                  <!-- ko if: $index() === ($parent.tags().length - 1) -->
-                  <div class="accordion--advice__tags">Current parent scenario</div>
+                  <!-- ko if: $parents[1].currentParentScenario() && $index() === ($parent.tags().length - 1) -->
+                  <div class="accordion--advice__tags" data-bind="text: $parents[1].currentParentScenario().title"></div>
+                  <!-- /ko -->
+                  {{!-- If advice doesn't have parent scenario we show all faqs --}}
+                  <!-- ko if: !$parents[1].currentParentScenario() && $index() === ($parent.tags().length - 1) && $parents[1].hasParentScenarios() && $parents[1].parentScenarios().filter(x => x.id() === $parent.parentScenarioId()).length -->
+                  <div class="accordion--advice__tags" data-bind="text: $parents[1].parentScenarios().filter(x => x.id() === $parent.parentScenarioId())[0].title"></div>
                   <!-- /ko -->
                 </div>
                 <p class="accordion--advice__short-description" data-bind="text: (body().length > 50 ? body().substring(0, 49) + '...' : body), css: { 'is-active': isSelected }"></p>

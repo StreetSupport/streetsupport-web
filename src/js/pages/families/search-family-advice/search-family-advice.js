@@ -4,6 +4,31 @@ const api = require('../../../get-api-data')
 const browser = require('../../../browser')
 const endpoints = require('../../../api')
 
+class SearchAdviceBaseModel {
+  constructor (data) {
+    this.id = data.id
+    this.title = data.title
+    this.body = data.body
+    this.sortPosition = data.sortPosition
+    this.tags = data.tags
+    this.breadcrumbs = data.breadcrumbs
+    this.url = data.url
+  }
+}
+class SearchParentScenarioModel extends SearchAdviceBaseModel {
+  constructor (data) {
+    super(data)
+    this.parentScenario = ko.observable(null)
+  }
+}
+
+class SearchAdviceModel extends SearchAdviceBaseModel {
+  constructor (data) {
+    super(data)
+    this.parentScenario = data.parentScenario
+  }
+}
+
 function SearchFamilyAdvice () {
   const self = this
   self.isSelectedSearchInput = ko.observable(false)
@@ -35,17 +60,16 @@ function SearchFamilyAdvice () {
     .then((result) => {
       self.advice(result.data.items.map((x) => {
         let parentScenario = self.parentScenarios().filter((y) => y.id() === x.parentScenarioId)[0]
-        return {
+        return new SearchAdviceModel ({
           id: ko.observable(x.id),
           body: ko.observable(x.body),
           parentScenario: ko.observable(parentScenario),
-          parentScenarioId: ko.observable(parentScenario ? parentScenario.id() : ''),
           sortPosition: ko.observable(x.sortPosition),
           tags: ko.observableArray(x.tags),
           title: ko.observable(x.title),
           breadcrumbs: ko.observable(`Families > ${parentScenario ? parentScenario.title() + ' > ' : ''}${x.title}`),
           url: ko.observable(`/families/advice?id=${x.id}${parentScenario ? '&parentScenarioId=' + parentScenario.id() : ''}`)
-        }
+        })
       }))
       self.advice(self.advice().concat(self.parentScenarios()))
       browser.loaded()
@@ -60,17 +84,15 @@ function SearchFamilyAdvice () {
       .data(`${endpoints.parentScenarios}`)
       .then((result) => {
         self.parentScenarios(result.data.map((x) => {
-          return {
+          return new SearchParentScenarioModel ({
             id: ko.observable(x.id),
             body: ko.observable(x.body),
-            parentScenario: ko.observable(null),
-            parentScenarioId: ko.observable(x.id),
             sortPosition: ko.observable(x.sortPosition),
             tags: ko.observableArray(x.tags),
             title: ko.observable(x.name),
             breadcrumbs: ko.observable(`Families > ${x.name}`),
             url: ko.observable(`/families/advice?parentScenarioId=${x.id}`)
-          }
+          })
         }))
         self.getAdvice()
       }, () => {
@@ -80,10 +102,10 @@ function SearchFamilyAdvice () {
 
   self.sortByTitle = function (a, b, searchTermRegex) {
     let resA = a.title().toLowerCase().trim().match(searchTermRegex)
-    resA = resA !== null ? resA.length : 0
+    resA = (resA !== null && resA !== undefined) ? resA.length : 0
 
     let resB = b.title().toLowerCase().trim().match(searchTermRegex)
-    resB = resB !== null ? resB.length : 0
+    resB = (resB !== null && resB !== undefined) ? resB.length : 0
 
     if ((resB - resA) === 0) {
       return self.sortByParentScenario(a, b, searchTermRegex)
@@ -94,18 +116,18 @@ function SearchFamilyAdvice () {
   self.filterByTitle = function (searchTermRegex, advice) {
     let filteredByTitle = ko.observableArray(advice.filter((x) => {
       let result = x.title().toLowerCase().trim().match(searchTermRegex)
-      return result !== null && result.length
+      return (result !== null && result !== undefined) && result.length
     }).sort((a, b) => self.sortByTitle(a, b, searchTermRegex)))
 
     return filteredByTitle
   }
 
   self.sortByParentScenario = function (a, b, searchTermRegex) {
-    let resA = a.parentScenario() !== null ? a.parentScenario().title().toLowerCase().trim().match(searchTermRegex) : null
-    resA = resA !== null ? resA.length : 0
+    let resA = (a.parentScenario() !== null && a.parentScenario() !== undefined) ? a.parentScenario().title().toLowerCase().trim().match(searchTermRegex) : null
+    resA = (resA !== null && resA !== undefined) ? resA.length : 0
 
-    let resB = b.parentScenario() !== null ? b.parentScenario().title().toLowerCase().trim().match(searchTermRegex) : null
-    resB = resB !== null ? resB.length : 0
+    let resB = (b.parentScenario() !== null && b.parentScenario() !== undefined) ? b.parentScenario().title().toLowerCase().trim().match(searchTermRegex) : null
+    resB = (resB !== null && resA !== undefined) ? resB.length : 0
 
     if ((resB - resA) === 0) {
       return self.sortByTag(a, b, searchTermRegex)
@@ -115,9 +137,9 @@ function SearchFamilyAdvice () {
 
   self.filterByParentScenario = function (searchTermRegex, filteredAdvice) {
     let filteredByTitle = ko.observableArray(filteredAdvice.filter((x) => {
-      if (x.parentScenario() !== null) {
+      if (x.parentScenario() !== null && x.parentScenario() !== undefined) {
         let result = x.parentScenario().title().toLowerCase().trim().match(searchTermRegex)
-        return result !== null && result.length
+        return (result !== null && result !== undefined) && result.length
       }
       return false
     }).sort((a, b) => self.sortByParentScenario(a, b, searchTermRegex)))
@@ -128,11 +150,11 @@ function SearchFamilyAdvice () {
   self.sortByTag = function (a, b, searchTermRegex) {
     const searchRegExp = new RegExp('-', 'g')
 
-    let resA = a.tags() !== null ? a.tags().filter((y) => y !== 'families').join(' ').replace(searchRegExp, ' ').match(searchTermRegex) : null
-    resA = resA !== null ? resA.length : 0
+    let resA = (a.tags() !== null && a.tags() !== undefined) ? a.tags().filter((y) => y !== 'families').join(' ').replace(searchRegExp, ' ').match(searchTermRegex) : null
+    resA = (resA !== null && resA !== undefined) ? resA.length : 0
 
-    let resB = b.tags() !== null ? b.tags().filter((y) => y !== 'families').join(' ').replace(searchRegExp, ' ').match(searchTermRegex) : null
-    resB = resB !== null ? resB.length : 0
+    let resB = (b.tags() !== null && b.tags() !== undefined) ? b.tags().filter((y) => y !== 'families').join(' ').replace(searchRegExp, ' ').match(searchTermRegex) : null
+    resB = (resB !== null && resB !== undefined) ? resB.length : 0
 
     if ((resB - resA) === 0) {
       return self.sortByContent(a, b, searchTermRegex)
@@ -142,10 +164,10 @@ function SearchFamilyAdvice () {
 
   self.filterByTag = function (searchTermRegex, filteredAdvice) {
     let filteredByTag = ko.observableArray(filteredAdvice.filter((x) => {
-      if (x.tags() !== null) {
+      if (x.tags() !== null && x.tags() !== undefined) {
         const searchRegExp = new RegExp('-', 'g')
         let result = x.tags().filter((y) => y !== 'families').join(' ').replace(searchRegExp, ' ').match(searchTermRegex)
-        return result !== null && result.length
+        return (result !== null && result !== undefined) && result.length
       }
       return false
     }).sort((a, b) => self.sortByTag(a, b, searchTermRegex)))
@@ -155,10 +177,10 @@ function SearchFamilyAdvice () {
 
   self.sortByContent = function (a, b, searchTermRegex) {
     let resContentA = a.body().toLowerCase().trim().match(searchTermRegex)
-    resContentA = resContentA !== null ? resContentA.length : 0
+    resContentA = (resContentA !== null && resContentA !== undefined) ? resContentA.length : 0
 
     let resContentB = b.body().toLowerCase().trim().match(searchTermRegex)
-    resContentB = resContentB !== null ? resContentB.length : 0
+    resContentB = (resContentB !== null && resContentB !== undefined) ? resContentB.length : 0
 
     return resContentB - resContentA
   }
@@ -166,7 +188,7 @@ function SearchFamilyAdvice () {
   self.filterByContent = function (searchTermRegex, filteredAdvice) {
     let filteredByContent = ko.observableArray(filteredAdvice.filter((x) => {
       let result = x.body().toLowerCase().trim().match(searchTermRegex)
-      return result !== null && result.length
+      return (result !== null && result !== undefined) && result.length
     }).sort((a, b) => self.sortByContent(a, b, searchTermRegex)))
 
     return filteredByContent
