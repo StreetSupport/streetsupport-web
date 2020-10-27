@@ -47,39 +47,8 @@ page: families-advice
 
 <div class="block block-advice">
   <div class="container">
-    <div class="container-advice__content">
-      <p class="advice-filter__header">Filter by:</p>
-      <div class="form--highlighted advice-filter">
-        <p class="advice-filter__label-situation">Current situation</p>
-        <div class="arrow" data-bind="click: collapseMobileFilters, css: { 'arrow--down': !isCollapsed(), 'arrow--up': isCollapsed() }"></div>
-        <!-- ko if: hasParentScenarios -->
-        <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: parentScenarios">
-          <li class="advice-filter__item-wrap" data-bind="css: { 'is-active': isCurrentParentScenario() || $parent.isCollapsed() }">
-            <div class="advice-filter__item advice-filter__item-main" data-bind="css: { 'is-active': isSelected }">
-              <label>
-                <input hidden="hidden" name="advice" type="radio" data-bind="attr: { id: id, checked: isSelected }, event: { change: changeParentScenario }" />
-                <span data-bind="text: title"></span>
-              </label>
-            </div>
 
-            <!-- ko if: $parent.hasAdvice && isCurrentParentScenario -->
-            <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: $parent.adviceByParentScenario">
-              <li class="advice-filter__item-wrap" data-bind="css: { 'is-active': isSelected() || $parents[1].isCollapsed() }">
-                <div class="advice-filter__item" data-bind="css: { 'is-active': isSelected }">
-                  <label>
-                    <input hidden="hidden" name="advice" type="radio" data-bind="attr: { id: id, checked: isSelected }, event: { change: changeAdvice }" />
-                    <span data-bind="text: title"></span>
-                  </label>
-                </div>
-              </li>
-            </ul>
-            <!-- /ko -->
-
-          </li>
-        </ul>
-        <!-- /ko -->
-      </div>
-    </div>
+    {{> families/filter-family-advice }}
     
     <div class="container-advice__content">      
       <!-- ko if: currentAdvice -->
@@ -90,78 +59,12 @@ page: families-advice
       <!-- /ko -->
 
       {{> divider }}
-      <div class="block__content">  
-        <!-- ko if: hasFAQs -->
-        <div class="cards__list">
-          <h2 class="h2">Frequently asked questions</h1>
-          <div class="result-detail">
-            <div class="accordion accordion--advice" data-bind="foreach: faqs">
-              <button class="h3 accordion__header" data-bind="css: { 'is-active': isSelected }, click: toggle">
-                <span class="accordion--advice__title" data-bind="html: title"></span>
-                <svg class="svg-plus-dims accordion__icon accordion__icon--open">
-                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use>
-                </svg>
-                <svg class="svg-minus-dims accordion__icon accordion__icon--close">
-                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use>
-                </svg>
-
-                <div data-bind="foreach: tags">
-                  <div class="accordion--advice__tags" data-bind="text: $data"></div>
-                  <!-- ko if: $parents[1].currentParentScenario() && $index() === ($parent.tags().length - 1) -->
-                  <div class="accordion--advice__tags" data-bind="text: $parents[1].currentParentScenario().title"></div>
-                  <!-- /ko -->
-                  {{!-- If advice doesn't have parent scenario we show all faqs --}}
-                  <!-- ko if: !$parents[1].currentParentScenario() && $index() === ($parent.tags().length - 1) && $parents[1].hasParentScenarios() && $parents[1].parentScenarios().filter(x => x.id() === $parent.parentScenarioId()).length -->
-                  <div class="accordion--advice__tags" data-bind="text: $parents[1].parentScenarios().filter(x => x.id() === $parent.parentScenarioId())[0].title"></div>
-                  <!-- /ko -->
-                </div>
-                <p class="accordion--advice__short-description" data-bind="text: (body().length > 50 ? body().substring(0, 49) + '...' : body), css: { 'is-active': isSelected }"></p>
-              </button>
-              <div class="accordion__item" data-bind="css: { 'is-active': isSelected }">
-                <div class="accordion__inner" data-bind="text: body">
-              </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- /ko -->
-      </div>
+      {{> families/frequently-asked-questions }}
     </div>
 
   </div>
 </div>
 
 {{> divider }}
-
-<div class="block">
-  <div class="container">
-    <div class="block__content">
-      <section class="block__content--central-cta block__section">
-        <h1>More useful resources</h1>
-      </section>
-      <article class="card card--cta card--grid-1-of-3">
-        <h2 class="h2 card__title card__title--help">Find local services</h2>
-        <p>Losing your home is distressing situation no-one should face alone. Find out what you need to do in your area to get the best help by selecting a supported area.</p>
-        <a href="/find-help/group/families/" class="btn btn--brand-e btn--always-full">
-          <span class="btn__text">Find help</span>
-        </a>
-      </article>
-      <article class="card card--cta card--grid-1-of-3">
-        <h2 class="h2 card__title card__title--hand">Want to know how you can help?</h2>
-        <p>Whether it's offering your time, giving practical items, making a donation or help change policies - there is lots you can do to make a difference.</p>
-        <a href="/give-help/help/group/families" class="btn btn--brand-e btn--always-full">
-          <span class="btn__text">Give help</span>
-        </a>
-      </article>
-      <article class="card card--cta card--grid-1-of-3">
-        <h2 class="h2 card__title card__title--street-support card__title--street-support--advice">Read our latest news about families</h2>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod</p>
-        <a href="https://news.streetsupport.net/tag/families/" class="btn btn--brand-e btn--always-full">
-          <span class="btn__text">Read news</span>
-        </a>
-      </article>
-    </div>
-  </div>
-</div>
-
+{{> families/useful-resources }}
 {{> loading-spinner}}
