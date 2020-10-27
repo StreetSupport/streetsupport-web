@@ -276,8 +276,14 @@
   }
 
   .block__content {
-    .block__content--advice {
+    &--advice {
       text-align: justify;
+    }
+
+    @include mq($until: m) {
+      .h1 {
+        font-size: 28px;
+      }
     }
   }
 }

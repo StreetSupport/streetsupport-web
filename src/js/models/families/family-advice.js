@@ -102,6 +102,11 @@ function FamilyAdvice () {
   self.hasAdvice = ko.computed(() => self.adviceByParentScenario().length > 0, this)
   self.faqs = ko.observableArray([])
   self.hasFAQs = ko.computed(() => self.faqs().length > 0, this)
+  self.isCollapsed = ko.observable(false)
+
+  self.collapseMobileFilters = function () {
+    self.isCollapsed(!self.isCollapsed())
+  }
 
   self.deactivateSelectedItems = function() {
     self.parentScenarios().forEach(element => {

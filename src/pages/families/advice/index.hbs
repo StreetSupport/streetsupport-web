@@ -51,9 +51,10 @@ page: families-advice
       <p class="advice-filter__header">Filter by:</p>
       <div class="form--highlighted advice-filter">
         <p class="advice-filter__label-situation">Current situation</p>
+        <div class="arrow" data-bind="click: collapseMobileFilters, css: { 'arrow--down': !isCollapsed(), 'arrow--up': isCollapsed() }"></div>
         <!-- ko if: hasParentScenarios -->
         <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: parentScenarios">
-          <li>
+          <li class="advice-filter__item-wrap" data-bind="css: { 'is-active': isCurrentParentScenario() || $parent.isCollapsed() }">
             <div class="advice-filter__item advice-filter__item-main" data-bind="css: { 'is-active': isSelected }">
               <label>
                 <input hidden="hidden" name="advice" type="radio" data-bind="attr: { id: id, checked: isSelected }, event: { change: changeParentScenario }" />
@@ -63,7 +64,7 @@ page: families-advice
 
             <!-- ko if: $parent.hasAdvice && isCurrentParentScenario -->
             <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: $parent.adviceByParentScenario">
-              <li>
+              <li class="advice-filter__item-wrap" data-bind="css: { 'is-active': isSelected() || $parents[1].isCollapsed() }">
                 <div class="advice-filter__item" data-bind="css: { 'is-active': isSelected }">
                   <label>
                     <input hidden="hidden" name="advice" type="radio" data-bind="attr: { id: id, checked: isSelected }, event: { change: changeAdvice }" />
