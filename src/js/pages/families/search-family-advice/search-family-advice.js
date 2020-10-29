@@ -71,6 +71,7 @@ function SearchFamilyAdvice () {
           url: ko.observable(`/families/advice?id=${x.id}${parentScenario ? '&parentScenarioId=' + parentScenario.id() : ''}`)
         })
       }))
+
       self.advice(self.advice().concat(self.parentScenarios()))
       browser.loaded()
     }, (_) => {
@@ -81,7 +82,7 @@ function SearchFamilyAdvice () {
   self.getParentScenarios = () => {
     browser.loading()
     api
-      .data(`${endpoints.parentScenarios}`)
+      .data(`${endpoints.parentScenarios}?tags=families`)
       .then((result) => {
         self.parentScenarios(result.data.map((x) => {
           return new SearchParentScenarioModel ({
@@ -221,7 +222,7 @@ function SearchFamilyAdvice () {
   }
 
   self.searchAll = function (data, event) {
-    if (event.which === 1 || event.which === 13) {
+    if ((event.which === 1 || event.which === 13) && self.searchQuery().trim()) {
       document.location.href = `/families/advice/result?searchQuery=${self.searchQuery().trim()}`
     }
   }

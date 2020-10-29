@@ -258,6 +258,20 @@
 
 .block-advice {
 
+  .container {
+    .container-advice__header-result {
+      display: inline;
+      background-image: url('/assets/img/search-icon.png');
+      background-position: 0px 3px;
+      background-repeat: no-repeat;
+      padding-left: 25px;
+    }
+
+    .container-advice__content-no-result {
+      margin-top: 25px;
+    }
+  }
+
   @include mq($from: m) {
 
     .container {
@@ -271,6 +285,15 @@
           @include span(7 of 12);
           @include first();
           float: right;
+      }
+    }
+  }
+
+  @include mq($until: m) {
+
+    .container {
+      .container-advice__content-no-result {
+        margin-top: 15px;
       }
     }
   }

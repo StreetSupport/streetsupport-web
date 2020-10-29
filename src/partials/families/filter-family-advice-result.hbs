@@ -1,0 +1,33 @@
+<div class="container-advice__content">
+    <p class="advice-filter__header">Filter by:</p>
+    <div class="form--highlighted advice-filter">
+    <p class="advice-filter__label-situation">Current situation</p>
+    <div class="arrow" data-bind="click: collapseMobileFilters, css: { 'arrow--down': !isCollapsed(), 'arrow--up': isCollapsed() }">
+    </div>
+    <!-- ko if: hasParentScenarios -->
+    <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: parentScenarios">
+        <li class="advice-filter__item-wrap" data-bind="css: { 'is-active': isCurrentParentScenario() || $parent.isCollapsed() }">
+            <div class="advice-filter__item advice-filter__item-main">
+                <label>
+                    <input hidden="hidden" name="advice" type="radio" data-bind="attr: { id: id, checked: isSelected }, event: { change: changeParentScenarioOnSearchResult }" />
+                    <span data-bind="text: title"></span>
+                </label>
+            </div>
+
+            <!-- ko if: $parent.hasAdvice && isCurrentParentScenario -->
+            <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: $parent.adviceByParentScenario">
+                    <li class="advice-filter__item-wrap"></li>
+                    <div class="advice-filter__item">
+                        <label>
+                            <a data-bind="text: title, attr: { href: '/families/advice?id=' + id() + '&parentScenarioId=' + $parent.id() }"></a>
+                        </label>
+                    </div>
+                </li>
+            </ul>
+            <!-- /ko -->
+
+        </li>
+    </ul>
+    <!-- /ko -->
+    </div>
+</div>

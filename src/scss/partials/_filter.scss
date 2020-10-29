@@ -84,6 +84,13 @@
         }
       }
     }
+
+    .advice-filter__item {
+      a, a:hover {
+        text-decoration: none;
+        color: black;
+      }
+    }
   }
 
   @include mq($until: m) {
