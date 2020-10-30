@@ -1,6 +1,5 @@
 import ko from 'knockout'
-import pushHistory from '../../history'
-import { ParentScenario, Advice, FAQ } from '../../models/families/family-advice-helper';
+import { ParentScenario, Advice, FAQ } from '../../models/families/family-advice-helper'
 
 const api = require('../../get-api-data')
 const browser = require('../../browser')
@@ -47,7 +46,7 @@ function FamilyAdviceResult () {
     .data(`${endpoints.faqs}?tags=families&pageSize=100000&index=0`)
     .then((result) => {
       self.faqs(result.data.items.map((x) => {
-        return new FAQ ({
+        return new FAQ({
           id: ko.observable(x.id),
           body: ko.observable(x.body),
           sortPosition: ko.observable(x.sortPosition),
@@ -69,7 +68,7 @@ function FamilyAdviceResult () {
       .then((result) => {
         self.parentScenarios(result.data
           .map(p => {
-            return new ParentScenario ({
+            return new ParentScenario({
               id: ko.observable(p.id),
               title: ko.observable(htmlEncode.htmlDecode(p.name)),
               body: ko.observable(p.body),
@@ -77,7 +76,7 @@ function FamilyAdviceResult () {
               tags: ko.observableArray(p.tags),
               isSelected: ko.observable(false),
               isParentScenario: ko.observable(true),
-              isCurrentParentScenario: ko.observable(false)  
+              isCurrentParentScenario: ko.observable(false)
             }, self)
           })
         )
@@ -96,7 +95,7 @@ function FamilyAdviceResult () {
       .data(`${endpoints.contentPages}?tags=families&type=advice&pageSize=100000&index=0&parentScenarioId=${self.currentParentScenario().id()}`)
       .then((result) => {
         self.adviceByParentScenario(result.data.items.map((x) => {
-          return new Advice ({
+          return new Advice({
             id: ko.observable(x.id),
             body: ko.observable(x.body),
             parentScenarioId: ko.observable(x.parentScenarioId),

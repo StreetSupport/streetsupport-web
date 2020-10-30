@@ -1,118 +1,131 @@
-// /* global describe, beforeEach, afterEach, it, expect */
+/* global describe, beforeEach, afterEach, it, expect */
 
-// import sinon from 'sinon'
+import sinon from 'sinon'
 
-// const api = require('../../../src/js/get-api-data')
-// const browser = require('../../../src/js/browser')
-// const Model = require('../../../src/js/pages/families/search-family-advice/search-family-advice')
-// const adviceList = require('./advice-list')
-// const querystring = require('../../../src/js/get-url-parameter')
-// const location = require('../../../src/js/location/locationSelector')
+const api = require('../../../src/js/get-api-data')
+const browser = require('../../../src/js/browser')
 
-// describe('Search Families Advice', () => {
-//   let ajaxGetStub,
-//     browserLoadingStub,
-//     browserLoadedStub,
-//     sut
+const proxyquire = require('proxyquire')
+const Model = proxyquire('../../../src/js/pages/families/search-family-advice/search-family-advice', require('../../../src/js/pages/families/search-family-advice/search-family-advice'))
+const adviceList = require('./advice-list')
+const parentScenariosList = require('./parent-scenarios-list')
+const querystring = require('../../../src/js/get-url-parameter')
 
-//   const currentLocation = {
-//     id: 'manchester'
-//   }
+describe('Search Families Advice', () => {
+  let ajaxGetStub,
+    browserLoadingStub,
+    browserLoadedStub,
+    sut
 
-//   beforeEach(() => {
-//     ajaxGetStub = sinon.stub(api, 'data')
-//     ajaxGetStub
-//       .returns({
-//         then: function (success) {
-//           success({ data: adviceList })
-//         }
-//       })
-//     browserLoadingStub = sinon.stub(browser, 'loading')
-//     browserLoadedStub = sinon.stub(browser, 'loaded')
+  const currentLocation = {
+    id: 'manchester'
+  }
 
-//     sinon.stub(querystring, 'parameter')
+  beforeEach(() => {
+    ajaxGetStub = sinon.stub(api, 'data')
 
-//     sut = new Model()
-//   })
+    ajaxGetStub
+      .onCall(0)
+      .returns({
+        then: function (success) {
+          success({ data: parentScenariosList })
+        }
+      })
 
-//   afterEach(() => {
-//     api.data.restore()
-//     browser.loading.restore()
-//     browser.loaded.restore()
-//     querystring.parameter.restore()
-//   })
+    ajaxGetStub
+      .onCall(1)
+      .returns({
+        then: function (success) {
+          success({ data: adviceList })
+        }
+      })
 
-//   it('- should return and set advice', () => {
-//     expect(sut.advice().length).toEqual(5)
-//   })
+    browserLoadingStub = sinon.stub(browser, 'loading')
+    browserLoadedStub = sinon.stub(browser, 'loaded')
 
-//   describe('- search by empty search filed', () => {
-//     beforeEach(() => {
-//       sut.searchQuery('nothing')
-//     })
+    sinon.stub(querystring, 'parameter')
 
-//     it('- should not search by empty search filed', () => {
-//       expect(sut.filteredAdvice().length).toEqual(0)
-//     })
-//   })
+    sut = new Model()
+  })
 
-//   describe('- search by wrong word', () => {
-//     beforeEach(() => {
-//       sut.searchQuery('nothing')
-//     })
+  afterEach(() => {
+    api.data.restore()
+    browser.loading.restore()
+    browser.loaded.restore()
+    querystring.parameter.restore()
+  })
 
-//     it('- should not search by wrong word', () => {
-//       expect(sut.filteredAdvice().length).toEqual(0)
-//     })
-//   })
+  it('- should return and set advice', () => {
+    expect(sut.advice().length).toEqual(8)
+  })
 
-//   describe('- search in title', () => {
-//     beforeEach(() => {
-//       sut.searchQuery('title')
-//     })
+  describe('- search by empty search filed', () => {
+    beforeEach(() => {
+      sut.searchQuery('nothing')
+    })
 
-//     it('- should search in title', () => {
-//       expect(sut.filteredAdvice().length).toEqual(1)
-//     })
-//   })
+    it('- should not search by empty search filed', () => {
+      expect(sut.filteredAdvice().length).toEqual(0)
+    })
+  })
 
-//   describe('- search in parent scenario', () => {
-//     beforeEach(() => {
-//       sut.searchQuery('ParentScenario3')
-//     })
+  describe('- search by wrong word', () => {
+    beforeEach(() => {
+      sut.searchQuery('nothing')
+    })
 
-//     it('- should search in parent scenario', () => {
-//       expect(sut.filteredAdvice().length).toEqual(1)
-//     })
-//   })
+    it('- should not search by wrong word', () => {
+      expect(sut.filteredAdvice().length).toEqual(0)
+    })
+  })
 
-//   describe('- search in tag', () => {
-//     beforeEach(() => {
-//       sut.searchQuery('tag')
-//     })
+  describe('- search in title', () => {
+    beforeEach(() => {
+      sut.searchQuery('title')
+    })
 
-//     it('- should search in tag', () => {
-//       expect(sut.filteredAdvice().length).toEqual(3)
-//     })
-//   })
+    it('- should search in title', () => {
+      expect(sut.filteredAdvice().length).toEqual(1)
+    })
+  })
 
-//   describe('- search in body', () => {
-//     beforeEach(() => {
-//       sut.searchQuery('content')
-//     })
+  describe('- search in parent scenario', () => {
+    beforeEach(() => {
+      sut.searchQuery('ParentScenario3')
+    })
 
-//     it('- should search in body', () => {
-//       expect(sut.filteredAdvice().length).toEqual(1)
-//     })
-//   })
+    it('- should search in parent scenario', () => {
+      expect(sut.filteredAdvice().length).toEqual(1)
+    })
+  })
 
-//   describe('- search in title, tag, body', () => {
-//     beforeEach(() => {
-//       sut.searchQuery('common')
-//     })
+  describe('- search in tag', () => {
+    beforeEach(() => {
+      sut.searchQuery('tag')
+    })
 
-//     it('- should search in title, tag, body', () => {
-//       expect(sut.filteredAdvice().length).toEqual(3)
-//     })
-//   })
-// })
+    it('- should search in tag', () => {
+      expect(sut.filteredAdvice().length).toEqual(3)
+    })
+  })
+
+  describe('- search in body', () => {
+    beforeEach(() => {
+      sut.searchQuery('content')
+    })
+
+    it('- should search in body', () => {
+      expect(sut.filteredAdvice().length).toEqual(1)
+    })
+  })
+
+  describe('- search in title, tag, body', () => {
+    beforeEach(() => {
+      sut.searchQuery('common')
+    })
+
+    it('- should search in title, tag, body', () => {
+      expect(sut.filteredAdvice().length).toEqual(3)
+    })
+  })
+})

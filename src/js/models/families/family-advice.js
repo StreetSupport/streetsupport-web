@@ -1,6 +1,6 @@
 import ko from 'knockout'
 import pushHistory from '../../history'
-import { ParentScenario, Advice, FAQ } from '../../models/families/family-advice-helper';
+import { ParentScenario, Advice, FAQ } from '../../models/families/family-advice-helper'
 
 const api = require('../../get-api-data')
 const browser = require('../../browser')
@@ -29,7 +29,7 @@ function FamilyAdvice () {
     self.isCollapsed(!self.isCollapsed())
   }
 
-  self.deactivateSelectedItems = function() {
+  self.deactivateSelectedItems = function () {
     self.parentScenarios().forEach(element => {
       element.isSelected(false)
     })
@@ -39,10 +39,10 @@ function FamilyAdvice () {
   }
 
   self.pushHistory = function () {
-    let filters = [];
+    let filters = []
     if (self.parentScenarioIdInQuerystring()) {
       filters.push({ qsKey: 'parentScenarioId', getValue: () => self.parentScenarioIdInQuerystring() },
-                    ...[{ qsKey: 'id', getValue: () => self.adviceIdInQuerystring() }] )
+                    ...[{ qsKey: 'id', getValue: () => self.adviceIdInQuerystring() }])
     } else if (self.adviceIdInQuerystring()) {
       filters.push({ qsKey: 'id', getValue: () => self.adviceIdInQuerystring() },
                     ...[{ qsKey: 'parentScenarioId', getValue: () => self.parentScenarioIdInQuerystring() }])
@@ -58,7 +58,6 @@ function FamilyAdvice () {
         self.adviceIdInQuerystring(querystring.parameter('id'))
         self.parentScenarios().filter(x => x.id() === querystring.parameter('parentScenarioId'))[0].changeParentScenario(true)
       }
-      
     } else if (querystring.parameter('parentScenarioId') && !querystring.parameter('id')) {
       self.adviceIdInQuerystring('')
       self.parentScenarios().filter(x => x.id() === querystring.parameter('parentScenarioId'))[0].changeParentScenario(true)
@@ -85,7 +84,7 @@ function FamilyAdvice () {
       .data(`${endpoints.contentPages}?tags=families&type=advice&pageSize=100000&index=0&parentScenarioId=${self.parentScenarioIdInQuerystring()}`)
       .then((result) => {
         self.adviceByParentScenario(result.data.items.map((x) => {
-          return new Advice ({
+          return new Advice({
             id: ko.observable(x.id),
             body: ko.observable(x.body),
             parentScenarioId: ko.observable(x.parentScenarioId),
@@ -96,6 +95,7 @@ function FamilyAdvice () {
             isParentScenario: ko.observable(false)
           }, self)
         }))
+
         if (self.adviceByParentScenario().filter((x) => x.id() === self.adviceIdInQuerystring()).length) {
           if (isBackUrl === true) {
             self.parentScenarios().forEach(element => {
@@ -106,7 +106,7 @@ function FamilyAdvice () {
         } else {
           // If we get wrong id in the url parameters we should clear it from url
           if (!self.currentAdvice() && self.adviceIdInQuerystring()) {
-            self.adviceIdInQuerystring("")
+            self.adviceIdInQuerystring('')
             self.pushHistory()
           }
           self.currentAdvice(self.currentParentScenario())
@@ -126,7 +126,7 @@ function FamilyAdvice () {
             element.isCurrentParentScenario(false)
           })
         }
-        self.currentAdvice(new Advice ({
+        self.currentAdvice(new Advice({
           id: ko.observable(result.data.id),
           title: ko.observable(result.data.title),
           body: ko.observable(result.data.body),
@@ -153,7 +153,7 @@ function FamilyAdvice () {
       .then((result) => {
         self.parentScenarios(result.data
           .map(p => {
-            return new ParentScenario ({
+            return new ParentScenario({
               id: ko.observable(p.id),
               title: ko.observable(htmlEncode.htmlDecode(p.name)),
               body: ko.observable(p.body),
@@ -161,11 +161,16 @@ function FamilyAdvice () {
               tags: ko.observableArray(p.tags),
               isSelected: ko.observable(false),
               isParentScenario: ko.observable(true),
-              isCurrentParentScenario: ko.observable(p.id === self.parentScenarioIdInQuerystring())  
+              isCurrentParentScenario: ko.observable(p.id === self.parentScenarioIdInQuerystring())
             }, self)
           })
         )
+
         self.currentParentScenario(self.parentScenarios().filter((x) => x.id() === self.parentScenarioIdInQuerystring())[0])
+        if (!self.currentParentScenario() && (!self.adviceIdInQuerystring() || self.parentScenarioIdInQuerystring())) {
+          browser.redirect('/500')
+        }
+
         browser.loaded()
         self.getAdvice()
       }, () => {
@@ -178,7 +183,7 @@ function FamilyAdvice () {
     .data(`${endpoints.faqs}?tags=families&pageSize=100000&index=0${self.parentScenarioIdInQuerystring() ? '&parentScenarioId=' + self.parentScenarioIdInQuerystring() : ''}`)
     .then((result) => {
       self.faqs(result.data.items.map((x) => {
-        return new FAQ ({
+        return new FAQ({
           id: ko.observable(x.id),
           body: ko.observable(x.body),
           sortPosition: ko.observable(x.sortPosition),
