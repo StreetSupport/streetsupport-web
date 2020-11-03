@@ -17,7 +17,7 @@
     "name":"ParentScenario3",
     "body":"body parent scenario 3",
     "sortPosition":980,
-    "tags":["families","1unique"],
+    "tags":["families","1unique", "test"],
     "id":"5f69bf51a27c1c3b84fe6449"
   }
 ]

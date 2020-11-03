@@ -60,7 +60,7 @@ function SearchFamilyAdvice () {
     .then((result) => {
       self.advice(result.data.items.map((x) => {
         let parentScenario = self.parentScenarios().filter((y) => y.id() === x.parentScenarioId)[0]
-        return new SearchAdviceModel ({
+        return new SearchAdviceModel({
           id: ko.observable(x.id),
           body: ko.observable(x.body),
           parentScenario: ko.observable(parentScenario),
@@ -70,9 +70,8 @@ function SearchFamilyAdvice () {
           breadcrumbs: ko.observable(`Families > ${parentScenario ? parentScenario.title() + ' > ' : ''}${x.title}`),
           url: ko.observable(`/families/advice?id=${x.id}${parentScenario ? '&parentScenarioId=' + parentScenario.id() : ''}`)
         })
-      }))
+      }).concat(self.parentScenarios()))
 
-      self.advice(self.advice().concat(self.parentScenarios()))
       browser.loaded()
     }, (_) => {
       browser.redirect('/500')
@@ -85,7 +84,7 @@ function SearchFamilyAdvice () {
       .data(`${endpoints.parentScenarios}?tags=families`)
       .then((result) => {
         self.parentScenarios(result.data.map((x) => {
-          return new SearchParentScenarioModel ({
+          return new SearchParentScenarioModel({
             id: ko.observable(x.id),
             body: ko.observable(x.body),
             sortPosition: ko.observable(x.sortPosition),

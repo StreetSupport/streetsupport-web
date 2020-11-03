@@ -69,7 +69,6 @@ export class Advice extends BaseAdvice {
     this.isSelected(true)
     this.container.currentAdvice(this)
     this.container.adviceIdInQuerystring(this.container.currentAdvice().id())
-    
     if (isBackUrl !== true) {
       this.container.pushHistory()
     }
