@@ -13,7 +13,7 @@ export default class LocalCampaigns {
     const locationCampaigns = [
       { key: 'isWiganRealChangeTemplate', locationKey: 'wigan-and-leigh' },
       { key: 'isRochdaleRealChangeTemplate', locationKey: 'rochdale' },
-      { key: 'isBournemouthTemplate', locationKey: 'bournemouth' },
+      { key: 'isBournemouthTemplate', locationKey: 'bcp' },
       { key: 'isDefaultTemplate', locationKey: 'leeds' },
       { key: 'isManchester', locationKey: 'manchester' }
     ]

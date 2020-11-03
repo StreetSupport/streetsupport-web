@@ -75,7 +75,7 @@
   }
 }
 
-.location--bournemouth .location-header {
+.location--bcp .location-header {
   @include mq($from: m) {
     &:before {
       background-size: 842px;
@@ -105,7 +105,7 @@
   }
 }
 
-.location--cambridge .location-header {
+.location--cambridgeshire .location-header {
   @include mq($from: m) {
     &:before {
       background-size: 644px;
