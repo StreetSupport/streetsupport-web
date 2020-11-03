@@ -166,7 +166,7 @@ class NeedsListing {
     const qsParts = {
       'latitude': this.proximitySearch.latitude,
       'longitude': this.proximitySearch.longitude,
-      'pageSize': 21,
+      'pageSize': 25,
       'range': this.proximitySearch.range()
     }
     const qs = Object.keys(qsParts)
