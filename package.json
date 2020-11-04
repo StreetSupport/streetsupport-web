@@ -76,7 +76,6 @@
     "delegate": "^3.2.0",
     "fastclick": "1.0.6",
     "geolib": "2.0.22",
-    "gulp-cli": "^2.3.0",
     "hogan.js": "3.0.2",
     "holderjs": "2.9.4",
     "htmlencode": "0.0.4",
