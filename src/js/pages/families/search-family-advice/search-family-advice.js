@@ -229,4 +229,4 @@ function SearchFamilyAdvice () {
   self.getParentScenarios()
 }
 
-module.exports = SearchFamilyAdvice
+module.exports = { SearchFamilyAdvice }

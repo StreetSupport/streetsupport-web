@@ -6,12 +6,12 @@ const browser = require('../../browser')
 const endpoints = require('../../api')
 const querystring = require('../../get-url-parameter')
 const htmlEncode = require('htmlencode')
-const SearchFamilyAdvice = require('../../pages/families/search-family-advice/search-family-advice')
+const SearchFamilyAdviceModule = require('../../pages/families/search-family-advice/search-family-advice')
 
 function FamilyAdviceResult () {
   const self = this
   self.searchQueryInQuerystring = ko.observable(querystring.parameter('searchQuery'))
-  self.searchFamilyAdvice = new SearchFamilyAdvice()
+  self.searchFamilyAdvice = new SearchFamilyAdviceModule.SearchFamilyAdvice()
   self.faqs = ko.observableArray([])
   self.hasFAQs = ko.computed(() => self.faqs().length > 0, this)
   self.currentParentScenario = ko.observable()
