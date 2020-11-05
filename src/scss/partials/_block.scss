@@ -252,6 +252,18 @@
           float: right;
           text-align: right;
       }
+
+      & > .container-families__content:nth-child(1) {
+        @include span(6 of $max-grid-column);
+        @include first();
+      }
+
+      & > .container-families__content:nth-child(2) {
+          @include span(5 of $max-grid-column);
+          @include first();
+          float: right;
+          text-align: left;
+      }
     }
   }
 }

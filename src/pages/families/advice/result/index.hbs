@@ -12,16 +12,14 @@ page: families-advice-result
 <div class="block block--breadcrumbs">
   <div class="container">
     <ol class="breadcrumbs__list">
-      <li class="breadcrumbs__item">Advice</li>
       <li class="breadcrumbs__item">
-        <a href="/families">Families</a>
+        <a href="/">Home</a>
       </li>
       <li class="breadcrumbs__item">
-        <a href="/">Advice</a>
+        <a href="/find-help/advice">Advice</a>
       </li>
       <!-- ko if: searchQueryInQuerystring -->
-      <li class="breadcrumbs__item">
-        <a href="/" data-bind="text: 'Search results: ' + searchQueryInQuerystring().trim()"></a>
+      <li class="breadcrumbs__item" data-bind="text: 'Search results: ' + searchQueryInQuerystring().trim()">
       </li>
       <!-- /ko -->
     </ol>
