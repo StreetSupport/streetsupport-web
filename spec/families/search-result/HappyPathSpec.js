@@ -7,16 +7,16 @@ const endpoints = require('../../../src/js/api')
 const api = require('../../../src/js/get-api-data')
 const browser = require('../../../src/js/browser')
 const adviceListByParentScenario = require('./advice-list-by-parent-scenario.json')
-const faqs = require('../family-advice/faqs.json')
+const faqs = require('../families-advice/faqs.json')
 const parentScenariosList = require('../search-advice/parent-scenarios-list.json')
 const querystring = require('../../../src/js/get-url-parameter')
-delete require.cache[require.resolve('../../../src/js/pages/families/search-family-advice/search-family-advice')]
-const SearchFamilyAdviceModule = require('../../../src/js/pages/families/search-family-advice/search-family-advice')
-sinon.stub(SearchFamilyAdviceModule, 'SearchFamilyAdvice').returns({
+delete require.cache[require.resolve('../../../src/js/pages/families/search-families-advice/search-families-advice')]
+const SearchFamiliesAdviceModule = require('../../../src/js/pages/families/search-families-advice/search-families-advice')
+sinon.stub(SearchFamiliesAdviceModule, 'SearchFamiliesAdvice').returns({
   advice: ko.observableArray([])
 })
 
-const Model = require('../../../src/js/models/families/family-advice-result')
+const Model = require('../../../src/js/models/families/families-advice-result')
 
 describe('Get search results by search phrase', () => {
   let ajaxGetStub,

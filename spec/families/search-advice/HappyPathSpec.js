@@ -4,8 +4,8 @@ import sinon from 'sinon'
 
 const api = require('../../../src/js/get-api-data')
 const browser = require('../../../src/js/browser')
-delete require.cache[require.resolve('../../../src/js/pages/families/search-family-advice/search-family-advice')]
-const SearchFamilyAdviceModule = require('../../../src/js/pages/families/search-family-advice/search-family-advice')
+delete require.cache[require.resolve('../../../src/js/pages/families/search-families-advice/search-families-advice')]
+const SearchFamiliesAdviceModule = require('../../../src/js/pages/families/search-families-advice/search-families-advice')
 const adviceList = require('./advice-list')
 const parentScenariosList = require('./parent-scenarios-list')
 const querystring = require('../../../src/js/get-url-parameter')
@@ -40,7 +40,7 @@ describe('Search Families Advice', () => {
 
     sinon.stub(querystring, 'parameter')
 
-    sut = new SearchFamilyAdviceModule.SearchFamilyAdvice()
+    sut = new SearchFamiliesAdviceModule.SearchFamiliesAdvice()
   })
 
   afterEach(() => {

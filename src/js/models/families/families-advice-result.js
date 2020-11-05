@@ -1,17 +1,17 @@
 import ko from 'knockout'
-import { ParentScenario, Advice, FAQ } from '../../models/families/family-advice-helper'
+import { ParentScenario, Advice, FAQ } from '../../models/families/families-advice-helper'
 
 const api = require('../../get-api-data')
 const browser = require('../../browser')
 const endpoints = require('../../api')
 const querystring = require('../../get-url-parameter')
 const htmlEncode = require('htmlencode')
-const SearchFamilyAdviceModule = require('../../pages/families/search-family-advice/search-family-advice')
+const SearchFamiliesAdviceModule = require('../../pages/families/search-families-advice/search-families-advice')
 
 function FamilyAdviceResult () {
   const self = this
   self.searchQueryInQuerystring = ko.observable(querystring.parameter('searchQuery'))
-  self.searchFamilyAdvice = new SearchFamilyAdviceModule.SearchFamilyAdvice()
+  self.searchFamiliesAdvice = new SearchFamiliesAdviceModule.SearchFamiliesAdvice()
   self.faqs = ko.observableArray([])
   self.hasFAQs = ko.computed(() => self.faqs().length > 0, this)
   self.currentParentScenario = ko.observable()
@@ -27,13 +27,13 @@ function FamilyAdviceResult () {
     self.isCollapsed(!self.isCollapsed())
   }
 
-  self.searchFamilyAdvice.advice.subscribe(() => {
+  self.searchFamiliesAdvice.advice.subscribe(() => {
     if (!self.isInitedResults()) {
       self.isInitedResults(true)
-      self.searchFamilyAdvice.searchQuery(htmlEncode.htmlDecode(self.searchQueryInQuerystring().trim()))
-      self.results(self.searchFamilyAdvice.filteredAdvice())
-      self.searchFamilyAdvice.searchQuery('')
-      self.searchFamilyAdvice.showFilteredAdvice(false)
+      self.searchFamiliesAdvice.searchQuery(htmlEncode.htmlDecode(self.searchQueryInQuerystring().trim()))
+      self.results(self.searchFamiliesAdvice.filteredAdvice())
+      self.searchFamiliesAdvice.searchQuery('')
+      self.searchFamiliesAdvice.showFilteredAdvice(false)
     }
   })
 

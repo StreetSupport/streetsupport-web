@@ -1,20 +1,20 @@
 import ko from 'knockout'
 import pushHistory from '../../history'
-import { ParentScenario, Advice, FAQ } from '../../models/families/family-advice-helper'
+import { ParentScenario, Advice, FAQ } from './families-advice-helper'
 
 const api = require('../../get-api-data')
 const browser = require('../../browser')
 const endpoints = require('../../api')
 const querystring = require('../../get-url-parameter')
 const htmlEncode = require('htmlencode')
-const SearchFamilyAdviceModule = require('../../pages/families/search-family-advice/search-family-advice')
+const SearchFamiliesAdviceModule = require('../../pages/families/search-families-advice/search-families-advice')
 
 function FamilyAdvice () {
   const self = this
   self.adviceIdInQuerystring = ko.observable(querystring.parameter('id'))
   self.parentScenarioIdInQuerystring = ko.observable(querystring.parameter('parentScenarioId'))
 
-  self.searchFamilyAdvice = new SearchFamilyAdviceModule.SearchFamilyAdvice()
+  self.searchFamiliesAdvice = new SearchFamiliesAdviceModule.SearchFamiliesAdvice()
   self.currentAdvice = ko.observable()
   self.currentParentScenario = ko.observable()
   self.parentScenarios = ko.observableArray([])

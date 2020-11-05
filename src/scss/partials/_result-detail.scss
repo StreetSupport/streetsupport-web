@@ -251,3 +251,44 @@
     }
   }
 }
+
+.container-families__content-result {
+  .accordion__header {
+
+    @include mq($until: m) {
+      height: auto;
+      @include span(12 of $max-grid-column);
+      @include first();
+    }
+
+    @include mq($until: xxl) {
+      height: 130px;
+    }
+
+    border-radius: 15px; 
+    margin-bottom: 15px; 
+    margin-right: 15px !important;
+    padding: 15px 20px 15px 20px; 
+    box-shadow: 5px 5px 5px rgba(90,73,127, 0.4);
+    height: 120px;
+
+    @include span(5 of $max-grid-column);
+    @include first();
+
+    &.full-width {
+      height: auto;
+      @include span(10 of $max-grid-column);
+      @include first();
+
+      @include mq($until: m) {
+        @include span(12 of $max-grid-column);
+        @include first();
+      }
+    }
+
+    .accordion--families__short-description {
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+  }
+}

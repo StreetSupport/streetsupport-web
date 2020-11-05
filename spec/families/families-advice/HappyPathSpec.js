@@ -10,16 +10,16 @@ const adviceList = require('../search-advice/advice-list.json')
 const faqs = require('./faqs.json')
 const parentScenariosList = require('../search-advice/parent-scenarios-list.json')
 const querystring = require('../../../src/js/get-url-parameter')
-delete require.cache[require.resolve('../../../src/js/pages/families/search-family-advice/search-family-advice')]
-const SearchFamilyAdviceModule = require('../../../src/js/pages/families/search-family-advice/search-family-advice')
-sinon.stub(SearchFamilyAdviceModule, 'SearchFamilyAdvice').returns({
+delete require.cache[require.resolve('../../../src/js/pages/families/search-families-advice/search-families-advice')]
+const SearchFamiliesAdviceModule = require('../../../src/js/pages/families/search-families-advice/search-families-advice')
+sinon.stub(SearchFamiliesAdviceModule, 'SearchFamiliesAdvice').returns({
   searchQuery: () => {},
   advice: ko.observableArray([]),
   filteredAdvice: ko.observableArray([])
 })
-const Model = require('../../../src/js/models/families/family-advice')
+const Model = require('../../../src/js/models/families/families-advice')
 
-describe('Get Family Advice by advice id', () => {
+describe('Get Family Advice by advice id and parent scenario id', () => {
   let ajaxGetStub,
     browserPushHistoryStub,
     queryStringStub,
@@ -75,6 +75,10 @@ describe('Get Family Advice by advice id', () => {
     queryStringStub
       .withArgs('id')
       .returns('5f6b28d3a27c1d88789591cf')
+      
+      queryStringStub
+      .withArgs('parentScenarioId')
+      .returns('5f69bf51a27c1c3b84fe6447')
 
       browserPushHistoryStub = sinon.stub(browser, 'pushHistory')
       sinon.stub(browser, 'setOnHistoryPop')
@@ -91,8 +95,8 @@ describe('Get Family Advice by advice id', () => {
     browser.setOnHistoryPop.restore()
   })
 
-  it('- should not have parent scenario id in query string', () => {
-    expect(sut.parentScenarioIdInQuerystring()).toEqual('')
+  it('- should have parent scenario id in query string', () => {
+    expect(sut.parentScenarioIdInQuerystring()).toEqual('5f69bf51a27c1c3b84fe6447')
   })
 
   it('- should have advice id in query string', () => {
@@ -100,39 +104,68 @@ describe('Get Family Advice by advice id', () => {
   })
 
   it('- should retrieve items from API', () => {
-    expect(ajaxGetStub.getCall(2).args[0]).toEqual(endpoints.getFullUrl('/v1/content-pages?tags=families&type=advice&pageSize=100000&index=0'))
+    expect(ajaxGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v1/parent-scenarios?tags=families'))
+  })
+
+  it('- should retrieve items from API', () => {
+    expect(ajaxGetStub.getCall(1).args[0]).toEqual(endpoints.getFullUrl('/v1/faqs/?tags=families&pageSize=100000&index=0&parentScenarioId=5f69bf51a27c1c3b84fe6447'))
+  })
+
+  it('- should retrieve items from API', () => {
+    expect(ajaxGetStub.getCall(2).args[0]).toEqual(endpoints.getFullUrl('/v1/content-pages?tags=families&type=advice&pageSize=100000&index=0&parentScenarioId=5f69bf51a27c1c3b84fe6447'))
   })
 
   it('- should return and set advice', () => {
     expect(sut.currentAdvice().id()).toEqual('5f6b28d3a27c1d88789591cf')
   })
 
-  it('- should not return and set current parent scenario', () => {
-    expect(sut.currentParentScenario()).toEqual(undefined)
+  it('- should return and set current parent scenario', () => {
+    expect(sut.currentParentScenario().id()).toEqual('5f69bf51a27c1c3b84fe6447')
   })
 
   it('- should have advice list', () => {
-    expect(sut.hasAdvice()).toEqual(false)
+    expect(sut.hasAdvice()).toEqual(true)
   })
 
   it('- should return advice by parent scenario', () => {
-    expect(sut.adviceByParentScenario().length).toEqual(0)
+    expect(sut.adviceByParentScenario().length).toEqual(5)
   })
 
   it('- should have parent scenarios', () => {
-    expect(sut.hasParentScenarios()).toEqual(false)
+    expect(sut.hasParentScenarios()).toEqual(true)
   })
 
   it('- should return parent scenarios', () => {
     expect(sut.parentScenarios().length).toEqual(3)
   })
-
+  
   it('- should have faqs', () => {
     expect(sut.hasFAQs()).toEqual(true)
   })
 
   it('- should return faqs', () => {
     expect(sut.faqs().length).toEqual(2)
+  })
+
+  describe('- select another advice in filter', () => {
+    let id
+    beforeEach(() => {
+        id = sut.adviceByParentScenario().filter(x => x.id() != sut.adviceIdInQuerystring())[0].id()
+        sut.adviceByParentScenario().filter(x => x.id() != sut.adviceIdInQuerystring())[0].changeAdvice()
+    })
+
+    it('- should set id in query string', () => {
+      expect(sut.adviceIdInQuerystring()).toEqual(id)
+    })
+
+    it('- should change current advice', () => {
+        expect(sut.currentAdvice().id()).toEqual(id)
+    })
+
+    it('- should set advice id in querystring', () => {
+        const expected = browserPushHistoryStub.withArgs({ parentScenarioId: '5f69bf51a27c1c3b84fe6447', id: id }, '', `?parentScenarioId=5f69bf51a27c1c3b84fe6447&id=${id}`).calledOnce
+        expect(expected).toBeTruthy()
+    })
   })
 
   describe('- select another parent scenario in filter', () => {
@@ -163,25 +196,25 @@ describe('Get Family Advice by advice id', () => {
         expect(expected).toBeTruthy()
     })
 
-    describe('- select another advice in filter', () => {
-      let id
-      beforeEach(() => {
-          id = sut.adviceByParentScenario().filter(x => x.id() != sut.adviceIdInQuerystring())[0].id()
-          sut.adviceByParentScenario().filter(x => x.id() != sut.adviceIdInQuerystring())[0].changeAdvice()
+    describe('- select another advice in filter after changing parent scenario', () => {
+        let id
+        beforeEach(() => {
+            id = sut.adviceByParentScenario().filter(x => x.id() != sut.adviceIdInQuerystring())[0].id()
+            sut.adviceByParentScenario().filter(x => x.id() != sut.adviceIdInQuerystring())[0].changeAdvice()
+        })
+    
+        it('- should set id in query string', () => {
+          expect(sut.adviceIdInQuerystring()).toEqual(id)
+        })
+    
+        it('- should change current advice', () => {
+            expect(sut.currentAdvice().id()).toEqual(id)
+        })
+    
+        it('- should set advice id in querystring', () => {
+            const expected = browserPushHistoryStub.withArgs({ parentScenarioId: '5f69bf51a27c1c3b84fe6448', id: id }, '', `?parentScenarioId=5f69bf51a27c1c3b84fe6448&id=${id}`).calledOnce
+            expect(expected).toBeTruthy()
+        })
       })
-
-      it('- should set id in query string', () => {
-        expect(sut.adviceIdInQuerystring()).toEqual(id)
-      })
-
-      it('- should change current advice', () => {
-          expect(sut.currentAdvice().id()).toEqual(id)
-      })
-
-      it('- should set advice id in querystring', () => {
-          const expected = browserPushHistoryStub.withArgs({ parentScenarioId: '5f69bf51a27c1c3b84fe6447', id: id }, '', `?parentScenarioId=5f69bf51a27c1c3b84fe6447&id=${id}`).calledOnce
-          expect(expected).toBeTruthy()
-      })
-    })
   })
 })

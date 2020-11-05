@@ -8,18 +8,18 @@ const api = require('../../../src/js/get-api-data')
 const browser = require('../../../src/js/browser')
 const adviceList = require('../search-advice/advice-list.json')
 const faqs = require('./faqs.json')
-const parentScenariosList = require('./../search-advice/parent-scenarios-list.json')
+const parentScenariosList = require('../search-advice/parent-scenarios-list.json')
 const querystring = require('../../../src/js/get-url-parameter')
-delete require.cache[require.resolve('../../../src/js/pages/families/search-family-advice/search-family-advice')]
-const SearchFamilyAdviceModule = require('../../../src/js/pages/families/search-family-advice/search-family-advice')
-sinon.stub(SearchFamilyAdviceModule, 'SearchFamilyAdvice').returns({
+delete require.cache[require.resolve('../../../src/js/pages/families/search-families-advice/search-families-advice')]
+const SearchFamiliesAdviceModule = require('../../../src/js/pages/families/search-families-advice/search-families-advice')
+sinon.stub(SearchFamiliesAdviceModule, 'SearchFamiliesAdvice').returns({
   searchQuery: () => {},
   advice: ko.observableArray([]),
   filteredAdvice: ko.observableArray([])
 })
-const Model = require('../../../src/js/models/families/family-advice')
+const Model = require('../../../src/js/models/families/families-advice')
 
-describe('Get Family Advice by advice id and parent scenario id', () => {
+describe('Get Family Advice by wrong advice id and parent scenario id', () => {
   let ajaxGetStub,
     browserPushHistoryStub,
     queryStringStub,
@@ -74,7 +74,7 @@ describe('Get Family Advice by advice id and parent scenario id', () => {
     queryStringStub = sinon.stub(querystring, 'parameter')
     queryStringStub
       .withArgs('id')
-      .returns('5f6b28d3a27c1d88789591cf')
+      .returns('wrong-id')
       
       queryStringStub
       .withArgs('parentScenarioId')
@@ -100,15 +100,7 @@ describe('Get Family Advice by advice id and parent scenario id', () => {
   })
 
   it('- should have advice id in query string', () => {
-    expect(sut.adviceIdInQuerystring()).toEqual('5f6b28d3a27c1d88789591cf')
-  })
-
-  it('- should retrieve items from API', () => {
-    expect(ajaxGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v1/parent-scenarios?tags=families'))
-  })
-
-  it('- should retrieve items from API', () => {
-    expect(ajaxGetStub.getCall(1).args[0]).toEqual(endpoints.getFullUrl('/v1/faqs/?tags=families&pageSize=100000&index=0&parentScenarioId=5f69bf51a27c1c3b84fe6447'))
+    expect(sut.adviceIdInQuerystring()).toEqual('')
   })
 
   it('- should retrieve items from API', () => {
@@ -116,7 +108,7 @@ describe('Get Family Advice by advice id and parent scenario id', () => {
   })
 
   it('- should return and set advice', () => {
-    expect(sut.currentAdvice().id()).toEqual('5f6b28d3a27c1d88789591cf')
+    expect(sut.currentAdvice().id()).toEqual('5f69bf51a27c1c3b84fe6447')
   })
 
   it('- should return and set current parent scenario', () => {
