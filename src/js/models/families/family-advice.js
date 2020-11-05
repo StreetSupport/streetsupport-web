@@ -1,64 +1,204 @@
 import ko from 'knockout'
+import pushHistory from '../../history'
+import { ParentScenario, Advice, FAQ } from '../../models/families/family-advice-helper'
 
 const api = require('../../get-api-data')
 const browser = require('../../browser')
 const endpoints = require('../../api')
 const querystring = require('../../get-url-parameter')
-const location = require('../../location/locationSelector')
+const htmlEncode = require('htmlencode')
+const SearchFamilyAdviceModule = require('../../pages/families/search-family-advice/search-family-advice')
 
 function FamilyAdvice () {
   const self = this
-  const currentLocation = location.getCurrentHubFromCookies()
-  const adviceIdInQuerystring = querystring.parameter('id')
-  const parentScenarioKeyInQuerystring = querystring.parameter('parentScenarioKey')
-  self.advice = ko.observable({})
-  self.parentScenarios = ko.observableArray()
-  self.adviceByParentScenario = ko.observableArray()
-  self.hasParentScenarios = ko.computed(() => self.parentScenarios().length > 0, this)
+  self.adviceIdInQuerystring = ko.observable(querystring.parameter('id'))
+  self.parentScenarioIdInQuerystring = ko.observable(querystring.parameter('parentScenarioId'))
 
-  self.getAdvice = function () {
+  self.searchFamilyAdvice = new SearchFamilyAdviceModule.SearchFamilyAdvice()
+  self.currentAdvice = ko.observable()
+  self.currentParentScenario = ko.observable()
+  self.parentScenarios = ko.observableArray([])
+  self.adviceByParentScenario = ko.observableArray([])
+  self.hasParentScenarios = ko.computed(() => self.parentScenarios().length > 0, this)
+  self.hasAdvice = ko.computed(() => self.adviceByParentScenario().length > 0, this)
+  self.faqs = ko.observableArray([])
+  self.hasFAQs = ko.computed(() => self.faqs().length > 0, this)
+  self.isCollapsed = ko.observable(false)
+
+  self.collapseMobileFilters = function () {
+    self.isCollapsed(!self.isCollapsed())
+  }
+
+  self.deactivateSelectedItems = function () {
+    self.parentScenarios().forEach(element => {
+      element.isSelected(false)
+    })
+    self.adviceByParentScenario().forEach(element => {
+      element.isSelected(false)
+    })
+  }
+
+  self.pushHistory = function () {
+    let filters = []
+    if (self.parentScenarioIdInQuerystring()) {
+      filters.push({ qsKey: 'parentScenarioId', getValue: () => self.parentScenarioIdInQuerystring() },
+                    ...[{ qsKey: 'id', getValue: () => self.adviceIdInQuerystring() }])
+    } else if (self.adviceIdInQuerystring()) {
+      filters.push({ qsKey: 'id', getValue: () => self.adviceIdInQuerystring() },
+                    ...[{ qsKey: 'parentScenarioId', getValue: () => self.parentScenarioIdInQuerystring() }])
+    }
+    pushHistory(filters)
+  }
+
+  self.onBrowserHistoryBack = function (thisDoobrey, e) {
+    if (querystring.parameter('parentScenarioId') && querystring.parameter('id')) {
+      if (querystring.parameter('parentScenarioId') === self.currentParentScenario().id()) {
+        self.adviceByParentScenario().filter(x => x.id() === querystring.parameter('id'))[0].changeAdvice(true)
+      } else {
+        self.adviceIdInQuerystring(querystring.parameter('id'))
+        self.parentScenarios().filter(x => x.id() === querystring.parameter('parentScenarioId'))[0].changeParentScenario(true)
+      }
+    } else if (querystring.parameter('parentScenarioId') && !querystring.parameter('id')) {
+      self.adviceIdInQuerystring('')
+      self.parentScenarios().filter(x => x.id() === querystring.parameter('parentScenarioId'))[0].changeParentScenario(true)
+    } else if (querystring.parameter('id') && !querystring.parameter('parentScenarioId')) {
+      self.adviceIdInQuerystring(querystring.parameter('id'))
+      self.parentScenarioIdInQuerystring('')
+      self.getAdvice(true)
+    }
+  }
+
+  browser.setOnHistoryPop((e) => {
+    self.onBrowserHistoryBack()
+  })
+
+  self.currentParentScenario.subscribe(() => {
+    self.getFAQs()
+  })
+
+  self.getAdvice = function (isBackUrl) {
     browser.loading()
-    if (parentScenarioKeyInQuerystring) {
+    if (self.parentScenarioIdInQuerystring()) {
+      self.adviceByParentScenario([])
       api
-      .data(`${endpoints.faqs}?location=${currentLocation.id}&tags=families&pageSize=100000&index=0&parentScenarioKey=${parentScenarioKeyInQuerystring}`)
+      .data(`${endpoints.contentPages}?tags=families&type=advice&pageSize=100000&index=0&parentScenarioId=${self.parentScenarioIdInQuerystring()}`)
       .then((result) => {
         self.adviceByParentScenario(result.data.items.map((x) => {
-          return {
+          return new Advice({
             id: ko.observable(x.id),
             body: ko.observable(x.body),
-            locationKey: ko.observable(x.locationKey),
-            parentScenario: ko.observable(x.parentScenario),
+            parentScenarioId: ko.observable(x.parentScenarioId),
             sortPosition: ko.observable(x.sortPosition),
             tags: ko.observableArray(x.tags),
             title: ko.observable(x.title),
-            breadcrumbs: ko.observable(`Families > ${x.parentScenario ? x.parentScenario.name + ' > ' : ''}${x.title}`),
-            isSelected: ko.observable(x.id === adviceIdInQuerystring)}
+            isSelected: ko.observable(x.id === self.adviceIdInQuerystring()),
+            isParentScenario: ko.observable(false)
+          }, self)
         }))
-        self.advice(self.adviceByParentScenario().filter((x) => x.id() === adviceIdInQuerystring)[0])
+
+        if (self.adviceByParentScenario().filter((x) => x.id() === self.adviceIdInQuerystring()).length) {
+          if (isBackUrl === true) {
+            self.parentScenarios().forEach(element => {
+              element.isSelected(false)
+            })
+          }
+          self.currentAdvice(self.adviceByParentScenario().filter((x) => x.id() === self.adviceIdInQuerystring())[0])
+        } else {
+          // If we get wrong id in the url parameters we should clear it from url
+          if (!self.currentAdvice() && self.adviceIdInQuerystring()) {
+            self.adviceIdInQuerystring('')
+            self.pushHistory()
+          }
+          self.currentAdvice(self.currentParentScenario())
+          self.parentScenarios().filter((x) => x.id() === self.currentParentScenario().id())[0].isSelected(true)
+        }
+
+        browser.loaded()
+      }, (_) => {
+        browser.redirect('/500')
+      })
+    } else if (self.adviceIdInQuerystring()) {
+      api
+      .data(`${endpoints.contentPages}/${self.adviceIdInQuerystring()}`).then((result) => {
+        if (isBackUrl === true) {
+          self.deactivateSelectedItems()
+          self.parentScenarios().forEach(element => {
+            element.isCurrentParentScenario(false)
+          })
+        }
+        self.currentAdvice(new Advice({
+          id: ko.observable(result.data.id),
+          title: ko.observable(result.data.title),
+          body: ko.observable(result.data.body),
+          sortPosition: ko.observable(result.data.sortPosition),
+          tags: ko.observableArray(result.data.tags),
+          isSelected: ko.observable(true),
+          isParentScenario: ko.observable(false)
+        }, self))
+
+        self.getFAQs()
         browser.loaded()
       }, (_) => {
         browser.redirect('/500')
       })
     } else {
-      api
-      .data(`${endpoints.faqs}/${adviceIdInQuerystring}`).then((result) => {
-        self.advice({
-          id: ko.observable(result.data.id),
-          body: ko.observable(result.data.body),
-          locationKey: ko.observable(result.data.locationKey),
-          sortPosition: ko.observable(result.data.sortPosition),
-          tags: ko.observableArray(result.data.tags),
-          title: ko.observable(result.data.title),
-          breadcrumbs: ko.observable(`Families > ${result.data.parentScenario ? result.data.parentScenario.name + ' > ' : ''}${result.data.title}`)
-        })
-        browser.loaded()
-      }, (_) => {
-        browser.redirect('/500')
-      })
+      browser.redirect('/500')
     }
   }
 
-  self.getAdvice()
+  self.getParentScenarios = () => {
+    browser.loading()
+    api
+      .data(`${endpoints.parentScenarios}?tags=families`)
+      .then((result) => {
+        self.parentScenarios(result.data
+          .map(p => {
+            return new ParentScenario({
+              id: ko.observable(p.id),
+              title: ko.observable(htmlEncode.htmlDecode(p.name)),
+              body: ko.observable(p.body),
+              sortPosition: ko.observable(p.sortPosition),
+              tags: ko.observableArray(p.tags),
+              isSelected: ko.observable(false),
+              isParentScenario: ko.observable(true),
+              isCurrentParentScenario: ko.observable(p.id === self.parentScenarioIdInQuerystring())
+            }, self)
+          })
+        )
+
+        self.currentParentScenario(self.parentScenarios().filter((x) => x.id() === self.parentScenarioIdInQuerystring())[0])
+        if (!self.currentParentScenario() && (!self.adviceIdInQuerystring() || self.parentScenarioIdInQuerystring())) {
+          browser.redirect('/500')
+        }
+
+        browser.loaded()
+        self.getAdvice()
+      }, () => {
+        browser.redirect('/500')
+      })
+  }
+
+  self.getFAQs = function () {
+    api
+    .data(`${endpoints.faqs}?tags=families&pageSize=100000&index=0${self.parentScenarioIdInQuerystring() ? '&parentScenarioId=' + self.parentScenarioIdInQuerystring() : ''}`)
+    .then((result) => {
+      self.faqs(result.data.items.map((x) => {
+        return new FAQ({
+          id: ko.observable(x.id),
+          body: ko.observable(x.body),
+          sortPosition: ko.observable(x.sortPosition),
+          tags: ko.observableArray(x.tags),
+          title: ko.observable(x.title),
+          isSelected: ko.observable(false),
+          parentScenarioId: ko.observable(x.parentScenarioId)
+        }, self)
+      }))
+    }, (_) => {
+      browser.redirect('/500')
+    })
+  }
+
+  self.getParentScenarios()
 }
 
 module.exports = FamilyAdvice
