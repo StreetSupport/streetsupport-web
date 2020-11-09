@@ -40,6 +40,7 @@ module.exports = {
     'find-help-by-client-group-map': path.join(__dirname, '/src/js/pages/find-help/by-client-group/by-location/app'),
     'find-help-by-client-group-timetable': path.join(__dirname, '/src/js/pages/find-help/by-client-group/by-day/app'),
     'families-landing-page': path.join(__dirname, '/src/js/pages/families/app'),
+    'families-guides': path.join(__dirname, '/src/js/pages/families/guides/app'),
     'families-advice-result': path.join(__dirname, '/src/js/pages/families/advice/result/app'),
     'families-advice': path.join(__dirname, '/src/js/pages/families/advice/app'),
     'give-help': path.join(__dirname, '/src/js/pages/give-help/index/app'),

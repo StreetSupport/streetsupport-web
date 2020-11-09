@@ -48,14 +48,14 @@ function FamilyAdviceResult () {
       self.faqs(result.data.items.map((x) => {
         return new FAQ({
           id: ko.observable(x.id),
-          body: ko.observable(x.body),
+          body: ko.observable(htmlEncode.htmlDecode(x.body)),
           sortPosition: ko.observable(x.sortPosition),
           tags: ko.observableArray(x.tags),
-          title: ko.observable(x.title),
+          title: ko.observable(htmlEncode.htmlDecode(x.title)),
           isSelected: ko.observable(false),
           parentScenarioId: ko.observable(x.parentScenarioId)
         }, self)
-      }))
+      }).sort((a, b) => { return b.sortPosition() - a.sortPosition() }))
     }, (_) => {
       browser.redirect('/500')
     })

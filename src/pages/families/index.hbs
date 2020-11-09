@@ -60,7 +60,14 @@ page: families
     </div>
     
     <div class="container-families__content">      
-      Guides
+      <!-- ko if: hasGuides -->
+      <p class="h2 container-families__header-guides">Guides for organisations</p>   
+      <ul class="container-families__content--guides" data-bind="foreach: guides">
+        <li class="container-families__content--guides__item">
+          <a class="h3" data-bind="text: title, attr: { 'href': '/families/guides?id=' + id() }"></a>
+        </li>
+      </ul>
+      <!-- /ko -->
     </div>
 
   </div>

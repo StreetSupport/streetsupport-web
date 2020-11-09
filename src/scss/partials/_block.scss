@@ -286,6 +286,33 @@
       }
     }
   }
+
+  .container-families__content {
+    &--guides {
+      list-style: none;
+      padding-left: 3px;
+
+      &__item {
+        color: #337ab7;
+        background-image: url(/assets/img/info-icon.png);
+        background-position: 0px 2px;
+        background-repeat: no-repeat;
+        padding-left: 25px;
+        margin-bottom: 15px;
+
+        a {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  @include mq($until: m) {
+
+    .container-families__header-guides {
+      margin-top: 20px;
+    }
+  }
 }
 
 .block-advice {

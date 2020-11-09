@@ -91,3 +91,21 @@ export class FAQ {
     this.isSelected(!this.isSelected())
   }
 }
+
+export class Guide extends BaseAdvice {
+  constructor (data, container) {
+    super(data, container)
+    this.isExpanded = data.isExpanded
+  }
+
+  toggle () {
+    this.container.guides().filter(x => x.id() !== this.id()).forEach(x => x.isSelected(false))
+    this.isSelected(!this.isSelected())
+    this.container.guides().forEach(x => x.isExpanded(false))
+  }
+
+  expand () {
+    this.container.guides().filter(x => x.id() !== this.id()).forEach(x => x.isExpanded(false))
+    this.isExpanded(!this.isExpanded())
+  }
+}
