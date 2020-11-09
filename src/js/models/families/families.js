@@ -22,7 +22,7 @@ function Families () {
   self.hasGuides = ko.computed(() => self.guides().length > 0, this)
 
   self.redirectToSupport = function () {
-    browser.redirect('https://streetsupport.net/')
+    browser.redirect('https://england.shelter.org.uk/housing_advice/homelessness/rules/emergency_housing_if_you_are_homeless')
   }
 
   self.redirectToAdvice = function (advice) {
@@ -119,14 +119,13 @@ function Families () {
             }, self)
           }).sort((a, b) => { return b.sortPosition() - a.sortPosition() })
         )
-        self.parentScenarios(self.parentScenarios().concat(self.parentScenarios()))
+
         self.currentParentScenario(self.parentScenarios().filter((x) => x.id() === self.parentScenarioIdInQuerystring())[0])
         if (self.currentParentScenario()) {         
           self.getAdvice()
         } else if (!self.currentParentScenario() && self.parentScenarioIdInQuerystring()) {
           browser.redirect('/500')
         }
-
         browser.loaded()
       }, () => {
         browser.redirect('/500')

@@ -107,11 +107,11 @@ describe('Get Family Advice by advice id and parent scenario id', () => {
     expect(ajaxGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v1/parent-scenarios?tags=families'))
   })
 
-  it('- should retrieve items from API', () => {
+  it('- should retrieve parent scenarios from API', () => {
     expect(ajaxGetStub.getCall(1).args[0]).toEqual(endpoints.getFullUrl('/v1/faqs/?tags=families&pageSize=100000&index=0&parentScenarioId=5f69bf51a27c1c3b84fe6447'))
   })
 
-  it('- should retrieve items from API', () => {
+  it('- should retrieve advice from API', () => {
     expect(ajaxGetStub.getCall(2).args[0]).toEqual(endpoints.getFullUrl('/v1/content-pages?tags=families&type=advice&pageSize=100000&index=0&parentScenarioId=5f69bf51a27c1c3b84fe6447'))
   })
 
