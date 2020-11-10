@@ -1,4 +1,5 @@
 import ko from 'knockout'
+import pushHistory from '../../history'
 import { Guide } from './families-advice-helper'
 
 const api = require('../../get-api-data')
@@ -14,6 +15,27 @@ function FamiliesGuides () {
   self.searchFamiliesAdvice = new SearchFamiliesAdviceModule.SearchFamiliesAdvice()
   self.guides = ko.observableArray([])
   self.hasGuides = ko.computed(() => self.guides().length > 0, this)
+
+  self.pushHistory = function () {
+    let filters = [{ qsKey: 'id', getValue: () => self.guideIdInQuerystring() }]
+    pushHistory(filters)
+  }
+
+  self.onBrowserHistoryBack = function () {
+    if (querystring.parameter('id')) {
+      self.guides().filter(x => x.id() === querystring.parameter('id'))[0].toggle(true)
+    }
+    else {
+      self.guides().forEach(x => {
+        x.isSelected(false)
+        x.isExpanded(false)
+      })
+    }
+  }
+
+  browser.setOnHistoryPop((e) => {
+    self.onBrowserHistoryBack()
+  })
 
   self.getGuides = function () {
     browser.loading()

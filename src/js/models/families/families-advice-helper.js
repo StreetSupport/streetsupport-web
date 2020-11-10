@@ -98,9 +98,20 @@ export class Guide extends BaseAdvice {
     this.isExpanded = data.isExpanded
   }
 
-  toggle () {
+  toggle (isBackUrl) {
     this.container.guides().filter(x => x.id() !== this.id()).forEach(x => x.isSelected(false))
     this.isSelected(!this.isSelected())
+
+    if (this.isSelected()) {
+      this.container.guideIdInQuerystring(this.id())
+    } else {
+      this.container.guideIdInQuerystring('')
+    }
+
+    if (isBackUrl !== true) {
+      this.container.pushHistory()
+    }
+
     this.container.guides().forEach(x => x.isExpanded(false))
   }
 

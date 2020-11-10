@@ -7,7 +7,7 @@ const endpoints = require('../../../src/js/api')
 const api = require('../../../src/js/get-api-data')
 const browser = require('../../../src/js/browser')
 const adviceListByParentScenario = require('../search-result/advice-list-by-parent-scenario.json')
-const guides = require('./guides.json')
+const guides = require('../families-guides/guides.json')
 const parentScenariosList = require('../search-advice/parent-scenarios-list.json')
 const querystring = require('../../../src/js/get-url-parameter')
 delete require.cache[require.resolve('../../../src/js/pages/families/search-families-advice/search-families-advice')]
