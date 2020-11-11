@@ -29,7 +29,7 @@ class SearchAdviceModel extends SearchAdviceBaseModel {
   }
 }
 
-function SearchFamilyAdvice () {
+function SearchFamiliesAdvice () {
   const self = this
   self.isSelectedSearchInput = ko.observable(false)
   self.showFilteredAdvice = ko.observable(false)
@@ -229,4 +229,4 @@ function SearchFamilyAdvice () {
   self.getParentScenarios()
 }
 
-module.exports = { SearchFamilyAdvice }
+module.exports = { SearchFamiliesAdvice }

@@ -1,8 +1,8 @@
 ---
 title: Street Support Families - Supporting families facing homelessness
 description: Street Support - Find help, and give help, to support families who are homeless
-image: https://streetsupport.net/assets/img/og/street-support-manchester.jpg
-layout: withGoogle.hbs
+image: https://streetsupport.net/assets/img/og/street-support.jpg
+layout: default.hbs
 permalink: false
 jsBundle: families-advice-result
 section: families
@@ -12,23 +12,21 @@ page: families-advice-result
 <div class="block block--breadcrumbs">
   <div class="container">
     <ol class="breadcrumbs__list">
-      <li class="breadcrumbs__item">Advice</li>
       <li class="breadcrumbs__item">
-        <a href="/families">Families</a>
+        <a href="/">Home</a>
       </li>
       <li class="breadcrumbs__item">
-        <a href="/">Advice</a>
+        <a href="/find-help/advice">Advice</a>
       </li>
       <!-- ko if: searchQueryInQuerystring -->
-      <li class="breadcrumbs__item">
-        <a href="/" data-bind="text: 'Search results: ' + searchQueryInQuerystring().trim()"></a>
+      <li class="breadcrumbs__item" data-bind="text: 'Search results: ' + searchQueryInQuerystring().trim()">
       </li>
       <!-- /ko -->
     </ol>
   </div>
 </div>
 
-{{> families/header-family-advice }}
+{{> families/header-families-advice }}
 
 <div class="container container-advice">
     {{> social-share}}
@@ -37,7 +35,7 @@ page: families-advice-result
 <div class="block block-advice">
   <div class="container">
 
-    {{> families/filter-family-advice-result }}
+    {{> families/filter-families-advice-result }}
     <div class="container-advice__content">  
       <p class="h2 container-advice__header-result" data-bind="text: 'Search results for: ' + searchQueryInQuerystring().trim()"></p>
       <!-- ko if: results -->

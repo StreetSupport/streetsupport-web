@@ -1,8 +1,8 @@
 ---
 title: Street Support Families - Supporting families facing homelessness
 description: Street Support - Find help, and give help, to support families who are homeless
-image: https://streetsupport.net/assets/img/og/street-support-manchester.jpg
-layout: withGoogle.hbs
+image: https://streetsupport.net/assets/img/og/street-support.jpg
+layout: default.hbs
 permalink: false
 jsBundle: families-advice
 section: families
@@ -12,7 +12,12 @@ page: families-advice
 <div class="block block--breadcrumbs">
   <div class="container">
     <ol class="breadcrumbs__list">
-      <li class="breadcrumbs__item">Advice</li>
+      <li class="breadcrumbs__item">
+        <a href="/">Home</a>
+      </li>
+      <li class="breadcrumbs__item">
+        <a href="/find-help/advice">Advice</a>
+      </li>
       <li class="breadcrumbs__item">
         <a href="/families">Families</a>
       </li>
@@ -23,14 +28,14 @@ page: families-advice
       <!-- /ko -->
       <!-- ko if: currentAdvice() && !currentAdvice().isParentScenario() -->
       <li class="breadcrumbs__item" data-bind="with: currentAdvice">
-        <a href="/" data-bind="text: title"></a>
+        <span data-bind="text: title"></span>
       </li>
       <!-- /ko -->
     </ol>
   </div>
 </div>
 
-{{> families/header-family-advice }}
+{{> families/header-families-advice }}
 
 <div class="container container-advice">
     {{> social-share}}
@@ -39,7 +44,7 @@ page: families-advice
 <div class="block block-advice">
   <div class="container">
 
-    {{> families/filter-family-advice }}
+    {{> families/filter-families-advice }}
     
     <div class="container-advice__content">      
       <!-- ko if: currentAdvice -->

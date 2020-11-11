@@ -251,3 +251,74 @@
     }
   }
 }
+
+.container-families__content-result {
+  .accordion__header {
+
+    @include mq($until: m) {
+      height: auto;
+      @include span(12 of $max-grid-column);
+      @include first();
+    }
+
+    @include mq($from: xxl) {
+      height: 130px;
+    }
+
+    border-radius: 15px; 
+    margin-bottom: 15px; 
+    margin-right: 15px !important;
+    padding: 15px 20px 15px 20px; 
+    box-shadow: 5px 5px 5px rgba(90,73,127, 0.4);
+    height: 120px;
+
+    @include span(5 of $max-grid-column);
+    @include first();
+
+    &.full-width {
+      height: auto;
+      @include span(10 of $max-grid-column);
+      @include first();
+
+      @include mq($until: m) {
+        @include span(12 of $max-grid-column);
+        @include first();
+      }
+    }
+
+    .accordion--families__short-description {
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.accordion--guides {
+  .btn--guides {
+    display: block;
+    margin-bottom: 0;
+
+    &__text {
+      background-repeat: no-repeat;
+      background-position: 45px 9px;
+      padding: 5px 30px 5px 55px;
+      display: block; 
+      margin: 0 auto;
+      width: 180px;
+    }
+  }
+
+  .btn__expanded {
+    background-image: url('/assets/img/minus-icon.png');
+  }
+
+  .btn__not-expanded {
+    background-position: 40px 9px;
+    background-image: url('/assets/img/plus-icon.png');
+  }
+
+  .btn__expanded:hover,
+  .btn__not-expanded:hover {
+    cursor: pointer;
+  }
+}

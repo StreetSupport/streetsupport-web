@@ -1,20 +1,20 @@
 import ko from 'knockout'
 import pushHistory from '../../history'
-import { ParentScenario, Advice, FAQ } from '../../models/families/family-advice-helper'
+import { ParentScenario, Advice, FAQ } from './families-advice-helper'
 
 const api = require('../../get-api-data')
 const browser = require('../../browser')
 const endpoints = require('../../api')
 const querystring = require('../../get-url-parameter')
 const htmlEncode = require('htmlencode')
-const SearchFamilyAdviceModule = require('../../pages/families/search-family-advice/search-family-advice')
+const SearchFamiliesAdviceModule = require('../../pages/families/search-families-advice/search-families-advice')
 
 function FamilyAdvice () {
   const self = this
   self.adviceIdInQuerystring = ko.observable(querystring.parameter('id'))
   self.parentScenarioIdInQuerystring = ko.observable(querystring.parameter('parentScenarioId'))
 
-  self.searchFamilyAdvice = new SearchFamilyAdviceModule.SearchFamilyAdvice()
+  self.searchFamiliesAdvice = new SearchFamiliesAdviceModule.SearchFamiliesAdvice()
   self.currentAdvice = ko.observable()
   self.currentParentScenario = ko.observable()
   self.parentScenarios = ko.observableArray([])
@@ -86,15 +86,15 @@ function FamilyAdvice () {
         self.adviceByParentScenario(result.data.items.map((x) => {
           return new Advice({
             id: ko.observable(x.id),
-            body: ko.observable(x.body),
+            body: ko.observable(htmlEncode.htmlDecode(x.body)),
             parentScenarioId: ko.observable(x.parentScenarioId),
             sortPosition: ko.observable(x.sortPosition),
             tags: ko.observableArray(x.tags),
-            title: ko.observable(x.title),
+            title: ko.observable(htmlEncode.htmlDecode(x.title)),
             isSelected: ko.observable(x.id === self.adviceIdInQuerystring()),
             isParentScenario: ko.observable(false)
           }, self)
-        }))
+        }).sort((a, b) => { return b.sortPosition() - a.sortPosition() }))
 
         if (self.adviceByParentScenario().filter((x) => x.id() === self.adviceIdInQuerystring()).length) {
           if (isBackUrl === true) {
@@ -128,8 +128,8 @@ function FamilyAdvice () {
         }
         self.currentAdvice(new Advice({
           id: ko.observable(result.data.id),
-          title: ko.observable(result.data.title),
-          body: ko.observable(result.data.body),
+          title: ko.observable(htmlEncode.htmlDecode(result.data.title)),
+          body: ko.observable(htmlEncode.htmlDecode(result.data.body)),
           sortPosition: ko.observable(result.data.sortPosition),
           tags: ko.observableArray(result.data.tags),
           isSelected: ko.observable(true),
@@ -156,14 +156,14 @@ function FamilyAdvice () {
             return new ParentScenario({
               id: ko.observable(p.id),
               title: ko.observable(htmlEncode.htmlDecode(p.name)),
-              body: ko.observable(p.body),
+              body: ko.observable(htmlEncode.htmlDecode(p.body)),
               sortPosition: ko.observable(p.sortPosition),
               tags: ko.observableArray(p.tags),
               isSelected: ko.observable(false),
               isParentScenario: ko.observable(true),
               isCurrentParentScenario: ko.observable(p.id === self.parentScenarioIdInQuerystring())
             }, self)
-          })
+          }).sort((a, b) => { return b.sortPosition() - a.sortPosition() })
         )
 
         self.currentParentScenario(self.parentScenarios().filter((x) => x.id() === self.parentScenarioIdInQuerystring())[0])
@@ -185,14 +185,14 @@ function FamilyAdvice () {
       self.faqs(result.data.items.map((x) => {
         return new FAQ({
           id: ko.observable(x.id),
-          body: ko.observable(x.body),
+          body: ko.observable(htmlEncode.htmlDecode(x.body)),
           sortPosition: ko.observable(x.sortPosition),
           tags: ko.observableArray(x.tags),
-          title: ko.observable(x.title),
+          title: ko.observable(htmlEncode.htmlDecode(x.title)),
           isSelected: ko.observable(false),
           parentScenarioId: ko.observable(x.parentScenarioId)
         }, self)
-      }))
+      }).sort((a, b) => { return b.sortPosition() - a.sortPosition() }))
     }, (_) => {
       browser.redirect('/500')
     })
