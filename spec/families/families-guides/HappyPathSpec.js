@@ -19,7 +19,6 @@ const Model = require('../../../src/js/models/families/families-guides')
 describe('Init families landing page', () => {
   let ajaxGetStub,
     queryStringStub,
-    browserPushHistoryStub,
     sut
 
   beforeEach(() => {
@@ -33,14 +32,6 @@ describe('Init families landing page', () => {
         }
       })
 
-    ajaxGetStub
-    .onCall(1)
-    .returns({
-      then: function (success) {
-        success({ data: guides })
-      }
-    })
-
     sinon.stub(browser, 'loading')
     sinon.stub(browser, 'loaded')
     sinon.stub(browser, 'redirect')
@@ -50,7 +41,7 @@ describe('Init families landing page', () => {
       .withArgs('id')
       .returns('5f897e260532b831b083072c')
 
-    browserPushHistoryStub = sinon.stub(browser, 'pushHistory')
+    sinon.stub(browser, 'pushHistory')
     sinon.stub(browser, 'setOnHistoryPop')
 
     sut = new Model()
@@ -103,7 +94,7 @@ describe('Init families landing page', () => {
             guide.expand()
         })
     
-        it('- guides expect current should be hided', () => {
+        it('- guides except current should be hided', () => {
             expect(sut.guides().filter(x => x.id() !== sut.guides()[0].id()).forEach(y => expect(y.isSelected()).toEqual(false)))
         })
 
@@ -111,7 +102,7 @@ describe('Init families landing page', () => {
             expect(guide.isSelected()).toEqual(true)
         })
 
-        it('- guide should be expaneded', () => {
+        it('- guide should be expanded', () => {
             expect(guide.isExpanded()).toEqual(true)
         })
 
