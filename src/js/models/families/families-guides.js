@@ -24,8 +24,7 @@ function FamiliesGuides () {
   self.onBrowserHistoryBack = function () {
     if (querystring.parameter('id')) {
       self.guides().filter(x => x.id() === querystring.parameter('id'))[0].toggle(true)
-    }
-    else {
+    } else {
       self.guides().forEach(x => {
         x.isSelected(false)
         x.isExpanded(false)

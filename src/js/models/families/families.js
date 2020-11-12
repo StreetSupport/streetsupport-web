@@ -121,7 +121,7 @@ function Families () {
         )
 
         self.currentParentScenario(self.parentScenarios().filter((x) => x.id() === self.parentScenarioIdInQuerystring())[0])
-        if (self.currentParentScenario()) {         
+        if (self.currentParentScenario()) {
           self.getAdvice()
         } else if (!self.currentParentScenario() && self.parentScenarioIdInQuerystring()) {
           browser.redirect('/500')
