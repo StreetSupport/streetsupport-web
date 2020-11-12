@@ -157,6 +157,23 @@
   }
 }
 
+.location--nottingham .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-size: 733px;
+      width: 733px;
+      bottom: 10px;
+      height: 335px;
+    }
+  }
+  @include mq($from: xxxl) {
+    &:before {
+      left: auto;
+      right: 0%;
+    }
+  }
+}
+
 .location--oldham .location-header {
   @include mq($from: m) {
     min-height: 400px;
