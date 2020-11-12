@@ -33,6 +33,7 @@
             text-align: left;
             height: 150px;
             overflow-y: auto;
+            display: none;
 
             @include mq($from: m) {
                 height: 100px;
