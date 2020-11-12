@@ -1,0 +1,78 @@
+---
+title: Street Support Families - Supporting families facing homelessness
+description: Street Support - Find help, and give help, to support families who are homeless
+image: https://streetsupport.net/assets/img/og/street-support.jpg
+layout: default.hbs
+permalink: false
+jsBundle: families-guides
+section: families
+page: families-guides
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item">
+        <a href="/">Home</a>
+      </li>
+      <li class="breadcrumbs__item">
+        <a href="/find-help/advice">Advice</a>
+      </li>
+      <li class="breadcrumbs__item">
+        <a href="/families">Families</a>
+      </li>
+      <li class="breadcrumbs__item">
+        Guides
+      </li>
+    </ol>
+  </div>
+</div>
+
+{{> families/header-families-advice }}
+
+<div class="container container-advice">
+    {{> social-share}}
+</div>
+
+<div class="block__content">  
+    <!-- ko if: hasGuides -->
+    <div class="cards__list">
+        <div class="result-detail">
+          <div class="accordion accordion--advice accordion--guides" data-bind="foreach: guides">
+              <button class="h3 accordion__header" data-bind="css: { 'is-active': isSelected }, click: toggle">
+                <span data-bind="html: title"></span>
+                <svg class="svg-plus-dims accordion__icon accordion__icon--open">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use>
+                </svg>
+                <svg class="svg-minus-dims accordion__icon accordion__icon--close">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use>
+                </svg>
+              </button>
+              <div class="accordion__item" data-bind="css: { 'is-active': isSelected }">
+
+              <!-- ko if: !isExpanded() -->
+              <div class="accordion__inner">
+                <p class="accordion--guides__short-description" data-bind="text: (body().length > 100 ? body().substring(0, 99) + '...' : body)"></p>
+                <a class="btn btn--brand-e btn--guides" data-bind="click: expand">
+                  <span class="btn__text btn--guides__text btn__not-expanded">Read more</span>
+                </a>
+              </div>
+              <!-- /ko -->
+              <!-- ko if: isExpanded -->
+              <div class="accordion__inner">
+                <p class="accordion--guides__short-description" data-bind="text: body"></p>
+                <a class="btn btn--brand-e btn--guides" data-bind="click: expand">
+                  <span class="btn__text btn--guides__text btn__expanded">Read less</span>
+                </a>
+              </div>
+              <!-- /ko -->
+              </div>
+          </div>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>
+
+{{> divider }}
+{{> families/useful-resources }}
+{{> loading-spinner}}

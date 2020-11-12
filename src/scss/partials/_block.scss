@@ -6,6 +6,10 @@
   @include mq($from: m) {
     padding-top: 40px;
     padding-bottom: 40px;
+
+    &--advice {
+      padding-top: 0;
+    }
   }
 
   // Components
@@ -226,13 +230,141 @@
     }
   }
 }
+
 .block--location-header {
+
   @include mq($from: m) {
 
     .container {
       & > * {
         @include span(1 of 2);
         @include first();
+      }
+
+      & > .container-advice__content:nth-child(1) {
+          @include span(3 of $grid-column);
+          @include first();
+      }
+
+      & > .container-advice__content:nth-child(2) {
+          @include span(4 of $grid-column);
+          @include first();
+          float: right;
+          text-align: right;
+      }
+
+      & > .container-families__content:nth-child(1) {
+        @include span(6 of $max-grid-column);
+        @include first();
+      }
+
+      & > .container-families__content:nth-child(2) {
+          @include span(5 of $max-grid-column);
+          @include first();
+          float: right;
+          text-align: left;
+      }
+    }
+  }
+}
+
+.block-families {
+
+  @include mq($from: m) {
+
+    .container {
+
+      & > .container-families__content:nth-child(1) {
+          @include span(8 of $max-grid-column);
+          @include first();
+      }
+
+      & > .container-families__content:nth-child(2) {
+          @include span(3 of $max-grid-column);
+          @include first();
+          float: right;
+      }
+    }
+  }
+
+  .container-families__content {
+    &--guides {
+      list-style: none;
+      padding-left: 3px;
+
+      &__item {
+        color: #337ab7;
+        background-image: url(/assets/img/info-icon.png);
+        background-position: 0px 2px;
+        background-repeat: no-repeat;
+        padding-left: 25px;
+        margin-bottom: 15px;
+
+        a {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  @include mq($until: m) {
+
+    .container-families__header-guides {
+      margin-top: 20px;
+    }
+  }
+}
+
+.block-advice {
+
+  .container {
+    .container-advice__header-result {
+      display: inline;
+      background-image: url('/assets/img/search-icon.png');
+      background-position: 0px 3px;
+      background-repeat: no-repeat;
+      padding-left: 25px;
+    }
+
+    .container-advice__content-no-result {
+      margin-top: 25px;
+    }
+  }
+
+  @include mq($from: m) {
+
+    .container {
+
+      & > .container-advice__content:nth-child(1) {
+          @include span(4 of $max-grid-column);
+          @include first();
+      }
+
+      & > .container-advice__content:nth-child(2) {
+          @include span(7 of $max-grid-column);
+          @include first();
+          float: right;
+      }
+    }
+  }
+
+  @include mq($until: m) {
+
+    .container {
+      .container-advice__content-no-result {
+        margin-top: 15px;
+      }
+    }
+  }
+
+  .block__content {
+    &--advice {
+      text-align: justify;
+    }
+
+    @include mq($until: m) {
+      .h1 {
+        font-size: 28px;
       }
     }
   }

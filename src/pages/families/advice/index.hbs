@@ -1,8 +1,8 @@
 ---
 title: Street Support Families - Supporting families facing homelessness
 description: Street Support - Find help, and give help, to support families who are homeless
-image: https://streetsupport.net/assets/img/og/street-support-manchester.jpg
-layout: withGoogle.hbs
+image: https://streetsupport.net/assets/img/og/street-support.jpg
+layout: default.hbs
 permalink: false
 jsBundle: families-advice
 section: families
@@ -12,42 +12,55 @@ page: families-advice
 <div class="block block--breadcrumbs">
   <div class="container">
     <ol class="breadcrumbs__list">
-      <li class="breadcrumbs__item">Result</li>
-      <li class="breadcrumbs__item">Advice</li>
-      <li class="breadcrumbs__item">
-        <a href="/families">Families</a>
-      </li>
       <li class="breadcrumbs__item">
         <a href="/">Home</a>
       </li>
+      <li class="breadcrumbs__item">
+        <a href="/find-help/advice">Advice</a>
+      </li>
+      <li class="breadcrumbs__item">
+        <a href="/families">Families</a>
+      </li>
+      <!-- ko if: currentParentScenario -->
+      <li class="breadcrumbs__item" data-bind="with: currentParentScenario">
+        <a data-bind="text: title, attr: { 'data-id': id, 'href': '/families/advice?parentScenarioId=' + id() }"></a>
+      </li>
+      <!-- /ko -->
+      <!-- ko if: currentAdvice() && !currentAdvice().isParentScenario() -->
+      <li class="breadcrumbs__item" data-bind="with: currentAdvice">
+        <span data-bind="text: title"></span>
+      </li>
+      <!-- /ko -->
     </ol>
   </div>
 </div>
 
-{{!-- {{> locations/banners/cv-banner }} --}}
+{{> families/header-families-advice }}
 
-<div class="block block--location-header location-header location-header--manchester">
+<div class="container container-advice">
+    {{> social-share}}
+</div>
+
+<div class="block block-advice">
   <div class="container">
-    <h1 class="h1 block__header">Supporting families facing homelessness</h1>
-    <h2 class="h2 block__sub-header">We have worked with teams from across UK to provide you with information specifically aimed at helping families facing homelessness</h2>
-    <div class="ctas">
-      <a href="/find-help/group/families/" class="btn btn--brand-d">
-        <span class="btn__text">Find Help</span>
-      </a>
-      <a href="/give-help/help/" class="btn btn--brand-e">
-        <span class="btn__text">Give Help</span>
-      </a>
+
+    {{> families/filter-families-advice }}
+    
+    <div class="container-advice__content">      
+      <!-- ko if: currentAdvice -->
+      <div class="block__content" data-bind="with: currentAdvice">
+        <h1 class="h1" data-bind="text: title"></h1>
+        <p class="block__content--advice" data-bind="text: body"></p>
+      </div>
+      <!-- /ko -->
+
+      {{> divider }}
+      {{> families/frequently-asked-questions }}
     </div>
+
   </div>
 </div>
 
-<!-- ko if: advice -->
-<div data-bind="with: advice">
-  <div><b>Breadcrumbs</b></div>
-  <div data-bind="text: breadcrumbs"></div>
-  <div><b>Body</b></div>
-  <div data-bind="text: body"></div>
-</div>
-<!-- /ko -->
-
+{{> divider }}
+{{> families/useful-resources }}
 {{> loading-spinner}}

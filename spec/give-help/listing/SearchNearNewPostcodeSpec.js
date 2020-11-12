@@ -112,9 +112,9 @@ describe('Needs Listing - new postcode search', () => {
     expect(qs.range).toEqual('5000')
   })
 
-  it('... 21 items at a time', () => {
+  it('... 25 items at a time', () => {
     const qs = parseQuery(ajaxGetStub.getCall(0).args[0])
-    expect(qs.pageSize).toEqual('21')
+    expect(qs.pageSize).toEqual('25')
   })
 
   it('- should show user there are needs', () => {

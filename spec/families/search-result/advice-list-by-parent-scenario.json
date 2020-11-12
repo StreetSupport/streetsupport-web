@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "id": "5f6b28d3a27c1d88789591cf",
+      "title": "Family 1 common",
+      "body": "Food body content",
+      "sortPosition": 0,
+      "tags": [
+        "families",
+        "another-tag",
+        "last-item",
+        "test"
+      ],
+      "parentScenarioId": "5f69bf51a27c1c3b84fe6447"
+    },
+    {
+      "id": "5f6b295ca27c1d88789591ef",
+      "title": "Manchester families with ps",
+      "body": "Body common",
+      "sortPosition": 0,
+      "tags": [
+        "families",
+        "another-tag",
+        "parent"
+      ],
+      "parentScenarioId": "5f69bf51a27c1c3b84fe6447"
+    }
+  ],
+  "total": 2
+}

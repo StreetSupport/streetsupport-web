@@ -91,7 +91,7 @@ describe('Find Help by Client Group - postcode, client group key, catIds, subCat
   })
 
   it('- should retrieve items from API', () => {
-    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/456.7/234.5?range=10000&pageSize=5&index=0&clientGroup=families&catIds=meals&subCatIds=general,community-grocers')) 
+    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/456.7/234.5?range=10000&pageSize=5&index=0&clientGroup=families&catIds=meals&subCatIds=general,community-grocers'))
   })
 
   it('- should not update url', () => {
