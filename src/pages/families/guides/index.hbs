@@ -52,7 +52,7 @@ page: families-guides
 
               <!-- ko if: !isExpanded() -->
               <div class="accordion__inner">
-                <p class="accordion--guides__short-description" data-bind="text: (body().length > 100 ? body().substring(0, 99) + '...' : body)"></p>
+                <p class="accordion--guides__short-description h4" data-bind="html: (body().length > 100 ? body().substring(0, 99) + '...' : body)"></p>
                 <a class="btn btn--brand-e btn--guides" data-bind="click: expand">
                   <span class="btn__text btn--guides__text btn__not-expanded">Read more</span>
                 </a>
@@ -60,7 +60,7 @@ page: families-guides
               <!-- /ko -->
               <!-- ko if: isExpanded -->
               <div class="accordion__inner">
-                <p class="accordion--guides__short-description" data-bind="text: body"></p>
+                <p class="accordion--guides__short-description" data-bind="html: body"></p>
                 <a class="btn btn--brand-e btn--guides" data-bind="click: expand">
                   <span class="btn__text btn--guides__text btn__expanded">Read less</span>
                 </a>

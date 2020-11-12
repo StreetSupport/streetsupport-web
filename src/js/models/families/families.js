@@ -6,6 +6,7 @@ const api = require('../../get-api-data')
 const browser = require('../../browser')
 const endpoints = require('../../api')
 const querystring = require('../../get-url-parameter')
+const marked = require('marked')
 const htmlEncode = require('htmlencode')
 const SearchFamiliesAdviceModule = require('../../pages/families/search-families-advice/search-families-advice')
 
@@ -61,7 +62,7 @@ function Families () {
         return {
           id: ko.observable(x.id),
           sortPosition: ko.observable(x.sortPosition),
-          title: ko.observable(htmlEncode.htmlDecode(x.title))
+          title: ko.observable(x.title)
         }
       }).sort((a, b) => { return b.sortPosition() - a.sortPosition() }))
 
@@ -81,11 +82,11 @@ function Families () {
         self.adviceByParentScenario(result.data.items.map((x) => {
           return new Advice({
             id: ko.observable(x.id),
-            body: ko.observable(htmlEncode.htmlDecode(x.body)),
+            body: ko.observable(marked(htmlEncode.htmlDecode(x.body))),
             parentScenarioId: ko.observable(x.parentScenarioId),
             sortPosition: ko.observable(x.sortPosition),
             tags: ko.observableArray(x.tags),
-            title: ko.observable(htmlEncode.htmlDecode(x.title)),
+            title: ko.observable(x.title),
             isSelected: ko.observable(false),
             isParentScenario: ko.observable(false)
           }, self)
@@ -109,8 +110,8 @@ function Families () {
           .map(p => {
             return new ParentScenario({
               id: ko.observable(p.id),
-              title: ko.observable(htmlEncode.htmlDecode(p.name)),
-              body: ko.observable(htmlEncode.htmlDecode(p.body)),
+              title: ko.observable(p.name),
+              body: ko.observable(marked(htmlEncode.htmlDecode(p.body))),
               sortPosition: ko.observable(p.sortPosition),
               tags: ko.observableArray(p.tags),
               isSelected: ko.observable(false),

@@ -23,10 +23,10 @@
                     <div class="accordion--advice__tags" data-bind="text: $parents[1].parentScenarios().filter(x => x.id() === $parent.parentScenarioId())[0].title"></div>
                     <!-- /ko -->
                 </div>
-                <p class="accordion--advice__short-description" data-bind="text: (body().length > 100 ? body().substring(0, 99) + '...' : body), css: { 'is-active': isSelected }"></p>
+                <p class="accordion--advice__short-description h4" data-bind="html: (body().length > 100 ? body().substring(0, 99) + '...' : body), css: { 'is-active': isSelected }"></p>
             </button>
             <div class="accordion__item" data-bind="css: { 'is-active': isSelected }">
-            <div class="accordion__inner" data-bind="text: body">
+            <div class="accordion__inner h4" data-bind="html: body">
             </div>
             </div>
         </div>

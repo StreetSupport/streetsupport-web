@@ -49,13 +49,14 @@ page: families-advice
     <div class="container-advice__content">      
       <!-- ko if: currentAdvice -->
       <div class="block__content" data-bind="with: currentAdvice">
-        <h1 class="h1" data-bind="text: title"></h1>
-        <p class="block__content--advice" data-bind="text: body"></p>
+        <h1 class="h1" data-bind="html: title"></h1>
+        <p class="block__content--advice" data-bind="html: body"></p>
       </div>
       <!-- /ko -->
 
       {{> divider }}
       {{> families/frequently-asked-questions }}
+
     </div>
 
   </div>

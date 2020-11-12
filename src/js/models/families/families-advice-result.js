@@ -5,6 +5,7 @@ const api = require('../../get-api-data')
 const browser = require('../../browser')
 const endpoints = require('../../api')
 const querystring = require('../../get-url-parameter')
+const marked = require('marked')
 const htmlEncode = require('htmlencode')
 const SearchFamiliesAdviceModule = require('../../pages/families/search-families-advice/search-families-advice')
 
@@ -48,10 +49,10 @@ function FamilyAdviceResult () {
       self.faqs(result.data.items.map((x) => {
         return new FAQ({
           id: ko.observable(x.id),
-          body: ko.observable(htmlEncode.htmlDecode(x.body)),
+          body: ko.observable(marked(htmlEncode.htmlDecode(x.body))),
           sortPosition: ko.observable(x.sortPosition),
           tags: ko.observableArray(x.tags),
-          title: ko.observable(htmlEncode.htmlDecode(x.title)),
+          title: ko.observable(x.title),
           isSelected: ko.observable(false),
           parentScenarioId: ko.observable(x.parentScenarioId)
         }, self)
@@ -70,8 +71,8 @@ function FamilyAdviceResult () {
           .map(p => {
             return new ParentScenario({
               id: ko.observable(p.id),
-              title: ko.observable(htmlEncode.htmlDecode(p.name)),
-              body: ko.observable(p.body),
+              title: ko.observable(p.name),
+              body: ko.observable(marked(htmlEncode.htmlDecode(p.body))),
               sortPosition: ko.observable(p.sortPosition),
               tags: ko.observableArray(p.tags),
               isSelected: ko.observable(false),
@@ -97,7 +98,7 @@ function FamilyAdviceResult () {
         self.adviceByParentScenario(result.data.items.map((x) => {
           return new Advice({
             id: ko.observable(x.id),
-            body: ko.observable(x.body),
+            body: ko.observable(marked(htmlEncode.htmlDecode(x.body))),
             parentScenarioId: ko.observable(x.parentScenarioId),
             sortPosition: ko.observable(x.sortPosition),
             tags: ko.observableArray(x.tags),

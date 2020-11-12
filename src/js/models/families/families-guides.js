@@ -6,6 +6,7 @@ const api = require('../../get-api-data')
 const browser = require('../../browser')
 const endpoints = require('../../api')
 const querystring = require('../../get-url-parameter')
+const marked = require('marked')
 const htmlEncode = require('htmlencode')
 const SearchFamiliesAdviceModule = require('../../pages/families/search-families-advice/search-families-advice')
 
@@ -45,8 +46,8 @@ function FamiliesGuides () {
         return new Guide({
           id: ko.observable(x.id),
           sortPosition: ko.observable(x.sortPosition),
-          title: ko.observable(htmlEncode.htmlDecode(x.title)),
-          body: ko.observable(htmlEncode.htmlDecode(x.body)),
+          title: ko.observable(x.title),
+          body: ko.observable(marked(htmlEncode.htmlDecode(x.body))),
           isSelected: ko.observable(self.guideIdInQuerystring() ? self.guideIdInQuerystring() === x.id : false),
           isExpanded: ko.observable(false)
         }, self)
