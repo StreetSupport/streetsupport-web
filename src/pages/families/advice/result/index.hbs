@@ -42,7 +42,7 @@ page: families-advice-result
       <div class="block__content container-advice__content-result" data-bind="foreach: results">
         <div class="h3 accordion__header" data-bind="click: $parent.redirectToAdvice">
           <span class="accordion--advice__title" data-bind="html: title"></span>
-          <p class="accordion--advice__short-description" data-bind="text: (body().length > 150 ? body().substring(0, 149) + '...' : body)"></p>
+          <p class="accordion--advice__short-description h4" data-bind="html: (body().length > 150 ? body().substring(0, 149) + '...' : body)"></p>
         </div>
       </div>
       <!-- /ko -->

@@ -86,7 +86,7 @@
     }
 
     .advice-filter__item {
-      a, a:hover {
+      &-link, &-link:hover {
         text-decoration: none;
         color: black;
       }

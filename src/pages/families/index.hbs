@@ -45,7 +45,7 @@ page: families
       <div class="block__content container-families__content-result" data-bind="foreach: parentScenarios">
         <div class="h3 accordion__header" data-bind="click: changeParentScenarioOnSearchResult"> 
           <span class="accordion--advice__title" data-bind="html: (title().length > 45 ? title().substring(0, 44) + '...' : title)"></span>
-          <p class="accordion--families__short-description" data-bind="text: (body().length > 30 ? body().substring(0, 29) + '...' : body)"></p>
+          <p class="accordion--families__short-description h4" data-bind="html: (body().length > 30 ? body().substring(0, 29) + '...' : body)"></p>
         </div>
       </div>
       <!-- /ko -->
@@ -64,7 +64,7 @@ page: families
       <p class="h2 container-families__header-guides">Guides for organisations</p>   
       <ul class="container-families__content--guides" data-bind="foreach: guides">
         <li class="container-families__content--guides__item">
-          <a class="h3" data-bind="text: title, attr: { 'href': '/families/guides?id=' + id() }"></a>
+          <a class="h3 container-families__content--guides__item-link" data-bind="text: title, attr: { 'href': '/families/guides?id=' + id() }"></a>
         </li>
       </ul>
       <!-- /ko -->
