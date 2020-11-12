@@ -16,7 +16,7 @@
 
             <!-- ko if: $parent.hasAdvice && isCurrentParentScenario -->
             <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: $parent.adviceByParentScenario">
-                    <li class="advice-filter__item-wrap"></li>
+                <li class="advice-filter__item-wrap">
                     <div class="advice-filter__item">
                         <label>
                             <a data-bind="text: title, attr: { href: '/families/advice?id=' + id() + '&parentScenarioId=' + $parent.id() }"></a>
