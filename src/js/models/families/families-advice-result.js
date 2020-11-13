@@ -107,7 +107,6 @@ function FamilyAdviceResult () {
             isParentScenario: ko.observable(false)
           }, self)
         }))
-
         browser.loaded()
       }, (_) => {
         browser.redirect('/500')
