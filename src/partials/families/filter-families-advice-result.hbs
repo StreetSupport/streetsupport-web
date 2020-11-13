@@ -14,8 +14,8 @@
                 </label>
             </div>
 
-            <!-- ko if: $parent.hasAdvice() && isCurrentParentScenario -->
-            <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: $parent.adviceByParentScenario()">
+            <!-- ko if: $parent.hasAdvice && isCurrentParentScenario -->
+            <ul class="list-to-dropdown subcat-filter__items" data-bind="foreach: $parent.adviceByParentScenario">
                 <li>
                     <div class="advice-filter__item">
                         <label>
