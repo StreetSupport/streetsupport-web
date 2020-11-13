@@ -194,7 +194,6 @@ function FamilyAdvice () {
           parentScenarioId: ko.observable(x.parentScenarioId)
         }, self)
       }).sort((a, b) => { return b.sortPosition() - a.sortPosition() }))
-
     }, (_) => {
       browser.redirect('/500')
     })
