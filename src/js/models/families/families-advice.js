@@ -91,7 +91,7 @@ function FamilyAdvice () {
             parentScenarioId: ko.observable(x.parentScenarioId),
             sortPosition: ko.observable(x.sortPosition),
             tags: ko.observableArray(x.tags),
-            title: ko.observable(x.title),
+            title: ko.observable(htmlEncode.htmlDecode(x.title)),
             isSelected: ko.observable(x.id === self.adviceIdInQuerystring()),
             isParentScenario: ko.observable(false)
           }, self)
@@ -129,7 +129,7 @@ function FamilyAdvice () {
         }
         self.currentAdvice(new Advice({
           id: ko.observable(result.data.id),
-          title: ko.observable(result.data.title),
+          title: ko.observable(htmlEncode.htmlDecode(result.data.title)),
           body: ko.observable(marked(htmlEncode.htmlDecode(result.data.body))),
           sortPosition: ko.observable(result.data.sortPosition),
           tags: ko.observableArray(result.data.tags),
@@ -156,7 +156,7 @@ function FamilyAdvice () {
           .map(p => {
             return new ParentScenario({
               id: ko.observable(p.id),
-              title: ko.observable(p.name),
+              title: ko.observable(htmlEncode.htmlDecode(p.name)),
               body: ko.observable(marked(htmlEncode.htmlDecode(p.body))),
               sortPosition: ko.observable(p.sortPosition),
               tags: ko.observableArray(p.tags),
