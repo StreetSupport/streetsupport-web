@@ -1,9 +1,9 @@
 module.exports = {
   'page1': {
     'links': {
-      'next': '/v2/service-provider-needs?latitude=53.4873656112133&longitude=-2.22721197039864&index=21&pageSize=21',
+      'next': '/v2/service-provider-needs?latitude=53.4873656112133&longitude=-2.22721197039864&index=21&pageSize=25',
       'prev': null,
-      'self': '/v2/service-provider-needs?latitude=53.4873656112133&longitude=-2.22721197039864&index=0&pageSize=21'
+      'self': '/v2/service-provider-needs?latitude=53.4873656112133&longitude=-2.22721197039864&index=0&pageSize=25'
     },
     'items': [
       {
@@ -547,8 +547,8 @@ module.exports = {
   'page2': {
     'links': {
       'next': null,
-      'prev': '/v2/service-provider-needs?latitude=53.4873656112133&longitude=-2.22721197039864&index=0&pageSize=21',
-      'self': '/v2/service-provider-needs?latitude=53.4873656112133&longitude=-2.22721197039864&index=21&pageSize=21'
+      'prev': '/v2/service-provider-needs?latitude=53.4873656112133&longitude=-2.22721197039864&index=0&pageSize=25',
+      'self': '/v2/service-provider-needs?latitude=53.4873656112133&longitude=-2.22721197039864&index=21&pageSize=25'
     },
     'items': [
       {

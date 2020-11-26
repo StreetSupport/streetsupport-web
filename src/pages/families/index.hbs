@@ -1,92 +1,78 @@
 ---
 title: Street Support Families - Supporting families facing homelessness
 description: Street Support - Find help, and give help, to support families who are homeless
-image: https://streetsupport.net/assets/img/og/street-support-manchester.jpg
-layout: withGoogle.hbs
+image: https://streetsupport.net/assets/img/og/street-support.jpg
+layout: default.hbs
 permalink: false
 jsBundle: families-landing-page
 section: families
 page: families
 ---
 
-{{!-- TODO: Move styles to the separate css file when we have final design--}}
-<style>
-#search-wrapper {
-  margin-left: 100px;
-  margin-top:50px;
-  height: 400px;
-  width: 70%;
-}
-
-/* The search field */
-#search {
-  box-sizing: border-box;
-  background-image: url('/assets/img/search-icon.png');
-  background-position: 18px 18px;
-  background-repeat: no-repeat;
-  font-size: 18px;
-  padding: 14px 20px 12px 45px;
-  border: 1px solid #707070;
-  border-radius: 50px;
-  max-width: 350px;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  position: absolute;
-  background-color: #FFFFFF;
-  border: 1px solid  #707070;
-  z-index: 1;
-  margin-top: 10px;
-  box-shadow: 5px 5px 5px rgba(0,0,0, 0.1);
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
-</style>
-
 <div class="block block--breadcrumbs">
   <div class="container">
     <ol class="breadcrumbs__list">
-      <li class="breadcrumbs__item">Families</li>
       <li class="breadcrumbs__item">
         <a href="/">Home</a>
       </li>
+      <li class="breadcrumbs__item">
+        <a href="/find-help/advice">Advice</a>
+      </li>
+      <li class="breadcrumbs__item">
+        <a href="/families">Families</a>
+      </li>
+      <!-- ko if: currentParentScenario -->
+      <li class="breadcrumbs__item" data-bind="with: currentParentScenario">
+        <a data-bind="text: title, attr: { 'data-id': id, 'href': '/families?parentScenarioId=' + id() }"></a>
+      </li>
+      <!-- /ko -->
     </ol>
   </div>
 </div>
 
-{{!-- {{> locations/banners/cv-banner }} --}}
+{{> families/header-families }}
 
-<div class="block block--location-header location-header location-header--manchester">
+<div class="container container-families">
+    {{> social-share}}
+</div>
+
+<div class="block block-families">
   <div class="container">
-    <h1 class="h1 block__header">Supporting families facing homelessness</h1>
-    <h2 class="h2 block__sub-header">We have worked with teams from across UK to provide you with information specifically aimed at helping families facing homelessness</h2>
-    <div class="ctas">
-      <a href="/find-help/group/families/" class="btn btn--brand-d">
-        <span class="btn__text">Find Help</span>
-      </a>
-      <a href="/give-help/help/group/families/" class="btn btn--brand-e">
-        <span class="btn__text">Give Help</span>
-      </a>
+
+    <div class="container-families__content">         
+      <!-- ko if: hasParentScenarios && !currentParentScenario() -->
+      <p class="h2 container-families__header-result">Advice by situation</p>   
+      <div class="block__content container-families__content-result" data-bind="foreach: parentScenarios">
+        <div class="h3 accordion__header" data-bind="click: changeParentScenarioOnSearchResult"> 
+          <span class="accordion--advice__title" data-bind="html: (title().length > 45 ? title().substring(0, 44) + '...' : title)"></span>
+          <p class="accordion--families__short-description h4" data-bind="html: (body().length > 30 ? body().substring(0, 29) + '...' : body)"></p>
+        </div>
+      </div>
+      <!-- /ko -->
+      <!-- ko if: hasAdvice && currentParentScenario -->
+      <p class="h2 container-advice__header-result" data-bind="text: currentParentScenario().title()">Advice by situation</p>   
+      <div class="block__content container-families__content-result" data-bind="foreach: adviceByParentScenario">
+        <div class="h3 accordion__header full-width" data-bind="click: $parent.redirectToAdvice"> 
+          <span class="accordion--advice__title" data-bind="html: title"></span>
+        </div>
+      </div>
+      <!-- /ko -->
     </div>
+    
+    <div class="container-families__content">      
+      <!-- ko if: hasGuides -->
+      <p class="h2 container-families__header-guides">Guides for organisations</p>   
+      <ul class="container-families__content--guides" data-bind="foreach: guides">
+        <li class="container-families__content--guides__item">
+          <a class="h3 container-families__content--guides__item-link" data-bind="text: title, attr: { 'href': '/families/guides?id=' + id() }"></a>
+        </li>
+      </ul>
+      <!-- /ko -->
+    </div>
+
   </div>
 </div>
 
-{{> families/search-family-advice }}
+{{> divider }}
+{{> families/useful-resources }}
 {{> loading-spinner}}

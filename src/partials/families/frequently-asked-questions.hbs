@@ -1,0 +1,36 @@
+<div class="block__content">  
+    <!-- ko if: hasFAQs -->
+    <div class="cards__list">
+        <h2 class="h2">Frequently asked questions</h1>
+        <div class="result-detail">
+        <div class="accordion accordion--advice" data-bind="foreach: faqs">
+            <button class="h3 accordion__header" data-bind="css: { 'is-active': isSelected }, click: toggle">
+                <span class="accordion--advice__title" data-bind="html: title"></span>
+                <svg class="svg-plus-dims accordion__icon accordion__icon--open">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use>
+                </svg>
+                <svg class="svg-minus-dims accordion__icon accordion__icon--close">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use>
+                </svg>
+
+                <div data-bind="foreach: tags">
+                    <div class="accordion--advice__tags" data-bind="text: $data"></div>
+                    <!-- ko if: $parents[1].currentParentScenario() && $index() === ($parent.tags().length - 1) -->
+                    <div class="accordion--advice__tags" data-bind="text: $parents[1].currentParentScenario().title"></div>
+                    <!-- /ko -->
+                    {{!-- If advice doesn't have parent scenario we show all faqs --}}
+                    <!-- ko if: !$parents[1].currentParentScenario() && $index() === ($parent.tags().length - 1) && $parents[1].hasParentScenarios() && $parents[1].parentScenarios().filter(x => x.id() === $parent.parentScenarioId()).length -->
+                    <div class="accordion--advice__tags" data-bind="text: $parents[1].parentScenarios().filter(x => x.id() === $parent.parentScenarioId())[0].title"></div>
+                    <!-- /ko -->
+                </div>
+                <p class="accordion--advice__short-description h4" data-bind="html: (body().length > 100 ? body().substring(0, 99) + '...' : body), css: { 'is-active': isSelected }"></p>
+            </button>
+            <div class="accordion__item" data-bind="css: { 'is-active': isSelected }">
+            <div class="accordion__inner h4" data-bind="html: body">
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>

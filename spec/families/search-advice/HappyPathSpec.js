@@ -4,10 +4,11 @@ import sinon from 'sinon'
 
 const api = require('../../../src/js/get-api-data')
 const browser = require('../../../src/js/browser')
-const Model = require('../../../src/js/pages/families/search-family-advice/search-family-advice')
+delete require.cache[require.resolve('../../../src/js/pages/families/search-families-advice/search-families-advice')]
+const SearchFamiliesAdviceModule = require('../../../src/js/pages/families/search-families-advice/search-families-advice')
 const adviceList = require('./advice-list')
+const parentScenariosList = require('./parent-scenarios-list')
 const querystring = require('../../../src/js/get-url-parameter')
-const location = require('../../../src/js/location/locationSelector')
 
 describe('Search Families Advice', () => {
   let ajaxGetStub,
@@ -15,38 +16,42 @@ describe('Search Families Advice', () => {
     browserLoadedStub,
     sut
 
-  const currentLocation = {
-    id: 'manchester'
-  }
-
   beforeEach(() => {
     ajaxGetStub = sinon.stub(api, 'data')
+
     ajaxGetStub
+      .onCall(0)
+      .returns({
+        then: function (success) {
+          success({ data: parentScenariosList })
+        }
+      })
+
+    ajaxGetStub
+      .onCall(1)
       .returns({
         then: function (success) {
           success({ data: adviceList })
         }
       })
+
     browserLoadingStub = sinon.stub(browser, 'loading')
     browserLoadedStub = sinon.stub(browser, 'loaded')
-    sinon.stub(location, 'getCurrentHubFromCookies')
-      .returns(currentLocation)
 
     sinon.stub(querystring, 'parameter')
 
-    sut = new Model()
+    sut = new SearchFamiliesAdviceModule.SearchFamiliesAdvice()
   })
 
   afterEach(() => {
     api.data.restore()
     browser.loading.restore()
     browser.loaded.restore()
-    location.getCurrentHubFromCookies.restore()
     querystring.parameter.restore()
   })
 
   it('- should return and set advice', () => {
-    expect(sut.advice().length).toEqual(5)
+    expect(sut.advice().length).toEqual(8)
   })
 
   describe('- search by empty search filed', () => {

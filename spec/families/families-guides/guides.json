@@ -1,0 +1,33 @@
+{
+    "items":
+    [
+      {
+        "id":"5f8d6bef0532b81690a68daf",
+        "title":"Demo 1",
+        "type":"guides",
+        "body":"Sed ut perspiciatis unde quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+        "sortPosition":1002,
+        "tags":["tag1","tag2","families"],
+        "parentScenarioId":"5f69bf51a27c1c3b84fe6448"
+      },
+      {
+        "id":"5f897e260532b831b083072c",
+        "title":"Test guide",
+        "type":"guides",
+        "body":"test",
+        "sortPosition":1000,
+        "tags":["families"],
+        "parentScenarioId":"5f69bf51a27c1c3b84fe6448"
+      },
+      {
+        "id":"5f858b5c0532b84abc5071c3",
+        "title":"Test guides",
+        "type":"guides",
+        "body":"Test body",
+        "sortPosition":1001,
+        "tags":["families"],
+        "parentScenarioId":"5f69bf51a27c1c3b84fe6448"
+      }
+    ],
+    "total":3
+  }

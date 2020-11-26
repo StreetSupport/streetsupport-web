@@ -1,0 +1,93 @@
+.form--support-section {
+    background: white;
+    padding: 20px 20px 5px 20px;
+    margin: 15px 0 30px 0;
+  
+    @include mq($until: m) {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border: none;
+      box-shadow: none;
+      background: none;
+    }
+  
+    .form__fieldset {
+      margin-top: 0
+    }
+  
+    &__header {
+  
+      &--title {
+          text-align: left; 
+          width: 70%; 
+          float: left;
+
+        p {
+            font-size: 14px;
+            line-height: 1.3;
+        }
+      }
+  
+      &--logo {
+          text-align: center; 
+          background-color: $brand-i; 
+          padding: 5px; 
+          width: 25%; 
+          float: right; 
+          font-weight: 900;
+      } 
+    }
+  
+    &__content {
+      clear: both;
+  
+      &--line {
+  
+        &-title {
+          margin-bottom: 0; 
+          font-weight: 900;
+          font-size: 14px;
+          line-height: 1.3;
+        }
+  
+        &-item {
+          box-sizing: border-box;
+          background-image: url('/assets/img/phone-icon.png');
+          background-position: 175px 3px;
+          background-repeat: no-repeat;
+          margin-top: 0; 
+          padding-left: 200px; 
+          display: block; 
+          margin-top: -15px; 
+          color: #0079FF; 
+          font-weight: 700;
+      
+          a:hover {
+              text-decoration: none;
+          }
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.3;
+        }
+
+        .divider__line {
+            margin-top: 5px;
+        }
+      }
+
+      &--btn {
+
+        @include mq($until: m) {
+            .btn {
+                width: 100%;
+            } 
+        }
+
+        .btn__text {
+            padding: 10px 20px;
+        }
+      }
+    }
+}
