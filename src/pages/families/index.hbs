@@ -45,7 +45,7 @@ page: families
       <div class="block__content container-families__content-result" data-bind="foreach: parentScenarios">
         <div class="h3 accordion__header" data-bind="click: changeParentScenarioOnSearchResult"> 
           <span class="accordion--advice__title" data-bind="html: (title().length > 45 ? title().substring(0, 44) + '...' : title)"></span>
-          <p class="accordion--families__short-description h4" data-bind="html: (body().length > 30 ? body().substring(0, 29) + '...' : body)"></p>
+          <p class="accordion--families__short-description h4" data-bind="html: (body().length > 55 ? (body().substring(0, 54).includes('e.g.') ? body().substring(0, 54) : '') : body)"></p>
         </div>
       </div>
       <!-- /ko -->
