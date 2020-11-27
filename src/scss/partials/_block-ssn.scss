@@ -73,12 +73,7 @@
     }
 
     .block__bcp-changeforgood {
-      margin: -70px 10px 0 10px;
-      border-left: 6px white solid;
-      border-right: 6px white solid;
-      border-bottom: 6px white solid;
-
-      @include mq($from: m) {
+        @include mq($from: m) {
         margin: 0;
         padding-top: 40px;
         @include span(6 of 12);
