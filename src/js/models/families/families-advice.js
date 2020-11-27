@@ -9,6 +9,7 @@ const querystring = require('../../get-url-parameter')
 const marked = require('marked')
 const htmlEncode = require('htmlencode')
 const SearchFamiliesAdviceModule = require('../../pages/families/search-families-advice/search-families-advice')
+const locationSelector = require('../../location/locationSelector')
 
 function FamilyAdvice () {
   const self = this
@@ -91,7 +92,7 @@ function FamilyAdvice () {
             parentScenarioId: ko.observable(x.parentScenarioId),
             sortPosition: ko.observable(x.sortPosition),
             tags: ko.observableArray(x.tags),
-            title: ko.observable(x.title),
+            title: ko.observable(htmlEncode.htmlDecode(x.title)),
             isSelected: ko.observable(x.id === self.adviceIdInQuerystring()),
             isParentScenario: ko.observable(false)
           }, self)
@@ -129,7 +130,7 @@ function FamilyAdvice () {
         }
         self.currentAdvice(new Advice({
           id: ko.observable(result.data.id),
-          title: ko.observable(result.data.title),
+          title: ko.observable(htmlEncode.htmlDecode(result.data.title)),
           body: ko.observable(marked(htmlEncode.htmlDecode(result.data.body))),
           sortPosition: ko.observable(result.data.sortPosition),
           tags: ko.observableArray(result.data.tags),
@@ -156,7 +157,7 @@ function FamilyAdvice () {
           .map(p => {
             return new ParentScenario({
               id: ko.observable(p.id),
-              title: ko.observable(p.name),
+              title: ko.observable(htmlEncode.htmlDecode(p.name)),
               body: ko.observable(marked(htmlEncode.htmlDecode(p.body))),
               sortPosition: ko.observable(p.sortPosition),
               tags: ko.observableArray(p.tags),
@@ -181,7 +182,7 @@ function FamilyAdvice () {
 
   self.getFAQs = function () {
     api
-    .data(`${endpoints.faqs}?tags=families&pageSize=100000&index=0${self.parentScenarioIdInQuerystring() ? '&parentScenarioId=' + self.parentScenarioIdInQuerystring() : ''}`)
+    .data(`${endpoints.faqs}?tags=families&pageSize=100000&index=0${locationSelector.getCurrentHubFromCookies().id ? '&location=' + locationSelector.getCurrentHubFromCookies().id : ''}${self.parentScenarioIdInQuerystring() ? '&parentScenarioId=' + self.parentScenarioIdInQuerystring() : ''}`)
     .then((result) => {
       self.faqs(result.data.items.map((x) => {
         return new FAQ({
@@ -194,7 +195,6 @@ function FamilyAdvice () {
           parentScenarioId: ko.observable(x.parentScenarioId)
         }, self)
       }).sort((a, b) => { return b.sortPosition() - a.sortPosition() }))
-
     }, (_) => {
       browser.redirect('/500')
     })

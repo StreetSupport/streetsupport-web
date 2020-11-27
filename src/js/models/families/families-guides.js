@@ -46,7 +46,7 @@ function FamiliesGuides () {
         return new Guide({
           id: ko.observable(x.id),
           sortPosition: ko.observable(x.sortPosition),
-          title: ko.observable(x.title),
+          title: ko.observable(htmlEncode.htmlDecode(x.title)),
           body: ko.observable(marked(htmlEncode.htmlDecode(x.body))),
           isSelected: ko.observable(self.guideIdInQuerystring() ? self.guideIdInQuerystring() === x.id : false),
           isExpanded: ko.observable(false)

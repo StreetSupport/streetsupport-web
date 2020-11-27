@@ -3,6 +3,7 @@ import ko from 'knockout'
 const api = require('../../../get-api-data')
 const browser = require('../../../browser')
 const endpoints = require('../../../api')
+const htmlEncode = require('htmlencode')
 
 class SearchAdviceBaseModel {
   constructor (data) {
@@ -62,11 +63,11 @@ function SearchFamiliesAdvice () {
         let parentScenario = self.parentScenarios().filter((y) => y.id() === x.parentScenarioId)[0]
         return new SearchAdviceModel({
           id: ko.observable(x.id),
-          body: ko.observable(x.body),
+          body: ko.observable(htmlEncode.htmlDecode(x.body)),
           parentScenario: ko.observable(parentScenario),
           sortPosition: ko.observable(x.sortPosition),
           tags: ko.observableArray(x.tags),
-          title: ko.observable(x.title),
+          title: ko.observable(htmlEncode.htmlDecode(x.title)),
           breadcrumbs: ko.observable(`Families > ${parentScenario ? parentScenario.title() + ' > ' : ''}${x.title}`),
           url: ko.observable(`/families/advice?id=${x.id}${parentScenario ? '&parentScenarioId=' + parentScenario.id() : ''}`)
         })
@@ -86,11 +87,11 @@ function SearchFamiliesAdvice () {
         self.parentScenarios(result.data.map((x) => {
           return new SearchParentScenarioModel({
             id: ko.observable(x.id),
-            body: ko.observable(x.body),
+            body: ko.observable(htmlEncode.htmlDecode(x.body)),
             sortPosition: ko.observable(x.sortPosition),
             tags: ko.observableArray(x.tags),
-            title: ko.observable(x.name),
-            breadcrumbs: ko.observable(`Families > ${x.name}`),
+            title: ko.observable(htmlEncode.htmlDecode(x.name)),
+            breadcrumbs: ko.observable(`Families > ${htmlEncode.htmlDecode(x.name)}`),
             url: ko.observable(`/families/advice?parentScenarioId=${x.id}`)
           })
         }))

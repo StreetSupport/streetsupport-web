@@ -8,6 +8,7 @@ const querystring = require('../../get-url-parameter')
 const marked = require('marked')
 const htmlEncode = require('htmlencode')
 const SearchFamiliesAdviceModule = require('../../pages/families/search-families-advice/search-families-advice')
+const locationSelector = require('../../location/locationSelector')
 
 function FamilyAdviceResult () {
   const self = this
@@ -44,7 +45,7 @@ function FamilyAdviceResult () {
 
   self.getFAQs = function () {
     api
-    .data(`${endpoints.faqs}?tags=families&pageSize=100000&index=0`)
+    .data(`${endpoints.faqs}?tags=families&pageSize=100000&index=0${locationSelector.getCurrentHubFromCookies().id ? '&location=' + locationSelector.getCurrentHubFromCookies().id : ''}`)
     .then((result) => {
       self.faqs(result.data.items.map((x) => {
         return new FAQ({
@@ -52,7 +53,7 @@ function FamilyAdviceResult () {
           body: ko.observable(marked(htmlEncode.htmlDecode(x.body))),
           sortPosition: ko.observable(x.sortPosition),
           tags: ko.observableArray(x.tags),
-          title: ko.observable(x.title),
+          title: ko.observable(htmlEncode.htmlDecode(x.title)),
           isSelected: ko.observable(false),
           parentScenarioId: ko.observable(x.parentScenarioId)
         }, self)
@@ -71,7 +72,7 @@ function FamilyAdviceResult () {
           .map(p => {
             return new ParentScenario({
               id: ko.observable(p.id),
-              title: ko.observable(p.name),
+              title: ko.observable(htmlEncode.htmlDecode(p.name)),
               body: ko.observable(marked(htmlEncode.htmlDecode(p.body))),
               sortPosition: ko.observable(p.sortPosition),
               tags: ko.observableArray(p.tags),
@@ -102,12 +103,11 @@ function FamilyAdviceResult () {
             parentScenarioId: ko.observable(x.parentScenarioId),
             sortPosition: ko.observable(x.sortPosition),
             tags: ko.observableArray(x.tags),
-            title: ko.observable(x.title),
+            title: ko.observable(htmlEncode.htmlDecode(x.title)),
             isSelected: ko.observable(false),
             isParentScenario: ko.observable(false)
           }, self)
         }))
-
         browser.loaded()
       }, (_) => {
         browser.redirect('/500')

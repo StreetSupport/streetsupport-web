@@ -122,6 +122,23 @@
   }
 }
 
+.location--edinburgh .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-size: 817px;
+      width: 733px;
+      bottom: -81px;
+      height: 335px;
+    }
+  }
+  @include mq($from: xxxl) {
+    &:before {
+      left: auto;
+      right: 0%;
+    }
+  }
+}
+
 .location--leeds .location-header {
   @include mq($from: m) {
     &:before {
