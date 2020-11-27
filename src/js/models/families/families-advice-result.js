@@ -108,6 +108,11 @@ function FamilyAdviceResult () {
             isParentScenario: ko.observable(false)
           }, self)
         }))
+
+        if(!self.hasAdvice()) {
+          browser.redirect(`/families/advice/?parentScenarioId=${self.currentParentScenario().id()}`)
+        }
+
         browser.loaded()
       }, (_) => {
         browser.redirect('/500')
