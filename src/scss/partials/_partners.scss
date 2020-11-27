@@ -508,6 +508,32 @@
       }
     }
 
+    //edinburgh
+
+    &--simon-community{
+      width: 250px;
+
+      a {
+        background-image: url(/assets/img/edinburgh-logos/simon-community.png)
+      }
+    }
+
+    &--edin-uni{
+      width: 300px;
+
+      a {
+        background-image: url(/assets/img/edinburgh-logos/edin-uni.png)
+      }
+    }
+
+    &--edin-council{
+      width: 250px;
+
+      a {
+        background-image: url(/assets/img/edinburgh-logos/edinburgh-council.svg)
+      }
+    }
+
     //luton
 
     &--luton-aldwych {
@@ -693,6 +719,14 @@
 
       a {
         background-image: url(/assets/img/nottingham-logos/jericho-road.jpg)
+      }
+    }
+
+    &--lottery {
+      width: 270px;
+
+      a {
+        background-image: url(/assets/img/nottingham-logos/lottery.png)
       }
     }
 
