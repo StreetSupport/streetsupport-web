@@ -109,7 +109,7 @@ function FamilyAdviceResult () {
           }, self)
         }))
 
-        if(!self.hasAdvice()) {
+        if (!self.hasAdvice()) {
           browser.redirect(`/families/advice/?parentScenarioId=${self.currentParentScenario().id()}`)
         }
 

@@ -48,7 +48,6 @@ function Families () {
     api
       .data(`${endpoints.parentScenarios}?tags=families`)
       .then((result) => {
-
         self.parentScenarios(result.data
           .map(p => {
             return new ParentScenario({
@@ -58,8 +57,7 @@ function Families () {
               sortPosition: ko.observable(p.sortPosition),
               tags: ko.observableArray(p.tags),
               isSelected: ko.observable(false),
-              isParentScenario: ko.observable(true),
-              isCurrentParentScenario: ko.observable(false)
+              isParentScenario: ko.observable(true)
             }, self)
           }).sort((a, b) => { return b.sortPosition() - a.sortPosition() })
         )
