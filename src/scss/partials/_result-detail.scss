@@ -219,14 +219,6 @@
     top: 27px;
   }
 
-  &__tags {
-    margin-top: 10px; 
-    border: 1px solid white; 
-    border-radius: 50px; 
-    padding: 8px; 
-    display:inline-block;
-  }
-
   &__short-description {
     margin-top: 10px !important;
     display: block;
@@ -264,7 +256,7 @@
     }
 
     @include mq($from: xxl) {
-      height: 130px;
+      height: 140px;
     }
 
     border-radius: 15px; 

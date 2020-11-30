@@ -45,7 +45,7 @@ function FamilyAdviceResult () {
 
   self.getFAQs = function () {
     api
-    .data(`${endpoints.faqs}?tags=families&pageSize=100000&index=0${locationSelector.getCurrentHubFromCookies().id ? '&location=' + locationSelector.getCurrentHubFromCookies().id : ''}`)
+    .data(`${endpoints.faqs}?tags=families&pageSize=100000&index=0&searchTerm=${self.searchQueryInQuerystring()}${locationSelector.getCurrentHubFromCookies().id ? '&location=' + locationSelector.getCurrentHubFromCookies().id : ''}`)
     .then((result) => {
       self.faqs(result.data.items.map((x) => {
         return new FAQ({
@@ -108,6 +108,11 @@ function FamilyAdviceResult () {
             isParentScenario: ko.observable(false)
           }, self)
         }))
+
+        if (!self.hasAdvice()) {
+          browser.redirect(`/families/advice/?parentScenarioId=${self.currentParentScenario().id()}`)
+        }
+
         browser.loaded()
       }, (_) => {
         browser.redirect('/500')
