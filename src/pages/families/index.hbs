@@ -21,11 +21,6 @@ page: families
       <li class="breadcrumbs__item">
         <a href="/families">Families</a>
       </li>
-      <!-- ko if: currentParentScenario -->
-      <li class="breadcrumbs__item" data-bind="with: currentParentScenario">
-        <a data-bind="text: title, attr: { 'data-id': id, 'href': '/families?parentScenarioId=' + id() }"></a>
-      </li>
-      <!-- /ko -->
     </ol>
   </div>
 </div>
@@ -40,20 +35,12 @@ page: families
   <div class="container">
 
     <div class="container-families__content">         
-      <!-- ko if: hasParentScenarios && !currentParentScenario() -->
+      <!-- ko if: hasParentScenarios -->
       <p class="h2 container-families__header-result">Advice by situation</p>   
       <div class="block__content container-families__content-result" data-bind="foreach: parentScenarios">
-        <div class="h3 accordion__header" data-bind="click: changeParentScenarioOnSearchResult"> 
+        <div class="h3 accordion__header" data-bind="click: $parent.redirectToParentScenario"> 
           <span class="accordion--advice__title" data-bind="html: (title().length > 45 ? title().substring(0, 44) + '...' : title)"></span>
-          <p class="accordion--families__short-description h4" data-bind="html: (body().length > 30 ? body().substring(0, 29) + '...' : body)"></p>
-        </div>
-      </div>
-      <!-- /ko -->
-      <!-- ko if: hasAdvice && currentParentScenario -->
-      <p class="h2 container-advice__header-result" data-bind="text: currentParentScenario().title()">Advice by situation</p>   
-      <div class="block__content container-families__content-result" data-bind="foreach: adviceByParentScenario">
-        <div class="h3 accordion__header full-width" data-bind="click: $parent.redirectToAdvice"> 
-          <span class="accordion--advice__title" data-bind="html: title"></span>
+          <p class="accordion--families__short-description h4" data-bind="html: (body().length > 55 ? (body().substring(0, 54).includes('e.g.') ? body().substring(0, 54) : '') : body)"></p>
         </div>
       </div>
       <!-- /ko -->

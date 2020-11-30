@@ -73,7 +73,7 @@ describe('Get search results by search phrase', () => {
   })
 
   it('- should retrieve items from API', () => {
-    expect(ajaxGetStub.getCall(1).args[0]).toEqual(endpoints.getFullUrl('/v1/faqs/?tags=families&pageSize=100000&index=0'))
+    expect(ajaxGetStub.getCall(1).args[0]).toEqual(endpoints.getFullUrl('/v1/faqs/?tags=families&pageSize=100000&index=0&searchTerm=test'))
   })
 
   it('- should have parent scenarios', () => {
