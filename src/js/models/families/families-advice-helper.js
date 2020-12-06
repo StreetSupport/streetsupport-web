@@ -83,7 +83,7 @@ export class FAQ {
     this.sortPosition = data.sortPosition
     this.tags = data.tags
     this.isSelected = data.isSelected
-    this.parentScenarioId = data.parentScenarioId
+    this.parentScenarioIds = data.parentScenarioIds
     this.container = container
   }
 
