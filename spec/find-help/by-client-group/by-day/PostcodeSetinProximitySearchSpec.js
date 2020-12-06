@@ -73,16 +73,16 @@ describe('Find Help by Day - postcode set in proximity search', () => {
     storage.set.restore()
   })
 
-  // it('- should show it is loading', () => {
-  //   expect(browserLoadingStub.calledOnce).toBeTruthy()
-  // })
+  it('- should show it is loading', () => {
+    expect(browserLoadingStub.calledOnce).toBeTruthy()
+  })
 
   it('- should get lat long from postcode lookup', () => {
     expect(postcodeLookupStub.getCall(0).args[0]).toEqual(newLocation.postcode)
   })
 
   it('- should retrieve items from API', () => {
-    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl(`/v2/timetabled-service-providers/show/long/234.5/lat/456.7?range=10000&day=${new Date().getDay() - 1}&clientGroup=families`))
+    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl(`/v2/timetabled-service-providers/show/long/234.5/lat/456.7?range=10000&day=${new Date().getDay() === 0 ? 6 : new Date().getDay() - 1}&clientGroup=families`))
   })
 
   it('- should set hasItems to true', () => {
