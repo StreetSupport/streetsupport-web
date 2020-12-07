@@ -80,7 +80,7 @@ export default class FindHelpByDay extends FindHelp {
 
     if (!dayOfWeekqs) {
       this.pushHistory()
-      this.day(new Date().getDay() - 1)
+      this.day(new Date().getDay() === 0 ? 6 : new Date().getDay() - 1)
     } else {
       this.day(this.getDayOfWeekValue(dayOfWeekqs))
     }
