@@ -182,7 +182,7 @@ function FamilyAdvice () {
 
   self.getFAQs = function () {
     api
-    .data(`${endpoints.faqs}?tags=families&pageSize=100000&index=0${locationSelector.getCurrentHubFromCookies().id ? '&location=' + locationSelector.getCurrentHubFromCookies().id : ''}${self.parentScenarioIdInQuerystring() ? '&parentScenarioId=' + self.parentScenarioIdInQuerystring() : ''}`)
+    .data(`${endpoints.faqs}?tags=families&pageSize=100000&index=0${locationSelector.getCurrentHubFromCookies().id ? '&location=' + locationSelector.getCurrentHubFromCookies().id : ''}${self.parentScenarioIdInQuerystring() ? '&parentScenarioIds=' + self.parentScenarioIdInQuerystring() : ''}`)
     .then((result) => {
       self.faqs(result.data.items.map((x) => {
         return new FAQ({
@@ -192,7 +192,7 @@ function FamilyAdvice () {
           tags: ko.observableArray(x.tags),
           title: ko.observable(x.title),
           isSelected: ko.observable(false),
-          parentScenarioId: ko.observable(x.parentScenarioId)
+          parentScenarioIds: ko.observableArray(x.parentScenarioIds)
         }, self)
       }).sort((a, b) => { return b.sortPosition() - a.sortPosition() }))
     }, (_) => {
