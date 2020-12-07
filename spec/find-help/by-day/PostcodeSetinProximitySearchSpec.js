@@ -84,7 +84,7 @@ describe('Find Help by Day - postcode set in proximity search', () => {
   })
 
   it('- should retrieve items from API', () => {
-    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl(`/v2/timetabled-service-providers/show/support/long/234.5/lat/456.7?range=10000&day=${new Date().getDay() - 1}`))
+    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl(`/v2/timetabled-service-providers/show/support/long/234.5/lat/456.7?range=10000&day=${new Date().getDay() === 0 ? 6 : new Date().getDay() - 1}`))
   })
 
   it('- should set hasItems to true', () => {

@@ -55,7 +55,7 @@ function FamilyAdviceResult () {
           tags: ko.observableArray(x.tags),
           title: ko.observable(htmlEncode.htmlDecode(x.title)),
           isSelected: ko.observable(false),
-          parentScenarioId: ko.observable(x.parentScenarioId)
+          parentScenarioIds: ko.observableArray(x.parentScenarioIds)
         }, self)
       }).sort((a, b) => { return b.sortPosition() - a.sortPosition() }))
     }, (_) => {
