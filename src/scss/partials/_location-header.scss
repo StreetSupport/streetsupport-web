@@ -94,6 +94,23 @@
   @extend %get-in-sea;
 }
 
+.location--brighton-and-hove .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-size: 733px;
+      width: 733px;
+      bottom: 3px;
+      height: 335px;
+    }
+  }
+  @include mq($from: xxxl) {
+    &:before {
+      left: auto;
+      right: 7%;
+    }
+  }
+}
+
 .location--bury .location-header {
   @include mq($from: m) {
     min-height: 400px;
@@ -181,12 +198,6 @@
       width: 733px;
       bottom: 10px;
       height: 335px;
-    }
-  }
-  @include mq($from: xxxl) {
-    &:before {
-      left: auto;
-      right: 0%;
     }
   }
 }
