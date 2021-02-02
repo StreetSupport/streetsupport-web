@@ -8,6 +8,10 @@
     margin-right: inherit;
     padding-bottom: $site-gutter;
 
+    &--advice {
+      padding: 50px 0;
+    }
+
     @include mq($from: m) {
       width: 100%;
       min-height: 200px;
