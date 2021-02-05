@@ -129,7 +129,7 @@ $columned-dropdown-column-count: 3;
   }
 }
 
-body, html { 
+body, html {
   @include mq($until: m) {
     overflow-x: hidden;
   }
@@ -194,7 +194,7 @@ body, html {
       list-style-type: none;
       background: $brand-e;
       width: 200%;
-      height: 1500px;
+      height: 2000px;
       margin: 0;
       padding: 0;
 
