@@ -6,6 +6,7 @@
         position: relative;
         display: inline-block;
         width: 100%;
+        padding-right: 10px;
 
         /* The search field */
         #search {
@@ -31,13 +32,13 @@
             box-shadow: 5px 5px 5px rgba(0,0,0, 0.1);
             width: 100%;
             text-align: left;
-            height: 150px;
+            height: 182px;
             overflow-y: auto;
             display: none;
 
-            @include mq($from: m) {
-                height: 100px;
-            }
+            // @include mq($from: m) {
+            //     height: 100px;
+            // }
 
             /* Links inside the dropdown */
             a {
@@ -74,7 +75,7 @@
             margin-top: 0;
         }
 
-        .btn__text { 
+        .btn__text {
             padding: 8px 18px;
             font-size: 18px;
         }
