@@ -45,13 +45,18 @@
   }
 
   &__item {
-    border-radius: 7px;  
+    border-radius: 7px;
     padding: 5px;
     width: fit-content;
+    color: $brand-b;
+      &:hover {
+        color: $brand-k;
+      }
 
     &.is-active {
       color: white;
-      background-color: #227f65;
+      background-color: $brand-r;
+      font-weight: bold;
     }
 
     &-main{
@@ -107,11 +112,11 @@
     float: right;
     width: 32px;
     height: 32px;
-  
+
     &--down {
       background-image: url('/assets/img/arrow-down.png');
     }
-  
+
     &--up {
       background-image: url('/assets/img/arrow-up.png');
     }
