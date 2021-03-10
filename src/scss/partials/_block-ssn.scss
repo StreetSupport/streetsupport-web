@@ -713,6 +713,24 @@
   }
 }
 
+.donation-banner {
+  width: 100%;
+  background-color: $big-change-a;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  @include mq($from: s) {
+    padding: 40px;
+    width: 95%;
+    margin: 30px auto;
+  }
+}
+
+.donation-banner__heading {
+  font-size: 28px;
+  margin: 0;
+}
+
 .sleeping-rough-title {
   display: flex;
   justify-content: center;
