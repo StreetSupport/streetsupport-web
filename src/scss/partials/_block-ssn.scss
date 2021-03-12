@@ -388,6 +388,47 @@
     }
   }
 
+  &--leeds-print-map {
+    background: rgba(10, 133, 100, 0.15);
+    display: block;
+    padding: 0!important;
+
+    @include mq($from: m) {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .block__leeds-print-map {
+      width: 100%;
+      height: 350px;
+      background: url('/assets/img/maps/leeds.jpg') right bottom;
+      box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.5);
+      // &:hover {
+      //   background: url('/assets/img/maps/leeds-hover.jpg') right bottom;
+      // } un-comment when map link is added
+
+      &--link-placeholder {
+        position:absolute;
+        width:143%;
+        height:143%;
+        top:0;
+        left: 0;
+        z-index: 1;
+      }
+
+      @include mq($from: m) {
+        width: 50%;
+      }
+    }
+
+    .block__leeds-map-pin {
+      height: 70%;
+      width: 70%;
+      position: relative;
+      background: url('/assets/img/maps/map-pin.svg') center no-repeat;
+    }
+  }
+
   &--real-change-banner {
     padding: 0 20px 30px 20px!important;
     background-color: #5e71ba;
@@ -711,6 +752,24 @@
       align-items: flex-end;
     }
   }
+}
+
+.donation-banner {
+  width: 100%;
+  background-color: $big-change-a;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+  @include mq($from: s) {
+    padding: 40px;
+    width: 95%;
+    margin: 30px auto;
+  }
+}
+
+.donation-banner__heading {
+  font-size: 28px;
+  margin: 0;
 }
 
 .sleeping-rough-title {
