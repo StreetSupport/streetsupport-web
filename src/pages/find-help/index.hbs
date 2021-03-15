@@ -25,6 +25,19 @@ page: findhelp
   <div class="container">
     <div class="block__content">
       <h1>Find Help</h1>
+      <h2 class="h2">Find local services to help you get what you need</h2>
+      <p>From a supportive chat and a warm meal, to legal advice and medical help, find help near you by selecting a category below.</p>
+      <div class="block__cta--3 result-grid">
+        {{> find-help/_generated-service-cats-ctas }}
+      </div>
+
+      <div class="title-with-button">
+        <h2 class="h3 title-with-button__title">Looking for an organisation?</h2>
+        <a class="btn btn--brand-d title-with-button__btn" href="/find-help/all-service-providers/">
+          <span class="btn__text">All organisations</span>
+        </a>
+      </div>
+
       <h2 class="h2">Have you recently become homeless, or at risk of losing your home?</h2>
 
       <p>Losing your home is a distressing situation no-one should face alone. Find out what you need to do in your area
@@ -48,19 +61,6 @@ page: findhelp
 
       <p>If Street Support is not in your area yet, please visit our <a href="advice/">general homelessness advice</a>.
       </p>
-
-      <h2 class="h2">Find local services to help you get what you need</h2>
-      <p>From a supportive chat and a warm meal, to legal advice and medical help, find help near you by selecting a category below.</p>
-      <div class="block__cta--3 result-grid">
-        {{> find-help/_generated-service-cats-ctas }}
-      </div>
-
-      <div class="title-with-button">
-        <h2 class="h3 title-with-button__title">Looking for an organisation?</h2>
-        <a class="btn btn--brand-d title-with-button__btn" href="/find-help/all-service-providers/">
-          <span class="btn__text">All organisations</span>
-        </a>
-      </div>
 
       <p class="text-center">If there are other local services that you know about, or you would like to help us bring
         Street Support to your area, please <a href="/about/contact/">get in touch</a>.</p>
