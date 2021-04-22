@@ -130,3 +130,9 @@
     background-image: url('/assets/img/mugshots/jez.jpg')
   }
 }
+
+.team__member-title--aida {
+  &::before, &::after {
+    background-image: url('/assets/img/mugshots/aida.jpg')
+  }
+}
