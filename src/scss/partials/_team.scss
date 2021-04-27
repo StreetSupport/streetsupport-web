@@ -136,3 +136,9 @@
     background-image: url('/assets/img/mugshots/aida.jpg')
   }
 }
+
+.team__member-title--unaiza {
+  &::before, &::after {
+    background-image: url('/assets/img/mugshots/unaiza.jpg')
+  }
+}
