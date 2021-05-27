@@ -12,6 +12,6 @@ gulp.task('browsersync', () => {
     server: {
       baseDir: config.paths.build
     },
-    xip: true
+    tunnel: true
   })
 })
