@@ -328,6 +328,34 @@
     }
   }
 
+  &--brighton-print-map {
+    background: rgba(10, 133, 100, 0.15);
+    display: block;
+    padding: 0!important;
+
+    @include mq($from: m) {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .brighton-print-map {
+      width: 100%;
+      height: 350px;
+      background: url('/assets/img/maps/brighton.jpg') center left no-repeat ;
+      box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.6);
+
+      @include mq($from: m) {
+        width: 50%;
+      }
+    }
+
+    .brighton-map-pin {
+      height: 60%;
+      width: 80%;
+      position: relative;
+      background: url('/assets/img/maps/map-pin.svg') center no-repeat;
+    }
+  }
 
   &--reading-print-map {
     background: rgba(10, 133, 100, 0.15);
