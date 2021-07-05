@@ -590,6 +590,13 @@
     }
   }
 
+  &--alt-giving-soton {
+    padding: 0 10px;
+    @include mq($from: m) {
+      padding: 40px 30px 40px 40px;
+    }
+  }
+
   &--bcp-changeforgood {
     padding: 0 10px;
     @include mq($from: m) {
