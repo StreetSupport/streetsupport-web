@@ -459,6 +459,7 @@ body, html {
       }
 
       &:hover {
+        background: $brand-c;
         & > .nav__list {
           display: block;
         }
@@ -507,7 +508,6 @@ body, html {
       height: $desktop-header-height;
 
       &:hover {
-        background: $brand-c;
         text-decoration: none;
       }
 
