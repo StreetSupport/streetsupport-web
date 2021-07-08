@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  streetsupport-web:
+    build: .
+    image: "streetsupport-web"
+    volumes:
+      - "./src:/app/src"
+      - "./tasks:/app/tasks"
+      - "./spec:/app/spec"
+    ports:
+      - "3000:3000"
+      - "3001:3001"
