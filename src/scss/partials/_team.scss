@@ -71,15 +71,15 @@
   }
 }
 
-.team__member-title--james {
+.team__member-title--eliz {
   &::before, &::after {
-    background-image: url('/assets/img/mugshots/james-cross.jpg')
+    background-image: url('/assets/img/mugshots/eliz.jpg')
   }
 }
 
-.team__member-title--samra {
+.team__member-title--james {
   &::before, &::after {
-    background-image: url('/assets/img/mugshots/samra-said.jpg')
+    background-image: url('/assets/img/mugshots/james-cross.jpg')
   }
 }
 
