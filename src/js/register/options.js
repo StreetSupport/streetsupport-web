@@ -1,3 +1,35 @@
+function emailValidation (callback) {
+  // This regex pattern was found here http://www.alpacajs.org/docs/fields/email.html
+  var re = new RegExp(/^[a-z0-9!\#\$%&'\*\-\/=\?\+\-\^_`\{\|\}~]+(?:\.[a-z0-9!\#\$%&'\*\-\/=\?\+\-\^_`\{\|\}~]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$/i)
+  var value = this.getValue()
+  if (!re.test(value)) {
+      callback({
+          "status": false,
+          "message": "Invalid Email address e.g. info@cloudcms.com"
+      });
+      return;
+  }
+  callback({
+      "status": true
+  });
+}
+
+function urlValidation (callback) {
+  // This regex pattern was found here https://mathiasbynens.be/demo/url-regex
+  var re = new RegExp(/^(((ftp|https?):\/\/[-\w]+(\.\w[-\w]*)+|(?:[a-z0-9](?:[-a-z0-9]*[a-z0-9])?\.)+(?: com\b|edu\b|biz\b|gov\b|in(?:t|fo)\b|mil\b|net\b|org\b|[a-z][a-z]\b))(\:\d+)?(\/[^.!,?;"'<>()\[\]{}\s\x7F-\xFF]*(?:[.!,?]+[^.!,?;"'<>()\[\]{}\s\x7F-\xFF]+)*)?)?$/i)
+  var value = this.getValue()
+  if (!re.test(value)) {
+      callback({
+          "status": false,
+          "message": "The URL provided is not a valid web address."
+      });
+      return;
+  }
+  callback({
+      "status": true
+  });
+}
+
 module.exports = {
   'hideInitValidationError': true,
   'fields': {
@@ -17,19 +49,24 @@ module.exports = {
       'placeholder': 'A more detailed description of your organisation.'
     },
     'adminEmail': {
-      'placeholder': 'Email address of the administrator.'
+      'placeholder': 'Email address of the administrator.',
+      'validator': emailValidation
     },
     'email': {
-      'placeholder': 'Email address to contact your organisation.'
+      'placeholder': 'Email address to contact your organisation.',
+      'validator': emailValidation
     },
     'website': {
-      'placeholder': 'eg https://streetsupport.net'
+      'placeholder': 'eg https://streetsupport.net',
+      'validator': urlValidation
     },
     'facebook': {
-      'placeholder': 'eg https://facebook.com/streetsupport'
+      'placeholder': 'eg https://facebook.com/streetsupport',
+      'validator': urlValidation
     },
     'twitter': {
-      'placeholder': 'eg https://twitter.com/streetsupportuk'
+      'placeholder': 'eg https://twitter.com/streetsupportuk',
+      'validator': urlValidation
     },
     'addresses': {
       'label': 'Addresses',
