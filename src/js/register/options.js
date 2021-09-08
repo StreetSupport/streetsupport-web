@@ -6,12 +6,12 @@ function emailValidation (callback) {
       callback({
           "status": false,
           "message": "Invalid Email address e.g. info@cloudcms.com"
-      });
-      return;
+      })
+      return
   }
   callback({
       "status": true
-  });
+  })
 }
 
 function urlValidation (callback) {
@@ -22,12 +22,12 @@ function urlValidation (callback) {
       callback({
           "status": false,
           "message": "The URL provided is not a valid web address."
-      });
-      return;
+      })
+      return
   }
   callback({
       "status": true
-  });
+  })
 }
 
 module.exports = {
