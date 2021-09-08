@@ -34,7 +34,14 @@ const formatData = function (data) {
   const formatTags = () => {
     data.formattedTags = []
     data.tags.forEach((tag) => {
-      data.formattedTags.push({ id: tag, name: tag.replace(/-/g, ' ') })
+      let tagName
+      if (tag === 'charity') {
+        tagName = 'Registered Charity'
+      } else {
+        tagName = tag.replace(/-/g, ' ')
+      }
+
+      data.formattedTags.push({ id: tag, name: tagName })
     })
   }
 

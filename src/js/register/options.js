@@ -4,13 +4,13 @@ function emailValidation (callback) {
   var value = this.getValue()
   if (!re.test(value)) {
       callback({
-          "status": false,
-          "message": "Invalid Email address e.g. info@cloudcms.com"
+          'status': false,
+          'message': 'Invalid Email address e.g. info@cloudcms.com'
       })
       return
   }
   callback({
-      "status": true
+      'status': true
   })
 }
 
@@ -20,13 +20,13 @@ function urlValidation (callback) {
   var value = this.getValue()
   if (!re.test(value)) {
       callback({
-          "status": false,
-          "message": "The URL provided is not a valid web address."
+          'status': false,
+          'message': 'The URL provided is not a valid web address.'
       })
       return
   }
   callback({
-      "status": true
+      'status': true
   })
 }
 
