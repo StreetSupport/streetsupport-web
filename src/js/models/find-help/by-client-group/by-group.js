@@ -148,15 +148,10 @@ export default class FindHelpByClientGroup extends FindHelp {
 
     // If isInit == true it means we load page first time and need to get url parameters.
     if (isInit && this.catFilters().length > 1 && !catIdsInQuerystring) {
-      if (!utils.isSmallscreen()) {
-        this.catFilters()[1].isSelected(true)
-        this.catFilters()[1].setSubcategories()
-      } else if (utils.isSmallscreen()) {
-        this.catFilters().forEach((x) => {
-          x.isSelected(true)
-          x.setSubcategories()
-        })
-      }
+      this.catFilters().forEach((x) => {
+        x.isSelected(true)
+        x.setSubcategories()
+      })
 
       this.pushHistory()
       catIdsInQuerystring = querystring.parameter('catIds')
