@@ -31,26 +31,22 @@ module.exports = {
       'title': 'Contact Email Address',
       'description': 'Email address for people to get in contact',
       'type': 'string',
-      'format': 'email',
       'required': true
     },
     'website': {
       'title': 'Your website',
       'description': 'THe URL of your website',
-      'type': 'string',
-      'format': 'url'
+      'type': 'string'
     },
     'facebook': {
       'title': 'Your facebook page',
       'description': 'The URL of your Facebook page',
-      'type': 'string',
-      'format': 'url'
+      'type': 'string'
     },
     'twitter': {
       'title': 'Your Twitter page',
       'description': 'The URL of your Twitter page',
-      'type': 'string',
-      'format': 'url'
+      'type': 'string'
     },
     'addresses': {
       'type': 'array',

@@ -34,10 +34,6 @@ const VolunteerModel = function (currCityId) {
   self.telephone = ko.observable('')
   self.city = ko.observable(currCityId)
   self.cities = supportedCities.locations
-  self.cities.push({
-    id: '',
-    name: 'Other'
-  })
   self.postcode = ko.observable('').extend({ required: true })
   self.skillsAndExperience = ko.observable('')
   self.skillsCategories = ko.observableArray(volCategories)

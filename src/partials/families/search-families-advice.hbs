@@ -3,7 +3,7 @@
   <div class="dropdown">
     <input type="text" placeholder="Search for advice..." id="search" class="search__input" data-bind="textInput: searchQuery, hasFocus: isSelectedSearchInput, event: { keyup: searchAll, focusout: onInputLostFocus } ">
     <div class="dropdown--content" data-bind="foreach: filteredAdvice, style: { display: showFilteredAdvice() ? 'block' : 'none' }">
-      <a class="breadcrumbs-list" data-bind="text: breadcrumbs, attr: { 'data-id': id, 'href': url }"></a>
+      <a class="breadcrumbs-list" tabindex="0" data-bind="html: breadcrumbs, attr: { 'data-id': id, 'href': url }"></a>
     </div>
   </div>
   <button class="btn btn--cosy btn--brand-e btn--full" data-bind="click: searchAll">
