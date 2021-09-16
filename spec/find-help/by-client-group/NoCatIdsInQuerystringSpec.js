@@ -3,7 +3,6 @@
 const sinon = require('sinon')
 const ajax = require('../../../src/js/get-api-data')
 const browser = require('../../../src/js/browser')
-const endpoints = require('../../../src/js/api')
 const postcodeLookup = require('../../../src/js/location/postcodes')
 const querystring = require('../../../src/js/get-url-parameter')
 const storage = require('../../../src/js/storage')
@@ -82,42 +81,43 @@ describe('Find Help by Client Group - postcode and client group key set in query
     expect(postcodeLookupStub.getCall(0).args[0]).toEqual(newLocation.postcode)
   })
 
-  it('- should select only the first category and its subcategories', () => {
+  it('- should be selected all categories and subcategories', () => {
     for (let i = 0; i < sut.catFilters().length; i++) {
-      if (i == 1) {
         expect(sut.catFilters()[i].isSelected()).toBeTruthy()
         for (let j = 0; j < sut.catFilters()[i].subCategories().length - 1; j++) {
           expect(sut.catFilters()[i].subCategories()[j].isSelected()).toBeTruthy()
         }
+    }
+  })
+  
+  it('- should clear the last category and its subcategories', () => {
+    for (let i = 0; i < sut.catFilters().length; i++) {
+      if (i == sut.catFilters().length - 1) {
+        sut.catFilters()[i].filter()
+        expect(sut.catFilters()[i].isSelected()).toBeFalsy()
+        for (let j = 0; j < sut.catFilters()[i].subCategories().length - 1; j++) {
+          expect(sut.catFilters()[i].subCategories()[j].isSelected()).toBeFalsy()
+        }
         continue;
+      }
+      expect(sut.catFilters()[i].isSelected()).toBeTruthy()
+      for (let j = 0; j < sut.catFilters()[i].subCategories().length - 1; j++) {
+        expect(sut.catFilters()[i].subCategories()[j].isSelected()).toBeTruthy()
+      }
+    }
+  })
+
+  it('- should clear and then select all categories and its subcategories', () => {
+    for (let i = 0; i < sut.catFilters().length; i++) {
+      if (i == 0) {
+        sut.catFilters()[i].filter()
       }
       expect(sut.catFilters()[i].isSelected()).toBeFalsy()
       for (let j = 0; j < sut.catFilters()[i].subCategories().length - 1; j++) {
         expect(sut.catFilters()[i].subCategories()[j].isSelected()).toBeFalsy()
       }
     }
-  })
 
-  it('- should select also the last category and its subcategories', () => {
-    for (let i = 0; i < sut.catFilters().length; i++) {
-      if (i == 1 || i == sut.catFilters().length - 1) {
-        if (i == sut.catFilters().length - 1) {
-          sut.catFilters()[i].filter()
-        }
-        expect(sut.catFilters()[i].isSelected()).toBeTruthy()
-        for (let j = 0; j < sut.catFilters()[i].subCategories().length - 1; j++) {
-          expect(sut.catFilters()[i].subCategories()[j].isSelected()).toBeTruthy()
-        }
-        continue;
-      }
-      expect(sut.catFilters()[i].isSelected()).toBeFalsy()
-      for (let j = 0; j < sut.catFilters()[i].subCategories().length - 1; j++) {
-        expect(sut.catFilters()[i].subCategories()[j].isSelected()).toBeFalsy()
-      }
-    }
-  })
-
-  it('- should select and then clear all categories and its subcategories', () => {
     for (let i = 0; i < sut.catFilters().length; i++) {
       if (i == 0) {
         sut.catFilters()[i].filter()
@@ -125,16 +125,6 @@ describe('Find Help by Client Group - postcode and client group key set in query
       expect(sut.catFilters()[i].isSelected()).toBeTruthy()
       for (let j = 0; j < sut.catFilters()[i].subCategories().length - 1; j++) {
         expect(sut.catFilters()[i].subCategories()[j].isSelected()).toBeTruthy()
-      }
-    }
-
-    for (let i = 0; i < sut.catFilters().length; i++) {
-      if (i == 0) {
-        sut.catFilters()[i].filter()
-      }
-      expect(sut.catFilters()[i].isSelected()).toBeFalsy()
-      for (let j = 0; j < sut.catFilters()[i].subCategories().length - 1; j++) {
-        expect(sut.catFilters()[i].subCategories()[j].isSelected()).toBeFalsy()
       }
     }
   })
