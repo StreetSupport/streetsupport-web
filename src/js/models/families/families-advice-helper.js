@@ -62,6 +62,7 @@ export class Advice extends BaseAdvice {
   constructor (data, container) {
     super(data, container)
     this.parentScenarioId = data.parentScenarioId
+    this.files = data.files
   }
 
   changeAdvice (isBackUrl) {
@@ -96,6 +97,7 @@ export class Guide extends BaseAdvice {
   constructor (data, container) {
     super(data, container)
     this.isExpanded = data.isExpanded
+    this.files = data.files
   }
 
   toggle (isBackUrl) {
