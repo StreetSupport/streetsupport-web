@@ -51,13 +51,15 @@ page: families-advice
       <div class="block__content" data-bind="with: currentAdvice">
         <h1 class="h1" data-bind="html: title"></h1>
         <p class="block__content--advice" data-bind="html: body"></p>
-        <h2 data-bind="html: files().length ? 'Files' : ''">:</h2>
-        <p data-bind="foreach: files">
+        <!-- ko if: files && files().length -->
+        <h2 class="subtitle">Files:</h2>
+        <p class="files-container" data-bind="foreach: files">
           <a data-bind="attr: { href: url, title: name }">
             <span data-bind="html: name"></span>
           </a>
           <br/>
         </p>
+        <!-- /ko -->
       </div>
       <!-- /ko -->
 

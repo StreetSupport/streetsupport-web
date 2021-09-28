@@ -7,7 +7,8 @@
       "body":"Sed ut perspiciatis unde omnis iste naore veritatis et quastatem. Uuptate velit esse quam luptas nulla pariatur?",
       "sortPosition":0,
       "tags":["families","food"],
-      "parentScenarioId":"5f69bf51a27c1c3b84fe6447"
+      "parentScenarioId":"5f69bf51a27c1c3b84fe6447",
+      "files": []
     },
     {
       "id":"5f6b28d3a27c1d88789591cf",
@@ -16,7 +17,8 @@
       "body":"Food body",
       "sortPosition":0,
       "tags":["families","another-tag","last-item","test"],
-      "parentScenarioId":""
+      "parentScenarioId":"",
+      "files": []
     }],
     "total":2
 }

@@ -60,6 +60,15 @@ page: families-guides
                 <!-- ko if: isExpanded -->
                 <div class="accordion__inner">
                   <p class="h4" data-bind="html: body"></p>
+                  <!-- ko if: files() && files().length -->
+                  <h3 class="subtitle">Files:</h3>
+                  <p class="files-container" data-bind="foreach: files">
+                    <a data-bind="attr: { href: url, title: name }">
+                      <span data-bind="html: name"></span>
+                    </a>
+                    <br/>
+                  </p>
+                  <!-- /ko -->
                   <a class="btn btn--brand-e btn--guides" data-bind="click: expand">
                     <span class="btn__text btn--guides__text btn__expanded">Read less</span>
                   </a>

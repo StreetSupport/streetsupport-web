@@ -49,7 +49,13 @@ function FamiliesGuides () {
           title: ko.observable(htmlEncode.htmlDecode(x.title)),
           body: ko.observable(marked(htmlEncode.htmlDecode(x.body))),
           isSelected: ko.observable(self.guideIdInQuerystring() ? self.guideIdInQuerystring() === x.id : false),
-          isExpanded: ko.observable(false)
+          isExpanded: ko.observable(false),
+          files: ko.observable(x.files.map(item => {
+            return {
+              name: item.fileName,
+              url: `${endpoints.contentPages}/file/${item.fileId}`
+            }
+          }))
         }, self)
       }).sort((a, b) => { return b.sortPosition() - a.sortPosition() }))
       browser.loaded()

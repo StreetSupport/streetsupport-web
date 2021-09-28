@@ -142,7 +142,7 @@ function FamilyAdvice () {
           tags: ko.observableArray(result.data.tags),
           isSelected: ko.observable(true),
           isParentScenario: ko.observable(false),
-          files: ko.observable(x.files.map(item => {
+          files: ko.observable(result.data.files.map(item => {
             return {
               name: item.fileName,
               url: `${endpoints.contentPages}/file/${item.fileId}`
@@ -175,7 +175,8 @@ function FamilyAdvice () {
               tags: ko.observableArray(p.tags),
               isSelected: ko.observable(false),
               isParentScenario: ko.observable(true),
-              isCurrentParentScenario: ko.observable(p.id === self.parentScenarioIdInQuerystring())
+              isCurrentParentScenario: ko.observable(p.id === self.parentScenarioIdInQuerystring()),
+              files: ko.observable([])
             }, self)
           }).sort((a, b) => { return b.sortPosition() - a.sortPosition() })
         )

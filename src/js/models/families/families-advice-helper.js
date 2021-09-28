@@ -14,6 +14,7 @@ export class ParentScenario extends BaseAdvice {
   constructor (data, container) {
     super(data, container)
     this.isCurrentParentScenario = data.isCurrentParentScenario
+    this.files = data.files
   }
 
   changeParentScenarioOnSearchResult () {
