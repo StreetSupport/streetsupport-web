@@ -362,6 +362,14 @@
       text-align: justify;
     }
 
+    .subtitle {
+      margin-bottom: 0;
+    }
+
+    .subtitle+.files-container {
+      margin-top: 0;
+    }
+
     @include mq($until: m) {
       .h1 {
         font-size: 28px;
