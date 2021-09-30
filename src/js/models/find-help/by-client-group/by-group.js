@@ -1,17 +1,15 @@
 require('../../../arrayExtensions')
 
 import ko from 'knockout'
-import utils from '../../../utils'
+import { getProvidersForListing } from '../../../pages/find-help/provider-listing/helpers'
+import FindHelp from './FindHelp'
+import { categories } from '../../../../data/generated/service-categories'
 
 const ajax = require('../../../get-api-data')
 const browser = require('../../../browser')
 const endpoints = require('../../../api')
 const querystring = require('../../../get-url-parameter')
 const listToDropdown = require('../../../list-to-dropdown')
-
-import { getProvidersForListing } from '../../../pages/find-help/provider-listing/helpers'
-import FindHelp from './FindHelp'
-import { categories } from '../../../../data/generated/service-categories'
 
 class CatFilter {
   constructor (data, container) {

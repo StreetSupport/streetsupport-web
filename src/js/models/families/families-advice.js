@@ -94,7 +94,13 @@ function FamilyAdvice () {
             tags: ko.observableArray(x.tags),
             title: ko.observable(htmlEncode.htmlDecode(x.title)),
             isSelected: ko.observable(x.id === self.adviceIdInQuerystring()),
-            isParentScenario: ko.observable(false)
+            isParentScenario: ko.observable(false),
+            files: ko.observable(x.files.map(item => {
+              return {
+                name: item.fileName,
+                url: `${endpoints.contentPages}/file/${item.fileId}`
+              }
+            }))
           }, self)
         }).sort((a, b) => { return b.sortPosition() - a.sortPosition() }))
 
@@ -135,7 +141,13 @@ function FamilyAdvice () {
           sortPosition: ko.observable(result.data.sortPosition),
           tags: ko.observableArray(result.data.tags),
           isSelected: ko.observable(true),
-          isParentScenario: ko.observable(false)
+          isParentScenario: ko.observable(false),
+          files: ko.observable(result.data.files.map(item => {
+            return {
+              name: item.fileName,
+              url: `${endpoints.contentPages}/file/${item.fileId}`
+            }
+          }))
         }, self))
 
         self.getFAQs()
@@ -163,7 +175,8 @@ function FamilyAdvice () {
               tags: ko.observableArray(p.tags),
               isSelected: ko.observable(false),
               isParentScenario: ko.observable(true),
-              isCurrentParentScenario: ko.observable(p.id === self.parentScenarioIdInQuerystring())
+              isCurrentParentScenario: ko.observable(p.id === self.parentScenarioIdInQuerystring()),
+              files: ko.observable([])
             }, self)
           }).sort((a, b) => { return b.sortPosition() - a.sortPosition() })
         )

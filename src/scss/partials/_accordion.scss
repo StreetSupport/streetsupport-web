@@ -109,5 +109,13 @@
 
   &__inner {
     padding: 30px 30px;
+
+    .subtitle {
+      margin-bottom: 0;
+    }
+    
+    .subtitle+.files-container {
+      margin-top: 0;
+    }
   }
 }

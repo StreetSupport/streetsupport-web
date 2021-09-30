@@ -8,7 +8,8 @@
         "body":"Sed ut perspiciatis unde quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
         "sortPosition":1002,
         "tags":["tag1","tag2","families"],
-        "parentScenarioId":"5f69bf51a27c1c3b84fe6448"
+        "parentScenarioId":"5f69bf51a27c1c3b84fe6448",
+        "files": []
       },
       {
         "id":"5f897e260532b831b083072c",
@@ -17,7 +18,8 @@
         "body":"test",
         "sortPosition":1000,
         "tags":["families"],
-        "parentScenarioId":"5f69bf51a27c1c3b84fe6448"
+        "parentScenarioId":"5f69bf51a27c1c3b84fe6448",
+        "files": []
       },
       {
         "id":"5f858b5c0532b84abc5071c3",
@@ -26,7 +28,8 @@
         "body":"Test body",
         "sortPosition":1001,
         "tags":["families"],
-        "parentScenarioId":"5f69bf51a27c1c3b84fe6448"
+        "parentScenarioId":"5f69bf51a27c1c3b84fe6448",
+        "files": []
       }
     ],
     "total":3

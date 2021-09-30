@@ -11,7 +11,8 @@
         "last-item",
         "test"
       ],
-      "parentScenarioId": "5f69bf51a27c1c3b84fe6447"
+      "parentScenarioId": "5f69bf51a27c1c3b84fe6447",
+      "files": []
     },
     {
       "id": "5f6b28f6a27c1d88789591d9",
@@ -23,7 +24,8 @@
         "food",
         "common"
       ],
-      "parentScenarioId": "5f69bf51a27c1c3b84fe6448"
+      "parentScenarioId": "5f69bf51a27c1c3b84fe6448",
+      "files": []
     },
     {
       "id": "5f6b295ca27c1d88789591ef",
@@ -35,7 +37,8 @@
         "another-tag",
         "parent"
       ],
-      "parentScenarioId": "5f69bf51a27c1c3b84fe6447"
+      "parentScenarioId": "5f69bf51a27c1c3b84fe6447",
+      "files": []
     },
     {
       "id": "5f69eac6a27c1d8c7cd68a5c",
@@ -49,7 +52,8 @@
         "last-item",
         "parent"
       ],
-      "parentScenarioId": null
+      "parentScenarioId": null,
+      "files": []
     },
     {
       "id": "5f69ea16a27c1d33b03aa8f1",
@@ -59,7 +63,8 @@
       "tags": [
         "families"
       ],
-      "parentScenarioId": null
+      "parentScenarioId": null,
+      "files": []
     }
   ],
   "total": 5
