@@ -100,7 +100,7 @@
       background-size: 733px;
       width: 733px;
       bottom: 3px;
-      height: 335px;
+      height: 350px;
     }
   }
   @include mq($from: xxxl) {
@@ -109,6 +109,7 @@
       right: 7%;
     }
   }
+  @extend %get-in-sea;
 }
 
 .location--bury .location-header {
