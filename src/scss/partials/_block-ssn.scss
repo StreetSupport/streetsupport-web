@@ -7,6 +7,16 @@
     }
   }
 
+  &--two-column {
+    padding-top: 10px!important;
+    display: flex;
+    flex-direction: column;
+
+    @include mq($from: m) {
+      flex-direction: row;
+    }
+  }
+
   &--pushup {
     margin-top: -140px;
 
@@ -365,7 +375,7 @@
 
     .brighton-print-map {
       width: 100%;
-      height: 350px;
+      height: 400px;
       background: url('/assets/img/maps/brighton.jpg') center left no-repeat ;
       box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.6);
 
@@ -883,6 +893,11 @@
 
 .wakefield-cares__logos {
   margin: auto;
+}
+
+.single-column {
+  width: 600px;
+  padding-right: 30px;
 }
 
 .block__link {
