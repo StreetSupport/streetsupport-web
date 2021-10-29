@@ -29,7 +29,7 @@ export const qAndAs = [
   },
   {
     question: 'I represent a business that would like to support the cause',
-    answer: 'If you are a business or organisation that shares our values and would like to support our mission, either financially or in other ways, please contact Gary at [mailto:gary@streetsupport.net](gary@streetsupport.net)'
+    answer: 'If you are a business or organisation that shares our values and would like to support our mission, either financially or in other ways, please contact Gary at [gary@streetsupport.net](mailto:gary@streetsupport.net)'
   }
 ]
 

@@ -187,6 +187,31 @@
     }
   }
 
+  &--change-into-action {
+    padding: 0!important;
+    border-top: 70px $cia-yellow solid;
+    border-bottom: 70px $cia-yellow solid;
+
+    @include mq($from: m) {
+      display: flex;
+    }
+
+    img {
+      padding-top: 20px;
+    }
+
+    .block__change-into-action {
+        @include mq($from: m) {
+        margin: 0;
+        padding-top: 60px;
+        @include span(6 of 12);
+        border: none;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
   &--southampton-charter {
     background: rgba(10, 133, 100, 0.15);
     display: block;
