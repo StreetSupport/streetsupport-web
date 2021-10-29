@@ -896,8 +896,11 @@
 }
 
 .single-column {
-  width: 600px;
   padding-right: 30px;
+
+  @include mq($from: m) {
+    width: 600px;
+  }
 }
 
 .block__link {
