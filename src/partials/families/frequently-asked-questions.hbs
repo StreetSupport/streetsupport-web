@@ -1,25 +1,24 @@
-<div class="block__content">  
+<div class="block__content">
     <!-- ko if: hasFAQs -->
     <div class="cards__list">
-        <h2 class="h2">Frequently asked questions</h2>
-        <div class="result-detail">
-            <div class="accordion accordion--advice" data-bind="foreach: faqs">
-                <button class="h3 accordion__header" data-bind="css: { 'is-active': isSelected }, click: toggle">
-                    <span class="accordion--advice__title" data-bind="html: title"></span>
-                    <svg class="svg-plus-dims accordion__icon accordion__icon--open">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use>
-                    </svg>
-                    <svg class="svg-minus-dims accordion__icon accordion__icon--close">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use>
-                    </svg>
-                    <p class="accordion--advice__short-description h4" data-bind="html: (body().length > 100 ? body().substring(0, 99) + '...' : body), css: { 'is-active': isSelected }"></p>
-                </button>
-                <div class="accordion__item" data-bind="css: { 'is-active': isSelected }">
-                    <div class="accordion__inner h4" data-bind="html: body">
-                    </div>
-                </div>
-            </div>
+      <div class="result-detail">
+        <div class="accordion accordion--advice" data-bind="foreach: faqs">
+          <button class="h3 accordion__header" data-bind="css: { 'is-active': isSelected }, click: toggle">
+            <span class="accordion--advice__title" data-bind="html: title"></span>
+            <svg class="svg-plus-dims accordion__icon accordion__icon--open">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#plus"></use>
+            </svg>
+            <svg class="svg-minus-dims accordion__icon accordion__icon--close">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#minus"></use>
+            </svg>
+            <p class="accordion--advice__short-description h4" data-bind="html: (body().length > 100 ? body().substring(0, 99) + '...' : body), css: { 'is-active': isSelected }"></p>
+          </button>
+          <div class="accordion__item" data-bind="css: { 'is-active': isSelected }">
+              <div class="accordion__inner h4" data-bind="html: body">
+              </div>
+          </div>
         </div>
+      </div>
     </div>
     <!-- /ko -->
 </div>
