@@ -45,8 +45,8 @@ page: families-advice
   <div class="container">
 
     {{> families/filter-families-advice }}
-    
-    <div class="container-advice__content">      
+
+    <div class="container-advice__content">
       <!-- ko if: currentAdvice -->
       <div class="block__content" data-bind="with: currentAdvice">
         <h1 class="h1" data-bind="html: title"></h1>
@@ -63,7 +63,6 @@ page: families-advice
       </div>
       <!-- /ko -->
 
-      {{> divider }}
       {{> families/frequently-asked-questions }}
 
     </div>

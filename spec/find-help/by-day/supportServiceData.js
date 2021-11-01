@@ -18626,7 +18626,7 @@ export default {
           'name': 'Justlife',
           'serviceInfo': 'Housing advice drop in or appointments.',
           'tags': [
-            'In temporary accomodation'
+            'In temporary accommodation'
           ],
           'address': {
             'key': '00000000-0000-0000-0000-000000000000',
