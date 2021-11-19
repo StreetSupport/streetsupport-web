@@ -177,6 +177,21 @@
     }
   }
 
+  &--full-inline {
+    width: 100%;
+    margin-top: 0px !important;
+    margin-bottom: 40px !important;
+
+    @include mq($from: m) {
+      width: auto;
+
+      .btn__text {
+        padding-right: 60px;
+        padding-left: 60px;
+      }
+    }
+  }
+
   &--short {
     .btn__text {
       padding: 5px 30px;
