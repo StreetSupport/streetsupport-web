@@ -136,3 +136,15 @@
     background-image: url('/assets/img/mugshots/aida.jpg')
   }
 }
+
+.team__member-title--barbara {
+  &::before, &::after {
+    background-image: url('/assets/img/mugshots/barbara.jpg')
+  }
+}
+
+.team__member-title--dorcas {
+  &::before, &::after {
+    background-image: url('/assets/img/mugshots/dorcas.jpg')
+  }
+}
