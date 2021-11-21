@@ -360,6 +360,23 @@
   }
 }
 
+.location--walsall .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-size: 790px;
+      width: 805px;
+      bottom: 6px;
+      height: 335px;
+    }
+  }
+  @include mq($from: xxxl) {
+    &:before {
+      left: auto;
+      right: 6%;
+    }
+  }
+}
+
 .location--wigan-and-leigh .location-header {
   @include mq($from: m) {
     min-height: 400px;

@@ -369,7 +369,7 @@
       width: 200px;
 
       a {
-        background-image: url(/assets/img/solihull-logos/solihull-council.svg);
+        background-image: url(/assets/img/solihull-logos/solihull-council.png);
       }
     }
 
@@ -991,6 +991,32 @@
 
       a {
         background-image: url(/assets/img/wakefield-logos/ssn.png)
+      }
+    }
+
+    //walsall
+
+    &--wal-council {
+      width: 200px;
+
+      a {
+        background-image: url(/assets/img/walsall-logos/wal-council.png)
+      }
+    }
+
+    &--wal-rmc {
+      width: 200px;
+
+      a {
+        background-image: url(/assets/img/walsall-logos/wal-rmc.png)
+      }
+    }
+
+    &--whg {
+      width: 200px;
+
+      a {
+        background-image: url(/assets/img/walsall-logos/whg.png)
       }
     }
 
