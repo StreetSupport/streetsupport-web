@@ -212,6 +212,36 @@
     }
   }
 
+  &--alternative-giving-campaign {
+    padding: 0 0 10px 0!important;
+    background-color: #383636;
+    color: #fff;
+
+    @include mq($from: m) {
+      display: flex;
+    }
+
+    a {
+      color: $brand-d;
+    }
+
+    img {
+      width: 350px;
+      margin: auto;
+    }
+
+    .block__alternative-giving-campaign {
+        @include mq($from: m) {
+        margin: 0;
+        padding-top: 25px;
+        @include span(6 of 12);
+        border: none;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
   &--southampton-charter {
     background: rgba(10, 133, 100, 0.15);
     display: block;
