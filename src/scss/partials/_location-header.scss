@@ -152,7 +152,7 @@
   @include mq($from: xxxl) {
     &:before {
       left: auto;
-      right: 6%;
+      right: 4%;
     }
   }
 }
@@ -181,7 +181,7 @@
       width: 756px;
       bottom: 21px;
       height: 335px;
-      right: 6%;
+      right: 3%;
     }
   }
   @include mq($from: xxxl) {
@@ -310,7 +310,7 @@
   @include mq($from: xxxl) {
     &:before {
       left: auto;
-      right: 6%;
+      right: 3%;
     }
   }
 }
@@ -390,7 +390,7 @@
   @include mq($from: xxxl) {
     &:before {
       left: auto;
-      right: 6%;
+      right: 3%;
     }
   }
 }
@@ -418,7 +418,7 @@
   @include mq($from: xxxl) {
     &:before {
       left: auto;
-      right: 6%;
+      right: 4%;
     }
   }
 }
