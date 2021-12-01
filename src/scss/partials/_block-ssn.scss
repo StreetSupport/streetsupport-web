@@ -693,6 +693,14 @@
     }
   }
 
+  &--orange {
+    background: $brand-d;
+    color: #1c1c1c;
+    a {
+      color: #0057fa;
+    }
+  }
+
   &--blue-highlight {
     background: transparent;
     background: linear-gradient(180deg, #019aa8 0%, #026c76 100%);
@@ -954,7 +962,7 @@
   padding-right: 30px;
 
   @include mq($from: m) {
-    width: 600px;
+    width: 400px;
   }
 }
 
