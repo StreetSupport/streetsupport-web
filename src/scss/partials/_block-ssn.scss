@@ -694,7 +694,7 @@
   }
 
   &--orange {
-    background: $brand-d;
+    background: linear-gradient(180deg, #ffae00 0%, #a8570a 100%);
     color: #1c1c1c;
     a {
       color: #0057fa;
