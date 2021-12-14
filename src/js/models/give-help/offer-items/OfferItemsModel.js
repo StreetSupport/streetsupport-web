@@ -26,7 +26,7 @@ var OfferItemModel = function (currCityId) {
   self.lastName = ko.observable('').extend({ required: true })
   self.email = ko.observable('').extend({ required: true })
   self.telephone = ko.observable('')
-  self.city = ko.observable(currCityId)
+  self.city = ko.observable(currCityId).extend({ required: true })
   self.isManchester = ko.computed(function () {
     return self.city() === 'manchester'
   }, self)
