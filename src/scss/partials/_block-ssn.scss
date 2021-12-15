@@ -187,6 +187,39 @@
     }
   }
 
+  &--manc-digital-collective {
+    padding: 0 0 10px 0!important;
+    background-color: #293238;
+    color: #fff;
+
+    @include mq($from: m) {
+      display: flex;
+    }
+
+    a {
+      color: $brand-d;
+    }
+
+    img {
+      width: 500px;
+      margin: auto;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+
+    .block__manc-digital-collective {
+        @include mq($from: m) {
+        margin: 0;
+        padding-top: 25px;
+        @include span(6 of 12);
+        border: none;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
   &--change-into-action {
     padding: 0!important;
     border-top: 70px $cia-yellow solid;

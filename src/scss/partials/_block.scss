@@ -649,6 +649,13 @@
     }
   }
 
+  &--mdc {
+    padding: 0 10px;
+    @include mq($from: m) {
+      padding: 10px 30px 10px 40px;
+    }
+  }
+
   &--video-banner {
     padding: 40px 1rem;
     @include mq($from: m) {
