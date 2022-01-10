@@ -148,3 +148,9 @@
     background-image: url('/assets/img/mugshots/dorcas.jpg')
   }
 }
+
+.team__member-title--mara {
+  &::before, &::after {
+    background-image: url('/assets/img/mugshots/mara.jpg')
+  }
+}
