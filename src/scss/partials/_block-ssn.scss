@@ -275,6 +275,42 @@
     }
   }
 
+  &--street-change-glasgow {
+    padding: 30px 0 30px 0!important;
+    background-color: $street-change-glasgow;
+    color: #fff;
+
+    .street-change-img {
+      margin-top: 20px;
+      height: 300px;
+    }
+
+    @include mq($from: m) {
+      display: flex;
+    }
+
+    a {
+      color: $brand-d;
+    }
+
+    img {
+      width: 350px;
+      margin: auto;
+    }
+
+    .block__street-change-glasgow {
+        @include mq($from: m) {
+        margin: 20px 0 0 0;
+        padding-top: 25px;
+        @include span(6 of 12);
+        border: none;
+        display: flex;
+        align-items: center;
+        height: 300px;
+      }
+    }
+  }
+
   &--southampton-charter {
     background: rgba(10, 133, 100, 0.15);
     display: block;
