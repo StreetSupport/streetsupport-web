@@ -633,6 +633,16 @@
     }
   }
 
+  &--street-change-glasgow {
+    padding: 0 10px;
+    a {
+      color: #fbbb0e;
+    }
+    @include mq($from: m) {
+      padding: 10px 30px 10px 40px;
+    }
+  }
+
   &--it-takes-a-city {
     padding: 40px 20px;
 
