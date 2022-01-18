@@ -145,6 +145,18 @@
     }
   }
 
+  &--brand-scg {
+    .btn__text {
+      background-color: #fbbb0e;
+      color: #101011;
+      box-shadow: 0px 3px 0px 0px darken( $brand-d, 15% );
+
+      &:hover {
+        background-color: darken( $brand-d, 5% );
+      }
+    }
+  }
+
   &--big-change {
     .btn__text {
       background-color: $big-change-b;
