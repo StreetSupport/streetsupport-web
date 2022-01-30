@@ -50,6 +50,23 @@
   }
 }
 
+.location--birmingham .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-size: 755px;
+      width: 758px;
+      bottom: 6px;
+      height: 335px;
+    }
+  }
+  @include mq($from: xxxl) {
+    &:before {
+      left: auto;
+      right: 4%;
+    }
+  }
+}
+
 .location--blackpool .location-header {
   @include mq($from: m) {
     min-height: 400px;

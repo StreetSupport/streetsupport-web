@@ -66,6 +66,16 @@
       }
     }
 
+    //birmingham
+
+    &--birm-council {
+      width: 230px;
+
+      a {
+        background-image: url(/assets/img/birmingham-logos/bcc.png);
+      }
+    }
+
     //brighton
 
     &--antifreeze {
@@ -153,6 +163,16 @@
 
       a {
         background-image: url(/assets/img/brighton-logos/sussex-police.png);
+      }
+    }
+
+    //dudley
+
+    &--dudley-council {
+      width: 200px;
+
+      a {
+        background-image: url(/assets/img/dudley-logos/dc.jpg);
       }
     }
 
