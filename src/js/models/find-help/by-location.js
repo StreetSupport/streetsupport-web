@@ -78,7 +78,7 @@ export default class FindHelpByCategory extends FindHelp {
 
     let popup = null
 
-      this.items()
+    this.items()
       .forEach((p) => {
         if (!isEmptyItems) {
           const marker = googleMaps.buildMarker(p.location, map, { title: `${htmlEncode.htmlDecode(p.serviceProviderName)}` })

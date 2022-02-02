@@ -62,7 +62,7 @@ export default class FindHelpByClientGroup extends FindHelp {
   }
 
   displayMap () {
-    let isEmptyItems = false;
+    let isEmptyItems = false
 
     if (this.items() != null && !this.items().length) {
       isEmptyItems = true
