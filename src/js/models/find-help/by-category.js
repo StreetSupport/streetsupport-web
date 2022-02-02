@@ -82,7 +82,7 @@ export default class FindHelpByCategory extends FindHelp {
       this.pageIndex(0)
     }
     ajax
-      .data(`${endpoints.serviceCategories}${this.category.categoryId}/${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}`)
+      .data(`${endpoints.serviceCategories}sorted-by-location?pageSize=${this.pageSize}&latitude=${this.proximitySearch.latitude}&longitude=${this.proximitySearch.longitude}&range=${this.proximitySearch.range()}&index=${this.pageIndex()}&serviceCategoryId=${this.category.categoryId}`)
       .then((result) => {
         if (isLoadMore !== true) {
           this.totalItems(result.data.total)
