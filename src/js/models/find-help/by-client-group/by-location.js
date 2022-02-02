@@ -62,6 +62,14 @@ export default class FindHelpByClientGroup extends FindHelp {
   }
 
   displayMap () {
+    let isEmptyItems = false;
+
+    if (this.items() != null && !this.items().length) {
+      isEmptyItems = true
+      // Map can't be inizialised without items
+      this.items([{}])
+    }
+
     const buildMap = () => {
       const zoom = proximityRanges.getByRange(this.proximitySearch.range())
       const center = { lat: this.proximitySearch.latitude, lng: this.proximitySearch.longitude }
@@ -71,21 +79,25 @@ export default class FindHelpByClientGroup extends FindHelp {
     const map = buildMap()
     let popup = null
 
-    this.items()
-      .forEach((p) => {
-        const marker = googleMaps.buildMarker(p.location, map, { title: `${htmlEncode.htmlDecode(p.serviceProviderName)}` })
-
-        marker.addListener('click', function () {
-          document.querySelectorAll('.card__gmaps-container')
-            .forEach((p) => p.parentNode.removeChild(p))
-          popup = new googleMaps.Popup(
-            this.position.lat(),
-            this.position.lng(),
-            buildInfoWindowMarkup(p))
-          popup.setMap(map)
-          map.setCenter(new google.maps.LatLng(this.position.lat(), this.position.lng()))
+    if (this.items() != null && this.items().length) {
+      this.items()
+        .forEach((p) => {
+          if (!isEmptyItems) {
+            const marker = googleMaps.buildMarker(p.location, map, { title: `${htmlEncode.htmlDecode(p.serviceProviderName)}` })
+            marker.addListener('click', function () {
+              document.querySelectorAll('.card__gmaps-container')
+                .forEach((p) => p.parentNode.removeChild(p))
+              popup = new googleMaps.Popup(
+                this.position.lat(),
+                this.position.lng(),
+                buildInfoWindowMarkup(p))
+              popup.setMap(map)
+              map.setCenter(new google.maps.LatLng(this.position.lat(), this.position.lng()))
+            })
+          }
         })
-      })
+    }
+
     googleMaps.addCircleMarker(this.proximitySearch, map)
   }
 

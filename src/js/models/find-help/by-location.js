@@ -44,7 +44,7 @@ export default class FindHelpByCategory extends FindHelp {
     this.isLoaded = true
     browser.loading()
     ajax
-      .data(`${endpoints.serviceCategories}${this.category.categoryId}/${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}`)
+      .data(`${endpoints.serviceCategories}sorted-by-location?pageSize=${this.pageSize}&latitude=${this.proximitySearch.latitude}&longitude=${this.proximitySearch.longitude}&range=${this.proximitySearch.range()}&index=${this.pageIndex()}&serviceCategoryId=${this.category.categoryId}`)
       .then((result) => {
         this.items(result.data.providers)
         this.displayMap()
@@ -59,6 +59,14 @@ export default class FindHelpByCategory extends FindHelp {
   }
 
   displayMap () {
+    let isEmptyItems = false
+
+    if (this.items() != null && !this.items().length) {
+      isEmptyItems = true
+      // Map can't be inizialised without items
+      this.items([{}])
+    }
+
     const buildMap = () => {
       const zoom = proximityRanges.getByRange(this.proximitySearch.range())
       const center = { lat: this.proximitySearch.latitude, lng: this.proximitySearch.longitude }
@@ -70,20 +78,22 @@ export default class FindHelpByCategory extends FindHelp {
 
     let popup = null
 
-    this.items()
+      this.items()
       .forEach((p) => {
-        const marker = googleMaps.buildMarker(p.location, map, { title: `${htmlEncode.htmlDecode(p.serviceProviderName)}` })
+        if (!isEmptyItems) {
+          const marker = googleMaps.buildMarker(p.location, map, { title: `${htmlEncode.htmlDecode(p.serviceProviderName)}` })
 
-        marker.addListener('click', function () {
-          document.querySelectorAll('.card__gmaps-container')
-            .forEach((p) => p.parentNode.removeChild(p))
-          popup = new googleMaps.Popup(
-            this.position.lat(),
-            this.position.lng(),
-            buildInfoWindowMarkup(p))
-          popup.setMap(map)
-          map.setCenter(new google.maps.LatLng(this.position.lat(), this.position.lng()))
-        })
+          marker.addListener('click', function () {
+            document.querySelectorAll('.card__gmaps-container')
+              .forEach((p) => p.parentNode.removeChild(p))
+            popup = new googleMaps.Popup(
+              this.position.lat(),
+              this.position.lng(),
+              buildInfoWindowMarkup(p))
+            popup.setMap(map)
+            map.setCenter(new google.maps.LatLng(this.position.lat(), this.position.lng()))
+          })
+        }
       })
 
     googleMaps.addCircleMarker(this.proximitySearch, map)
