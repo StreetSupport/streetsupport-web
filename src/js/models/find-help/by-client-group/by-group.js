@@ -165,7 +165,7 @@ export default class FindHelpByClientGroup extends FindHelp {
     }
 
     ajax
-      .data(`${endpoints.serviceCategories}${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}&clientGroup=${this.encodeClientGroupKey(this.clientGroup.clientGroupKey)}&catIds=${catIdsInQuerystring}&subCatIds=${subCatIdsInQuerystring}`)
+      .data(`${endpoints.serviceCategories}by-client-group?pageSize=${this.pageSize}&latitude=${this.proximitySearch.latitude}&longitude=${this.proximitySearch.longitude}&range=${this.proximitySearch.range()}&index=${this.pageIndex()}&clientGroup=${this.encodeClientGroupKey(this.clientGroup.clientGroupKey)}&catIds=${catIdsInQuerystring}&subCatIds=${subCatIdsInQuerystring}`)
       .then((result) => {
         if (isLoadMore !== true) {
           this.totalItems(result.data.total)

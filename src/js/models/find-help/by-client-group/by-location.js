@@ -45,7 +45,7 @@ export default class FindHelpByClientGroup extends FindHelp {
     browser.loading()
 
     ajax
-      .data(`${endpoints.serviceCategories}${this.proximitySearch.latitude}/${this.proximitySearch.longitude}?range=${this.proximitySearch.range()}&pageSize=${this.pageSize}&index=${this.pageIndex()}&clientGroup=${this.encodeClientGroupKey(this.clientGroup.clientGroupKey)}`)
+      .data(`${endpoints.serviceCategories}by-client-group?pageSize=${this.pageSize}&latitude=${this.proximitySearch.latitude}&longitude=${this.proximitySearch.longitude}&range=${this.proximitySearch.range()}&index=${this.pageIndex()}&clientGroup=${this.encodeClientGroupKey(this.clientGroup.clientGroupKey)}`)
       .then((result) => {
         this.items(result.data.providers)
         this.displayMap()
