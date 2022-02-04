@@ -90,10 +90,9 @@ describe('Find Help by Client Group - postcode, client group key, catIds, subCat
     expect(postcodeLookupStub.getCall(0).args[0]).toEqual(newLocation.postcode)
   })
 
-  // TODO: Fix it
-  // it('- should retrieve items from API', () => {
-  //   expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/456.7/234.5?range=10000&pageSize=5&index=0&clientGroup=families&catIds=meals&subCatIds=general,community-grocers'))
-  // })
+  it('- should retrieve items from API', () => {
+    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/by-client-group?pageSize=5&latitude=456.7&longitude=234.5&range=10000&index=0&clientGroup=families&catIds=meals&subCatIds=general,community-grocers'))
+  })
 
   it('- should not update url', () => {
     expect(browserPushHistoryStub.called).toBeFalsy()
