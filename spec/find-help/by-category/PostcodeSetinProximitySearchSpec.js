@@ -85,10 +85,9 @@ describe('Find Help by Category - postcode set in proximity search', () => {
     expect(postcodeLookupStub.getCall(0).args[0]).toEqual(newLocation.postcode)
   })
 
-  // TODO: Fix it
-  // it('- should retrieve items from API', () => {
-  //   expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/support/456.7/234.5?range=10000&pageSize=25&index=0'))
-  // })
+  it('- should retrieve items from API', () => {
+    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/sorted-by-location?pageSize=25&latitude=456.7&longitude=234.5&range=10000&index=0&serviceCategoryId=support'))
+  })
 
   it('- should set hasItems to true', () => {
     expect(sut.hasItems()).toBeTruthy()
