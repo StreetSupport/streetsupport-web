@@ -96,10 +96,9 @@ describe('Find Help by Client Group - postcode set in proximity search', () => {
     expect(postcodeLookupStub.getCall(0).args[0]).toEqual(newLocation.postcode)
   })
 
-  // TODO: Fix it
-  // it('- should retrieve items from API', () => {
-  //   expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/456.7/234.5?range=10000&pageSize=25&index=0&clientGroup=families&catIds=meals&subCatIds=general'))
-  // })
+  it('- should retrieve items from API', () => {
+    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/by-client-group?pageSize=25&latitude=456.7&longitude=234.5&range=10000&index=0&clientGroup=families&catIds=meals&subCatIds=general'))
+  })
 
   it('- should set hasItems to true', () => {
     expect(sut.hasItems()).toBeTruthy()
