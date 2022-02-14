@@ -9,7 +9,6 @@ const querystring = require('../../get-url-parameter')
 const marked = require('marked')
 const htmlEncode = require('htmlencode')
 const SearchFamiliesAdviceModule = require('../../pages/families/search-families-advice/search-families-advice')
-const locationSelector = require('../../location/locationSelector')
 
 function FamilyAdvice () {
   const self = this
@@ -195,7 +194,7 @@ function FamilyAdvice () {
 
   self.getFAQs = function () {
     api
-    .data(`${endpoints.faqs}?tags=families&pageSize=100000&index=0${locationSelector.getCurrentHubFromCookies().id ? '&location=' + locationSelector.getCurrentHubFromCookies().id : ''}${self.parentScenarioIdInQuerystring() ? '&parentScenarioIds=' + self.parentScenarioIdInQuerystring() : ''}`)
+    .data(`${endpoints.faqs}?tags=families&pageSize=100000&index=0${self.parentScenarioIdInQuerystring() ? '&parentScenarioIds=' + self.parentScenarioIdInQuerystring() : ''}`)
     .then((result) => {
       self.faqs(result.data.items.map((x) => {
         return new FAQ({
