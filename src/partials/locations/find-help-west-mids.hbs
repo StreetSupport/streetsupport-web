@@ -1,0 +1,29 @@
+<form class="form form--highlighted js-find-help-form">
+<h1 class="h2">Find help near you</h1>
+  <fieldset class="form__fieldset form__fieldset--inline-fill">
+    <div class="form__fieldset-inline-fill-container">
+      <label class="hide-screen" for="postcode">Your Postcode</label>
+      <input name="postcode" class="form__input form__input--inline-fill js-find-help-postcode" placeholder="your postcode: eg M1"></input>
+      <label class="hide-screen" for="category">Service Category</label>
+      <select class="form__input form__input--inline-fill js-find-help-cats"></select>
+      <button class="btn btn--brand-e btn--inline-fill" type="submit">
+        <span class="btn__text">Find help</span>
+      </button>
+    </div>
+  </fieldset>
+</form>
+<form class="form location-selector form--highlighted js-change-location-form">
+<h2 class="h2">Get advice in your area</h2>
+  <fieldset class="form__fieldset form__fieldset--inline-fill">
+    <div class="form__fieldset-inline-fill-container">
+      <label class="hide-screen" for="location">Get advice for your area:</label>
+      <select name="location" class="form__input form__input--inline-fill js-change-location-select">
+        <option value="">- Select a local area -</option>
+        {{> locations/_west-mids-option-tags }}
+      </select>
+      <button class="btn btn--brand-e btn--inline-fill js-change-location-btn" type="submit">
+        <span class="btn__text">Get advice</span>
+      </button>
+    </div>
+  </fieldset>
+</form>
