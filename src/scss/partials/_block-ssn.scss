@@ -762,6 +762,19 @@
     }
   }
 
+  &--grey-highlight {
+    background: transparent;
+    background-color: rgb(243, 243, 243);
+
+    a {
+      color: $brand-e;
+    }
+  }
+
+  &--wmca-taskforce {
+    text-align: center;
+  }
+
   &--orange {
     background: linear-gradient(180deg, #ffae00 0%, #a8570a 100%);
     color: #1c1c1c;

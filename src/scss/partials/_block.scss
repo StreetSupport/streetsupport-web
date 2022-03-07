@@ -164,6 +164,7 @@
 
 .block--header,
 .block--home-header,
+.block--west-mids-header,
 .block--location-header {
   padding-bottom: 100px;
 
@@ -213,6 +214,53 @@
   }
 }
 
+.block--west-mids-header {
+  background-image: url('../img/west-mids-header.png');
+  background-repeat: repeat-x;
+  background-position: bottom;
+  height: 380px;
+}
+
+.block--west-mids-title {
+  text-align: center;
+  color: #707070 !important;
+}
+
+.block--west-mids-locations {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 80%;
+
+  a{
+    color: $brand-h;
+    text-shadow: 1px 1px 2px #927fbd;
+    transition: 0.2s;
+    text-decoration: none;
+
+    &:hover {
+      text-shadow: 0px 0px 0px;
+    }
+  }
+
+  &__list {
+    @include cf();
+
+    list-style: none;
+    margin: 50px 0 30px;
+    padding: 0;
+
+    @include mq($from: m) {
+      margin-top: 20px;
+    }
+  }
+}
+
+.west-mids-location {
+  flex: 1 0 19%;
+  margin: 0 15px;
+}
 
 .block--header {
   padding: 40px 0 0 0!important;
