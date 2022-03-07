@@ -41,6 +41,10 @@
     a { 
       text-decoration: none;
     }
+
+    a[href$="#"] {
+      pointer-events: none;
+    }
   }
 
   &__title {

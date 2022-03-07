@@ -11,7 +11,8 @@ gulp.task('browsersync', () => {
     notify: false,
     server: {
       baseDir: config.paths.build
-    },
-    tunnel: true
+    }
+    // TODO: Uncomment if it doesn't fix issue regarding build the site locally
+    //tunnel: true
   })
 })
