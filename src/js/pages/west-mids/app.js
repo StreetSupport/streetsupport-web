@@ -76,7 +76,37 @@ const initNews = function () {
     })
 }
 
+const initStatistics = function () {
+  const stats = [
+    { field: 'totalServiceProviders', link: '#', label: 'Organisations' },
+    { field: 'totalServices', link: '#', label: 'Services' },
+    { field: 'totalNeeds', link: '#', label: 'Needs' }
+  ]
+
+  const requiredStats = ['totalServiceProviders', 'totalNeeds', 'totalServices']
+
+  api
+    .data(endpoints.statistics + 'west-midlands' + '/latest')
+    .then((result) => {
+      const theData = {
+        statistics: requiredStats
+          .map((rs) => {
+            const reqStat = stats.find((s) => s.field === rs)
+            return {
+              total: result.data[rs],
+              link: reqStat.link,
+              label: reqStat.label
+            }
+          })
+      }
+
+      templating.renderTemplate('js-statistics-tpl', theData, 'js-statistics-output')
+    }, (_) => {
+    })
+}
+
 initNews()
+initStatistics()
 initMap(cities.find((c) => c.id === 'birmingham'))
 
 location
