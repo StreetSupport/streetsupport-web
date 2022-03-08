@@ -156,3 +156,4 @@ location
   .then((result) => {
     initLocations(result)
   })
+  
