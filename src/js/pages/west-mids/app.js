@@ -4,6 +4,7 @@ import { cities } from '../../../data/generated/supported-cities'
 import { categories } from '../../../data/generated/service-categories'
 import htmlEncode from 'htmlencode'
 
+const location = require('../../location/locationSelector')
 const api = require('../../get-api-data')
 const browser = require('../../browser')
 const endpoints = require('../../api')
@@ -14,6 +15,27 @@ const supportedCities = require('../../../js/location/supportedCities')
 const mainCity = 'birmingham'
 const countyKey = 'west-midlands'
 
+const initLocations = function (currentLocation) {
+  const ui = {
+    form: document.querySelector('.js-change-location-form'),
+    select: document.querySelector('.js-change-location-select')
+  }
+  ui.form.addEventListener('submit', function (e) {
+    e.preventDefault()
+    const reqLocation = ui.select.value
+    if (reqLocation) {
+      location.setCurrent(reqLocation)
+      browser.redirect(`/${reqLocation}/advice`)
+    }
+  })
+
+  if (currentLocation) {
+    Array.from(document.querySelector('.js-change-location-select'))
+      .filter((t) => t.tagName === 'OPTION')
+      .find((o) => o.value === currentLocation.id)
+      .setAttribute('selected', 'selected')
+  }
+}
 
 const initFindHelp = function (currentLocation) {
   const cats = categories
@@ -121,10 +143,16 @@ const initStatistics = function () {
     })
 }
 
-
 const currentLocation = supportedCities.get(mainCity)
 
+initLocations(currentLocation)
 initFindHelp(currentLocation)
 initNews()
 initStatistics()
 initMap(cities.find((c) => c.id === mainCity))
+
+location
+  .getPreviouslySetPostcode()
+  .then((result) => {
+    initLocations(result)
+  })
