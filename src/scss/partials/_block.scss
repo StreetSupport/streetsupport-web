@@ -232,6 +232,7 @@
   flex-wrap: wrap;
   margin: 0 auto;
   width: 80%;
+  padding-bottom: 40px;
 
   a{
     color: $brand-h;
@@ -258,8 +259,7 @@
 }
 
 .west-mids-location {
-  flex: 1 0 19%;
-  margin: 0 15px;
+  flex: 1 0 100%;
 }
 
 .block--header {
