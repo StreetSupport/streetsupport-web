@@ -145,6 +145,21 @@
     }
   }
 
+  &--west-mids-locations {
+    margin: 10px;
+    .btn__text {
+      background-color: #e6f2ee;
+      color: #83a79b;
+      font-size: 20px;
+
+
+      &:hover {
+        background-color: darken( #e6f2ee, 5% );
+        border: 2px solid #83a79b;
+      }
+    }
+  }
+
   &--brand-scg {
     .btn__text {
       background-color: #fbbb0e;
