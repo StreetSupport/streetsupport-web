@@ -146,11 +146,13 @@
   }
 
   &--west-mids-locations {
+    transition: background-color 250ms linear, box-shadow 250ms linear;
     margin: 10px;
     .btn__text {
       background-color: #e6f2ee;
       color: #83a79b;
       font-size: 20px;
+      text-shadow: none;
 
 
       &:hover {
