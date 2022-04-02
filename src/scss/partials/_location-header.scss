@@ -157,6 +157,23 @@
   }
 }
 
+.location--chelmsford .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-size: 724px;
+      width: 758px;
+      bottom: 6px;
+      height: 335px;
+    }
+  }
+  @include mq($from: xxxl) {
+    &:before {
+      left: auto;
+      right: 4%;
+    }
+  }
+}
+
 .location--coventry .location-header {
   @include mq($from: m) {
     &:before {
