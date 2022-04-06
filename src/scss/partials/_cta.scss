@@ -89,6 +89,13 @@
   }
 }
 
+.cta--money-advice {
+  background-color: $brand-p;
+  @include cf();
+  @include span(8 of $grid-column);
+  float: none;
+}
+
 .home-cta {
   @include span(1 of 2);
 
