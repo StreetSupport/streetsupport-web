@@ -154,3 +154,9 @@
     background-image: url('/assets/img/mugshots/mara.jpg')
   }
 }
+
+.team__member-title--malar {
+  &::before, &::after {
+    background-image: url('/assets/img/mugshots/malar.jpg')
+  }
+}
