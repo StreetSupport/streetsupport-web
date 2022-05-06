@@ -160,3 +160,15 @@
     background-image: url('/assets/img/mugshots/malar.jpg')
   }
 }
+
+.team__member-title--daniel {
+  &::before, &::after {
+    background-image: url('/assets/img/mugshots/daniel.jpg')
+  }
+}
+
+.team__member-title--esther {
+  &::before, &::after {
+    background-image: url('/assets/img/mugshots/esther.jpg')
+  }
+}
