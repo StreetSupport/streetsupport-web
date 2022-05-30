@@ -500,7 +500,7 @@
     .brighton-print-map {
       width: 100%;
       height: 400px;
-      background: url('/assets/img/maps/brighton.jpg') center left no-repeat ;
+      background: url('/assets/img/maps/brighton.jpg') bottom right no-repeat ;
       box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.6);
 
       @include mq($from: m) {
