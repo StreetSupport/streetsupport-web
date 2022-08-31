@@ -186,6 +186,18 @@
     }
   }
 
+  &--change-liverpool {
+    .btn__text {
+      background-color: $change-liverpool;
+      color: #fff;
+      box-shadow: 0px 3px 0px 0px darken( $change-liverpool, 15% );
+
+      &:hover {
+        background-color: darken( $change-liverpool, 5% );
+      }
+    }
+  }
+
   &--plain {
     .btn__text {
       box-shadow: none;
