@@ -713,6 +713,13 @@
     }
   }
 
+  &--change-liverpool {
+    padding: 0 10px;
+    @include mq($from: m) {
+      padding: 10px 30px 10px 40px;
+    }
+  }
+
   &--street-change-glasgow {
     padding: 0 10px;
     a {
