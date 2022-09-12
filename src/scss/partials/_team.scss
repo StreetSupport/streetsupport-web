@@ -172,3 +172,9 @@
     background-image: url('/assets/img/mugshots/esther.jpg')
   }
 }
+
+.team__member-title--bolakale {
+  &::before, &::after {
+    background-image: url('/assets/img/mugshots/bolakale.jpg')
+  }
+}
