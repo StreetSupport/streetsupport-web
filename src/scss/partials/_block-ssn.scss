@@ -824,6 +824,18 @@
     }
   }
 
+  &--money-matters {
+    background: $money-matters-background;
+
+    .h1,
+    .h2 {
+      color: #fff;
+    }
+    a {
+      color: $brand-e;
+    }
+  }
+
   &--grey-highlight {
     background: transparent;
     background-color: rgb(243, 243, 243);
@@ -1040,6 +1052,29 @@
 .donation-banner__heading {
   font-size: 28px;
   margin: 0;
+}
+
+.money-matters-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.money-matters-title__heading {
+  color: $money-matters-text;
+  font-weight: 800;
+  text-shadow: 2px 2px #3f3f3f;
+  text-align: left;
+  width: 230px;
+  @include mq($from: s) {
+    width: auto;
+  }
+}
+
+.money-matters-title__content {
+  font-size: 20px;
+  line-height: 1.2;
+  color: #fff;
 }
 
 .sleeping-rough-title {
