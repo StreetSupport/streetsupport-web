@@ -196,7 +196,6 @@ gulp.task('generate-nav-links', () => {
         case 'accom':
           return `<li class="nav__item nav__item--sub-item nav__item--find-help-${c.key}"><a href="/find-help/accommodation/">${c.name}</a></li>`
         case 'dropin':
-        case 'foodbank':
           return `<li class="nav__item nav__item--sub-item nav__item--find-help-${c.key}"><a href="/find-help/${c.key}/timetable/">${c.name}</a></li>`
         default:
           return `<li class="nav__item nav__item--sub-item nav__item--find-help-${c.key}"><a href="/find-help/${c.key}/">${c.name}</a></li>`
