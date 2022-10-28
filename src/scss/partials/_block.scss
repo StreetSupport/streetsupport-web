@@ -108,22 +108,24 @@
     }
 
     &--3 {
-      @include mq($from: xs) {
-        .cta:last-of-type {
-          @include span(4 of $grid-column);  // Reset last style
-          @include push(2 of $grid-column);
-        }
-      }
+      // TODO: if number of categories on /find-help page is odd we should uncomment it.
+      // @include mq($from: xs) {
+      //   .cta:last-of-type {
+      //     @include span(4 of $grid-column);  // Reset last style
+      //     @include push(2 of $grid-column);
+      //   }
+      // }
 
       @include mq($from: m) {
         .cta:nth-of-type(3n + 1) {
           @include push(1 of $grid-column);
         }
 
-        .cta:last-of-type {
-          @include span(2 of $grid-column);  // Reset last style
-          @include push(3 of $grid-column); // Reset push style
-        }
+        // TODO: if number of categories on /find-help page is odd we should uncomment it.
+        // .cta:last-of-type {
+        //   @include span(2 of $grid-column);  // Reset last style
+        //   @include push(3 of $grid-column); // Reset push style
+        // }
       }
     }
   }
