@@ -17,11 +17,10 @@
       @include span(2 of $grid-column);
     }
 
-    &:last-of-type {
-      @include last();
-    }
-
-
+    // TODO: if number of categories on /find-help page is odd we should uncomment it.    
+    // &:last-of-type {
+    //   @include last();
+    // }
 
     &--last-of-3 {
       margin-left: 0!important;

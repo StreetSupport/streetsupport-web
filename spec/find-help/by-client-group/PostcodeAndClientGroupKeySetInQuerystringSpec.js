@@ -59,11 +59,11 @@ describe('Find Help by Client Group - postcode, client group key, catIds, subCat
 
     queryStringStub
     .withArgs('catIds')
-    .returns('meals')
+    .returns('dropin')
 
     queryStringStub
     .withArgs('subCatIds')
-    .returns('general,community-grocers')
+    .returns('general,warm-spaces')
 
     sinon.stub(storage, 'set')
     sinon.stub(storage, 'get').returns({})
@@ -91,7 +91,7 @@ describe('Find Help by Client Group - postcode, client group key, catIds, subCat
   })
 
   it('- should retrieve items from API', () => {
-    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/by-client-group?pageSize=5&latitude=456.7&longitude=234.5&range=10000&index=0&clientGroup=families&catIds=meals&subCatIds=general,community-grocers'))
+    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/by-client-group?pageSize=5&latitude=456.7&longitude=234.5&range=10000&index=0&clientGroup=families&catIds=dropin&subCatIds=general,warm-spaces'))
   })
 
   it('- should not update url', () => {

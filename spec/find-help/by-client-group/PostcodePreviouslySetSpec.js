@@ -54,7 +54,7 @@ describe('Find Help by Client Group - postcode previously set', () => {
 
     queryStringStub
       .withArgs('catIds')
-      .returns('meals')
+      .returns('dropin')
 
     queryStringStub
       .withArgs('subCatIds')
@@ -103,7 +103,7 @@ describe('Find Help by Client Group - postcode previously set', () => {
   })
 
   it('- should retrieve items from API', () => {
-    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/by-client-group?pageSize=25&latitude=456.7&longitude=234.5&range=10000&index=0&clientGroup=families&catIds=meals&subCatIds=general'))
+    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/by-client-group?pageSize=25&latitude=456.7&longitude=234.5&range=10000&index=0&clientGroup=families&catIds=dropin&subCatIds=general'))
   })
 
   it('- should show it is loaded', () => {
