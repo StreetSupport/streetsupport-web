@@ -59,7 +59,7 @@ describe('Find Help by Client Group - postcode set in proximity search', () => {
 
     queryStringStub
     .withArgs('catIds')
-    .returns('meals')
+    .returns('dropin')
 
     queryStringStub
       .withArgs('subCatIds')
@@ -97,7 +97,7 @@ describe('Find Help by Client Group - postcode set in proximity search', () => {
   })
 
   it('- should retrieve items from API', () => {
-    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/by-client-group?pageSize=25&latitude=456.7&longitude=234.5&range=10000&index=0&clientGroup=families&catIds=meals&subCatIds=general'))
+    expect(apiGetStub.getCall(0).args[0]).toEqual(endpoints.getFullUrl('/v2/service-categories/by-client-group?pageSize=25&latitude=456.7&longitude=234.5&range=10000&index=0&clientGroup=families&catIds=dropin&subCatIds=general'))
   })
 
   it('- should set hasItems to true', () => {
@@ -115,7 +115,7 @@ describe('Find Help by Client Group - postcode set in proximity search', () => {
   })
 
   it('- should set postcode, catIds and subCatIds in querystring', () => {
-    const expected = browserPushHistoryStub.withArgs({ postcode: newLocation.postcode, catIds: 'meals', subCatIds: 'general,community-grocers' }, '', `?postcode=${newLocation.postcode}&catIds=meals&subCatIds=general,community-grocers`).calledOnce
+    const expected = browserPushHistoryStub.withArgs({ postcode: newLocation.postcode, catIds: 'dropin', subCatIds: 'general,warm-spaces' }, '', `?postcode=${newLocation.postcode}&catIds=dropin&subCatIds=general,warm-spaces`).calledOnce
     expect(expected).toBeTruthy()
   })
 })

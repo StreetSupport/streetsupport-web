@@ -21,7 +21,6 @@ let cities = []
 gulp.task('getServiceCategories', (callback) => {
   const getPageUrl = (key) => {
     switch (key) {
-      case 'meals': return 'meals/timetable'
       case 'dropin': return 'dropin/timetable'
       case 'accom': return 'accommodation'
       default: return key
@@ -196,7 +195,6 @@ gulp.task('generate-nav-links', () => {
       switch (c.key) {
         case 'accom':
           return `<li class="nav__item nav__item--sub-item nav__item--find-help-${c.key}"><a href="/find-help/accommodation/">${c.name}</a></li>`
-        case 'meals':
         case 'dropin':
         case 'foodbank':
           return `<li class="nav__item nav__item--sub-item nav__item--find-help-${c.key}"><a href="/find-help/${c.key}/timetable/">${c.name}</a></li>`
