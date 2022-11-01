@@ -178,3 +178,9 @@
     background-image: url('/assets/img/mugshots/bolakale.jpg')
   }
 }
+
+.team__member-title--robyn {
+  &::before, &::after {
+    background-image: url('/assets/img/mugshots/robyn.jpg')
+  }
+}
