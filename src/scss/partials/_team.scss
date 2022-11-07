@@ -184,3 +184,9 @@
     background-image: url('/assets/img/mugshots/robyn.jpg')
   }
 }
+
+.team__member-title--francisca {
+  &::before, &::after {
+    background-image: url('/assets/img/mugshots/francisca.jpg')
+  }
+}
