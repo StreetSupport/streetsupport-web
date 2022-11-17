@@ -78,7 +78,7 @@ $spacing: 20px;
   margin-top: 0;
   text-align: left;
 
-  a { 
+  a {
     text-decoration: none;
     color: white!important;
   }
@@ -188,12 +188,12 @@ $spacing: 20px;
     height: 305px;
   }
 
-  p { 
+  p {
     @include mq($from: m) {
-      height: 122px 
+      height: 122px
     }
     @include mq($from: l) {
-      height: 112px 
+      height: 112px
     }
   }
 
@@ -204,7 +204,7 @@ $spacing: 20px;
   .card__title {
     @include cf();
     display: flex;
-    align-items: center; 
+    align-items: center;
     &:before {
       content: '';
       display: block;
@@ -289,7 +289,7 @@ $spacing: 20px;
     padding: 0px;
     margin-bottom: 20px;
   }
-  
+
   .card__details__description {
     text-decoration: none!important;
     margin-bottom: 20px!important;
@@ -363,4 +363,50 @@ $spacing: 20px;
   font-size: 16px;
   margin: -15px -5px 0 0 !important;
   padding: 5px !important;
+}
+
+.team-card-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.team-card {
+  position: relative;
+  width: 100%;
+  border: 1px solid #9c9c9c;
+  box-shadow: 2px 2px 2px 2px #c4c4c4;
+  margin: 10px 20px 10px 0;
+  padding: 0 10px 10px 10px;
+
+  @include mq($from: s) {
+    width: 220px;
+  }
+
+  a {
+    position: absolute;
+    bottom: 20px;
+  }
+}
+
+.team-card__heading {
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.team-card__subheading {
+  font-size: 14px;
+  margin-top: 0px !important;
+}
+
+.team-card__content {
+  padding-bottom: 20px;
+}
+
+.team-card__img {
+  display: block;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  border: 1px solid #c4c4c4;
 }
