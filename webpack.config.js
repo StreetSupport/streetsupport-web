@@ -66,6 +66,7 @@ module.exports = {
     accomMap: path.join(__dirname, 'src/js/pages/accommodation/map/app'),
     accomDetails: path.join(__dirname, 'src/js/pages/accommodation/details/app'),
     'general-advice': path.join(__dirname, 'src/js/pages/advice/app'),
+    'wm': path.join(__dirname, 'src/js/pages/west-mids/app'),
     'west-mids': path.join(__dirname, 'src/js/pages/west-mids/app'),
     'gm': path.join(__dirname, 'src/js/pages/gm/app'),
     'gm-info': path.join(__dirname, 'src/js/pages/gm/info'),
