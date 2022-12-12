@@ -316,14 +316,24 @@
 
     //leeds
 
-    &--leedsbid {
+    &--supportchange {
       width: 220px;
-      svg {
-        position: absolute;
-        left: 0;
-        top: 0 !important;
-        height: 140px;
-        width: 200px;
+      a {
+        background-image: url(/assets/img/leeds-logos/supportchange.png);
+      }
+    }
+
+    &--leedscharter {
+      width: 220px;
+      a {
+        background-image: url(/assets/img/leeds-logos/leedscharter.png);
+      }
+    }
+
+    &--leedscouncil {
+      width: 220px;
+      a {
+        background-image: url(/assets/img/leeds-logos/leedscouncil.png);
       }
     }
 
