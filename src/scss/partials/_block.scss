@@ -748,6 +748,14 @@
     }
   }
 
+  &--street-aid-notts {
+    padding: 0 10px;
+    color: #1c1c1c;
+    @include mq($from: m) {
+      padding: 10px 30px 10px 40px;
+    }
+  }
+
   &--it-takes-a-city {
     padding: 40px 20px;
 
