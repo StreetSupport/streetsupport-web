@@ -680,6 +680,19 @@
     }
   }
 
+  &--notts-warm-spaces {
+    color: #fff;
+    padding: 40px 1rem;
+    a {
+      color: $brand-e;
+      text-decoration: underline;
+    }
+    @include mq($from: m) {
+      max-width: 500px;  // half of $site-container in _variables.scss
+      padding: 10px 30px 10px 40px;
+    }
+  }
+
   &--notts-food-rota {
     padding: 40px 1rem;
     @include mq($from: m) {
