@@ -684,6 +684,34 @@
     }
   }
 
+  &--notts-warm-spaces {
+    background: $brand-a;
+    display: block;
+    padding: 0!important;
+
+    @include mq($from: m) {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .block__notts-warm-spaces{
+      margin: auto 0 auto 20px;
+      width: 100%;
+      height: 350px;
+      background: url('/nottingham/notts-warm-spaces.jpg') center;
+      box-shadow: 5px 5px 5px 5px rgba(10, 133, 100, 0.2);
+      transition: 0.3s ease-in;
+
+      &:hover {
+        box-shadow: none;
+      }
+
+      @include mq($from: m) {
+        width: 50%;
+      }
+    }
+  }
+
   &--notts-food-rota {
     background: rgba(10, 133, 100, 0.2);
     display: block;
