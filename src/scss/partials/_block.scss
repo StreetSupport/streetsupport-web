@@ -765,7 +765,7 @@
     padding: 0 10px;
     color: #1c1c1c;
     @include mq($from: m) {
-      padding: 10px 30px 10px 40px;
+      padding: 10px 0px 10px 0px;
     }
   }
 

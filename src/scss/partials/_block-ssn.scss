@@ -328,6 +328,7 @@
     }
 
     img {
+      padding-top: 20px;
       width: 400px;
       margin: auto;
     }
@@ -337,7 +338,6 @@
         padding-top: 50px;
         @include span(6 of 12);
         border: none;
-        display: flex;
         align-items: center;
       }
     }
