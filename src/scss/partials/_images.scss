@@ -58,3 +58,14 @@
     }
   }
 }
+
+.img__how-this-started {
+  display: none;
+  @include mq($from: m) {
+      width: 50%;
+      display: block;
+      transform: translateX(50%);
+      padding-bottom: 40px;
+    }
+  }
+
