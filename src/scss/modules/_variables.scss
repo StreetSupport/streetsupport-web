@@ -87,6 +87,9 @@ $soton-giving: #5d4567;
 
 $street-change-glasgow: #201751;
 
+$street-aid-yellow: #ffcf06;
+$street-aid-orange: #f5821f;
+
 $sea-blue: #00A6B0;
 
 $wmht-hero-lilac: #796e78;
@@ -136,8 +139,8 @@ $header-subnav-margin: 85px;
 $nav-width: 100%;
 
 // Used to automatically generate active CSS classes - also see _generated-variables.scss, created by gulp task
-$nav-sections: home findhelp givehelp hubs charter bigchange organisations impact about contact toolkit locations mhp businesssupport localfunders crowdfunder;
-$nav-pages: home findhelp emergencyhelp adviceforfamilies swep allorganisations givehelp giveitems volunteer offeritems donate partnership charter mhp readthecharter pledgeyoursupport joinactiongroup aboutthecharter bigchange bigchangeabout bigchangepartners realchangefunding realchangewho realchangecasestudies toolkit best-practice awards benefits training get-in-touch apply impact about about-organisations contact jobs team trustees locations businesssupport localfunders crowdfunders;
+$nav-sections: home findhelp givehelp hubs charter bigchange organisations impact about contact toolkit locations mhp businesssupport localfunders crowdfunder street-aid;
+$nav-pages: home findhelp emergencyhelp adviceforfamilies swep allorganisations givehelp giveitems volunteer offeritems donate partnership charter mhp readthecharter pledgeyoursupport street-aid joinactiongroup aboutthecharter bigchange bigchangeabout bigchangepartners realchangefunding realchangewho realchangecasestudies toolkit best-practice awards benefits training get-in-touch apply impact about about-organisations contact jobs team trustees locations businesssupport localfunders crowdfunders;
 
 // z-indices
 $zIndex-modal: 2000;

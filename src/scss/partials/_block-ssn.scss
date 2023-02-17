@@ -316,7 +316,7 @@
 
   &--street-aid-notts {
     padding: 0 0 10px 0!important;
-    background-color: #ffcf06;
+    background-color: $street-aid-yellow;
     color: #fff;
 
     @include mq($from: m) {
@@ -908,6 +908,18 @@
     background: transparent;
     background: linear-gradient(180deg, $brand-a 0%, $brand-b 100%);
     color: #fff;
+
+    a {
+      color: $brand-e;
+    }
+  }
+
+  &--street-aid-highlight {
+    background: $street-aid-yellow;
+    .h2 {
+      color: #1c1c1c;
+    }
+    color: #1c1c1c;
 
     a {
       color: $brand-e;
