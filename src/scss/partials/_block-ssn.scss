@@ -316,7 +316,7 @@
 
   &--street-aid-notts {
     padding: 0 0 10px 0!important;
-    background-color: #ffcf06;
+    background-color: $street-aid-yellow;
     color: #fff;
 
     @include mq($from: m) {
@@ -324,7 +324,7 @@
     }
 
     a {
-      color: $brand-d;
+      color: $brand-f;
     }
 
     img {
@@ -914,6 +914,18 @@
     }
   }
 
+  &--street-aid-highlight {
+    background: $street-aid-yellow;
+    .h2 {
+      color: #1c1c1c;
+    }
+    color: #1c1c1c;
+
+    a {
+      color: $brand-e;
+    }
+  }
+
   &--money-matters {
     background: $money-matters-background;
 
@@ -937,6 +949,7 @@
 
   &--wmca-taskforce {
     text-align: center;
+    // background: linear-gradient(180deg, $wmht-hero-lilac 0%, $wmht-lilac 100%);
   }
 
   &--orange {

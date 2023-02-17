@@ -47,15 +47,16 @@
   }
 }
 
-.fairy-lights {
+.notts-street-aid {
+  width: 100%;
+}
+
+.notts-street-aid-logo {
+  display: none;
+  float: right;
+  height: 200px;
   @include mq($from: m) {
-    &:after {
-      content: '';
-      width: 100%;
-      height: 120px;
-      background: url('../img/fairy-lights.png') repeat-x;
-      display: block;
-    }
+    display: block;
   }
 }
 
