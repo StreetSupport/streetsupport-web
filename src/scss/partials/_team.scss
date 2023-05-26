@@ -196,3 +196,9 @@
     background-image: url('/assets/img/mugshots/james-goddard.jpg')
   }
 }
+
+.team__member-title--zahara {
+  &::before, &::after {
+    background-image: url('/assets/img/mugshots/zahara.jpg')
+  }
+}
