@@ -252,7 +252,7 @@
 
   &--change-liverpool {
     padding: 10px 0 0 0!important;
-    background: url('../img/liverpool-logos/bg_2.jpg') repeat-x;
+    background-color: #fbc214;
     color: #1c1c1c;
     font-weight: bold;
     font-size: 17px;
@@ -263,8 +263,7 @@
     }
 
     a {
-      color: $change-liverpool;
-      font-weight: bold;
+      color: #fff;
     }
 
     img {
