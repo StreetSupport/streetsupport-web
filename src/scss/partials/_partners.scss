@@ -280,8 +280,16 @@
       }
     }
 
+    &--chelmsford-pnc {
+      width: 170px;
+
+      a {
+        background-image: url(/assets/img/chelmsford-logos/pnc.jpg);
+      }
+    }
+
     &--chelmsford-safer-chelmsford {
-      width: 100px;
+      width: 150px;
 
       a {
         background-image: url(/assets/img/chelmsford-logos/safer-chelmsford.jpg);
@@ -289,7 +297,7 @@
     }
 
     &--chelmsford-sanctus {
-      width: 100px;
+      width: 150px;
 
       a {
         background-image: url(/assets/img/chelmsford-logos/snctus.jpg);
