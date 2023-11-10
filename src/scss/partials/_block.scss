@@ -167,6 +167,7 @@
 .block--header,
 .block--home-header,
 .block--west-mids-header,
+.block--vol-for-good-header,
 .block--location-header {
   padding-bottom: 100px;
 
@@ -226,6 +227,60 @@
 .block--west-mids-title {
   text-align: center;
   color: #707070 !important;
+}
+
+.block--vol-for-good-header {
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@700&display=swap');
+  color: #fff;
+  border-bottom: 3px solid $vfg-orange;
+
+  h1 {
+    padding: 40px 0;
+    font-family: "Barlow Semi Condensed";
+    font-weight: 800;
+    font-size: 4rem;
+    text-align: center;
+    color: #fff !important;
+    text-transform: uppercase;
+    line-height: 90px;
+    @include mq($from: m) {
+      padding: 30px 0;
+      font-size: 5rem;
+    }
+    @include mq($from: l) {
+      padding: 50px 0;
+      font-size: 6.5rem;
+    }
+  }
+  span {
+    color: $vfg-orange;
+  }
+  background: $brand-a;
+}
+
+.block--orgs-near-you-header {
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@700&display=swap');
+  color: #fff;
+  border-bottom: 3px solid $vfg-orange;
+
+  h1 {
+    padding: 40px 0;
+    font-family: "Barlow Semi Condensed";
+    font-weight: 800;
+    font-size: 4rem;
+    text-align: center;
+    color: #fff !important;
+    text-transform: uppercase;
+    line-height: 90px;
+    @include mq($from: m) {
+      padding: 50px 0;
+      font-size: 5rem;
+    }
+  }
+  span {
+    color: $vfg-orange;
+  }
+  background: $brand-a;
 }
 
 .block--gm-locations {

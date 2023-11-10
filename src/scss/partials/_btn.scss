@@ -145,6 +145,18 @@
     }
   }
 
+  &--gmmc-blue {
+    .btn__text {
+      background-color: $gmmc-blue;
+      color: #fff;
+      box-shadow: 4px 4px 4px 0px darken( #83a79b, 15% );
+
+      &:hover {
+        background-color: darken( $gmmc-blue, 5% );
+      }
+    }
+  }
+
   &--west-mids-locations {
     transition: background-color 250ms linear, box-shadow 250ms linear;
     margin: 10px;
