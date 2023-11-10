@@ -7,10 +7,10 @@ const wp = require('../../wordpress')
 const initNews = function () {
   const totalPostsToShow = 3
   wp
-    .getPostsByTag('greater-manchester', totalPostsToShow, 0, true)
+    .getPostsByTag('volunteer-for-good', totalPostsToShow, 0, true)
     .then((result) => {
       if (result.posts.length === totalPostsToShow) {
-        result.taxonomy.name = 'greater-manchester'
+        result.taxonomy.name = 'volunteer-for-good'
         result.taxonomy.link = 'https://news.streetsupport.net/tag/volunteer-for-good/'
         templating.renderTemplate('js-news-tpl', result, 'js-news-output')
       }
