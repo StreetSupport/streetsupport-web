@@ -67,6 +67,7 @@ module.exports = {
     accomDetails: path.join(__dirname, 'src/js/pages/accommodation/details/app'),
     'general-advice': path.join(__dirname, 'src/js/pages/advice/app'),
     'west-mids': path.join(__dirname, 'src/js/pages/west-mids/app'),
+    'vol-for-good': path.join(__dirname, 'src/js/pages/vol-for-good/app'),
     'gm': path.join(__dirname, 'src/js/pages/gm/app'),
     'gm-info': path.join(__dirname, 'src/js/pages/gm/info'),
     'gm-offer-items': path.join(__dirname, 'src/js/pages/gm/offer-items')
