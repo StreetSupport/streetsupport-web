@@ -907,6 +907,9 @@
     background: transparent;
     background: linear-gradient(180deg, $brand-a 0%, $brand-b 100%);
     color: #fff;
+    .h2 {
+      color: #fff;
+    }
 
     a {
       color: $brand-e;
@@ -920,6 +923,19 @@
     }
     color: #1c1c1c;
 
+    a {
+      color: $brand-e;
+    }
+  }
+
+  &--aben-banner {
+    background: $gmmc-green;
+    color: #fff;
+
+    .h1,
+    .h2 {
+      color: #fff;
+    }
     a {
       color: $brand-e;
     }

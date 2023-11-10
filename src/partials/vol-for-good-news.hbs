@@ -1,0 +1,45 @@
+<div class="block block--news">
+  <div class="container">
+    <header class="news-header">
+      <h1 class="h2">Latest News</h1>
+    </header>
+    <section class="news-posts">
+      \{{#posts}}
+      <article class="news-posts__post">
+        <figure class="post__image\{{^featured_media_object}} post__image--empty\{{/featured_media_object}}">
+          <a href="\{{link}}">
+            \{{#featured_media_object}}
+            <img src="\{{media_details.sizes.medium.source_url}}" srcset="\{{ srcset }}" alt="\{{alt_text}}">
+            \{{/featured_media_object}}
+
+            \{{^featured_media_object}}
+            <svg class="svg-logo-dims">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/svgsprite.svg#logo"></use>
+            </svg>
+            \{{/featured_media_object}}
+          </a>
+        </figure>
+        <h2 class="h2 post__title">
+          <a href="\{{link}}">
+            \{{{title.rendered}}}
+          </a>
+        </h2>
+        <div class="post__excerpt">
+          \{{{short_excerpt}}}
+        </div>
+        <time class="post__date" datetime="\{{date_local_iso}}">\{{date_local_formatted}}</time>
+        <div class="post__cta">
+          <a href="\{{link}}" class="post__cta__link">Read more</a>
+        </div>
+      </article>
+      \{{/posts}}
+    </section>
+    <footer class="news-footer">
+      <a href="\{{taxonomy.link}}" class="btn btn--brand-e">
+        <span class="btn__text">
+          View All
+        </span>
+      </a>
+    </footer>
+  </div>
+</div>
