@@ -232,6 +232,12 @@ $spacing: 20px;
       }
     }
 
+    &--form {
+      &:before {
+        background-position: -224px 285px;
+      }
+    }
+
     &--hand {
       &:before {
         background-position: -326px 83px;
