@@ -63,11 +63,13 @@
 }
 
 .vol-for-good {
-  width: 250px;
+  width: 150px;
+  margin: 5px;
   float: right;
-  margin: 30px;
-  display: none;
+  // display: none;
   @include mq($from: m) {
+    margin: 30px;
+    width: 250px;
     display: block;
   }
 }
