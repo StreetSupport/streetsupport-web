@@ -89,8 +89,13 @@ page: givehelp
   <div class="container">
     <h1 class="h1">Local Campaigns</h1>
     <p>Campaigns currently running in <span data-bind="text: locationName"></span>:</p>
+    <p></p>
   </div>
 </div>
+
+  <!-- ko if: abenIsEnabled -->
+  {{> locations/banners/vol-for-good }}
+  <!-- /ko -->
 
   <!-- ko if: abenIsEnabled -->
   {{> locations/gm-banner }}
