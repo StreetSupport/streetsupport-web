@@ -191,6 +191,23 @@
   }
 }
 
+.location--derbyshire .location-header {
+  @include mq($from: m) {
+    &:before {
+      background-size: 690px;
+      width: 700px;
+      bottom: 6px;
+      height: 335px;
+    }
+  }
+  @include mq($from: xxxl) {
+    &:before {
+      left: auto;
+      right: 3%;
+    }
+  }
+}
+
 .location--dudley .location-header {
   @include mq($from: m) {
     &:before {
