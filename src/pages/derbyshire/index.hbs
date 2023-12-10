@@ -1,0 +1,104 @@
+---
+title: Street Support Derbyshire - Working together to tackle homelessness in Derbyshire
+description: Street Support - Find help, and give help, to support people who are homeless in Derbyshire
+image: https://streetsupport.net/assets/img/og/street-support-derbyshire.jpg
+layout: withGoogle.hbs
+permalink: false
+jsBundle: location-home-page
+section: home
+page: derbyshire
+location: derbyshire
+---
+
+<div class="block block--breadcrumbs">
+  <div class="container">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item"><a href="/">Home</a></li>
+      <li class="breadcrumbs__item">Derbyshire</li>
+    </ol>
+  </div>
+</div>
+
+<div class="block block--location-header location-header location-header--derbyshire">
+  <div class="container">
+    <h1 class="h1 block__header">Street Support Derbyshire</h1>
+    <h2 class="h2 block__sub-header">Connecting people and organisations locally, to tackle homelessness in Derbyshire.</h2>
+    <div class="ctas">
+      <a href="/find-help" class="btn btn--brand-d">
+        <span class="btn__text">Find Help</span>
+      </a>
+      <a href="/give-help" class="btn btn--brand-e">
+        <span class="btn__text">Give Help</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="js-swep-output"></div>
+
+<div class="block block--light-highlight">
+  <div class="container">
+    <div class="block__content text-center">
+      <div class="sleeping-rough-title">
+        <img class="sleeping-rough-title__icon" src="/assets/img/exclamation.svg" alt="exclamation-icon">
+        <h1 class="sleeping-rough-title__heading">Help someone sleeping rough</h1>
+      </div>
+      <p class="sleeping-rough-title__content">If you are worried about someone you’ve seen sleeping rough in Derbyshire, you can alert the Council and Derbyshire’s Rough Sleeper Outreach Service via <a href="https://thestreetlink.org.uk">Streetlink</a>.</p>
+      <a class="btn btn--brand-e btn--emergency-advice" href="/derbyshire/advice">
+        <span class="btn__text">See more emergency advice</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="container">
+    <div class="home__copy home__copy--padding">
+      <h1 class="h2">You're in Derbyshire</h1>
+      {{> locations/find-help }}
+      {{> locations/selector-hogan }}
+    </div>
+    <div class="home__copy">
+      <div class="js-map"></div>
+    </div>
+  </div>
+</div>
+
+{{> locations/banners/charter-banner-derbyshire }}
+
+<div id="js-statistics-output"></div>
+
+<div class="block block--minor-highlight">
+  <div class="container container--central-cta">
+    <div class="block__content block__content--central-cta block__content--join-mailing-list">
+      <h1 class="h2">Get in touch</h1>
+      <p>If you would like to get involved, or have any offers, questions or suggestion, please get in touch at <a href="mailto: derbyshire@streetsupport.net">derbyshire@streetsupport.net</a>.</p>
+    </div>
+  </div>
+</div>
+
+<div id="js-news-output"></div>
+
+<div class="block block--highlight block--promo">
+  <div class="container">
+    <div class="block__content partners">
+      {{> derbyshire/supporters }}
+      <p>We are looking for businesses and organisations to <a href="/give-help/business-support/">support us</a> so that we can continue to develop this resource.</p>
+      <p>If you share our vision of a society without homelessness, please <a href="mailto:sponsorship@streetsupport.net">get in touch</a>.</p>
+    </div>
+  </div>
+</div>
+
+{{> loading-spinner}}
+
+<script id="js-swep-tpl" type="text/template">
+{{> find-help/swep-notification theLocationId="derbyshire" }}
+</script>
+
+<script id="js-news-tpl" type="text/template">
+    {{>news-posts }}
+</script>
+
+<script id="js-statistics-tpl" type="text/template">
+  {{> impact-statistics }}
+</script>
