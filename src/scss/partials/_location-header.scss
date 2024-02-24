@@ -317,18 +317,6 @@
   }
 }
 
-.location--portsmouth .location-header {
-  @include mq($from: m) {
-    &:before {
-      background-size: 600px;
-      width: 600px;
-      height: 270px;
-      bottom: 10px;
-    }
-  }
-  @extend %get-in-sea;
-}
-
 .location--rochdale .location-header {
   @include mq($from: m) {
     &:before {
