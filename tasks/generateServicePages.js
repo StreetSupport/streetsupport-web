@@ -2,7 +2,7 @@ import del from 'del'
 import fs from 'fs'
 import gulp from 'gulp'
 import request from 'request'
-import runSequence from 'run-sequence'
+import runSequence from 'gulp4-run-sequence'
 import marked from 'marked'
 
 import config from '../foley.json'
@@ -18,7 +18,7 @@ const generatedPagesSrc = `${config.paths.pages}_generated/`
 let categories = []
 let cities = []
 
-gulp.task('getServiceCategories', (callback) => {
+gulp.task('getServiceCategories', gulp.series((callback) => {
   const getPageUrl = (key) => {
     switch (key) {
       case 'dropin': return 'dropin/timetable'
@@ -44,14 +44,14 @@ gulp.task('getServiceCategories', (callback) => {
       })
     callback()
   })
-})
+}))
 
-gulp.task('getCities', (callback) => {
+gulp.task('getCities', gulp.series((callback) => {
   request(endpoints.cities, function (err, res, body) {
     cities = JSON.parse(body)
     callback()
   })
-})
+}))
 
 const getNewTitle = function (catName, suffix = '') {
   const services = 'Services'
@@ -106,21 +106,22 @@ const getNewLocationContent = function (src, cat) {
   return result
 }
 
-gulp.task('reset', () => {
+gulp.task('reset', gulp.series(() => {
   const generatedCategoryDirectories = categories
     .map((c) => `${findHelpSrc}/${c.key}`)
   return del([...generatedCategoryDirectories, generatedPagesSrc])
-})
+}))
 
-gulp.task('clean-generated-files', () => {
+gulp.task('clean-generated-files', gulp.series(() => {
   return del([generatedPagesSrc])
-})
+}))
 
-gulp.task('make-generated-files-directory', () => {
+gulp.task('make-generated-files-directory', gulp.series((callback) => {
   fs.mkdirSync(generatedPagesSrc)
-})
+  callback()
+}))
 
-gulp.task('generate-provider-directories', () => {
+gulp.task('generate-provider-directories', gulp.series((callback) => {
   categories
     .forEach((c) => {
       const destDir = `${generatedPagesSrc}${c.key}`
@@ -128,9 +129,10 @@ gulp.task('generate-provider-directories', () => {
       fs.mkdirSync(`${destDir}/map`)
       fs.mkdirSync(`${destDir}/timetable`)
     })
-})
+  callback()
+}))
 
-gulp.task('generate-provider-listing-pages', () => {
+gulp.task('generate-provider-listing-pages', gulp.series((callback) => {
   const srcContent = fs.readFileSync(categoryPageSrc, 'utf-8')
 
   categories
@@ -139,9 +141,10 @@ gulp.task('generate-provider-listing-pages', () => {
       const newContent = getNewContent(srcContent, c)
       fs.writeFileSync(`${destDir}index.hbs`, newContent)
     })
-})
+  callback()
+}))
 
-gulp.task('generate-timetabled-pages', () => {
+gulp.task('generate-timetabled-pages', gulp.series((callback) => {
   const srcContent = fs.readFileSync(timetabledPageSrc, 'utf-8')
 
   categories
@@ -150,9 +153,10 @@ gulp.task('generate-timetabled-pages', () => {
       const newContent = getNewTimeTabledContent(srcContent, c)
       fs.writeFileSync(`${destDir}timetable/index.hbs`, newContent)
     })
-})
+  callback()
+}))
 
-gulp.task('generate-map-pages', () => {
+gulp.task('generate-map-pages', gulp.series((callback) => {
   const srcContent = fs.readFileSync(locationPageSrc, 'utf-8')
 
   categories
@@ -161,9 +165,10 @@ gulp.task('generate-map-pages', () => {
       const newContent = getNewLocationContent(srcContent, c)
       fs.writeFileSync(`${destDir}map/index.hbs`, newContent)
     })
-})
+  callback()
+}))
 
-gulp.task('generate-category-ctas', () => {
+gulp.task('generate-category-ctas', gulp.series(() => {
   const categoryCtaTemplate = `<span class="cta">
     <a class="btn btn--brand-d" id="{{key}}" href="{{page}}">
       <span class="btn__icon">
@@ -186,9 +191,9 @@ gulp.task('generate-category-ctas', () => {
   const srcFile = `${config.paths.partials}/find-help/`
   return newFile('_generated-service-cats-ctas.hbs', output)
     .pipe(gulp.dest(srcFile))
-})
+}))
 
-gulp.task('generate-nav-links', () => {
+gulp.task('generate-nav-links', gulp.series(() => {
   const srcFile = `${config.paths.partials}/nav/`
   const output = categories
     .map((c) => {
@@ -205,9 +210,9 @@ gulp.task('generate-nav-links', () => {
 
   return newFile('service-cats.hbs', output)
     .pipe(gulp.dest(srcFile))
-})
+}))
 
-gulp.task('generate-nav-variables', () => {
+gulp.task('generate-nav-variables', gulp.series(() => {
   const srcFile = `${config.paths.scss}/modules/`
   const catOutput = categories
     .map((c) => `find-help-${c.key}`)
@@ -219,14 +224,14 @@ gulp.task('generate-nav-variables', () => {
 
   return newFile('_generated-variables.scss', `$generated-nav-pages: ${catOutput} ${cityOutput}`)
     .pipe(gulp.dest(srcFile))
-})
+}))
 
-gulp.task('copy-to-find-help', () => {
+gulp.task('copy-to-find-help', gulp.series(() => {
   return gulp.src(generatedPagesSrc + '**/*', {})
     .pipe(gulp.dest(findHelpSrc))
-})
+}))
 
-gulp.task('generate-service-pages', (callback) => {
+gulp.task('generate-service-pages', gulp.series((callback) => {
   runSequence(
     'reset',
     'getServiceCategories',
@@ -241,4 +246,4 @@ gulp.task('generate-service-pages', (callback) => {
     'generate-nav-variables',
     callback
   )
-})
+}))

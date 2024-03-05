@@ -2,7 +2,7 @@ import del from 'del'
 import fs from 'fs'
 import gulp from 'gulp'
 import request from 'request'
-import runSequence from 'run-sequence'
+import runSequence from 'gulp4-run-sequence'
 
 import config from '../foley.json'
 import endpoints from '../src/js/api'
@@ -14,7 +14,7 @@ const advice2PageSrc = `${pagesRoot}locations/_advice2.hbs`
 
 let cities = []
 
-gulp.task('l-getCities', (callback) => {
+gulp.task('l-getCities', gulp.series((callback) => {
   request(endpoints.cities, function (err, res, body) {
     cities = JSON.parse(body)
       .filter(c => c.isPublic)
@@ -25,15 +25,15 @@ gulp.task('l-getCities', (callback) => {
       })
     callback()
   })
-})
+}))
 
-gulp.task('l-clean', () => {
+gulp.task('l-clean', gulp.series(() => {
   const generatedHomePages = cities
     .map((c) => `${pagesRoot}${c.id}/index.hbs`)
   return del(generatedHomePages)
-})
+}))
 
-gulp.task('l-generate-home-pages', (callback) => {
+gulp.task('l-generate-home-pages', gulp.series((callback) => {
   const srcContent = fs.readFileSync(homePageSrc, 'utf-8')
   cities
     .forEach((c) => {
@@ -44,9 +44,9 @@ gulp.task('l-generate-home-pages', (callback) => {
       fs.writeFileSync(dest, newContent)
     })
   callback()
-})
+}))
 
-gulp.task('l-generate-advice2-pages', (callback) => {
+gulp.task('l-generate-advice2-pages', gulp.series((callback) => {
   const srcContent = fs.readFileSync(advice2PageSrc, 'utf-8')
   cities
     .forEach((c) => {
@@ -57,9 +57,9 @@ gulp.task('l-generate-advice2-pages', (callback) => {
       fs.writeFileSync(dest, newContent)
     })
   callback()
-})
+}))
 
-gulp.task('l-generate-nav-variables', () => {
+gulp.task('l-generate-nav-variables', gulp.series(() => {
   const srcFile = `${config.paths.scss}/modules/`
   const cityOutput = cities
     .map((c) => `${c.id}`)
@@ -67,9 +67,9 @@ gulp.task('l-generate-nav-variables', () => {
 
   return newFile('_generated-location-nav-variables.scss', `$generated-locations-for-nav: ${cityOutput}`)
     .pipe(gulp.dest(srcFile))
-})
+}))
 
-gulp.task('l-generate-header-css', () => {
+gulp.task('l-generate-header-css', gulp.series(() => {
   const srcFile = `${config.paths.scss}/partials/`
   const cityOutput = cities
     .map((c) => `
@@ -84,9 +84,9 @@ gulp.task('l-generate-header-css', () => {
 
   return newFile('_generated-location-header.scss', cityOutput)
     .pipe(gulp.dest(srcFile))
-})
+}))
 
-gulp.task('l-generate-mobile-nav', () => {
+gulp.task('l-generate-mobile-nav', gulp.series(() => {
   const srcFile = `${config.paths.partials}/nav/`
   const cityOutput = cities
     .map((c) => `{{> ${c.id}/nav }}`)
@@ -95,9 +95,9 @@ gulp.task('l-generate-mobile-nav', () => {
 
   return newFile('locations.hbs', cityOutput)
     .pipe(gulp.dest(srcFile))
-})
+}))
 
-gulp.task('l-generate-header-nav', () => {
+gulp.task('l-generate-header-nav', gulp.series(() => {
   const srcFile = `${config.paths.partials}/nav/`
   const cityOutput = cities
     .map((c) => `<li class="nav__item nav__item--sub-item nav__item--${c.id}" data-location="${c.id}"><a href="/${c.id}">${c.name}</a></li>`)
@@ -106,7 +106,7 @@ gulp.task('l-generate-header-nav', () => {
 
   return newFile('header-locations.hbs', cityOutput)
     .pipe(gulp.dest(srcFile))
-})
+}))
 
 function loactionOptionTag(str, id, isSelected, name) {
   var selectedStr = ""
@@ -116,7 +116,7 @@ function loactionOptionTag(str, id, isSelected, name) {
   return str[0]+id+str[1]+selectedStr+str[2]+name+str[3]
 }
 
-gulp.task('l-generate-location-dropdown', () => {
+gulp.task('l-generate-location-dropdown', gulp.series(gulp.series(() => {
   const srcFile = `${config.paths.partials}/locations/`
   const cityOutput = 
   `${cities
@@ -124,10 +124,10 @@ gulp.task('l-generate-location-dropdown', () => {
     .join(`\n`)}`
 
   return newFile('_generated-option-tags.hbs', cityOutput).pipe(gulp.dest(srcFile))
-})
+})))
 
 
-gulp.task('generate-location-files', (callback) => {
+gulp.task('generate-location-files', gulp.series((callback) => {
   runSequence(
     'l-clean',
     'l-getCities',
@@ -140,4 +140,4 @@ gulp.task('generate-location-files', (callback) => {
     'l-generate-location-dropdown',
     callback
   )
-})
+}))

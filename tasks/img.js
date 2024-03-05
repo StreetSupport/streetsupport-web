@@ -11,7 +11,7 @@ import imagemin from 'gulp-imagemin'
 import pngquant from 'imagemin-pngquant'
 
 // Image minification task
-gulp.task('img', () => {
+gulp.task('img', gulp.series(() => {
   return gulp.src(config.paths.img + '{,**/}*.{png,jpg,gif,svg}')
   .pipe(gulpif(argv.debug === true, debug({title: 'Images Optimised:'})))
   .pipe(imagemin({
@@ -21,4 +21,4 @@ gulp.task('img', () => {
   }))
   .pipe(gulp.dest(config.paths.buildAssets + 'img'))
   .pipe(browserSync.stream())
-})
+}))

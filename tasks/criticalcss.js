@@ -13,7 +13,7 @@ const criticalcss = critical.stream
 var dimensions = config.critical.dimensions || {}
 
 // HTML minify task
-gulp.task('criticalcss', () => {
+gulp.task('criticalcss', gulp.series(() => {
   return gulp.src(config.paths.build + '**/*.html')
   .pipe(gulpif(argv.debug === true, debug({title: 'CSS Inlined:'})))
   .pipe(criticalcss({
@@ -25,4 +25,4 @@ gulp.task('criticalcss', () => {
   }))
   .on('error', function(err) { console.log(err.message); })
   .pipe(gulp.dest(config.paths.build))
-})
+}))

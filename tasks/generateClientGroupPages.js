@@ -2,7 +2,7 @@ import del from 'del'
 import fs from 'fs'
 import gulp from 'gulp'
 import request from 'request'
-import runSequence from 'run-sequence'
+import runSequence from 'gulp4-run-sequence'
 
 import config from '../foley.json'
 import endpoints from '../src/js/api'
@@ -16,7 +16,7 @@ const generatedPagesSrc = `${config.paths.pages}_generated/`
 let clientGroups = []
 let cities = []
 
-gulp.task('getClientGroups', (callback) => {
+gulp.task('getClientGroups', gulp.series((callback) => {
   request(endpoints.clientGroups, function (err, res, body) {
     clientGroups = JSON.parse(body)
       .sort((a, b) => {
@@ -33,14 +33,14 @@ gulp.task('getClientGroups', (callback) => {
       })
     callback()
   })
-})
+}))
 
-gulp.task('getCitiesCG', (callback) => {
+gulp.task('getCitiesCG', gulp.series((callback) => {
   request(endpoints.cities, function (err, res, body) {
     cities = JSON.parse(body)
     callback()
   })
-})
+}))
 
 const getNewTitle = function (catName, suffix = '') {
   const services = 'Client Group'
@@ -92,21 +92,22 @@ const getNewLocationContent = function (src, cat) {
   return result
 }
 
-gulp.task('resetCG', () => {
+gulp.task('resetCG', gulp.series(() => {
   const generatedClientGroupsDirectories = clientGroups
     .map((c) => `${findHelpSrc}${c.key}`)
   return del([...generatedClientGroupsDirectories, generatedPagesSrc])
-})
+}))
 
-gulp.task('clean-generated-filesCG', () => {
+gulp.task('clean-generated-filesCG', gulp.series(() => {
   return del([generatedPagesSrc])
-})
+}))
 
-gulp.task('make-generated-files-directoryCG', () => {
+gulp.task('make-generated-files-directoryCG', gulp.series((callback) => {
   fs.mkdirSync(generatedPagesSrc)
-})
+  callback()
+}))
 
-gulp.task('generate-provider-directoriesCG', () => {
+gulp.task('generate-provider-directoriesCG', gulp.series((callback) => {
   clientGroups
     .forEach((c) => {
       const destDir = `${generatedPagesSrc}${c.key}`
@@ -114,9 +115,10 @@ gulp.task('generate-provider-directoriesCG', () => {
       fs.mkdirSync(`${destDir}/map`)
       fs.mkdirSync(`${destDir}/timetable`)
     })
-})
+  callback()
+}))
 
-gulp.task('generate-provider-listing-pagesCG', () => {
+gulp.task('generate-provider-listing-pagesCG', gulp.series((callback) => {
   const srcContent = fs.readFileSync(categoryPageSrc, 'utf-8')
 
   clientGroups
@@ -125,9 +127,10 @@ gulp.task('generate-provider-listing-pagesCG', () => {
       const newContent = getNewContent(srcContent, c)
       fs.writeFileSync(`${destDir}index.hbs`, newContent)
     })
-})
+  callback()
+}))
 
-gulp.task('generate-timetabled-pagesCG', () => {
+gulp.task('generate-timetabled-pagesCG', gulp.series((callback) => {
   const srcContent = fs.readFileSync(timetabledPageSrc, 'utf-8')
 
   clientGroups
@@ -136,9 +139,10 @@ gulp.task('generate-timetabled-pagesCG', () => {
       const newContent = getNewTimeTabledContent(srcContent, c)
       fs.writeFileSync(`${destDir}timetable/index.hbs`, newContent)
     })
-})
+  callback()
+}))
 
-gulp.task('generate-map-pagesCG', () => {
+gulp.task('generate-map-pagesCG', gulp.series((callback) => {
   const srcContent = fs.readFileSync(locationPageSrc, 'utf-8')
 
   clientGroups
@@ -147,14 +151,15 @@ gulp.task('generate-map-pagesCG', () => {
       const newContent = getNewLocationContent(srcContent, c)
       fs.writeFileSync(`${destDir}map/index.hbs`, newContent)
     })
-})
+  callback()
+}))
 
-gulp.task('copy-to-find-helpCG', () => {
+gulp.task('copy-to-find-helpCG', gulp.series(() => {
   return gulp.src(generatedPagesSrc + '**/*', {})
     .pipe(gulp.dest(findHelpSrc))
-})
+}))
 
-gulp.task('generate-find-help-client-group-pages', (callback) => {
+gulp.task('generate-find-help-client-group-pages', gulp.series((callback) => {
   runSequence(
     'resetCG',
     'getClientGroups',
@@ -166,4 +171,4 @@ gulp.task('generate-find-help-client-group-pages', (callback) => {
     'clean-generated-filesCG',
     callback
   )
-})
+}))
