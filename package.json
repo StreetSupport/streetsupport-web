@@ -13,7 +13,7 @@
     "url": "https://github.com/StreetSupport/streetsupport-web/issues"
   },
   "engines": {
-    "node": ">= 12"
+    "node": ">= 14"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.18",
