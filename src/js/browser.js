@@ -27,7 +27,7 @@ const location = () => {
   return window.location
 }
 
-let getBody = () => {
+const getBody = () => {
   return document.getElementsByTagName('body')[0]
 }
 
@@ -44,21 +44,21 @@ var loaded = function () {
 var jumpTo = function (id) {
   var self = this
   self.id = id
-  let gotoElement = () => {
+  const gotoElement = () => {
     window.location.href = self.id
   }
   setTimeout(gotoElement, 250)
 }
 
-let pushHistory = (stateObject, title, url) => {
+const pushHistory = (stateObject, title, url) => {
   history.pushState(stateObject, title, url)
 }
 
-let popHistory = () => {
+const popHistory = () => {
   history.back()
 }
 
-let setOnHistoryPop = (onPopCallback) => {
+const setOnHistoryPop = (onPopCallback) => {
   window.onpopstate = (e) => {
     onPopCallback(e)
   }
@@ -87,7 +87,7 @@ var scrollTo = function (selector) {
     ? getMobileHeaderHeight()
     : getDesktopHeaderHeight()
 
-  let findPos = (obj) => {
+    const findPos = (obj) => {
     var curtop = 0
     if (obj.offsetParent) {
       do {
@@ -96,7 +96,7 @@ var scrollTo = function (selector) {
       return [curtop - currentHeaderHeight]
     }
   }
-  let element = document.querySelector(selector)
+  const element = document.querySelector(selector)
   window.scroll(0, findPos(element))
 }
 

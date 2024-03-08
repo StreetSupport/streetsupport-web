@@ -1,7 +1,7 @@
 module.exports = {
-  'addresses': [
+  addresses: [
     {
-      'openingTimes': [
+      openingTimes: [
         {}
       ]
     }

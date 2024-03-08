@@ -102,8 +102,8 @@ const AccommodationDetails = function (renderCallback) {
     getApiData
       .data(`${endpoints.accommodation}/${querystring.parameter('id')}`)
       .then((result) => {
-        let address = new Address(result.data.address)
-        let coordinates = new Coordinates(result.data.address)
+        const address = new Address(result.data.address)
+        const coordinates = new Coordinates(result.data.address)
         self.viewModel = result.data
 
         self.viewModel.address.formattedAddress = address.formattedForDisplay()

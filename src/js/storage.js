@@ -18,6 +18,6 @@ export const set = (key, obj) => {
 }
 
 export const keys = {
-  'userLocationState': 'userLocationState',
-  'postcode': 'postcode'
+  userLocationState: 'userLocationState',
+  postcode: 'postcode'
 }

@@ -1,16 +1,14 @@
-const ko = require('knockout')
+import { formatNeedsKO } from '../../requests/needs'
+import { getKOSortAscFunc, getKOSortDescFunc } from '../../../../sorting'
+import ProximitySearch from '../../../ProximitySearch'
+import pushHistory from '../../../../history'
+import GiveHelpClientGroup from '../GiveHelpClientGroup'
 
+const ko = require('knockout')
 const api = require('../../../../get-api-data')
 const browser = require('../../../../browser')
 const endpoints = require('../../../../api')
 const querystring = require('../../../../get-url-parameter')
-
-import { formatNeedsKO } from '../../requests/needs'
-import { getKOSortAscFunc, getKOSortDescFunc } from '../../../../sorting'
-
-import ProximitySearch from '../../../ProximitySearch'
-import pushHistory from '../../../../history'
-import GiveHelpClientGroup from '../GiveHelpClientGroup'
 
 class NeedsListing {
   constructor () {
@@ -165,11 +163,11 @@ class NeedsListing {
 
   get firstPageUrl () {
     const qsParts = {
-      'latitude': this.proximitySearch.latitude,
-      'longitude': this.proximitySearch.longitude,
-      'pageSize': 25,
-      'range': this.proximitySearch.range(),
-      'clientGroup': this.encodeClientGroupKey(this.clientGroup.clientGroupKey)
+      latitude: this.proximitySearch.latitude,
+      longitude: this.proximitySearch.longitude,
+      pageSize: 25,
+      range: this.proximitySearch.range(),
+      clientGroup: this.encodeClientGroupKey(this.clientGroup.clientGroupKey)
     }
     const qs = Object.keys(qsParts)
       .map((k) => `${k}=${qsParts[k]}`)

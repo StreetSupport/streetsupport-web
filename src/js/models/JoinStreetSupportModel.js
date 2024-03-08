@@ -34,11 +34,11 @@ var Model = function () {
       browser.loading()
       postApiData
         .post(endpoints.joinStreetSupportApplications, {
-          'Name': self.formModel().name(),
-          'Email': self.formModel().email(),
-          'Reason': self.formModel().reason(),
-          'Location': self.formModel().location(),
-          'IsOptedIn': self.formModel().isOptedIn()
+          Name: self.formModel().name(),
+          Email: self.formModel().email(),
+          Reason: self.formModel().reason(),
+          Location: self.formModel().location(),
+          IsOptedIn: self.formModel().isOptedIn()
         }).then(function (success) {
           browser.loaded()
           if (success.status === 'error') {

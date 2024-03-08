@@ -27,20 +27,20 @@ function Families () {
   self.getGuides = function () {
     browser.loading()
     api
-    .data(`${endpoints.contentPages}?tags=families&type=guides&pageSize=100000&index=0`)
-    .then((result) => {
-      self.guides(result.data.items.map((x) => {
-        return {
-          id: ko.observable(x.id),
-          sortPosition: ko.observable(x.sortPosition),
-          title: ko.observable(htmlEncode.htmlDecode(x.title))
-        }
-      }).sort((a, b) => { return b.sortPosition() - a.sortPosition() }))
+      .data(`${endpoints.contentPages}?tags=families&type=guides&pageSize=100000&index=0`)
+      .then((result) => {
+        self.guides(result.data.items.map((x) => {
+          return {
+            id: ko.observable(x.id),
+            sortPosition: ko.observable(x.sortPosition),
+            title: ko.observable(htmlEncode.htmlDecode(x.title))
+          }
+        }).sort((a, b) => { return b.sortPosition() - a.sortPosition() }))
 
-      browser.loaded()
-    }, (_) => {
-      browser.redirect('/500')
-    })
+        browser.loaded()
+      }, (_) => {
+        browser.redirect('/500')
+      })
   }
 
   self.getParentScenarios = () => {

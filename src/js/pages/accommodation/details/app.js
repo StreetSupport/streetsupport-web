@@ -19,7 +19,7 @@ const renderCallback = (viewModel) => {
   templating.renderTemplate('js-template', viewModel, 'js-template-placeholder', onRenderCallback)
 }
 
-let viewModel = new ViewModel(renderCallback)
+const viewModel = new ViewModel(renderCallback)
 
 browser.loading()
 viewModel.build()

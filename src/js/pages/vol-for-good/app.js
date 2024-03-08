@@ -18,4 +18,3 @@ const initNews = function () {
 }
 
 initNews()
-

@@ -32,26 +32,26 @@ var getApiData = function (url) {
     if (window.XDomainRequest) {
       var jsonXDomain = JSON.parse(req.responseText)
       deferred.resolve({
-        'status': statusKeys.ok,
-        'data': jsonXDomain
+        status: statusKeys.ok,
+        data: jsonXDomain
       })
     }
 
     if (req.status === 200 || req.status === 304) {
       var json = JSON.parse(req.responseText)
       deferred.resolve({
-        'status': statusKeys.ok,
-        'data': json
+        status: statusKeys.ok,
+        data: json
       })
     } else if (req.status === 404) { // todo: this never gets hit! VL
       deferred.resolve({
-        'status': statusKeys.notFound
+        status: statusKeys.notFound
       })
     } else {
       deferred.resolve({
-        'status': statusKeys.error,
-        'statusCode': req.status,
-        'message': req.responseText
+        status: statusKeys.error,
+        statusCode: req.status,
+        message: req.responseText
       })
     }
   }
