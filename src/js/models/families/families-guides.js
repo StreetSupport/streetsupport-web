@@ -18,7 +18,7 @@ function FamiliesGuides () {
   self.hasGuides = ko.computed(() => self.guides().length > 0, this)
 
   self.pushHistory = function () {
-    let filters = [{ qsKey: 'id', getValue: () => self.guideIdInQuerystring() }]
+    const filters = [{ qsKey: 'id', getValue: () => self.guideIdInQuerystring() }]
     pushHistory(filters)
   }
 
@@ -40,28 +40,28 @@ function FamiliesGuides () {
   self.getGuides = function () {
     browser.loading()
     api
-    .data(`${endpoints.contentPages}?tags=families&type=guides&pageSize=100000&index=0`)
-    .then((result) => {
-      self.guides(result.data.items.map((x) => {
-        return new Guide({
-          id: ko.observable(x.id),
-          sortPosition: ko.observable(x.sortPosition),
-          title: ko.observable(htmlEncode.htmlDecode(x.title)),
-          body: ko.observable(marked(htmlEncode.htmlDecode(x.body))),
-          isSelected: ko.observable(self.guideIdInQuerystring() ? self.guideIdInQuerystring() === x.id : false),
-          isExpanded: ko.observable(false),
-          files: ko.observable(x.files.map(item => {
-            return {
-              name: item.fileName,
-              url: `${endpoints.contentPages}/file/${item.fileId}`
-            }
-          }))
-        }, self)
-      }).sort((a, b) => { return b.sortPosition() - a.sortPosition() }))
-      browser.loaded()
-    }, (_) => {
-      browser.redirect('/500')
-    })
+      .data(`${endpoints.contentPages}?tags=families&type=guides&pageSize=100000&index=0`)
+      .then((result) => {
+        self.guides(result.data.items.map((x) => {
+          return new Guide({
+            id: ko.observable(x.id),
+            sortPosition: ko.observable(x.sortPosition),
+            title: ko.observable(htmlEncode.htmlDecode(x.title)),
+            body: ko.observable(marked(htmlEncode.htmlDecode(x.body))),
+            isSelected: ko.observable(self.guideIdInQuerystring() ? self.guideIdInQuerystring() === x.id : false),
+            isExpanded: ko.observable(false),
+            files: ko.observable(x.files.map(item => {
+              return {
+                name: item.fileName,
+                url: `${endpoints.contentPages}/file/${item.fileId}`
+              }
+            }))
+          }, self)
+        }).sort((a, b) => { return b.sortPosition() - a.sortPosition() }))
+        browser.loaded()
+      }, (_) => {
+        browser.redirect('/500')
+      })
   }
 
   self.getGuides()

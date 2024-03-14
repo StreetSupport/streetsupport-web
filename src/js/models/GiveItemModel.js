@@ -30,10 +30,10 @@ var GiveItemModel = function () {
       browser.loading()
 
       var postEndpoint = endpoints.needs + self.needId + '/offers-to-help'
-      let payload = {
-        'Email': self.formModel().email(),
-        'Message': self.formModel().message(),
-        'IsOptedIn': self.formModel().isOptedIn()
+      const payload = {
+        Email: self.formModel().email(),
+        Message: self.formModel().message(),
+        IsOptedIn: self.formModel().isOptedIn()
       }
 
       postApiData

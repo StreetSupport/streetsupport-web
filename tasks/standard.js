@@ -6,19 +6,19 @@ import gulp from 'gulp'
 import standard from 'gulp-standard'
 
 // Linting task
-gulp.task('standardlint', () => {
+gulp.task('standardlint', gulp.series(() => {
   return gulp.src(config.paths.js + '**/*.js')
   .pipe(standard())
   .pipe(standard.reporter('default', {
     breakOnError: false
   }))
-})
+}))
 
 // Linting task
-gulp.task('specsstandardlint', () => {
+gulp.task('specsstandardlint', gulp.series(() => {
   return gulp.src(config.paths.spec + '**/*.js')
   .pipe(standard())
   .pipe(standard.reporter('default', {
     breakOnError: false
   }))
-})
+}))

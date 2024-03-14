@@ -265,11 +265,11 @@ function OrgListing (orgsFilter = null, pageSize = 25) {
       self.getByPostcode()
     } else {
       location.getPreviouslySetPostcode()
-      .then((result) => {
-        init(result, false)
-      }, () => {
-        browser.redirect('/500')
-      })
+        .then((result) => {
+          init(result, false)
+        }, () => {
+          browser.redirect('/500')
+        })
     }
   }
 

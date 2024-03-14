@@ -9,7 +9,7 @@ import gulpif from 'gulp-if'
 import htmlmin from 'gulp-htmlmin'
 
 // HTML minify task
-gulp.task('htmlmin', () => {
+gulp.task('htmlmin', gulp.series(() => {
   return gulp.src(config.paths.build + '**/*.html')
   .pipe(gulpif(argv.debug === true, debug({title: 'HTML Minified:'})))
   .pipe(gulpif(argv.production === true,
@@ -18,4 +18,4 @@ gulp.task('htmlmin', () => {
     })
   ))
   .pipe(gulp.dest(config.paths.build))
-})
+}))

@@ -80,16 +80,16 @@ const formatData = function (data) {
   const formatAddresses = () => {
     data.hasAddresses = data.addresses.length > 0
     data.addresses.forEach((a) => {
-      let groupedOpeningTimes = []
+      const groupedOpeningTimes = []
       a.openingTimes.forEach((ot) => {
-        let match = groupedOpeningTimes.filter((got) => got.day === ot.day)
+        const match = groupedOpeningTimes.filter((got) => got.day === ot.day)
         if (match.length === 1) {
           match[0].openingTimes.push({
             endTime: ot.endTime,
             startTime: ot.startTime
           })
         } else {
-          let newDay = {
+          const newDay = {
             day: ot.day,
             openingTimes: [{
               endTime: ot.endTime,

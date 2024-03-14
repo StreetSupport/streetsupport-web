@@ -44,9 +44,9 @@ var svgConfig = {
 }
 
 // SVG sprite task
-gulp.task('svgsprite', () => {
+gulp.task('svgsprite', gulp.series(() => {
   return gulp.src(config.paths.icons + '/**/*.svg')
     .pipe(gulpif(argv.debug === true, debug({title: 'SVG Spritesheet:'})))
     .pipe(svgSprite(svgConfig))
     .pipe(gulp.dest('.'))
-})
+}))

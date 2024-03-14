@@ -10,7 +10,10 @@ import browserSync from 'browser-sync'
 
 // Sass modules
 import sourcemaps from 'gulp-sourcemaps'
-import sass from 'gulp-sass'
+import dartSass from 'sass'
+import gulpSass from 'gulp-sass'
+const sass = gulpSass(dartSass)
+
 import postcss from 'gulp-postcss'
 
 // Postcss output modules
@@ -43,7 +46,7 @@ const workflow = [
 ]
 
 // Sass & Postcss task
-gulp.task('scss', () => {
+gulp.task('scss', gulp.series(() => {
   return gulp.src(config.paths.scss + '**/*.scss')
   .pipe(gulpif(argv.debug === true, debug({title: 'CSS Processed:'})))
   .pipe(gulpif(!argv.production, sourcemaps.init())) // Sourcemaps if there is no production flag
@@ -52,10 +55,10 @@ gulp.task('scss', () => {
   .pipe(gulpif(!argv.production, sourcemaps.write('.'))) // Sourcemaps if there is no production flag
   .pipe(gulp.dest(config.paths.buildAssets + 'css'))
   .pipe(browserSync.stream({match: '**/*.css'}))
-})
+}))
 
 // Stylelint task
-gulp.task('scsslint', () => {
+gulp.task('scsslint', gulp.series(() => {
   return gulp.src([config.paths.scss + '**/*.scss', '!' + config.paths.scss + 'vendor{,/**}'])
   .pipe(postcss(workflow, {syntax: scss}))
-})
+}))

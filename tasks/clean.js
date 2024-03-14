@@ -6,9 +6,9 @@ import gulp from 'gulp'
 import del from 'del'
 
 // Clean task
-gulp.task('clean', () => {
+gulp.task('clean', gulp.series(async () => {
   return del([
     config.paths.build,
     config.paths.svgicon
   ])
-})
+}))

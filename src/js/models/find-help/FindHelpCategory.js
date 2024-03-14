@@ -1,8 +1,8 @@
 import ko from 'knockout'
 import marked from 'marked'
+import { categories } from '../../../data/generated/service-categories'
 
 const browser = require('../../browser')
-import { categories } from '../../../data/generated/service-categories'
 
 export default class FindHelpCategory {
   constructor () {

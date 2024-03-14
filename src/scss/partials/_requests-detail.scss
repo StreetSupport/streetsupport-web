@@ -18,9 +18,6 @@
     top: 0;
   }
 
-  &__description {
-  }
-
   &__name {
     margin-bottom: 0;
   }
@@ -99,8 +96,8 @@
   &__form {
 
     @include mq($from: l) {
-      @include pre(1 of 6)
-      @include post(1 of 6)
+      @include pre(1 of 6);
+      @include post(1 of 6);
     }
   }
 

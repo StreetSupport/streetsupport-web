@@ -14,7 +14,7 @@ export default class ProximitySearch {
     this.longitude = null
 
     if (!overrideStoredPostcode) {
-      let existingPostcodeInfo = storage.get(storage.keys.userLocationState)
+      const existingPostcodeInfo = storage.get(storage.keys.userLocationState)
       if (existingPostcodeInfo) {
         this.postcode(existingPostcodeInfo.postcode)
         this.latitude = existingPostcodeInfo.latitude

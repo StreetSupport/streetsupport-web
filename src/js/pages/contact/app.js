@@ -1,10 +1,9 @@
 import '../../common'
+import { qAndAs } from './qAndAs'
 
 const marked = require('marked')
-
 const accordion = require('../../accordion')
 const templating = require('../../template-render')
-import { qAndAs } from './qAndAs'
 
 const listener = {
   accordionOpened: () => {
@@ -28,4 +27,3 @@ const onRenderCallback = function () {
 }
 
 templating.renderTemplate(template, viewModel, 'js-output', onRenderCallback)
-

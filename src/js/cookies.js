@@ -16,7 +16,7 @@ module.exports = {
   'set': set,
   'unset': unset,
   'get': get,
-  'keys': {
+  keys: {
     location: 'desired-location'
   }
 }

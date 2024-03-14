@@ -1,16 +1,14 @@
-require('../../arrayExtensions')
-
 import ko from 'knockout'
+import { getProvidersForListing } from '../../pages/find-help/provider-listing/helpers'
+import FindHelp from './FindHelp'
+
+require('../../arrayExtensions')
 
 const ajax = require('../../get-api-data')
 const browser = require('../../browser')
 const endpoints = require('../../api')
 const querystring = require('../../get-url-parameter')
 const listToDropdown = require('../../list-to-dropdown')
-
-import { getProvidersForListing } from '../../pages/find-help/provider-listing/helpers'
-
-import FindHelp from './FindHelp'
 
 class SubCatFilter {
   constructor (data, container) {

@@ -22,7 +22,7 @@ export class Address {
 
   formattedForDisplay () {
     if (this.isEmpty()) return ''
-    let addressParts = [this.street1, this.street2, this.street3, this.city]
+    const addressParts = [this.street1, this.street2, this.street3, this.city]
     const result = addressParts
       .filter((p) => p && p !== undefined && p.length > 0)
       .join(', ')
@@ -31,15 +31,15 @@ export class Address {
 
   isEmpty () {
     return Object.keys(this)
-    .map(propertyKey => this[propertyKey])
-    .every((propertyValue) => propertyValue === '' || propertyValue === null)
+      .map(propertyKey => this[propertyKey])
+      .every((propertyValue) => propertyValue === '' || propertyValue === null)
   }
 }
 
 export const Accommodation = function (data, index, listeners) {
   const self = this
 
-  let address = new Address(data)
+  const address = new Address(data)
 
   self.mapIndex = ko.observable(index)
   self.mapIndexToDisplay = ko.observable(index + 1)
