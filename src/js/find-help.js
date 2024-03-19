@@ -1,7 +1,8 @@
+import { PostcodeProximity } from './components/PostcodeProximity'
+
 const browser = require('./browser')
 const print = require('./navigation/print')
 const querystring = require('./get-url-parameter')
-import { PostcodeProximity } from './components/PostcodeProximity'
 
 const FindHelp = function (location) {
   const self = this
@@ -19,7 +20,7 @@ const FindHelp = function (location) {
 
   if (self.theCategory.startsWith('category')) {
     const redirects = {
-      'category': '/',
+      category: '/',
       'category-by-day': '/timetable/',
       'category-by-location': '/map/'
     }

@@ -1,13 +1,12 @@
-const ajaxGet = require('../../get-api-data')
-const endpoints = require('../../api')
-const browser = require('../../browser')
-const locationSelector = require('../../location/locationSelector')
-
 import { Accommodation } from './types'
 import { getCoords } from '../../location/postcodes'
 import * as storage from '../../storage'
 import { categories } from '../../../data/generated/accom-categories'
 
+const ajaxGet = require('../../get-api-data')
+const endpoints = require('../../api')
+const browser = require('../../browser')
+const locationSelector = require('../../location/locationSelector')
 const ko = require('knockout')
 
 const SearchFilter = function (dataFieldName, labelText) {
@@ -55,8 +54,8 @@ const AccommodationListing = function (addtionalQueryString = '') {
   ])
 
   self.referralOptions = ko.observableArray([
-    {value: false, name: 'No'},
-    {value: true, name: 'Yes'}
+    { value: false, name: 'No' },
+    { value: true, name: 'Yes' }
   ])
 
   self.referralRequired = ko.observable()
@@ -112,18 +111,18 @@ const AccommodationListing = function (addtionalQueryString = '') {
   self.loadItems = function (endpoint) {
     browser.loading()
     ajaxGet.data(endpoint)
-    .then((result) => {
-      result.data.items
-        .forEach((e, i) => {
-          e.mapIndex = i
-        })
-      const previous = self.items()
-      const next = result.data.items.map((e, i) => new Accommodation(e, i, [self]))
-      self.items(previous.concat(next))
-      self.nextPageEndpoint(result.data.links.next)
-      self.dataIsLoaded(true)
-      browser.loaded()
-    })
+      .then((result) => {
+        result.data.items
+          .forEach((e, i) => {
+            e.mapIndex = i
+          })
+        const previous = self.items()
+        const next = result.data.items.map((e, i) => new Accommodation(e, i, [self]))
+        self.items(previous.concat(next))
+        self.nextPageEndpoint(result.data.links.next)
+        self.dataIsLoaded(true)
+        browser.loaded()
+      })
   }
 
   self.init = (currentLocation) => {

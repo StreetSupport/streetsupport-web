@@ -1,4 +1,5 @@
 /* global location, history */
+import { categories as volCategories } from '../../data/generated/volunteer-categories'
 
 const ko = require('knockout')
 require('knockout.validation') // No variable here is deliberate!
@@ -7,8 +8,6 @@ const apiRoutes = require('../api')
 const postApi = require('../post-api-data')
 const browser = require('../browser')
 const supportedCities = require('../location/supportedCities')
-import { categories as volCategories } from '../../data/generated/volunteer-categories'
-
 const formId = 'js-form'
 const failId = 'js-fail'
 const successId = 'js-success'
@@ -51,17 +50,17 @@ const VolunteerModel = function (currCityId) {
       browser.loading()
 
       var payload = {
-        'FirstName': self.firstName(),
-        'LastName': self.lastName(),
-        'Email': self.email(),
-        'Telephone': self.telephone(),
-        'City': self.city(),
-        'Postcode': self.postcode(),
-        'SkillsCategories': self.skillCategory(),
-        'SkillsAndExperienceDescription': self.skillsAndExperience(),
-        'AvailabilityDescription': self.availability(),
-        'ResourcesDescription': self.resources(),
-        'IsOptedIn': self.isOptedIn()
+        FirstName: self.firstName(),
+        LastName: self.lastName(),
+        Email: self.email(),
+        Telephone: self.telephone(),
+        City: self.city(),
+        Postcode: self.postcode(),
+        SkillsCategories: self.skillCategory(),
+        SkillsAndExperienceDescription: self.skillsAndExperience(),
+        AvailabilityDescription: self.availability(),
+        ResourcesDescription: self.resources(),
+        IsOptedIn: self.isOptedIn()
       }
 
       // TODO: Nice notification on success/fail

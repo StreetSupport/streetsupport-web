@@ -10,10 +10,10 @@ var Model = function () {
 
 const init = () => {
   const selectedCityId = location.getSelectedLocationId()
-  let model = new Model()
+  const model = new Model()
   model.selectedCity = selectedCityId
 
-  let body = document.querySelector('body')
+  const body = document.querySelector('body')
 
   if (Array.from(body.classList).includes(`location--`)) {
     body.classList.add(`location--${selectedCityId}`)

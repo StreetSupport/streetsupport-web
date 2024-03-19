@@ -27,26 +27,26 @@ var postApiData = function (url, data) {
     // This seems hacky but XDomain doesnt have a req.status
     if (window.XDomainRequest) {
       deferred.resolve({
-        'status': 'ok',
-        'statusCode': 200
+        status: 'ok',
+        statusCode: 200
       })
     }
 
     if (req.status === 201) {
       deferred.resolve({
-        'status': 'created',
-        'statusCode': this.status
+        status: 'created',
+        statusCode: this.status
       })
     } else if (req.status === 200) {
       deferred.resolve({
-        'status': 'ok',
-        'statusCode': this.status
+        status: 'ok',
+        statusCode: this.status
       })
     } else {
       deferred.resolve({
-        'status': 'error',
-        'statusCode': req.status,
-        'messages': JSON.parse(req.responseText).messages
+        status: 'error',
+        statusCode: req.status,
+        messages: JSON.parse(req.responseText).messages
       })
     }
   }

@@ -1,4 +1,5 @@
 import '../../../../common'
+import { formatNeeds } from '../../../../models/give-help/requests/needs'
 
 const apiRoutes = require('../../../../api')
 const browser = require('../../../../browser')
@@ -7,8 +8,6 @@ const getUrlParams = require('../../../../get-url-parameter')
 const templating = require('../../../../template-render')
 
 const ContactFormModel = require('../../../../models/GiveItemModel')
-
-import { formatNeeds } from '../../../../models/give-help/requests/needs'
 
 const ko = require('knockout')
 

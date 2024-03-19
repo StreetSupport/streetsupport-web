@@ -1,21 +1,18 @@
 /* global google */
 
+import FindHelp from './FindHelp'
+import { buildInfoWindowMarkup } from '../../../pages/find-help/by-location/helpers'
+import ko from 'knockout'
+
 require('../../../arrayExtensions')
 
 const htmlEncode = require('htmlencode')
-
 const ajax = require('../../../get-api-data')
 const browser = require('../../../browser')
 const endpoints = require('../../../api')
 const googleMaps = require('../../../location/googleMaps')
 const proximityRanges = require('../../../location/proximityRanges')
 const querystring = require('../../../get-url-parameter')
-
-import FindHelp from './FindHelp'
-
-import { buildInfoWindowMarkup } from '../../../pages/find-help/by-location/helpers'
-
-import ko from 'knockout'
 
 export default class FindHelpByClientGroup extends FindHelp {
   constructor () {

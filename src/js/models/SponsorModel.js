@@ -32,9 +32,9 @@ var Model = function () {
       browser.loading()
       postApiData
         .post(postEndpoint, {
-          'Email': self.formModel().email(),
-          'Message': self.formModel().message(),
-          'IsOptedIn': self.formModel().isOptedIn()
+          Email: self.formModel().email(),
+          Message: self.formModel().message(),
+          IsOptedIn: self.formModel().isOptedIn()
         }).then(function (success) {
           browser.loaded()
           if (success.status === 'error') {

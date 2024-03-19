@@ -157,8 +157,8 @@ function processPosts (posts) {
           postItem.featured_media_object.srcset = Array.from(postItem.featured_media_object.media_details.sizes)
           .map(function (sizeItem) {
             return `${sizeItem.source_url} ${sizeItem.width}w`
-          })
-          .join(', ')
+            })
+            .join(', ')
         }
       } else {
         postItem.featured_media_object = null

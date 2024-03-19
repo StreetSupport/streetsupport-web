@@ -9,7 +9,7 @@ import webpack from 'webpack'
 import webpackConfig from '../webpack.config.js'
 
 // Webpack build task
-gulp.task('webpack', (callback) => {
+gulp.task('webpack', gulp.series((callback) => {
   webpack(webpackConfig, function (err, stats) {
     if (err) {
       throw new gutil.PluginError('webpack', err)
@@ -22,4 +22,4 @@ gulp.task('webpack', (callback) => {
     browserSync.reload()
     callback()
   })
-})
+}))

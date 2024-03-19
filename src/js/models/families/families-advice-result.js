@@ -44,22 +44,22 @@ function FamilyAdviceResult () {
 
   self.getFAQs = function () {
     api
-    .data(`${endpoints.faqs}?tags=families&pageSize=100000&index=0&searchTerm=${self.searchQueryInQuerystring()}`)
-    .then((result) => {
-      self.faqs(result.data.items.map((x) => {
-        return new FAQ({
-          id: ko.observable(x.id),
-          body: ko.observable(marked(htmlEncode.htmlDecode(x.body))),
-          sortPosition: ko.observable(x.sortPosition),
-          tags: ko.observableArray(x.tags),
-          title: ko.observable(htmlEncode.htmlDecode(x.title)),
-          isSelected: ko.observable(false),
-          parentScenarioIds: ko.observableArray(x.parentScenarioIds)
-        }, self)
-      }).sort((a, b) => { return b.sortPosition() - a.sortPosition() }))
-    }, (_) => {
-      browser.redirect('/500')
-    })
+      .data(`${endpoints.faqs}?tags=families&pageSize=100000&index=0&searchTerm=${self.searchQueryInQuerystring()}`)
+      .then((result) => {
+        self.faqs(result.data.items.map((x) => {
+          return new FAQ({
+            id: ko.observable(x.id),
+            body: ko.observable(marked(htmlEncode.htmlDecode(x.body))),
+            sortPosition: ko.observable(x.sortPosition),
+            tags: ko.observableArray(x.tags),
+            title: ko.observable(htmlEncode.htmlDecode(x.title)),
+            isSelected: ko.observable(false),
+            parentScenarioIds: ko.observableArray(x.parentScenarioIds)
+          }, self)
+        }).sort((a, b) => { return b.sortPosition() - a.sortPosition() }))
+      }, (_) => {
+        browser.redirect('/500')
+      })
   }
 
   self.getParentScenarios = () => {
@@ -93,29 +93,29 @@ function FamilyAdviceResult () {
     if (self.currentParentScenario()) {
       self.adviceByParentScenario([])
       api
-      .data(`${endpoints.contentPages}?tags=families&type=advice&pageSize=100000&index=0&parentScenarioId=${self.currentParentScenario().id()}`)
-      .then((result) => {
-        self.adviceByParentScenario(result.data.items.map((x) => {
-          return new Advice({
-            id: ko.observable(x.id),
-            body: ko.observable(marked(htmlEncode.htmlDecode(x.body))),
-            parentScenarioId: ko.observable(x.parentScenarioId),
-            sortPosition: ko.observable(x.sortPosition),
-            tags: ko.observableArray(x.tags),
-            title: ko.observable(htmlEncode.htmlDecode(x.title)),
-            isSelected: ko.observable(false),
-            isParentScenario: ko.observable(false)
-          }, self)
-        }))
+        .data(`${endpoints.contentPages}?tags=families&type=advice&pageSize=100000&index=0&parentScenarioId=${self.currentParentScenario().id()}`)
+        .then((result) => {
+          self.adviceByParentScenario(result.data.items.map((x) => {
+            return new Advice({
+              id: ko.observable(x.id),
+              body: ko.observable(marked(htmlEncode.htmlDecode(x.body))),
+              parentScenarioId: ko.observable(x.parentScenarioId),
+              sortPosition: ko.observable(x.sortPosition),
+              tags: ko.observableArray(x.tags),
+              title: ko.observable(htmlEncode.htmlDecode(x.title)),
+              isSelected: ko.observable(false),
+              isParentScenario: ko.observable(false)
+            }, self)
+          }))
 
-        if (!self.hasAdvice()) {
-          browser.redirect(`/families/advice/?parentScenarioId=${self.currentParentScenario().id()}`)
-        }
+          if (!self.hasAdvice()) {
+            browser.redirect(`/families/advice/?parentScenarioId=${self.currentParentScenario().id()}`)
+          }
 
-        browser.loaded()
-      }, (_) => {
-        browser.redirect('/500')
-      })
+          browser.loaded()
+        }, (_) => {
+          browser.redirect('/500')
+        })
     } else {
       browser.redirect('/500')
     }

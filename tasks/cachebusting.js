@@ -6,6 +6,6 @@ import gulp from 'gulp'
 import fs from 'fs'
 
 // HTML minify task
-gulp.task('cachebusting', (callback) => {
+gulp.task('cachebusting', gulp.series((callback) => {
   fs.writeFile(config.paths.data + 'cachebusting.json', '{"date": "' + new Date().getTime() + '"}', callback);
-})
+}))

@@ -1,9 +1,9 @@
-require('../../../arrayExtensions')
-
 import ko from 'knockout'
 import { getProvidersForListing } from '../../../pages/find-help/provider-listing/helpers'
 import FindHelp from './FindHelp'
 import { categories } from '../../../../data/generated/service-categories'
+
+require('../../../arrayExtensions')
 
 const ajax = require('../../../get-api-data')
 const browser = require('../../../browser')
@@ -71,13 +71,13 @@ export default class FindHelpByClientGroup extends FindHelp {
         var categories = this.catFilters().filter((c) => c.id !== undefined && c.isSelected())
         if (categories && categories.length) {
           const selectedSubCatFilters = categories.map((c) => c.subCategories())
-                                                  .reduce(function (a, b) {
-                                                    return a.concat(b.filter((sc) => sc.isSelected()))
-                                                  })
-                                                  .map((sc) => sc.id)
+            .reduce(function (a, b) {
+              return a.concat(b.filter((sc) => sc.isSelected()))
+            })
+            .map((sc) => sc.id)
           return selectedSubCatFilters && selectedSubCatFilters.length
-                  ? selectedSubCatFilters.join(',')
-                  : undefined
+            ? selectedSubCatFilters.join(',')
+            : undefined
         }
         return undefined
       }
@@ -201,10 +201,10 @@ export default class FindHelpByClientGroup extends FindHelp {
   onCatFilter (catId, isInit = false) {
     if (!catId) {
       this.catFilters()
-      .forEach((c) => {
-        c.isSelected(this.catFilters().find((f) => c.categoryId === undefined).isSelected())
-        c.setSubcategories()
-      })
+        .forEach((c) => {
+          c.isSelected(this.catFilters().find((f) => c.categoryId === undefined).isSelected())
+          c.setSubcategories()
+        })
     } else {
       if (this.catFilters().filter((f) => f.id !== undefined).every((e) => e.isSelected() === true)) {
         this.catFilters().find((f) => f.id === undefined).isSelected(true)
@@ -227,7 +227,7 @@ export default class FindHelpByClientGroup extends FindHelp {
   }
 
   onCatMobileFilter (catId) {
-    let isSelected = !(catId !== undefined)
+    const isSelected = !(catId !== undefined)
     this.catFilters()
       .filter((c) => c.id !== catId)
       .forEach((c) => c.isSelected(isSelected))

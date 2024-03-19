@@ -1,14 +1,13 @@
-require('../../arrayExtensions')
-
 import ko from 'knockout'
+import { getServicesByDay } from '../../pages/find-help/provider-listing/helpers'
+import FindHelp from './FindHelp'
+
+require('../../arrayExtensions')
 
 const ajax = require('../../get-api-data')
 const browser = require('../../browser')
 const endpoints = require('../../api')
 const querystring = require('../../get-url-parameter')
-
-import { getServicesByDay } from '../../pages/find-help/provider-listing/helpers'
-import FindHelp from './FindHelp'
 
 export default class FindHelpByDay extends FindHelp {
   constructor () {
