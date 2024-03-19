@@ -14,7 +14,7 @@ const redirectToHubPage = function (locationId) {
 
 const init = () => {
   // TODO: remove this console message after testing
-  console.log('advice')
+  console.log('advice-2')
   const theData = {
     locations: [{ id: '', name: '- Select a location -' }, ...supportedCities.locations]
   }
