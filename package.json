@@ -75,7 +75,7 @@
     "delegate": "^3.2.0",
     "fastclick": "1.0.6",
     "geolib": "^2.0.24",
-    "gulp-cli": "^2.3.0",
+    "gulp-cli": "^3.0.0",
     "gulp4-run-sequence": "^1.0.2",
     "hogan.js": "3.0.2",
     "holderjs": "^2.9.9",
