@@ -52,12 +52,11 @@
 }
 
 .gmmc-logo {
-  height: 250px;
+  height: 100px;
 
   display: none;
   @include mq($from: m) {
-    padding-top: 60px;
-    padding-right: 20px;
+    margin: 60px 0 0 30px;
     display: block;
   }
 }
