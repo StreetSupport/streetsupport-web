@@ -230,14 +230,13 @@
 }
 
 .block--vol-for-good-header {
-  @import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@700&display=swap');
   color: #fff;
   border-bottom: 3px solid $vfg-orange;
 
   h1 {
-    padding: 40px 0;
     font-family: "Barlow Semi Condensed";
-    font-weight: 800;
+    padding: 40px 0;
+    font-weight: 600;
     font-size: 4rem;
     text-align: center;
     color: #fff !important;
