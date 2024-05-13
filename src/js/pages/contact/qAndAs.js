@@ -9,7 +9,7 @@ export const qAndAs = [
   },
   {
     question: 'I want to get more involved in ending homelessness in Manchester',
-    answer: 'You can learn more about how Manchester is coming together to end homelessness through the [Manchester Homelessness Charter](https://charter.streetsupport.net), and [join an action group](https://charter.streetsupport.net/join-action-group/) to get involved.'
+    answer: 'You can learn more about how Manchester is coming together to end homelessness through the [Manchester Homelessness Charter](https://charter.streetsupport.net), and [join an action group](https://mhp.org.uk/action-groups/) to get involved.'
   },
   {
     question: 'I would like to learn more about homelessness',
