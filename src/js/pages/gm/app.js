@@ -80,7 +80,7 @@ const initLocations = function (currentLocation) {
 window.initMap = () => { }
 
 const initMap = function (currentLocation) {
-  const endpoint = `${endpoints.serviceProviderLocations}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}&range=20000&pageSize=1000`
+  const endpoint = `${endpoints.serviceProviderLocations}?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}&range=23000&pageSize=2000`
 
   const buildInfoWindowMarkup = (p) => {
     return `<div class="card card--brand-h card--gmaps">
