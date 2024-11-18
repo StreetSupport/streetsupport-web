@@ -250,6 +250,14 @@ $spacing: 20px;
       }
     }
 
+    &--branding {
+      &:before {
+        width: 55px;
+        background: url('../img/resource-icons/branding-icon.png');
+        background-repeat: no-repeat;
+      }
+    }
+
     &--briefcase {
       &:before {
         background-position: -224px 185px;
@@ -295,6 +303,22 @@ $spacing: 20px;
         @include mq($from: l) {
           width: 90px;
         }
+      }
+    }
+
+    &--partnership-comms {
+      &:before {
+        width: 55px;
+        background: url('../img/resource-icons/partnership-comms-icon.png');
+        background-repeat: no-repeat;
+      }
+    }
+
+    &--street-feeding {
+      &:before {
+        width: 55px;
+        background: url('../img/resource-icons/street-feeding-icon.png');
+        background-repeat: no-repeat;
       }
     }
 
