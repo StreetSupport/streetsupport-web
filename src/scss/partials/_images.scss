@@ -102,10 +102,10 @@
 
 .two-column-images {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   @include mq($from: m) {
-    flex-direction: column;
+    flex-direction: row;
   }
 }
 
