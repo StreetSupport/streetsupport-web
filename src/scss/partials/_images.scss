@@ -100,3 +100,12 @@
     }
   }
 
+.two-column-images {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  @include mq($from: m) {
+    flex-direction: column;
+  }
+}
+
