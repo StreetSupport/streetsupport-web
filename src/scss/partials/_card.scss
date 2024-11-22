@@ -306,6 +306,14 @@ $spacing: 20px;
       }
     }
 
+    &--marketing {
+      &:before {
+        width: 55px;
+        background: url('../img/resource-icons/marketing.png');
+        background-repeat: no-repeat;
+      }
+    }
+
     &--partnership-comms {
       &:before {
         width: 55px;
