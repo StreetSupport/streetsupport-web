@@ -83,6 +83,12 @@
   }
 }
 
+.team__member-title--matt {
+  &::before, &::after {
+    background-image: url('/assets/img/mugshots/matt.jpg')
+  }
+}
+
 .team__member-title--joanne {
   &::before, &::after {
     background-image: url('/assets/img/mugshots/jo.jpg')
