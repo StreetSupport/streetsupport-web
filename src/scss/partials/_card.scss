@@ -306,6 +306,14 @@ $spacing: 20px;
       }
     }
 
+    &--effective-volunteering {
+      &:before {
+        width: 55px;
+        background: url('../img/resource-icons/volunteering-icon.png');
+        background-repeat: no-repeat;
+      }
+    }
+
     &--marketing {
       &:before {
         width: 55px;
