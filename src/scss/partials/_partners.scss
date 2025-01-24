@@ -66,6 +66,16 @@
       }
     }
 
+    &--homeless-link {
+      a {
+        svg {
+          height: 96px;
+          width: 120px;
+          margin-top: -48px;
+        }
+      }
+    }
+
     //birmingham
 
     &--birm-council {
