@@ -70,9 +70,17 @@
       a {
         svg {
           height: 96px;
-          width: 120px;
-          margin-top: -48px;
+          width: 260px;
+          margin-top: -28px;
         }
+      }
+    }
+
+    &--homeless-link-alt {
+      width: 260px;
+
+      a {
+        background-image: url(/assets/icons/homeless-link.png);
       }
     }
 
