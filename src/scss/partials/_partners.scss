@@ -67,12 +67,9 @@
     }
 
     &--homeless-link {
+      width: 280px;
       a {
-        svg {
-          height: 96px;
-          width: 260px;
-          margin-top: -28px;
-        }
+        background-image: url(/assets/icons/homeless-link.png);
       }
     }
 
