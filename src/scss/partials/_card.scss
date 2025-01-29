@@ -244,17 +244,17 @@ $spacing: 20px;
 
     &--alt-giving {
       &:before {
+        background: url('../img/resource-icons/alternative-giving-icon.png');
         width: 55px;
-        background: url('../icons/alternative-giving.svg');
-        background-repeat: no-repeat;
+        height: 55px;
       }
     }
 
     &--branding {
       &:before {
+        background: url('../img/resource-icons/branding-icon.png');
         width: 55px;
-        background: url('../icons/branding.svg');
-        background-repeat: no-repeat;
+        height: 55px;
       }
     }
 
@@ -270,17 +270,33 @@ $spacing: 20px;
       }
     }
 
-    &--charter {
+    &--charters {
       &:before {
+        background: url('../img/resource-icons/charters-icon.png');
         width: 55px;
-        background: url('../icons/charters.svg');
-        background-repeat: no-repeat;
+        height: 55px;
+      }
+    }
+
+    &--effective-volunteering {
+      &:before {
+        background: url('../img/resource-icons/volunteering-icon.png');
+        width: 55px;
+        height: 55px;
       }
     }
 
     &--form {
       &:before {
         background-position: -224px 285px;
+      }
+    }
+
+    &--marketing {
+      &:before {
+        background: url('../img/resource-icons/marketing-icon.png');
+        width: 55px;
+        height: 55px;
       }
     }
 
@@ -306,35 +322,11 @@ $spacing: 20px;
       }
     }
 
-    &--effective-volunteering {
-      &:before {
-        width: 55px;
-        background: url('../icons/effective-volunteering.svg');
-        background-repeat: no-repeat;
-      }
-    }
-
-    &--marketing {
-      &:before {
-        width: 55px;
-        background: url('../icons/marketing.svg');
-        background-repeat: no-repeat;
-      }
-    }
-
     &--partnership-comms {
       &:before {
-        width: 65px;
-        background: url('../icons/partnership-comms.svg');
-        background-repeat: no-repeat;
-      }
-    }
-
-    &--street-feeding {
-      &:before {
+        background: url('../img/resource-icons/partnership-comms-icon.png');
         width: 55px;
-        background: url('../icons/street-feeding.svg');
-        background-repeat: no-repeat;
+        height: 55px;
       }
     }
 
@@ -342,6 +334,14 @@ $spacing: 20px;
       &:before {
         height: 60px;
         background-position: -23px 288px;
+      }
+
+      &--street-feeding {
+        &:before {
+          background: url('../img/resource-icons/street-feeding-icon.png');
+          width: 55px;
+          height: 55px;
+        }
       }
 
       &--advice {
