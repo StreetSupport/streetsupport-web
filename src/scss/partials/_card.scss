@@ -135,7 +135,7 @@ $spacing: 20px;
     float: left;
     clear: left;
     margin-right: 1em;
-    width: 150px
+    width: 150px;
   }
 }
 
@@ -144,9 +144,11 @@ $spacing: 20px;
   margin-bottom: 10px;
   margin-left: 0;
   padding-left: 0;
+
   @include mq($from: m) {
     margin-bottom: 0;
     margin-left: 166px;
+
     &::after {
       content: ' ';
       height: 1em;
@@ -158,18 +160,28 @@ $spacing: 20px;
 .card--grid-1-of-3 {
   @include mq($from: m) {
     @include span(1 of 3);
-    &:nth-of-type(3n) { @include last() }
+
+    &:nth-of-type(3n) {
+      @include last();
+    }
   }
 }
 
 .card--grid-1-of-4 {
   @include mq($from: m, $until: l) {
     @include span(1 of 2);
-    &:nth-of-type(2n) { @include last() }
+
+    &:nth-of-type(2n) {
+      @include last();
+    }
   }
+
   @include mq($from: l) {
     @include span(1 of 4);
-    &:nth-of-type(4n) { @include last() }
+
+    &:nth-of-type(4n) {
+      @include last();
+    }
   }
 }
 
@@ -178,7 +190,6 @@ $spacing: 20px;
   flex-wrap: wrap;
   justify-content: center;
   margin: 20px 0px;
-
 }
 
 .card--purple {
@@ -187,6 +198,7 @@ $spacing: 20px;
     margin: auto;
     padding-top: 80px;
   }
+
   margin: 10px;
   background-color: $brand-h;
   color: #FFF;
@@ -195,6 +207,7 @@ $spacing: 20px;
   text-align: center;
   border-radius: 0;
   box-shadow: 2px 2px 5px 3px rgba(0,0,0,0.35);
+
   &:hover {
     transition: all 0.5s ease-in-out;
     box-shadow: none;
@@ -218,10 +231,11 @@ $spacing: 20px;
 
   p {
     @include mq($from: m) {
-      height: 122px
+      height: 122px;
     }
+
     @include mq($from: l) {
-      height: 112px
+      height: 112px;
     }
   }
 
@@ -233,6 +247,7 @@ $spacing: 20px;
     @include cf();
     display: flex;
     align-items: center;
+
     &:before {
       content: '';
       display: block;
@@ -337,22 +352,21 @@ $spacing: 20px;
       }
     }
 
-      &--street-feeding {
-        &:before {
-          background: url('../img/resource-icons/street-feeding-icon.png');
-          width: 55px;
-          height: 55px;
-        }
+    &--street-feeding {
+      &:before {
+        background: url('../img/resource-icons/street-feeding-icon.png');
+        width: 55px;
+        height: 55px;
       }
+    }
 
-      &--advice {
-        &:before {
-          width: 90px;
-        }
+    &--advice {
+      &:before {
+        width: 90px;
       }
     }
   }
-
+}
 
 .card--brand-h {
   box-shadow: 0 0 5px 1px rgba(0,0,0,0.25);
@@ -364,11 +378,16 @@ $spacing: 20px;
     height: 220px;
     padding: 20px 10px 10px 10px;
     text-align: left;
+
     * {
       color: white;
     }
-    *:last-child { padding-bottom: 10px }
+
+    *:last-child {
+      padding-bottom: 10px;
+    }
   }
+
   .card__details {
     background: white;
     text-align: left;
@@ -385,6 +404,7 @@ $spacing: 20px;
     text-decoration: none!important;
     margin-bottom: 20px!important;
   }
+
   .card__details__link {
     text-decoration: underline;
     @include printHide();
@@ -393,6 +413,7 @@ $spacing: 20px;
 
 .card--big {
   width: 100%;
+
   .card__title {
     height: auto;
   }
@@ -408,13 +429,14 @@ $spacing: 20px;
   @include mq($from: m) {
     left: -150px;
   }
+}
 
-  .card__title {
-    height: auto;
-    * {
-      padding: 0;
-      margin: 0;
-    }
+.card__title {
+  height: auto;
+
+  * {
+    padding: 0;
+    margin: 0;
   }
 }
 
