@@ -51,6 +51,15 @@ location: birmingham
   </div>
 </div>
 
+<div class="block block--highlight block--promo">
+  <div class="container">
+    <div class="block__content">
+      <h1 class="h2">What's happening now in your area</h1>
+      <div id="js-recent-news-output"></div>
+    </div>
+  </div>
+</div>
+
 <div class="block">
   <div class="container">
     <div class="home__copy home__copy--padding">
@@ -113,4 +122,14 @@ location: birmingham
 
 <script id="js-statistics-tpl" type="text/template">
   {{> impact-statistics }}
+</script>
+
+<script id="js-recent-news-tpl" type="text/template">
+  <div class="news-item">
+    <h2>{{title}}</h2>
+    <p>{{excerpt}}</p>
+    <a href="{{link}}" class="btn btn--brand-e">
+      <span class="btn__text">Read more</span>
+    </a>
+  </div>
 </script>
