@@ -114,17 +114,6 @@ const initNews = function () {
     })
 }
 
-const initRecentNews = function () {
-  const totalPostsToShow = 1
-  wp
-    .getPostsByTag(countyKey, totalPostsToShow, 0, true)
-    .then((result) => {
-      if (result.posts.length === totalPostsToShow) {
-        templating.renderTemplate('js-recent-news-tpl', result.posts[0], 'js-recent-news-output')
-      }
-    })
-}
-
 const initStatistics = function () {
   const stats = [
     { field: 'totalServiceProviders', link: '#', label: 'Organisations' },
