@@ -1,11 +1,14 @@
 'use strict'
 
+require("@babel/register");
+
 // Load global config and gulp
-import config from './foley.json'
-import gulp from 'gulp'
+const config = require("./foley.json");
+const gulp = require('gulp');
+
 
 // Load modules to run tasks from files
-import runSequence from 'gulp4-run-sequence'
+const runSequence = require('gulp4-run-sequence');
 
 // Load gulp tasks from 'tasks' directory
 const tasks = require('./tasks');
