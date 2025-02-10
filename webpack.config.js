@@ -87,7 +87,7 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel',
         query: {
-          presets: ["@babel/preset-env"]
+          presets: ['es2015']
         }
       },
       {
