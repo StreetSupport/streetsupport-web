@@ -11,7 +11,6 @@ I would also appreciate any issues/PRs for bugs you may come across, and general
 ## Build Status
 
 * develop: https://ssn-web-dev.azurewebsites.net/ - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=develop)](https://travis-ci.org/StreetSupport/streetsupport-web)
-* uat: https://ssn-web-uat.azurewebsites.net/ - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=uat)](https://travis-ci.org/StreetSupport/streetsupport-web)
 * release: https://streetsupport.net - [![Build Status](https://travis-ci.org/StreetSupport/streetsupport-web.svg?branch=release)](https://travis-ci.org/StreetSupport/streetsupport-web)
 
 ## Install
@@ -26,6 +25,19 @@ I would also appreciate any issues/PRs for bugs you may come across, and general
 See Installation Troubleshooting section if Installation fails
 
 See [https://github.com/fephil/garrus](https://github.com/fephil/garrus) for more information about the Frontend workflow.
+
+## Babel Update
+
+We have updated Babel to use @babel/preset-env instead of babel-preset-es2015/. Ensure your local setup reflects this by installing the new preset.:
+
+`npm unintall babel-preset-es2015`
+`npm install --save-dev @babel/preset-env`
+
+Update your Babel presets:
+
+{
+  "presets": ["@babel/[preset-env]"]
+}
 
 ### Optional Installs
 
@@ -57,11 +69,10 @@ Run these tasks in your command line Terminal:
 
 ### Environments
 
-There are three API environments: CI, UAT and LIVE. You can alter the API your local instance is running from by editing [/blob/develop/src/js/env.js](/blob/develop/src/js/env.js):
+There are two API environments: CI and LIVE. You can alter the API your local instance is running from by editing [/blob/develop/src/js/env.js](/blob/develop/src/js/env.js):
 
 * 0: locally running API instance
 * 1: CI
-* 2: UAT
 * 3: LIVE
 
 Day-to-day development should point at CI.
