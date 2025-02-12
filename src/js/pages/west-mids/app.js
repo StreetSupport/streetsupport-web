@@ -148,7 +148,6 @@ const currentLocation = supportedCities.get(mainCity)
 initLocations(currentLocation)
 initFindHelp(currentLocation)
 initNews()
-initRecentNews()
 initStatistics()
 initMap(cities.find((c) => c.id === mainCity))
 
