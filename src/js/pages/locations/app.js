@@ -2,6 +2,7 @@
 import '../../common'
 import htmlEncode from 'htmlencode'
 import { categories } from '../../../data/generated/service-categories'
+import Handlebars from 'handlebars'
 
 const api = require('../../get-api-data')
 const browser = require('../../browser')
@@ -162,6 +163,30 @@ const initSwep = function (currentLocationId) {
     }, (_) => {})
 }
 
+async function fetchFeaturedEvent() {
+  try {
+    const response = await fetch('/api/posts'); // Replace with your API endpoint
+    const posts = await response.json();
+
+    // Filter posts to include only those tagged as "featured"
+    const featuredPosts = posts.filter(post => post.tags.includes('featured'));
+
+    // Sort posts by date, assuming posts have a 'date' property
+    featuredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // Pass the most recent featured post to the template
+    const context = {
+      posts: featuredPosts.length > 0 ? [featuredPosts[0]] : []
+    };
+
+    // Render the template with the context
+    const template = Handlebars.compile(document.getElementById('featured-event-template').innerHTML);
+    document.getElementById('js-featured-event-output').innerHTML = template(context);
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+  }
+}
+
 const currentLocation = location.getCurrentHub()
 
 initLocations(currentLocation.id)
@@ -170,3 +195,4 @@ initFindHelp(currentLocation)
 initStatistics(currentLocation)
 initMap(currentLocation)
 initSwep(currentLocation.id)
+fetchFeaturedEvent()
