@@ -92,8 +92,6 @@ location: birmingham
 
 <div id="js-news-output"></div>
 
-<div id="js-featured-event-output"></div>
-
 <div class="block block--highlight block--promo">
   <div class="container">
     <div class="block__content partners">
@@ -126,36 +124,4 @@ location: birmingham
       <span class="btn__text">Read more</span>
     </a>
   </div>
-</script>
-
-<script id="js-featured-event-tpl" type="text/template">
-  {{> featured-event }}
-</script>
-
-<script>
-async function fetchFeaturedEvent() {
-  try {
-    const response = await fetch('/api/posts'); // Replace with your API endpoint
-    const posts = await response.json();
-
-    // Filter posts to include only those tagged as "featured"
-    const featuredPosts = posts.filter(post => post.tags.includes('featured'));
-
-    // Sort posts by date, assuming posts have a 'date' property
-    featuredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-    // Pass the most recent featured post to the template
-    const context = {
-      posts: featuredPosts.length > 0 ? [featuredPosts[0]] : []
-    };
-
-    // Render the template with the context
-    const template = Handlebars.compile(document.getElementById('js-featured-event-tpl').innerHTML);
-    document.getElementById('js-featured-event-output').innerHTML = template(context);
-  } catch (error) {
-    console.error('Error fetching posts:', error);
-  }
-}
-
-fetchFeaturedEvent();
 </script>
