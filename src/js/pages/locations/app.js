@@ -54,6 +54,17 @@ const initNews = function (currentLocationId) {
     })
 }
 
+const initFeaturedNews = function (currentLocationId) {
+  const reqPosts = 1
+  wp
+    .getPostsByLocation(currentLocationId, reqPosts, 0, true, 'featured')
+    .then((result) => {
+      if (result.posts.length === reqPosts) {
+        templating.renderTemplate('js-featured-news-tpl', result, 'js-featured-news-output')
+      }
+    })
+}
+
 const initFindHelp = function (currentLocation) {
   const cats = categories
   cats.find((c) => c.key === 'accom').key = 'accommodation'
@@ -166,6 +177,7 @@ const currentLocation = location.getCurrentHub()
 
 initLocations(currentLocation.id)
 initNews(currentLocation.id)
+initFeaturedNews(currentLocation.id)
 initFindHelp(currentLocation)
 initStatistics(currentLocation)
 initMap(currentLocation)
