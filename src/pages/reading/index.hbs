@@ -91,16 +91,6 @@ location: reading
 
 <div id="js-featured-news-output"></div>
 
-<script id="js-featured-news-tpl" type="text/template">
-  <div class="news-item">
-    <h2>{{title}}</h2>
-    <p>{{excerpt}}</p>
-    <a href="{{link}}" class="btn btn--brand-e">
-      <span class="btn__text">Read more</span>
-    </a>
-  </div>
-</script>
-
 <div id="js-statistics-output"></div>
 
 <div id="js-news-output"></div>
@@ -123,6 +113,10 @@ location: reading
 
 <script id="js-news-tpl" type="text/template">
     {{>news-posts }}
+</script>
+
+<script id="js-featured-news-tpl" type="text/template">
+    {{>featured-news-posts }}
 </script>
 
 <script id="js-statistics-tpl" type="text/template">
