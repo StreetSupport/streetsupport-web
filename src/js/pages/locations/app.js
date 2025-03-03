@@ -60,7 +60,10 @@ const initFeaturedNews = function (currentLocationId) {
     .getPostsByLocation(currentLocationId, reqPosts, 0, true, 'featured')
     .then((result) => {
       if (result.posts.length === reqPosts) {
-        templating.renderTemplate('js-featured-news-tpl', result, 'js-featured-news-output')
+        const featuredPost = result.posts.find(post => post.tags.includes('featured'))
+        if (featuredPost) {
+          templating.renderTemplate('js-featured-news-tpl', { posts: [featuredPost] }, 'js-featured-news-output')
+        }
       }
     })
 }
