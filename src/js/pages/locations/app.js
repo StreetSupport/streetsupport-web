@@ -54,16 +54,15 @@ const initNews = function (currentLocationId) {
     })
 }
 
-const initFeaturedNews = function (currentLocationId) {
-  const reqPosts = 1
+const initFeaturedNews = function () {
+  const totalPostsToShow = 1
   wp
-    .getPostsByLocation(currentLocationId, reqPosts, 0, true, 'featured')
+    .getPostsByTags(['reading', 'featured'], totalPostsToShow, 0, true)
     .then((result) => {
-      if (result.posts.length === reqPosts) {
-        const featuredPost = result.posts.find(post => post.tags.includes('featured'))
-        if (featuredPost) {
-          templating.renderTemplate('js-featured-news-tpl', { posts: [featuredPost] }, 'js-featured-news-output')
-        }
+      if (result.posts.length === totalPostsToShow) {
+        result.taxonomy.name = 'volunteer-for-good and featured'
+        result.taxonomy.link = 'https://news.streetsupport.net/tag/volunteer-for-good/'
+        templating.renderTemplate('js-news-tpl', result, 'js-news-output')
       }
     })
 }
