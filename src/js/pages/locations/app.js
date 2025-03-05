@@ -54,18 +54,18 @@ const initNews = function (currentLocationId) {
     })
 }
 
-const initFeaturedNews = function () {
-  const totalPostsToShow = 1
-  wp
-    .getPostsByTags(['reading', 'featured'], totalPostsToShow, 0, true)
-    .then((result) => {
-      if (result.posts.length === totalPostsToShow) {
-        result.taxonomy.name = 'volunteer-for-good and featured'
-        result.taxonomy.link = 'https://news.streetsupport.net/tag/volunteer-for-good/'
-        templating.renderTemplate('js-news-tpl', result, 'js-news-output')
-      }
-    })
-}
+// const initFeaturedNews = function (currentLocation) {
+//   const totalPostsToShow = 1
+//   wp
+//     .getPostsByTags([currentLocation.id, 'featured'], totalPostsToShow, 0, true)
+//     .then((result) => {
+//       if (result.posts.length === totalPostsToShow) {
+//         result.taxonomy.name = `Featured in ${currentLocation.id}`
+//         result.taxonomy.link = `https://news.streetsupport.net/tag/${currentLocation.id}/`
+//         templating.renderTemplate('js-news-tpl', result, 'js-news-output')
+//       }
+//     })
+// }
 
 const initFindHelp = function (currentLocation) {
   const cats = categories
@@ -179,7 +179,7 @@ const currentLocation = location.getCurrentHub()
 
 initLocations(currentLocation.id)
 initNews(currentLocation.id)
-initFeaturedNews(currentLocation.id)
+// initFeaturedNews(currentLocation)
 initFindHelp(currentLocation)
 initStatistics(currentLocation)
 initMap(currentLocation)
