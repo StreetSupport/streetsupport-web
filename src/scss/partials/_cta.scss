@@ -1,3 +1,14 @@
+.ctas {
+  .btn {
+    width: 100%; // Make the button match the width of the h1 block__header
+    @include span(2 of 3);
+    &:last-of-type {
+      float: left!important;
+      @include last();
+    }
+  }
+}
+
 .cta {
   @include mq($from: xs) {
     @include span(4 of $grid-column);
@@ -17,7 +28,7 @@
       @include span(2 of $grid-column);
     }
 
-    // TODO: if number of categories on /find-help page is odd we should uncomment it.    
+    // TODO: if number of categories on /find-help page is odd we should uncomment it.
     // &:last-of-type {
     //   @include last();
     // }
