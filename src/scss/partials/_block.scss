@@ -356,8 +356,28 @@
 }
 
 .block--home-header {
+  .block__header,
+  .block__sub-header {
+    color: $brand-m;
+  }
+
+  .h1 {
+    padding-top: 50px;
+  }
+
+  .ctas {
+    .btn {
+      width: 100%; // Make the button match the width of the h1 block__header
+      @include span(2 of 3);
+      &:last-of-type {
+        float: left!important;
+        @include last();
+      }
+    }
+  }
+
   @include mq($from: m) {
-    padding-bottom: 30px;
+    padding-bottom: 150px; // Further increase padding for larger screens
 
     .container {
       & > * {

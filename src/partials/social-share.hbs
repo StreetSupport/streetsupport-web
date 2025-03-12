@@ -1,13 +1,30 @@
 <div class="social-share{{#if class}} {{{ class }}}{{/if}}">
   <span class="social-share__text">{{#if text}}{{{ text }}}{{else}}Share this page: {{/if}}</span>
-  <a href="#" class="social-share__link social-share__link--twitter js-twitterShareWindow">
-    {{>icon name="twitter-brand-colour" class="social-share__icon"}}
-    <span class="social-share__caption">Share on X</span>
-    <span class="hide-screen">Share on X</span>
+
+  <a href="#" onclick="shareOnBluesky()" class="social-share__link social-share__link--bluesky">
+      {{>icon name="bluesky" class="social-share__icon"}}
+      <span class="social-share__caption">Share on Bluesky</span>
+      <span class="hide-screen">Share on Bluesky</span>
   </a>
-  <a href="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=&t=', 'blank', 'width=500,height=300');" class="social-share__link social-share__link--facebook">
+
+  <script>
+  function shareOnBluesky() {
+      const text = encodeURIComponent(`Help is out there – check out this page on Street Support Network: ${document.title} ${window.location.href}`);
+      const shareUrl = `https://bsky.app/intent/compose?text=${text}`;
+      window.open(shareUrl, 'blank', 'width=600,height=300');
+  }
+  </script>
+
+  <a href="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=&t=', 'blank', 'width=600,height=400');" class="social-share__link social-share__link--facebook">
     {{>icon name="facebook-brand-colour" class="social-share__icon"}}
-    <span class="social-share__caption">Share</span>
+    <span class="social-share__caption">Share on Facebook</span>
     <span class="hide-screen">Share on Facebook</span>
   </a>
+
+  <a href="https://twitter.com/intent/tweet?text=Help%20is%20out%20there%20-%20check%20out%20this%20page%20on%20Street%20Support%20Network%3A%20{{document.title}}%20{{window.location.href}}" target="_blank" class="social-share__link social-share__link--twitter">
+    {{>icon name="twitter-brand-colour" class="social-share__icon"}}
+    <span class="social-share__caption">Share on X</span>
+    <span class="hide-screen">Share on Twitter</span>
+</a>
+
 </div>
