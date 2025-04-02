@@ -93,7 +93,8 @@ const initStatistics = function (currentLocation) {
     { field: 'totalServiceProviders', link: '/find-help/all-service-providers/', label: 'Organisations' },
     { field: 'totalPledges', link: 'https://charter.streetsupport.net/progress/', label: 'Pledges' },
     { field: 'totalVolunteers', link: '/give-help/volunteer/', label: 'Volunteers' },
-    { field: 'totalServices', link: '/find-help/', label: 'Services' }
+    { field: 'totalServices', link: '/find-help/', label: 'Services' },
+    { field: 'totalNeeds', link: '/give-help/help/', label: 'Needs' }
   ]
   const requiredStats = currentLocation.homePageStats && currentLocation.homePageStats.length > 0
     ? currentLocation.homePageStats
