@@ -360,6 +360,14 @@ $spacing: 20px;
       }
     }
 
+    &--user-guides {
+      &:before {
+        background: url('../img/resource-icons/user-guides.png');
+        width: 55px;
+        height: 55px;
+      }
+    }
+
     &--advice {
       &:before {
         width: 90px;
