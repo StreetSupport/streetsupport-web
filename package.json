@@ -90,6 +90,7 @@
     "q": "^1.5.1",
     "request": "^2.88.2",
     "sass": "^1.32.13",
+    "sitemap": "^8.0.0",
     "snyk": "^1.1285.0",
     "spin.js": "^2.3.2",
     "svg4everybody": "^2.1.9",
@@ -103,6 +104,8 @@
   "browserslist": [
     "defaults"
   ],
-  "scripts": {},
+  "scripts": {
+    "generate-sitemap": "node generate-sitemap.js"
+  },
   "snyk": true
 }
