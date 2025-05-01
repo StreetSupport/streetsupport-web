@@ -1,4 +1,148 @@
-    <script src="{{site.url}}assets/js/commons.js?v={{cachebusting.date}}"></script>
-    <script src="{{site.url}}assets/js/{{jsBundle}}.bundle.js?v={{cachebusting.date}}"></script>
-  </body>
+<script src="{{site.url}}assets/js/commons.js?v={{cachebusting.date}}"></script>
+<script src="{{site.url}}assets/js/{{jsBundle}}.bundle.js?v={{cachebusting.date}}"></script>
+
+<div id="cookie-banner" class="cookie-banner">
+  <div class="cookie-banner__content">
+    <p class="cookie-banner__text">
+      We use cookies to improve your experience and understand how our site is used. You can accept all cookies, reject non-essential, or choose your preferred settings.
+    </p>
+
+    <div class="cookie-banner__buttons">
+      <button id="accept-all" class="cookie-banner__button">Accept All</button>
+      <button id="reject-all" class="cookie-banner__button">Reject All</button>
+      <button id="cookie-settings" class="cookie-banner__button">Cookie Settings</button>
+    </div>
+  </div>
+
+  <!-- Cookie Settings Modal -->
+  <div id="cookie-settings-modal" class="cookie-settings-modal">
+    <div class="cookie-settings-modal__content">
+      <h3>Cookie Settings</h3>
+      <form id="cookie-settings-form">
+        <label>
+          <input type="checkbox" name="analytics" checked /> Analytics Cookies
+        </label>
+        <label>
+          <input type="checkbox" name="advertisement" checked /> Advertisement Cookies
+        </label>
+        <label>
+          <input type="checkbox" name="functional" checked disabled /> Necessary Cookies (Always Active)
+        </label>
+      </form>
+      <div class="cookie-settings-modal__actions">
+        <button id="save-settings" class="cookie-banner__button">Save Settings</button>
+        <button id="close-settings" class="cookie-banner__button">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="cookie-banner__policy-link">
+    <a href="/about/privacy-and-data/cookie-policy" target="_blank">Read our Cookie Policy</a>
+  </p>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Show the cookie banner
+    const cookieBanner = document.getElementById("cookie-banner");
+    const cookieSettingsModal = document.getElementById("cookie-settings-modal");
+
+    // Check if cookies have been accepted or rejected
+    if (!localStorage.getItem("cookieConsent")) {
+      cookieBanner.style.display = "block";
+    }
+
+    // Accept All cookies
+    document.getElementById("accept-all").addEventListener("click", function () {
+      localStorage.setItem("cookieConsent", "accepted");
+      cookieBanner.style.display = "none";
+      setCookies("accept");
+    });
+
+    // Reject All non-essential cookies
+    document.getElementById("reject-all").addEventListener("click", function () {
+      localStorage.setItem("cookieConsent", "rejected");
+      cookieBanner.style.display = "none";
+      setCookies("reject");
+    });
+
+    // Open Cookie Settings
+    document.getElementById("cookie-settings").addEventListener("click", function () {
+      cookieSettingsModal.style.display = "block";
+    });
+
+    // Close Cookie Settings Modal
+    document.getElementById("close-settings").addEventListener("click", function () {
+      cookieSettingsModal.style.display = "none";
+    });
+
+    // Save Cookie Preferences
+    document.getElementById("save-settings").addEventListener("click", function () {
+      const form = document.getElementById("cookie-settings-form");
+      const preferences = {
+        analytics: form.querySelector('input[name="analytics"]').checked,
+        advertisement: form.querySelector('input[name="advertisement"]').checked,
+      };
+
+      localStorage.setItem("cookieConsent", JSON.stringify(preferences));
+      cookieSettingsModal.style.display = "none";
+      setCookies("save", preferences);
+    });
+
+    function setCookies(action, preferences = null) {
+      // Helper function to set a cookie
+      const setCookie = (name, value, days) => {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = `expires=${date.toUTCString()}`;
+        document.cookie = `${name}=${value}; ${expires}; path=/; Secure; SameSite=Lax`;
+      };
+
+      // Helper function to delete a cookie
+      const deleteCookie = (name) => {
+        document.cookie = `${name}=; path=/; max-age=0; Secure; SameSite=Lax`;
+      };
+
+      try {
+        if (action === "accept") {
+          // Set all cookies for one year
+          setCookie("analytics", "true", 365);
+          setCookie("advertisement", "true", 365);
+          console.log("Accepting all cookies");
+        } else if (action === "reject") {
+          // Reject non-essential cookies
+          deleteCookie("analytics");
+          deleteCookie("advertisement");
+          console.log("Rejecting non-essential cookies");
+        } else if (action === "save" && preferences) {
+          // Apply saved preferences
+          if (typeof preferences.analytics === "boolean") {
+            if (preferences.analytics) {
+              setCookie("analytics", "true", 365);
+              console.log("Analytics cookies are enabled");
+            } else {
+              deleteCookie("analytics");
+              console.log("Analytics cookies are disabled");
+            }
+          }
+
+          if (typeof preferences.advertisement === "boolean") {
+            if (preferences.advertisement) {
+              setCookie("advertisement", "true", 365);
+              console.log("Advertisement cookies are enabled");
+            } else {
+              deleteCookie("advertisement");
+              console.log("Advertisement cookies are disabled");
+            }
+          }
+        } else {
+          throw new Error("Invalid action or missing preferences");
+        }
+      } catch (error) {
+        console.error("Error in setCookies function:", error.message);
+      }
+    }
+  });
+</script>
+</body>
 </html>
