@@ -1,0 +1,81 @@
+/* Basic Cookie Banner Styling */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 20px;
+  display: none;
+  z-index: 9999;
+  text-align: center;
+}
+
+.cookie-banner__content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cookie-banner__text {
+  font-size: 16px;
+}
+
+.cookie-banner__buttons {
+  margin-top: 15px;
+}
+
+.cookie-banner__button {
+  background-color: $brand-d;
+  color: #1c1c1c;
+  border: none;
+  padding: 10px 15px;
+  margin: 5px;
+  cursor: pointer;
+  box-shadow: 1px 3px 0px 0px darken( $brand-d, 15% );
+  border-radius: 10px;
+  transition: background-color 250ms linear, box-shadow 250ms linear;
+}
+
+.cookie-banner__button:hover {
+  background-color: darken( $brand-d, 5% );
+  box-shadow: none;
+}
+
+.cookie-banner__policy-link {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.cookie-banner__policy-link a {
+  color: $brand-e;
+  text-decoration: underline;
+}
+
+.cookie-settings-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  color: #000;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: none;
+  z-index: 10000;
+  width: 80%;
+  max-width: 500px;
+}
+
+.cookie-settings-modal__content {
+  text-align: left;
+}
+
+.cookie-settings-modal__actions {
+  margin-top: 15px;
+  text-align: right;
+}
+
+.cookie-settings-modal__actions button {
+  margin-left: 10px;
+}
