@@ -1,4 +1,4 @@
----
+{{!-- ---
 title: Street Support Families - Supporting families facing homelessness
 description: Street Support - Find help, and give help, to support families who are homeless
 image: https://streetsupport.net/assets/img/og/street-support.jpg
@@ -34,21 +34,21 @@ page: families
 <div class="block block-families">
   <div class="container">
 
-    <div class="container-families__content">         
+    <div class="container-families__content">
       <!-- ko if: hasParentScenarios -->
-      <p class="h2 container-families__header-result">Advice by situation</p>   
+      <p class="h2 container-families__header-result">Advice by situation</p>
       <div class="block__content container-families__content-result" data-bind="foreach: parentScenarios">
-        <div class="h3 accordion__header" data-bind="click: $parent.redirectToParentScenario"> 
+        <div class="h3 accordion__header" data-bind="click: $parent.redirectToParentScenario">
           <span class="accordion--advice__title" data-bind="html: (title().length > 45 ? title().substring(0, 44) + '...' : title)"></span>
           <p class="accordion--families__short-description h4" data-bind="html: (body().length > 55 ? (body().substring(0, 54).includes('e.g.') ? body().substring(0, 54) : '') : body)"></p>
         </div>
       </div>
       <!-- /ko -->
     </div>
-    
-    <div class="container-families__content">      
+
+    <div class="container-families__content">
       <!-- ko if: hasGuides -->
-      <p class="h2 container-families__header-guides">Guides for organisations</p>   
+      <p class="h2 container-families__header-guides">Guides for organisations</p>
       <ul class="container-families__content--guides" data-bind="foreach: guides">
         <li class="container-families__content--guides__item">
           <a class="h3 container-families__content--guides__item-link" data-bind="text: title, attr: { 'href': '/families/guides?id=' + id() }"></a>
@@ -62,4 +62,4 @@ page: families
 
 {{> divider }}
 {{> families/useful-resources }}
-{{> loading-spinner}}
+{{> loading-spinner}} --}}
