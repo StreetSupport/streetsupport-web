@@ -94,6 +94,10 @@
       async function onLoad(instance) {
         instance.on({ type: "receive", handler: receiveHandler });
         await instance.render();
+
+        setTimeout(() => {
+          instance.openWindow();
+        }, 2000);
       }
 
       window.watsonAssistantChatOptions = {
