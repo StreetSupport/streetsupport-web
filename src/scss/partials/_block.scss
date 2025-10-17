@@ -573,6 +573,14 @@
   background: $brand-q;
 }
 
+.block--money-advice-leeds {
+  background: $brand-i;
+  @include mq($from: m) {
+    display: flex;
+    align-items: center;
+  }
+}
+
 .block--pre-icon {
   padding-bottom: 70px;
 }
@@ -768,6 +776,53 @@
 
     a {
       color: $brand-r;
+    }
+  }
+
+  &--money-advice-leeds-image {
+    text-align: center;
+    padding: 40px 1rem;
+    @include mq($from: m) {
+      @include span(5 of 12);
+      padding: 40px 30px;
+    }
+
+    a {
+      display: block;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+
+    img {
+      width: 100%;
+      max-width: 400px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+    }
+  }
+
+  &--money-advice-leeds-text {
+    padding: 20px 1rem 40px;
+    @include mq($from: m) {
+      @include span(7 of 12);
+      @include last();
+      padding: 40px 40px 40px 30px;
+    }
+
+    a {
+      color: $brand-r;
+      text-decoration: underline;
+
+      &:hover {
+        color: $brand-e;
+      }
+    }
+
+    .btn {
+      margin-top: 10px;
     }
   }
 
