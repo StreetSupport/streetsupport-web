@@ -247,14 +247,15 @@ $spacing: 20px;
     @include cf();
     display: flex;
     align-items: center;
+    gap: 15px;
 
     &:before {
       content: '';
       display: block;
-      width: 65px;
+      flex-shrink: 0;
+      width: 55px;
       height: 55px;
       background: url('../img/icon-tileset.png');
-      float: left;
     }
 
     &--alt-giving {
