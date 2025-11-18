@@ -69,8 +69,13 @@
     &--homeless-link {
       width: 300px;
       a {
-        top: -35%;
+        top: 50%;
+        transform: translateY(-50%);
         background-image: url(/assets/icons/homeless-link.png);
+
+        svg {
+          margin-top: -50px;
+        }
       }
     }
 
