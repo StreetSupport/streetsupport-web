@@ -1027,3 +1027,42 @@
   height: 500px;
   width: 100%;
 }
+
+.block--swep-inactive-notice {
+  background: $brand-d;
+  padding: 30px 0;
+  border-bottom: 4px solid $brand-g;
+
+  .block__content--swep-notice {
+    text-align: center;
+
+    h2 {
+      color: $brand-m;
+      margin-top: 0;
+    }
+
+    p {
+      color: $brand-m;
+      font-size: 16px;
+      margin-bottom: 16px;
+
+      &:last-of-type {
+        margin-bottom: 24px;
+      }
+    }
+  }
+
+  .swep-notice-ctas {
+    margin-top: 20px;
+
+    @include mq($from: s) {
+      .btn {
+        margin: 0 10px;
+      }
+    }
+
+    .btn {
+      margin-bottom: 10px;
+    }
+  }
+}
