@@ -1066,3 +1066,36 @@
     }
   }
 }
+
+.block--notts-christmas-timetable {
+  background: $brand-h;
+  padding: 30px 0;
+  border-bottom: 4px solid $brand-e;
+
+  .block__content--christmas-timetable {
+    text-align: center;
+
+    h2 {
+      color: #fff;
+      margin-top: 0;
+    }
+
+    p {
+      color: #fff;
+      font-size: 16px;
+      margin-bottom: 16px;
+
+      &:last-of-type {
+        margin-bottom: 24px;
+      }
+    }
+  }
+
+  .christmas-timetable-ctas {
+    margin-top: 20px;
+
+    .btn {
+      margin-bottom: 10px;
+    }
+  }
+}
