@@ -53,6 +53,7 @@ module.exports = {
     joinstreetsupport: path.join(__dirname, '/src/js/page-join-street-support'),
     register: path.join(__dirname, '/src/js/page-register'),
     'location-home-page': path.join(__dirname, 'src/js/pages/locations/app'),
+    'location-home-page-va': path.join(__dirname, 'src/js/pages/locations/app-va'),
     emergencyhelp: path.join(__dirname, 'src/js/page-advice'),
     adviceV2: path.join(__dirname, 'src/js/page-advice-faqs'),
     swep: path.join(__dirname, 'src/js/page-swep'),

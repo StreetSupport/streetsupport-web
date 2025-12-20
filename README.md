@@ -15,29 +15,14 @@ I would also appreciate any issues/PRs for bugs you may come across, and general
 
 ## Install
 
-* Install the latest stable Node version,
-* Run in Terminal: `npm i gulp-cli -g` (Gulp does not need to be installed globally),
+* Install Node 18 (recommended, especially for ARM Macs),
 * In your command line terminal, navigate to the street support project folder,
 * Run: `npm i`
-  * if you are on the Code Wifi network, you may have an issue installing modules around CriticalCSS/Phantom; you might need to tether to your mobile phone to get these downloaded.)
-  * if this throws errors around Snyk (most likely Windows), see [https://support.snyk.io/snyk-cli/snyk-protect-requires-the-patch-binary].
+* Run gulp using `npx gulp` (no need to install gulp globally)
 
 See Installation Troubleshooting section if Installation fails
 
 See [https://github.com/fephil/garrus](https://github.com/fephil/garrus) for more information about the Frontend workflow.
-
-## Babel Update
-
-We have updated Babel to use @babel/preset-env instead of babel-preset-es2015/. Ensure your local setup reflects this by installing the new preset.:
-
-`npm unintall babel-preset-es2015`
-`npm install --save-dev @babel/preset-env`
-
-Update your Babel presets:
-
-{
-  "presets": ["@babel/[preset-env]"]
-}
 
 ### Optional Installs
 
@@ -69,13 +54,14 @@ Run these tasks in your command line Terminal:
 
 ### Environments
 
-There are two API environments: CI and LIVE. You can alter the API your local instance is running from by editing [/blob/develop/src/js/env.js](/blob/develop/src/js/env.js):
+There are four API environments. You can alter the API your local instance is running from by editing [/blob/develop/src/js/env.js](/blob/develop/src/js/env.js):
 
 * 0: locally running API instance
-* 1: CI
+* 1: CI/Dev
+* 2: Staging/UAT
 * 3: LIVE
 
-Day-to-day development should point at CI.
+Day-to-day development should point at CI (value 1).
 
 ## Development
 
@@ -153,6 +139,31 @@ npm rebuild
 Caused by: network blocking download
 
 Solution: use an alternative network (best to run `npm i` before attending)
+
+#### ARM Mac (M1/M2/M3/M4) Binary Compatibility
+
+```
+spawn /Users/.../node_modules/pngquant-bin/vendor/pngquant ENOENT
+Error: pngquant failed to build, make sure that libpng is installed
+Unknown system error -86
+```
+
+Caused by: The pre-built binaries for image optimization tools (pngquant, optipng, mozjpeg, gifsicle) are compiled for x86 and don't run natively on ARM Macs.
+
+Solution: Install Rosetta and use an x86 version of Node:
+
+```
+# Install Rosetta
+softwareupdate --install-rosetta --agree-to-license
+
+# If using nvm, uninstall your current Node 18 and reinstall under Rosetta
+nvm uninstall 18
+arch -x86_64 zsh -c 'source ~/.zshrc && nvm install 18'
+
+# Then reinstall dependencies
+rm -rf node_modules
+npm install
+```
 
 #### Others
 
