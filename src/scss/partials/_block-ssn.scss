@@ -323,7 +323,8 @@
     }
 
     a {
-      color: $brand-f;
+      color: $brand-c;
+      text-decoration: underline;
     }
 
     img {
@@ -1375,4 +1376,21 @@
 .block-footer {
   text-align: center;
   padding: 20px 0;
+}
+
+.street-aid-suspension-notice {
+  background-color: $street-aid-orange;
+  color: $brand-l;
+  padding: 15px 20px;
+  margin: 15px 0;
+  border-radius: 4px;
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: $brand-l;
+    text-decoration: underline;
+  }
 }
