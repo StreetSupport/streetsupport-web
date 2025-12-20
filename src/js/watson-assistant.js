@@ -5,7 +5,7 @@
 
 // Default config - can be overridden by setting window.WATSON_PAGE_CONFIG before loading this script
 var WATSON_DEFAULT_CONFIG = {
-  integrationID: '83b099b7-08a1-4118-bba3-341fbec366d1',
+  integrationID: '2146349f-ef06-4e9d-ad65-c7846775c0b6',
   region: 'eu-gb',
   serviceInstanceID: 'a3a6beaa-5967-4039-8390-d48ace365d86'
 }
