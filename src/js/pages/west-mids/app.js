@@ -1,6 +1,9 @@
 // Common modules
 import '../../common'
 import { cities } from '../../../data/generated/supported-cities'
+
+// Watson Assistant
+require('../../watson-assistant')
 import { categories } from '../../../data/generated/service-categories'
 import htmlEncode from 'htmlencode'
 
