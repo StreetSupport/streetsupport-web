@@ -4,7 +4,7 @@
  */
 
 var WATSON_CONFIG = {
-  integrationID: '2146349f-ef06-4e9d-ad65-c7846775c0b6',
+  integrationID: '83b099b7-08a1-4118-bba3-341fbec366d1',
   region: 'eu-gb',
   serviceInstanceID: 'a3a6beaa-5967-4039-8390-d48ace365d86'
 }
