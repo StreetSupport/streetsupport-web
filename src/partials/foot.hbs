@@ -1,148 +1,252 @@
 <script src="{{site.url}}assets/js/commons.js?v={{cachebusting.date}}"></script>
 <script src="{{site.url}}assets/js/{{jsBundle}}.bundle.js?v={{cachebusting.date}}"></script>
 
-<div id="cookie-banner" class="cookie-banner">
+<!-- Cookie Banner -->
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="false" aria-labelledby="cookie-banner-title">
   <div class="cookie-banner__content">
+    <h2 id="cookie-banner-title" class="cookie-banner__title">Cookie Preferences</h2>
     <p class="cookie-banner__text">
-      We use cookies to improve your experience and understand how our site is used. You can accept all cookies, reject non-essential, or choose your preferred settings.
+      We use cookies to keep the site working and, with your permission, to analyse how it's used so we can improve it.
     </p>
-
+    <p class="cookie-banner__policy-link">
+      <a href="/about/privacy-and-data/cookie-policy" target="_blank" rel="noopener">Read our Cookie Policy</a>
+    </p>
     <div class="cookie-banner__buttons">
-      <button id="accept-all" class="cookie-banner__button">Accept All</button>
-      <button id="reject-all" class="cookie-banner__button">Reject All</button>
-      <button id="cookie-settings" class="cookie-banner__button">Cookie Settings</button>
+      <button id="accept-all" class="cookie-banner__button cookie-banner__button--primary">Accept All</button>
+      <button id="reject-all" class="cookie-banner__button cookie-banner__button--secondary">Essential Only</button>
+      <button id="cookie-settings-btn" class="cookie-banner__button cookie-banner__button--tertiary">Cookie Settings</button>
     </div>
   </div>
+</div>
 
-  <!-- Cookie Settings Modal -->
-  <div id="cookie-settings-modal" class="cookie-settings-modal">
-    <div class="cookie-settings-modal__content">
-      <h3>Cookie Settings</h3>
-      <form id="cookie-settings-form">
-        <label>
-          <input type="checkbox" name="analytics" checked /> Analytics Cookies
+<!-- Cookie Settings Modal -->
+<div id="cookie-modal-backdrop" class="cookie-modal-backdrop" aria-hidden="true"></div>
+<div id="cookie-settings-modal" class="cookie-settings-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title" aria-hidden="true">
+  <div class="cookie-settings-modal__content">
+    <div class="cookie-settings-modal__header">
+      <h3 id="cookie-modal-title" class="cookie-settings-modal__title">Cookie Settings</h3>
+      <button id="close-modal-x" class="cookie-settings-modal__close" aria-label="Close cookie settings">&times;</button>
+    </div>
+    <p class="cookie-settings-modal__description">
+      Choose which optional cookies you'd like to allow. Essential cookies are always active to keep the site working.
+    </p>
+    <form id="cookie-settings-form" class="cookie-settings-form">
+      <div class="cookie-settings-form__group">
+        <label class="cookie-settings-form__label">
+          <input type="checkbox" name="necessary" class="cookie-settings-form__checkbox" checked disabled />
+          <span class="cookie-settings-form__checkbox-custom"></span>
+          <span class="cookie-settings-form__text">
+            <strong>Essential Cookies</strong>
+            <small>Keep the site working. Always active.</small>
+          </span>
         </label>
-        <label>
-          <input type="checkbox" name="advertisement" checked /> Advertisement Cookies
-        </label>
-        <label>
-          <input type="checkbox" name="functional" checked disabled /> Necessary Cookies (Always Active)
-        </label>
-      </form>
-      <div class="cookie-settings-modal__actions">
-        <button id="save-settings" class="cookie-banner__button">Save Settings</button>
-        <button id="close-settings" class="cookie-banner__button">Close</button>
       </div>
+      <div class="cookie-settings-form__group">
+        <label class="cookie-settings-form__label">
+          <input type="checkbox" name="analytics" class="cookie-settings-form__checkbox" />
+          <span class="cookie-settings-form__checkbox-custom"></span>
+          <span class="cookie-settings-form__text">
+            <strong>Analytics Cookies</strong>
+            <small>Help us understand how the site is used so we can improve it.</small>
+          </span>
+        </label>
+      </div>
+      <div class="cookie-settings-form__group">
+        <label class="cookie-settings-form__label">
+          <input type="checkbox" name="advertisement" class="cookie-settings-form__checkbox" />
+          <span class="cookie-settings-form__checkbox-custom"></span>
+          <span class="cookie-settings-form__text">
+            <strong>Marketing Cookies</strong>
+            <small>Allow personalised advertisements on other sites.</small>
+          </span>
+        </label>
+      </div>
+    </form>
+    <div class="cookie-settings-modal__actions">
+      <button id="save-settings" class="cookie-banner__button cookie-banner__button--primary">Save Preferences</button>
+      <button id="close-settings" class="cookie-banner__button cookie-banner__button--secondary">Cancel</button>
     </div>
   </div>
-
-  <p class="cookie-banner__policy-link">
-    <a href="/about/privacy-and-data/cookie-policy" target="_blank">Read our Cookie Policy</a>
-  </p>
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Show the cookie banner
-    const cookieBanner = document.getElementById("cookie-banner");
-    const cookieSettingsModal = document.getElementById("cookie-settings-modal");
+  (function() {
+    var cookieBanner = document.getElementById("cookie-banner");
+    var cookieSettingsModal = document.getElementById("cookie-settings-modal");
+    var modalBackdrop = document.getElementById("cookie-modal-backdrop");
+    var settingsForm = document.getElementById("cookie-settings-form");
+    var previouslyFocusedElement = null;
 
-    // Check if cookies have been accepted or rejected
-    if (!localStorage.getItem("cookieConsent")) {
-      cookieBanner.style.display = "block";
+    // Cookie helper functions
+    function setCookie(name, value, days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      var expires = "expires=" + date.toUTCString();
+      document.cookie = name + "=" + value + "; " + expires + "; path=/; Secure; SameSite=Lax";
     }
 
-    // Accept All cookies
-    document.getElementById("accept-all").addEventListener("click", function () {
-      localStorage.setItem("cookieConsent", "accepted");
-      cookieBanner.style.display = "none";
-      setCookies("accept");
-    });
+    function deleteCookie(name) {
+      document.cookie = name + "=; path=/; max-age=0; Secure; SameSite=Lax";
+    }
 
-    // Reject All non-essential cookies
-    document.getElementById("reject-all").addEventListener("click", function () {
-      localStorage.setItem("cookieConsent", "rejected");
-      cookieBanner.style.display = "none";
-      setCookies("reject");
-    });
-
-    // Open Cookie Settings
-    document.getElementById("cookie-settings").addEventListener("click", function () {
-      cookieSettingsModal.style.display = "block";
-    });
-
-    // Close Cookie Settings Modal
-    document.getElementById("close-settings").addEventListener("click", function () {
-      cookieSettingsModal.style.display = "none";
-    });
-
-    // Save Cookie Preferences
-    document.getElementById("save-settings").addEventListener("click", function () {
-      const form = document.getElementById("cookie-settings-form");
-      const preferences = {
-        analytics: form.querySelector('input[name="analytics"]').checked,
-        advertisement: form.querySelector('input[name="advertisement"]').checked,
-      };
-
-      localStorage.setItem("cookieConsent", JSON.stringify(preferences));
-      cookieSettingsModal.style.display = "none";
-      setCookies("save", preferences);
-    });
-
-    function setCookies(action, preferences = null) {
-      // Helper function to set a cookie
-      const setCookie = (name, value, days) => {
-        const date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        const expires = `expires=${date.toUTCString()}`;
-        document.cookie = `${name}=${value}; ${expires}; path=/; Secure; SameSite=Lax`;
-      };
-
-      // Helper function to delete a cookie
-      const deleteCookie = (name) => {
-        document.cookie = `${name}=; path=/; max-age=0; Secure; SameSite=Lax`;
-      };
-
+    function getStoredPreferences() {
+      var stored = localStorage.getItem("cookieConsent");
+      if (!stored) return null;
       try {
-        if (action === "accept") {
-          // Set all cookies for one year
-          setCookie("analytics", "true", 365);
-          setCookie("advertisement", "true", 365);
-          console.log("Accepting all cookies");
-        } else if (action === "reject") {
-          // Reject non-essential cookies
-          deleteCookie("analytics");
-          deleteCookie("advertisement");
-          console.log("Rejecting non-essential cookies");
-        } else if (action === "save" && preferences) {
-          // Apply saved preferences
-          if (typeof preferences.analytics === "boolean") {
-            if (preferences.analytics) {
-              setCookie("analytics", "true", 365);
-              console.log("Analytics cookies are enabled");
-            } else {
-              deleteCookie("analytics");
-              console.log("Analytics cookies are disabled");
-            }
-          }
-
-          if (typeof preferences.advertisement === "boolean") {
-            if (preferences.advertisement) {
-              setCookie("advertisement", "true", 365);
-              console.log("Advertisement cookies are enabled");
-            } else {
-              deleteCookie("advertisement");
-              console.log("Advertisement cookies are disabled");
-            }
-          }
-        } else {
-          throw new Error("Invalid action or missing preferences");
-        }
-      } catch (error) {
-        console.error("Error in setCookies function:", error.message);
+        return JSON.parse(stored);
+      } catch (e) {
+        return null;
       }
     }
-  });
+
+    function savePreferences(preferences) {
+      localStorage.setItem("cookieConsent", JSON.stringify(preferences));
+      applyCookies(preferences);
+    }
+
+    function applyCookies(preferences) {
+      if (preferences.analytics) {
+        setCookie("analytics", "true", 365);
+      } else {
+        deleteCookie("analytics");
+      }
+      if (preferences.advertisement) {
+        setCookie("advertisement", "true", 365);
+      } else {
+        deleteCookie("advertisement");
+      }
+    }
+
+    // Banner visibility
+    function showBanner() {
+      cookieBanner.classList.add("cookie-banner--visible");
+      cookieBanner.setAttribute("aria-hidden", "false");
+    }
+
+    function hideBanner() {
+      cookieBanner.classList.remove("cookie-banner--visible");
+      cookieBanner.setAttribute("aria-hidden", "true");
+    }
+
+    // Modal functions
+    function openModal() {
+      previouslyFocusedElement = document.activeElement;
+      var prefs = getStoredPreferences();
+
+      // Set checkbox states based on stored preferences
+      settingsForm.querySelector('input[name="analytics"]').checked = prefs ? prefs.analytics : false;
+      settingsForm.querySelector('input[name="advertisement"]').checked = prefs ? prefs.advertisement : false;
+
+      modalBackdrop.classList.add("cookie-modal-backdrop--visible");
+      modalBackdrop.setAttribute("aria-hidden", "false");
+      cookieSettingsModal.classList.add("cookie-settings-modal--visible");
+      cookieSettingsModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+
+      // Focus the first interactive element
+      var closeBtn = document.getElementById("close-modal-x");
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function closeModal() {
+      modalBackdrop.classList.remove("cookie-modal-backdrop--visible");
+      modalBackdrop.setAttribute("aria-hidden", "true");
+      cookieSettingsModal.classList.remove("cookie-settings-modal--visible");
+      cookieSettingsModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+
+      // Return focus to previously focused element
+      if (previouslyFocusedElement) {
+        previouslyFocusedElement.focus();
+      }
+    }
+
+    // Focus trap for modal
+    function trapFocus(event) {
+      if (!cookieSettingsModal.classList.contains("cookie-settings-modal--visible")) return;
+
+      var focusableElements = cookieSettingsModal.querySelectorAll(
+        'button, [href], input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      var firstElement = focusableElements[0];
+      var lastElement = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
+    }
+
+    // Event handlers
+    function handleAcceptAll() {
+      var prefs = { analytics: true, advertisement: true };
+      savePreferences(prefs);
+      hideBanner();
+    }
+
+    function handleRejectAll() {
+      var prefs = { analytics: false, advertisement: false };
+      savePreferences(prefs);
+      hideBanner();
+    }
+
+    function handleSaveSettings() {
+      var prefs = {
+        analytics: settingsForm.querySelector('input[name="analytics"]').checked,
+        advertisement: settingsForm.querySelector('input[name="advertisement"]').checked
+      };
+      savePreferences(prefs);
+      closeModal();
+      hideBanner();
+    }
+
+    function handleKeydown(event) {
+      if (event.key === "Escape" && cookieSettingsModal.classList.contains("cookie-settings-modal--visible")) {
+        closeModal();
+      }
+      if (event.key === "Tab") {
+        trapFocus(event);
+      }
+    }
+
+    // Initialise
+    function init() {
+      // Show banner if no consent stored
+      if (!getStoredPreferences()) {
+        showBanner();
+      }
+
+      // Button events
+      document.getElementById("accept-all").addEventListener("click", handleAcceptAll);
+      document.getElementById("reject-all").addEventListener("click", handleRejectAll);
+      document.getElementById("cookie-settings-btn").addEventListener("click", openModal);
+      document.getElementById("close-modal-x").addEventListener("click", closeModal);
+      document.getElementById("close-settings").addEventListener("click", closeModal);
+      document.getElementById("save-settings").addEventListener("click", handleSaveSettings);
+
+      // Backdrop click to close
+      modalBackdrop.addEventListener("click", closeModal);
+
+      // Keyboard events
+      document.addEventListener("keydown", handleKeydown);
+
+      // Global function to open settings from footer link
+      window.openCookieSettings = function() {
+        openModal();
+        showBanner();
+      };
+    }
+
+    // Run on DOM ready
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  })();
 </script>
 </body>
 </html>
