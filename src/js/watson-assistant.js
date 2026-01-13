@@ -1,5 +1,6 @@
 /**
  * Watson Assistant Chat Integration
+ * Handles initialization of Watson Assistant chat widget with geolocation support
  */
 
 var WATSON_CONFIG = {
