@@ -7,7 +7,7 @@
   <div class="cookie-banner__content">
     <h2 id="cookie-banner-title" class="cookie-banner__title">Cookie Preferences</h2>
     <p class="cookie-banner__text">
-      We use cookies to keep the site working and, with your permission, to analyse how it's used so we can improve it.
+      We use essential cookies to keep the site working. We also use analytics cookies to understand how the site is used so we can improve it. Analytics cookies are enabled by default and you can opt out at any time.
     </p>
     <p class="cookie-banner__policy-link">
       <a href="/about/privacy-and-data/cookie-policy" target="_blank" rel="noopener">Read our Cookie Policy</a>
@@ -16,6 +16,7 @@
       <button id="accept-all" class="cookie-banner__button cookie-banner__button--primary">Accept All</button>
       <button id="reject-all" class="cookie-banner__button cookie-banner__button--secondary">Essential Only</button>
       <button id="cookie-settings-btn" class="cookie-banner__button cookie-banner__button--tertiary">Cookie Settings</button>
+      <button id="dismiss-banner" class="cookie-banner__button cookie-banner__button--tertiary">Dismiss</button>
     </div>
   </div>
 </div>
@@ -29,7 +30,7 @@
       <button id="close-modal-x" class="cookie-settings-modal__close" aria-label="Close cookie settings">&times;</button>
     </div>
     <p class="cookie-settings-modal__description">
-      Choose which optional cookies you'd like to allow. Essential cookies are always active to keep the site working.
+      Analytics cookies are enabled by default for statistical purposes under the UK Data Use and Access Act 2025. You can opt out below. Marketing cookies require your consent and are off by default.
     </p>
     <form id="cookie-settings-form" class="cookie-settings-form">
       <div class="cookie-settings-form__group">
@@ -135,7 +136,7 @@
       var prefs = getStoredPreferences();
 
       // Set checkbox states based on stored preferences
-      settingsForm.querySelector('input[name="analytics"]').checked = prefs ? prefs.analytics : false;
+      settingsForm.querySelector('input[name="analytics"]').checked = prefs ? prefs.analytics : true;
       settingsForm.querySelector('input[name="advertisement"]').checked = prefs ? prefs.advertisement : false;
 
       modalBackdrop.classList.add("cookie-modal-backdrop--visible");
@@ -194,6 +195,12 @@
       hideBanner();
     }
 
+    function handleDismiss() {
+      var prefs = { analytics: true, advertisement: false };
+      savePreferences(prefs);
+      hideBanner();
+    }
+
     function handleSaveSettings() {
       var prefs = {
         analytics: settingsForm.querySelector('input[name="analytics"]').checked,
@@ -224,6 +231,7 @@
       document.getElementById("accept-all").addEventListener("click", handleAcceptAll);
       document.getElementById("reject-all").addEventListener("click", handleRejectAll);
       document.getElementById("cookie-settings-btn").addEventListener("click", openModal);
+      document.getElementById("dismiss-banner").addEventListener("click", handleDismiss);
       document.getElementById("close-modal-x").addEventListener("click", closeModal);
       document.getElementById("close-settings").addEventListener("click", closeModal);
       document.getElementById("save-settings").addEventListener("click", handleSaveSettings);
