@@ -1,0 +1,25 @@
+.new-site-banner {
+  background: $brand-k;
+  padding: 10px 0;
+  text-align: center;
+  margin-top: -5px;
+
+  + .block--breadcrumbs {
+    margin-top: 0;
+  }
+}
+
+.new-site-banner__text {
+  color: #fff;
+  font-size: 15px;
+  margin: 0;
+}
+
+.new-site-banner__link {
+  color: $brand-e;
+  text-decoration: underline;
+
+  &:hover {
+    color: $brand-d;
+  }
+}
